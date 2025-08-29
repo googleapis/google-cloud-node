@@ -17901,6 +17901,7 @@ export namespace google {
                         RANDOM = 262527171,
                         RING_HASH = 432795069,
                         ROUND_ROBIN = 153895801,
+                        WEIGHTED_GCP_RENDEZVOUS = 82501640,
                         WEIGHTED_MAGLEV = 254930962,
                         WEIGHTED_ROUND_ROBIN = 5584977
                     }
@@ -20197,6 +20198,7 @@ export namespace google {
                         RANDOM = 262527171,
                         RING_HASH = 432795069,
                         ROUND_ROBIN = 153895801,
+                        WEIGHTED_GCP_RENDEZVOUS = 82501640,
                         WEIGHTED_MAGLEV = 254930962,
                         WEIGHTED_ROUND_ROBIN = 5584977
                     }
@@ -168722,6 +168724,9 @@ export namespace google {
                 /** Properties of a ResourceStatus. */
                 interface IResourceStatus {
 
+                    /** ResourceStatus effectiveInstanceMetadata */
+                    effectiveInstanceMetadata?: (google.cloud.compute.v1beta.IResourceStatusEffectiveInstanceMetadata|null);
+
                     /** ResourceStatus physicalHost */
                     physicalHost?: (string|null);
 
@@ -168746,6 +168751,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1beta.IResourceStatus);
+
+                    /** ResourceStatus effectiveInstanceMetadata. */
+                    public effectiveInstanceMetadata?: (google.cloud.compute.v1beta.IResourceStatusEffectiveInstanceMetadata|null);
 
                     /** ResourceStatus physicalHost. */
                     public physicalHost?: (string|null);
@@ -168834,6 +168842,145 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ResourceStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResourceStatusEffectiveInstanceMetadata. */
+                interface IResourceStatusEffectiveInstanceMetadata {
+
+                    /** ResourceStatusEffectiveInstanceMetadata blockProjectSshKeysMetadataValue */
+                    blockProjectSshKeysMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableGuestAttributesMetadataValue */
+                    enableGuestAttributesMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableOsInventoryMetadataValue */
+                    enableOsInventoryMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableOsconfigMetadataValue */
+                    enableOsconfigMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableOsloginMetadataValue */
+                    enableOsloginMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata serialPortEnableMetadataValue */
+                    serialPortEnableMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata serialPortLoggingEnableMetadataValue */
+                    serialPortLoggingEnableMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata vmDnsSettingMetadataValue */
+                    vmDnsSettingMetadataValue?: (string|null);
+                }
+
+                /** Represents a ResourceStatusEffectiveInstanceMetadata. */
+                class ResourceStatusEffectiveInstanceMetadata implements IResourceStatusEffectiveInstanceMetadata {
+
+                    /**
+                     * Constructs a new ResourceStatusEffectiveInstanceMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IResourceStatusEffectiveInstanceMetadata);
+
+                    /** ResourceStatusEffectiveInstanceMetadata blockProjectSshKeysMetadataValue. */
+                    public blockProjectSshKeysMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableGuestAttributesMetadataValue. */
+                    public enableGuestAttributesMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableOsInventoryMetadataValue. */
+                    public enableOsInventoryMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableOsconfigMetadataValue. */
+                    public enableOsconfigMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata enableOsloginMetadataValue. */
+                    public enableOsloginMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata serialPortEnableMetadataValue. */
+                    public serialPortEnableMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata serialPortLoggingEnableMetadataValue. */
+                    public serialPortLoggingEnableMetadataValue?: (boolean|null);
+
+                    /** ResourceStatusEffectiveInstanceMetadata vmDnsSettingMetadataValue. */
+                    public vmDnsSettingMetadataValue?: (string|null);
+
+                    /**
+                     * Creates a new ResourceStatusEffectiveInstanceMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceStatusEffectiveInstanceMetadata instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IResourceStatusEffectiveInstanceMetadata): google.cloud.compute.v1beta.ResourceStatusEffectiveInstanceMetadata;
+
+                    /**
+                     * Encodes the specified ResourceStatusEffectiveInstanceMetadata message. Does not implicitly {@link google.cloud.compute.v1beta.ResourceStatusEffectiveInstanceMetadata.verify|verify} messages.
+                     * @param message ResourceStatusEffectiveInstanceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IResourceStatusEffectiveInstanceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceStatusEffectiveInstanceMetadata message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.ResourceStatusEffectiveInstanceMetadata.verify|verify} messages.
+                     * @param message ResourceStatusEffectiveInstanceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IResourceStatusEffectiveInstanceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceStatusEffectiveInstanceMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceStatusEffectiveInstanceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.ResourceStatusEffectiveInstanceMetadata;
+
+                    /**
+                     * Decodes a ResourceStatusEffectiveInstanceMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceStatusEffectiveInstanceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.ResourceStatusEffectiveInstanceMetadata;
+
+                    /**
+                     * Verifies a ResourceStatusEffectiveInstanceMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceStatusEffectiveInstanceMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceStatusEffectiveInstanceMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.ResourceStatusEffectiveInstanceMetadata;
+
+                    /**
+                     * Creates a plain object from a ResourceStatusEffectiveInstanceMetadata message. Also converts values to other types if specified.
+                     * @param message ResourceStatusEffectiveInstanceMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.ResourceStatusEffectiveInstanceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceStatusEffectiveInstanceMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceStatusEffectiveInstanceMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

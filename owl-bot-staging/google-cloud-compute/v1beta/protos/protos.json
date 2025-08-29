@@ -10601,6 +10601,7 @@
                             "RANDOM": 262527171,
                             "RING_HASH": 432795069,
                             "ROUND_ROBIN": 153895801,
+                            "WEIGHTED_GCP_RENDEZVOUS": 82501640,
                             "WEIGHTED_MAGLEV": 254930962,
                             "WEIGHTED_ROUND_ROBIN": 5584977
                           }
@@ -11520,6 +11521,7 @@
                             "RANDOM": 262527171,
                             "RING_HASH": 432795069,
                             "ROUND_ROBIN": 153895801,
+                            "WEIGHTED_GCP_RENDEZVOUS": 82501640,
                             "WEIGHTED_MAGLEV": 254930962,
                             "WEIGHTED_ROUND_ROBIN": 5584977
                           }
@@ -76988,6 +76990,11 @@
                     },
                     "ResourceStatus": {
                       "oneofs": {
+                        "_effectiveInstanceMetadata": {
+                          "oneof": [
+                            "effectiveInstanceMetadata"
+                          ]
+                        },
                         "_physicalHost": {
                           "oneof": [
                             "physicalHost"
@@ -77015,6 +77022,13 @@
                         }
                       },
                       "fields": {
+                        "effectiveInstanceMetadata": {
+                          "type": "ResourceStatusEffectiveInstanceMetadata",
+                          "id": 55052033,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "physicalHost": {
                           "type": "string",
                           "id": 464370704,
@@ -77046,6 +77060,108 @@
                         "upcomingMaintenance": {
                           "type": "UpcomingMaintenance",
                           "id": 227348592,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ResourceStatusEffectiveInstanceMetadata": {
+                      "oneofs": {
+                        "_blockProjectSshKeysMetadataValue": {
+                          "oneof": [
+                            "blockProjectSshKeysMetadataValue"
+                          ]
+                        },
+                        "_enableGuestAttributesMetadataValue": {
+                          "oneof": [
+                            "enableGuestAttributesMetadataValue"
+                          ]
+                        },
+                        "_enableOsInventoryMetadataValue": {
+                          "oneof": [
+                            "enableOsInventoryMetadataValue"
+                          ]
+                        },
+                        "_enableOsconfigMetadataValue": {
+                          "oneof": [
+                            "enableOsconfigMetadataValue"
+                          ]
+                        },
+                        "_enableOsloginMetadataValue": {
+                          "oneof": [
+                            "enableOsloginMetadataValue"
+                          ]
+                        },
+                        "_serialPortEnableMetadataValue": {
+                          "oneof": [
+                            "serialPortEnableMetadataValue"
+                          ]
+                        },
+                        "_serialPortLoggingEnableMetadataValue": {
+                          "oneof": [
+                            "serialPortLoggingEnableMetadataValue"
+                          ]
+                        },
+                        "_vmDnsSettingMetadataValue": {
+                          "oneof": [
+                            "vmDnsSettingMetadataValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "blockProjectSshKeysMetadataValue": {
+                          "type": "bool",
+                          "id": 338623101,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableGuestAttributesMetadataValue": {
+                          "type": "bool",
+                          "id": 420155878,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsInventoryMetadataValue": {
+                          "type": "bool",
+                          "id": 371752675,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsconfigMetadataValue": {
+                          "type": "bool",
+                          "id": 502966494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsloginMetadataValue": {
+                          "type": "bool",
+                          "id": 216603159,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serialPortEnableMetadataValue": {
+                          "type": "bool",
+                          "id": 430536330,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serialPortLoggingEnableMetadataValue": {
+                          "type": "bool",
+                          "id": 311813290,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "vmDnsSettingMetadataValue": {
+                          "type": "string",
+                          "id": 411127950,
                           "options": {
                             "proto3_optional": true
                           }
