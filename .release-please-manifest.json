@@ -1,5 +1,5 @@
 {
-  "packages/gapic-node-processing": "0.0.0",
+  "packages/gapic-node-processing": "0.1.0",
   "packages/google-ai-generativelanguage": "3.4.0",
   "packages/google-analytics-admin": "9.0.0",
   "packages/google-analytics-data": "5.2.0",
@@ -187,7 +187,7 @@
   "packages/google-cloud-privilegedaccessmanager": "0.6.0",
   "packages/google-shopping-merchant-products": "0.7.0",
   "packages/google-shopping-merchant-accounts": "3.0.0",
-  "packages/google-cloud-gdchardwaremanagement": "0.8.0",
+  "packages/google-cloud-gdchardwaremanagement": "0.9.0",
   "packages/google-cloud-apihub": "0.4.0",
   "packages/google-marketingplatform-admin": "0.3.0",
   "packages/google-cloud-oracledatabase": "0.6.0",

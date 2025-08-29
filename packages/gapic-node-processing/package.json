@@ -38,7 +38,7 @@
   "engines": {
     "node": ">=18"
   },
- "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/googleapis/google-cloud-node.git",
     "directory": "packages/gapic-node-processing"

@@ -4,6 +4,40 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "b92b2c7d56645f28aabd7771cba76d8fd506ec0a",
+          "message": "[gdchardwaremanagement] Added RequestOrderDateChange RPC - allows Customers to request date changes",
+          "issues": [
+            "6627"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "69eeae19-6b7b-4d74-980f-8a7d519f4cf8",
+      "createTime": "2025-08-28T21:41:16.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5267f25145ef5605daa1bd1140c3320e5f3b5b66",
+          "message": "Create gapic-node-processing library",
+          "issues": [
+            "6604"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "5b3b0883-7acc-40d6-84ef-7d47dad38201",
+      "createTime": "2025-08-28T21:41:16.360Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "71b30db34f8c83c1b2395270fd7ff8fb2621b669",
           "message": "[chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata`",
@@ -62046,5 +62080,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-27T20:58:49.633Z"
+  "updateTime": "2025-08-28T21:41:16.387Z"
 }
