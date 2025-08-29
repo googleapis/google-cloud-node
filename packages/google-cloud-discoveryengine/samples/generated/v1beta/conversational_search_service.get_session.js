@@ -33,6 +33,11 @@ function main(name) {
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If set to true, the full session including all answer details
+   *  will be returned.
+   */
+  // const includeAnswerDetails = true
 
   // Imports the Discoveryengine library
   const {ConversationalSearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;

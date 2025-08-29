@@ -13,6 +13,76 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Account_issue_service.list_account_issues](#account_issue_service.list_account_issues)
+  * [Account_relationships_service.get_account_relationship](#account_relationships_service.get_account_relationship)
+  * [Account_relationships_service.list_account_relationships](#account_relationships_service.list_account_relationships)
+  * [Account_relationships_service.update_account_relationship](#account_relationships_service.update_account_relationship)
+  * [Account_services_service.approve_account_service](#account_services_service.approve_account_service)
+  * [Account_services_service.get_account_service](#account_services_service.get_account_service)
+  * [Account_services_service.list_account_services](#account_services_service.list_account_services)
+  * [Account_services_service.propose_account_service](#account_services_service.propose_account_service)
+  * [Account_services_service.reject_account_service](#account_services_service.reject_account_service)
+  * [Accounts_service.create_and_configure_account](#accounts_service.create_and_configure_account)
+  * [Accounts_service.delete_account](#accounts_service.delete_account)
+  * [Accounts_service.get_account](#accounts_service.get_account)
+  * [Accounts_service.list_accounts](#accounts_service.list_accounts)
+  * [Accounts_service.list_sub_accounts](#accounts_service.list_sub_accounts)
+  * [Accounts_service.update_account](#accounts_service.update_account)
+  * [Autofeed_settings_service.get_autofeed_settings](#autofeed_settings_service.get_autofeed_settings)
+  * [Autofeed_settings_service.update_autofeed_settings](#autofeed_settings_service.update_autofeed_settings)
+  * [Automatic_improvements_service.get_automatic_improvements](#automatic_improvements_service.get_automatic_improvements)
+  * [Automatic_improvements_service.update_automatic_improvements](#automatic_improvements_service.update_automatic_improvements)
+  * [Business_identity_service.get_business_identity](#business_identity_service.get_business_identity)
+  * [Business_identity_service.update_business_identity](#business_identity_service.update_business_identity)
+  * [Business_info_service.get_business_info](#business_info_service.get_business_info)
+  * [Business_info_service.update_business_info](#business_info_service.update_business_info)
+  * [Checkout_settings_service.create_checkout_settings](#checkout_settings_service.create_checkout_settings)
+  * [Checkout_settings_service.delete_checkout_settings](#checkout_settings_service.delete_checkout_settings)
+  * [Checkout_settings_service.get_checkout_settings](#checkout_settings_service.get_checkout_settings)
+  * [Checkout_settings_service.update_checkout_settings](#checkout_settings_service.update_checkout_settings)
+  * [Developer_registration_service.get_developer_registration](#developer_registration_service.get_developer_registration)
+  * [Developer_registration_service.register_gcp](#developer_registration_service.register_gcp)
+  * [Developer_registration_service.unregister_gcp](#developer_registration_service.unregister_gcp)
+  * [Email_preferences_service.get_email_preferences](#email_preferences_service.get_email_preferences)
+  * [Email_preferences_service.update_email_preferences](#email_preferences_service.update_email_preferences)
+  * [Gbp_accounts_service.link_gbp_account](#gbp_accounts_service.link_gbp_account)
+  * [Gbp_accounts_service.list_gbp_accounts](#gbp_accounts_service.list_gbp_accounts)
+  * [Homepage_service.claim_homepage](#homepage_service.claim_homepage)
+  * [Homepage_service.get_homepage](#homepage_service.get_homepage)
+  * [Homepage_service.unclaim_homepage](#homepage_service.unclaim_homepage)
+  * [Homepage_service.update_homepage](#homepage_service.update_homepage)
+  * [Lfp_providers_service.find_lfp_providers](#lfp_providers_service.find_lfp_providers)
+  * [Lfp_providers_service.link_lfp_provider](#lfp_providers_service.link_lfp_provider)
+  * [Omnichannel_settings_service.create_omnichannel_setting](#omnichannel_settings_service.create_omnichannel_setting)
+  * [Omnichannel_settings_service.get_omnichannel_setting](#omnichannel_settings_service.get_omnichannel_setting)
+  * [Omnichannel_settings_service.list_omnichannel_settings](#omnichannel_settings_service.list_omnichannel_settings)
+  * [Omnichannel_settings_service.request_inventory_verification](#omnichannel_settings_service.request_inventory_verification)
+  * [Omnichannel_settings_service.update_omnichannel_setting](#omnichannel_settings_service.update_omnichannel_setting)
+  * [Online_return_policy_service.create_online_return_policy](#online_return_policy_service.create_online_return_policy)
+  * [Online_return_policy_service.delete_online_return_policy](#online_return_policy_service.delete_online_return_policy)
+  * [Online_return_policy_service.get_online_return_policy](#online_return_policy_service.get_online_return_policy)
+  * [Online_return_policy_service.list_online_return_policies](#online_return_policy_service.list_online_return_policies)
+  * [Programs_service.disable_program](#programs_service.disable_program)
+  * [Programs_service.enable_program](#programs_service.enable_program)
+  * [Programs_service.get_program](#programs_service.get_program)
+  * [Programs_service.list_programs](#programs_service.list_programs)
+  * [Regions_service.create_region](#regions_service.create_region)
+  * [Regions_service.delete_region](#regions_service.delete_region)
+  * [Regions_service.get_region](#regions_service.get_region)
+  * [Regions_service.list_regions](#regions_service.list_regions)
+  * [Regions_service.update_region](#regions_service.update_region)
+  * [Shipping_settings_service.get_shipping_settings](#shipping_settings_service.get_shipping_settings)
+  * [Shipping_settings_service.insert_shipping_settings](#shipping_settings_service.insert_shipping_settings)
+  * [Terms_of_service_agreement_state_service.get_terms_of_service_agreement_state](#terms_of_service_agreement_state_service.get_terms_of_service_agreement_state)
+  * [Terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state](#terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state)
+  * [Terms_of_service_service.accept_terms_of_service](#terms_of_service_service.accept_terms_of_service)
+  * [Terms_of_service_service.get_terms_of_service](#terms_of_service_service.get_terms_of_service)
+  * [Terms_of_service_service.retrieve_latest_terms_of_service](#terms_of_service_service.retrieve_latest_terms_of_service)
+  * [User_service.create_user](#user_service.create_user)
+  * [User_service.delete_user](#user_service.delete_user)
+  * [User_service.get_user](#user_service.get_user)
+  * [User_service.list_users](#user_service.list_users)
+  * [User_service.update_user](#user_service.update_user)
+  * [Account_issue_service.list_account_issues](#account_issue_service.list_account_issues)
   * [Account_tax_service.get_account_tax](#account_tax_service.get_account_tax)
   * [Account_tax_service.list_account_tax](#account_tax_service.list_account_tax)
   * [Account_tax_service.update_account_tax](#account_tax_service.update_account_tax)
@@ -89,6 +159,1196 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Account_issue_service.list_account_issues
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_issue_service.list_account_issues.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_issue_service.list_account_issues.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_issue_service.list_account_issues.js`
+
+
+-----
+
+
+
+
+### Account_relationships_service.get_account_relationship
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.get_account_relationship.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.get_account_relationship.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.get_account_relationship.js`
+
+
+-----
+
+
+
+
+### Account_relationships_service.list_account_relationships
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.list_account_relationships.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.list_account_relationships.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.list_account_relationships.js`
+
+
+-----
+
+
+
+
+### Account_relationships_service.update_account_relationship
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.update_account_relationship.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.update_account_relationship.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_relationships_service.update_account_relationship.js`
+
+
+-----
+
+
+
+
+### Account_services_service.approve_account_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.approve_account_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.approve_account_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.approve_account_service.js`
+
+
+-----
+
+
+
+
+### Account_services_service.get_account_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.get_account_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.get_account_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.get_account_service.js`
+
+
+-----
+
+
+
+
+### Account_services_service.list_account_services
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.list_account_services.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.list_account_services.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.list_account_services.js`
+
+
+-----
+
+
+
+
+### Account_services_service.propose_account_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.propose_account_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.propose_account_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.propose_account_service.js`
+
+
+-----
+
+
+
+
+### Account_services_service.reject_account_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.reject_account_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.reject_account_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/account_services_service.reject_account_service.js`
+
+
+-----
+
+
+
+
+### Accounts_service.create_and_configure_account
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.create_and_configure_account.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.create_and_configure_account.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.create_and_configure_account.js`
+
+
+-----
+
+
+
+
+### Accounts_service.delete_account
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.delete_account.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.delete_account.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.delete_account.js`
+
+
+-----
+
+
+
+
+### Accounts_service.get_account
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.get_account.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.get_account.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.get_account.js`
+
+
+-----
+
+
+
+
+### Accounts_service.list_accounts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.list_accounts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.list_accounts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.list_accounts.js`
+
+
+-----
+
+
+
+
+### Accounts_service.list_sub_accounts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.list_sub_accounts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.list_sub_accounts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.list_sub_accounts.js`
+
+
+-----
+
+
+
+
+### Accounts_service.update_account
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.update_account.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.update_account.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/accounts_service.update_account.js`
+
+
+-----
+
+
+
+
+### Autofeed_settings_service.get_autofeed_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/autofeed_settings_service.get_autofeed_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/autofeed_settings_service.get_autofeed_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/autofeed_settings_service.get_autofeed_settings.js`
+
+
+-----
+
+
+
+
+### Autofeed_settings_service.update_autofeed_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/autofeed_settings_service.update_autofeed_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/autofeed_settings_service.update_autofeed_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/autofeed_settings_service.update_autofeed_settings.js`
+
+
+-----
+
+
+
+
+### Automatic_improvements_service.get_automatic_improvements
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/automatic_improvements_service.get_automatic_improvements.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/automatic_improvements_service.get_automatic_improvements.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/automatic_improvements_service.get_automatic_improvements.js`
+
+
+-----
+
+
+
+
+### Automatic_improvements_service.update_automatic_improvements
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/automatic_improvements_service.update_automatic_improvements.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/automatic_improvements_service.update_automatic_improvements.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/automatic_improvements_service.update_automatic_improvements.js`
+
+
+-----
+
+
+
+
+### Business_identity_service.get_business_identity
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/business_identity_service.get_business_identity.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/business_identity_service.get_business_identity.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/business_identity_service.get_business_identity.js`
+
+
+-----
+
+
+
+
+### Business_identity_service.update_business_identity
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/business_identity_service.update_business_identity.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/business_identity_service.update_business_identity.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/business_identity_service.update_business_identity.js`
+
+
+-----
+
+
+
+
+### Business_info_service.get_business_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/business_info_service.get_business_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/business_info_service.get_business_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/business_info_service.get_business_info.js`
+
+
+-----
+
+
+
+
+### Business_info_service.update_business_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/business_info_service.update_business_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/business_info_service.update_business_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/business_info_service.update_business_info.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.create_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.create_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.create_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.create_checkout_settings.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.delete_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.delete_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.delete_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.delete_checkout_settings.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.get_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.get_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.get_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.get_checkout_settings.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.update_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.update_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.update_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.update_checkout_settings.js`
+
+
+-----
+
+
+
+
+### Developer_registration_service.get_developer_registration
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.get_developer_registration.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.get_developer_registration.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.get_developer_registration.js`
+
+
+-----
+
+
+
+
+### Developer_registration_service.register_gcp
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.register_gcp.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.register_gcp.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.register_gcp.js`
+
+
+-----
+
+
+
+
+### Developer_registration_service.unregister_gcp
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.unregister_gcp.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.unregister_gcp.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.unregister_gcp.js`
+
+
+-----
+
+
+
+
+### Email_preferences_service.get_email_preferences
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/email_preferences_service.get_email_preferences.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/email_preferences_service.get_email_preferences.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/email_preferences_service.get_email_preferences.js`
+
+
+-----
+
+
+
+
+### Email_preferences_service.update_email_preferences
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/email_preferences_service.update_email_preferences.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/email_preferences_service.update_email_preferences.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/email_preferences_service.update_email_preferences.js`
+
+
+-----
+
+
+
+
+### Gbp_accounts_service.link_gbp_account
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/gbp_accounts_service.link_gbp_account.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/gbp_accounts_service.link_gbp_account.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/gbp_accounts_service.link_gbp_account.js`
+
+
+-----
+
+
+
+
+### Gbp_accounts_service.list_gbp_accounts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/gbp_accounts_service.list_gbp_accounts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/gbp_accounts_service.list_gbp_accounts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/gbp_accounts_service.list_gbp_accounts.js`
+
+
+-----
+
+
+
+
+### Homepage_service.claim_homepage
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.claim_homepage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.claim_homepage.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.claim_homepage.js`
+
+
+-----
+
+
+
+
+### Homepage_service.get_homepage
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.get_homepage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.get_homepage.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.get_homepage.js`
+
+
+-----
+
+
+
+
+### Homepage_service.unclaim_homepage
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.unclaim_homepage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.unclaim_homepage.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.unclaim_homepage.js`
+
+
+-----
+
+
+
+
+### Homepage_service.update_homepage
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.update_homepage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.update_homepage.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/homepage_service.update_homepage.js`
+
+
+-----
+
+
+
+
+### Lfp_providers_service.find_lfp_providers
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/lfp_providers_service.find_lfp_providers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/lfp_providers_service.find_lfp_providers.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/lfp_providers_service.find_lfp_providers.js`
+
+
+-----
+
+
+
+
+### Lfp_providers_service.link_lfp_provider
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/lfp_providers_service.link_lfp_provider.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/lfp_providers_service.link_lfp_provider.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/lfp_providers_service.link_lfp_provider.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.create_omnichannel_setting
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.create_omnichannel_setting.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.create_omnichannel_setting.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.create_omnichannel_setting.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.get_omnichannel_setting
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.get_omnichannel_setting.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.get_omnichannel_setting.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.get_omnichannel_setting.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.list_omnichannel_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.list_omnichannel_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.list_omnichannel_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.list_omnichannel_settings.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.request_inventory_verification
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.request_inventory_verification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.request_inventory_verification.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.request_inventory_verification.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.update_omnichannel_setting
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.update_omnichannel_setting.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.update_omnichannel_setting.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/omnichannel_settings_service.update_omnichannel_setting.js`
+
+
+-----
+
+
+
+
+### Online_return_policy_service.create_online_return_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.create_online_return_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.create_online_return_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.create_online_return_policy.js`
+
+
+-----
+
+
+
+
+### Online_return_policy_service.delete_online_return_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.delete_online_return_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.delete_online_return_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.delete_online_return_policy.js`
+
+
+-----
+
+
+
+
+### Online_return_policy_service.get_online_return_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.get_online_return_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.get_online_return_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.get_online_return_policy.js`
+
+
+-----
+
+
+
+
+### Online_return_policy_service.list_online_return_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.list_online_return_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.list_online_return_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/online_return_policy_service.list_online_return_policies.js`
+
+
+-----
+
+
+
+
+### Programs_service.disable_program
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.disable_program.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.disable_program.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.disable_program.js`
+
+
+-----
+
+
+
+
+### Programs_service.enable_program
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.enable_program.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.enable_program.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.enable_program.js`
+
+
+-----
+
+
+
+
+### Programs_service.get_program
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.get_program.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.get_program.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.get_program.js`
+
+
+-----
+
+
+
+
+### Programs_service.list_programs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.list_programs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.list_programs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/programs_service.list_programs.js`
+
+
+-----
+
+
+
+
+### Regions_service.create_region
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.create_region.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.create_region.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.create_region.js`
+
+
+-----
+
+
+
+
+### Regions_service.delete_region
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.delete_region.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.delete_region.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.delete_region.js`
+
+
+-----
+
+
+
+
+### Regions_service.get_region
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.get_region.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.get_region.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.get_region.js`
+
+
+-----
+
+
+
+
+### Regions_service.list_regions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.list_regions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.list_regions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.list_regions.js`
+
+
+-----
+
+
+
+
+### Regions_service.update_region
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.update_region.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.update_region.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/regions_service.update_region.js`
+
+
+-----
+
+
+
+
+### Shipping_settings_service.get_shipping_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/shipping_settings_service.get_shipping_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/shipping_settings_service.get_shipping_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/shipping_settings_service.get_shipping_settings.js`
+
+
+-----
+
+
+
+
+### Shipping_settings_service.insert_shipping_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/shipping_settings_service.insert_shipping_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/shipping_settings_service.insert_shipping_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/shipping_settings_service.insert_shipping_settings.js`
+
+
+-----
+
+
+
+
+### Terms_of_service_agreement_state_service.get_terms_of_service_agreement_state
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_agreement_state_service.get_terms_of_service_agreement_state.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_agreement_state_service.get_terms_of_service_agreement_state.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_agreement_state_service.get_terms_of_service_agreement_state.js`
+
+
+-----
+
+
+
+
+### Terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state.js`
+
+
+-----
+
+
+
+
+### Terms_of_service_service.accept_terms_of_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.accept_terms_of_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.accept_terms_of_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.accept_terms_of_service.js`
+
+
+-----
+
+
+
+
+### Terms_of_service_service.get_terms_of_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.get_terms_of_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.get_terms_of_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.get_terms_of_service.js`
+
+
+-----
+
+
+
+
+### Terms_of_service_service.retrieve_latest_terms_of_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.retrieve_latest_terms_of_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.retrieve_latest_terms_of_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/terms_of_service_service.retrieve_latest_terms_of_service.js`
+
+
+-----
+
+
+
+
+### User_service.create_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.create_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.create_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.create_user.js`
+
+
+-----
+
+
+
+
+### User_service.delete_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.delete_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.delete_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.delete_user.js`
+
+
+-----
+
+
+
+
+### User_service.get_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.get_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.get_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.get_user.js`
+
+
+-----
+
+
+
+
+### User_service.list_users
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.list_users.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.list_users.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.list_users.js`
+
+
+-----
+
+
+
+
+### User_service.update_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.update_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.update_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.update_user.js`
+
+
+-----
+
 
 
 

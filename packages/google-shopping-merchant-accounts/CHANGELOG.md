@@ -1,5 +1,33 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.4.0...accounts-v3.0.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.3.0...accounts-v2.4.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add accounts API client libraries for v1 ([#6573](https://github.com/googleapis/google-cloud-node/issues/6573)) ([3cdfa47](https://github.com/googleapis/google-cloud-node/commit/3cdfa4762673343395c4d27879d5244d522b7fc5))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.2.0...accounts-v2.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* [merchantapi] Add CheckoutSettings service ([#6447](https://github.com/googleapis/google-cloud-node/issues/6447)) ([e6dc92c](https://github.com/googleapis/google-cloud-node/commit/e6dc92c6e07d4dabd7b81041b594c15738362f61))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.1.0...accounts-v2.2.0) (2025-06-03)
 
 

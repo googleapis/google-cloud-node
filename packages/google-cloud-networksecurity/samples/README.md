@@ -27,6 +27,11 @@
   * [Network_security.update_authorization_policy](#network_security.update_authorization_policy)
   * [Network_security.update_client_tls_policy](#network_security.update_client_tls_policy)
   * [Network_security.update_server_tls_policy](#network_security.update_server_tls_policy)
+  * [Network_security.create_client_tls_policy](#network_security.create_client_tls_policy)
+  * [Network_security.delete_client_tls_policy](#network_security.delete_client_tls_policy)
+  * [Network_security.get_client_tls_policy](#network_security.get_client_tls_policy)
+  * [Network_security.list_client_tls_policies](#network_security.list_client_tls_policies)
+  * [Network_security.update_client_tls_policy](#network_security.update_client_tls_policy)
   * [Network_security.create_authorization_policy](#network_security.create_authorization_policy)
   * [Network_security.create_client_tls_policy](#network_security.create_client_tls_policy)
   * [Network_security.create_server_tls_policy](#network_security.create_server_tls_policy)
@@ -307,6 +312,91 @@ __Usage:__
 
 
 `node packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_server_tls_policy.js`
+
+
+-----
+
+
+
+
+### Network_security.create_client_tls_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.create_client_tls_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.create_client_tls_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.create_client_tls_policy.js`
+
+
+-----
+
+
+
+
+### Network_security.delete_client_tls_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.delete_client_tls_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.delete_client_tls_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.delete_client_tls_policy.js`
+
+
+-----
+
+
+
+
+### Network_security.get_client_tls_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.get_client_tls_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.get_client_tls_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.get_client_tls_policy.js`
+
+
+-----
+
+
+
+
+### Network_security.list_client_tls_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.list_client_tls_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.list_client_tls_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.list_client_tls_policies.js`
+
+
+-----
+
+
+
+
+### Network_security.update_client_tls_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.update_client_tls_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.update_client_tls_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1alpha1/network_security.update_client_tls_policy.js`
 
 
 -----

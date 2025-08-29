@@ -29,7 +29,7 @@ function main(subpropertySyncConfig) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The SubpropertySyncConfig to update.
+   *  Required. The `SubpropertySyncConfig` to update.
    */
   // const subpropertySyncConfig = {}
   /**

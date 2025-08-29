@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.4.0...parametermanager-v0.5.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [parametermanager] KMS key resource_definition `cloudkms.googleapis.com/CryptoKey is added ([#6435](https://github.com/googleapis/google-cloud-node/issues/6435)) ([c4cdb16](https://github.com/googleapis/google-cloud-node/commit/c4cdb16b7d31a37e52c94b9d387893f0592cc19f))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.3.0...parametermanager-v0.4.0) (2025-06-03)
 
 

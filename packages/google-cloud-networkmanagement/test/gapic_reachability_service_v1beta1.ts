@@ -1985,6 +1985,52 @@ describe('v1beta1.ReachabilityServiceClient', () => {
             });
         });
 
+        describe('organizationLocationVpcFlowLogsConfigs', async () => {
+            const fakePath = "/rendered/path/organizationLocationVpcFlowLogsConfigs";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                vpc_flow_logs_config: "vpcFlowLogsConfigValue",
+            };
+            const client = new reachabilityserviceModule.v1beta1.ReachabilityServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationVpcFlowLogsConfigsPath', () => {
+                const result = client.organizationLocationVpcFlowLogsConfigsPath("organizationValue", "locationValue", "vpcFlowLogsConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationVpcFlowLogsConfigsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchLocationFromOrganizationLocationVpcFlowLogsConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVpcFlowLogsConfigFromOrganizationLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchVpcFlowLogsConfigFromOrganizationLocationVpcFlowLogsConfigsName(fakePath);
+                assert.strictEqual(result, "vpcFlowLogsConfigValue");
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('project', async () => {
             const fakePath = "/rendered/path/project";
             const expectedParameters = {
@@ -2015,8 +2061,8 @@ describe('v1beta1.ReachabilityServiceClient', () => {
             });
         });
 
-        describe('vpcFlowLogsConfig', async () => {
-            const fakePath = "/rendered/path/vpcFlowLogsConfig";
+        describe('projectLocationVpcFlowLogsConfigs', async () => {
+            const fakePath = "/rendered/path/projectLocationVpcFlowLogsConfigs";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -2027,36 +2073,36 @@ describe('v1beta1.ReachabilityServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.vpcFlowLogsConfigPathTemplate.render =
+            client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.vpcFlowLogsConfigPathTemplate.match =
+            client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('vpcFlowLogsConfigPath', () => {
-                const result = client.vpcFlowLogsConfigPath("projectValue", "locationValue", "vpcFlowLogsConfigValue");
+            it('projectLocationVpcFlowLogsConfigsPath', () => {
+                const result = client.projectLocationVpcFlowLogsConfigsPath("projectValue", "locationValue", "vpcFlowLogsConfigValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromVpcFlowLogsConfigName', () => {
-                const result = client.matchProjectFromVpcFlowLogsConfigName(fakePath);
+            it('matchProjectFromProjectLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchProjectFromProjectLocationVpcFlowLogsConfigsName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromVpcFlowLogsConfigName', () => {
-                const result = client.matchLocationFromVpcFlowLogsConfigName(fakePath);
+            it('matchLocationFromProjectLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchLocationFromProjectLocationVpcFlowLogsConfigsName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchVpcFlowLogsConfigFromVpcFlowLogsConfigName', () => {
-                const result = client.matchVpcFlowLogsConfigFromVpcFlowLogsConfigName(fakePath);
+            it('matchVpcFlowLogsConfigFromProjectLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchVpcFlowLogsConfigFromProjectLocationVpcFlowLogsConfigsName(fakePath);
                 assert.strictEqual(result, "vpcFlowLogsConfigValue");
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -9373,156 +9373,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         });
     });
 
-    describe('setAutomatedGa4ConfigurationOptOut', () => {
-        it('invokes setAutomatedGa4ConfigurationOptOut without error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse()
-            );
-            client.innerApiCalls.setAutomatedGa4ConfigurationOptOut = stubSimpleCall(expectedResponse);
-            const [response] = await client.setAutomatedGa4ConfigurationOptOut(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes setAutomatedGa4ConfigurationOptOut without error using callback', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse()
-            );
-            client.innerApiCalls.setAutomatedGa4ConfigurationOptOut = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.setAutomatedGa4ConfigurationOptOut(
-                    request,
-                    (err?: Error|null, result?: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes setAutomatedGa4ConfigurationOptOut with error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.setAutomatedGa4ConfigurationOptOut = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.setAutomatedGa4ConfigurationOptOut(request), expectedError);
-        });
-
-        it('invokes setAutomatedGa4ConfigurationOptOut with closed client', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.setAutomatedGa4ConfigurationOptOut(request), expectedError);
-        });
-    });
-
-    describe('fetchAutomatedGa4ConfigurationOptOut', () => {
-        it('invokes fetchAutomatedGa4ConfigurationOptOut without error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse()
-            );
-            client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut = stubSimpleCall(expectedResponse);
-            const [response] = await client.fetchAutomatedGa4ConfigurationOptOut(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes fetchAutomatedGa4ConfigurationOptOut without error using callback', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse()
-            );
-            client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.fetchAutomatedGa4ConfigurationOptOut(
-                    request,
-                    (err?: Error|null, result?: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes fetchAutomatedGa4ConfigurationOptOut with error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.fetchAutomatedGa4ConfigurationOptOut(request), expectedError);
-        });
-
-        it('invokes fetchAutomatedGa4ConfigurationOptOut with closed client', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
-            );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.fetchAutomatedGa4ConfigurationOptOut(request), expectedError);
-        });
-    });
-
     describe('createBigQueryLink', () => {
         it('invokes createBigQueryLink without error', async () => {
             const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
@@ -10176,306 +10026,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.updateEnhancedMeasurementSettings(request), expectedError);
-        });
-    });
-
-    describe('createConnectedSiteTag', () => {
-        it('invokes createConnectedSiteTag without error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse()
-            );
-            client.innerApiCalls.createConnectedSiteTag = stubSimpleCall(expectedResponse);
-            const [response] = await client.createConnectedSiteTag(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes createConnectedSiteTag without error using callback', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse()
-            );
-            client.innerApiCalls.createConnectedSiteTag = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createConnectedSiteTag(
-                    request,
-                    (err?: Error|null, result?: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes createConnectedSiteTag with error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createConnectedSiteTag = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createConnectedSiteTag(request), expectedError);
-        });
-
-        it('invokes createConnectedSiteTag with closed client', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
-            );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.createConnectedSiteTag(request), expectedError);
-        });
-    });
-
-    describe('deleteConnectedSiteTag', () => {
-        it('invokes deleteConnectedSiteTag without error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteConnectedSiteTag = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteConnectedSiteTag(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes deleteConnectedSiteTag without error using callback', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteConnectedSiteTag = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteConnectedSiteTag(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes deleteConnectedSiteTag with error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteConnectedSiteTag = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteConnectedSiteTag(request), expectedError);
-        });
-
-        it('invokes deleteConnectedSiteTag with closed client', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
-            );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteConnectedSiteTag(request), expectedError);
-        });
-    });
-
-    describe('listConnectedSiteTags', () => {
-        it('invokes listConnectedSiteTags without error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse()
-            );
-            client.innerApiCalls.listConnectedSiteTags = stubSimpleCall(expectedResponse);
-            const [response] = await client.listConnectedSiteTags(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes listConnectedSiteTags without error using callback', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse()
-            );
-            client.innerApiCalls.listConnectedSiteTags = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listConnectedSiteTags(
-                    request,
-                    (err?: Error|null, result?: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes listConnectedSiteTags with error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listConnectedSiteTags = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listConnectedSiteTags(request), expectedError);
-        });
-
-        it('invokes listConnectedSiteTags with closed client', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
-            );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.listConnectedSiteTags(request), expectedError);
-        });
-    });
-
-    describe('fetchConnectedGa4Property', () => {
-        it('invokes fetchConnectedGa4Property without error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse()
-            );
-            client.innerApiCalls.fetchConnectedGa4Property = stubSimpleCall(expectedResponse);
-            const [response] = await client.fetchConnectedGa4Property(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes fetchConnectedGa4Property without error using callback', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse()
-            );
-            client.innerApiCalls.fetchConnectedGa4Property = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.fetchConnectedGa4Property(
-                    request,
-                    (err?: Error|null, result?: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes fetchConnectedGa4Property with error', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.fetchConnectedGa4Property = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.fetchConnectedGa4Property(request), expectedError);
-        });
-
-        it('invokes fetchConnectedGa4Property with closed client', async () => {
-            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
-            );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.fetchConnectedGa4Property(request), expectedError);
         });
     });
 
@@ -14110,6 +13660,114 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getSubpropertySyncConfig(request), expectedError);
+        });
+    });
+
+    describe('getReportingIdentitySettings', () => {
+        it('invokes getReportingIdentitySettings without error', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.ReportingIdentitySettings()
+            );
+            client.innerApiCalls.getReportingIdentitySettings = stubSimpleCall(expectedResponse);
+            const [response] = await client.getReportingIdentitySettings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReportingIdentitySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReportingIdentitySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReportingIdentitySettings without error using callback', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.ReportingIdentitySettings()
+            );
+            client.innerApiCalls.getReportingIdentitySettings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getReportingIdentitySettings(
+                    request,
+                    (err?: Error|null, result?: protos.google.analytics.admin.v1alpha.IReportingIdentitySettings|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReportingIdentitySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReportingIdentitySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReportingIdentitySettings with error', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getReportingIdentitySettings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getReportingIdentitySettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getReportingIdentitySettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReportingIdentitySettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReportingIdentitySettings with closed client', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getReportingIdentitySettings(request), expectedError);
         });
     });
 
@@ -22150,6 +21808,36 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
                 const result = client.matchReportingDataAnnotationFromReportingDataAnnotationName(fakePath);
                 assert.strictEqual(result, "reportingDataAnnotationValue");
                 assert((client.pathTemplates.reportingDataAnnotationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('reportingIdentitySettings', async () => {
+            const fakePath = "/rendered/path/reportingIdentitySettings";
+            const expectedParameters = {
+                property: "propertyValue",
+            };
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.reportingIdentitySettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.reportingIdentitySettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('reportingIdentitySettingsPath', () => {
+                const result = client.reportingIdentitySettingsPath("propertyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.reportingIdentitySettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchPropertyFromReportingIdentitySettingsName', () => {
+                const result = client.matchPropertyFromReportingIdentitySettingsName(fakePath);
+                assert.strictEqual(result, "propertyValue");
+                assert((client.pathTemplates.reportingIdentitySettingsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

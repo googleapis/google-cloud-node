@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/connectors",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Connectors API client for Node.js",
   "repository": {
     "type": "git",

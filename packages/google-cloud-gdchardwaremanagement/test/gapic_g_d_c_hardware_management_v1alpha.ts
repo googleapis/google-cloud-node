@@ -1867,6 +1867,160 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         });
     });
 
+    describe('cancelOrder', () => {
+        it('invokes cancelOrder without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.cancelOrder = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.cancelOrder(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelOrder without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.cancelOrder = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelOrder(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelOrder with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelOrder = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.cancelOrder(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelOrder with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelOrder = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.cancelOrder(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCancelOrderProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCancelOrderProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCancelOrderProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCancelOrderProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('createSite', () => {
         it('invokes createSite without error', async () => {
             const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
@@ -4034,6 +4188,160 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkSignalZoneStateProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('requestOrderDateChange', () => {
+        it('invokes requestOrderDateChange without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.requestOrderDateChange = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.requestOrderDateChange(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes requestOrderDateChange without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.requestOrderDateChange = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.requestOrderDateChange(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes requestOrderDateChange with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.requestOrderDateChange = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.requestOrderDateChange(request), expectedError);
+            const actualRequest = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes requestOrderDateChange with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.requestOrderDateChange = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.requestOrderDateChange(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.requestOrderDateChange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRequestOrderDateChangeProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRequestOrderDateChangeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRequestOrderDateChangeProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRequestOrderDateChangeProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });

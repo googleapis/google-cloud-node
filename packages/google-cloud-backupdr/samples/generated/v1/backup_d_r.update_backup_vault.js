@@ -64,6 +64,11 @@ function main(updateMask, backupVault) {
    *  enforcement duration.
    */
   // const force = true
+  /**
+   *  Optional. If set to true, we will force update access restriction even if
+   *  some non compliant data sources are present. The default is 'false'.
+   */
+  // const forceUpdateAccessRestriction = true
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;

@@ -259,6 +259,114 @@ describe('v2beta.CaseAttachmentServiceClient', () => {
         });
     });
 
+    describe('getAttachment', () => {
+        it('invokes getAttachment without error', async () => {
+            const client = new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.GetAttachmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.GetAttachmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.Attachment()
+            );
+            client.innerApiCalls.getAttachment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAttachment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAttachment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAttachment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAttachment without error using callback', async () => {
+            const client = new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.GetAttachmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.GetAttachmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.Attachment()
+            );
+            client.innerApiCalls.getAttachment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAttachment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.support.v2beta.IAttachment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAttachment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAttachment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAttachment with error', async () => {
+            const client = new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.GetAttachmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.GetAttachmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAttachment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAttachment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAttachment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAttachment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAttachment with closed client', async () => {
+            const client = new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.GetAttachmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.GetAttachmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAttachment(request), expectedError);
+        });
+    });
+
     describe('listAttachments', () => {
         it('invokes listAttachments without error', async () => {
             const client = new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({

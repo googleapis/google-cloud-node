@@ -125,6 +125,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateBackupPlan": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetBackupPlan": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -137,7 +141,19 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetBackupPlanRevision": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListBackupPlanRevisions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateBackupPlanAssociation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateBackupPlanAssociation": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -149,11 +165,23 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "FetchBackupPlanAssociationsForResourceType": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteBackupPlanAssociation": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "TriggerBackup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDataSourceReference": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchDataSourceReferencesForResourceType": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

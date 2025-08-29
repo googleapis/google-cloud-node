@@ -1375,9 +1375,9 @@ export class EndpointServiceClient {
   }
 /**
  * Updates an existing deployed model. Updatable fields include
- * `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`,
- * `disable_container_logging` (v1 only), and `enable_container_logging`
- * (v1beta1 only).
+ * `min_replica_count`, `max_replica_count`, `required_replica_count`,
+ * `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and
+ * `enable_container_logging` (v1beta1 only).
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1395,6 +1395,8 @@ export class EndpointServiceClient {
  *   * `max_replica_count` in either
  *   {@link protos.google.cloud.aiplatform.v1.DedicatedResources|DedicatedResources} or
  *   {@link protos.google.cloud.aiplatform.v1.AutomaticResources|AutomaticResources}
+ *   * `required_replica_count` in
+ *   {@link protos.google.cloud.aiplatform.v1.DedicatedResources|DedicatedResources}
  *   * {@link protos.google.cloud.aiplatform.v1.DedicatedResources.autoscaling_metric_specs|autoscaling_metric_specs}
  *   * `disable_container_logging` (v1 only)
  *   * `enable_container_logging` (v1beta1 only)

@@ -16,7 +16,7 @@
     "!test/"
   ],
   "dependencies": {
-    "@google-cloud/automl": "^5.0.1",
+    "@google-cloud/automl": "^5.1.0",
     "csv": "^6.0.0",
     "mathjs": "^14.0.0",
     "yargs": "^17.0.0"

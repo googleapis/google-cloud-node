@@ -16,14 +16,15 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const ProductInputsServiceClient = v1beta.ProductInputsServiceClient;
-type ProductInputsServiceClient = v1beta.ProductInputsServiceClient;
-const ProductsServiceClient = v1beta.ProductsServiceClient;
-type ProductsServiceClient = v1beta.ProductsServiceClient;
+const ProductInputsServiceClient = v1.ProductInputsServiceClient;
+type ProductInputsServiceClient = v1.ProductInputsServiceClient;
+const ProductsServiceClient = v1.ProductsServiceClient;
+type ProductsServiceClient = v1.ProductsServiceClient;
 
-export {v1beta, ProductInputsServiceClient, ProductsServiceClient};
-export default {v1beta, ProductInputsServiceClient, ProductsServiceClient};
+export {v1, v1beta, ProductInputsServiceClient, ProductsServiceClient};
+export default {v1, v1beta, ProductInputsServiceClient, ProductsServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

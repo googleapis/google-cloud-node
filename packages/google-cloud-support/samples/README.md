@@ -23,6 +23,7 @@
   * [Case_service.update_case](#case_service.update_case)
   * [Comment_service.create_comment](#comment_service.create_comment)
   * [Comment_service.list_comments](#comment_service.list_comments)
+  * [Case_attachment_service.get_attachment](#case_attachment_service.get_attachment)
   * [Case_attachment_service.list_attachments](#case_attachment_service.list_attachments)
   * [Case_service.close_case](#case_service.close_case)
   * [Case_service.create_case](#case_service.create_case)
@@ -33,6 +34,7 @@
   * [Case_service.search_cases](#case_service.search_cases)
   * [Case_service.update_case](#case_service.update_case)
   * [Comment_service.create_comment](#comment_service.create_comment)
+  * [Comment_service.get_comment](#comment_service.get_comment)
   * [Comment_service.list_comments](#comment_service.list_comments)
   * [Feed_service.show_feed](#feed_service.show_feed)
   * [Quickstart](#quickstart)
@@ -239,6 +241,23 @@ __Usage:__
 
 
 
+### Case_attachment_service.get_attachment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.get_attachment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.get_attachment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.get_attachment.js`
+
+
+-----
+
+
+
+
 ### Case_attachment_service.list_attachments
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.list_attachments.js).
@@ -402,6 +421,23 @@ __Usage:__
 
 
 `node packages/google-cloud-support/samples/generated/v2beta/comment_service.create_comment.js`
+
+
+-----
+
+
+
+
+### Comment_service.get_comment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/comment_service.get_comment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/comment_service.get_comment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/comment_service.get_comment.js`
 
 
 -----

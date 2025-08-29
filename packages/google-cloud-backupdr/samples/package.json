@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/backupdr": "^0.3.1"
+    "@google-cloud/backupdr": "^0.5.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",
