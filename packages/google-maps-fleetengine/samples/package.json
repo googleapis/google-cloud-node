@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@googlemaps/fleetengine": "^0.6.1"
+    "@googlemaps/fleetengine": "^0.8.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

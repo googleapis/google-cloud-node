@@ -5,7 +5,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "name": "@google-cloud/billing-budgets",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "author": "Google LLC",
   "description": "Budgets client for Node.js",
   "main": "build/src/index.js",

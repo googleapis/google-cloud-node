@@ -1,6 +1,7 @@
 {
   "initial-version": "0.1.0",
   "packages": {
+    "packages/gapic-node-processing": {},
     "packages/google-ai-generativelanguage": {},
     "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
@@ -206,7 +207,12 @@
     "packages/google-cloud-lustre": {},
     "packages/google-cloud-storagebatchoperations": {},
     "packages/google-apps-events-subscriptions": {},
-    "packages/google-cloud-maintenance-api": {}
+    "packages/google-cloud-maintenance-api": {},
+    "packages/google-cloud-managedkafka-schemaregistry": {},
+    "packages/google-cloud-licensemanager": {},
+    "packages/google-cloud-configdelivery": {},
+    "packages/google-cloud-saasplatform-saasservicemgmt": {},
+    "packages/google-cloud-cloudsecuritycompliance": {}
   },
   "plugins": [
     {

@@ -16,14 +16,15 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const AggregateProductStatusesServiceClient = v1beta.AggregateProductStatusesServiceClient;
-type AggregateProductStatusesServiceClient = v1beta.AggregateProductStatusesServiceClient;
-const IssueResolutionServiceClient = v1beta.IssueResolutionServiceClient;
-type IssueResolutionServiceClient = v1beta.IssueResolutionServiceClient;
+const AggregateProductStatusesServiceClient = v1.AggregateProductStatusesServiceClient;
+type AggregateProductStatusesServiceClient = v1.AggregateProductStatusesServiceClient;
+const IssueResolutionServiceClient = v1.IssueResolutionServiceClient;
+type IssueResolutionServiceClient = v1.IssueResolutionServiceClient;
 
-export {v1beta, AggregateProductStatusesServiceClient, IssueResolutionServiceClient};
-export default {v1beta, AggregateProductStatusesServiceClient, IssueResolutionServiceClient};
+export {v1, v1beta, AggregateProductStatusesServiceClient, IssueResolutionServiceClient};
+export default {v1, v1beta, AggregateProductStatusesServiceClient, IssueResolutionServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

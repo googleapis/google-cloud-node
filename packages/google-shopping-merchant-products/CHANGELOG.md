@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.6.0...products-v0.7.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.5.0...products-v0.6.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add products API client libraries for v1 ([#6569](https://github.com/googleapis/google-cloud-node/issues/6569)) ([57f22a0](https://github.com/googleapis/google-cloud-node/commit/57f22a05e39ad20866b3d5270e55f5660fd727ff))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.4.0...products-v0.5.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.3.0...products-v0.4.0) (2025-05-09)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-compute",
-        "version": "5.2.0",
+        "version": "6.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -38482,7 +38482,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -38501,6 +38501,10 @@
                     },
                     {
                         "name": "reservation_block",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
                         "type": "TYPE_STRING"
                     },
                     {
@@ -39380,6 +39384,62 @@
                 "method": {
                     "shortName": "List",
                     "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.List",
+                    "service": {
+                        "shortName": "ReservationSubBlocks",
+                        "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1beta_generated_ReservationSubBlocks_PerformMaintenance_async",
+            "title": "AcceleratorTypes performMaintenance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Allows customers to perform maintenance on a reservation subBlock",
+            "canonical": true,
+            "file": "reservation_sub_blocks.perform_maintenance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PerformMaintenance",
+                "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.PerformMaintenance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reservation_sub_block",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1beta.Operation",
+                "client": {
+                    "shortName": "ReservationSubBlocksClient",
+                    "fullName": "google.cloud.compute.v1beta.ReservationSubBlocksClient"
+                },
+                "method": {
+                    "shortName": "PerformMaintenance",
+                    "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.PerformMaintenance",
                     "service": {
                         "shortName": "ReservationSubBlocks",
                         "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks"

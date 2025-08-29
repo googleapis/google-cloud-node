@@ -4,7 +4,7 @@
 
 # [Merchant API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-conversions)
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-shopping/conversions.svg)](https://www.npmjs.org/package/@google-shopping/conversions)
 
 
@@ -117,6 +117,12 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Conversion_sources_service.create_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.create_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.create_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
+| Conversion_sources_service.delete_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.delete_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.delete_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
+| Conversion_sources_service.get_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.get_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.get_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
+| Conversion_sources_service.list_conversion_sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.list_conversion_sources.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.list_conversion_sources.js,packages/google-shopping-merchant-conversions/samples/README.md) |
+| Conversion_sources_service.undelete_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.undelete_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.undelete_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
+| Conversion_sources_service.update_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.update_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.update_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
 | Conversion_sources_service.create_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.create_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.create_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
 | Conversion_sources_service.delete_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.delete_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.delete_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
 | Conversion_sources_service.get_conversion_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.get_conversion_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.get_conversion_source.js,packages/google-shopping-merchant-conversions/samples/README.md) |
@@ -157,13 +163,14 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
 
 
 
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]

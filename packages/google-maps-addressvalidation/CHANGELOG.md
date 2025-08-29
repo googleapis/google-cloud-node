@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v3.1.0...addressvalidation-v3.2.0) (2025-07-22)
+
+
+### Features
+
+* [addressvalidation] add has_spell_corrected_components field to the Address Validation verdict in the API response ([#6498](https://github.com/googleapis/google-cloud-node/issues/6498)) ([a39702e](https://github.com/googleapis/google-cloud-node/commit/a39702e4f0e8a9536cef0adbc64d5fd3045592d8))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v3.0.1...addressvalidation-v3.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6425](https://github.com/googleapis/google-cloud-node/issues/6425)) ([c920e8d](https://github.com/googleapis/google-cloud-node/commit/c920e8d0d43be81fc171bc5f7d59800b66b830b8))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v3.0.0...addressvalidation-v3.0.1) (2025-03-19)
 
 

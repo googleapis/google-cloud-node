@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.12.0...reports-v0.13.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.11.0...reports-v0.12.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add reports API client libraries for v1beta ([#6572](https://github.com/googleapis/google-cloud-node/issues/6572)) ([46bee29](https://github.com/googleapis/google-cloud-node/commit/46bee29bfe10579f2fb20fdd079370de60d9a578))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.10.0...reports-v0.11.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] Add additional YouTube report fields to Merchant reports endpoint ([#6549](https://github.com/googleapis/google-cloud-node/issues/6549)) ([7c4f983](https://github.com/googleapis/google-cloud-node/commit/7c4f983971be37e7bdd1b2344166c8ff662b01b9))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.9.0...reports-v0.10.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* [merchantapi]Add v1alpha version to Merchant reports endpoint ([#6465](https://github.com/googleapis/google-cloud-node/issues/6465)) ([7340db2](https://github.com/googleapis/google-cloud-node/commit/7340db2fa3498158de392dbe8ffbcb3f97e21883))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.8.1...reports-v0.9.0) (2025-06-03)
 
 

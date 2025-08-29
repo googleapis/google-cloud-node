@@ -30,10 +30,10 @@ function main(locations) {
    */
   /**
    *  Required. The desired list of Google Compute Engine
-   *  zones (https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster's nodes should be located. Changing the locations a cluster is in
-   *  will result in nodes being either created or removed from the cluster,
-   *  depending on whether locations are being added or removed.
+   *  zones (https://cloud.google.com/compute/docs/zones#available)
+   *  in which the cluster's nodes should be located. Changing the locations a
+   *  cluster is in will result in nodes being either created or removed from the
+   *  cluster, depending on whether locations are being added or removed.
    *  This list must always include the cluster's primary zone.
    */
   // const locations = ['abc','def']

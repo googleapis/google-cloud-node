@@ -189,11 +189,29 @@ export class SimulatorClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      customConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/customConstraints/{custom_constraint}'
+      ),
+      folderConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/constraints/{constraint}'
+      ),
       folderLocationReplayPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/replays/{replay}'
       ),
       folderLocationReplayReplayResultPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/replays/{replay}/results/{replay_result}'
+      ),
+      folderPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/policies/{policy}'
+      ),
+      orgPolicyViolationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/orgPolicyViolationsPreviews/{org_policy_violations_preview}/orgPolicyViolations/{org_policy_violation}'
+      ),
+      orgPolicyViolationsPreviewPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/orgPolicyViolationsPreviews/{org_policy_violations_preview}'
+      ),
+      organizationConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/constraints/{constraint}'
       ),
       organizationLocationReplayPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/replays/{replay}'
@@ -201,11 +219,20 @@ export class SimulatorClient {
       organizationLocationReplayReplayResultPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/replays/{replay}/results/{replay_result}'
       ),
+      organizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/policies/{policy}'
+      ),
+      projectConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/constraints/{constraint}'
+      ),
       projectLocationReplayPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/replays/{replay}'
       ),
       projectLocationReplayReplayResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/replays/{replay}/results/{replay_result}'
+      ),
+      projectPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/policies/{policy}'
       ),
     };
 
@@ -227,7 +254,7 @@ export class SimulatorClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=operations/**}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=folders/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=organizations/*/locations/*/replays/*/operations/**}',}],
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=operations/**}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=folders/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=organizations/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=projects/*/locations/*/orgPolicyViolationsPreviews/*/operations/**}',},{get: '/v1/{name=folders/*/locations/*/orgPolicyViolationsPreviews/*/operations/**}',},{get: '/v1/{name=organizations/*/locations/*/orgPolicyViolationsPreviews/*/operations/**}',},{get: '/v1/{name=projects/*/locations/*/accessPolicySimulations/*/operations/**}',},{get: '/v1/{name=folders/*/locations/*/accessPolicySimulations/*/operations/**}',},{get: '/v1/{name=organizations/*/locations/*/accessPolicySimulations/*/operations/**}',}],
       },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=operations}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/replays/*/operations}',},{get: '/v1/{name=folders/*/locations/*/replays/*/operations}',},{get: '/v1/{name=organizations/*/locations/*/replays/*/operations}',}],
       }];
     }
@@ -1079,6 +1106,78 @@ export class SimulatorClient {
   // --------------------
 
   /**
+   * Return a fully-qualified customConstraint resource name string.
+   *
+   * @param {string} organization
+   * @param {string} custom_constraint
+   * @returns {string} Resource name string.
+   */
+  customConstraintPath(organization:string,customConstraint:string) {
+    return this.pathTemplates.customConstraintPathTemplate.render({
+      organization: organization,
+      custom_constraint: customConstraint,
+    });
+  }
+
+  /**
+   * Parse the organization from CustomConstraint resource.
+   *
+   * @param {string} customConstraintName
+   *   A fully-qualified path representing CustomConstraint resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromCustomConstraintName(customConstraintName: string) {
+    return this.pathTemplates.customConstraintPathTemplate.match(customConstraintName).organization;
+  }
+
+  /**
+   * Parse the custom_constraint from CustomConstraint resource.
+   *
+   * @param {string} customConstraintName
+   *   A fully-qualified path representing CustomConstraint resource.
+   * @returns {string} A string representing the custom_constraint.
+   */
+  matchCustomConstraintFromCustomConstraintName(customConstraintName: string) {
+    return this.pathTemplates.customConstraintPathTemplate.match(customConstraintName).custom_constraint;
+  }
+
+  /**
+   * Return a fully-qualified folderConstraint resource name string.
+   *
+   * @param {string} folder
+   * @param {string} constraint
+   * @returns {string} Resource name string.
+   */
+  folderConstraintPath(folder:string,constraint:string) {
+    return this.pathTemplates.folderConstraintPathTemplate.render({
+      folder: folder,
+      constraint: constraint,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderConstraint resource.
+   *
+   * @param {string} folderConstraintName
+   *   A fully-qualified path representing folder_constraint resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderConstraintName(folderConstraintName: string) {
+    return this.pathTemplates.folderConstraintPathTemplate.match(folderConstraintName).folder;
+  }
+
+  /**
+   * Parse the constraint from FolderConstraint resource.
+   *
+   * @param {string} folderConstraintName
+   *   A fully-qualified path representing folder_constraint resource.
+   * @returns {string} A string representing the constraint.
+   */
+  matchConstraintFromFolderConstraintName(folderConstraintName: string) {
+    return this.pathTemplates.folderConstraintPathTemplate.match(folderConstraintName).constraint;
+  }
+
+  /**
    * Return a fully-qualified folderLocationReplay resource name string.
    *
    * @param {string} folder
@@ -1187,6 +1286,189 @@ export class SimulatorClient {
    */
   matchReplayResultFromFolderLocationReplayReplayResultName(folderLocationReplayReplayResultName: string) {
     return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(folderLocationReplayReplayResultName).replay_result;
+  }
+
+  /**
+   * Return a fully-qualified folderPolicy resource name string.
+   *
+   * @param {string} folder
+   * @param {string} policy
+   * @returns {string} Resource name string.
+   */
+  folderPolicyPath(folder:string,policy:string) {
+    return this.pathTemplates.folderPolicyPathTemplate.render({
+      folder: folder,
+      policy: policy,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderPolicy resource.
+   *
+   * @param {string} folderPolicyName
+   *   A fully-qualified path representing folder_policy resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderPolicyName(folderPolicyName: string) {
+    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName).folder;
+  }
+
+  /**
+   * Parse the policy from FolderPolicy resource.
+   *
+   * @param {string} folderPolicyName
+   *   A fully-qualified path representing folder_policy resource.
+   * @returns {string} A string representing the policy.
+   */
+  matchPolicyFromFolderPolicyName(folderPolicyName: string) {
+    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName).policy;
+  }
+
+  /**
+   * Return a fully-qualified orgPolicyViolation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} org_policy_violations_preview
+   * @param {string} org_policy_violation
+   * @returns {string} Resource name string.
+   */
+  orgPolicyViolationPath(organization:string,location:string,orgPolicyViolationsPreview:string,orgPolicyViolation:string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.render({
+      organization: organization,
+      location: location,
+      org_policy_violations_preview: orgPolicyViolationsPreview,
+      org_policy_violation: orgPolicyViolation,
+    });
+  }
+
+  /**
+   * Parse the organization from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).organization;
+  }
+
+  /**
+   * Parse the location from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).location;
+  }
+
+  /**
+   * Parse the org_policy_violations_preview from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the org_policy_violations_preview.
+   */
+  matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).org_policy_violations_preview;
+  }
+
+  /**
+   * Parse the org_policy_violation from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the org_policy_violation.
+   */
+  matchOrgPolicyViolationFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).org_policy_violation;
+  }
+
+  /**
+   * Return a fully-qualified orgPolicyViolationsPreview resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} org_policy_violations_preview
+   * @returns {string} Resource name string.
+   */
+  orgPolicyViolationsPreviewPath(organization:string,location:string,orgPolicyViolationsPreview:string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.render({
+      organization: organization,
+      location: location,
+      org_policy_violations_preview: orgPolicyViolationsPreview,
+    });
+  }
+
+  /**
+   * Parse the organization from OrgPolicyViolationsPreview resource.
+   *
+   * @param {string} orgPolicyViolationsPreviewName
+   *   A fully-qualified path representing OrgPolicyViolationsPreview resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrgPolicyViolationsPreviewName(orgPolicyViolationsPreviewName: string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match(orgPolicyViolationsPreviewName).organization;
+  }
+
+  /**
+   * Parse the location from OrgPolicyViolationsPreview resource.
+   *
+   * @param {string} orgPolicyViolationsPreviewName
+   *   A fully-qualified path representing OrgPolicyViolationsPreview resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrgPolicyViolationsPreviewName(orgPolicyViolationsPreviewName: string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match(orgPolicyViolationsPreviewName).location;
+  }
+
+  /**
+   * Parse the org_policy_violations_preview from OrgPolicyViolationsPreview resource.
+   *
+   * @param {string} orgPolicyViolationsPreviewName
+   *   A fully-qualified path representing OrgPolicyViolationsPreview resource.
+   * @returns {string} A string representing the org_policy_violations_preview.
+   */
+  matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName(orgPolicyViolationsPreviewName: string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match(orgPolicyViolationsPreviewName).org_policy_violations_preview;
+  }
+
+  /**
+   * Return a fully-qualified organizationConstraint resource name string.
+   *
+   * @param {string} organization
+   * @param {string} constraint
+   * @returns {string} Resource name string.
+   */
+  organizationConstraintPath(organization:string,constraint:string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.render({
+      organization: organization,
+      constraint: constraint,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationConstraint resource.
+   *
+   * @param {string} organizationConstraintName
+   *   A fully-qualified path representing organization_constraint resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationConstraintName(organizationConstraintName: string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.match(organizationConstraintName).organization;
+  }
+
+  /**
+   * Parse the constraint from OrganizationConstraint resource.
+   *
+   * @param {string} organizationConstraintName
+   *   A fully-qualified path representing organization_constraint resource.
+   * @returns {string} A string representing the constraint.
+   */
+  matchConstraintFromOrganizationConstraintName(organizationConstraintName: string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.match(organizationConstraintName).constraint;
   }
 
   /**
@@ -1301,6 +1583,78 @@ export class SimulatorClient {
   }
 
   /**
+   * Return a fully-qualified organizationPolicy resource name string.
+   *
+   * @param {string} organization
+   * @param {string} policy
+   * @returns {string} Resource name string.
+   */
+  organizationPolicyPath(organization:string,policy:string) {
+    return this.pathTemplates.organizationPolicyPathTemplate.render({
+      organization: organization,
+      policy: policy,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationPolicy resource.
+   *
+   * @param {string} organizationPolicyName
+   *   A fully-qualified path representing organization_policy resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationPolicyName(organizationPolicyName: string) {
+    return this.pathTemplates.organizationPolicyPathTemplate.match(organizationPolicyName).organization;
+  }
+
+  /**
+   * Parse the policy from OrganizationPolicy resource.
+   *
+   * @param {string} organizationPolicyName
+   *   A fully-qualified path representing organization_policy resource.
+   * @returns {string} A string representing the policy.
+   */
+  matchPolicyFromOrganizationPolicyName(organizationPolicyName: string) {
+    return this.pathTemplates.organizationPolicyPathTemplate.match(organizationPolicyName).policy;
+  }
+
+  /**
+   * Return a fully-qualified projectConstraint resource name string.
+   *
+   * @param {string} project
+   * @param {string} constraint
+   * @returns {string} Resource name string.
+   */
+  projectConstraintPath(project:string,constraint:string) {
+    return this.pathTemplates.projectConstraintPathTemplate.render({
+      project: project,
+      constraint: constraint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConstraint resource.
+   *
+   * @param {string} projectConstraintName
+   *   A fully-qualified path representing project_constraint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConstraintName(projectConstraintName: string) {
+    return this.pathTemplates.projectConstraintPathTemplate.match(projectConstraintName).project;
+  }
+
+  /**
+   * Parse the constraint from ProjectConstraint resource.
+   *
+   * @param {string} projectConstraintName
+   *   A fully-qualified path representing project_constraint resource.
+   * @returns {string} A string representing the constraint.
+   */
+  matchConstraintFromProjectConstraintName(projectConstraintName: string) {
+    return this.pathTemplates.projectConstraintPathTemplate.match(projectConstraintName).constraint;
+  }
+
+  /**
    * Return a fully-qualified projectLocationReplay resource name string.
    *
    * @param {string} project
@@ -1409,6 +1763,42 @@ export class SimulatorClient {
    */
   matchReplayResultFromProjectLocationReplayReplayResultName(projectLocationReplayReplayResultName: string) {
     return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(projectLocationReplayReplayResultName).replay_result;
+  }
+
+  /**
+   * Return a fully-qualified projectPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} policy
+   * @returns {string} Resource name string.
+   */
+  projectPolicyPath(project:string,policy:string) {
+    return this.pathTemplates.projectPolicyPathTemplate.render({
+      project: project,
+      policy: policy,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectPolicy resource.
+   *
+   * @param {string} projectPolicyName
+   *   A fully-qualified path representing project_policy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectPolicyName(projectPolicyName: string) {
+    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName).project;
+  }
+
+  /**
+   * Parse the policy from ProjectPolicy resource.
+   *
+   * @param {string} projectPolicyName
+   *   A fully-qualified path representing project_policy resource.
+   * @returns {string} A string representing the policy.
+   */
+  matchPolicyFromProjectPolicyName(projectPolicyName: string) {
+    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName).policy;
   }
 
   /**

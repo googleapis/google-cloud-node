@@ -26,6 +26,2810 @@ export namespace google {
             /** Namespace datasources. */
             namespace datasources {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents a DataSourcesService */
+                    class DataSourcesService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new DataSourcesService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new DataSourcesService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataSourcesService;
+
+                        /**
+                         * Calls GetDataSource.
+                         * @param request GetDataSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataSource
+                         */
+                        public getDataSource(request: google.shopping.merchant.datasources.v1.IGetDataSourceRequest, callback: google.shopping.merchant.datasources.v1.DataSourcesService.GetDataSourceCallback): void;
+
+                        /**
+                         * Calls GetDataSource.
+                         * @param request GetDataSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getDataSource(request: google.shopping.merchant.datasources.v1.IGetDataSourceRequest): Promise<google.shopping.merchant.datasources.v1.DataSource>;
+
+                        /**
+                         * Calls ListDataSources.
+                         * @param request ListDataSourcesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListDataSourcesResponse
+                         */
+                        public listDataSources(request: google.shopping.merchant.datasources.v1.IListDataSourcesRequest, callback: google.shopping.merchant.datasources.v1.DataSourcesService.ListDataSourcesCallback): void;
+
+                        /**
+                         * Calls ListDataSources.
+                         * @param request ListDataSourcesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listDataSources(request: google.shopping.merchant.datasources.v1.IListDataSourcesRequest): Promise<google.shopping.merchant.datasources.v1.ListDataSourcesResponse>;
+
+                        /**
+                         * Calls CreateDataSource.
+                         * @param request CreateDataSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataSource
+                         */
+                        public createDataSource(request: google.shopping.merchant.datasources.v1.ICreateDataSourceRequest, callback: google.shopping.merchant.datasources.v1.DataSourcesService.CreateDataSourceCallback): void;
+
+                        /**
+                         * Calls CreateDataSource.
+                         * @param request CreateDataSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createDataSource(request: google.shopping.merchant.datasources.v1.ICreateDataSourceRequest): Promise<google.shopping.merchant.datasources.v1.DataSource>;
+
+                        /**
+                         * Calls UpdateDataSource.
+                         * @param request UpdateDataSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataSource
+                         */
+                        public updateDataSource(request: google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest, callback: google.shopping.merchant.datasources.v1.DataSourcesService.UpdateDataSourceCallback): void;
+
+                        /**
+                         * Calls UpdateDataSource.
+                         * @param request UpdateDataSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateDataSource(request: google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest): Promise<google.shopping.merchant.datasources.v1.DataSource>;
+
+                        /**
+                         * Calls DeleteDataSource.
+                         * @param request DeleteDataSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteDataSource(request: google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest, callback: google.shopping.merchant.datasources.v1.DataSourcesService.DeleteDataSourceCallback): void;
+
+                        /**
+                         * Calls DeleteDataSource.
+                         * @param request DeleteDataSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteDataSource(request: google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls FetchDataSource.
+                         * @param request FetchDataSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public fetchDataSource(request: google.shopping.merchant.datasources.v1.IFetchDataSourceRequest, callback: google.shopping.merchant.datasources.v1.DataSourcesService.FetchDataSourceCallback): void;
+
+                        /**
+                         * Calls FetchDataSource.
+                         * @param request FetchDataSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public fetchDataSource(request: google.shopping.merchant.datasources.v1.IFetchDataSourceRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace DataSourcesService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|getDataSource}.
+                         * @param error Error, if any
+                         * @param [response] DataSource
+                         */
+                        type GetDataSourceCallback = (error: (Error|null), response?: google.shopping.merchant.datasources.v1.DataSource) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|listDataSources}.
+                         * @param error Error, if any
+                         * @param [response] ListDataSourcesResponse
+                         */
+                        type ListDataSourcesCallback = (error: (Error|null), response?: google.shopping.merchant.datasources.v1.ListDataSourcesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|createDataSource}.
+                         * @param error Error, if any
+                         * @param [response] DataSource
+                         */
+                        type CreateDataSourceCallback = (error: (Error|null), response?: google.shopping.merchant.datasources.v1.DataSource) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|updateDataSource}.
+                         * @param error Error, if any
+                         * @param [response] DataSource
+                         */
+                        type UpdateDataSourceCallback = (error: (Error|null), response?: google.shopping.merchant.datasources.v1.DataSource) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|deleteDataSource}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteDataSourceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|fetchDataSource}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type FetchDataSourceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a DataSource. */
+                    interface IDataSource {
+
+                        /** DataSource primaryProductDataSource */
+                        primaryProductDataSource?: (google.shopping.merchant.datasources.v1.IPrimaryProductDataSource|null);
+
+                        /** DataSource supplementalProductDataSource */
+                        supplementalProductDataSource?: (google.shopping.merchant.datasources.v1.ISupplementalProductDataSource|null);
+
+                        /** DataSource localInventoryDataSource */
+                        localInventoryDataSource?: (google.shopping.merchant.datasources.v1.ILocalInventoryDataSource|null);
+
+                        /** DataSource regionalInventoryDataSource */
+                        regionalInventoryDataSource?: (google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource|null);
+
+                        /** DataSource promotionDataSource */
+                        promotionDataSource?: (google.shopping.merchant.datasources.v1.IPromotionDataSource|null);
+
+                        /** DataSource productReviewDataSource */
+                        productReviewDataSource?: (google.shopping.merchant.datasources.v1.IProductReviewDataSource|null);
+
+                        /** DataSource merchantReviewDataSource */
+                        merchantReviewDataSource?: (google.shopping.merchant.datasources.v1.IMerchantReviewDataSource|null);
+
+                        /** DataSource name */
+                        name?: (string|null);
+
+                        /** DataSource dataSourceId */
+                        dataSourceId?: (number|Long|string|null);
+
+                        /** DataSource displayName */
+                        displayName?: (string|null);
+
+                        /** DataSource input */
+                        input?: (google.shopping.merchant.datasources.v1.DataSource.Input|keyof typeof google.shopping.merchant.datasources.v1.DataSource.Input|null);
+
+                        /** DataSource fileInput */
+                        fileInput?: (google.shopping.merchant.datasources.v1.IFileInput|null);
+                    }
+
+                    /** Represents a DataSource. */
+                    class DataSource implements IDataSource {
+
+                        /**
+                         * Constructs a new DataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IDataSource);
+
+                        /** DataSource primaryProductDataSource. */
+                        public primaryProductDataSource?: (google.shopping.merchant.datasources.v1.IPrimaryProductDataSource|null);
+
+                        /** DataSource supplementalProductDataSource. */
+                        public supplementalProductDataSource?: (google.shopping.merchant.datasources.v1.ISupplementalProductDataSource|null);
+
+                        /** DataSource localInventoryDataSource. */
+                        public localInventoryDataSource?: (google.shopping.merchant.datasources.v1.ILocalInventoryDataSource|null);
+
+                        /** DataSource regionalInventoryDataSource. */
+                        public regionalInventoryDataSource?: (google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource|null);
+
+                        /** DataSource promotionDataSource. */
+                        public promotionDataSource?: (google.shopping.merchant.datasources.v1.IPromotionDataSource|null);
+
+                        /** DataSource productReviewDataSource. */
+                        public productReviewDataSource?: (google.shopping.merchant.datasources.v1.IProductReviewDataSource|null);
+
+                        /** DataSource merchantReviewDataSource. */
+                        public merchantReviewDataSource?: (google.shopping.merchant.datasources.v1.IMerchantReviewDataSource|null);
+
+                        /** DataSource name. */
+                        public name: string;
+
+                        /** DataSource dataSourceId. */
+                        public dataSourceId: (number|Long|string);
+
+                        /** DataSource displayName. */
+                        public displayName: string;
+
+                        /** DataSource input. */
+                        public input: (google.shopping.merchant.datasources.v1.DataSource.Input|keyof typeof google.shopping.merchant.datasources.v1.DataSource.Input);
+
+                        /** DataSource fileInput. */
+                        public fileInput?: (google.shopping.merchant.datasources.v1.IFileInput|null);
+
+                        /** DataSource Type. */
+                        public Type?: ("primaryProductDataSource"|"supplementalProductDataSource"|"localInventoryDataSource"|"regionalInventoryDataSource"|"promotionDataSource"|"productReviewDataSource"|"merchantReviewDataSource");
+
+                        /**
+                         * Creates a new DataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IDataSource): google.shopping.merchant.datasources.v1.DataSource;
+
+                        /**
+                         * Encodes the specified DataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSource.verify|verify} messages.
+                         * @param message DataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSource.verify|verify} messages.
+                         * @param message DataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.DataSource;
+
+                        /**
+                         * Decodes a DataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.DataSource;
+
+                        /**
+                         * Verifies a DataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.DataSource;
+
+                        /**
+                         * Creates a plain object from a DataSource message. Also converts values to other types if specified.
+                         * @param message DataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.DataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataSource {
+
+                        /** Input enum. */
+                        enum Input {
+                            INPUT_UNSPECIFIED = 0,
+                            API = 1,
+                            FILE = 2,
+                            UI = 3,
+                            AUTOFEED = 4
+                        }
+                    }
+
+                    /** Properties of a GetDataSourceRequest. */
+                    interface IGetDataSourceRequest {
+
+                        /** GetDataSourceRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetDataSourceRequest. */
+                    class GetDataSourceRequest implements IGetDataSourceRequest {
+
+                        /**
+                         * Constructs a new GetDataSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IGetDataSourceRequest);
+
+                        /** GetDataSourceRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetDataSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetDataSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IGetDataSourceRequest): google.shopping.merchant.datasources.v1.GetDataSourceRequest;
+
+                        /**
+                         * Encodes the specified GetDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetDataSourceRequest.verify|verify} messages.
+                         * @param message GetDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IGetDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetDataSourceRequest.verify|verify} messages.
+                         * @param message GetDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IGetDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetDataSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.GetDataSourceRequest;
+
+                        /**
+                         * Decodes a GetDataSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.GetDataSourceRequest;
+
+                        /**
+                         * Verifies a GetDataSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetDataSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.GetDataSourceRequest;
+
+                        /**
+                         * Creates a plain object from a GetDataSourceRequest message. Also converts values to other types if specified.
+                         * @param message GetDataSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.GetDataSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetDataSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetDataSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDataSourcesRequest. */
+                    interface IListDataSourcesRequest {
+
+                        /** ListDataSourcesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListDataSourcesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListDataSourcesRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListDataSourcesRequest. */
+                    class ListDataSourcesRequest implements IListDataSourcesRequest {
+
+                        /**
+                         * Constructs a new ListDataSourcesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IListDataSourcesRequest);
+
+                        /** ListDataSourcesRequest parent. */
+                        public parent: string;
+
+                        /** ListDataSourcesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListDataSourcesRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListDataSourcesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDataSourcesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IListDataSourcesRequest): google.shopping.merchant.datasources.v1.ListDataSourcesRequest;
+
+                        /**
+                         * Encodes the specified ListDataSourcesRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesRequest.verify|verify} messages.
+                         * @param message ListDataSourcesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IListDataSourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDataSourcesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesRequest.verify|verify} messages.
+                         * @param message ListDataSourcesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IListDataSourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDataSourcesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDataSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.ListDataSourcesRequest;
+
+                        /**
+                         * Decodes a ListDataSourcesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDataSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.ListDataSourcesRequest;
+
+                        /**
+                         * Verifies a ListDataSourcesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDataSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDataSourcesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.ListDataSourcesRequest;
+
+                        /**
+                         * Creates a plain object from a ListDataSourcesRequest message. Also converts values to other types if specified.
+                         * @param message ListDataSourcesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.ListDataSourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDataSourcesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDataSourcesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDataSourcesResponse. */
+                    interface IListDataSourcesResponse {
+
+                        /** ListDataSourcesResponse dataSources */
+                        dataSources?: (google.shopping.merchant.datasources.v1.IDataSource[]|null);
+
+                        /** ListDataSourcesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListDataSourcesResponse. */
+                    class ListDataSourcesResponse implements IListDataSourcesResponse {
+
+                        /**
+                         * Constructs a new ListDataSourcesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IListDataSourcesResponse);
+
+                        /** ListDataSourcesResponse dataSources. */
+                        public dataSources: google.shopping.merchant.datasources.v1.IDataSource[];
+
+                        /** ListDataSourcesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListDataSourcesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDataSourcesResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IListDataSourcesResponse): google.shopping.merchant.datasources.v1.ListDataSourcesResponse;
+
+                        /**
+                         * Encodes the specified ListDataSourcesResponse message. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesResponse.verify|verify} messages.
+                         * @param message ListDataSourcesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IListDataSourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDataSourcesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesResponse.verify|verify} messages.
+                         * @param message ListDataSourcesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IListDataSourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDataSourcesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDataSourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.ListDataSourcesResponse;
+
+                        /**
+                         * Decodes a ListDataSourcesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDataSourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.ListDataSourcesResponse;
+
+                        /**
+                         * Verifies a ListDataSourcesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDataSourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDataSourcesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.ListDataSourcesResponse;
+
+                        /**
+                         * Creates a plain object from a ListDataSourcesResponse message. Also converts values to other types if specified.
+                         * @param message ListDataSourcesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.ListDataSourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDataSourcesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDataSourcesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateDataSourceRequest. */
+                    interface ICreateDataSourceRequest {
+
+                        /** CreateDataSourceRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateDataSourceRequest dataSource */
+                        dataSource?: (google.shopping.merchant.datasources.v1.IDataSource|null);
+                    }
+
+                    /** Represents a CreateDataSourceRequest. */
+                    class CreateDataSourceRequest implements ICreateDataSourceRequest {
+
+                        /**
+                         * Constructs a new CreateDataSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.ICreateDataSourceRequest);
+
+                        /** CreateDataSourceRequest parent. */
+                        public parent: string;
+
+                        /** CreateDataSourceRequest dataSource. */
+                        public dataSource?: (google.shopping.merchant.datasources.v1.IDataSource|null);
+
+                        /**
+                         * Creates a new CreateDataSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateDataSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.ICreateDataSourceRequest): google.shopping.merchant.datasources.v1.CreateDataSourceRequest;
+
+                        /**
+                         * Encodes the specified CreateDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.CreateDataSourceRequest.verify|verify} messages.
+                         * @param message CreateDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.ICreateDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.CreateDataSourceRequest.verify|verify} messages.
+                         * @param message CreateDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.ICreateDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateDataSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.CreateDataSourceRequest;
+
+                        /**
+                         * Decodes a CreateDataSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.CreateDataSourceRequest;
+
+                        /**
+                         * Verifies a CreateDataSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateDataSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.CreateDataSourceRequest;
+
+                        /**
+                         * Creates a plain object from a CreateDataSourceRequest message. Also converts values to other types if specified.
+                         * @param message CreateDataSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.CreateDataSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateDataSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateDataSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateDataSourceRequest. */
+                    interface IUpdateDataSourceRequest {
+
+                        /** UpdateDataSourceRequest dataSource */
+                        dataSource?: (google.shopping.merchant.datasources.v1.IDataSource|null);
+
+                        /** UpdateDataSourceRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateDataSourceRequest. */
+                    class UpdateDataSourceRequest implements IUpdateDataSourceRequest {
+
+                        /**
+                         * Constructs a new UpdateDataSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest);
+
+                        /** UpdateDataSourceRequest dataSource. */
+                        public dataSource?: (google.shopping.merchant.datasources.v1.IDataSource|null);
+
+                        /** UpdateDataSourceRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateDataSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateDataSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest): google.shopping.merchant.datasources.v1.UpdateDataSourceRequest;
+
+                        /**
+                         * Encodes the specified UpdateDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.verify|verify} messages.
+                         * @param message UpdateDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.verify|verify} messages.
+                         * @param message UpdateDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateDataSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.UpdateDataSourceRequest;
+
+                        /**
+                         * Decodes an UpdateDataSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.UpdateDataSourceRequest;
+
+                        /**
+                         * Verifies an UpdateDataSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateDataSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.UpdateDataSourceRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateDataSourceRequest message. Also converts values to other types if specified.
+                         * @param message UpdateDataSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.UpdateDataSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateDataSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateDataSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FetchDataSourceRequest. */
+                    interface IFetchDataSourceRequest {
+
+                        /** FetchDataSourceRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a FetchDataSourceRequest. */
+                    class FetchDataSourceRequest implements IFetchDataSourceRequest {
+
+                        /**
+                         * Constructs a new FetchDataSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IFetchDataSourceRequest);
+
+                        /** FetchDataSourceRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new FetchDataSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FetchDataSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IFetchDataSourceRequest): google.shopping.merchant.datasources.v1.FetchDataSourceRequest;
+
+                        /**
+                         * Encodes the specified FetchDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FetchDataSourceRequest.verify|verify} messages.
+                         * @param message FetchDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IFetchDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FetchDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FetchDataSourceRequest.verify|verify} messages.
+                         * @param message FetchDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IFetchDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FetchDataSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FetchDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.FetchDataSourceRequest;
+
+                        /**
+                         * Decodes a FetchDataSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FetchDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.FetchDataSourceRequest;
+
+                        /**
+                         * Verifies a FetchDataSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FetchDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FetchDataSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.FetchDataSourceRequest;
+
+                        /**
+                         * Creates a plain object from a FetchDataSourceRequest message. Also converts values to other types if specified.
+                         * @param message FetchDataSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.FetchDataSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FetchDataSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchDataSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteDataSourceRequest. */
+                    interface IDeleteDataSourceRequest {
+
+                        /** DeleteDataSourceRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteDataSourceRequest. */
+                    class DeleteDataSourceRequest implements IDeleteDataSourceRequest {
+
+                        /**
+                         * Constructs a new DeleteDataSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest);
+
+                        /** DeleteDataSourceRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteDataSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteDataSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest): google.shopping.merchant.datasources.v1.DeleteDataSourceRequest;
+
+                        /**
+                         * Encodes the specified DeleteDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.DeleteDataSourceRequest.verify|verify} messages.
+                         * @param message DeleteDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.DeleteDataSourceRequest.verify|verify} messages.
+                         * @param message DeleteDataSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteDataSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.DeleteDataSourceRequest;
+
+                        /**
+                         * Decodes a DeleteDataSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteDataSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.DeleteDataSourceRequest;
+
+                        /**
+                         * Verifies a DeleteDataSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteDataSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.DeleteDataSourceRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteDataSourceRequest message. Also converts values to other types if specified.
+                         * @param message DeleteDataSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.DeleteDataSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteDataSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteDataSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PrimaryProductDataSource. */
+                    interface IPrimaryProductDataSource {
+
+                        /** PrimaryProductDataSource legacyLocal */
+                        legacyLocal?: (boolean|null);
+
+                        /** PrimaryProductDataSource feedLabel */
+                        feedLabel?: (string|null);
+
+                        /** PrimaryProductDataSource contentLanguage */
+                        contentLanguage?: (string|null);
+
+                        /** PrimaryProductDataSource countries */
+                        countries?: (string[]|null);
+
+                        /** PrimaryProductDataSource defaultRule */
+                        defaultRule?: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule|null);
+
+                        /** PrimaryProductDataSource containsCustomRules */
+                        containsCustomRules?: (boolean|null);
+
+                        /** PrimaryProductDataSource destinations */
+                        destinations?: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination[]|null);
+                    }
+
+                    /** Represents a PrimaryProductDataSource. */
+                    class PrimaryProductDataSource implements IPrimaryProductDataSource {
+
+                        /**
+                         * Constructs a new PrimaryProductDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IPrimaryProductDataSource);
+
+                        /** PrimaryProductDataSource legacyLocal. */
+                        public legacyLocal: boolean;
+
+                        /** PrimaryProductDataSource feedLabel. */
+                        public feedLabel?: (string|null);
+
+                        /** PrimaryProductDataSource contentLanguage. */
+                        public contentLanguage?: (string|null);
+
+                        /** PrimaryProductDataSource countries. */
+                        public countries: string[];
+
+                        /** PrimaryProductDataSource defaultRule. */
+                        public defaultRule?: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule|null);
+
+                        /** PrimaryProductDataSource containsCustomRules. */
+                        public containsCustomRules: boolean;
+
+                        /** PrimaryProductDataSource destinations. */
+                        public destinations: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination[];
+
+                        /**
+                         * Creates a new PrimaryProductDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrimaryProductDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IPrimaryProductDataSource): google.shopping.merchant.datasources.v1.PrimaryProductDataSource;
+
+                        /**
+                         * Encodes the specified PrimaryProductDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.verify|verify} messages.
+                         * @param message PrimaryProductDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IPrimaryProductDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrimaryProductDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.verify|verify} messages.
+                         * @param message PrimaryProductDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IPrimaryProductDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrimaryProductDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrimaryProductDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.PrimaryProductDataSource;
+
+                        /**
+                         * Decodes a PrimaryProductDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrimaryProductDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.PrimaryProductDataSource;
+
+                        /**
+                         * Verifies a PrimaryProductDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrimaryProductDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrimaryProductDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.PrimaryProductDataSource;
+
+                        /**
+                         * Creates a plain object from a PrimaryProductDataSource message. Also converts values to other types if specified.
+                         * @param message PrimaryProductDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.PrimaryProductDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrimaryProductDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrimaryProductDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PrimaryProductDataSource {
+
+                        /** Properties of a DefaultRule. */
+                        interface IDefaultRule {
+
+                            /** DefaultRule takeFromDataSources */
+                            takeFromDataSources?: (google.shopping.merchant.datasources.v1.IDataSourceReference[]|null);
+                        }
+
+                        /** Represents a DefaultRule. */
+                        class DefaultRule implements IDefaultRule {
+
+                            /**
+                             * Constructs a new DefaultRule.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule);
+
+                            /** DefaultRule takeFromDataSources. */
+                            public takeFromDataSources: google.shopping.merchant.datasources.v1.IDataSourceReference[];
+
+                            /**
+                             * Creates a new DefaultRule instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DefaultRule instance
+                             */
+                            public static create(properties?: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Encodes the specified DefaultRule message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.verify|verify} messages.
+                             * @param message DefaultRule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DefaultRule message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.verify|verify} messages.
+                             * @param message DefaultRule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DefaultRule message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DefaultRule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Decodes a DefaultRule message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DefaultRule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Verifies a DefaultRule message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DefaultRule message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DefaultRule
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Creates a plain object from a DefaultRule message. Also converts values to other types if specified.
+                             * @param message DefaultRule
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DefaultRule to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DefaultRule
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Destination. */
+                        interface IDestination {
+
+                            /** Destination destination */
+                            destination?: (google.shopping.type.Destination.DestinationEnum|keyof typeof google.shopping.type.Destination.DestinationEnum|null);
+
+                            /** Destination state */
+                            state?: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State|keyof typeof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State|null);
+                        }
+
+                        /** Represents a Destination. */
+                        class Destination implements IDestination {
+
+                            /**
+                             * Constructs a new Destination.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination);
+
+                            /** Destination destination. */
+                            public destination: (google.shopping.type.Destination.DestinationEnum|keyof typeof google.shopping.type.Destination.DestinationEnum);
+
+                            /** Destination state. */
+                            public state: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State|keyof typeof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State);
+
+                            /**
+                             * Creates a new Destination instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Destination instance
+                             */
+                            public static create(properties?: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination;
+
+                            /**
+                             * Encodes the specified Destination message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.verify|verify} messages.
+                             * @param message Destination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.verify|verify} messages.
+                             * @param message Destination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Destination message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Destination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination;
+
+                            /**
+                             * Decodes a Destination message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Destination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination;
+
+                            /**
+                             * Verifies a Destination message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Destination
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination;
+
+                            /**
+                             * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                             * @param message Destination
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Destination to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Destination
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Destination {
+
+                            /** State enum. */
+                            enum State {
+                                STATE_UNSPECIFIED = 0,
+                                ENABLED = 1,
+                                DISABLED = 2
+                            }
+                        }
+                    }
+
+                    /** Properties of a SupplementalProductDataSource. */
+                    interface ISupplementalProductDataSource {
+
+                        /** SupplementalProductDataSource feedLabel */
+                        feedLabel?: (string|null);
+
+                        /** SupplementalProductDataSource contentLanguage */
+                        contentLanguage?: (string|null);
+
+                        /** SupplementalProductDataSource referencingPrimaryDataSources */
+                        referencingPrimaryDataSources?: (google.shopping.merchant.datasources.v1.IDataSourceReference[]|null);
+                    }
+
+                    /** Represents a SupplementalProductDataSource. */
+                    class SupplementalProductDataSource implements ISupplementalProductDataSource {
+
+                        /**
+                         * Constructs a new SupplementalProductDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.ISupplementalProductDataSource);
+
+                        /** SupplementalProductDataSource feedLabel. */
+                        public feedLabel?: (string|null);
+
+                        /** SupplementalProductDataSource contentLanguage. */
+                        public contentLanguage?: (string|null);
+
+                        /** SupplementalProductDataSource referencingPrimaryDataSources. */
+                        public referencingPrimaryDataSources: google.shopping.merchant.datasources.v1.IDataSourceReference[];
+
+                        /**
+                         * Creates a new SupplementalProductDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SupplementalProductDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.ISupplementalProductDataSource): google.shopping.merchant.datasources.v1.SupplementalProductDataSource;
+
+                        /**
+                         * Encodes the specified SupplementalProductDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.SupplementalProductDataSource.verify|verify} messages.
+                         * @param message SupplementalProductDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.ISupplementalProductDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SupplementalProductDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.SupplementalProductDataSource.verify|verify} messages.
+                         * @param message SupplementalProductDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.ISupplementalProductDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SupplementalProductDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SupplementalProductDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.SupplementalProductDataSource;
+
+                        /**
+                         * Decodes a SupplementalProductDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SupplementalProductDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.SupplementalProductDataSource;
+
+                        /**
+                         * Verifies a SupplementalProductDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SupplementalProductDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SupplementalProductDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.SupplementalProductDataSource;
+
+                        /**
+                         * Creates a plain object from a SupplementalProductDataSource message. Also converts values to other types if specified.
+                         * @param message SupplementalProductDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.SupplementalProductDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SupplementalProductDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SupplementalProductDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LocalInventoryDataSource. */
+                    interface ILocalInventoryDataSource {
+
+                        /** LocalInventoryDataSource feedLabel */
+                        feedLabel?: (string|null);
+
+                        /** LocalInventoryDataSource contentLanguage */
+                        contentLanguage?: (string|null);
+                    }
+
+                    /** Represents a LocalInventoryDataSource. */
+                    class LocalInventoryDataSource implements ILocalInventoryDataSource {
+
+                        /**
+                         * Constructs a new LocalInventoryDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.ILocalInventoryDataSource);
+
+                        /** LocalInventoryDataSource feedLabel. */
+                        public feedLabel: string;
+
+                        /** LocalInventoryDataSource contentLanguage. */
+                        public contentLanguage: string;
+
+                        /**
+                         * Creates a new LocalInventoryDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocalInventoryDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.ILocalInventoryDataSource): google.shopping.merchant.datasources.v1.LocalInventoryDataSource;
+
+                        /**
+                         * Encodes the specified LocalInventoryDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.LocalInventoryDataSource.verify|verify} messages.
+                         * @param message LocalInventoryDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.ILocalInventoryDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocalInventoryDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.LocalInventoryDataSource.verify|verify} messages.
+                         * @param message LocalInventoryDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.ILocalInventoryDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocalInventoryDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocalInventoryDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.LocalInventoryDataSource;
+
+                        /**
+                         * Decodes a LocalInventoryDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocalInventoryDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.LocalInventoryDataSource;
+
+                        /**
+                         * Verifies a LocalInventoryDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocalInventoryDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocalInventoryDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.LocalInventoryDataSource;
+
+                        /**
+                         * Creates a plain object from a LocalInventoryDataSource message. Also converts values to other types if specified.
+                         * @param message LocalInventoryDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.LocalInventoryDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocalInventoryDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocalInventoryDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RegionalInventoryDataSource. */
+                    interface IRegionalInventoryDataSource {
+
+                        /** RegionalInventoryDataSource feedLabel */
+                        feedLabel?: (string|null);
+
+                        /** RegionalInventoryDataSource contentLanguage */
+                        contentLanguage?: (string|null);
+                    }
+
+                    /** Represents a RegionalInventoryDataSource. */
+                    class RegionalInventoryDataSource implements IRegionalInventoryDataSource {
+
+                        /**
+                         * Constructs a new RegionalInventoryDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource);
+
+                        /** RegionalInventoryDataSource feedLabel. */
+                        public feedLabel: string;
+
+                        /** RegionalInventoryDataSource contentLanguage. */
+                        public contentLanguage: string;
+
+                        /**
+                         * Creates a new RegionalInventoryDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RegionalInventoryDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource): google.shopping.merchant.datasources.v1.RegionalInventoryDataSource;
+
+                        /**
+                         * Encodes the specified RegionalInventoryDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.verify|verify} messages.
+                         * @param message RegionalInventoryDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RegionalInventoryDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.verify|verify} messages.
+                         * @param message RegionalInventoryDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RegionalInventoryDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RegionalInventoryDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.RegionalInventoryDataSource;
+
+                        /**
+                         * Decodes a RegionalInventoryDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RegionalInventoryDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.RegionalInventoryDataSource;
+
+                        /**
+                         * Verifies a RegionalInventoryDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RegionalInventoryDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RegionalInventoryDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.RegionalInventoryDataSource;
+
+                        /**
+                         * Creates a plain object from a RegionalInventoryDataSource message. Also converts values to other types if specified.
+                         * @param message RegionalInventoryDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.RegionalInventoryDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RegionalInventoryDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RegionalInventoryDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PromotionDataSource. */
+                    interface IPromotionDataSource {
+
+                        /** PromotionDataSource targetCountry */
+                        targetCountry?: (string|null);
+
+                        /** PromotionDataSource contentLanguage */
+                        contentLanguage?: (string|null);
+                    }
+
+                    /** Represents a PromotionDataSource. */
+                    class PromotionDataSource implements IPromotionDataSource {
+
+                        /**
+                         * Constructs a new PromotionDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IPromotionDataSource);
+
+                        /** PromotionDataSource targetCountry. */
+                        public targetCountry: string;
+
+                        /** PromotionDataSource contentLanguage. */
+                        public contentLanguage: string;
+
+                        /**
+                         * Creates a new PromotionDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PromotionDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IPromotionDataSource): google.shopping.merchant.datasources.v1.PromotionDataSource;
+
+                        /**
+                         * Encodes the specified PromotionDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PromotionDataSource.verify|verify} messages.
+                         * @param message PromotionDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IPromotionDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PromotionDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PromotionDataSource.verify|verify} messages.
+                         * @param message PromotionDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IPromotionDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PromotionDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PromotionDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.PromotionDataSource;
+
+                        /**
+                         * Decodes a PromotionDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PromotionDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.PromotionDataSource;
+
+                        /**
+                         * Verifies a PromotionDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PromotionDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PromotionDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.PromotionDataSource;
+
+                        /**
+                         * Creates a plain object from a PromotionDataSource message. Also converts values to other types if specified.
+                         * @param message PromotionDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.PromotionDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PromotionDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PromotionDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProductReviewDataSource. */
+                    interface IProductReviewDataSource {
+                    }
+
+                    /** Represents a ProductReviewDataSource. */
+                    class ProductReviewDataSource implements IProductReviewDataSource {
+
+                        /**
+                         * Constructs a new ProductReviewDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IProductReviewDataSource);
+
+                        /**
+                         * Creates a new ProductReviewDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductReviewDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IProductReviewDataSource): google.shopping.merchant.datasources.v1.ProductReviewDataSource;
+
+                        /**
+                         * Encodes the specified ProductReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.ProductReviewDataSource.verify|verify} messages.
+                         * @param message ProductReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IProductReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.ProductReviewDataSource.verify|verify} messages.
+                         * @param message ProductReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IProductReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductReviewDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.ProductReviewDataSource;
+
+                        /**
+                         * Decodes a ProductReviewDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.ProductReviewDataSource;
+
+                        /**
+                         * Verifies a ProductReviewDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductReviewDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.ProductReviewDataSource;
+
+                        /**
+                         * Creates a plain object from a ProductReviewDataSource message. Also converts values to other types if specified.
+                         * @param message ProductReviewDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.ProductReviewDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductReviewDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductReviewDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MerchantReviewDataSource. */
+                    interface IMerchantReviewDataSource {
+                    }
+
+                    /** Represents a MerchantReviewDataSource. */
+                    class MerchantReviewDataSource implements IMerchantReviewDataSource {
+
+                        /**
+                         * Constructs a new MerchantReviewDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IMerchantReviewDataSource);
+
+                        /**
+                         * Creates a new MerchantReviewDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MerchantReviewDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IMerchantReviewDataSource): google.shopping.merchant.datasources.v1.MerchantReviewDataSource;
+
+                        /**
+                         * Encodes the specified MerchantReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.MerchantReviewDataSource.verify|verify} messages.
+                         * @param message MerchantReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IMerchantReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MerchantReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.MerchantReviewDataSource.verify|verify} messages.
+                         * @param message MerchantReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IMerchantReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MerchantReviewDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MerchantReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.MerchantReviewDataSource;
+
+                        /**
+                         * Decodes a MerchantReviewDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MerchantReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.MerchantReviewDataSource;
+
+                        /**
+                         * Verifies a MerchantReviewDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MerchantReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MerchantReviewDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.MerchantReviewDataSource;
+
+                        /**
+                         * Creates a plain object from a MerchantReviewDataSource message. Also converts values to other types if specified.
+                         * @param message MerchantReviewDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.MerchantReviewDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MerchantReviewDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MerchantReviewDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataSourceReference. */
+                    interface IDataSourceReference {
+
+                        /** DataSourceReference self */
+                        self?: (boolean|null);
+
+                        /** DataSourceReference primaryDataSourceName */
+                        primaryDataSourceName?: (string|null);
+
+                        /** DataSourceReference supplementalDataSourceName */
+                        supplementalDataSourceName?: (string|null);
+                    }
+
+                    /** Represents a DataSourceReference. */
+                    class DataSourceReference implements IDataSourceReference {
+
+                        /**
+                         * Constructs a new DataSourceReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IDataSourceReference);
+
+                        /** DataSourceReference self. */
+                        public self?: (boolean|null);
+
+                        /** DataSourceReference primaryDataSourceName. */
+                        public primaryDataSourceName?: (string|null);
+
+                        /** DataSourceReference supplementalDataSourceName. */
+                        public supplementalDataSourceName?: (string|null);
+
+                        /** DataSourceReference dataSourceId. */
+                        public dataSourceId?: ("self"|"primaryDataSourceName"|"supplementalDataSourceName");
+
+                        /**
+                         * Creates a new DataSourceReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataSourceReference instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IDataSourceReference): google.shopping.merchant.datasources.v1.DataSourceReference;
+
+                        /**
+                         * Encodes the specified DataSourceReference message. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSourceReference.verify|verify} messages.
+                         * @param message DataSourceReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IDataSourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataSourceReference message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSourceReference.verify|verify} messages.
+                         * @param message DataSourceReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IDataSourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataSourceReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataSourceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.DataSourceReference;
+
+                        /**
+                         * Decodes a DataSourceReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataSourceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.DataSourceReference;
+
+                        /**
+                         * Verifies a DataSourceReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataSourceReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataSourceReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.DataSourceReference;
+
+                        /**
+                         * Creates a plain object from a DataSourceReference message. Also converts values to other types if specified.
+                         * @param message DataSourceReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.DataSourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataSourceReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataSourceReference
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FileInput. */
+                    interface IFileInput {
+
+                        /** FileInput fetchSettings */
+                        fetchSettings?: (google.shopping.merchant.datasources.v1.FileInput.IFetchSettings|null);
+
+                        /** FileInput fileName */
+                        fileName?: (string|null);
+
+                        /** FileInput fileInputType */
+                        fileInputType?: (google.shopping.merchant.datasources.v1.FileInput.FileInputType|keyof typeof google.shopping.merchant.datasources.v1.FileInput.FileInputType|null);
+                    }
+
+                    /** Represents a FileInput. */
+                    class FileInput implements IFileInput {
+
+                        /**
+                         * Constructs a new FileInput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IFileInput);
+
+                        /** FileInput fetchSettings. */
+                        public fetchSettings?: (google.shopping.merchant.datasources.v1.FileInput.IFetchSettings|null);
+
+                        /** FileInput fileName. */
+                        public fileName: string;
+
+                        /** FileInput fileInputType. */
+                        public fileInputType: (google.shopping.merchant.datasources.v1.FileInput.FileInputType|keyof typeof google.shopping.merchant.datasources.v1.FileInput.FileInputType);
+
+                        /**
+                         * Creates a new FileInput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FileInput instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IFileInput): google.shopping.merchant.datasources.v1.FileInput;
+
+                        /**
+                         * Encodes the specified FileInput message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.verify|verify} messages.
+                         * @param message FileInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IFileInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FileInput message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.verify|verify} messages.
+                         * @param message FileInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IFileInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FileInput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FileInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.FileInput;
+
+                        /**
+                         * Decodes a FileInput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FileInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.FileInput;
+
+                        /**
+                         * Verifies a FileInput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FileInput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FileInput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.FileInput;
+
+                        /**
+                         * Creates a plain object from a FileInput message. Also converts values to other types if specified.
+                         * @param message FileInput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.FileInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FileInput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FileInput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FileInput {
+
+                        /** Properties of a FetchSettings. */
+                        interface IFetchSettings {
+
+                            /** FetchSettings enabled */
+                            enabled?: (boolean|null);
+
+                            /** FetchSettings dayOfMonth */
+                            dayOfMonth?: (number|null);
+
+                            /** FetchSettings timeOfDay */
+                            timeOfDay?: (google.type.ITimeOfDay|null);
+
+                            /** FetchSettings dayOfWeek */
+                            dayOfWeek?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                            /** FetchSettings timeZone */
+                            timeZone?: (string|null);
+
+                            /** FetchSettings frequency */
+                            frequency?: (google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency|keyof typeof google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency|null);
+
+                            /** FetchSettings fetchUri */
+                            fetchUri?: (string|null);
+
+                            /** FetchSettings username */
+                            username?: (string|null);
+
+                            /** FetchSettings password */
+                            password?: (string|null);
+                        }
+
+                        /** Represents a FetchSettings. */
+                        class FetchSettings implements IFetchSettings {
+
+                            /**
+                             * Constructs a new FetchSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.datasources.v1.FileInput.IFetchSettings);
+
+                            /** FetchSettings enabled. */
+                            public enabled: boolean;
+
+                            /** FetchSettings dayOfMonth. */
+                            public dayOfMonth: number;
+
+                            /** FetchSettings timeOfDay. */
+                            public timeOfDay?: (google.type.ITimeOfDay|null);
+
+                            /** FetchSettings dayOfWeek. */
+                            public dayOfWeek: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                            /** FetchSettings timeZone. */
+                            public timeZone: string;
+
+                            /** FetchSettings frequency. */
+                            public frequency: (google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency|keyof typeof google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency);
+
+                            /** FetchSettings fetchUri. */
+                            public fetchUri: string;
+
+                            /** FetchSettings username. */
+                            public username: string;
+
+                            /** FetchSettings password. */
+                            public password: string;
+
+                            /**
+                             * Creates a new FetchSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FetchSettings instance
+                             */
+                            public static create(properties?: google.shopping.merchant.datasources.v1.FileInput.IFetchSettings): google.shopping.merchant.datasources.v1.FileInput.FetchSettings;
+
+                            /**
+                             * Encodes the specified FetchSettings message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.FetchSettings.verify|verify} messages.
+                             * @param message FetchSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.datasources.v1.FileInput.IFetchSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FetchSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.FetchSettings.verify|verify} messages.
+                             * @param message FetchSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.datasources.v1.FileInput.IFetchSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FetchSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FetchSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.FileInput.FetchSettings;
+
+                            /**
+                             * Decodes a FetchSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FetchSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.FileInput.FetchSettings;
+
+                            /**
+                             * Verifies a FetchSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FetchSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FetchSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.FileInput.FetchSettings;
+
+                            /**
+                             * Creates a plain object from a FetchSettings message. Also converts values to other types if specified.
+                             * @param message FetchSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.datasources.v1.FileInput.FetchSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FetchSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FetchSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace FetchSettings {
+
+                            /** Frequency enum. */
+                            enum Frequency {
+                                FREQUENCY_UNSPECIFIED = 0,
+                                FREQUENCY_DAILY = 1,
+                                FREQUENCY_WEEKLY = 2,
+                                FREQUENCY_MONTHLY = 3
+                            }
+                        }
+
+                        /** FileInputType enum. */
+                        enum FileInputType {
+                            FILE_INPUT_TYPE_UNSPECIFIED = 0,
+                            UPLOAD = 1,
+                            FETCH = 2,
+                            GOOGLE_SHEETS = 3
+                        }
+                    }
+
+                    /** Represents a FileUploadsService */
+                    class FileUploadsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new FileUploadsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new FileUploadsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): FileUploadsService;
+
+                        /**
+                         * Calls GetFileUpload.
+                         * @param request GetFileUploadRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and FileUpload
+                         */
+                        public getFileUpload(request: google.shopping.merchant.datasources.v1.IGetFileUploadRequest, callback: google.shopping.merchant.datasources.v1.FileUploadsService.GetFileUploadCallback): void;
+
+                        /**
+                         * Calls GetFileUpload.
+                         * @param request GetFileUploadRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getFileUpload(request: google.shopping.merchant.datasources.v1.IGetFileUploadRequest): Promise<google.shopping.merchant.datasources.v1.FileUpload>;
+                    }
+
+                    namespace FileUploadsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1.FileUploadsService|getFileUpload}.
+                         * @param error Error, if any
+                         * @param [response] FileUpload
+                         */
+                        type GetFileUploadCallback = (error: (Error|null), response?: google.shopping.merchant.datasources.v1.FileUpload) => void;
+                    }
+
+                    /** Properties of a FileUpload. */
+                    interface IFileUpload {
+
+                        /** FileUpload name */
+                        name?: (string|null);
+
+                        /** FileUpload dataSourceId */
+                        dataSourceId?: (number|Long|string|null);
+
+                        /** FileUpload processingState */
+                        processingState?: (google.shopping.merchant.datasources.v1.FileUpload.ProcessingState|keyof typeof google.shopping.merchant.datasources.v1.FileUpload.ProcessingState|null);
+
+                        /** FileUpload issues */
+                        issues?: (google.shopping.merchant.datasources.v1.FileUpload.IIssue[]|null);
+
+                        /** FileUpload itemsTotal */
+                        itemsTotal?: (number|Long|string|null);
+
+                        /** FileUpload itemsCreated */
+                        itemsCreated?: (number|Long|string|null);
+
+                        /** FileUpload itemsUpdated */
+                        itemsUpdated?: (number|Long|string|null);
+
+                        /** FileUpload uploadTime */
+                        uploadTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a FileUpload. */
+                    class FileUpload implements IFileUpload {
+
+                        /**
+                         * Constructs a new FileUpload.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IFileUpload);
+
+                        /** FileUpload name. */
+                        public name: string;
+
+                        /** FileUpload dataSourceId. */
+                        public dataSourceId: (number|Long|string);
+
+                        /** FileUpload processingState. */
+                        public processingState: (google.shopping.merchant.datasources.v1.FileUpload.ProcessingState|keyof typeof google.shopping.merchant.datasources.v1.FileUpload.ProcessingState);
+
+                        /** FileUpload issues. */
+                        public issues: google.shopping.merchant.datasources.v1.FileUpload.IIssue[];
+
+                        /** FileUpload itemsTotal. */
+                        public itemsTotal: (number|Long|string);
+
+                        /** FileUpload itemsCreated. */
+                        public itemsCreated: (number|Long|string);
+
+                        /** FileUpload itemsUpdated. */
+                        public itemsUpdated: (number|Long|string);
+
+                        /** FileUpload uploadTime. */
+                        public uploadTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new FileUpload instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FileUpload instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IFileUpload): google.shopping.merchant.datasources.v1.FileUpload;
+
+                        /**
+                         * Encodes the specified FileUpload message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.verify|verify} messages.
+                         * @param message FileUpload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IFileUpload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FileUpload message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.verify|verify} messages.
+                         * @param message FileUpload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IFileUpload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FileUpload message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FileUpload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.FileUpload;
+
+                        /**
+                         * Decodes a FileUpload message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FileUpload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.FileUpload;
+
+                        /**
+                         * Verifies a FileUpload message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FileUpload message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FileUpload
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.FileUpload;
+
+                        /**
+                         * Creates a plain object from a FileUpload message. Also converts values to other types if specified.
+                         * @param message FileUpload
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.FileUpload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FileUpload to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FileUpload
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FileUpload {
+
+                        /** Properties of an Issue. */
+                        interface IIssue {
+
+                            /** Issue title */
+                            title?: (string|null);
+
+                            /** Issue description */
+                            description?: (string|null);
+
+                            /** Issue code */
+                            code?: (string|null);
+
+                            /** Issue count */
+                            count?: (number|Long|string|null);
+
+                            /** Issue severity */
+                            severity?: (google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity|keyof typeof google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity|null);
+
+                            /** Issue documentationUri */
+                            documentationUri?: (string|null);
+                        }
+
+                        /** Represents an Issue. */
+                        class Issue implements IIssue {
+
+                            /**
+                             * Constructs a new Issue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.datasources.v1.FileUpload.IIssue);
+
+                            /** Issue title. */
+                            public title: string;
+
+                            /** Issue description. */
+                            public description: string;
+
+                            /** Issue code. */
+                            public code: string;
+
+                            /** Issue count. */
+                            public count: (number|Long|string);
+
+                            /** Issue severity. */
+                            public severity: (google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity|keyof typeof google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity);
+
+                            /** Issue documentationUri. */
+                            public documentationUri: string;
+
+                            /**
+                             * Creates a new Issue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Issue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.datasources.v1.FileUpload.IIssue): google.shopping.merchant.datasources.v1.FileUpload.Issue;
+
+                            /**
+                             * Encodes the specified Issue message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.Issue.verify|verify} messages.
+                             * @param message Issue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.datasources.v1.FileUpload.IIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Issue message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.Issue.verify|verify} messages.
+                             * @param message Issue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.datasources.v1.FileUpload.IIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Issue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Issue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.FileUpload.Issue;
+
+                            /**
+                             * Decodes an Issue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Issue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.FileUpload.Issue;
+
+                            /**
+                             * Verifies an Issue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Issue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Issue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.FileUpload.Issue;
+
+                            /**
+                             * Creates a plain object from an Issue message. Also converts values to other types if specified.
+                             * @param message Issue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.datasources.v1.FileUpload.Issue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Issue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Issue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Issue {
+
+                            /** Severity enum. */
+                            enum Severity {
+                                SEVERITY_UNSPECIFIED = 0,
+                                WARNING = 1,
+                                ERROR = 2
+                            }
+                        }
+
+                        /** ProcessingState enum. */
+                        enum ProcessingState {
+                            PROCESSING_STATE_UNSPECIFIED = 0,
+                            FAILED = 1,
+                            IN_PROGRESS = 2,
+                            SUCCEEDED = 3
+                        }
+                    }
+
+                    /** Properties of a GetFileUploadRequest. */
+                    interface IGetFileUploadRequest {
+
+                        /** GetFileUploadRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetFileUploadRequest. */
+                    class GetFileUploadRequest implements IGetFileUploadRequest {
+
+                        /**
+                         * Constructs a new GetFileUploadRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1.IGetFileUploadRequest);
+
+                        /** GetFileUploadRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetFileUploadRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetFileUploadRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1.IGetFileUploadRequest): google.shopping.merchant.datasources.v1.GetFileUploadRequest;
+
+                        /**
+                         * Encodes the specified GetFileUploadRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetFileUploadRequest.verify|verify} messages.
+                         * @param message GetFileUploadRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1.IGetFileUploadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetFileUploadRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetFileUploadRequest.verify|verify} messages.
+                         * @param message GetFileUploadRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1.IGetFileUploadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetFileUploadRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetFileUploadRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1.GetFileUploadRequest;
+
+                        /**
+                         * Decodes a GetFileUploadRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetFileUploadRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1.GetFileUploadRequest;
+
+                        /**
+                         * Verifies a GetFileUploadRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetFileUploadRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetFileUploadRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1.GetFileUploadRequest;
+
+                        /**
+                         * Creates a plain object from a GetFileUploadRequest message. Also converts values to other types if specified.
+                         * @param message GetFileUploadRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1.GetFileUploadRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetFileUploadRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetFileUploadRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 
@@ -3854,6 +6658,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -3870,6 +6677,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -4571,6 +7381,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -4584,6 +7397,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -4661,6 +7477,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -4989,6 +7917,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -5002,6 +7933,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -5325,6 +8259,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -5708,6 +8745,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -5737,6 +8775,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -5786,6 +8827,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -5921,6 +8965,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -5961,6 +9008,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -6809,6 +9859,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -6834,6 +9887,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -7769,6 +10825,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -7823,6 +10882,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -8039,6 +11101,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -8282,6 +11459,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -8303,6 +11483,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -8893,6 +12076,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -8921,6 +12110,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -9044,6 +12239,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -9163,8 +12468,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -9179,8 +12487,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -9711,6 +13022,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

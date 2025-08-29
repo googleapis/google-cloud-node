@@ -23,7 +23,6 @@ const accounts = require('@google-shopping/accounts');
 function main() {
   const accountIssueServiceClient = new accounts.AccountIssueServiceClient();
   const accountsServiceClient = new accounts.AccountsServiceClient();
-  const accountTaxServiceClient = new accounts.AccountTaxServiceClient();
   const autofeedSettingsServiceClient = new accounts.AutofeedSettingsServiceClient();
   const automaticImprovementsServiceClient = new accounts.AutomaticImprovementsServiceClient();
   const businessIdentityServiceClient = new accounts.BusinessIdentityServiceClient();

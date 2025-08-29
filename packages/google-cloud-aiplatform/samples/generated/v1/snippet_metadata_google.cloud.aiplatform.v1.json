@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "4.2.0",
+        "version": "5.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1595,14 +1595,14 @@
             "regionTag": "aiplatform_v1_generated_EndpointService_MutateDeployedModel_async",
             "title": "DatasetService mutateDeployedModel Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
+            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `required_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
             "canonical": true,
             "file": "endpoint_service.mutate_deployed_model.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -2468,6 +2468,50 @@
                 "method": {
                     "shortName": "SearchNearestEntities",
                     "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.SearchNearestEntities",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreService",
+                        "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreService_FeatureViewDirectWrite_async",
+            "title": "DatasetService featureViewDirectWrite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Bidirectional streaming RPC to directly write to feature values in a feature view. Requests may not have a one-to-one mapping to responses and responses may be returned out-of-order to reduce latency.",
+            "canonical": true,
+            "file": "feature_online_store_service.feature_view_direct_write.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FeatureViewDirectWrite",
+                "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.FeatureViewDirectWrite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "data_key_and_feature_values",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreServiceClient"
+                },
+                "method": {
+                    "shortName": "FeatureViewDirectWrite",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.FeatureViewDirectWrite",
                     "service": {
                         "shortName": "FeatureOnlineStoreService",
                         "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService"
@@ -11750,7 +11794,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 111,
+                    "end": 116,
                     "type": "FULL"
                 }
             ],
@@ -11792,6 +11836,10 @@
                         "type": "TYPE_MESSAGE[]"
                     },
                     {
+                        "name": "model_armor_config",
+                        "type": ".google.cloud.aiplatform.v1.ModelArmorConfig"
+                    },
+                    {
                         "name": "generation_config",
                         "type": ".google.cloud.aiplatform.v1.GenerationConfig"
                     }
@@ -11822,7 +11870,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 113,
+                    "end": 118,
                     "type": "FULL"
                 }
             ],
@@ -11862,6 +11910,10 @@
                     {
                         "name": "safety_settings",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "model_armor_config",
+                        "type": ".google.cloud.aiplatform.v1.ModelArmorConfig"
                     },
                     {
                         "name": "generation_config",

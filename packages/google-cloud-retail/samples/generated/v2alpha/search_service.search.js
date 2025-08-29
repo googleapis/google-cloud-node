@@ -238,6 +238,10 @@ function main(placement, visitorId) {
    */
   // const variantRollupKeys = ['abc','def']
   /**
+   *  Optional. An ID for the experiment group this search belongs to.
+   */
+  // const experimentId = 'abc123'
+  /**
    *  The categories associated with a category page. Must be set for category
    *  navigation queries to achieve good search quality. The format should be
    *  the same as
@@ -337,7 +341,7 @@ function main(placement, visitorId) {
    *  search results.
    *  * Populate at most 100 key-value pairs per query.
    *  * Only supports string keys and repeated string values.
-   *  * Duplcate keys are not allowed within a single query.
+   *  * Duplicate keys are not allowed within a single query.
    *  Example:
    *     user_attributes: 
    *      { key: "pets"

@@ -318,9 +318,9 @@ export class SolarClient {
   // -- Service calls --
   // -------------------
 /**
- * Locates the closest building to a query point. Returns an error with
- * code `NOT_FOUND` if there are no buildings within approximately 50m of the
- * query point.
+ * Locates the building whose centroid is closest to a query point. Returns an
+ * error with code `NOT_FOUND` if there are no buildings within approximately
+ * 50m of the query point.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -338,6 +338,8 @@ export class SolarClient {
  *   `required_quality` is set to MEDIUM.  If set to true, `required_quality`
  *   is interpreted as the exact required quality and only `MEDIUM` quality
  *   imagery is returned if `required_quality` is set to `MEDIUM`.
+ * @param {number[]} [request.experiments]
+ *   Optional. Specifies the pre-GA features to enable.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -461,6 +463,8 @@ export class SolarClient {
  *   `required_quality` is set to MEDIUM.  If set to true, `required_quality`
  *   is interpreted as the exact required quality and only `MEDIUM` quality
  *   imagery is returned if `required_quality` is set to `MEDIUM`.
+ * @param {number[]} [request.experiments]
+ *   Optional. Specifies the pre-GA experiments to enable.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

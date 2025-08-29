@@ -16,5 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {OrganizationVpcFlowLogsServiceClient} from './organization_vpc_flow_logs_service_client';
 export {ReachabilityServiceClient} from './reachability_service_client';
 export {VpcFlowLogsServiceClient} from './vpc_flow_logs_service_client';

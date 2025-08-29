@@ -66,6 +66,14 @@ function main(parent) {
    *  SQLServer RDBMS to enrich with child data objects and metadata.
    */
   // const sqlServerRdbms = {}
+  /**
+   *  Salesforce organization to enrich with child data objects and metadata.
+   */
+  // const salesforceOrg = {}
+  /**
+   *  MongoDB cluster to enrich with child data objects and metadata.
+   */
+  // const mongodbCluster = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;

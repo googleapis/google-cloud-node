@@ -26,6 +26,1117 @@ export namespace google {
             /** Namespace notifications. */
             namespace notifications {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents a NotificationsApiService */
+                    class NotificationsApiService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new NotificationsApiService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new NotificationsApiService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): NotificationsApiService;
+
+                        /**
+                         * Calls GetNotificationSubscription.
+                         * @param request GetNotificationSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and NotificationSubscription
+                         */
+                        public getNotificationSubscription(request: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest, callback: google.shopping.merchant.notifications.v1.NotificationsApiService.GetNotificationSubscriptionCallback): void;
+
+                        /**
+                         * Calls GetNotificationSubscription.
+                         * @param request GetNotificationSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getNotificationSubscription(request: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest): Promise<google.shopping.merchant.notifications.v1.NotificationSubscription>;
+
+                        /**
+                         * Calls CreateNotificationSubscription.
+                         * @param request CreateNotificationSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and NotificationSubscription
+                         */
+                        public createNotificationSubscription(request: google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest, callback: google.shopping.merchant.notifications.v1.NotificationsApiService.CreateNotificationSubscriptionCallback): void;
+
+                        /**
+                         * Calls CreateNotificationSubscription.
+                         * @param request CreateNotificationSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createNotificationSubscription(request: google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest): Promise<google.shopping.merchant.notifications.v1.NotificationSubscription>;
+
+                        /**
+                         * Calls UpdateNotificationSubscription.
+                         * @param request UpdateNotificationSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and NotificationSubscription
+                         */
+                        public updateNotificationSubscription(request: google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest, callback: google.shopping.merchant.notifications.v1.NotificationsApiService.UpdateNotificationSubscriptionCallback): void;
+
+                        /**
+                         * Calls UpdateNotificationSubscription.
+                         * @param request UpdateNotificationSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateNotificationSubscription(request: google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest): Promise<google.shopping.merchant.notifications.v1.NotificationSubscription>;
+
+                        /**
+                         * Calls DeleteNotificationSubscription.
+                         * @param request DeleteNotificationSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteNotificationSubscription(request: google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest, callback: google.shopping.merchant.notifications.v1.NotificationsApiService.DeleteNotificationSubscriptionCallback): void;
+
+                        /**
+                         * Calls DeleteNotificationSubscription.
+                         * @param request DeleteNotificationSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteNotificationSubscription(request: google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls ListNotificationSubscriptions.
+                         * @param request ListNotificationSubscriptionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListNotificationSubscriptionsResponse
+                         */
+                        public listNotificationSubscriptions(request: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest, callback: google.shopping.merchant.notifications.v1.NotificationsApiService.ListNotificationSubscriptionsCallback): void;
+
+                        /**
+                         * Calls ListNotificationSubscriptions.
+                         * @param request ListNotificationSubscriptionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listNotificationSubscriptions(request: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest): Promise<google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse>;
+
+                        /**
+                         * Calls GetNotificationSubscriptionHealthMetrics.
+                         * @param request GetNotificationSubscriptionHealthMetricsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and NotificationSubscriptionHealthMetrics
+                         */
+                        public getNotificationSubscriptionHealthMetrics(request: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest, callback: google.shopping.merchant.notifications.v1.NotificationsApiService.GetNotificationSubscriptionHealthMetricsCallback): void;
+
+                        /**
+                         * Calls GetNotificationSubscriptionHealthMetrics.
+                         * @param request GetNotificationSubscriptionHealthMetricsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getNotificationSubscriptionHealthMetrics(request: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest): Promise<google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics>;
+                    }
+
+                    namespace NotificationsApiService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|getNotificationSubscription}.
+                         * @param error Error, if any
+                         * @param [response] NotificationSubscription
+                         */
+                        type GetNotificationSubscriptionCallback = (error: (Error|null), response?: google.shopping.merchant.notifications.v1.NotificationSubscription) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|createNotificationSubscription}.
+                         * @param error Error, if any
+                         * @param [response] NotificationSubscription
+                         */
+                        type CreateNotificationSubscriptionCallback = (error: (Error|null), response?: google.shopping.merchant.notifications.v1.NotificationSubscription) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|updateNotificationSubscription}.
+                         * @param error Error, if any
+                         * @param [response] NotificationSubscription
+                         */
+                        type UpdateNotificationSubscriptionCallback = (error: (Error|null), response?: google.shopping.merchant.notifications.v1.NotificationSubscription) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|deleteNotificationSubscription}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteNotificationSubscriptionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|listNotificationSubscriptions}.
+                         * @param error Error, if any
+                         * @param [response] ListNotificationSubscriptionsResponse
+                         */
+                        type ListNotificationSubscriptionsCallback = (error: (Error|null), response?: google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|getNotificationSubscriptionHealthMetrics}.
+                         * @param error Error, if any
+                         * @param [response] NotificationSubscriptionHealthMetrics
+                         */
+                        type GetNotificationSubscriptionHealthMetricsCallback = (error: (Error|null), response?: google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics) => void;
+                    }
+
+                    /** Properties of a GetNotificationSubscriptionRequest. */
+                    interface IGetNotificationSubscriptionRequest {
+
+                        /** GetNotificationSubscriptionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetNotificationSubscriptionRequest. */
+                    class GetNotificationSubscriptionRequest implements IGetNotificationSubscriptionRequest {
+
+                        /**
+                         * Constructs a new GetNotificationSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest);
+
+                        /** GetNotificationSubscriptionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetNotificationSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetNotificationSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified GetNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message GetNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message GetNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetNotificationSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest;
+
+                        /**
+                         * Decodes a GetNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest;
+
+                        /**
+                         * Verifies a GetNotificationSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetNotificationSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from a GetNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message GetNotificationSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetNotificationSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetNotificationSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateNotificationSubscriptionRequest. */
+                    interface ICreateNotificationSubscriptionRequest {
+
+                        /** CreateNotificationSubscriptionRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateNotificationSubscriptionRequest notificationSubscription */
+                        notificationSubscription?: (google.shopping.merchant.notifications.v1.INotificationSubscription|null);
+                    }
+
+                    /** Represents a CreateNotificationSubscriptionRequest. */
+                    class CreateNotificationSubscriptionRequest implements ICreateNotificationSubscriptionRequest {
+
+                        /**
+                         * Constructs a new CreateNotificationSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest);
+
+                        /** CreateNotificationSubscriptionRequest parent. */
+                        public parent: string;
+
+                        /** CreateNotificationSubscriptionRequest notificationSubscription. */
+                        public notificationSubscription?: (google.shopping.merchant.notifications.v1.INotificationSubscription|null);
+
+                        /**
+                         * Creates a new CreateNotificationSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateNotificationSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest): google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified CreateNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message CreateNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message CreateNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateNotificationSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest;
+
+                        /**
+                         * Decodes a CreateNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest;
+
+                        /**
+                         * Verifies a CreateNotificationSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateNotificationSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from a CreateNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message CreateNotificationSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateNotificationSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateNotificationSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateNotificationSubscriptionRequest. */
+                    interface IUpdateNotificationSubscriptionRequest {
+
+                        /** UpdateNotificationSubscriptionRequest notificationSubscription */
+                        notificationSubscription?: (google.shopping.merchant.notifications.v1.INotificationSubscription|null);
+
+                        /** UpdateNotificationSubscriptionRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateNotificationSubscriptionRequest. */
+                    class UpdateNotificationSubscriptionRequest implements IUpdateNotificationSubscriptionRequest {
+
+                        /**
+                         * Constructs a new UpdateNotificationSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest);
+
+                        /** UpdateNotificationSubscriptionRequest notificationSubscription. */
+                        public notificationSubscription?: (google.shopping.merchant.notifications.v1.INotificationSubscription|null);
+
+                        /** UpdateNotificationSubscriptionRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateNotificationSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateNotificationSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest): google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified UpdateNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message UpdateNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message UpdateNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateNotificationSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest;
+
+                        /**
+                         * Decodes an UpdateNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest;
+
+                        /**
+                         * Verifies an UpdateNotificationSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateNotificationSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message UpdateNotificationSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateNotificationSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateNotificationSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteNotificationSubscriptionRequest. */
+                    interface IDeleteNotificationSubscriptionRequest {
+
+                        /** DeleteNotificationSubscriptionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteNotificationSubscriptionRequest. */
+                    class DeleteNotificationSubscriptionRequest implements IDeleteNotificationSubscriptionRequest {
+
+                        /**
+                         * Constructs a new DeleteNotificationSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest);
+
+                        /** DeleteNotificationSubscriptionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteNotificationSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteNotificationSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest): google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified DeleteNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message DeleteNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest.verify|verify} messages.
+                         * @param message DeleteNotificationSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteNotificationSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest;
+
+                        /**
+                         * Decodes a DeleteNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteNotificationSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest;
+
+                        /**
+                         * Verifies a DeleteNotificationSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteNotificationSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message DeleteNotificationSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteNotificationSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteNotificationSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListNotificationSubscriptionsRequest. */
+                    interface IListNotificationSubscriptionsRequest {
+
+                        /** ListNotificationSubscriptionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListNotificationSubscriptionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListNotificationSubscriptionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListNotificationSubscriptionsRequest. */
+                    class ListNotificationSubscriptionsRequest implements IListNotificationSubscriptionsRequest {
+
+                        /**
+                         * Constructs a new ListNotificationSubscriptionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest);
+
+                        /** ListNotificationSubscriptionsRequest parent. */
+                        public parent: string;
+
+                        /** ListNotificationSubscriptionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListNotificationSubscriptionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListNotificationSubscriptionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListNotificationSubscriptionsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest;
+
+                        /**
+                         * Encodes the specified ListNotificationSubscriptionsRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest.verify|verify} messages.
+                         * @param message ListNotificationSubscriptionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListNotificationSubscriptionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest.verify|verify} messages.
+                         * @param message ListNotificationSubscriptionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListNotificationSubscriptionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListNotificationSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest;
+
+                        /**
+                         * Decodes a ListNotificationSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListNotificationSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest;
+
+                        /**
+                         * Verifies a ListNotificationSubscriptionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListNotificationSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListNotificationSubscriptionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListNotificationSubscriptionsRequest message. Also converts values to other types if specified.
+                         * @param message ListNotificationSubscriptionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListNotificationSubscriptionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListNotificationSubscriptionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListNotificationSubscriptionsResponse. */
+                    interface IListNotificationSubscriptionsResponse {
+
+                        /** ListNotificationSubscriptionsResponse notificationSubscriptions */
+                        notificationSubscriptions?: (google.shopping.merchant.notifications.v1.INotificationSubscription[]|null);
+
+                        /** ListNotificationSubscriptionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListNotificationSubscriptionsResponse. */
+                    class ListNotificationSubscriptionsResponse implements IListNotificationSubscriptionsResponse {
+
+                        /**
+                         * Constructs a new ListNotificationSubscriptionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse);
+
+                        /** ListNotificationSubscriptionsResponse notificationSubscriptions. */
+                        public notificationSubscriptions: google.shopping.merchant.notifications.v1.INotificationSubscription[];
+
+                        /** ListNotificationSubscriptionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListNotificationSubscriptionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListNotificationSubscriptionsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse;
+
+                        /**
+                         * Encodes the specified ListNotificationSubscriptionsResponse message. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse.verify|verify} messages.
+                         * @param message ListNotificationSubscriptionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListNotificationSubscriptionsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse.verify|verify} messages.
+                         * @param message ListNotificationSubscriptionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListNotificationSubscriptionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListNotificationSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse;
+
+                        /**
+                         * Decodes a ListNotificationSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListNotificationSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse;
+
+                        /**
+                         * Verifies a ListNotificationSubscriptionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListNotificationSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListNotificationSubscriptionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListNotificationSubscriptionsResponse message. Also converts values to other types if specified.
+                         * @param message ListNotificationSubscriptionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListNotificationSubscriptionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListNotificationSubscriptionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NotificationSubscription. */
+                    interface INotificationSubscription {
+
+                        /** NotificationSubscription allManagedAccounts */
+                        allManagedAccounts?: (boolean|null);
+
+                        /** NotificationSubscription targetAccount */
+                        targetAccount?: (string|null);
+
+                        /** NotificationSubscription name */
+                        name?: (string|null);
+
+                        /** NotificationSubscription registeredEvent */
+                        registeredEvent?: (google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType|keyof typeof google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType|null);
+
+                        /** NotificationSubscription callBackUri */
+                        callBackUri?: (string|null);
+                    }
+
+                    /** Represents a NotificationSubscription. */
+                    class NotificationSubscription implements INotificationSubscription {
+
+                        /**
+                         * Constructs a new NotificationSubscription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.INotificationSubscription);
+
+                        /** NotificationSubscription allManagedAccounts. */
+                        public allManagedAccounts?: (boolean|null);
+
+                        /** NotificationSubscription targetAccount. */
+                        public targetAccount?: (string|null);
+
+                        /** NotificationSubscription name. */
+                        public name: string;
+
+                        /** NotificationSubscription registeredEvent. */
+                        public registeredEvent: (google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType|keyof typeof google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType);
+
+                        /** NotificationSubscription callBackUri. */
+                        public callBackUri: string;
+
+                        /** NotificationSubscription interestedIn. */
+                        public interestedIn?: ("allManagedAccounts"|"targetAccount");
+
+                        /**
+                         * Creates a new NotificationSubscription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NotificationSubscription instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.INotificationSubscription): google.shopping.merchant.notifications.v1.NotificationSubscription;
+
+                        /**
+                         * Encodes the specified NotificationSubscription message. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscription.verify|verify} messages.
+                         * @param message NotificationSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.INotificationSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NotificationSubscription message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscription.verify|verify} messages.
+                         * @param message NotificationSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.INotificationSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NotificationSubscription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NotificationSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.NotificationSubscription;
+
+                        /**
+                         * Decodes a NotificationSubscription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NotificationSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.NotificationSubscription;
+
+                        /**
+                         * Verifies a NotificationSubscription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NotificationSubscription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NotificationSubscription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.NotificationSubscription;
+
+                        /**
+                         * Creates a plain object from a NotificationSubscription message. Also converts values to other types if specified.
+                         * @param message NotificationSubscription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.NotificationSubscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NotificationSubscription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NotificationSubscription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NotificationSubscription {
+
+                        /** NotificationEventType enum. */
+                        enum NotificationEventType {
+                            NOTIFICATION_EVENT_TYPE_UNSPECIFIED = 0,
+                            PRODUCT_STATUS_CHANGE = 1
+                        }
+                    }
+
+                    /** Properties of a GetNotificationSubscriptionHealthMetricsRequest. */
+                    interface IGetNotificationSubscriptionHealthMetricsRequest {
+
+                        /** GetNotificationSubscriptionHealthMetricsRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetNotificationSubscriptionHealthMetricsRequest. */
+                    class GetNotificationSubscriptionHealthMetricsRequest implements IGetNotificationSubscriptionHealthMetricsRequest {
+
+                        /**
+                         * Constructs a new GetNotificationSubscriptionHealthMetricsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest);
+
+                        /** GetNotificationSubscriptionHealthMetricsRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetNotificationSubscriptionHealthMetricsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetNotificationSubscriptionHealthMetricsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest;
+
+                        /**
+                         * Encodes the specified GetNotificationSubscriptionHealthMetricsRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest.verify|verify} messages.
+                         * @param message GetNotificationSubscriptionHealthMetricsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetNotificationSubscriptionHealthMetricsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest.verify|verify} messages.
+                         * @param message GetNotificationSubscriptionHealthMetricsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetNotificationSubscriptionHealthMetricsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetNotificationSubscriptionHealthMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest;
+
+                        /**
+                         * Decodes a GetNotificationSubscriptionHealthMetricsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetNotificationSubscriptionHealthMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest;
+
+                        /**
+                         * Verifies a GetNotificationSubscriptionHealthMetricsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetNotificationSubscriptionHealthMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetNotificationSubscriptionHealthMetricsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest;
+
+                        /**
+                         * Creates a plain object from a GetNotificationSubscriptionHealthMetricsRequest message. Also converts values to other types if specified.
+                         * @param message GetNotificationSubscriptionHealthMetricsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetNotificationSubscriptionHealthMetricsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetNotificationSubscriptionHealthMetricsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NotificationSubscriptionHealthMetrics. */
+                    interface INotificationSubscriptionHealthMetrics {
+
+                        /** NotificationSubscriptionHealthMetrics name */
+                        name?: (string|null);
+
+                        /** NotificationSubscriptionHealthMetrics acknowledgedMessagesCount */
+                        acknowledgedMessagesCount?: (number|Long|string|null);
+
+                        /** NotificationSubscriptionHealthMetrics undeliveredMessagesCount */
+                        undeliveredMessagesCount?: (number|Long|string|null);
+
+                        /** NotificationSubscriptionHealthMetrics oldestUnacknowledgedMessageWaitingTime */
+                        oldestUnacknowledgedMessageWaitingTime?: (number|Long|string|null);
+                    }
+
+                    /** Represents a NotificationSubscriptionHealthMetrics. */
+                    class NotificationSubscriptionHealthMetrics implements INotificationSubscriptionHealthMetrics {
+
+                        /**
+                         * Constructs a new NotificationSubscriptionHealthMetrics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics);
+
+                        /** NotificationSubscriptionHealthMetrics name. */
+                        public name: string;
+
+                        /** NotificationSubscriptionHealthMetrics acknowledgedMessagesCount. */
+                        public acknowledgedMessagesCount: (number|Long|string);
+
+                        /** NotificationSubscriptionHealthMetrics undeliveredMessagesCount. */
+                        public undeliveredMessagesCount: (number|Long|string);
+
+                        /** NotificationSubscriptionHealthMetrics oldestUnacknowledgedMessageWaitingTime. */
+                        public oldestUnacknowledgedMessageWaitingTime: (number|Long|string);
+
+                        /**
+                         * Creates a new NotificationSubscriptionHealthMetrics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NotificationSubscriptionHealthMetrics instance
+                         */
+                        public static create(properties?: google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics): google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics;
+
+                        /**
+                         * Encodes the specified NotificationSubscriptionHealthMetrics message. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics.verify|verify} messages.
+                         * @param message NotificationSubscriptionHealthMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NotificationSubscriptionHealthMetrics message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics.verify|verify} messages.
+                         * @param message NotificationSubscriptionHealthMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NotificationSubscriptionHealthMetrics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NotificationSubscriptionHealthMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics;
+
+                        /**
+                         * Decodes a NotificationSubscriptionHealthMetrics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NotificationSubscriptionHealthMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics;
+
+                        /**
+                         * Verifies a NotificationSubscriptionHealthMetrics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NotificationSubscriptionHealthMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NotificationSubscriptionHealthMetrics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics;
+
+                        /**
+                         * Creates a plain object from a NotificationSubscriptionHealthMetrics message. Also converts values to other types if specified.
+                         * @param message NotificationSubscriptionHealthMetrics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NotificationSubscriptionHealthMetrics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NotificationSubscriptionHealthMetrics
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 
@@ -2186,6 +3297,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -2202,6 +3316,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -2903,6 +4020,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -2916,6 +4036,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -2993,6 +4116,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -3321,6 +4556,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -3334,6 +4572,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -3657,6 +4898,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -4040,6 +5384,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -4069,6 +5414,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -4118,6 +5466,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -4253,6 +5604,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -4293,6 +5647,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -5141,6 +6498,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -5166,6 +6526,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -6101,6 +7464,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -6155,6 +7521,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6371,6 +7740,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -6614,6 +8098,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -6635,6 +8122,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7225,6 +8715,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -7253,6 +8749,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -7376,6 +8878,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -7495,8 +9107,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -7511,8 +9126,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -8043,6 +9661,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */
