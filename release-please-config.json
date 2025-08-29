@@ -1,6 +1,7 @@
 {
   "initial-version": "0.1.0",
   "packages": {
+    "packages/gapic-node-processing": {},
     "packages/google-ai-generativelanguage": {},
     "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
