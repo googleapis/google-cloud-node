@@ -151,7 +151,7 @@ describe('generate readme.ts', () => {
     );
     const env = new nj.Environment(
       new nj.FileSystemLoader(POST_PROCESSING_TEMPLATES_PATH),
-      {autoescape: false},
+      {autoescape: false}, // Disable autoescaping for code generation
     );
 
     // Now, render using the template's filename, and Nunjucks will find it
@@ -161,7 +161,6 @@ describe('generate readme.ts', () => {
     });
     assert.match(readMeContents, new RegExp(compiledTemplate));
     assert.match(readMeContents, /preview/);
-    console.log(readMeContents);
   });
 
   it('should write to any README file with any regex that you give it', async () => {
@@ -180,7 +179,7 @@ describe('generate readme.ts', () => {
     assert.match(readMeContents, /We generated correctly! Hooray!/);
   });
 
-  it('if a README does not exist, it should throw a helpful error', async () => {
+  it('if a README does not exist, it should throw a helfpul error', async () => {
     try {
       await fs.rm(
         path.join(TEST_FIXTURES_PATH, 'test-output-readme', 'README.md'),

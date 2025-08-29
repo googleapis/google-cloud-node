@@ -41,16 +41,16 @@ describe('tests running generate-readme command', () => {
     readAndWriteToReadmeStub.restore();
   });
 
-  it.only('it should run initial generation if initial-generation flag is true', async () => {
+  it('it should run initial generation if initial-generation flag is true', async () => {
     await generateReadme.handler({
       'source-path': 'path',
       sourcePath: 'path',
       'initial-generation': true,
       initialGeneration: true,
-      'replacement-string-samples': '\\[//]: # "samples"',
-      replacementStringSamples: '\\[//]: # "samples"',
-      'replacement-string-release-level': '\\[//]: # "releaseLevel"',
-      replacementStringReleaseLevel: '\\[//]: # "releaseLevel"',
+      'replacement-string-samples': '//samples',
+      replacementStringSamples: '//samples',
+      'replacement-string-release-level': '//releaseLevel',
+      replacementStringReleaseLevel: '//releaseLevel',
       'release-level': 'stable',
       releaseLevel: 'stable',
       'destination-path': 'destination-path',
@@ -62,8 +62,8 @@ describe('tests running generate-readme command', () => {
     assert.ok(
       initialGenerateReadMeStub.calledOnceWithExactly({
         currentLibrary: 'path',
-        stringToReplaceForSampleTable: '\\[//]: # "samples"',
-        stringToReplaceForReleaseLevel: '\\[//]: # "releaseLevel"',
+        stringToReplaceForSampleTable: '//samples',
+        stringToReplaceForReleaseLevel: '//releaseLevel',
         releaseLevel: 'stable',
         writeLibrary: 'destination-path',
       }),
