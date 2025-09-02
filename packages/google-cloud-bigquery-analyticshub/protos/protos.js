@@ -833,6 +833,237 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|createQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef CreateQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls CreateQueryTemplate.
+                             * @function createQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} request CreateQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.createQueryTemplate = function createQueryTemplate(request, callback) {
+                                return this.rpcCall(createQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "CreateQueryTemplate" });
+    
+                            /**
+                             * Calls CreateQueryTemplate.
+                             * @function createQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} request CreateQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|getQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef GetQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls GetQueryTemplate.
+                             * @function getQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} request GetQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.getQueryTemplate = function getQueryTemplate(request, callback) {
+                                return this.rpcCall(getQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "GetQueryTemplate" });
+    
+                            /**
+                             * Calls GetQueryTemplate.
+                             * @function getQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} request GetQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|listQueryTemplates}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef ListQueryTemplatesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} [response] ListQueryTemplatesResponse
+                             */
+    
+                            /**
+                             * Calls ListQueryTemplates.
+                             * @function listQueryTemplates
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} request ListQueryTemplatesRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplatesCallback} callback Node-style callback called with the error, if any, and ListQueryTemplatesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.listQueryTemplates = function listQueryTemplates(request, callback) {
+                                return this.rpcCall(listQueryTemplates, $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest, $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse, request, callback);
+                            }, "name", { value: "ListQueryTemplates" });
+    
+                            /**
+                             * Calls ListQueryTemplates.
+                             * @function listQueryTemplates
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} request ListQueryTemplatesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|updateQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef UpdateQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls UpdateQueryTemplate.
+                             * @function updateQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} request UpdateQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.updateQueryTemplate = function updateQueryTemplate(request, callback) {
+                                return this.rpcCall(updateQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "UpdateQueryTemplate" });
+    
+                            /**
+                             * Calls UpdateQueryTemplate.
+                             * @function updateQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} request UpdateQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|deleteQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef DeleteQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteQueryTemplate.
+                             * @function deleteQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} request DeleteQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplateCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.deleteQueryTemplate = function deleteQueryTemplate(request, callback) {
+                                return this.rpcCall(deleteQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteQueryTemplate" });
+    
+                            /**
+                             * Calls DeleteQueryTemplate.
+                             * @function deleteQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} request DeleteQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|submitQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef SubmitQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls SubmitQueryTemplate.
+                             * @function submitQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} request SubmitQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.submitQueryTemplate = function submitQueryTemplate(request, callback) {
+                                return this.rpcCall(submitQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "SubmitQueryTemplate" });
+    
+                            /**
+                             * Calls SubmitQueryTemplate.
+                             * @function submitQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} request SubmitQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|approveQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef ApproveQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls ApproveQueryTemplate.
+                             * @function approveQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} request ApproveQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.approveQueryTemplate = function approveQueryTemplate(request, callback) {
+                                return this.rpcCall(approveQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "ApproveQueryTemplate" });
+    
+                            /**
+                             * Calls ApproveQueryTemplate.
+                             * @function approveQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} request ApproveQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
                             return AnalyticsHubService;
                         })();
     
@@ -1341,6 +1572,2568 @@
                             };
     
                             return DataExchange;
+                        })();
+    
+                        v1.QueryTemplate = (function() {
+    
+                            /**
+                             * Properties of a QueryTemplate.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IQueryTemplate
+                             * @property {string|null} [name] QueryTemplate name
+                             * @property {string|null} [displayName] QueryTemplate displayName
+                             * @property {string|null} [description] QueryTemplate description
+                             * @property {string|null} [proposer] QueryTemplate proposer
+                             * @property {string|null} [primaryContact] QueryTemplate primaryContact
+                             * @property {string|null} [documentation] QueryTemplate documentation
+                             * @property {google.cloud.bigquery.analyticshub.v1.QueryTemplate.State|null} [state] QueryTemplate state
+                             * @property {google.cloud.bigquery.analyticshub.v1.IRoutine|null} [routine] QueryTemplate routine
+                             * @property {google.protobuf.ITimestamp|null} [createTime] QueryTemplate createTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] QueryTemplate updateTime
+                             */
+    
+                            /**
+                             * Constructs a new QueryTemplate.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a QueryTemplate.
+                             * @implements IQueryTemplate
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate=} [properties] Properties to set
+                             */
+                            function QueryTemplate(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QueryTemplate name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.name = "";
+    
+                            /**
+                             * QueryTemplate displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.displayName = "";
+    
+                            /**
+                             * QueryTemplate description.
+                             * @member {string} description
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.description = "";
+    
+                            /**
+                             * QueryTemplate proposer.
+                             * @member {string} proposer
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.proposer = "";
+    
+                            /**
+                             * QueryTemplate primaryContact.
+                             * @member {string} primaryContact
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.primaryContact = "";
+    
+                            /**
+                             * QueryTemplate documentation.
+                             * @member {string} documentation
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.documentation = "";
+    
+                            /**
+                             * QueryTemplate state.
+                             * @member {google.cloud.bigquery.analyticshub.v1.QueryTemplate.State} state
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.state = 0;
+    
+                            /**
+                             * QueryTemplate routine.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IRoutine|null|undefined} routine
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.routine = null;
+    
+                            /**
+                             * QueryTemplate createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.createTime = null;
+    
+                            /**
+                             * QueryTemplate updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.updateTime = null;
+    
+                            /**
+                             * Creates a new QueryTemplate instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate instance
+                             */
+                            QueryTemplate.create = function create(properties) {
+                                return new QueryTemplate(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QueryTemplate message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate} message QueryTemplate message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryTemplate.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                if (message.proposer != null && Object.hasOwnProperty.call(message, "proposer"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.proposer);
+                                if (message.documentation != null && Object.hasOwnProperty.call(message, "documentation"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.documentation);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
+                                if (message.routine != null && Object.hasOwnProperty.call(message, "routine"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.Routine.encode(message.routine, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.primaryContact != null && Object.hasOwnProperty.call(message, "primaryContact"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.primaryContact);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QueryTemplate message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate} message QueryTemplate message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryTemplate.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QueryTemplate message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryTemplate.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.proposer = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.primaryContact = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.documentation = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.routine = $root.google.cloud.bigquery.analyticshub.v1.Routine.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QueryTemplate message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryTemplate.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QueryTemplate message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QueryTemplate.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.proposer != null && message.hasOwnProperty("proposer"))
+                                    if (!$util.isString(message.proposer))
+                                        return "proposer: string expected";
+                                if (message.primaryContact != null && message.hasOwnProperty("primaryContact"))
+                                    if (!$util.isString(message.primaryContact))
+                                        return "primaryContact: string expected";
+                                if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                    if (!$util.isString(message.documentation))
+                                        return "documentation: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.routine != null && message.hasOwnProperty("routine")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.Routine.verify(message.routine);
+                                    if (error)
+                                        return "routine." + error;
+                                }
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QueryTemplate message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate
+                             */
+                            QueryTemplate.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.proposer != null)
+                                    message.proposer = String(object.proposer);
+                                if (object.primaryContact != null)
+                                    message.primaryContact = String(object.primaryContact);
+                                if (object.documentation != null)
+                                    message.documentation = String(object.documentation);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "DRAFTED":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "PENDING":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETED":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "APPROVED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                if (object.routine != null) {
+                                    if (typeof object.routine !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.QueryTemplate.routine: object expected");
+                                    message.routine = $root.google.cloud.bigquery.analyticshub.v1.Routine.fromObject(object.routine);
+                                }
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.QueryTemplate.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.QueryTemplate.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QueryTemplate message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} message QueryTemplate
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QueryTemplate.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.displayName = "";
+                                    object.description = "";
+                                    object.proposer = "";
+                                    object.documentation = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.routine = null;
+                                    object.createTime = null;
+                                    object.updateTime = null;
+                                    object.primaryContact = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.proposer != null && message.hasOwnProperty("proposer"))
+                                    object.proposer = message.proposer;
+                                if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                    object.documentation = message.documentation;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.State[message.state] === undefined ? message.state : $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.State[message.state] : message.state;
+                                if (message.routine != null && message.hasOwnProperty("routine"))
+                                    object.routine = $root.google.cloud.bigquery.analyticshub.v1.Routine.toObject(message.routine, options);
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                if (message.primaryContact != null && message.hasOwnProperty("primaryContact"))
+                                    object.primaryContact = message.primaryContact;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QueryTemplate to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QueryTemplate.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QueryTemplate
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QueryTemplate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.QueryTemplate";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.bigquery.analyticshub.v1.QueryTemplate.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} DRAFTED=1 DRAFTED value
+                             * @property {number} PENDING=2 PENDING value
+                             * @property {number} DELETED=3 DELETED value
+                             * @property {number} APPROVED=4 APPROVED value
+                             */
+                            QueryTemplate.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DRAFTED"] = 1;
+                                values[valuesById[2] = "PENDING"] = 2;
+                                values[valuesById[3] = "DELETED"] = 3;
+                                values[valuesById[4] = "APPROVED"] = 4;
+                                return values;
+                            })();
+    
+                            return QueryTemplate;
+                        })();
+    
+                        v1.Routine = (function() {
+    
+                            /**
+                             * Properties of a Routine.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IRoutine
+                             * @property {google.cloud.bigquery.analyticshub.v1.Routine.RoutineType|null} [routineType] Routine routineType
+                             * @property {string|null} [definitionBody] Routine definitionBody
+                             */
+    
+                            /**
+                             * Constructs a new Routine.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a Routine.
+                             * @implements IRoutine
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine=} [properties] Properties to set
+                             */
+                            function Routine(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Routine routineType.
+                             * @member {google.cloud.bigquery.analyticshub.v1.Routine.RoutineType} routineType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @instance
+                             */
+                            Routine.prototype.routineType = 0;
+    
+                            /**
+                             * Routine definitionBody.
+                             * @member {string} definitionBody
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @instance
+                             */
+                            Routine.prototype.definitionBody = "";
+    
+                            /**
+                             * Creates a new Routine instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine instance
+                             */
+                            Routine.create = function create(properties) {
+                                return new Routine(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Routine message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Routine.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine} message Routine message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Routine.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.routineType != null && Object.hasOwnProperty.call(message, "routineType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.routineType);
+                                if (message.definitionBody != null && Object.hasOwnProperty.call(message, "definitionBody"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.definitionBody);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Routine message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Routine.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine} message Routine message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Routine.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Routine message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Routine.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Routine();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.routineType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.definitionBody = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Routine message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Routine.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Routine message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Routine.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.routineType != null && message.hasOwnProperty("routineType"))
+                                    switch (message.routineType) {
+                                    default:
+                                        return "routineType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.definitionBody != null && message.hasOwnProperty("definitionBody"))
+                                    if (!$util.isString(message.definitionBody))
+                                        return "definitionBody: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Routine message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine
+                             */
+                            Routine.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Routine)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.Routine();
+                                switch (object.routineType) {
+                                default:
+                                    if (typeof object.routineType === "number") {
+                                        message.routineType = object.routineType;
+                                        break;
+                                    }
+                                    break;
+                                case "ROUTINE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.routineType = 0;
+                                    break;
+                                case "TABLE_VALUED_FUNCTION":
+                                case 1:
+                                    message.routineType = 1;
+                                    break;
+                                }
+                                if (object.definitionBody != null)
+                                    message.definitionBody = String(object.definitionBody);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Routine message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.Routine} message Routine
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Routine.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.routineType = options.enums === String ? "ROUTINE_TYPE_UNSPECIFIED" : 0;
+                                    object.definitionBody = "";
+                                }
+                                if (message.routineType != null && message.hasOwnProperty("routineType"))
+                                    object.routineType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.Routine.RoutineType[message.routineType] === undefined ? message.routineType : $root.google.cloud.bigquery.analyticshub.v1.Routine.RoutineType[message.routineType] : message.routineType;
+                                if (message.definitionBody != null && message.hasOwnProperty("definitionBody"))
+                                    object.definitionBody = message.definitionBody;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Routine to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Routine.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Routine
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Routine.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Routine";
+                            };
+    
+                            /**
+                             * RoutineType enum.
+                             * @name google.cloud.bigquery.analyticshub.v1.Routine.RoutineType
+                             * @enum {number}
+                             * @property {number} ROUTINE_TYPE_UNSPECIFIED=0 ROUTINE_TYPE_UNSPECIFIED value
+                             * @property {number} TABLE_VALUED_FUNCTION=1 TABLE_VALUED_FUNCTION value
+                             */
+                            Routine.RoutineType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ROUTINE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "TABLE_VALUED_FUNCTION"] = 1;
+                                return values;
+                            })();
+    
+                            return Routine;
+                        })();
+    
+                        v1.CreateQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface ICreateQueryTemplateRequest
+                             * @property {string|null} [parent] CreateQueryTemplateRequest parent
+                             * @property {string|null} [queryTemplateId] CreateQueryTemplateRequest queryTemplateId
+                             * @property {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null} [queryTemplate] CreateQueryTemplateRequest queryTemplate
+                             */
+    
+                            /**
+                             * Constructs a new CreateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a CreateQueryTemplateRequest.
+                             * @implements ICreateQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function CreateQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateQueryTemplateRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             */
+                            CreateQueryTemplateRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateQueryTemplateRequest queryTemplateId.
+                             * @member {string} queryTemplateId
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             */
+                            CreateQueryTemplateRequest.prototype.queryTemplateId = "";
+    
+                            /**
+                             * CreateQueryTemplateRequest queryTemplate.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null|undefined} queryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             */
+                            CreateQueryTemplateRequest.prototype.queryTemplate = null;
+    
+                            /**
+                             * Creates a new CreateQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest instance
+                             */
+                            CreateQueryTemplateRequest.create = function create(properties) {
+                                return new CreateQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} message CreateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.queryTemplateId != null && Object.hasOwnProperty.call(message, "queryTemplateId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.queryTemplateId);
+                                if (message.queryTemplate != null && Object.hasOwnProperty.call(message, "queryTemplate"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.encode(message.queryTemplate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} message CreateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.queryTemplateId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.queryTemplateId != null && message.hasOwnProperty("queryTemplateId"))
+                                    if (!$util.isString(message.queryTemplateId))
+                                        return "queryTemplateId: string expected";
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify(message.queryTemplate);
+                                    if (error)
+                                        return "queryTemplate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest
+                             */
+                            CreateQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.queryTemplateId != null)
+                                    message.queryTemplateId = String(object.queryTemplateId);
+                                if (object.queryTemplate != null) {
+                                    if (typeof object.queryTemplate !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest.queryTemplate: object expected");
+                                    message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.fromObject(object.queryTemplate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} message CreateQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.queryTemplateId = "";
+                                    object.queryTemplate = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.queryTemplateId != null && message.hasOwnProperty("queryTemplateId"))
+                                    object.queryTemplateId = message.queryTemplateId;
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate"))
+                                    object.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.toObject(message.queryTemplate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest";
+                            };
+    
+                            return CreateQueryTemplateRequest;
+                        })();
+    
+                        v1.GetQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a GetQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IGetQueryTemplateRequest
+                             * @property {string|null} [name] GetQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a GetQueryTemplateRequest.
+                             * @implements IGetQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function GetQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @instance
+                             */
+                            GetQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest instance
+                             */
+                            GetQueryTemplateRequest.create = function create(properties) {
+                                return new GetQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} message GetQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} message GetQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest
+                             */
+                            GetQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} message GetQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest";
+                            };
+    
+                            return GetQueryTemplateRequest;
+                        })();
+    
+                        v1.ListQueryTemplatesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListQueryTemplatesRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IListQueryTemplatesRequest
+                             * @property {string|null} [parent] ListQueryTemplatesRequest parent
+                             * @property {number|null} [pageSize] ListQueryTemplatesRequest pageSize
+                             * @property {string|null} [pageToken] ListQueryTemplatesRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListQueryTemplatesRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a ListQueryTemplatesRequest.
+                             * @implements IListQueryTemplatesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest=} [properties] Properties to set
+                             */
+                            function ListQueryTemplatesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListQueryTemplatesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             */
+                            ListQueryTemplatesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListQueryTemplatesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             */
+                            ListQueryTemplatesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListQueryTemplatesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             */
+                            ListQueryTemplatesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListQueryTemplatesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest instance
+                             */
+                            ListQueryTemplatesRequest.create = function create(properties) {
+                                return new ListQueryTemplatesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} message ListQueryTemplatesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} message ListQueryTemplatesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListQueryTemplatesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListQueryTemplatesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListQueryTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest
+                             */
+                            ListQueryTemplatesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListQueryTemplatesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} message ListQueryTemplatesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListQueryTemplatesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListQueryTemplatesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListQueryTemplatesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListQueryTemplatesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListQueryTemplatesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest";
+                            };
+    
+                            return ListQueryTemplatesRequest;
+                        })();
+    
+                        v1.ListQueryTemplatesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListQueryTemplatesResponse.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IListQueryTemplatesResponse
+                             * @property {Array.<google.cloud.bigquery.analyticshub.v1.IQueryTemplate>|null} [queryTemplates] ListQueryTemplatesResponse queryTemplates
+                             * @property {string|null} [nextPageToken] ListQueryTemplatesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListQueryTemplatesResponse.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a ListQueryTemplatesResponse.
+                             * @implements IListQueryTemplatesResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse=} [properties] Properties to set
+                             */
+                            function ListQueryTemplatesResponse(properties) {
+                                this.queryTemplates = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListQueryTemplatesResponse queryTemplates.
+                             * @member {Array.<google.cloud.bigquery.analyticshub.v1.IQueryTemplate>} queryTemplates
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @instance
+                             */
+                            ListQueryTemplatesResponse.prototype.queryTemplates = $util.emptyArray;
+    
+                            /**
+                             * ListQueryTemplatesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @instance
+                             */
+                            ListQueryTemplatesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListQueryTemplatesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse instance
+                             */
+                            ListQueryTemplatesResponse.create = function create(properties) {
+                                return new ListQueryTemplatesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesResponse message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse} message ListQueryTemplatesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.queryTemplates != null && message.queryTemplates.length)
+                                    for (var i = 0; i < message.queryTemplates.length; ++i)
+                                        $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.encode(message.queryTemplates[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse} message ListQueryTemplatesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.queryTemplates && message.queryTemplates.length))
+                                                message.queryTemplates = [];
+                                            message.queryTemplates.push($root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListQueryTemplatesResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListQueryTemplatesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.queryTemplates != null && message.hasOwnProperty("queryTemplates")) {
+                                    if (!Array.isArray(message.queryTemplates))
+                                        return "queryTemplates: array expected";
+                                    for (var i = 0; i < message.queryTemplates.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify(message.queryTemplates[i]);
+                                        if (error)
+                                            return "queryTemplates." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListQueryTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse
+                             */
+                            ListQueryTemplatesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse();
+                                if (object.queryTemplates) {
+                                    if (!Array.isArray(object.queryTemplates))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.queryTemplates: array expected");
+                                    message.queryTemplates = [];
+                                    for (var i = 0; i < object.queryTemplates.length; ++i) {
+                                        if (typeof object.queryTemplates[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.queryTemplates: object expected");
+                                        message.queryTemplates[i] = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.fromObject(object.queryTemplates[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListQueryTemplatesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} message ListQueryTemplatesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListQueryTemplatesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.queryTemplates = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.queryTemplates && message.queryTemplates.length) {
+                                    object.queryTemplates = [];
+                                    for (var j = 0; j < message.queryTemplates.length; ++j)
+                                        object.queryTemplates[j] = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.toObject(message.queryTemplates[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListQueryTemplatesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListQueryTemplatesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListQueryTemplatesResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListQueryTemplatesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse";
+                            };
+    
+                            return ListQueryTemplatesResponse;
+                        })();
+    
+                        v1.UpdateQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IUpdateQueryTemplateRequest
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateQueryTemplateRequest updateMask
+                             * @property {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null} [queryTemplate] UpdateQueryTemplateRequest queryTemplate
+                             */
+    
+                            /**
+                             * Constructs a new UpdateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents an UpdateQueryTemplateRequest.
+                             * @implements IUpdateQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function UpdateQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateQueryTemplateRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @instance
+                             */
+                            UpdateQueryTemplateRequest.prototype.updateMask = null;
+    
+                            /**
+                             * UpdateQueryTemplateRequest queryTemplate.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null|undefined} queryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @instance
+                             */
+                            UpdateQueryTemplateRequest.prototype.queryTemplate = null;
+    
+                            /**
+                             * Creates a new UpdateQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest instance
+                             */
+                            UpdateQueryTemplateRequest.create = function create(properties) {
+                                return new UpdateQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} message UpdateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.queryTemplate != null && Object.hasOwnProperty.call(message, "queryTemplate"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.encode(message.queryTemplate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} message UpdateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify(message.queryTemplate);
+                                    if (error)
+                                        return "queryTemplate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest
+                             */
+                            UpdateQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest();
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                if (object.queryTemplate != null) {
+                                    if (typeof object.queryTemplate !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.queryTemplate: object expected");
+                                    message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.fromObject(object.queryTemplate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} message UpdateQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.updateMask = null;
+                                    object.queryTemplate = null;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate"))
+                                    object.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.toObject(message.queryTemplate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest";
+                            };
+    
+                            return UpdateQueryTemplateRequest;
+                        })();
+    
+                        v1.DeleteQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IDeleteQueryTemplateRequest
+                             * @property {string|null} [name] DeleteQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a DeleteQueryTemplateRequest.
+                             * @implements IDeleteQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function DeleteQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @instance
+                             */
+                            DeleteQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest instance
+                             */
+                            DeleteQueryTemplateRequest.create = function create(properties) {
+                                return new DeleteQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} message DeleteQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} message DeleteQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest
+                             */
+                            DeleteQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} message DeleteQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest";
+                            };
+    
+                            return DeleteQueryTemplateRequest;
+                        })();
+    
+                        v1.SubmitQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a SubmitQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface ISubmitQueryTemplateRequest
+                             * @property {string|null} [name] SubmitQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new SubmitQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a SubmitQueryTemplateRequest.
+                             * @implements ISubmitQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function SubmitQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SubmitQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @instance
+                             */
+                            SubmitQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new SubmitQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest instance
+                             */
+                            SubmitQueryTemplateRequest.create = function create(properties) {
+                                return new SubmitQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SubmitQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} message SubmitQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubmitQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SubmitQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} message SubmitQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubmitQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SubmitQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubmitQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SubmitQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubmitQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SubmitQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SubmitQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SubmitQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest
+                             */
+                            SubmitQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SubmitQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} message SubmitQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SubmitQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SubmitQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SubmitQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SubmitQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SubmitQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest";
+                            };
+    
+                            return SubmitQueryTemplateRequest;
+                        })();
+    
+                        v1.ApproveQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of an ApproveQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IApproveQueryTemplateRequest
+                             * @property {string|null} [name] ApproveQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new ApproveQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents an ApproveQueryTemplateRequest.
+                             * @implements IApproveQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function ApproveQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ApproveQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @instance
+                             */
+                            ApproveQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new ApproveQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest instance
+                             */
+                            ApproveQueryTemplateRequest.create = function create(properties) {
+                                return new ApproveQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ApproveQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} message ApproveQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ApproveQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ApproveQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} message ApproveQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ApproveQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ApproveQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ApproveQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ApproveQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ApproveQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ApproveQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ApproveQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ApproveQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest
+                             */
+                            ApproveQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ApproveQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} message ApproveQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ApproveQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ApproveQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ApproveQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ApproveQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ApproveQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest";
+                            };
+    
+                            return ApproveQueryTemplateRequest;
                         })();
     
                         v1.SharingEnvironmentConfig = (function() {
@@ -2733,6 +5526,7 @@
                              * @property {google.protobuf.IStringValue|null} [description] DestinationDataset description
                              * @property {Object.<string,string>|null} [labels] DestinationDataset labels
                              * @property {string|null} [location] DestinationDataset location
+                             * @property {Array.<string>|null} [replicaLocations] DestinationDataset replicaLocations
                              */
     
                             /**
@@ -2745,6 +5539,7 @@
                              */
                             function DestinationDataset(properties) {
                                 this.labels = {};
+                                this.replicaLocations = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -2792,6 +5587,14 @@
                             DestinationDataset.prototype.location = "";
     
                             /**
+                             * DestinationDataset replicaLocations.
+                             * @member {Array.<string>} replicaLocations
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationDataset
+                             * @instance
+                             */
+                            DestinationDataset.prototype.replicaLocations = $util.emptyArray;
+    
+                            /**
                              * Creates a new DestinationDataset instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.analyticshub.v1.DestinationDataset
@@ -2826,6 +5629,9 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.location);
+                                if (message.replicaLocations != null && message.replicaLocations.length)
+                                    for (var i = 0; i < message.replicaLocations.length; ++i)
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.replicaLocations[i]);
                                 return writer;
                             };
     
@@ -2901,6 +5707,12 @@
                                             message.location = reader.string();
                                             break;
                                         }
+                                    case 6: {
+                                            if (!(message.replicaLocations && message.replicaLocations.length))
+                                                message.replicaLocations = [];
+                                            message.replicaLocations.push(reader.string());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2962,6 +5774,13 @@
                                 if (message.location != null && message.hasOwnProperty("location"))
                                     if (!$util.isString(message.location))
                                         return "location: string expected";
+                                if (message.replicaLocations != null && message.hasOwnProperty("replicaLocations")) {
+                                    if (!Array.isArray(message.replicaLocations))
+                                        return "replicaLocations: array expected";
+                                    for (var i = 0; i < message.replicaLocations.length; ++i)
+                                        if (!$util.isString(message.replicaLocations[i]))
+                                            return "replicaLocations: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -3001,6 +5820,13 @@
                                 }
                                 if (object.location != null)
                                     message.location = String(object.location);
+                                if (object.replicaLocations) {
+                                    if (!Array.isArray(object.replicaLocations))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.DestinationDataset.replicaLocations: array expected");
+                                    message.replicaLocations = [];
+                                    for (var i = 0; i < object.replicaLocations.length; ++i)
+                                        message.replicaLocations[i] = String(object.replicaLocations[i]);
+                                }
                                 return message;
                             };
     
@@ -3017,6 +5843,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.replicaLocations = [];
                                 if (options.objects || options.defaults)
                                     object.labels = {};
                                 if (options.defaults) {
@@ -3039,6 +5867,11 @@
                                 }
                                 if (message.location != null && message.hasOwnProperty("location"))
                                     object.location = message.location;
+                                if (message.replicaLocations && message.replicaLocations.length) {
+                                    object.replicaLocations = [];
+                                    for (var j = 0; j < message.replicaLocations.length; ++j)
+                                        object.replicaLocations[j] = message.replicaLocations[j];
+                                }
                                 return object;
                             };
     
@@ -3811,6 +6644,7 @@
                                         case 17:
                                         case 18:
                                         case 19:
+                                        case 20:
                                             break;
                                         }
                                 }
@@ -4017,6 +6851,10 @@
                                         case 19:
                                             message.categories[i] = 19;
                                             break;
+                                        case "CATEGORY_GOOGLE_EARTH_ENGINE":
+                                        case 20:
+                                            message.categories[i] = 20;
+                                            break;
                                         }
                                 }
                                 if (object.publisher != null) {
@@ -4215,6 +7053,8 @@
                                  * @property {string|null} [dataset] BigQueryDatasetSource dataset
                                  * @property {Array.<google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.ISelectedResource>|null} [selectedResources] BigQueryDatasetSource selectedResources
                                  * @property {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy|null} [restrictedExportPolicy] BigQueryDatasetSource restrictedExportPolicy
+                                 * @property {Array.<string>|null} [replicaLocations] BigQueryDatasetSource replicaLocations
+                                 * @property {Array.<google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica>|null} [effectiveReplicas] BigQueryDatasetSource effectiveReplicas
                                  */
     
                                 /**
@@ -4227,6 +7067,8 @@
                                  */
                                 function BigQueryDatasetSource(properties) {
                                     this.selectedResources = [];
+                                    this.replicaLocations = [];
+                                    this.effectiveReplicas = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                             if (properties[keys[i]] != null)
@@ -4256,6 +7098,22 @@
                                  * @instance
                                  */
                                 BigQueryDatasetSource.prototype.restrictedExportPolicy = null;
+    
+                                /**
+                                 * BigQueryDatasetSource replicaLocations.
+                                 * @member {Array.<string>} replicaLocations
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                 * @instance
+                                 */
+                                BigQueryDatasetSource.prototype.replicaLocations = $util.emptyArray;
+    
+                                /**
+                                 * BigQueryDatasetSource effectiveReplicas.
+                                 * @member {Array.<google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica>} effectiveReplicas
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                 * @instance
+                                 */
+                                BigQueryDatasetSource.prototype.effectiveReplicas = $util.emptyArray;
     
                                 /**
                                  * Creates a new BigQueryDatasetSource instance using the specified properties.
@@ -4288,6 +7146,12 @@
                                             $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource.encode(message.selectedResources[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                     if (message.restrictedExportPolicy != null && Object.hasOwnProperty.call(message, "restrictedExportPolicy"))
                                         $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.encode(message.restrictedExportPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.replicaLocations != null && message.replicaLocations.length)
+                                        for (var i = 0; i < message.replicaLocations.length; ++i)
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.replicaLocations[i]);
+                                    if (message.effectiveReplicas != null && message.effectiveReplicas.length)
+                                        for (var i = 0; i < message.effectiveReplicas.length; ++i)
+                                            $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.encode(message.effectiveReplicas[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -4336,6 +7200,18 @@
                                             }
                                         case 3: {
                                                 message.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 5: {
+                                                if (!(message.replicaLocations && message.replicaLocations.length))
+                                                    message.replicaLocations = [];
+                                                message.replicaLocations.push(reader.string());
+                                                break;
+                                            }
+                                        case 6: {
+                                                if (!(message.effectiveReplicas && message.effectiveReplicas.length))
+                                                    message.effectiveReplicas = [];
+                                                message.effectiveReplicas.push($root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.decode(reader, reader.uint32()));
                                                 break;
                                             }
                                         default:
@@ -4390,6 +7266,22 @@
                                         if (error)
                                             return "restrictedExportPolicy." + error;
                                     }
+                                    if (message.replicaLocations != null && message.hasOwnProperty("replicaLocations")) {
+                                        if (!Array.isArray(message.replicaLocations))
+                                            return "replicaLocations: array expected";
+                                        for (var i = 0; i < message.replicaLocations.length; ++i)
+                                            if (!$util.isString(message.replicaLocations[i]))
+                                                return "replicaLocations: string[] expected";
+                                    }
+                                    if (message.effectiveReplicas != null && message.hasOwnProperty("effectiveReplicas")) {
+                                        if (!Array.isArray(message.effectiveReplicas))
+                                            return "effectiveReplicas: array expected";
+                                        for (var i = 0; i < message.effectiveReplicas.length; ++i) {
+                                            var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.verify(message.effectiveReplicas[i]);
+                                            if (error)
+                                                return "effectiveReplicas." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -4422,6 +7314,23 @@
                                             throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.restrictedExportPolicy: object expected");
                                         message.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.fromObject(object.restrictedExportPolicy);
                                     }
+                                    if (object.replicaLocations) {
+                                        if (!Array.isArray(object.replicaLocations))
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.replicaLocations: array expected");
+                                        message.replicaLocations = [];
+                                        for (var i = 0; i < object.replicaLocations.length; ++i)
+                                            message.replicaLocations[i] = String(object.replicaLocations[i]);
+                                    }
+                                    if (object.effectiveReplicas) {
+                                        if (!Array.isArray(object.effectiveReplicas))
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.effectiveReplicas: array expected");
+                                        message.effectiveReplicas = [];
+                                        for (var i = 0; i < object.effectiveReplicas.length; ++i) {
+                                            if (typeof object.effectiveReplicas[i] !== "object")
+                                                throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.effectiveReplicas: object expected");
+                                            message.effectiveReplicas[i] = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.fromObject(object.effectiveReplicas[i]);
+                                        }
+                                    }
                                     return message;
                                 };
     
@@ -4438,8 +7347,11 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
-                                    if (options.arrays || options.defaults)
+                                    if (options.arrays || options.defaults) {
                                         object.selectedResources = [];
+                                        object.replicaLocations = [];
+                                        object.effectiveReplicas = [];
+                                    }
                                     if (options.defaults) {
                                         object.dataset = "";
                                         object.restrictedExportPolicy = null;
@@ -4453,6 +7365,16 @@
                                     }
                                     if (message.restrictedExportPolicy != null && message.hasOwnProperty("restrictedExportPolicy"))
                                         object.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.toObject(message.restrictedExportPolicy, options);
+                                    if (message.replicaLocations && message.replicaLocations.length) {
+                                        object.replicaLocations = [];
+                                        for (var j = 0; j < message.replicaLocations.length; ++j)
+                                            object.replicaLocations[j] = message.replicaLocations[j];
+                                    }
+                                    if (message.effectiveReplicas && message.effectiveReplicas.length) {
+                                        object.effectiveReplicas = [];
+                                        for (var j = 0; j < message.effectiveReplicas.length; ++j)
+                                            object.effectiveReplicas[j] = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.toObject(message.effectiveReplicas[j], options);
+                                    }
                                     return object;
                                 };
     
@@ -4999,6 +7921,345 @@
                                     };
     
                                     return RestrictedExportPolicy;
+                                })();
+    
+                                BigQueryDatasetSource.Replica = (function() {
+    
+                                    /**
+                                     * Properties of a Replica.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                     * @interface IReplica
+                                     * @property {string|null} [location] Replica location
+                                     * @property {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState|null} [replicaState] Replica replicaState
+                                     * @property {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState|null} [primaryState] Replica primaryState
+                                     */
+    
+                                    /**
+                                     * Constructs a new Replica.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                     * @classdesc Represents a Replica.
+                                     * @implements IReplica
+                                     * @constructor
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica=} [properties] Properties to set
+                                     */
+                                    function Replica(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Replica location.
+                                     * @member {string} location
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     */
+                                    Replica.prototype.location = "";
+    
+                                    /**
+                                     * Replica replicaState.
+                                     * @member {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState} replicaState
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     */
+                                    Replica.prototype.replicaState = 0;
+    
+                                    /**
+                                     * Replica primaryState.
+                                     * @member {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState|null|undefined} primaryState
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     */
+                                    Replica.prototype.primaryState = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(Replica.prototype, "_primaryState", {
+                                        get: $util.oneOfGetter($oneOfFields = ["primaryState"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new Replica instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica=} [properties] Properties to set
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica instance
+                                     */
+                                    Replica.create = function create(properties) {
+                                        return new Replica(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Replica message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica} message Replica message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Replica.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                                        if (message.replicaState != null && Object.hasOwnProperty.call(message, "replicaState"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.replicaState);
+                                        if (message.primaryState != null && Object.hasOwnProperty.call(message, "primaryState"))
+                                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.primaryState);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Replica message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica} message Replica message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Replica.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Replica message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Replica.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.location = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.replicaState = reader.int32();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.primaryState = reader.int32();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Replica message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Replica.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Replica message.
+                                     * @function verify
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Replica.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.location != null && message.hasOwnProperty("location"))
+                                            if (!$util.isString(message.location))
+                                                return "location: string expected";
+                                        if (message.replicaState != null && message.hasOwnProperty("replicaState"))
+                                            switch (message.replicaState) {
+                                            default:
+                                                return "replicaState: enum value expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                                break;
+                                            }
+                                        if (message.primaryState != null && message.hasOwnProperty("primaryState")) {
+                                            properties._primaryState = 1;
+                                            switch (message.primaryState) {
+                                            default:
+                                                return "primaryState: enum value expected";
+                                            case 0:
+                                            case 1:
+                                                break;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Replica message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica
+                                     */
+                                    Replica.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica)
+                                            return object;
+                                        var message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica();
+                                        if (object.location != null)
+                                            message.location = String(object.location);
+                                        switch (object.replicaState) {
+                                        default:
+                                            if (typeof object.replicaState === "number") {
+                                                message.replicaState = object.replicaState;
+                                                break;
+                                            }
+                                            break;
+                                        case "REPLICA_STATE_UNSPECIFIED":
+                                        case 0:
+                                            message.replicaState = 0;
+                                            break;
+                                        case "READY_TO_USE":
+                                        case 1:
+                                            message.replicaState = 1;
+                                            break;
+                                        case "UNAVAILABLE":
+                                        case 2:
+                                            message.replicaState = 2;
+                                            break;
+                                        }
+                                        switch (object.primaryState) {
+                                        default:
+                                            if (typeof object.primaryState === "number") {
+                                                message.primaryState = object.primaryState;
+                                                break;
+                                            }
+                                            break;
+                                        case "PRIMARY_STATE_UNSPECIFIED":
+                                        case 0:
+                                            message.primaryState = 0;
+                                            break;
+                                        case "PRIMARY_REPLICA":
+                                        case 1:
+                                            message.primaryState = 1;
+                                            break;
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Replica message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} message Replica
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Replica.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.location = "";
+                                            object.replicaState = options.enums === String ? "REPLICA_STATE_UNSPECIFIED" : 0;
+                                        }
+                                        if (message.location != null && message.hasOwnProperty("location"))
+                                            object.location = message.location;
+                                        if (message.replicaState != null && message.hasOwnProperty("replicaState"))
+                                            object.replicaState = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState[message.replicaState] === undefined ? message.replicaState : $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState[message.replicaState] : message.replicaState;
+                                        if (message.primaryState != null && message.hasOwnProperty("primaryState")) {
+                                            object.primaryState = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState[message.primaryState] === undefined ? message.primaryState : $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState[message.primaryState] : message.primaryState;
+                                            if (options.oneofs)
+                                                object._primaryState = "primaryState";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Replica to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Replica.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Replica
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Replica.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica";
+                                    };
+    
+                                    /**
+                                     * ReplicaState enum.
+                                     * @name google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState
+                                     * @enum {number}
+                                     * @property {number} REPLICA_STATE_UNSPECIFIED=0 REPLICA_STATE_UNSPECIFIED value
+                                     * @property {number} READY_TO_USE=1 READY_TO_USE value
+                                     * @property {number} UNAVAILABLE=2 UNAVAILABLE value
+                                     */
+                                    Replica.ReplicaState = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "REPLICA_STATE_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "READY_TO_USE"] = 1;
+                                        values[valuesById[2] = "UNAVAILABLE"] = 2;
+                                        return values;
+                                    })();
+    
+                                    /**
+                                     * PrimaryState enum.
+                                     * @name google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState
+                                     * @enum {number}
+                                     * @property {number} PRIMARY_STATE_UNSPECIFIED=0 PRIMARY_STATE_UNSPECIFIED value
+                                     * @property {number} PRIMARY_REPLICA=1 PRIMARY_REPLICA value
+                                     */
+                                    Replica.PrimaryState = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "PRIMARY_STATE_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "PRIMARY_REPLICA"] = 1;
+                                        return values;
+                                    })();
+    
+                                    return Replica;
                                 })();
     
                                 return BigQueryDatasetSource;
@@ -6054,6 +9315,7 @@
                              * @property {number} CATEGORY_SCIENCE_AND_RESEARCH=17 CATEGORY_SCIENCE_AND_RESEARCH value
                              * @property {number} CATEGORY_TRANSPORTATION_AND_LOGISTICS=18 CATEGORY_TRANSPORTATION_AND_LOGISTICS value
                              * @property {number} CATEGORY_TRAVEL_AND_TOURISM=19 CATEGORY_TRAVEL_AND_TOURISM value
+                             * @property {number} CATEGORY_GOOGLE_EARTH_ENGINE=20 CATEGORY_GOOGLE_EARTH_ENGINE value
                              */
                             Listing.Category = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -6077,6 +9339,7 @@
                                 values[valuesById[17] = "CATEGORY_SCIENCE_AND_RESEARCH"] = 17;
                                 values[valuesById[18] = "CATEGORY_TRANSPORTATION_AND_LOGISTICS"] = 18;
                                 values[valuesById[19] = "CATEGORY_TRAVEL_AND_TOURISM"] = 19;
+                                values[valuesById[20] = "CATEGORY_GOOGLE_EARTH_ENGINE"] = 20;
                                 return values;
                             })();
     
@@ -19519,6 +22782,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -19554,6 +22818,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -19585,6 +22857,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -19634,6 +22908,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -19687,6 +22965,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -19729,6 +23012,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -19747,8 +23035,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -19756,6 +23046,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -21578,6 +24870,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -21602,6 +24895,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -21629,6 +24930,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -21667,6 +24970,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -21709,6 +25016,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -21729,6 +25041,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -21745,10 +25062,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -21777,6 +25098,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -22654,6 +26227,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -22665,6 +26239,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -22678,6 +26253,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -22705,6 +26288,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -22735,7 +26321,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -22743,6 +26329,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -22785,6 +26394,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -22805,6 +26422,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -22821,10 +26445,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -23461,6 +27093,251 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
+            })();
+    
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -24448,6 +28325,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -24462,6 +28340,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -24486,6 +28365,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -24508,6 +28388,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -24557,6 +28438,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -24679,6 +28568,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -24749,6 +28641,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -24853,6 +28751,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -24907,6 +28812,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -24958,6 +28864,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -25021,6 +28934,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -25087,6 +29004,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -25143,6 +29061,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -25191,6 +29114,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -25297,6 +29221,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -25348,6 +29280,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -25438,6 +29372,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -25553,6 +29491,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -25652,6 +29599,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -25681,6 +29648,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -25726,6 +29694,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -27770,6 +31740,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -27831,6 +31802,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -27867,6 +31846,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -27927,6 +31908,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -27997,6 +31982,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -28046,6 +32040,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -28070,6 +32084,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -28090,6 +32105,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -30408,6 +34425,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -30529,6 +34547,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -30602,6 +34628,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -30701,6 +34729,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -30837,6 +34869,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -31026,6 +35063,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -31123,6 +35165,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -31155,6 +35198,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -31427,6 +35472,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -31467,6 +35513,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -31565,6 +35615,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -32159,6 +36691,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -32203,6 +36736,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -32240,6 +36781,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -32289,6 +36832,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -32343,6 +36890,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -32376,6 +36928,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -32408,6 +36965,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -32415,6 +36973,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -33882,6 +38442,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -33948,6 +38510,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -33983,6 +38561,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -34041,6 +38623,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -34131,6 +38721,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -34272,6 +38882,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -34295,6 +38953,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -34308,6 +38968,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -34433,6 +39097,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -34619,6 +39496,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -34636,6 +39514,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -34683,6 +39562,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -34735,6 +39618,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -34844,7 +39731,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -34871,12 +39759,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -34902,10 +39798,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -34946,8 +39844,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -34990,6 +39892,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -35002,10 +39905,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -35032,6 +39940,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -35074,10 +39986,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -35096,13 +40013,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -36315,6 +41235,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

@@ -1010,6 +1010,306 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_CreateQueryTemplate_async",
+            "title": "AnalyticsHubService createQueryTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new QueryTemplate",
+            "canonical": true,
+            "file": "analytics_hub_service.create_query_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateQueryTemplate",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query_template_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query_template",
+                        "type": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateQueryTemplate",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplate",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetQueryTemplate_async",
+            "title": "AnalyticsHubService getQueryTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a QueryTemplate",
+            "canonical": true,
+            "file": "analytics_hub_service.get_query_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetQueryTemplate",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "GetQueryTemplate",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplate",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListQueryTemplates_async",
+            "title": "AnalyticsHubService listQueryTemplates Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all QueryTemplates in a given project and location.",
+            "canonical": true,
+            "file": "analytics_hub_service.list_query_templates.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListQueryTemplates",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplates",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "ListQueryTemplates",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplates",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_UpdateQueryTemplate_async",
+            "title": "AnalyticsHubService updateQueryTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an existing QueryTemplate",
+            "canonical": true,
+            "file": "analytics_hub_service.update_query_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateQueryTemplate",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "query_template",
+                        "type": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateQueryTemplate",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplate",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteQueryTemplate_async",
+            "title": "AnalyticsHubService deleteQueryTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a query template.",
+            "canonical": true,
+            "file": "analytics_hub_service.delete_query_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteQueryTemplate",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteQueryTemplate",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplate",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubmitQueryTemplate_async",
+            "title": "AnalyticsHubService submitQueryTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Submits a query template for approval.",
+            "canonical": true,
+            "file": "analytics_hub_service.submit_query_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SubmitQueryTemplate",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "SubmitQueryTemplate",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplate",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ApproveQueryTemplate_async",
+            "title": "AnalyticsHubService approveQueryTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Approves a query template.",
+            "canonical": true,
+            "file": "analytics_hub_service.approve_query_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ApproveQueryTemplate",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "ApproveQueryTemplate",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplate",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
         }
     ]
 }

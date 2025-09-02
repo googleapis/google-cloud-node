@@ -1795,6 +1795,658 @@ describe('v1.AnalyticsHubServiceClient', () => {
         });
     });
 
+    describe('createQueryTemplate', () => {
+        it('invokes createQueryTemplate without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.createQueryTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.createQueryTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createQueryTemplate without error using callback', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.createQueryTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createQueryTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createQueryTemplate with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createQueryTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createQueryTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createQueryTemplate with closed client', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createQueryTemplate(request), expectedError);
+        });
+    });
+
+    describe('getQueryTemplate', () => {
+        it('invokes getQueryTemplate without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.getQueryTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.getQueryTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getQueryTemplate without error using callback', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.getQueryTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getQueryTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getQueryTemplate with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getQueryTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getQueryTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getQueryTemplate with closed client', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getQueryTemplate(request), expectedError);
+        });
+    });
+
+    describe('updateQueryTemplate', () => {
+        it('invokes updateQueryTemplate without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest()
+            );
+            request.queryTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest', ['queryTemplate', 'name']);
+            request.queryTemplate.name = defaultValue1;
+            const expectedHeaderRequestParams = `query_template.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.updateQueryTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateQueryTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateQueryTemplate without error using callback', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest()
+            );
+            request.queryTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest', ['queryTemplate', 'name']);
+            request.queryTemplate.name = defaultValue1;
+            const expectedHeaderRequestParams = `query_template.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.updateQueryTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateQueryTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateQueryTemplate with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest()
+            );
+            request.queryTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest', ['queryTemplate', 'name']);
+            request.queryTemplate.name = defaultValue1;
+            const expectedHeaderRequestParams = `query_template.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateQueryTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateQueryTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateQueryTemplate with closed client', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest()
+            );
+            request.queryTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest', ['queryTemplate', 'name']);
+            request.queryTemplate.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateQueryTemplate(request), expectedError);
+        });
+    });
+
+    describe('deleteQueryTemplate', () => {
+        it('invokes deleteQueryTemplate without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteQueryTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteQueryTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteQueryTemplate without error using callback', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteQueryTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteQueryTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteQueryTemplate with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteQueryTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteQueryTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteQueryTemplate with closed client', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteQueryTemplate(request), expectedError);
+        });
+    });
+
+    describe('submitQueryTemplate', () => {
+        it('invokes submitQueryTemplate without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.submitQueryTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.submitQueryTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.submitQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitQueryTemplate without error using callback', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.submitQueryTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.submitQueryTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.submitQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitQueryTemplate with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.submitQueryTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.submitQueryTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.submitQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitQueryTemplate with closed client', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.submitQueryTemplate(request), expectedError);
+        });
+    });
+
+    describe('approveQueryTemplate', () => {
+        it('invokes approveQueryTemplate without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.approveQueryTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.approveQueryTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveQueryTemplate without error using callback', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()
+            );
+            client.innerApiCalls.approveQueryTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.approveQueryTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveQueryTemplate with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.approveQueryTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.approveQueryTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.approveQueryTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveQueryTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveQueryTemplate with closed client', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.approveQueryTemplate(request), expectedError);
+        });
+    });
+
     describe('subscribeDataExchange', () => {
         it('invokes subscribeDataExchange without error', async () => {
             const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
@@ -3481,6 +4133,251 @@ describe('v1.AnalyticsHubServiceClient', () => {
             );
         });
     });
+
+    describe('listQueryTemplates', () => {
+        it('invokes listQueryTemplates without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+            ];
+            client.innerApiCalls.listQueryTemplates = stubSimpleCall(expectedResponse);
+            const [response] = await client.listQueryTemplates(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listQueryTemplates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQueryTemplates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listQueryTemplates without error using callback', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+            ];
+            client.innerApiCalls.listQueryTemplates = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listQueryTemplates(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listQueryTemplates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQueryTemplates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listQueryTemplates with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listQueryTemplates = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listQueryTemplates(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listQueryTemplates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQueryTemplates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listQueryTemplatesStream without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+            ];
+            client.descriptors.page.listQueryTemplates.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listQueryTemplatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listQueryTemplates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listQueryTemplates, request));
+            assert(
+                (client.descriptors.page.listQueryTemplates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listQueryTemplatesStream with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listQueryTemplates.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listQueryTemplatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listQueryTemplates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listQueryTemplates, request));
+            assert(
+                (client.descriptors.page.listQueryTemplates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listQueryTemplates without error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+              generateSampleMessage(new protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate()),
+            ];
+            client.descriptors.page.listQueryTemplates.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate[] = [];
+            const iterable = client.listQueryTemplatesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listQueryTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listQueryTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listQueryTemplates with error', async () => {
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listQueryTemplates.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listQueryTemplatesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listQueryTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listQueryTemplates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getOperation', () => {
         it('invokes getOperation without error', async () => {
             const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
@@ -3903,6 +4800,60 @@ describe('v1.AnalyticsHubServiceClient', () => {
                 const result = client.matchProjectFromProjectName(fakePath);
                 assert.strictEqual(result, "projectValue");
                 assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('queryTemplate', async () => {
+            const fakePath = "/rendered/path/queryTemplate";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_exchange: "dataExchangeValue",
+                query_template: "queryTemplateValue",
+            };
+            const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.queryTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.queryTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('queryTemplatePath', () => {
+                const result = client.queryTemplatePath("projectValue", "locationValue", "dataExchangeValue", "queryTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.queryTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromQueryTemplateName', () => {
+                const result = client.matchProjectFromQueryTemplateName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.queryTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromQueryTemplateName', () => {
+                const result = client.matchLocationFromQueryTemplateName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.queryTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataExchangeFromQueryTemplateName', () => {
+                const result = client.matchDataExchangeFromQueryTemplateName(fakePath);
+                assert.strictEqual(result, "dataExchangeValue");
+                assert((client.pathTemplates.queryTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQueryTemplateFromQueryTemplateName', () => {
+                const result = client.matchQueryTemplateFromQueryTemplateName(fakePath);
+                assert.strictEqual(result, "queryTemplateValue");
+                assert((client.pathTemplates.queryTemplatePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
