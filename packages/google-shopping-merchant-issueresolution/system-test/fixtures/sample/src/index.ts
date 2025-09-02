@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AggregateProductStatusesServiceClient, IssueResolutionServiceClient} from '@google-shopping/issueresolution';
+import {AggregateProductStatusesServiceClient, IssueResolutionServiceClient} from '@google-cloud/issueresolution';
 
 // check that the client class type name can be used
 function doStuffWithAggregateProductStatusesServiceClient(client: AggregateProductStatusesServiceClient) {

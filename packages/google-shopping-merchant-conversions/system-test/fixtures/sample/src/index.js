@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const conversions = require('@google-shopping/conversions');
+const conversions = require('@google-cloud/conversions');
 
 function main() {
   const conversionSourcesServiceClient = new conversions.ConversionSourcesServiceClient();
