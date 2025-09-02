@@ -9964,6 +9964,7 @@
                             "RANDOM": 262527171,
                             "RING_HASH": 432795069,
                             "ROUND_ROBIN": 153895801,
+                            "WEIGHTED_GCP_RENDEZVOUS": 82501640,
                             "WEIGHTED_MAGLEV": 254930962,
                             "WEIGHTED_ROUND_ROBIN": 5584977
                           }
@@ -10847,6 +10848,7 @@
                             "RANDOM": 262527171,
                             "RING_HASH": 432795069,
                             "ROUND_ROBIN": 153895801,
+                            "WEIGHTED_GCP_RENDEZVOUS": 82501640,
                             "WEIGHTED_MAGLEV": 254930962,
                             "WEIGHTED_ROUND_ROBIN": 5584977
                           }
@@ -69126,6 +69128,11 @@
                     },
                     "ResourceStatus": {
                       "oneofs": {
+                        "_effectiveInstanceMetadata": {
+                          "oneof": [
+                            "effectiveInstanceMetadata"
+                          ]
+                        },
                         "_physicalHost": {
                           "oneof": [
                             "physicalHost"
@@ -69148,6 +69155,13 @@
                         }
                       },
                       "fields": {
+                        "effectiveInstanceMetadata": {
+                          "type": "ResourceStatusEffectiveInstanceMetadata",
+                          "id": 55052033,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "physicalHost": {
                           "type": "string",
                           "id": 464370704,
@@ -69172,6 +69186,108 @@
                         "upcomingMaintenance": {
                           "type": "UpcomingMaintenance",
                           "id": 227348592,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ResourceStatusEffectiveInstanceMetadata": {
+                      "oneofs": {
+                        "_blockProjectSshKeysMetadataValue": {
+                          "oneof": [
+                            "blockProjectSshKeysMetadataValue"
+                          ]
+                        },
+                        "_enableGuestAttributesMetadataValue": {
+                          "oneof": [
+                            "enableGuestAttributesMetadataValue"
+                          ]
+                        },
+                        "_enableOsInventoryMetadataValue": {
+                          "oneof": [
+                            "enableOsInventoryMetadataValue"
+                          ]
+                        },
+                        "_enableOsconfigMetadataValue": {
+                          "oneof": [
+                            "enableOsconfigMetadataValue"
+                          ]
+                        },
+                        "_enableOsloginMetadataValue": {
+                          "oneof": [
+                            "enableOsloginMetadataValue"
+                          ]
+                        },
+                        "_serialPortEnableMetadataValue": {
+                          "oneof": [
+                            "serialPortEnableMetadataValue"
+                          ]
+                        },
+                        "_serialPortLoggingEnableMetadataValue": {
+                          "oneof": [
+                            "serialPortLoggingEnableMetadataValue"
+                          ]
+                        },
+                        "_vmDnsSettingMetadataValue": {
+                          "oneof": [
+                            "vmDnsSettingMetadataValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "blockProjectSshKeysMetadataValue": {
+                          "type": "bool",
+                          "id": 338623101,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableGuestAttributesMetadataValue": {
+                          "type": "bool",
+                          "id": 420155878,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsInventoryMetadataValue": {
+                          "type": "bool",
+                          "id": 371752675,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsconfigMetadataValue": {
+                          "type": "bool",
+                          "id": 502966494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsloginMetadataValue": {
+                          "type": "bool",
+                          "id": 216603159,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serialPortEnableMetadataValue": {
+                          "type": "bool",
+                          "id": 430536330,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serialPortLoggingEnableMetadataValue": {
+                          "type": "bool",
+                          "id": 311813290,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "vmDnsSettingMetadataValue": {
+                          "type": "string",
+                          "id": 411127950,
                           "options": {
                             "proto3_optional": true
                           }
@@ -87392,6 +87508,7 @@
                             "FAILURE_MEMORY": 440132982,
                             "FAILURE_NETWORK": 42811449,
                             "FAILURE_NVLINK": 484426295,
+                            "FAILURE_REDUNDANT_HARDWARE_FAULT": 31000530,
                             "INFRASTRUCTURE_RELOCATION": 359845636,
                             "MAINTENANCE_REASON_UNKNOWN": 50570235,
                             "PLANNED_NETWORK_UPDATE": 135494677,
@@ -118990,6 +119107,21 @@
                             "maxConnectionsPerInstance"
                           ]
                         },
+                        "_maxInFlightRequests": {
+                          "oneof": [
+                            "maxInFlightRequests"
+                          ]
+                        },
+                        "_maxInFlightRequestsPerEndpoint": {
+                          "oneof": [
+                            "maxInFlightRequestsPerEndpoint"
+                          ]
+                        },
+                        "_maxInFlightRequestsPerInstance": {
+                          "oneof": [
+                            "maxInFlightRequestsPerInstance"
+                          ]
+                        },
                         "_maxRate": {
                           "oneof": [
                             "maxRate"
@@ -119013,6 +119145,11 @@
                         "_preference": {
                           "oneof": [
                             "preference"
+                          ]
+                        },
+                        "_trafficDuration": {
+                          "oneof": [
+                            "trafficDuration"
                           ]
                         }
                       },
@@ -119078,6 +119215,27 @@
                             "proto3_optional": true
                           }
                         },
+                        "maxInFlightRequests": {
+                          "type": "int32",
+                          "id": 273269332,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxInFlightRequestsPerEndpoint": {
+                          "type": "int32",
+                          "id": 307928706,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxInFlightRequestsPerInstance": {
+                          "type": "int32",
+                          "id": 195696002,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "maxRate": {
                           "type": "int32",
                           "id": 408035035,
@@ -119112,6 +119270,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "trafficDuration": {
+                          "type": "string",
+                          "id": 11618710,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -119120,6 +119285,7 @@
                             "UNDEFINED_BALANCING_MODE": 0,
                             "CONNECTION": 246311646,
                             "CUSTOM_METRICS": 331575765,
+                            "IN_FLIGHT": 190040266,
                             "RATE": 2508000,
                             "UTILIZATION": 157008386
                           }
@@ -119130,6 +119296,14 @@
                             "DEFAULT": 115302945,
                             "PREFERENCE_UNSPECIFIED": 496219571,
                             "PREFERRED": 418847841
+                          }
+                        },
+                        "TrafficDuration": {
+                          "values": {
+                            "UNDEFINED_TRAFFIC_DURATION": 0,
+                            "LONG": 2342524,
+                            "SHORT": 78875740,
+                            "TRAFFIC_DURATION_UNSPECIFIED": 265201166
                           }
                         }
                       }
@@ -119189,6 +119363,11 @@
                         "_name": {
                           "oneof": [
                             "name"
+                          ]
+                        },
+                        "_params": {
+                          "oneof": [
+                            "params"
                           ]
                         },
                         "_selfLink": {
@@ -119276,6 +119455,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "BackendBucketParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -119653,6 +119839,15 @@
                         }
                       }
                     },
+                    "BackendBucketParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
+                        }
+                      }
+                    },
                     "BackendBucketUsedBy": {
                       "oneofs": {
                         "_reference": {
@@ -119858,6 +120053,11 @@
                         "_outlierDetection": {
                           "oneof": [
                             "outlierDetection"
+                          ]
+                        },
+                        "_params": {
+                          "oneof": [
+                            "params"
                           ]
                         },
                         "_port": {
@@ -120165,6 +120365,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "params": {
+                          "type": "BackendServiceParams",
+                          "id": 78313862,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "port": {
                           "type": "int32",
                           "id": 3446913,
@@ -120313,6 +120520,7 @@
                             "RANDOM": 262527171,
                             "RING_HASH": 432795069,
                             "ROUND_ROBIN": 153895801,
+                            "WEIGHTED_GCP_RENDEZVOUS": 82501640,
                             "WEIGHTED_MAGLEV": 254930962,
                             "WEIGHTED_ROUND_ROBIN": 5584977
                           }
@@ -121232,6 +121440,7 @@
                             "RANDOM": 262527171,
                             "RING_HASH": 432795069,
                             "ROUND_ROBIN": 153895801,
+                            "WEIGHTED_GCP_RENDEZVOUS": 82501640,
                             "WEIGHTED_MAGLEV": 254930962,
                             "WEIGHTED_ROUND_ROBIN": 5584977
                           }
@@ -121350,6 +121559,15 @@
                             "ZONAL_AFFINITY_SPILL_CROSS_ZONE": 251048410,
                             "ZONAL_AFFINITY_STAY_WITHIN_ZONE": 12177782
                           }
+                        }
+                      }
+                    },
+                    "BackendServiceParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -138676,6 +138894,13 @@
                       }
                     },
                     "GetSubnetworkRequest": {
+                      "oneofs": {
+                        "_views": {
+                          "oneof": [
+                            "views"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -138696,6 +138921,22 @@
                           "id": 307827694,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "views": {
+                          "type": "string",
+                          "id": 112204398,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Views": {
+                          "values": {
+                            "UNDEFINED_VIEWS": 0,
+                            "DEFAULT": 115302945,
+                            "WITH_UTILIZATION": 504090633
                           }
                         }
                       }
@@ -165026,6 +165267,11 @@
                           "oneof": [
                             "returnPartialSuccess"
                           ]
+                        },
+                        "_views": {
+                          "oneof": [
+                            "views"
+                          ]
                         }
                       },
                       "fields": {
@@ -165076,6 +165322,22 @@
                           "id": 517198390,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "views": {
+                          "type": "string",
+                          "id": 112204398,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Views": {
+                          "values": {
+                            "UNDEFINED_VIEWS": 0,
+                            "DEFAULT": 115302945,
+                            "WITH_UTILIZATION": 504090633
                           }
                         }
                       }
@@ -167441,6 +167703,11 @@
                             "propertiesFromFlexibilityPolicy"
                           ]
                         },
+                        "_scheduling": {
+                          "oneof": [
+                            "scheduling"
+                          ]
+                        },
                         "_targetStatus": {
                           "oneof": [
                             "targetStatus"
@@ -167524,6 +167791,13 @@
                         "propertiesFromFlexibilityPolicy": {
                           "type": "ManagedInstancePropertiesFromFlexibilityPolicy",
                           "id": 155525825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "scheduling": {
+                          "type": "ManagedInstanceScheduling",
+                          "id": 386688404,
                           "options": {
                             "proto3_optional": true
                           }
@@ -167709,6 +167983,24 @@
                             "RESERVATION_BOUND": 293538571,
                             "SPOT": 2552066,
                             "STANDARD": 484642493
+                          }
+                        }
+                      }
+                    },
+                    "ManagedInstanceScheduling": {
+                      "oneofs": {
+                        "_terminationTimestamp": {
+                          "oneof": [
+                            "terminationTimestamp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "terminationTimestamp": {
+                          "type": "string",
+                          "id": 364180891,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -168107,6 +168399,11 @@
                           "oneof": [
                             "selfLink"
                           ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
                         }
                       },
                       "fields": {
@@ -168165,6 +168462,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "status": {
+                          "type": "MultiMigStatus",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -168180,6 +168484,100 @@
                         "workloadPolicy": {
                           "type": "string",
                           "id": 114721530,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MultiMigStatus": {
+                      "fields": {
+                        "appliedAcceleratorTopologies": {
+                          "rule": "repeated",
+                          "type": "MultiMigStatusAcceleratorTopology",
+                          "id": 481392547
+                        }
+                      }
+                    },
+                    "MultiMigStatusAcceleratorTopology": {
+                      "oneofs": {
+                        "_acceleratorTopology": {
+                          "oneof": [
+                            "acceleratorTopology"
+                          ]
+                        },
+                        "_acceleratorTopologyState": {
+                          "oneof": [
+                            "acceleratorTopologyState"
+                          ]
+                        },
+                        "_acceleratorTopologyStateLastCheck": {
+                          "oneof": [
+                            "acceleratorTopologyStateLastCheck"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "acceleratorTopology": {
+                          "type": "string",
+                          "id": 389323203,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "acceleratorTopologyState": {
+                          "type": "string",
+                          "id": 228860693,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "acceleratorTopologyStateLastCheck": {
+                          "type": "MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck",
+                          "id": 386725257,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AcceleratorTopologyState": {
+                          "values": {
+                            "UNDEFINED_ACCELERATOR_TOPOLOGY_STATE": 0,
+                            "ACTIVATING": 378825968,
+                            "ACTIVE": 314733318,
+                            "ACTIVE_DEGRADED": 471128135,
+                            "DEACTIVATING": 57182257,
+                            "FAILED": 455706685,
+                            "INCOMPLETE": 11941214
+                          }
+                        }
+                      }
+                    },
+                    "MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck": {
+                      "oneofs": {
+                        "_error": {
+                          "oneof": [
+                            "error"
+                          ]
+                        },
+                        "_timestamp": {
+                          "oneof": [
+                            "timestamp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "error": {
+                          "type": "Error",
+                          "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "id": 55126294,
                           "options": {
                             "proto3_optional": true
                           }
@@ -179239,24 +179637,12 @@
                           "oneof": [
                             "rolloutInput"
                           ]
-                        },
-                        "_rolloutStatus": {
-                          "oneof": [
-                            "rolloutStatus"
-                          ]
                         }
                       },
                       "fields": {
                         "rolloutInput": {
                           "type": "PreviewFeatureRolloutOperationRolloutInput",
                           "id": 265745340,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "rolloutStatus": {
-                          "type": "PreviewFeatureRolloutOperationRolloutStatus",
-                          "id": 476426816,
                           "options": {
                             "proto3_optional": true
                           }
@@ -179315,76 +179701,16 @@
                         }
                       }
                     },
-                    "PreviewFeatureRolloutOperationRolloutStatus": {
-                      "oneofs": {
-                        "_previousRollout": {
-                          "oneof": [
-                            "previousRollout"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "ongoingRollouts": {
-                          "rule": "repeated",
-                          "type": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata",
-                          "id": 389110054
-                        },
-                        "previousRollout": {
-                          "type": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata",
-                          "id": 375749737,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      }
-                    },
-                    "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata": {
-                      "oneofs": {
-                        "_rollout": {
-                          "oneof": [
-                            "rollout"
-                          ]
-                        },
-                        "_rolloutPlan": {
-                          "oneof": [
-                            "rolloutPlan"
-                          ]
-                        },
-                        "_status": {
-                          "oneof": [
-                            "status"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "rollout": {
-                          "type": "string",
-                          "id": 303366577,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "rolloutPlan": {
-                          "type": "string",
-                          "id": 459057399,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "status": {
-                          "type": "PreviewFeatureStatus",
-                          "id": 181260274,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      }
-                    },
                     "PreviewFeatureStatus": {
                       "oneofs": {
                         "_description": {
                           "oneof": [
                             "description"
+                          ]
+                        },
+                        "_helpLink": {
+                          "oneof": [
+                            "helpLink"
                           ]
                         },
                         "_releaseStatus": {
@@ -179397,6 +179723,13 @@
                         "description": {
                           "type": "string",
                           "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "helpLink": {
+                          "type": "string",
+                          "id": 223410744,
                           "options": {
                             "proto3_optional": true
                           }
@@ -183633,6 +183966,11 @@
                     },
                     "Reservation": {
                       "oneofs": {
+                        "_advancedDeploymentControl": {
+                          "oneof": [
+                            "advancedDeploymentControl"
+                          ]
+                        },
                         "_aggregateReservation": {
                           "oneof": [
                             "aggregateReservation"
@@ -183686,6 +184024,11 @@
                         "_name": {
                           "oneof": [
                             "name"
+                          ]
+                        },
+                        "_protectionTier": {
+                          "oneof": [
+                            "protectionTier"
                           ]
                         },
                         "_reservationMode": {
@@ -183745,6 +184088,13 @@
                         }
                       },
                       "fields": {
+                        "advancedDeploymentControl": {
+                          "type": "ReservationAdvancedDeploymentControl",
+                          "id": 410618144,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "aggregateReservation": {
                           "type": "AllocationAggregateReservation",
                           "id": 291567948,
@@ -183823,6 +184173,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "protectionTier": {
+                          "type": "string",
+                          "id": 503959432,
                           "options": {
                             "proto3_optional": true
                           }
@@ -183919,6 +184276,14 @@
                             "FLEXIBLE": 379880395
                           }
                         },
+                        "ProtectionTier": {
+                          "values": {
+                            "UNDEFINED_PROTECTION_TIER": 0,
+                            "CAPACITY_OPTIMIZED": 17430466,
+                            "PROTECTION_TIER_UNSPECIFIED": 262261984,
+                            "STANDARD": 484642493
+                          }
+                        },
                         "ReservationMode": {
                           "values": {
                             "UNDEFINED_RESERVATION_MODE": 0,
@@ -183943,6 +184308,34 @@
                             "INVALID": 530283991,
                             "READY": 77848963,
                             "UPDATING": 494614342
+                          }
+                        }
+                      }
+                    },
+                    "ReservationAdvancedDeploymentControl": {
+                      "oneofs": {
+                        "_reservationOperationalMode": {
+                          "oneof": [
+                            "reservationOperationalMode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "reservationOperationalMode": {
+                          "type": "string",
+                          "id": 499978755,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReservationOperationalMode": {
+                          "values": {
+                            "UNDEFINED_RESERVATION_OPERATIONAL_MODE": 0,
+                            "ALL_CAPACITY": 500029880,
+                            "HIGHLY_AVAILABLE_CAPACITY": 110861600,
+                            "RESERVATION_OPERATIONAL_MODE_UNSPECIFIED": 194296603
                           }
                         }
                       }
@@ -186516,6 +186909,11 @@
                     },
                     "ResourceStatus": {
                       "oneofs": {
+                        "_effectiveInstanceMetadata": {
+                          "oneof": [
+                            "effectiveInstanceMetadata"
+                          ]
+                        },
                         "_physicalHost": {
                           "oneof": [
                             "physicalHost"
@@ -186543,6 +186941,13 @@
                         }
                       },
                       "fields": {
+                        "effectiveInstanceMetadata": {
+                          "type": "ResourceStatusEffectiveInstanceMetadata",
+                          "id": 55052033,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "physicalHost": {
                           "type": "string",
                           "id": 464370704,
@@ -186574,6 +186979,108 @@
                         "upcomingMaintenance": {
                           "type": "UpcomingMaintenance",
                           "id": 227348592,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ResourceStatusEffectiveInstanceMetadata": {
+                      "oneofs": {
+                        "_blockProjectSshKeysMetadataValue": {
+                          "oneof": [
+                            "blockProjectSshKeysMetadataValue"
+                          ]
+                        },
+                        "_enableGuestAttributesMetadataValue": {
+                          "oneof": [
+                            "enableGuestAttributesMetadataValue"
+                          ]
+                        },
+                        "_enableOsInventoryMetadataValue": {
+                          "oneof": [
+                            "enableOsInventoryMetadataValue"
+                          ]
+                        },
+                        "_enableOsconfigMetadataValue": {
+                          "oneof": [
+                            "enableOsconfigMetadataValue"
+                          ]
+                        },
+                        "_enableOsloginMetadataValue": {
+                          "oneof": [
+                            "enableOsloginMetadataValue"
+                          ]
+                        },
+                        "_serialPortEnableMetadataValue": {
+                          "oneof": [
+                            "serialPortEnableMetadataValue"
+                          ]
+                        },
+                        "_serialPortLoggingEnableMetadataValue": {
+                          "oneof": [
+                            "serialPortLoggingEnableMetadataValue"
+                          ]
+                        },
+                        "_vmDnsSettingMetadataValue": {
+                          "oneof": [
+                            "vmDnsSettingMetadataValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "blockProjectSshKeysMetadataValue": {
+                          "type": "bool",
+                          "id": 338623101,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableGuestAttributesMetadataValue": {
+                          "type": "bool",
+                          "id": 420155878,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsInventoryMetadataValue": {
+                          "type": "bool",
+                          "id": 371752675,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsconfigMetadataValue": {
+                          "type": "bool",
+                          "id": 502966494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableOsloginMetadataValue": {
+                          "type": "bool",
+                          "id": 216603159,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serialPortEnableMetadataValue": {
+                          "type": "bool",
+                          "id": 430536330,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serialPortLoggingEnableMetadataValue": {
+                          "type": "bool",
+                          "id": 311813290,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "vmDnsSettingMetadataValue": {
+                          "type": "string",
+                          "id": 411127950,
                           "options": {
                             "proto3_optional": true
                           }
@@ -192575,6 +193082,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 86866735
                         },
                         "name": {
                           "type": "string",
@@ -201286,6 +201798,11 @@
                             "reservedInternalRange"
                           ]
                         },
+                        "_resolveSubnetMask": {
+                          "oneof": [
+                            "resolveSubnetMask"
+                          ]
+                        },
                         "_role": {
                           "oneof": [
                             "role"
@@ -201304,6 +201821,11 @@
                         "_state": {
                           "oneof": [
                             "state"
+                          ]
+                        },
+                        "_utilizationDetails": {
+                          "oneof": [
+                            "utilizationDetails"
                           ]
                         }
                       },
@@ -201476,6 +201998,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "resolveSubnetMask": {
+                          "type": "string",
+                          "id": 517696699,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "role": {
                           "type": "string",
                           "id": 3506294,
@@ -201518,6 +202047,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 432294995
+                        },
+                        "utilizationDetails": {
+                          "type": "SubnetworkUtilizationDetails",
+                          "id": 125404453,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -201555,6 +202091,13 @@
                             "PRIVATE_RFC_1918": 254902107,
                             "PRIVATE_SERVICE_CONNECT": 48134724,
                             "REGIONAL_MANAGED_PROXY": 153049966
+                          }
+                        },
+                        "ResolveSubnetMask": {
+                          "values": {
+                            "UNDEFINED_RESOLVE_SUBNET_MASK": 0,
+                            "ARP_ALL_RANGES": 445655380,
+                            "ARP_PRIMARY_RANGE": 120210048
                           }
                         },
                         "Role": {
@@ -201866,6 +202409,125 @@
                         "reservedInternalRange": {
                           "type": "string",
                           "id": 286248754,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SubnetworkUtilizationDetails": {
+                      "oneofs": {
+                        "_externalIpv6InstanceUtilization": {
+                          "oneof": [
+                            "externalIpv6InstanceUtilization"
+                          ]
+                        },
+                        "_externalIpv6LbUtilization": {
+                          "oneof": [
+                            "externalIpv6LbUtilization"
+                          ]
+                        },
+                        "_internalIpv6Utilization": {
+                          "oneof": [
+                            "internalIpv6Utilization"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "externalIpv6InstanceUtilization": {
+                          "type": "SubnetworkUtilizationDetailsIPV6Utilization",
+                          "id": 419750236,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "externalIpv6LbUtilization": {
+                          "type": "SubnetworkUtilizationDetailsIPV6Utilization",
+                          "id": 136563645,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "internalIpv6Utilization": {
+                          "type": "SubnetworkUtilizationDetailsIPV6Utilization",
+                          "id": 69707020,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ipv4Utilizations": {
+                          "rule": "repeated",
+                          "type": "SubnetworkUtilizationDetailsIPV4Utilization",
+                          "id": 206180011
+                        }
+                      }
+                    },
+                    "SubnetworkUtilizationDetailsIPV4Utilization": {
+                      "oneofs": {
+                        "_rangeName": {
+                          "oneof": [
+                            "rangeName"
+                          ]
+                        },
+                        "_totalAllocatedIp": {
+                          "oneof": [
+                            "totalAllocatedIp"
+                          ]
+                        },
+                        "_totalFreeIp": {
+                          "oneof": [
+                            "totalFreeIp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rangeName": {
+                          "type": "string",
+                          "id": 332216397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalAllocatedIp": {
+                          "type": "int64",
+                          "id": 279055546,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalFreeIp": {
+                          "type": "int64",
+                          "id": 105624031,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SubnetworkUtilizationDetailsIPV6Utilization": {
+                      "oneofs": {
+                        "_totalAllocatedIp": {
+                          "oneof": [
+                            "totalAllocatedIp"
+                          ]
+                        },
+                        "_totalFreeIp": {
+                          "oneof": [
+                            "totalFreeIp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "totalAllocatedIp": {
+                          "type": "Uint128",
+                          "id": 279055546,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalFreeIp": {
+                          "type": "Uint128",
+                          "id": 105624031,
                           "options": {
                             "proto3_optional": true
                           }
@@ -207336,8 +207998,11 @@
                             "FAILURE_MEMORY": 440132982,
                             "FAILURE_NETWORK": 42811449,
                             "FAILURE_NVLINK": 484426295,
+                            "FAILURE_REDUNDANT_HARDWARE_FAULT": 31000530,
                             "INFRASTRUCTURE_RELOCATION": 359845636,
-                            "MAINTENANCE_REASON_UNKNOWN": 50570235
+                            "MAINTENANCE_REASON_UNKNOWN": 50570235,
+                            "PLANNED_NETWORK_UPDATE": 135494677,
+                            "PLANNED_UPDATE": 161733572
                           }
                         },
                         "MaintenanceStatus": {
@@ -207351,6 +208016,7 @@
                         "Type": {
                           "values": {
                             "UNDEFINED_TYPE": 0,
+                            "MULTIPLE": 362714640,
                             "SCHEDULED": 478400653,
                             "UNKNOWN_TYPE": 490705455,
                             "UNSCHEDULED": 450077204
