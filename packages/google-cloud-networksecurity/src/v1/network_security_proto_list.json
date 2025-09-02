@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/networksecurity/v1/address_group.proto",
   "../../protos/google/cloud/networksecurity/v1/authorization_policy.proto",
   "../../protos/google/cloud/networksecurity/v1/client_tls_policy.proto",
   "../../protos/google/cloud/networksecurity/v1/common.proto",

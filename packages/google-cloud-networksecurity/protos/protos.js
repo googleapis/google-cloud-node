@@ -66,6 +66,4336 @@
                      */
                     var v1 = {};
     
+                    v1.AddressGroupService = (function() {
+    
+                        /**
+                         * Constructs a new AddressGroupService service.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an AddressGroupService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function AddressGroupService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (AddressGroupService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AddressGroupService;
+    
+                        /**
+                         * Creates new AddressGroupService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {AddressGroupService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        AddressGroupService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|listAddressGroups}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef ListAddressGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupsResponse} [response] ListAddressGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListAddressGroups.
+                         * @function listAddressGroups
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest} request ListAddressGroupsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.ListAddressGroupsCallback} callback Node-style callback called with the error, if any, and ListAddressGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.listAddressGroups = function listAddressGroups(request, callback) {
+                            return this.rpcCall(listAddressGroups, $root.google.cloud.networksecurity.v1.ListAddressGroupsRequest, $root.google.cloud.networksecurity.v1.ListAddressGroupsResponse, request, callback);
+                        }, "name", { value: "ListAddressGroups" });
+    
+                        /**
+                         * Calls ListAddressGroups.
+                         * @function listAddressGroups
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest} request ListAddressGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListAddressGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|getAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef GetAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.AddressGroup} [response] AddressGroup
+                         */
+    
+                        /**
+                         * Calls GetAddressGroup.
+                         * @function getAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest} request GetAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.GetAddressGroupCallback} callback Node-style callback called with the error, if any, and AddressGroup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.getAddressGroup = function getAddressGroup(request, callback) {
+                            return this.rpcCall(getAddressGroup, $root.google.cloud.networksecurity.v1.GetAddressGroupRequest, $root.google.cloud.networksecurity.v1.AddressGroup, request, callback);
+                        }, "name", { value: "GetAddressGroup" });
+    
+                        /**
+                         * Calls GetAddressGroup.
+                         * @function getAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest} request GetAddressGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.AddressGroup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|createAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef CreateAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAddressGroup.
+                         * @function createAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest} request CreateAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.CreateAddressGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.createAddressGroup = function createAddressGroup(request, callback) {
+                            return this.rpcCall(createAddressGroup, $root.google.cloud.networksecurity.v1.CreateAddressGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAddressGroup" });
+    
+                        /**
+                         * Calls CreateAddressGroup.
+                         * @function createAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest} request CreateAddressGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|updateAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef UpdateAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAddressGroup.
+                         * @function updateAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest} request UpdateAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.UpdateAddressGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.updateAddressGroup = function updateAddressGroup(request, callback) {
+                            return this.rpcCall(updateAddressGroup, $root.google.cloud.networksecurity.v1.UpdateAddressGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAddressGroup" });
+    
+                        /**
+                         * Calls UpdateAddressGroup.
+                         * @function updateAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest} request UpdateAddressGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|addAddressGroupItems}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef AddAddressGroupItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls AddAddressGroupItems.
+                         * @function addAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest} request AddAddressGroupItemsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.AddAddressGroupItemsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.addAddressGroupItems = function addAddressGroupItems(request, callback) {
+                            return this.rpcCall(addAddressGroupItems, $root.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "AddAddressGroupItems" });
+    
+                        /**
+                         * Calls AddAddressGroupItems.
+                         * @function addAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest} request AddAddressGroupItemsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|removeAddressGroupItems}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef RemoveAddressGroupItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RemoveAddressGroupItems.
+                         * @function removeAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest} request RemoveAddressGroupItemsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.RemoveAddressGroupItemsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.removeAddressGroupItems = function removeAddressGroupItems(request, callback) {
+                            return this.rpcCall(removeAddressGroupItems, $root.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RemoveAddressGroupItems" });
+    
+                        /**
+                         * Calls RemoveAddressGroupItems.
+                         * @function removeAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest} request RemoveAddressGroupItemsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|cloneAddressGroupItems}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef CloneAddressGroupItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CloneAddressGroupItems.
+                         * @function cloneAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest} request CloneAddressGroupItemsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.CloneAddressGroupItemsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.cloneAddressGroupItems = function cloneAddressGroupItems(request, callback) {
+                            return this.rpcCall(cloneAddressGroupItems, $root.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CloneAddressGroupItems" });
+    
+                        /**
+                         * Calls CloneAddressGroupItems.
+                         * @function cloneAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest} request CloneAddressGroupItemsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|deleteAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef DeleteAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteAddressGroup.
+                         * @function deleteAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest} request DeleteAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.DeleteAddressGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.deleteAddressGroup = function deleteAddressGroup(request, callback) {
+                            return this.rpcCall(deleteAddressGroup, $root.google.cloud.networksecurity.v1.DeleteAddressGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteAddressGroup" });
+    
+                        /**
+                         * Calls DeleteAddressGroup.
+                         * @function deleteAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest} request DeleteAddressGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|listAddressGroupReferences}.
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @typedef ListAddressGroupReferencesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse} [response] ListAddressGroupReferencesResponse
+                         */
+    
+                        /**
+                         * Calls ListAddressGroupReferences.
+                         * @function listAddressGroupReferences
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest} request ListAddressGroupReferencesRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.AddressGroupService.ListAddressGroupReferencesCallback} callback Node-style callback called with the error, if any, and ListAddressGroupReferencesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AddressGroupService.prototype.listAddressGroupReferences = function listAddressGroupReferences(request, callback) {
+                            return this.rpcCall(listAddressGroupReferences, $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest, $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse, request, callback);
+                        }, "name", { value: "ListAddressGroupReferences" });
+    
+                        /**
+                         * Calls ListAddressGroupReferences.
+                         * @function listAddressGroupReferences
+                         * @memberof google.cloud.networksecurity.v1.AddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest} request ListAddressGroupReferencesRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return AddressGroupService;
+                    })();
+    
+                    v1.OrganizationAddressGroupService = (function() {
+    
+                        /**
+                         * Constructs a new OrganizationAddressGroupService service.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an OrganizationAddressGroupService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function OrganizationAddressGroupService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (OrganizationAddressGroupService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = OrganizationAddressGroupService;
+    
+                        /**
+                         * Creates new OrganizationAddressGroupService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {OrganizationAddressGroupService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        OrganizationAddressGroupService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|listAddressGroups}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef ListAddressGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupsResponse} [response] ListAddressGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListAddressGroups.
+                         * @function listAddressGroups
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest} request ListAddressGroupsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.ListAddressGroupsCallback} callback Node-style callback called with the error, if any, and ListAddressGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.listAddressGroups = function listAddressGroups(request, callback) {
+                            return this.rpcCall(listAddressGroups, $root.google.cloud.networksecurity.v1.ListAddressGroupsRequest, $root.google.cloud.networksecurity.v1.ListAddressGroupsResponse, request, callback);
+                        }, "name", { value: "ListAddressGroups" });
+    
+                        /**
+                         * Calls ListAddressGroups.
+                         * @function listAddressGroups
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest} request ListAddressGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListAddressGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|getAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef GetAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.AddressGroup} [response] AddressGroup
+                         */
+    
+                        /**
+                         * Calls GetAddressGroup.
+                         * @function getAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest} request GetAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.GetAddressGroupCallback} callback Node-style callback called with the error, if any, and AddressGroup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.getAddressGroup = function getAddressGroup(request, callback) {
+                            return this.rpcCall(getAddressGroup, $root.google.cloud.networksecurity.v1.GetAddressGroupRequest, $root.google.cloud.networksecurity.v1.AddressGroup, request, callback);
+                        }, "name", { value: "GetAddressGroup" });
+    
+                        /**
+                         * Calls GetAddressGroup.
+                         * @function getAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest} request GetAddressGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.AddressGroup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|createAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef CreateAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAddressGroup.
+                         * @function createAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest} request CreateAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.CreateAddressGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.createAddressGroup = function createAddressGroup(request, callback) {
+                            return this.rpcCall(createAddressGroup, $root.google.cloud.networksecurity.v1.CreateAddressGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAddressGroup" });
+    
+                        /**
+                         * Calls CreateAddressGroup.
+                         * @function createAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest} request CreateAddressGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|updateAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef UpdateAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAddressGroup.
+                         * @function updateAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest} request UpdateAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.UpdateAddressGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.updateAddressGroup = function updateAddressGroup(request, callback) {
+                            return this.rpcCall(updateAddressGroup, $root.google.cloud.networksecurity.v1.UpdateAddressGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAddressGroup" });
+    
+                        /**
+                         * Calls UpdateAddressGroup.
+                         * @function updateAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest} request UpdateAddressGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|addAddressGroupItems}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef AddAddressGroupItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls AddAddressGroupItems.
+                         * @function addAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest} request AddAddressGroupItemsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.AddAddressGroupItemsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.addAddressGroupItems = function addAddressGroupItems(request, callback) {
+                            return this.rpcCall(addAddressGroupItems, $root.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "AddAddressGroupItems" });
+    
+                        /**
+                         * Calls AddAddressGroupItems.
+                         * @function addAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest} request AddAddressGroupItemsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|removeAddressGroupItems}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef RemoveAddressGroupItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RemoveAddressGroupItems.
+                         * @function removeAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest} request RemoveAddressGroupItemsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.RemoveAddressGroupItemsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.removeAddressGroupItems = function removeAddressGroupItems(request, callback) {
+                            return this.rpcCall(removeAddressGroupItems, $root.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RemoveAddressGroupItems" });
+    
+                        /**
+                         * Calls RemoveAddressGroupItems.
+                         * @function removeAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest} request RemoveAddressGroupItemsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|cloneAddressGroupItems}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef CloneAddressGroupItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CloneAddressGroupItems.
+                         * @function cloneAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest} request CloneAddressGroupItemsRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.CloneAddressGroupItemsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.cloneAddressGroupItems = function cloneAddressGroupItems(request, callback) {
+                            return this.rpcCall(cloneAddressGroupItems, $root.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CloneAddressGroupItems" });
+    
+                        /**
+                         * Calls CloneAddressGroupItems.
+                         * @function cloneAddressGroupItems
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest} request CloneAddressGroupItemsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|deleteAddressGroup}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef DeleteAddressGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteAddressGroup.
+                         * @function deleteAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest} request DeleteAddressGroupRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.DeleteAddressGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.deleteAddressGroup = function deleteAddressGroup(request, callback) {
+                            return this.rpcCall(deleteAddressGroup, $root.google.cloud.networksecurity.v1.DeleteAddressGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteAddressGroup" });
+    
+                        /**
+                         * Calls DeleteAddressGroup.
+                         * @function deleteAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest} request DeleteAddressGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|listAddressGroupReferences}.
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @typedef ListAddressGroupReferencesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse} [response] ListAddressGroupReferencesResponse
+                         */
+    
+                        /**
+                         * Calls ListAddressGroupReferences.
+                         * @function listAddressGroupReferences
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest} request ListAddressGroupReferencesRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.OrganizationAddressGroupService.ListAddressGroupReferencesCallback} callback Node-style callback called with the error, if any, and ListAddressGroupReferencesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationAddressGroupService.prototype.listAddressGroupReferences = function listAddressGroupReferences(request, callback) {
+                            return this.rpcCall(listAddressGroupReferences, $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest, $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse, request, callback);
+                        }, "name", { value: "ListAddressGroupReferences" });
+    
+                        /**
+                         * Calls ListAddressGroupReferences.
+                         * @function listAddressGroupReferences
+                         * @memberof google.cloud.networksecurity.v1.OrganizationAddressGroupService
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest} request ListAddressGroupReferencesRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return OrganizationAddressGroupService;
+                    })();
+    
+                    v1.AddressGroup = (function() {
+    
+                        /**
+                         * Properties of an AddressGroup.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IAddressGroup
+                         * @property {string|null} [name] AddressGroup name
+                         * @property {string|null} [description] AddressGroup description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AddressGroup createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AddressGroup updateTime
+                         * @property {Object.<string,string>|null} [labels] AddressGroup labels
+                         * @property {google.cloud.networksecurity.v1.AddressGroup.Type|null} [type] AddressGroup type
+                         * @property {Array.<string>|null} [items] AddressGroup items
+                         * @property {number|null} [capacity] AddressGroup capacity
+                         * @property {string|null} [selfLink] AddressGroup selfLink
+                         * @property {Array.<google.cloud.networksecurity.v1.AddressGroup.Purpose>|null} [purpose] AddressGroup purpose
+                         */
+    
+                        /**
+                         * Constructs a new AddressGroup.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an AddressGroup.
+                         * @implements IAddressGroup
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IAddressGroup=} [properties] Properties to set
+                         */
+                        function AddressGroup(properties) {
+                            this.labels = {};
+                            this.items = [];
+                            this.purpose = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AddressGroup name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.name = "";
+    
+                        /**
+                         * AddressGroup description.
+                         * @member {string} description
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.description = "";
+    
+                        /**
+                         * AddressGroup createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.createTime = null;
+    
+                        /**
+                         * AddressGroup updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.updateTime = null;
+    
+                        /**
+                         * AddressGroup labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * AddressGroup type.
+                         * @member {google.cloud.networksecurity.v1.AddressGroup.Type} type
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.type = 0;
+    
+                        /**
+                         * AddressGroup items.
+                         * @member {Array.<string>} items
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.items = $util.emptyArray;
+    
+                        /**
+                         * AddressGroup capacity.
+                         * @member {number} capacity
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.capacity = 0;
+    
+                        /**
+                         * AddressGroup selfLink.
+                         * @member {string} selfLink
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.selfLink = "";
+    
+                        /**
+                         * AddressGroup purpose.
+                         * @member {Array.<google.cloud.networksecurity.v1.AddressGroup.Purpose>} purpose
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         */
+                        AddressGroup.prototype.purpose = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AddressGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAddressGroup=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.AddressGroup} AddressGroup instance
+                         */
+                        AddressGroup.create = function create(properties) {
+                            return new AddressGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AddressGroup message. Does not implicitly {@link google.cloud.networksecurity.v1.AddressGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAddressGroup} message AddressGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AddressGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.type);
+                            if (message.items != null && message.items.length)
+                                for (var i = 0; i < message.items.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.items[i]);
+                            if (message.capacity != null && Object.hasOwnProperty.call(message, "capacity"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.capacity);
+                            if (message.selfLink != null && Object.hasOwnProperty.call(message, "selfLink"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.selfLink);
+                            if (message.purpose != null && message.purpose.length) {
+                                writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                                for (var i = 0; i < message.purpose.length; ++i)
+                                    writer.int32(message.purpose[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AddressGroup message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AddressGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAddressGroup} message AddressGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AddressGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AddressGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.AddressGroup} AddressGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AddressGroup.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.AddressGroup(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.items && message.items.length))
+                                            message.items = [];
+                                        message.items.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.capacity = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.selfLink = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.purpose && message.purpose.length))
+                                            message.purpose = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.purpose.push(reader.int32());
+                                        } else
+                                            message.purpose.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AddressGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.AddressGroup} AddressGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AddressGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AddressGroup message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AddressGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!Array.isArray(message.items))
+                                    return "items: array expected";
+                                for (var i = 0; i < message.items.length; ++i)
+                                    if (!$util.isString(message.items[i]))
+                                        return "items: string[] expected";
+                            }
+                            if (message.capacity != null && message.hasOwnProperty("capacity"))
+                                if (!$util.isInteger(message.capacity))
+                                    return "capacity: integer expected";
+                            if (message.selfLink != null && message.hasOwnProperty("selfLink"))
+                                if (!$util.isString(message.selfLink))
+                                    return "selfLink: string expected";
+                            if (message.purpose != null && message.hasOwnProperty("purpose")) {
+                                if (!Array.isArray(message.purpose))
+                                    return "purpose: array expected";
+                                for (var i = 0; i < message.purpose.length; ++i)
+                                    switch (message.purpose[i]) {
+                                    default:
+                                        return "purpose: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AddressGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.AddressGroup} AddressGroup
+                         */
+                        AddressGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.AddressGroup)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.AddressGroup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.AddressGroup.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.AddressGroup.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.AddressGroup.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "IPV4":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "IPV6":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            if (object.items) {
+                                if (!Array.isArray(object.items))
+                                    throw TypeError(".google.cloud.networksecurity.v1.AddressGroup.items: array expected");
+                                message.items = [];
+                                for (var i = 0; i < object.items.length; ++i)
+                                    message.items[i] = String(object.items[i]);
+                            }
+                            if (object.capacity != null)
+                                message.capacity = object.capacity | 0;
+                            if (object.selfLink != null)
+                                message.selfLink = String(object.selfLink);
+                            if (object.purpose) {
+                                if (!Array.isArray(object.purpose))
+                                    throw TypeError(".google.cloud.networksecurity.v1.AddressGroup.purpose: array expected");
+                                message.purpose = [];
+                                for (var i = 0; i < object.purpose.length; ++i)
+                                    switch (object.purpose[i]) {
+                                    default:
+                                        if (typeof object.purpose[i] === "number") {
+                                            message.purpose[i] = object.purpose[i];
+                                            break;
+                                        }
+                                    case "PURPOSE_UNSPECIFIED":
+                                    case 0:
+                                        message.purpose[i] = 0;
+                                        break;
+                                    case "DEFAULT":
+                                    case 1:
+                                        message.purpose[i] = 1;
+                                        break;
+                                    case "CLOUD_ARMOR":
+                                    case 2:
+                                        message.purpose[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AddressGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.AddressGroup} message AddressGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AddressGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.items = [];
+                                object.purpose = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.capacity = 0;
+                                object.selfLink = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.networksecurity.v1.AddressGroup.Type[message.type] === undefined ? message.type : $root.google.cloud.networksecurity.v1.AddressGroup.Type[message.type] : message.type;
+                            if (message.items && message.items.length) {
+                                object.items = [];
+                                for (var j = 0; j < message.items.length; ++j)
+                                    object.items[j] = message.items[j];
+                            }
+                            if (message.capacity != null && message.hasOwnProperty("capacity"))
+                                object.capacity = message.capacity;
+                            if (message.selfLink != null && message.hasOwnProperty("selfLink"))
+                                object.selfLink = message.selfLink;
+                            if (message.purpose && message.purpose.length) {
+                                object.purpose = [];
+                                for (var j = 0; j < message.purpose.length; ++j)
+                                    object.purpose[j] = options.enums === String ? $root.google.cloud.networksecurity.v1.AddressGroup.Purpose[message.purpose[j]] === undefined ? message.purpose[j] : $root.google.cloud.networksecurity.v1.AddressGroup.Purpose[message.purpose[j]] : message.purpose[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AddressGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AddressGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AddressGroup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.AddressGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AddressGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.AddressGroup";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.networksecurity.v1.AddressGroup.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} IPV4=1 IPV4 value
+                         * @property {number} IPV6=2 IPV6 value
+                         */
+                        AddressGroup.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IPV4"] = 1;
+                            values[valuesById[2] = "IPV6"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Purpose enum.
+                         * @name google.cloud.networksecurity.v1.AddressGroup.Purpose
+                         * @enum {number}
+                         * @property {number} PURPOSE_UNSPECIFIED=0 PURPOSE_UNSPECIFIED value
+                         * @property {number} DEFAULT=1 DEFAULT value
+                         * @property {number} CLOUD_ARMOR=2 CLOUD_ARMOR value
+                         */
+                        AddressGroup.Purpose = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PURPOSE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEFAULT"] = 1;
+                            values[valuesById[2] = "CLOUD_ARMOR"] = 2;
+                            return values;
+                        })();
+    
+                        return AddressGroup;
+                    })();
+    
+                    v1.ListAddressGroupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAddressGroupsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListAddressGroupsRequest
+                         * @property {string|null} [parent] ListAddressGroupsRequest parent
+                         * @property {number|null} [pageSize] ListAddressGroupsRequest pageSize
+                         * @property {string|null} [pageToken] ListAddressGroupsRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListAddressGroupsRequest returnPartialSuccess
+                         */
+    
+                        /**
+                         * Constructs a new ListAddressGroupsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListAddressGroupsRequest.
+                         * @implements IListAddressGroupsRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest=} [properties] Properties to set
+                         */
+                        function ListAddressGroupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAddressGroupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @instance
+                         */
+                        ListAddressGroupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAddressGroupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @instance
+                         */
+                        ListAddressGroupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAddressGroupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @instance
+                         */
+                        ListAddressGroupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAddressGroupsRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @instance
+                         */
+                        ListAddressGroupsRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
+                         * Creates a new ListAddressGroupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsRequest} ListAddressGroupsRequest instance
+                         */
+                        ListAddressGroupsRequest.create = function create(properties) {
+                            return new ListAddressGroupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest} message ListAddressGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsRequest} message ListAddressGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsRequest} ListAddressGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListAddressGroupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsRequest} ListAddressGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAddressGroupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAddressGroupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAddressGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsRequest} ListAddressGroupsRequest
+                         */
+                        ListAddressGroupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListAddressGroupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListAddressGroupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAddressGroupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupsRequest} message ListAddressGroupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAddressGroupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.returnPartialSuccess = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAddressGroupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAddressGroupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAddressGroupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAddressGroupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListAddressGroupsRequest";
+                        };
+    
+                        return ListAddressGroupsRequest;
+                    })();
+    
+                    v1.ListAddressGroupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAddressGroupsResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListAddressGroupsResponse
+                         * @property {Array.<google.cloud.networksecurity.v1.IAddressGroup>|null} [addressGroups] ListAddressGroupsResponse addressGroups
+                         * @property {string|null} [nextPageToken] ListAddressGroupsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListAddressGroupsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListAddressGroupsResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListAddressGroupsResponse.
+                         * @implements IListAddressGroupsResponse
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsResponse=} [properties] Properties to set
+                         */
+                        function ListAddressGroupsResponse(properties) {
+                            this.addressGroups = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAddressGroupsResponse addressGroups.
+                         * @member {Array.<google.cloud.networksecurity.v1.IAddressGroup>} addressGroups
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @instance
+                         */
+                        ListAddressGroupsResponse.prototype.addressGroups = $util.emptyArray;
+    
+                        /**
+                         * ListAddressGroupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @instance
+                         */
+                        ListAddressGroupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListAddressGroupsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @instance
+                         */
+                        ListAddressGroupsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListAddressGroupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsResponse} ListAddressGroupsResponse instance
+                         */
+                        ListAddressGroupsResponse.create = function create(properties) {
+                            return new ListAddressGroupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupsResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsResponse} message ListAddressGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.addressGroups != null && message.addressGroups.length)
+                                for (var i = 0; i < message.addressGroups.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.AddressGroup.encode(message.addressGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupsResponse} message ListAddressGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsResponse} ListAddressGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListAddressGroupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.addressGroups && message.addressGroups.length))
+                                            message.addressGroups = [];
+                                        message.addressGroups.push($root.google.cloud.networksecurity.v1.AddressGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsResponse} ListAddressGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAddressGroupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAddressGroupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.addressGroups != null && message.hasOwnProperty("addressGroups")) {
+                                if (!Array.isArray(message.addressGroups))
+                                    return "addressGroups: array expected";
+                                for (var i = 0; i < message.addressGroups.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.AddressGroup.verify(message.addressGroups[i]);
+                                    if (error)
+                                        return "addressGroups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAddressGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupsResponse} ListAddressGroupsResponse
+                         */
+                        ListAddressGroupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListAddressGroupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListAddressGroupsResponse();
+                            if (object.addressGroups) {
+                                if (!Array.isArray(object.addressGroups))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListAddressGroupsResponse.addressGroups: array expected");
+                                message.addressGroups = [];
+                                for (var i = 0; i < object.addressGroups.length; ++i) {
+                                    if (typeof object.addressGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ListAddressGroupsResponse.addressGroups: object expected");
+                                    message.addressGroups[i] = $root.google.cloud.networksecurity.v1.AddressGroup.fromObject(object.addressGroups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListAddressGroupsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAddressGroupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupsResponse} message ListAddressGroupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAddressGroupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.addressGroups = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.addressGroups && message.addressGroups.length) {
+                                object.addressGroups = [];
+                                for (var j = 0; j < message.addressGroups.length; ++j)
+                                    object.addressGroups[j] = $root.google.cloud.networksecurity.v1.AddressGroup.toObject(message.addressGroups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAddressGroupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAddressGroupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAddressGroupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAddressGroupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListAddressGroupsResponse";
+                        };
+    
+                        return ListAddressGroupsResponse;
+                    })();
+    
+                    v1.GetAddressGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IGetAddressGroupRequest
+                         * @property {string|null} [name] GetAddressGroupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a GetAddressGroupRequest.
+                         * @implements IGetAddressGroupRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest=} [properties] Properties to set
+                         */
+                        function GetAddressGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAddressGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @instance
+                         */
+                        GetAddressGroupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAddressGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.GetAddressGroupRequest} GetAddressGroupRequest instance
+                         */
+                        GetAddressGroupRequest.create = function create(properties) {
+                            return new GetAddressGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetAddressGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest} message GetAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAddressGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetAddressGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetAddressGroupRequest} message GetAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAddressGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAddressGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.GetAddressGroupRequest} GetAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAddressGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.GetAddressGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAddressGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.GetAddressGroupRequest} GetAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAddressGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAddressGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAddressGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.GetAddressGroupRequest} GetAddressGroupRequest
+                         */
+                        GetAddressGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.GetAddressGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.GetAddressGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAddressGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.GetAddressGroupRequest} message GetAddressGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAddressGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAddressGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAddressGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAddressGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.GetAddressGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAddressGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.GetAddressGroupRequest";
+                        };
+    
+                        return GetAddressGroupRequest;
+                    })();
+    
+                    v1.CreateAddressGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICreateAddressGroupRequest
+                         * @property {string|null} [parent] CreateAddressGroupRequest parent
+                         * @property {string|null} [addressGroupId] CreateAddressGroupRequest addressGroupId
+                         * @property {google.cloud.networksecurity.v1.IAddressGroup|null} [addressGroup] CreateAddressGroupRequest addressGroup
+                         * @property {string|null} [requestId] CreateAddressGroupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CreateAddressGroupRequest.
+                         * @implements ICreateAddressGroupRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest=} [properties] Properties to set
+                         */
+                        function CreateAddressGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAddressGroupRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @instance
+                         */
+                        CreateAddressGroupRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAddressGroupRequest addressGroupId.
+                         * @member {string} addressGroupId
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @instance
+                         */
+                        CreateAddressGroupRequest.prototype.addressGroupId = "";
+    
+                        /**
+                         * CreateAddressGroupRequest addressGroup.
+                         * @member {google.cloud.networksecurity.v1.IAddressGroup|null|undefined} addressGroup
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @instance
+                         */
+                        CreateAddressGroupRequest.prototype.addressGroup = null;
+    
+                        /**
+                         * CreateAddressGroupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @instance
+                         */
+                        CreateAddressGroupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateAddressGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CreateAddressGroupRequest} CreateAddressGroupRequest instance
+                         */
+                        CreateAddressGroupRequest.create = function create(properties) {
+                            return new CreateAddressGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAddressGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest} message CreateAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAddressGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.addressGroupId != null && Object.hasOwnProperty.call(message, "addressGroupId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.addressGroupId);
+                            if (message.addressGroup != null && Object.hasOwnProperty.call(message, "addressGroup"))
+                                $root.google.cloud.networksecurity.v1.AddressGroup.encode(message.addressGroup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAddressGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateAddressGroupRequest} message CreateAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAddressGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAddressGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CreateAddressGroupRequest} CreateAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAddressGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CreateAddressGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.addressGroupId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.addressGroup = $root.google.cloud.networksecurity.v1.AddressGroup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAddressGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CreateAddressGroupRequest} CreateAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAddressGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAddressGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAddressGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.addressGroupId != null && message.hasOwnProperty("addressGroupId"))
+                                if (!$util.isString(message.addressGroupId))
+                                    return "addressGroupId: string expected";
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup")) {
+                                var error = $root.google.cloud.networksecurity.v1.AddressGroup.verify(message.addressGroup);
+                                if (error)
+                                    return "addressGroup." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CreateAddressGroupRequest} CreateAddressGroupRequest
+                         */
+                        CreateAddressGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CreateAddressGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CreateAddressGroupRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.addressGroupId != null)
+                                message.addressGroupId = String(object.addressGroupId);
+                            if (object.addressGroup != null) {
+                                if (typeof object.addressGroup !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CreateAddressGroupRequest.addressGroup: object expected");
+                                message.addressGroup = $root.google.cloud.networksecurity.v1.AddressGroup.fromObject(object.addressGroup);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAddressGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CreateAddressGroupRequest} message CreateAddressGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAddressGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.addressGroupId = "";
+                                object.addressGroup = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.addressGroupId != null && message.hasOwnProperty("addressGroupId"))
+                                object.addressGroupId = message.addressGroupId;
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                object.addressGroup = $root.google.cloud.networksecurity.v1.AddressGroup.toObject(message.addressGroup, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAddressGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAddressGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAddressGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.CreateAddressGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAddressGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.CreateAddressGroupRequest";
+                        };
+    
+                        return CreateAddressGroupRequest;
+                    })();
+    
+                    v1.UpdateAddressGroupRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IUpdateAddressGroupRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAddressGroupRequest updateMask
+                         * @property {google.cloud.networksecurity.v1.IAddressGroup|null} [addressGroup] UpdateAddressGroupRequest addressGroup
+                         * @property {string|null} [requestId] UpdateAddressGroupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an UpdateAddressGroupRequest.
+                         * @implements IUpdateAddressGroupRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest=} [properties] Properties to set
+                         */
+                        function UpdateAddressGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAddressGroupRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @instance
+                         */
+                        UpdateAddressGroupRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAddressGroupRequest addressGroup.
+                         * @member {google.cloud.networksecurity.v1.IAddressGroup|null|undefined} addressGroup
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @instance
+                         */
+                        UpdateAddressGroupRequest.prototype.addressGroup = null;
+    
+                        /**
+                         * UpdateAddressGroupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @instance
+                         */
+                        UpdateAddressGroupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateAddressGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.UpdateAddressGroupRequest} UpdateAddressGroupRequest instance
+                         */
+                        UpdateAddressGroupRequest.create = function create(properties) {
+                            return new UpdateAddressGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAddressGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest} message UpdateAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAddressGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.addressGroup != null && Object.hasOwnProperty.call(message, "addressGroup"))
+                                $root.google.cloud.networksecurity.v1.AddressGroup.encode(message.addressGroup, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAddressGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateAddressGroupRequest} message UpdateAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAddressGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAddressGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.UpdateAddressGroupRequest} UpdateAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAddressGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.UpdateAddressGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.addressGroup = $root.google.cloud.networksecurity.v1.AddressGroup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAddressGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.UpdateAddressGroupRequest} UpdateAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAddressGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAddressGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAddressGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup")) {
+                                var error = $root.google.cloud.networksecurity.v1.AddressGroup.verify(message.addressGroup);
+                                if (error)
+                                    return "addressGroup." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.UpdateAddressGroupRequest} UpdateAddressGroupRequest
+                         */
+                        UpdateAddressGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.UpdateAddressGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.UpdateAddressGroupRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateAddressGroupRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.addressGroup != null) {
+                                if (typeof object.addressGroup !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateAddressGroupRequest.addressGroup: object expected");
+                                message.addressGroup = $root.google.cloud.networksecurity.v1.AddressGroup.fromObject(object.addressGroup);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAddressGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.UpdateAddressGroupRequest} message UpdateAddressGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAddressGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.addressGroup = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                object.addressGroup = $root.google.cloud.networksecurity.v1.AddressGroup.toObject(message.addressGroup, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAddressGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAddressGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAddressGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.UpdateAddressGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAddressGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.UpdateAddressGroupRequest";
+                        };
+    
+                        return UpdateAddressGroupRequest;
+                    })();
+    
+                    v1.DeleteAddressGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IDeleteAddressGroupRequest
+                         * @property {string|null} [name] DeleteAddressGroupRequest name
+                         * @property {string|null} [requestId] DeleteAddressGroupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAddressGroupRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a DeleteAddressGroupRequest.
+                         * @implements IDeleteAddressGroupRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest=} [properties] Properties to set
+                         */
+                        function DeleteAddressGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAddressGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @instance
+                         */
+                        DeleteAddressGroupRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteAddressGroupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @instance
+                         */
+                        DeleteAddressGroupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteAddressGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.DeleteAddressGroupRequest} DeleteAddressGroupRequest instance
+                         */
+                        DeleteAddressGroupRequest.create = function create(properties) {
+                            return new DeleteAddressGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAddressGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest} message DeleteAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAddressGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAddressGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteAddressGroupRequest} message DeleteAddressGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAddressGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAddressGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.DeleteAddressGroupRequest} DeleteAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAddressGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.DeleteAddressGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAddressGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.DeleteAddressGroupRequest} DeleteAddressGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAddressGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAddressGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAddressGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.DeleteAddressGroupRequest} DeleteAddressGroupRequest
+                         */
+                        DeleteAddressGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.DeleteAddressGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.DeleteAddressGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAddressGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.DeleteAddressGroupRequest} message DeleteAddressGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAddressGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAddressGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAddressGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAddressGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.DeleteAddressGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAddressGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.DeleteAddressGroupRequest";
+                        };
+    
+                        return DeleteAddressGroupRequest;
+                    })();
+    
+                    v1.AddAddressGroupItemsRequest = (function() {
+    
+                        /**
+                         * Properties of an AddAddressGroupItemsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IAddAddressGroupItemsRequest
+                         * @property {string|null} [addressGroup] AddAddressGroupItemsRequest addressGroup
+                         * @property {Array.<string>|null} [items] AddAddressGroupItemsRequest items
+                         * @property {string|null} [requestId] AddAddressGroupItemsRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new AddAddressGroupItemsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an AddAddressGroupItemsRequest.
+                         * @implements IAddAddressGroupItemsRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest=} [properties] Properties to set
+                         */
+                        function AddAddressGroupItemsRequest(properties) {
+                            this.items = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AddAddressGroupItemsRequest addressGroup.
+                         * @member {string} addressGroup
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @instance
+                         */
+                        AddAddressGroupItemsRequest.prototype.addressGroup = "";
+    
+                        /**
+                         * AddAddressGroupItemsRequest items.
+                         * @member {Array.<string>} items
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @instance
+                         */
+                        AddAddressGroupItemsRequest.prototype.items = $util.emptyArray;
+    
+                        /**
+                         * AddAddressGroupItemsRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @instance
+                         */
+                        AddAddressGroupItemsRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new AddAddressGroupItemsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.AddAddressGroupItemsRequest} AddAddressGroupItemsRequest instance
+                         */
+                        AddAddressGroupItemsRequest.create = function create(properties) {
+                            return new AddAddressGroupItemsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AddAddressGroupItemsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.AddAddressGroupItemsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest} message AddAddressGroupItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AddAddressGroupItemsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.addressGroup != null && Object.hasOwnProperty.call(message, "addressGroup"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.addressGroup);
+                            if (message.items != null && message.items.length)
+                                for (var i = 0; i < message.items.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.items[i]);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AddAddressGroupItemsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AddAddressGroupItemsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest} message AddAddressGroupItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AddAddressGroupItemsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AddAddressGroupItemsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.AddAddressGroupItemsRequest} AddAddressGroupItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AddAddressGroupItemsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.addressGroup = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.items && message.items.length))
+                                            message.items = [];
+                                        message.items.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AddAddressGroupItemsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.AddAddressGroupItemsRequest} AddAddressGroupItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AddAddressGroupItemsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AddAddressGroupItemsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AddAddressGroupItemsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                if (!$util.isString(message.addressGroup))
+                                    return "addressGroup: string expected";
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!Array.isArray(message.items))
+                                    return "items: array expected";
+                                for (var i = 0; i < message.items.length; ++i)
+                                    if (!$util.isString(message.items[i]))
+                                        return "items: string[] expected";
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AddAddressGroupItemsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.AddAddressGroupItemsRequest} AddAddressGroupItemsRequest
+                         */
+                        AddAddressGroupItemsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.AddAddressGroupItemsRequest();
+                            if (object.addressGroup != null)
+                                message.addressGroup = String(object.addressGroup);
+                            if (object.items) {
+                                if (!Array.isArray(object.items))
+                                    throw TypeError(".google.cloud.networksecurity.v1.AddAddressGroupItemsRequest.items: array expected");
+                                message.items = [];
+                                for (var i = 0; i < object.items.length; ++i)
+                                    message.items[i] = String(object.items[i]);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AddAddressGroupItemsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.AddAddressGroupItemsRequest} message AddAddressGroupItemsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AddAddressGroupItemsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.items = [];
+                            if (options.defaults) {
+                                object.addressGroup = "";
+                                object.requestId = "";
+                            }
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                object.addressGroup = message.addressGroup;
+                            if (message.items && message.items.length) {
+                                object.items = [];
+                                for (var j = 0; j < message.items.length; ++j)
+                                    object.items[j] = message.items[j];
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AddAddressGroupItemsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AddAddressGroupItemsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AddAddressGroupItemsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.AddAddressGroupItemsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AddAddressGroupItemsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.AddAddressGroupItemsRequest";
+                        };
+    
+                        return AddAddressGroupItemsRequest;
+                    })();
+    
+                    v1.RemoveAddressGroupItemsRequest = (function() {
+    
+                        /**
+                         * Properties of a RemoveAddressGroupItemsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IRemoveAddressGroupItemsRequest
+                         * @property {string|null} [addressGroup] RemoveAddressGroupItemsRequest addressGroup
+                         * @property {Array.<string>|null} [items] RemoveAddressGroupItemsRequest items
+                         * @property {string|null} [requestId] RemoveAddressGroupItemsRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new RemoveAddressGroupItemsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a RemoveAddressGroupItemsRequest.
+                         * @implements IRemoveAddressGroupItemsRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest=} [properties] Properties to set
+                         */
+                        function RemoveAddressGroupItemsRequest(properties) {
+                            this.items = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RemoveAddressGroupItemsRequest addressGroup.
+                         * @member {string} addressGroup
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @instance
+                         */
+                        RemoveAddressGroupItemsRequest.prototype.addressGroup = "";
+    
+                        /**
+                         * RemoveAddressGroupItemsRequest items.
+                         * @member {Array.<string>} items
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @instance
+                         */
+                        RemoveAddressGroupItemsRequest.prototype.items = $util.emptyArray;
+    
+                        /**
+                         * RemoveAddressGroupItemsRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @instance
+                         */
+                        RemoveAddressGroupItemsRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new RemoveAddressGroupItemsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest} RemoveAddressGroupItemsRequest instance
+                         */
+                        RemoveAddressGroupItemsRequest.create = function create(properties) {
+                            return new RemoveAddressGroupItemsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RemoveAddressGroupItemsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest} message RemoveAddressGroupItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RemoveAddressGroupItemsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.addressGroup != null && Object.hasOwnProperty.call(message, "addressGroup"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.addressGroup);
+                            if (message.items != null && message.items.length)
+                                for (var i = 0; i < message.items.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.items[i]);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RemoveAddressGroupItemsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest} message RemoveAddressGroupItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RemoveAddressGroupItemsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RemoveAddressGroupItemsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest} RemoveAddressGroupItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RemoveAddressGroupItemsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.addressGroup = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.items && message.items.length))
+                                            message.items = [];
+                                        message.items.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RemoveAddressGroupItemsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest} RemoveAddressGroupItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RemoveAddressGroupItemsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RemoveAddressGroupItemsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RemoveAddressGroupItemsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                if (!$util.isString(message.addressGroup))
+                                    return "addressGroup: string expected";
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!Array.isArray(message.items))
+                                    return "items: array expected";
+                                for (var i = 0; i < message.items.length; ++i)
+                                    if (!$util.isString(message.items[i]))
+                                        return "items: string[] expected";
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RemoveAddressGroupItemsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest} RemoveAddressGroupItemsRequest
+                         */
+                        RemoveAddressGroupItemsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest();
+                            if (object.addressGroup != null)
+                                message.addressGroup = String(object.addressGroup);
+                            if (object.items) {
+                                if (!Array.isArray(object.items))
+                                    throw TypeError(".google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest.items: array expected");
+                                message.items = [];
+                                for (var i = 0; i < object.items.length; ++i)
+                                    message.items[i] = String(object.items[i]);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RemoveAddressGroupItemsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest} message RemoveAddressGroupItemsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RemoveAddressGroupItemsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.items = [];
+                            if (options.defaults) {
+                                object.addressGroup = "";
+                                object.requestId = "";
+                            }
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                object.addressGroup = message.addressGroup;
+                            if (message.items && message.items.length) {
+                                object.items = [];
+                                for (var j = 0; j < message.items.length; ++j)
+                                    object.items[j] = message.items[j];
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RemoveAddressGroupItemsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RemoveAddressGroupItemsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RemoveAddressGroupItemsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RemoveAddressGroupItemsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest";
+                        };
+    
+                        return RemoveAddressGroupItemsRequest;
+                    })();
+    
+                    v1.CloneAddressGroupItemsRequest = (function() {
+    
+                        /**
+                         * Properties of a CloneAddressGroupItemsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICloneAddressGroupItemsRequest
+                         * @property {string|null} [addressGroup] CloneAddressGroupItemsRequest addressGroup
+                         * @property {string|null} [sourceAddressGroup] CloneAddressGroupItemsRequest sourceAddressGroup
+                         * @property {string|null} [requestId] CloneAddressGroupItemsRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CloneAddressGroupItemsRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CloneAddressGroupItemsRequest.
+                         * @implements ICloneAddressGroupItemsRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest=} [properties] Properties to set
+                         */
+                        function CloneAddressGroupItemsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloneAddressGroupItemsRequest addressGroup.
+                         * @member {string} addressGroup
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @instance
+                         */
+                        CloneAddressGroupItemsRequest.prototype.addressGroup = "";
+    
+                        /**
+                         * CloneAddressGroupItemsRequest sourceAddressGroup.
+                         * @member {string} sourceAddressGroup
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @instance
+                         */
+                        CloneAddressGroupItemsRequest.prototype.sourceAddressGroup = "";
+    
+                        /**
+                         * CloneAddressGroupItemsRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @instance
+                         */
+                        CloneAddressGroupItemsRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CloneAddressGroupItemsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest} CloneAddressGroupItemsRequest instance
+                         */
+                        CloneAddressGroupItemsRequest.create = function create(properties) {
+                            return new CloneAddressGroupItemsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloneAddressGroupItemsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest} message CloneAddressGroupItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloneAddressGroupItemsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.addressGroup != null && Object.hasOwnProperty.call(message, "addressGroup"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.addressGroup);
+                            if (message.sourceAddressGroup != null && Object.hasOwnProperty.call(message, "sourceAddressGroup"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceAddressGroup);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloneAddressGroupItemsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest} message CloneAddressGroupItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloneAddressGroupItemsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloneAddressGroupItemsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest} CloneAddressGroupItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloneAddressGroupItemsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.addressGroup = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceAddressGroup = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloneAddressGroupItemsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest} CloneAddressGroupItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloneAddressGroupItemsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloneAddressGroupItemsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloneAddressGroupItemsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                if (!$util.isString(message.addressGroup))
+                                    return "addressGroup: string expected";
+                            if (message.sourceAddressGroup != null && message.hasOwnProperty("sourceAddressGroup"))
+                                if (!$util.isString(message.sourceAddressGroup))
+                                    return "sourceAddressGroup: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloneAddressGroupItemsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest} CloneAddressGroupItemsRequest
+                         */
+                        CloneAddressGroupItemsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest();
+                            if (object.addressGroup != null)
+                                message.addressGroup = String(object.addressGroup);
+                            if (object.sourceAddressGroup != null)
+                                message.sourceAddressGroup = String(object.sourceAddressGroup);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloneAddressGroupItemsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest} message CloneAddressGroupItemsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloneAddressGroupItemsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.addressGroup = "";
+                                object.sourceAddressGroup = "";
+                                object.requestId = "";
+                            }
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                object.addressGroup = message.addressGroup;
+                            if (message.sourceAddressGroup != null && message.hasOwnProperty("sourceAddressGroup"))
+                                object.sourceAddressGroup = message.sourceAddressGroup;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloneAddressGroupItemsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloneAddressGroupItemsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloneAddressGroupItemsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloneAddressGroupItemsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest";
+                        };
+    
+                        return CloneAddressGroupItemsRequest;
+                    })();
+    
+                    v1.ListAddressGroupReferencesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAddressGroupReferencesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListAddressGroupReferencesRequest
+                         * @property {string|null} [addressGroup] ListAddressGroupReferencesRequest addressGroup
+                         * @property {number|null} [pageSize] ListAddressGroupReferencesRequest pageSize
+                         * @property {string|null} [pageToken] ListAddressGroupReferencesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAddressGroupReferencesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListAddressGroupReferencesRequest.
+                         * @implements IListAddressGroupReferencesRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest=} [properties] Properties to set
+                         */
+                        function ListAddressGroupReferencesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAddressGroupReferencesRequest addressGroup.
+                         * @member {string} addressGroup
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @instance
+                         */
+                        ListAddressGroupReferencesRequest.prototype.addressGroup = "";
+    
+                        /**
+                         * ListAddressGroupReferencesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @instance
+                         */
+                        ListAddressGroupReferencesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAddressGroupReferencesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @instance
+                         */
+                        ListAddressGroupReferencesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListAddressGroupReferencesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest} ListAddressGroupReferencesRequest instance
+                         */
+                        ListAddressGroupReferencesRequest.create = function create(properties) {
+                            return new ListAddressGroupReferencesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupReferencesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest} message ListAddressGroupReferencesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupReferencesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.addressGroup != null && Object.hasOwnProperty.call(message, "addressGroup"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.addressGroup);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupReferencesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest} message ListAddressGroupReferencesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupReferencesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupReferencesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest} ListAddressGroupReferencesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupReferencesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.addressGroup = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupReferencesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest} ListAddressGroupReferencesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupReferencesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAddressGroupReferencesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAddressGroupReferencesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                if (!$util.isString(message.addressGroup))
+                                    return "addressGroup: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAddressGroupReferencesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest} ListAddressGroupReferencesRequest
+                         */
+                        ListAddressGroupReferencesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest();
+                            if (object.addressGroup != null)
+                                message.addressGroup = String(object.addressGroup);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAddressGroupReferencesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest} message ListAddressGroupReferencesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAddressGroupReferencesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.addressGroup = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.addressGroup != null && message.hasOwnProperty("addressGroup"))
+                                object.addressGroup = message.addressGroup;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAddressGroupReferencesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAddressGroupReferencesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAddressGroupReferencesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAddressGroupReferencesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest";
+                        };
+    
+                        return ListAddressGroupReferencesRequest;
+                    })();
+    
+                    v1.ListAddressGroupReferencesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAddressGroupReferencesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListAddressGroupReferencesResponse
+                         * @property {Array.<google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>|null} [addressGroupReferences] ListAddressGroupReferencesResponse addressGroupReferences
+                         * @property {string|null} [nextPageToken] ListAddressGroupReferencesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAddressGroupReferencesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListAddressGroupReferencesResponse.
+                         * @implements IListAddressGroupReferencesResponse
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse=} [properties] Properties to set
+                         */
+                        function ListAddressGroupReferencesResponse(properties) {
+                            this.addressGroupReferences = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAddressGroupReferencesResponse addressGroupReferences.
+                         * @member {Array.<google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference>} addressGroupReferences
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @instance
+                         */
+                        ListAddressGroupReferencesResponse.prototype.addressGroupReferences = $util.emptyArray;
+    
+                        /**
+                         * ListAddressGroupReferencesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @instance
+                         */
+                        ListAddressGroupReferencesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAddressGroupReferencesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse} ListAddressGroupReferencesResponse instance
+                         */
+                        ListAddressGroupReferencesResponse.create = function create(properties) {
+                            return new ListAddressGroupReferencesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupReferencesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse} message ListAddressGroupReferencesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupReferencesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.addressGroupReferences != null && message.addressGroupReferences.length)
+                                for (var i = 0; i < message.addressGroupReferences.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.encode(message.addressGroupReferences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAddressGroupReferencesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse} message ListAddressGroupReferencesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAddressGroupReferencesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupReferencesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse} ListAddressGroupReferencesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupReferencesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.addressGroupReferences && message.addressGroupReferences.length))
+                                            message.addressGroupReferences = [];
+                                        message.addressGroupReferences.push($root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAddressGroupReferencesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse} ListAddressGroupReferencesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAddressGroupReferencesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAddressGroupReferencesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAddressGroupReferencesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.addressGroupReferences != null && message.hasOwnProperty("addressGroupReferences")) {
+                                if (!Array.isArray(message.addressGroupReferences))
+                                    return "addressGroupReferences: array expected";
+                                for (var i = 0; i < message.addressGroupReferences.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.verify(message.addressGroupReferences[i]);
+                                    if (error)
+                                        return "addressGroupReferences." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAddressGroupReferencesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse} ListAddressGroupReferencesResponse
+                         */
+                        ListAddressGroupReferencesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse();
+                            if (object.addressGroupReferences) {
+                                if (!Array.isArray(object.addressGroupReferences))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.addressGroupReferences: array expected");
+                                message.addressGroupReferences = [];
+                                for (var i = 0; i < object.addressGroupReferences.length; ++i) {
+                                    if (typeof object.addressGroupReferences[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.addressGroupReferences: object expected");
+                                    message.addressGroupReferences[i] = $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.fromObject(object.addressGroupReferences[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAddressGroupReferencesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse} message ListAddressGroupReferencesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAddressGroupReferencesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.addressGroupReferences = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.addressGroupReferences && message.addressGroupReferences.length) {
+                                object.addressGroupReferences = [];
+                                for (var j = 0; j < message.addressGroupReferences.length; ++j)
+                                    object.addressGroupReferences[j] = $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.toObject(message.addressGroupReferences[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAddressGroupReferencesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAddressGroupReferencesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAddressGroupReferencesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAddressGroupReferencesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse";
+                        };
+    
+                        ListAddressGroupReferencesResponse.AddressGroupReference = (function() {
+    
+                            /**
+                             * Properties of an AddressGroupReference.
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                             * @interface IAddressGroupReference
+                             * @property {string|null} [firewallPolicy] AddressGroupReference firewallPolicy
+                             * @property {string|null} [securityPolicy] AddressGroupReference securityPolicy
+                             * @property {number|null} [rulePriority] AddressGroupReference rulePriority
+                             */
+    
+                            /**
+                             * Constructs a new AddressGroupReference.
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse
+                             * @classdesc Represents an AddressGroupReference.
+                             * @implements IAddressGroupReference
+                             * @constructor
+                             * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference=} [properties] Properties to set
+                             */
+                            function AddressGroupReference(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AddressGroupReference firewallPolicy.
+                             * @member {string} firewallPolicy
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @instance
+                             */
+                            AddressGroupReference.prototype.firewallPolicy = "";
+    
+                            /**
+                             * AddressGroupReference securityPolicy.
+                             * @member {string} securityPolicy
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @instance
+                             */
+                            AddressGroupReference.prototype.securityPolicy = "";
+    
+                            /**
+                             * AddressGroupReference rulePriority.
+                             * @member {number} rulePriority
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @instance
+                             */
+                            AddressGroupReference.prototype.rulePriority = 0;
+    
+                            /**
+                             * Creates a new AddressGroupReference instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference=} [properties] Properties to set
+                             * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference} AddressGroupReference instance
+                             */
+                            AddressGroupReference.create = function create(properties) {
+                                return new AddressGroupReference(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AddressGroupReference message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference} message AddressGroupReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddressGroupReference.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.firewallPolicy != null && Object.hasOwnProperty.call(message, "firewallPolicy"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.firewallPolicy);
+                                if (message.rulePriority != null && Object.hasOwnProperty.call(message, "rulePriority"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rulePriority);
+                                if (message.securityPolicy != null && Object.hasOwnProperty.call(message, "securityPolicy"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.securityPolicy);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AddressGroupReference message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference} message AddressGroupReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddressGroupReference.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AddressGroupReference message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference} AddressGroupReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddressGroupReference.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.firewallPolicy = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.securityPolicy = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rulePriority = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AddressGroupReference message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference} AddressGroupReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddressGroupReference.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AddressGroupReference message.
+                             * @function verify
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AddressGroupReference.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy"))
+                                    if (!$util.isString(message.firewallPolicy))
+                                        return "firewallPolicy: string expected";
+                                if (message.securityPolicy != null && message.hasOwnProperty("securityPolicy"))
+                                    if (!$util.isString(message.securityPolicy))
+                                        return "securityPolicy: string expected";
+                                if (message.rulePriority != null && message.hasOwnProperty("rulePriority"))
+                                    if (!$util.isInteger(message.rulePriority))
+                                        return "rulePriority: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AddressGroupReference message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference} AddressGroupReference
+                             */
+                            AddressGroupReference.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference)
+                                    return object;
+                                var message = new $root.google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference();
+                                if (object.firewallPolicy != null)
+                                    message.firewallPolicy = String(object.firewallPolicy);
+                                if (object.securityPolicy != null)
+                                    message.securityPolicy = String(object.securityPolicy);
+                                if (object.rulePriority != null)
+                                    message.rulePriority = object.rulePriority | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AddressGroupReference message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference} message AddressGroupReference
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AddressGroupReference.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.firewallPolicy = "";
+                                    object.rulePriority = 0;
+                                    object.securityPolicy = "";
+                                }
+                                if (message.firewallPolicy != null && message.hasOwnProperty("firewallPolicy"))
+                                    object.firewallPolicy = message.firewallPolicy;
+                                if (message.rulePriority != null && message.hasOwnProperty("rulePriority"))
+                                    object.rulePriority = message.rulePriority;
+                                if (message.securityPolicy != null && message.hasOwnProperty("securityPolicy"))
+                                    object.securityPolicy = message.securityPolicy;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AddressGroupReference to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AddressGroupReference.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AddressGroupReference
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AddressGroupReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference";
+                            };
+    
+                            return AddressGroupReference;
+                        })();
+    
+                        return ListAddressGroupReferencesResponse;
+                    })();
+    
                     v1.AuthorizationPolicy = (function() {
     
                         /**
@@ -21147,722 +25477,6 @@
              */
             var api = {};
     
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             * @property {number} IDENTIFIER=8 IDENTIFIER value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                values[valuesById[8] = "IDENTIFIER"] = 8;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.pattern && message.pattern.length))
-                                    message.pattern = [];
-                                message.pattern.push(reader.string());
-                                break;
-                            }
-                        case 3: {
-                                message.nameField = reader.string();
-                                break;
-                            }
-                        case 4: {
-                                message.history = reader.int32();
-                                break;
-                            }
-                        case 5: {
-                                message.plural = reader.string();
-                                break;
-                            }
-                        case 6: {
-                                message.singular = reader.string();
-                                break;
-                            }
-                        case 10: {
-                                if (!(message.style && message.style.length))
-                                    message.style = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
-                                        message.style.push(reader.int32());
-                                } else
-                                    message.style.push(reader.int32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    default:
-                        if (typeof object.history === "number") {
-                            message.history = object.history;
-                            break;
-                        }
-                        break;
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                                if (typeof object.style[i] === "number") {
-                                    message.style[i] = object.style[i];
-                                    break;
-                                }
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceDescriptor
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.childType = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceReference
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceReference";
-                };
-    
-                return ResourceReference;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -27422,6 +31036,722 @@
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
                 return values;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -40595,470 +44925,6 @@
                 return values;
             })();
     
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.paths && message.paths.length))
-                                    message.paths = [];
-                                message.paths.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldMask
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FieldMask";
-                };
-    
-                return FieldMask;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
-            })();
-    
             protobuf.Duration = (function() {
     
                 /**
@@ -41715,6 +45581,470 @@
                 };
     
                 return Empty;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
             })();
     
             return protobuf;
