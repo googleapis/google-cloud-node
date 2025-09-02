@@ -592,6 +592,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
+                                },
+                                "softFailoverStartTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 }
                               }
                             }
@@ -802,6 +809,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "bigqueryreservation.googleapis.com/Reservation"
+                              }
+                            },
+                            "failoverMode": {
+                              "type": "FailoverMode",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -1253,6 +1267,13 @@
                             "STANDARD": 1,
                             "ENTERPRISE": 2,
                             "ENTERPRISE_PLUS": 3
+                          }
+                        },
+                        "FailoverMode": {
+                          "values": {
+                            "FAILOVER_MODE_UNSPECIFIED": 0,
+                            "SOFT": 1,
+                            "HARD": 2
                           }
                         }
                       }
