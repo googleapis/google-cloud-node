@@ -336,18 +336,20 @@ export class PublicCertificateAuthorityServiceClient {
   // -- Service calls --
   // -------------------
 /**
- * Creates a new {@link protos.google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey} bound to the project.
+ * Creates a new
+ * {@link protos.google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey}
+ * bound to the project.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent resource where this external_account_key will be created.
- *   Format: projects/[project_id]/locations/[location].
- *   At present only the "global" location is supported.
+ *   Required. The parent resource where this external_account_key will be
+ *   created. Format: projects/[project_id]/locations/[location]. At present
+ *   only the "global" location is supported.
  * @param {google.cloud.security.publicca.v1beta1.ExternalAccountKey} request.externalAccountKey
- *   Required. The external account key to create. This field only exists to future-proof
- *   the API. At present, all fields in ExternalAccountKey are output only and
- *   all values are ignored. For the purpose of the
+ *   Required. The external account key to create. This field only exists to
+ *   future-proof the API. At present, all fields in ExternalAccountKey are
+ *   output only and all values are ignored. For the purpose of the
  *   CreateExternalAccountKeyRequest, set it to a default/empty value.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
