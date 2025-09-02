@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.5.0...aiplatform-v5.6.0) (2025-08-21)
+
+
+### Features
+
+* Add `gpu_partition_size` to `MachineSpec` ([#6595](https://github.com/googleapis/google-cloud-node/issues/6595)) ([de966d3](https://github.com/googleapis/google-cloud-node/commit/de966d3992725acf05932096ff09d0b6741a6c1f))
+* Add option EndpointUserId and ModelUserId fields ([#6600](https://github.com/googleapis/google-cloud-node/issues/6600)) ([11f87fa](https://github.com/googleapis/google-cloud-node/commit/11f87fa265c5b83214838c6179e007ad9e6bf590))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.4.0...aiplatform-v5.5.0) (2025-08-12)
 
 

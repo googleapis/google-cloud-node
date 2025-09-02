@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.2.0...text-to-speech-v6.3.0) (2025-08-27)
+
+
+### Features
+
+* [texttospeech] Support promptable voices by specifying a model name and a prompt ([#6617](https://github.com/googleapis/google-cloud-node/issues/6617)) ([66f1081](https://github.com/googleapis/google-cloud-node/commit/66f10812282f69475c3fa923ddd7641e331bb7be))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.1.0...text-to-speech-v6.2.0) (2025-07-09)
 
 

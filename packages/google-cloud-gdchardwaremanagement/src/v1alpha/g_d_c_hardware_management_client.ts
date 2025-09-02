@@ -267,6 +267,10 @@ export class GDCHardwareManagementClient {
       '.google.cloud.gdchardwaremanagement.v1alpha.Order') as gax.protobuf.Type;
     const submitOrderMetadata = protoFilesRoot.lookup(
       '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
+    const cancelOrderResponse = protoFilesRoot.lookup(
+      '.google.cloud.gdchardwaremanagement.v1alpha.Order') as gax.protobuf.Type;
+    const cancelOrderMetadata = protoFilesRoot.lookup(
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const createSiteResponse = protoFilesRoot.lookup(
       '.google.cloud.gdchardwaremanagement.v1alpha.Site') as gax.protobuf.Type;
     const createSiteMetadata = protoFilesRoot.lookup(
@@ -323,6 +327,10 @@ export class GDCHardwareManagementClient {
       '.google.cloud.gdchardwaremanagement.v1alpha.Zone') as gax.protobuf.Type;
     const signalZoneStateMetadata = protoFilesRoot.lookup(
       '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
+    const requestOrderDateChangeResponse = protoFilesRoot.lookup(
+      '.google.cloud.gdchardwaremanagement.v1alpha.Order') as gax.protobuf.Type;
+    const requestOrderDateChangeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createOrder: new this._gaxModule.LongrunningDescriptor(
@@ -341,6 +349,10 @@ export class GDCHardwareManagementClient {
         this.operationsClient,
         submitOrderResponse.decode.bind(submitOrderResponse),
         submitOrderMetadata.decode.bind(submitOrderMetadata)),
+      cancelOrder: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        cancelOrderResponse.decode.bind(cancelOrderResponse),
+        cancelOrderMetadata.decode.bind(cancelOrderMetadata)),
       createSite: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSiteResponse.decode.bind(createSiteResponse),
@@ -396,7 +408,11 @@ export class GDCHardwareManagementClient {
       signalZoneState: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         signalZoneStateResponse.decode.bind(signalZoneStateResponse),
-        signalZoneStateMetadata.decode.bind(signalZoneStateMetadata))
+        signalZoneStateMetadata.decode.bind(signalZoneStateMetadata)),
+      requestOrderDateChange: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        requestOrderDateChangeResponse.decode.bind(requestOrderDateChangeResponse),
+        requestOrderDateChangeMetadata.decode.bind(requestOrderDateChangeMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -442,7 +458,7 @@ export class GDCHardwareManagementClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const gDCHardwareManagementStubMethods =
-        ['listOrders', 'getOrder', 'createOrder', 'updateOrder', 'deleteOrder', 'submitOrder', 'listSites', 'getSite', 'createSite', 'updateSite', 'deleteSite', 'listHardwareGroups', 'getHardwareGroup', 'createHardwareGroup', 'updateHardwareGroup', 'deleteHardwareGroup', 'listHardware', 'getHardware', 'createHardware', 'updateHardware', 'deleteHardware', 'listComments', 'getComment', 'createComment', 'recordActionOnComment', 'listChangeLogEntries', 'getChangeLogEntry', 'listSkus', 'getSku', 'listZones', 'getZone', 'createZone', 'updateZone', 'deleteZone', 'signalZoneState'];
+        ['listOrders', 'getOrder', 'createOrder', 'updateOrder', 'deleteOrder', 'submitOrder', 'cancelOrder', 'listSites', 'getSite', 'createSite', 'updateSite', 'deleteSite', 'listHardwareGroups', 'getHardwareGroup', 'createHardwareGroup', 'updateHardwareGroup', 'deleteHardwareGroup', 'listHardware', 'getHardware', 'createHardware', 'updateHardware', 'deleteHardware', 'listComments', 'getComment', 'createComment', 'recordActionOnComment', 'listChangeLogEntries', 'getChangeLogEntry', 'listSkus', 'getSku', 'listZones', 'getZone', 'createZone', 'updateZone', 'deleteZone', 'signalZoneState', 'requestOrderDateChange'];
     for (const methodName of gDCHardwareManagementStubMethods) {
       const callPromise = this.gDCHardwareManagementStub.then(
         stub => (...args: Array<{}>) => {
@@ -1875,6 +1891,117 @@ export class GDCHardwareManagementClient {
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.submitOrder, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
+  }
+/**
+ * Cancels an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the order.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.cancel_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CancelOrder_async
+ */
+  cancelOrder(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  cancelOrder(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  cancelOrder(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  cancelOrder(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('cancelOrder response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('cancelOrder request %j', request);
+    return this.innerApiCalls.cancelOrder(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('cancelOrder response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `cancelOrder()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.cancel_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CancelOrder_async
+ */
+  async checkCancelOrderProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
+    this._log.info('cancelOrder long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.cancelOrder, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
 /**
@@ -3513,6 +3640,117 @@ export class GDCHardwareManagementClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.signalZoneState, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Zone, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
+  }
+/**
+ * Updates the requested date change of a single Order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the order to update.
+ *   Format: projects/{project}/locations/{location}/orders/{order}
+ * @param {google.type.Date} request.requestedDate
+ *   Required. The date to which the customer or Google wants to set the
+ *   scheduled installation date.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.request_order_date_change.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RequestOrderDateChange_async
+ */
+  requestOrderDateChange(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  requestOrderDateChange(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  requestOrderDateChange(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  requestOrderDateChange(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('requestOrderDateChange response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('requestOrderDateChange request %j', request);
+    return this.innerApiCalls.requestOrderDateChange(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('requestOrderDateChange response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `requestOrderDateChange()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.request_order_date_change.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RequestOrderDateChange_async
+ */
+  async checkRequestOrderDateChangeProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
+    this._log.info('requestOrderDateChange long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.requestOrderDateChange, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
  /**
  * Lists orders in a given project and location.

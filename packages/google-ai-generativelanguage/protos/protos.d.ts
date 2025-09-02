@@ -359,6 +359,9 @@ export namespace google {
 
                     /** Part inlineData */
                     inlineData?: (google.ai.generativelanguage.v1.IBlob|null);
+
+                    /** Part videoMetadata */
+                    videoMetadata?: (google.ai.generativelanguage.v1.IVideoMetadata|null);
                 }
 
                 /** Represents a Part. */
@@ -376,8 +379,14 @@ export namespace google {
                     /** Part inlineData. */
                     public inlineData?: (google.ai.generativelanguage.v1.IBlob|null);
 
+                    /** Part videoMetadata. */
+                    public videoMetadata?: (google.ai.generativelanguage.v1.IVideoMetadata|null);
+
                     /** Part data. */
                     public data?: ("text"|"inlineData");
+
+                    /** Part metadata. */
+                    public metadata?: "videoMetadata";
 
                     /**
                      * Creates a new Part instance using the specified properties.
@@ -554,6 +563,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Blob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VideoMetadata. */
+                interface IVideoMetadata {
+
+                    /** VideoMetadata startOffset */
+                    startOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata endOffset */
+                    endOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata fps */
+                    fps?: (number|null);
+                }
+
+                /** Represents a VideoMetadata. */
+                class VideoMetadata implements IVideoMetadata {
+
+                    /**
+                     * Constructs a new VideoMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1.IVideoMetadata);
+
+                    /** VideoMetadata startOffset. */
+                    public startOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata endOffset. */
+                    public endOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata fps. */
+                    public fps: number;
+
+                    /**
+                     * Creates a new VideoMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VideoMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1.IVideoMetadata): google.ai.generativelanguage.v1.VideoMetadata;
+
+                    /**
+                     * Encodes the specified VideoMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1.VideoMetadata.verify|verify} messages.
+                     * @param message VideoMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1.IVideoMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VideoMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.VideoMetadata.verify|verify} messages.
+                     * @param message VideoMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1.IVideoMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VideoMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VideoMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.VideoMetadata;
+
+                    /**
+                     * Decodes a VideoMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VideoMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.VideoMetadata;
+
+                    /**
+                     * Verifies a VideoMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VideoMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VideoMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.VideoMetadata;
+
+                    /**
+                     * Creates a plain object from a VideoMetadata message. Also converts values to other types if specified.
+                     * @param message VideoMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1.VideoMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VideoMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VideoMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1097,6 +1215,9 @@ export namespace google {
 
                     /** GenerateContentResponse modelVersion */
                     modelVersion?: (string|null);
+
+                    /** GenerateContentResponse responseId */
+                    responseId?: (string|null);
                 }
 
                 /** Represents a GenerateContentResponse. */
@@ -1119,6 +1240,9 @@ export namespace google {
 
                     /** GenerateContentResponse modelVersion. */
                     public modelVersion: string;
+
+                    /** GenerateContentResponse responseId. */
+                    public responseId: string;
 
                     /**
                      * Creates a new GenerateContentResponse instance using the specified properties.
@@ -1491,6 +1615,9 @@ export namespace google {
 
                     /** Candidate logprobsResult */
                     logprobsResult?: (google.ai.generativelanguage.v1.ILogprobsResult|null);
+
+                    /** Candidate urlContextMetadata */
+                    urlContextMetadata?: (google.ai.generativelanguage.v1.IUrlContextMetadata|null);
                 }
 
                 /** Represents a Candidate. */
@@ -1528,6 +1655,9 @@ export namespace google {
 
                     /** Candidate logprobsResult. */
                     public logprobsResult?: (google.ai.generativelanguage.v1.ILogprobsResult|null);
+
+                    /** Candidate urlContextMetadata. */
+                    public urlContextMetadata?: (google.ai.generativelanguage.v1.IUrlContextMetadata|null);
 
                     /**
                      * Creates a new Candidate instance using the specified properties.
@@ -1622,7 +1752,218 @@ export namespace google {
                         PROHIBITED_CONTENT = 8,
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10,
-                        IMAGE_SAFETY = 11
+                        IMAGE_SAFETY = 11,
+                        UNEXPECTED_TOOL_CALL = 12
+                    }
+                }
+
+                /** Properties of an UrlContextMetadata. */
+                interface IUrlContextMetadata {
+
+                    /** UrlContextMetadata urlMetadata */
+                    urlMetadata?: (google.ai.generativelanguage.v1.IUrlMetadata[]|null);
+                }
+
+                /** Represents an UrlContextMetadata. */
+                class UrlContextMetadata implements IUrlContextMetadata {
+
+                    /**
+                     * Constructs a new UrlContextMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1.IUrlContextMetadata);
+
+                    /** UrlContextMetadata urlMetadata. */
+                    public urlMetadata: google.ai.generativelanguage.v1.IUrlMetadata[];
+
+                    /**
+                     * Creates a new UrlContextMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlContextMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1.IUrlContextMetadata): google.ai.generativelanguage.v1.UrlContextMetadata;
+
+                    /**
+                     * Encodes the specified UrlContextMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1.UrlContextMetadata.verify|verify} messages.
+                     * @param message UrlContextMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1.IUrlContextMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlContextMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.UrlContextMetadata.verify|verify} messages.
+                     * @param message UrlContextMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1.IUrlContextMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlContextMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlContextMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.UrlContextMetadata;
+
+                    /**
+                     * Decodes an UrlContextMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlContextMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.UrlContextMetadata;
+
+                    /**
+                     * Verifies an UrlContextMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlContextMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlContextMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.UrlContextMetadata;
+
+                    /**
+                     * Creates a plain object from an UrlContextMetadata message. Also converts values to other types if specified.
+                     * @param message UrlContextMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1.UrlContextMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlContextMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlContextMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UrlMetadata. */
+                interface IUrlMetadata {
+
+                    /** UrlMetadata retrievedUrl */
+                    retrievedUrl?: (string|null);
+
+                    /** UrlMetadata urlRetrievalStatus */
+                    urlRetrievalStatus?: (google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus|keyof typeof google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus|null);
+                }
+
+                /** Represents an UrlMetadata. */
+                class UrlMetadata implements IUrlMetadata {
+
+                    /**
+                     * Constructs a new UrlMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1.IUrlMetadata);
+
+                    /** UrlMetadata retrievedUrl. */
+                    public retrievedUrl: string;
+
+                    /** UrlMetadata urlRetrievalStatus. */
+                    public urlRetrievalStatus: (google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus|keyof typeof google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus);
+
+                    /**
+                     * Creates a new UrlMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1.IUrlMetadata): google.ai.generativelanguage.v1.UrlMetadata;
+
+                    /**
+                     * Encodes the specified UrlMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1.UrlMetadata.verify|verify} messages.
+                     * @param message UrlMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1.IUrlMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.UrlMetadata.verify|verify} messages.
+                     * @param message UrlMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1.IUrlMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.UrlMetadata;
+
+                    /**
+                     * Decodes an UrlMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.UrlMetadata;
+
+                    /**
+                     * Verifies an UrlMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.UrlMetadata;
+
+                    /**
+                     * Creates a plain object from an UrlMetadata message. Also converts values to other types if specified.
+                     * @param message UrlMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1.UrlMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UrlMetadata {
+
+                    /** UrlRetrievalStatus enum. */
+                    enum UrlRetrievalStatus {
+                        URL_RETRIEVAL_STATUS_UNSPECIFIED = 0,
+                        URL_RETRIEVAL_STATUS_SUCCESS = 1,
+                        URL_RETRIEVAL_STATUS_ERROR = 2
                     }
                 }
 
@@ -3713,6 +4054,9 @@ export namespace google {
 
                     /** Model topK */
                     topK?: (number|null);
+
+                    /** Model thinking */
+                    thinking?: (boolean|null);
                 }
 
                 /** Represents a Model. */
@@ -3759,6 +4103,9 @@ export namespace google {
 
                     /** Model topK. */
                     public topK?: (number|null);
+
+                    /** Model thinking. */
+                    public thinking: boolean;
 
                     /**
                      * Creates a new Model instance using the specified properties.
@@ -25463,8 +25810,14 @@ export namespace google {
                     /** Part codeExecutionResult */
                     codeExecutionResult?: (google.ai.generativelanguage.v1beta.ICodeExecutionResult|null);
 
+                    /** Part videoMetadata */
+                    videoMetadata?: (google.ai.generativelanguage.v1beta.IVideoMetadata|null);
+
                     /** Part thought */
                     thought?: (boolean|null);
+
+                    /** Part thoughtSignature */
+                    thoughtSignature?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Part. */
@@ -25497,11 +25850,20 @@ export namespace google {
                     /** Part codeExecutionResult. */
                     public codeExecutionResult?: (google.ai.generativelanguage.v1beta.ICodeExecutionResult|null);
 
+                    /** Part videoMetadata. */
+                    public videoMetadata?: (google.ai.generativelanguage.v1beta.IVideoMetadata|null);
+
                     /** Part thought. */
                     public thought: boolean;
 
+                    /** Part thoughtSignature. */
+                    public thoughtSignature: (Uint8Array|Buffer|string);
+
                     /** Part data. */
                     public data?: ("text"|"inlineData"|"functionCall"|"functionResponse"|"fileData"|"executableCode"|"codeExecutionResult");
+
+                    /** Part metadata. */
+                    public metadata?: "videoMetadata";
 
                     /**
                      * Creates a new Part instance using the specified properties.
@@ -25787,6 +26149,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a VideoMetadata. */
+                interface IVideoMetadata {
+
+                    /** VideoMetadata startOffset */
+                    startOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata endOffset */
+                    endOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata fps */
+                    fps?: (number|null);
+                }
+
+                /** Represents a VideoMetadata. */
+                class VideoMetadata implements IVideoMetadata {
+
+                    /**
+                     * Constructs a new VideoMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IVideoMetadata);
+
+                    /** VideoMetadata startOffset. */
+                    public startOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata endOffset. */
+                    public endOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata fps. */
+                    public fps: number;
+
+                    /**
+                     * Creates a new VideoMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VideoMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IVideoMetadata): google.ai.generativelanguage.v1beta.VideoMetadata;
+
+                    /**
+                     * Encodes the specified VideoMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
+                     * @param message VideoMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IVideoMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VideoMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
+                     * @param message VideoMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IVideoMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VideoMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VideoMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.VideoMetadata;
+
+                    /**
+                     * Decodes a VideoMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VideoMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.VideoMetadata;
+
+                    /**
+                     * Verifies a VideoMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VideoMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VideoMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.VideoMetadata;
+
+                    /**
+                     * Creates a plain object from a VideoMetadata message. Also converts values to other types if specified.
+                     * @param message VideoMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.VideoMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VideoMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VideoMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an ExecutableCode. */
                 interface IExecutableCode {
 
@@ -26027,6 +26498,9 @@ export namespace google {
 
                     /** Tool googleSearch */
                     googleSearch?: (google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null);
+
+                    /** Tool urlContext */
+                    urlContext?: (google.ai.generativelanguage.v1beta.IUrlContext|null);
                 }
 
                 /** Represents a Tool. */
@@ -26049,6 +26523,9 @@ export namespace google {
 
                     /** Tool googleSearch. */
                     public googleSearch?: (google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null);
+
+                    /** Tool urlContext. */
+                    public urlContext?: (google.ai.generativelanguage.v1beta.IUrlContext|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -26132,6 +26609,9 @@ export namespace google {
 
                     /** Properties of a GoogleSearch. */
                     interface IGoogleSearch {
+
+                        /** GoogleSearch timeRangeFilter */
+                        timeRangeFilter?: (google.type.IInterval|null);
                     }
 
                     /** Represents a GoogleSearch. */
@@ -26142,6 +26622,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.ai.generativelanguage.v1beta.Tool.IGoogleSearch);
+
+                        /** GoogleSearch timeRangeFilter. */
+                        public timeRangeFilter?: (google.type.IInterval|null);
 
                         /**
                          * Creates a new GoogleSearch instance using the specified properties.
@@ -26220,6 +26703,97 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of an UrlContext. */
+                interface IUrlContext {
+                }
+
+                /** Represents an UrlContext. */
+                class UrlContext implements IUrlContext {
+
+                    /**
+                     * Constructs a new UrlContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IUrlContext);
+
+                    /**
+                     * Creates a new UrlContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlContext instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IUrlContext): google.ai.generativelanguage.v1beta.UrlContext;
+
+                    /**
+                     * Encodes the specified UrlContext message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContext.verify|verify} messages.
+                     * @param message UrlContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IUrlContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlContext message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContext.verify|verify} messages.
+                     * @param message UrlContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IUrlContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.UrlContext;
+
+                    /**
+                     * Decodes an UrlContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.UrlContext;
+
+                    /**
+                     * Verifies an UrlContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.UrlContext;
+
+                    /**
+                     * Creates a plain object from an UrlContext message. Also converts values to other types if specified.
+                     * @param message UrlContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.UrlContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GoogleSearchRetrieval. */
@@ -26746,8 +27320,17 @@ export namespace google {
                     /** FunctionDeclaration parameters */
                     parameters?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
+                    /** FunctionDeclaration parametersJsonSchema */
+                    parametersJsonSchema?: (google.protobuf.IValue|null);
+
                     /** FunctionDeclaration response */
                     response?: (google.ai.generativelanguage.v1beta.ISchema|null);
+
+                    /** FunctionDeclaration responseJsonSchema */
+                    responseJsonSchema?: (google.protobuf.IValue|null);
+
+                    /** FunctionDeclaration behavior */
+                    behavior?: (google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior|keyof typeof google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior|null);
                 }
 
                 /** Represents a FunctionDeclaration. */
@@ -26768,8 +27351,17 @@ export namespace google {
                     /** FunctionDeclaration parameters. */
                     public parameters?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
+                    /** FunctionDeclaration parametersJsonSchema. */
+                    public parametersJsonSchema?: (google.protobuf.IValue|null);
+
                     /** FunctionDeclaration response. */
                     public response?: (google.ai.generativelanguage.v1beta.ISchema|null);
+
+                    /** FunctionDeclaration responseJsonSchema. */
+                    public responseJsonSchema?: (google.protobuf.IValue|null);
+
+                    /** FunctionDeclaration behavior. */
+                    public behavior: (google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior|keyof typeof google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior);
 
                     /**
                      * Creates a new FunctionDeclaration instance using the specified properties.
@@ -26847,6 +27439,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FunctionDeclaration {
+
+                    /** Behavior enum. */
+                    enum Behavior {
+                        UNSPECIFIED = 0,
+                        BLOCKING = 1,
+                        NON_BLOCKING = 2
+                    }
                 }
 
                 /** Properties of a FunctionCall. */
@@ -26969,6 +27571,12 @@ export namespace google {
 
                     /** FunctionResponse response */
                     response?: (google.protobuf.IStruct|null);
+
+                    /** FunctionResponse willContinue */
+                    willContinue?: (boolean|null);
+
+                    /** FunctionResponse scheduling */
+                    scheduling?: (google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling|keyof typeof google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling|null);
                 }
 
                 /** Represents a FunctionResponse. */
@@ -26988,6 +27596,12 @@ export namespace google {
 
                     /** FunctionResponse response. */
                     public response?: (google.protobuf.IStruct|null);
+
+                    /** FunctionResponse willContinue. */
+                    public willContinue: boolean;
+
+                    /** FunctionResponse scheduling. */
+                    public scheduling?: (google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling|keyof typeof google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling|null);
 
                     /**
                      * Creates a new FunctionResponse instance using the specified properties.
@@ -27067,6 +27681,17 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace FunctionResponse {
+
+                    /** Scheduling enum. */
+                    enum Scheduling {
+                        SCHEDULING_UNSPECIFIED = 0,
+                        SILENT = 1,
+                        WHEN_IDLE = 2,
+                        INTERRUPT = 3
+                    }
+                }
+
                 /** Properties of a Schema. */
                 interface ISchema {
 
@@ -27103,11 +27728,29 @@ export namespace google {
                     /** Schema required */
                     required?: (string[]|null);
 
+                    /** Schema minProperties */
+                    minProperties?: (number|Long|string|null);
+
+                    /** Schema maxProperties */
+                    maxProperties?: (number|Long|string|null);
+
                     /** Schema minimum */
                     minimum?: (number|null);
 
                     /** Schema maximum */
                     maximum?: (number|null);
+
+                    /** Schema minLength */
+                    minLength?: (number|Long|string|null);
+
+                    /** Schema maxLength */
+                    maxLength?: (number|Long|string|null);
+
+                    /** Schema pattern */
+                    pattern?: (string|null);
+
+                    /** Schema example */
+                    example?: (google.protobuf.IValue|null);
 
                     /** Schema anyOf */
                     anyOf?: (google.ai.generativelanguage.v1beta.ISchema[]|null);
@@ -27161,11 +27804,29 @@ export namespace google {
                     /** Schema required. */
                     public required: string[];
 
+                    /** Schema minProperties. */
+                    public minProperties: (number|Long|string);
+
+                    /** Schema maxProperties. */
+                    public maxProperties: (number|Long|string);
+
                     /** Schema minimum. */
                     public minimum?: (number|null);
 
                     /** Schema maximum. */
                     public maximum?: (number|null);
+
+                    /** Schema minLength. */
+                    public minLength: (number|Long|string);
+
+                    /** Schema maxLength. */
+                    public maxLength: (number|Long|string);
+
+                    /** Schema pattern. */
+                    public pattern: string;
+
+                    /** Schema example. */
+                    public example?: (google.protobuf.IValue|null);
 
                     /** Schema anyOf. */
                     public anyOf: google.ai.generativelanguage.v1beta.ISchema[];
@@ -29065,7 +29726,7 @@ export namespace google {
                 interface IFile {
 
                     /** File videoMetadata */
-                    videoMetadata?: (google.ai.generativelanguage.v1beta.IVideoMetadata|null);
+                    videoMetadata?: (google.ai.generativelanguage.v1beta.IVideoFileMetadata|null);
 
                     /** File name */
                     name?: (string|null);
@@ -29117,7 +29778,7 @@ export namespace google {
                     constructor(properties?: google.ai.generativelanguage.v1beta.IFile);
 
                     /** File videoMetadata. */
-                    public videoMetadata?: (google.ai.generativelanguage.v1beta.IVideoMetadata|null);
+                    public videoMetadata?: (google.ai.generativelanguage.v1beta.IVideoFileMetadata|null);
 
                     /** File name. */
                     public name: string;
@@ -29257,97 +29918,97 @@ export namespace google {
                     }
                 }
 
-                /** Properties of a VideoMetadata. */
-                interface IVideoMetadata {
+                /** Properties of a VideoFileMetadata. */
+                interface IVideoFileMetadata {
 
-                    /** VideoMetadata videoDuration */
+                    /** VideoFileMetadata videoDuration */
                     videoDuration?: (google.protobuf.IDuration|null);
                 }
 
-                /** Represents a VideoMetadata. */
-                class VideoMetadata implements IVideoMetadata {
+                /** Represents a VideoFileMetadata. */
+                class VideoFileMetadata implements IVideoFileMetadata {
 
                     /**
-                     * Constructs a new VideoMetadata.
+                     * Constructs a new VideoFileMetadata.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.ai.generativelanguage.v1beta.IVideoMetadata);
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IVideoFileMetadata);
 
-                    /** VideoMetadata videoDuration. */
+                    /** VideoFileMetadata videoDuration. */
                     public videoDuration?: (google.protobuf.IDuration|null);
 
                     /**
-                     * Creates a new VideoMetadata instance using the specified properties.
+                     * Creates a new VideoFileMetadata instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns VideoMetadata instance
+                     * @returns VideoFileMetadata instance
                      */
-                    public static create(properties?: google.ai.generativelanguage.v1beta.IVideoMetadata): google.ai.generativelanguage.v1beta.VideoMetadata;
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IVideoFileMetadata): google.ai.generativelanguage.v1beta.VideoFileMetadata;
 
                     /**
-                     * Encodes the specified VideoMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
-                     * @param message VideoMetadata message or plain object to encode
+                     * Encodes the specified VideoFileMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoFileMetadata.verify|verify} messages.
+                     * @param message VideoFileMetadata message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.ai.generativelanguage.v1beta.IVideoMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.ai.generativelanguage.v1beta.IVideoFileMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified VideoMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
-                     * @param message VideoMetadata message or plain object to encode
+                     * Encodes the specified VideoFileMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoFileMetadata.verify|verify} messages.
+                     * @param message VideoFileMetadata message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IVideoMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IVideoFileMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a VideoMetadata message from the specified reader or buffer.
+                     * Decodes a VideoFileMetadata message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns VideoMetadata
+                     * @returns VideoFileMetadata
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.VideoMetadata;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.VideoFileMetadata;
 
                     /**
-                     * Decodes a VideoMetadata message from the specified reader or buffer, length delimited.
+                     * Decodes a VideoFileMetadata message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns VideoMetadata
+                     * @returns VideoFileMetadata
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.VideoMetadata;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.VideoFileMetadata;
 
                     /**
-                     * Verifies a VideoMetadata message.
+                     * Verifies a VideoFileMetadata message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a VideoMetadata message from a plain object. Also converts values to their respective internal types.
+                     * Creates a VideoFileMetadata message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns VideoMetadata
+                     * @returns VideoFileMetadata
                      */
-                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.VideoMetadata;
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.VideoFileMetadata;
 
                     /**
-                     * Creates a plain object from a VideoMetadata message. Also converts values to other types if specified.
-                     * @param message VideoMetadata
+                     * Creates a plain object from a VideoFileMetadata message. Also converts values to other types if specified.
+                     * @param message VideoFileMetadata
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.ai.generativelanguage.v1beta.VideoMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.ai.generativelanguage.v1beta.VideoFileMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this VideoMetadata to JSON.
+                     * Converts this VideoFileMetadata to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for VideoMetadata
+                     * Gets the default type url for VideoFileMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -30785,11 +31446,214 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SpeakerVoiceConfig. */
+                interface ISpeakerVoiceConfig {
+
+                    /** SpeakerVoiceConfig speaker */
+                    speaker?: (string|null);
+
+                    /** SpeakerVoiceConfig voiceConfig */
+                    voiceConfig?: (google.ai.generativelanguage.v1beta.IVoiceConfig|null);
+                }
+
+                /** Represents a SpeakerVoiceConfig. */
+                class SpeakerVoiceConfig implements ISpeakerVoiceConfig {
+
+                    /**
+                     * Constructs a new SpeakerVoiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig);
+
+                    /** SpeakerVoiceConfig speaker. */
+                    public speaker: string;
+
+                    /** SpeakerVoiceConfig voiceConfig. */
+                    public voiceConfig?: (google.ai.generativelanguage.v1beta.IVoiceConfig|null);
+
+                    /**
+                     * Creates a new SpeakerVoiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeakerVoiceConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig): google.ai.generativelanguage.v1beta.SpeakerVoiceConfig;
+
+                    /**
+                     * Encodes the specified SpeakerVoiceConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.verify|verify} messages.
+                     * @param message SpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.verify|verify} messages.
+                     * @param message SpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeakerVoiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.SpeakerVoiceConfig;
+
+                    /**
+                     * Decodes a SpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.SpeakerVoiceConfig;
+
+                    /**
+                     * Verifies a SpeakerVoiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeakerVoiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.SpeakerVoiceConfig;
+
+                    /**
+                     * Creates a plain object from a SpeakerVoiceConfig message. Also converts values to other types if specified.
+                     * @param message SpeakerVoiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.SpeakerVoiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeakerVoiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpeakerVoiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MultiSpeakerVoiceConfig. */
+                interface IMultiSpeakerVoiceConfig {
+
+                    /** MultiSpeakerVoiceConfig speakerVoiceConfigs */
+                    speakerVoiceConfigs?: (google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig[]|null);
+                }
+
+                /** Represents a MultiSpeakerVoiceConfig. */
+                class MultiSpeakerVoiceConfig implements IMultiSpeakerVoiceConfig {
+
+                    /**
+                     * Constructs a new MultiSpeakerVoiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig);
+
+                    /** MultiSpeakerVoiceConfig speakerVoiceConfigs. */
+                    public speakerVoiceConfigs: google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig[];
+
+                    /**
+                     * Creates a new MultiSpeakerVoiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiSpeakerVoiceConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig): google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Encodes the specified MultiSpeakerVoiceConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.verify|verify} messages.
+                     * @param message MultiSpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiSpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.verify|verify} messages.
+                     * @param message MultiSpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiSpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiSpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Verifies a MultiSpeakerVoiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiSpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiSpeakerVoiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Creates a plain object from a MultiSpeakerVoiceConfig message. Also converts values to other types if specified.
+                     * @param message MultiSpeakerVoiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiSpeakerVoiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiSpeakerVoiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SpeechConfig. */
                 interface ISpeechConfig {
 
                     /** SpeechConfig voiceConfig */
                     voiceConfig?: (google.ai.generativelanguage.v1beta.IVoiceConfig|null);
+
+                    /** SpeechConfig multiSpeakerVoiceConfig */
+                    multiSpeakerVoiceConfig?: (google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig|null);
 
                     /** SpeechConfig languageCode */
                     languageCode?: (string|null);
@@ -30806,6 +31670,9 @@ export namespace google {
 
                     /** SpeechConfig voiceConfig. */
                     public voiceConfig?: (google.ai.generativelanguage.v1beta.IVoiceConfig|null);
+
+                    /** SpeechConfig multiSpeakerVoiceConfig. */
+                    public multiSpeakerVoiceConfig?: (google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig|null);
 
                     /** SpeechConfig languageCode. */
                     public languageCode: string;
@@ -31021,6 +31888,9 @@ export namespace google {
                     /** GenerationConfig responseSchema */
                     responseSchema?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
+                    /** GenerationConfig responseJsonSchema */
+                    responseJsonSchema?: (google.protobuf.IValue|null);
+
                     /** GenerationConfig presencePenalty */
                     presencePenalty?: (number|null);
 
@@ -31084,6 +31954,9 @@ export namespace google {
 
                     /** GenerationConfig responseSchema. */
                     public responseSchema?: (google.ai.generativelanguage.v1beta.ISchema|null);
+
+                    /** GenerationConfig responseJsonSchema. */
+                    public responseJsonSchema?: (google.protobuf.IValue|null);
 
                     /** GenerationConfig presencePenalty. */
                     public presencePenalty?: (number|null);
@@ -31344,6 +32217,9 @@ export namespace google {
 
                     /** GenerateContentResponse modelVersion */
                     modelVersion?: (string|null);
+
+                    /** GenerateContentResponse responseId */
+                    responseId?: (string|null);
                 }
 
                 /** Represents a GenerateContentResponse. */
@@ -31366,6 +32242,9 @@ export namespace google {
 
                     /** GenerateContentResponse modelVersion. */
                     public modelVersion: string;
+
+                    /** GenerateContentResponse responseId. */
+                    public responseId: string;
 
                     /**
                      * Creates a new GenerateContentResponse instance using the specified properties.
@@ -31747,6 +32626,9 @@ export namespace google {
 
                     /** Candidate logprobsResult */
                     logprobsResult?: (google.ai.generativelanguage.v1beta.ILogprobsResult|null);
+
+                    /** Candidate urlContextMetadata */
+                    urlContextMetadata?: (google.ai.generativelanguage.v1beta.IUrlContextMetadata|null);
                 }
 
                 /** Represents a Candidate. */
@@ -31787,6 +32669,9 @@ export namespace google {
 
                     /** Candidate logprobsResult. */
                     public logprobsResult?: (google.ai.generativelanguage.v1beta.ILogprobsResult|null);
+
+                    /** Candidate urlContextMetadata. */
+                    public urlContextMetadata?: (google.ai.generativelanguage.v1beta.IUrlContextMetadata|null);
 
                     /**
                      * Creates a new Candidate instance using the specified properties.
@@ -31881,7 +32766,218 @@ export namespace google {
                         PROHIBITED_CONTENT = 8,
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10,
-                        IMAGE_SAFETY = 11
+                        IMAGE_SAFETY = 11,
+                        UNEXPECTED_TOOL_CALL = 12
+                    }
+                }
+
+                /** Properties of an UrlContextMetadata. */
+                interface IUrlContextMetadata {
+
+                    /** UrlContextMetadata urlMetadata */
+                    urlMetadata?: (google.ai.generativelanguage.v1beta.IUrlMetadata[]|null);
+                }
+
+                /** Represents an UrlContextMetadata. */
+                class UrlContextMetadata implements IUrlContextMetadata {
+
+                    /**
+                     * Constructs a new UrlContextMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IUrlContextMetadata);
+
+                    /** UrlContextMetadata urlMetadata. */
+                    public urlMetadata: google.ai.generativelanguage.v1beta.IUrlMetadata[];
+
+                    /**
+                     * Creates a new UrlContextMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlContextMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IUrlContextMetadata): google.ai.generativelanguage.v1beta.UrlContextMetadata;
+
+                    /**
+                     * Encodes the specified UrlContextMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContextMetadata.verify|verify} messages.
+                     * @param message UrlContextMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IUrlContextMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlContextMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContextMetadata.verify|verify} messages.
+                     * @param message UrlContextMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IUrlContextMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlContextMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlContextMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.UrlContextMetadata;
+
+                    /**
+                     * Decodes an UrlContextMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlContextMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.UrlContextMetadata;
+
+                    /**
+                     * Verifies an UrlContextMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlContextMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlContextMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.UrlContextMetadata;
+
+                    /**
+                     * Creates a plain object from an UrlContextMetadata message. Also converts values to other types if specified.
+                     * @param message UrlContextMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.UrlContextMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlContextMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlContextMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UrlMetadata. */
+                interface IUrlMetadata {
+
+                    /** UrlMetadata retrievedUrl */
+                    retrievedUrl?: (string|null);
+
+                    /** UrlMetadata urlRetrievalStatus */
+                    urlRetrievalStatus?: (google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus|keyof typeof google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus|null);
+                }
+
+                /** Represents an UrlMetadata. */
+                class UrlMetadata implements IUrlMetadata {
+
+                    /**
+                     * Constructs a new UrlMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IUrlMetadata);
+
+                    /** UrlMetadata retrievedUrl. */
+                    public retrievedUrl: string;
+
+                    /** UrlMetadata urlRetrievalStatus. */
+                    public urlRetrievalStatus: (google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus|keyof typeof google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus);
+
+                    /**
+                     * Creates a new UrlMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UrlMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IUrlMetadata): google.ai.generativelanguage.v1beta.UrlMetadata;
+
+                    /**
+                     * Encodes the specified UrlMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlMetadata.verify|verify} messages.
+                     * @param message UrlMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IUrlMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UrlMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlMetadata.verify|verify} messages.
+                     * @param message UrlMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IUrlMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UrlMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UrlMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.UrlMetadata;
+
+                    /**
+                     * Decodes an UrlMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UrlMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.UrlMetadata;
+
+                    /**
+                     * Verifies an UrlMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UrlMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UrlMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.UrlMetadata;
+
+                    /**
+                     * Creates a plain object from an UrlMetadata message. Also converts values to other types if specified.
+                     * @param message UrlMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.UrlMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UrlMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UrlMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UrlMetadata {
+
+                    /** UrlRetrievalStatus enum. */
+                    enum UrlRetrievalStatus {
+                        URL_RETRIEVAL_STATUS_UNSPECIFIED = 0,
+                        URL_RETRIEVAL_STATUS_SUCCESS = 1,
+                        URL_RETRIEVAL_STATUS_ERROR = 2
                     }
                 }
 
@@ -35159,6 +36255,9 @@ export namespace google {
                     /** BidiGenerateContentSetup contextWindowCompression */
                     contextWindowCompression?: (google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig|null);
 
+                    /** BidiGenerateContentSetup inputAudioTranscription */
+                    inputAudioTranscription?: (google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null);
+
                     /** BidiGenerateContentSetup outputAudioTranscription */
                     outputAudioTranscription?: (google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null);
                 }
@@ -35192,6 +36291,9 @@ export namespace google {
 
                     /** BidiGenerateContentSetup contextWindowCompression. */
                     public contextWindowCompression?: (google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig|null);
+
+                    /** BidiGenerateContentSetup inputAudioTranscription. */
+                    public inputAudioTranscription?: (google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null);
 
                     /** BidiGenerateContentSetup outputAudioTranscription. */
                     public outputAudioTranscription?: (google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null);
@@ -36019,8 +37121,14 @@ export namespace google {
                     /** BidiGenerateContentServerContent groundingMetadata */
                     groundingMetadata?: (google.ai.generativelanguage.v1beta.IGroundingMetadata|null);
 
+                    /** BidiGenerateContentServerContent inputTranscription */
+                    inputTranscription?: (google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null);
+
                     /** BidiGenerateContentServerContent outputTranscription */
                     outputTranscription?: (google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null);
+
+                    /** BidiGenerateContentServerContent urlContextMetadata */
+                    urlContextMetadata?: (google.ai.generativelanguage.v1beta.IUrlContextMetadata|null);
                 }
 
                 /** Represents a BidiGenerateContentServerContent. */
@@ -36047,8 +37155,14 @@ export namespace google {
                     /** BidiGenerateContentServerContent groundingMetadata. */
                     public groundingMetadata?: (google.ai.generativelanguage.v1beta.IGroundingMetadata|null);
 
+                    /** BidiGenerateContentServerContent inputTranscription. */
+                    public inputTranscription?: (google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null);
+
                     /** BidiGenerateContentServerContent outputTranscription. */
                     public outputTranscription?: (google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null);
+
+                    /** BidiGenerateContentServerContent urlContextMetadata. */
+                    public urlContextMetadata?: (google.ai.generativelanguage.v1beta.IUrlContextMetadata|null);
 
                     /**
                      * Creates a new BidiGenerateContentServerContent instance using the specified properties.
@@ -37864,6 +38978,9 @@ export namespace google {
 
                     /** Model topK */
                     topK?: (number|null);
+
+                    /** Model thinking */
+                    thinking?: (boolean|null);
                 }
 
                 /** Represents a Model. */
@@ -37910,6 +39027,9 @@ export namespace google {
 
                     /** Model topK. */
                     public topK?: (number|null);
+
+                    /** Model thinking. */
+                    public thinking: boolean;
 
                     /**
                      * Creates a new Model instance using the specified properties.
@@ -43386,6 +44506,9 @@ export namespace google {
 
                     /** RelevantChunk chunk */
                     chunk?: (google.ai.generativelanguage.v1beta.IChunk|null);
+
+                    /** RelevantChunk document */
+                    document?: (google.ai.generativelanguage.v1beta.IDocument|null);
                 }
 
                 /** Represents a RelevantChunk. */
@@ -43402,6 +44525,9 @@ export namespace google {
 
                     /** RelevantChunk chunk. */
                     public chunk?: (google.ai.generativelanguage.v1beta.IChunk|null);
+
+                    /** RelevantChunk document. */
+                    public document?: (google.ai.generativelanguage.v1beta.IDocument|null);
 
                     /**
                      * Creates a new RelevantChunk instance using the specified properties.
@@ -56065,6 +57191,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -56081,6 +57210,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -56782,6 +57914,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -56795,6 +57930,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -56872,6 +58010,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -57200,6 +58450,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -57213,6 +58466,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -57536,6 +58792,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -57906,6 +59265,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -57935,6 +59295,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -57984,6 +59347,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -58119,6 +59485,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -58159,6 +59528,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -59007,6 +60379,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -59032,6 +60407,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -59967,6 +61345,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -60021,6 +61402,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -60237,6 +61621,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -60480,6 +61979,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -60501,6 +62003,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -61094,6 +62599,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -61122,6 +62633,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -61245,6 +62762,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -61364,8 +62991,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -61380,8 +63010,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -61912,6 +63545,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */
@@ -63819,6 +65459,113 @@ export namespace google {
 
             /**
              * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of an Interval. */
+        interface IInterval {
+
+            /** Interval startTime */
+            startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime */
+            endTime?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents an Interval. */
+        class Interval implements IInterval {
+
+            /**
+             * Constructs a new Interval.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IInterval);
+
+            /** Interval startTime. */
+            public startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime. */
+            public endTime?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new Interval instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Interval instance
+             */
+            public static create(properties?: google.type.IInterval): google.type.Interval;
+
+            /**
+             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
+
+            /**
+             * Verifies an Interval message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Interval
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Interval;
+
+            /**
+             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+             * @param message Interval
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Interval to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Interval
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

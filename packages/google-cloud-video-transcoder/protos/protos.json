@@ -246,6 +246,13 @@
                             "preprocessingConfig": {
                               "type": "PreprocessingConfig",
                               "id": 3
+                            },
+                            "attributes": {
+                              "type": "InputAttributes",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -809,6 +816,59 @@
                                     }
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "TrackDefinition": {
+                          "oneofs": {
+                            "_inputTrack": {
+                              "oneof": [
+                                "inputTrack"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "inputTrack": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "languages": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "detectLanguages": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "detectedLanguages": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "InputAttributes": {
+                          "fields": {
+                            "trackDefinitions": {
+                              "rule": "repeated",
+                              "type": "TrackDefinition",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }

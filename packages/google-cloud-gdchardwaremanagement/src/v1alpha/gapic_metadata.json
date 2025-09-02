@@ -75,6 +75,11 @@
                 "submitOrder"
               ]
             },
+            "CancelOrder": {
+              "methods": [
+                "cancelOrder"
+              ]
+            },
             "CreateSite": {
               "methods": [
                 "createSite"
@@ -143,6 +148,11 @@
             "SignalZoneState": {
               "methods": [
                 "signalZoneState"
+              ]
+            },
+            "RequestOrderDateChange": {
+              "methods": [
+                "requestOrderDateChange"
               ]
             },
             "ListOrders": {
@@ -271,6 +281,11 @@
                 "submitOrder"
               ]
             },
+            "CancelOrder": {
+              "methods": [
+                "cancelOrder"
+              ]
+            },
             "CreateSite": {
               "methods": [
                 "createSite"
@@ -339,6 +354,11 @@
             "SignalZoneState": {
               "methods": [
                 "signalZoneState"
+              ]
+            },
+            "RequestOrderDateChange": {
+              "methods": [
+                "requestOrderDateChange"
               ]
             },
             "ListOrders": {

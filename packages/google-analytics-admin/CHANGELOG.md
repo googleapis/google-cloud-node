@@ -1,5 +1,16 @@
 # Changelog
 
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v8.3.0...admin-v9.0.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* [analytics-admin] remove the `SetAutomatedGa4ConfigurationOptOut` method ([#6613](https://github.com/googleapis/google-cloud-node/issues/6613))
+
+### Bug Fixes
+
+* [analytics-admin] remove the `SetAutomatedGa4ConfigurationOptOut` method ([#6613](https://github.com/googleapis/google-cloud-node/issues/6613)) ([cdd0d85](https://github.com/googleapis/google-cloud-node/commit/cdd0d85a7213734befbb4e95a971d8351af79f23))
+
 ## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/admin-v8.2.0...admin-v8.3.0) (2025-07-09)
 
 

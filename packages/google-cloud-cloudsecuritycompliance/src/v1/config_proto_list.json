@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/cloudsecuritycompliance/v1/common.proto",
+  "../../protos/google/cloud/cloudsecuritycompliance/v1/config.proto",
+  "../../protos/google/cloud/cloudsecuritycompliance/v1/deployment.proto"
+]

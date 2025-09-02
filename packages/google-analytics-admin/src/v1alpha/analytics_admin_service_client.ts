@@ -270,6 +270,9 @@ export class AnalyticsAdminServiceClient {
       reportingDataAnnotationPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/reportingDataAnnotations/{reporting_data_annotation}'
       ),
+      reportingIdentitySettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/reportingIdentitySettings'
+      ),
       rollupPropertySourceLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/rollupPropertySourceLinks/{rollup_property_source_link}'
       ),
@@ -394,7 +397,7 @@ export class AnalyticsAdminServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const analyticsAdminServiceStubMethods =
-        ['getAccount', 'listAccounts', 'deleteAccount', 'updateAccount', 'provisionAccountTicket', 'listAccountSummaries', 'getProperty', 'listProperties', 'createProperty', 'deleteProperty', 'updateProperty', 'createFirebaseLink', 'deleteFirebaseLink', 'listFirebaseLinks', 'getGlobalSiteTag', 'createGoogleAdsLink', 'updateGoogleAdsLink', 'deleteGoogleAdsLink', 'listGoogleAdsLinks', 'getDataSharingSettings', 'getMeasurementProtocolSecret', 'listMeasurementProtocolSecrets', 'createMeasurementProtocolSecret', 'deleteMeasurementProtocolSecret', 'updateMeasurementProtocolSecret', 'acknowledgeUserDataCollection', 'getSkAdNetworkConversionValueSchema', 'createSkAdNetworkConversionValueSchema', 'deleteSkAdNetworkConversionValueSchema', 'updateSkAdNetworkConversionValueSchema', 'listSkAdNetworkConversionValueSchemas', 'searchChangeHistoryEvents', 'getGoogleSignalsSettings', 'updateGoogleSignalsSettings', 'createConversionEvent', 'updateConversionEvent', 'getConversionEvent', 'deleteConversionEvent', 'listConversionEvents', 'createKeyEvent', 'updateKeyEvent', 'getKeyEvent', 'deleteKeyEvent', 'listKeyEvents', 'getDisplayVideo360AdvertiserLink', 'listDisplayVideo360AdvertiserLinks', 'createDisplayVideo360AdvertiserLink', 'deleteDisplayVideo360AdvertiserLink', 'updateDisplayVideo360AdvertiserLink', 'getDisplayVideo360AdvertiserLinkProposal', 'listDisplayVideo360AdvertiserLinkProposals', 'createDisplayVideo360AdvertiserLinkProposal', 'deleteDisplayVideo360AdvertiserLinkProposal', 'approveDisplayVideo360AdvertiserLinkProposal', 'cancelDisplayVideo360AdvertiserLinkProposal', 'createCustomDimension', 'updateCustomDimension', 'listCustomDimensions', 'archiveCustomDimension', 'getCustomDimension', 'createCustomMetric', 'updateCustomMetric', 'listCustomMetrics', 'archiveCustomMetric', 'getCustomMetric', 'getDataRetentionSettings', 'updateDataRetentionSettings', 'createDataStream', 'deleteDataStream', 'updateDataStream', 'listDataStreams', 'getDataStream', 'getAudience', 'listAudiences', 'createAudience', 'updateAudience', 'archiveAudience', 'getSearchAds360Link', 'listSearchAds360Links', 'createSearchAds360Link', 'deleteSearchAds360Link', 'updateSearchAds360Link', 'getAttributionSettings', 'updateAttributionSettings', 'runAccessReport', 'createAccessBinding', 'getAccessBinding', 'updateAccessBinding', 'deleteAccessBinding', 'listAccessBindings', 'batchCreateAccessBindings', 'batchGetAccessBindings', 'batchUpdateAccessBindings', 'batchDeleteAccessBindings', 'getExpandedDataSet', 'listExpandedDataSets', 'createExpandedDataSet', 'updateExpandedDataSet', 'deleteExpandedDataSet', 'getChannelGroup', 'listChannelGroups', 'createChannelGroup', 'updateChannelGroup', 'deleteChannelGroup', 'setAutomatedGa4ConfigurationOptOut', 'fetchAutomatedGa4ConfigurationOptOut', 'createBigQueryLink', 'getBigQueryLink', 'listBigQueryLinks', 'deleteBigQueryLink', 'updateBigQueryLink', 'getEnhancedMeasurementSettings', 'updateEnhancedMeasurementSettings', 'createConnectedSiteTag', 'deleteConnectedSiteTag', 'listConnectedSiteTags', 'fetchConnectedGa4Property', 'getAdSenseLink', 'createAdSenseLink', 'deleteAdSenseLink', 'listAdSenseLinks', 'getEventCreateRule', 'listEventCreateRules', 'createEventCreateRule', 'updateEventCreateRule', 'deleteEventCreateRule', 'getEventEditRule', 'listEventEditRules', 'createEventEditRule', 'updateEventEditRule', 'deleteEventEditRule', 'reorderEventEditRules', 'updateDataRedactionSettings', 'getDataRedactionSettings', 'getCalculatedMetric', 'createCalculatedMetric', 'listCalculatedMetrics', 'updateCalculatedMetric', 'deleteCalculatedMetric', 'createRollupProperty', 'getRollupPropertySourceLink', 'listRollupPropertySourceLinks', 'createRollupPropertySourceLink', 'deleteRollupPropertySourceLink', 'provisionSubproperty', 'createSubpropertyEventFilter', 'getSubpropertyEventFilter', 'listSubpropertyEventFilters', 'updateSubpropertyEventFilter', 'deleteSubpropertyEventFilter', 'createReportingDataAnnotation', 'getReportingDataAnnotation', 'listReportingDataAnnotations', 'updateReportingDataAnnotation', 'deleteReportingDataAnnotation', 'submitUserDeletion', 'listSubpropertySyncConfigs', 'updateSubpropertySyncConfig', 'getSubpropertySyncConfig'];
+        ['getAccount', 'listAccounts', 'deleteAccount', 'updateAccount', 'provisionAccountTicket', 'listAccountSummaries', 'getProperty', 'listProperties', 'createProperty', 'deleteProperty', 'updateProperty', 'createFirebaseLink', 'deleteFirebaseLink', 'listFirebaseLinks', 'getGlobalSiteTag', 'createGoogleAdsLink', 'updateGoogleAdsLink', 'deleteGoogleAdsLink', 'listGoogleAdsLinks', 'getDataSharingSettings', 'getMeasurementProtocolSecret', 'listMeasurementProtocolSecrets', 'createMeasurementProtocolSecret', 'deleteMeasurementProtocolSecret', 'updateMeasurementProtocolSecret', 'acknowledgeUserDataCollection', 'getSkAdNetworkConversionValueSchema', 'createSkAdNetworkConversionValueSchema', 'deleteSkAdNetworkConversionValueSchema', 'updateSkAdNetworkConversionValueSchema', 'listSkAdNetworkConversionValueSchemas', 'searchChangeHistoryEvents', 'getGoogleSignalsSettings', 'updateGoogleSignalsSettings', 'createConversionEvent', 'updateConversionEvent', 'getConversionEvent', 'deleteConversionEvent', 'listConversionEvents', 'createKeyEvent', 'updateKeyEvent', 'getKeyEvent', 'deleteKeyEvent', 'listKeyEvents', 'getDisplayVideo360AdvertiserLink', 'listDisplayVideo360AdvertiserLinks', 'createDisplayVideo360AdvertiserLink', 'deleteDisplayVideo360AdvertiserLink', 'updateDisplayVideo360AdvertiserLink', 'getDisplayVideo360AdvertiserLinkProposal', 'listDisplayVideo360AdvertiserLinkProposals', 'createDisplayVideo360AdvertiserLinkProposal', 'deleteDisplayVideo360AdvertiserLinkProposal', 'approveDisplayVideo360AdvertiserLinkProposal', 'cancelDisplayVideo360AdvertiserLinkProposal', 'createCustomDimension', 'updateCustomDimension', 'listCustomDimensions', 'archiveCustomDimension', 'getCustomDimension', 'createCustomMetric', 'updateCustomMetric', 'listCustomMetrics', 'archiveCustomMetric', 'getCustomMetric', 'getDataRetentionSettings', 'updateDataRetentionSettings', 'createDataStream', 'deleteDataStream', 'updateDataStream', 'listDataStreams', 'getDataStream', 'getAudience', 'listAudiences', 'createAudience', 'updateAudience', 'archiveAudience', 'getSearchAds360Link', 'listSearchAds360Links', 'createSearchAds360Link', 'deleteSearchAds360Link', 'updateSearchAds360Link', 'getAttributionSettings', 'updateAttributionSettings', 'runAccessReport', 'createAccessBinding', 'getAccessBinding', 'updateAccessBinding', 'deleteAccessBinding', 'listAccessBindings', 'batchCreateAccessBindings', 'batchGetAccessBindings', 'batchUpdateAccessBindings', 'batchDeleteAccessBindings', 'getExpandedDataSet', 'listExpandedDataSets', 'createExpandedDataSet', 'updateExpandedDataSet', 'deleteExpandedDataSet', 'getChannelGroup', 'listChannelGroups', 'createChannelGroup', 'updateChannelGroup', 'deleteChannelGroup', 'createBigQueryLink', 'getBigQueryLink', 'listBigQueryLinks', 'deleteBigQueryLink', 'updateBigQueryLink', 'getEnhancedMeasurementSettings', 'updateEnhancedMeasurementSettings', 'getAdSenseLink', 'createAdSenseLink', 'deleteAdSenseLink', 'listAdSenseLinks', 'getEventCreateRule', 'listEventCreateRules', 'createEventCreateRule', 'updateEventCreateRule', 'deleteEventCreateRule', 'getEventEditRule', 'listEventEditRules', 'createEventEditRule', 'updateEventEditRule', 'deleteEventEditRule', 'reorderEventEditRules', 'updateDataRedactionSettings', 'getDataRedactionSettings', 'getCalculatedMetric', 'createCalculatedMetric', 'listCalculatedMetrics', 'updateCalculatedMetric', 'deleteCalculatedMetric', 'createRollupProperty', 'getRollupPropertySourceLink', 'listRollupPropertySourceLinks', 'createRollupPropertySourceLink', 'deleteRollupPropertySourceLink', 'provisionSubproperty', 'createSubpropertyEventFilter', 'getSubpropertyEventFilter', 'listSubpropertyEventFilters', 'updateSubpropertyEventFilter', 'deleteSubpropertyEventFilter', 'createReportingDataAnnotation', 'getReportingDataAnnotation', 'listReportingDataAnnotations', 'updateReportingDataAnnotation', 'deleteReportingDataAnnotation', 'submitUserDeletion', 'listSubpropertySyncConfigs', 'updateSubpropertySyncConfig', 'getSubpropertySyncConfig', 'getReportingIdentitySettings'];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -8781,196 +8784,6 @@ export class AnalyticsAdminServiceClient {
       });
   }
 /**
- * Sets the opt out status for the automated GA4 setup process for a UA
- * property.
- * Note: this has no effect on GA4 property.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   Required. The UA property to set the opt out status. Note this request uses
- *   the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
- *   Format: properties/{internalWebPropertyId}
- *   Example: properties/1234
- * @param {boolean} request.optOut
- *   The status to set.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse|SetAutomatedGa4ConfigurationOptOutResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.set_automated_ga4_configuration_opt_out.js</caption>
- * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_SetAutomatedGa4ConfigurationOptOut_async
- */
-  setAutomatedGa4ConfigurationOptOut(
-      request?: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|undefined, {}|undefined
-      ]>;
-  setAutomatedGa4ConfigurationOptOut(
-      request: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>): void;
-  setAutomatedGa4ConfigurationOptOut(
-      request: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>): void;
-  setAutomatedGa4ConfigurationOptOut(
-      request?: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    this._log.info('setAutomatedGa4ConfigurationOptOut request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('setAutomatedGa4ConfigurationOptOut response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls.setAutomatedGa4ConfigurationOptOut(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('setAutomatedGa4ConfigurationOptOut response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
-        }
-        throw error;
-      });
-  }
-/**
- * Fetches the opt out status for the automated GA4 setup process for a UA
- * property.
- * Note: this has no effect on GA4 property.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   Required. The UA property to get the opt out status. Note this request uses
- *   the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
- *   Format: properties/{internalWebPropertyId}
- *   Example: properties/1234
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse|FetchAutomatedGa4ConfigurationOptOutResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.fetch_automated_ga4_configuration_opt_out.js</caption>
- * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchAutomatedGa4ConfigurationOptOut_async
- */
-  fetchAutomatedGa4ConfigurationOptOut(
-      request?: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|undefined, {}|undefined
-      ]>;
-  fetchAutomatedGa4ConfigurationOptOut(
-      request: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>): void;
-  fetchAutomatedGa4ConfigurationOptOut(
-      request: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>): void;
-  fetchAutomatedGa4ConfigurationOptOut(
-      request?: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    this._log.info('fetchAutomatedGa4ConfigurationOptOut request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('fetchAutomatedGa4ConfigurationOptOut response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
-        protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('fetchAutomatedGa4ConfigurationOptOut response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
-        }
-        throw error;
-      });
-  }
-/**
  * Creates a BigQueryLink.
  *
  * @param {Object} request
@@ -9549,386 +9362,6 @@ export class AnalyticsAdminServiceClient {
         {}|undefined
       ]) => {
         this._log.info('updateEnhancedMeasurementSettings response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
-        }
-        throw error;
-      });
-  }
-/**
- * Creates a connected site tag for a Universal Analytics property. You can
- * create a maximum of 20 connected site tags per property.
- * Note: This API cannot be used on GA4 properties.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   The Universal Analytics property to create connected site tags for.
- *   This API does not support GA4 properties.
- *   Format: properties/{universalAnalyticsPropertyId}
- *   Example: properties/1234
- * @param {google.analytics.admin.v1alpha.ConnectedSiteTag} request.connectedSiteTag
- *   Required. The tag to add to the Universal Analytics property
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse|CreateConnectedSiteTagResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_connected_site_tag.js</caption>
- * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateConnectedSiteTag_async
- */
-  createConnectedSiteTag(
-      request?: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|undefined, {}|undefined
-      ]>;
-  createConnectedSiteTag(
-      request: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>): void;
-  createConnectedSiteTag(
-      request: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>): void;
-  createConnectedSiteTag(
-      request?: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    this._log.info('createConnectedSiteTag request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('createConnectedSiteTag response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls.createConnectedSiteTag(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
-        protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createConnectedSiteTag response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
-        }
-        throw error;
-      });
-  }
-/**
- * Deletes a connected site tag for a Universal Analytics property.
- * Note: this has no effect on GA4 properties.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   The Universal Analytics property to delete connected site tags for.
- *   This API does not support GA4 properties.
- *   Format: properties/{universalAnalyticsPropertyId}
- *   Example: properties/1234
- * @param {string} request.tagId
- *   Tag ID to forward events to. Also known as the Measurement ID, or the
- *   "G-ID"  (For example: G-12345).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_connected_site_tag.js</caption>
- * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteConnectedSiteTag_async
- */
-  deleteConnectedSiteTag(
-      request?: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|undefined, {}|undefined
-      ]>;
-  deleteConnectedSiteTag(
-      request: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>): void;
-  deleteConnectedSiteTag(
-      request: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>): void;
-  deleteConnectedSiteTag(
-      request?: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    this._log.info('deleteConnectedSiteTag request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('deleteConnectedSiteTag response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls.deleteConnectedSiteTag(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteConnectedSiteTag response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
-        }
-        throw error;
-      });
-  }
-/**
- * Lists the connected site tags for a Universal Analytics property. A maximum
- * of 20 connected site tags will be returned. Note: this has no effect on GA4
- * property.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   The Universal Analytics property to fetch connected site tags for.
- *   This does not work on GA4 properties. A maximum of 20 connected site tags
- *   will be returned.
- *   Example Format: `properties/1234`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse|ListConnectedSiteTagsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_connected_site_tags.js</caption>
- * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConnectedSiteTags_async
- */
-  listConnectedSiteTags(
-      request?: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|undefined, {}|undefined
-      ]>;
-  listConnectedSiteTags(
-      request: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|null|undefined,
-          {}|null|undefined>): void;
-  listConnectedSiteTags(
-      request: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|null|undefined,
-          {}|null|undefined>): void;
-  listConnectedSiteTags(
-      request?: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    this._log.info('listConnectedSiteTags request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('listConnectedSiteTags response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls.listConnectedSiteTags(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
-        protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listConnectedSiteTags response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
-        }
-        throw error;
-      });
-  }
-/**
- * Given a specified UA property, looks up the GA4 property connected to it.
- * Note: this cannot be used with GA4 properties.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   Required. The UA property for which to look up the connected GA4 property.
- *   Note this request uses the
- *   internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
- *   Format: properties/{internal_web_property_id}
- *   Example: properties/1234
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse|FetchConnectedGa4PropertyResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.fetch_connected_ga4_property.js</caption>
- * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchConnectedGa4Property_async
- */
-  fetchConnectedGa4Property(
-      request?: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|undefined, {}|undefined
-      ]>;
-  fetchConnectedGa4Property(
-      request: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|null|undefined,
-          {}|null|undefined>): void;
-  fetchConnectedGa4Property(
-      request: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
-      callback: Callback<
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|null|undefined,
-          {}|null|undefined>): void;
-  fetchConnectedGa4Property(
-      request?: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    this._log.info('fetchConnectedGa4Property request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('fetchConnectedGa4Property response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls.fetchConnectedGa4Property(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
-        protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('fetchConnectedGa4Property response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -12971,8 +12404,20 @@ export class AnalyticsAdminServiceClient {
  *   Firebase [application instance
  *   ID](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#getAppInstanceId).
  * @param {string} request.userProvidedData
- *   The un-hashed, unencrypted, [user-provided
- *   data](https://support.google.com/analytics/answer/14077171).
+ *   [User-provided
+ *   data](https://support.google.com/analytics/answer/14077171).  May contain
+ *   either one email address or one phone number.
+ *
+ *   Email addresses should be normalized as such:
+ *
+ *   * lowercase
+ *   * remove periods before @ for gmail.com/googlemail.com addresses
+ *   * remove all spaces
+ *
+ *   Phone numbers should be normalized as such:
+ *
+ *   * remove all non digit characters
+ *   * add + prefix
  * @param {string} request.name
  *   Required. The name of the property to submit user deletion for.
  * @param {object} [options]
@@ -13063,12 +12508,12 @@ export class AnalyticsAdminServiceClient {
       });
   }
 /**
- * Updates a Subproperty Sync Config.
+ * Updates a `SubpropertySyncConfig`.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {google.analytics.admin.v1alpha.SubpropertySyncConfig} request.subpropertySyncConfig
- *   Required. The SubpropertySyncConfig to update.
+ *   Required. The `SubpropertySyncConfig` to update.
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. The list of fields to update. Field names must be in snake case
  *   (for example, "field_to_update"). Omitted fields will not be updated. To
@@ -13162,7 +12607,7 @@ export class AnalyticsAdminServiceClient {
       });
   }
 /**
- * Lookup for a single Subproperty Sync Config.
+ * Lookup for a single `SubpropertySyncConfig`.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -13249,6 +12694,103 @@ export class AnalyticsAdminServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getSubpropertySyncConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Returns the singleton data retention settings for this property.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the settings to lookup.
+ *   Format:
+ *   properties/{property}/reportingIdentitySettings
+ *   Example: "properties/1000/reportingIdentitySettings"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ReportingIdentitySettings|ReportingIdentitySettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_reporting_identity_settings.js</caption>
+ * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetReportingIdentitySettings_async
+ */
+  getReportingIdentitySettings(
+      request?: protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+        protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|undefined, {}|undefined
+      ]>;
+  getReportingIdentitySettings(
+      request: protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+          protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportingIdentitySettings(
+      request: protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest,
+      callback: Callback<
+          protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+          protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportingIdentitySettings(
+      request?: protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+          protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+          protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+        protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getReportingIdentitySettings request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+        protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReportingIdentitySettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getReportingIdentitySettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+        protos.google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReportingIdentitySettings response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -19450,7 +18992,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IReportingDataAnnotation>;
   }
  /**
- * List all Subproperty Sync Configs on a property.
+ * List all `SubpropertySyncConfig` resources for a property.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -20707,6 +20249,29 @@ export class AnalyticsAdminServiceClient {
    */
   matchReportingDataAnnotationFromReportingDataAnnotationName(reportingDataAnnotationName: string) {
     return this.pathTemplates.reportingDataAnnotationPathTemplate.match(reportingDataAnnotationName).reporting_data_annotation;
+  }
+
+  /**
+   * Return a fully-qualified reportingIdentitySettings resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  reportingIdentitySettingsPath(property:string) {
+    return this.pathTemplates.reportingIdentitySettingsPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from ReportingIdentitySettings resource.
+   *
+   * @param {string} reportingIdentitySettingsName
+   *   A fully-qualified path representing ReportingIdentitySettings resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromReportingIdentitySettingsName(reportingIdentitySettingsName: string) {
+    return this.pathTemplates.reportingIdentitySettingsPathTemplate.match(reportingIdentitySettingsName).property;
   }
 
   /**
