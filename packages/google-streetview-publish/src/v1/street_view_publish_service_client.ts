@@ -663,7 +663,7 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'photo_id': request.photoId ?? '',
+      'photo_id': request.photoId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getPhoto request %j', request);
@@ -919,7 +919,7 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'photo.photo_id.id': request.photo!.photoId!.id ?? '',
+      'photo.photo_id.id': request.photo!.photoId!.id?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updatePhoto request %j', request);
@@ -1142,7 +1142,7 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'photo_id': request.photoId ?? '',
+      'photo_id': request.photoId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('deletePhoto request %j', request);
@@ -1449,7 +1449,7 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'sequence_id': request.sequenceId ?? '',
+      'sequence_id': request.sequenceId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('deletePhotoSequence request %j', request);
@@ -1700,7 +1700,7 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'sequence_id': request.sequenceId ?? '',
+      'sequence_id': request.sequenceId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: Callback<
