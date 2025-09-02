@@ -16,7 +16,6 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as delivery from './delivery';
 import * as v1 from './v1';
 
 const TripServiceClient = v1.TripServiceClient;
@@ -24,7 +23,7 @@ type TripServiceClient = v1.TripServiceClient;
 const VehicleServiceClient = v1.VehicleServiceClient;
 type VehicleServiceClient = v1.VehicleServiceClient;
 
-export {delivery, v1, TripServiceClient, VehicleServiceClient};
-export default {delivery, v1, TripServiceClient, VehicleServiceClient};
+export {v1, TripServiceClient, VehicleServiceClient};
+export default {v1, TripServiceClient, VehicleServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
