@@ -1,0 +1,10 @@
+[
+  "../../protos/google/geo/type/viewport.proto",
+  "../../protos/google/maps/fleetengine/v1/fleetengine.proto",
+  "../../protos/google/maps/fleetengine/v1/header.proto",
+  "../../protos/google/maps/fleetengine/v1/traffic.proto",
+  "../../protos/google/maps/fleetengine/v1/trip_api.proto",
+  "../../protos/google/maps/fleetengine/v1/trips.proto",
+  "../../protos/google/maps/fleetengine/v1/vehicle_api.proto",
+  "../../protos/google/maps/fleetengine/v1/vehicles.proto"
+]
