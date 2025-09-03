@@ -440,7 +440,7 @@ export class StorageTransferServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getGoogleServiceAccount request %j', request);
@@ -1152,7 +1152,7 @@ export class StorageTransferServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('createAgentPool request %j', request);
@@ -1932,7 +1932,7 @@ export class StorageTransferServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
@@ -1998,7 +1998,7 @@ export class StorageTransferServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listAgentPools'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2055,7 +2055,7 @@ export class StorageTransferServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listAgentPools'];
     const callSettings = defaultCallSettings.merge(options);
