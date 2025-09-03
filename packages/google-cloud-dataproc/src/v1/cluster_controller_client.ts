@@ -511,7 +511,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
       'cluster_name': request.clusterName ?? '',
     });
@@ -632,7 +632,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -827,7 +827,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
       'cluster_name': request.clusterName ?? '',
     });
@@ -957,7 +957,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
       'cluster_name': request.clusterName ?? '',
     });
@@ -1087,7 +1087,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
       'cluster_name': request.clusterName ?? '',
     });
@@ -1219,7 +1219,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
       'cluster_name': request.clusterName ?? '',
     });
@@ -1355,7 +1355,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
       'cluster_name': request.clusterName ?? '',
     });
@@ -1494,7 +1494,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -1575,7 +1575,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     const defaultCallSettings = this._defaults['listClusters'];
@@ -1647,7 +1647,7 @@ export class ClusterControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     const defaultCallSettings = this._defaults['listClusters'];

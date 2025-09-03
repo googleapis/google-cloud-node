@@ -1,7 +1,0 @@
-[
-  "../../protos/google/cloud/dataqna/v1alpha/annotated_string.proto",
-  "../../protos/google/cloud/dataqna/v1alpha/auto_suggestion_service.proto",
-  "../../protos/google/cloud/dataqna/v1alpha/question.proto",
-  "../../protos/google/cloud/dataqna/v1alpha/question_service.proto",
-  "../../protos/google/cloud/dataqna/v1alpha/user_feedback.proto"
-]
