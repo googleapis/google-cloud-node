@@ -41,7 +41,7 @@ function main(emailPreferences, updateMask) {
   // const updateMask = {}
 
   // Imports the Accounts library
-  const {EmailPreferencesServiceClient} = require('@google-cloud/accounts').v1;
+  const {EmailPreferencesServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new EmailPreferencesServiceClient();

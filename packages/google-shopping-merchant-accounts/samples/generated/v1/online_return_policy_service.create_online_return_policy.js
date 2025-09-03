@@ -39,7 +39,7 @@ function main(parent, onlineReturnPolicy) {
   // const onlineReturnPolicy = {}
 
   // Imports the Accounts library
-  const {OnlineReturnPolicyServiceClient} = require('@google-cloud/accounts').v1;
+  const {OnlineReturnPolicyServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new OnlineReturnPolicyServiceClient();

@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const accounts = require('@google-cloud/accounts');
+const accounts = require('@google-shopping/accounts');
 
 function main() {
   const accountIssueServiceClient = new accounts.AccountIssueServiceClient();

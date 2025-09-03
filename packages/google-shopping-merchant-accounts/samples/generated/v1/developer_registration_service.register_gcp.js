@@ -46,7 +46,7 @@ function main(name, developerEmail) {
   // const developerEmail = 'abc123'
 
   // Imports the Accounts library
-  const {DeveloperRegistrationServiceClient} = require('@google-cloud/accounts').v1;
+  const {DeveloperRegistrationServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new DeveloperRegistrationServiceClient();

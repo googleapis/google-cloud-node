@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AccountIssueServiceClient, AccountRelationshipsServiceClient, AccountServicesServiceClient, AccountsServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, DeveloperRegistrationServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-cloud/accounts';
+import {AccountIssueServiceClient, AccountRelationshipsServiceClient, AccountServicesServiceClient, AccountsServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, DeveloperRegistrationServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-shopping/accounts';
 
 // check that the client class type name can be used
 function doStuffWithAccountIssueServiceClient(client: AccountIssueServiceClient) {

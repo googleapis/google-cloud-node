@@ -42,7 +42,7 @@ function main(name, externalAccountId) {
   // const externalAccountId = 'abc123'
 
   // Imports the Accounts library
-  const {LfpProvidersServiceClient} = require('@google-cloud/accounts').v1;
+  const {LfpProvidersServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new LfpProvidersServiceClient();

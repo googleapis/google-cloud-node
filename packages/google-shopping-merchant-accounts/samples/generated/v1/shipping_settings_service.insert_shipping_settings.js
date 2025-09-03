@@ -41,7 +41,7 @@ function main(parent, shippingSetting) {
   // const shippingSetting = {}
 
   // Imports the Accounts library
-  const {ShippingSettingsServiceClient} = require('@google-cloud/accounts').v1;
+  const {ShippingSettingsServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new ShippingSettingsServiceClient();
