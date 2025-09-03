@@ -695,6 +695,9 @@ export namespace google {
 
                     /** Deployment annotations */
                     annotations?: ({ [k: string]: string }|null);
+
+                    /** Deployment providerConfig */
+                    providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
                 }
 
                 /** Represents a Deployment. */
@@ -774,6 +777,9 @@ export namespace google {
 
                     /** Deployment annotations. */
                     public annotations: { [k: string]: string };
+
+                    /** Deployment providerConfig. */
+                    public providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
 
                     /** Deployment blueprint. */
                     public blueprint?: "terraformBlueprint";
@@ -2527,6 +2533,9 @@ export namespace google {
 
                     /** Revision quotaValidation */
                     quotaValidation?: (google.cloud.config.v1.QuotaValidation|keyof typeof google.cloud.config.v1.QuotaValidation|null);
+
+                    /** Revision providerConfig */
+                    providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
                 }
 
                 /** Represents a Revision. */
@@ -2597,6 +2606,9 @@ export namespace google {
 
                     /** Revision quotaValidation. */
                     public quotaValidation: (google.cloud.config.v1.QuotaValidation|keyof typeof google.cloud.config.v1.QuotaValidation);
+
+                    /** Revision providerConfig. */
+                    public providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
 
                     /** Revision blueprint. */
                     public blueprint?: "terraformBlueprint";
@@ -4737,6 +4749,9 @@ export namespace google {
 
                     /** Preview annotations */
                     annotations?: ({ [k: string]: string }|null);
+
+                    /** Preview providerConfig */
+                    providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
                 }
 
                 /** Represents a Preview. */
@@ -4807,6 +4822,9 @@ export namespace google {
 
                     /** Preview annotations. */
                     public annotations: { [k: string]: string };
+
+                    /** Preview providerConfig. */
+                    public providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
 
                     /** Preview blueprint. */
                     public blueprint?: "terraformBlueprint";
@@ -7826,6 +7844,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProviderConfig. */
+                interface IProviderConfig {
+
+                    /** ProviderConfig sourceType */
+                    sourceType?: (google.cloud.config.v1.ProviderConfig.ProviderSource|keyof typeof google.cloud.config.v1.ProviderConfig.ProviderSource|null);
+                }
+
+                /** Represents a ProviderConfig. */
+                class ProviderConfig implements IProviderConfig {
+
+                    /**
+                     * Constructs a new ProviderConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IProviderConfig);
+
+                    /** ProviderConfig sourceType. */
+                    public sourceType?: (google.cloud.config.v1.ProviderConfig.ProviderSource|keyof typeof google.cloud.config.v1.ProviderConfig.ProviderSource|null);
+
+                    /**
+                     * Creates a new ProviderConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProviderConfig instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IProviderConfig): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Encodes the specified ProviderConfig message. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                     * @param message ProviderConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IProviderConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProviderConfig message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                     * @param message ProviderConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IProviderConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProviderConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProviderConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Decodes a ProviderConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProviderConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Verifies a ProviderConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProviderConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProviderConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Creates a plain object from a ProviderConfig message. Also converts values to other types if specified.
+                     * @param message ProviderConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ProviderConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProviderConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProviderConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProviderConfig {
+
+                    /** ProviderSource enum. */
+                    enum ProviderSource {
+                        PROVIDER_SOURCE_UNSPECIFIED = 0,
+                        SERVICE_MAINTAINED = 1
+                    }
                 }
             }
         }
