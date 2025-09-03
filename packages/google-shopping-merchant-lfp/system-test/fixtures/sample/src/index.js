@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const lfp = require('@google-shopping/lfp');
+const lfp = require('@google-cloud/lfp');
 
 function main() {
   const lfpInventoryServiceClient = new lfp.LfpInventoryServiceClient();

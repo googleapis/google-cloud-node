@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2025 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-shopping/inventories',
+    systemName: '@google-cloud/inventories',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
