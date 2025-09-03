@@ -404,7 +404,7 @@ export class TemplatesServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -521,7 +521,7 @@ export class TemplatesServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -632,7 +632,7 @@ export class TemplatesServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
     });
     this.initialize().catch(err => {throw err});
