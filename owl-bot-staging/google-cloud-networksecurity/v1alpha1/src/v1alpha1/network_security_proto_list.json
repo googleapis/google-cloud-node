@@ -1,0 +1,6 @@
+[
+  "../../protos/google/cloud/networksecurity/v1alpha1/client_tls_policy.proto",
+  "../../protos/google/cloud/networksecurity/v1alpha1/common.proto",
+  "../../protos/google/cloud/networksecurity/v1alpha1/network_security.proto",
+  "../../protos/google/cloud/networksecurity/v1alpha1/tls.proto"
+]
