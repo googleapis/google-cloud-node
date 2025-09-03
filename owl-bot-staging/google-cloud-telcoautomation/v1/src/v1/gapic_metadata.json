@@ -1,0 +1,423 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.telcoautomation.v1",
+  "libraryPackage": "@google-cloud/telcoautomation",
+  "services": {
+    "TelcoAutomation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TelcoAutomationClient",
+          "rpcs": {
+            "GetOrchestrationCluster": {
+              "methods": [
+                "getOrchestrationCluster"
+              ]
+            },
+            "GetEdgeSlm": {
+              "methods": [
+                "getEdgeSlm"
+              ]
+            },
+            "CreateBlueprint": {
+              "methods": [
+                "createBlueprint"
+              ]
+            },
+            "UpdateBlueprint": {
+              "methods": [
+                "updateBlueprint"
+              ]
+            },
+            "GetBlueprint": {
+              "methods": [
+                "getBlueprint"
+              ]
+            },
+            "DeleteBlueprint": {
+              "methods": [
+                "deleteBlueprint"
+              ]
+            },
+            "ApproveBlueprint": {
+              "methods": [
+                "approveBlueprint"
+              ]
+            },
+            "ProposeBlueprint": {
+              "methods": [
+                "proposeBlueprint"
+              ]
+            },
+            "RejectBlueprint": {
+              "methods": [
+                "rejectBlueprint"
+              ]
+            },
+            "DiscardBlueprintChanges": {
+              "methods": [
+                "discardBlueprintChanges"
+              ]
+            },
+            "GetPublicBlueprint": {
+              "methods": [
+                "getPublicBlueprint"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "createDeployment"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "updateDeployment"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "RemoveDeployment": {
+              "methods": [
+                "removeDeployment"
+              ]
+            },
+            "DiscardDeploymentChanges": {
+              "methods": [
+                "discardDeploymentChanges"
+              ]
+            },
+            "ApplyDeployment": {
+              "methods": [
+                "applyDeployment"
+              ]
+            },
+            "ComputeDeploymentStatus": {
+              "methods": [
+                "computeDeploymentStatus"
+              ]
+            },
+            "RollbackDeployment": {
+              "methods": [
+                "rollbackDeployment"
+              ]
+            },
+            "GetHydratedDeployment": {
+              "methods": [
+                "getHydratedDeployment"
+              ]
+            },
+            "UpdateHydratedDeployment": {
+              "methods": [
+                "updateHydratedDeployment"
+              ]
+            },
+            "ApplyHydratedDeployment": {
+              "methods": [
+                "applyHydratedDeployment"
+              ]
+            },
+            "CreateOrchestrationCluster": {
+              "methods": [
+                "createOrchestrationCluster"
+              ]
+            },
+            "DeleteOrchestrationCluster": {
+              "methods": [
+                "deleteOrchestrationCluster"
+              ]
+            },
+            "CreateEdgeSlm": {
+              "methods": [
+                "createEdgeSlm"
+              ]
+            },
+            "DeleteEdgeSlm": {
+              "methods": [
+                "deleteEdgeSlm"
+              ]
+            },
+            "ListOrchestrationClusters": {
+              "methods": [
+                "listOrchestrationClusters",
+                "listOrchestrationClustersStream",
+                "listOrchestrationClustersAsync"
+              ]
+            },
+            "ListEdgeSlms": {
+              "methods": [
+                "listEdgeSlms",
+                "listEdgeSlmsStream",
+                "listEdgeSlmsAsync"
+              ]
+            },
+            "ListBlueprints": {
+              "methods": [
+                "listBlueprints",
+                "listBlueprintsStream",
+                "listBlueprintsAsync"
+              ]
+            },
+            "ListBlueprintRevisions": {
+              "methods": [
+                "listBlueprintRevisions",
+                "listBlueprintRevisionsStream",
+                "listBlueprintRevisionsAsync"
+              ]
+            },
+            "SearchBlueprintRevisions": {
+              "methods": [
+                "searchBlueprintRevisions",
+                "searchBlueprintRevisionsStream",
+                "searchBlueprintRevisionsAsync"
+              ]
+            },
+            "SearchDeploymentRevisions": {
+              "methods": [
+                "searchDeploymentRevisions",
+                "searchDeploymentRevisionsStream",
+                "searchDeploymentRevisionsAsync"
+              ]
+            },
+            "ListPublicBlueprints": {
+              "methods": [
+                "listPublicBlueprints",
+                "listPublicBlueprintsStream",
+                "listPublicBlueprintsAsync"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            },
+            "ListDeploymentRevisions": {
+              "methods": [
+                "listDeploymentRevisions",
+                "listDeploymentRevisionsStream",
+                "listDeploymentRevisionsAsync"
+              ]
+            },
+            "ListHydratedDeployments": {
+              "methods": [
+                "listHydratedDeployments",
+                "listHydratedDeploymentsStream",
+                "listHydratedDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TelcoAutomationClient",
+          "rpcs": {
+            "GetOrchestrationCluster": {
+              "methods": [
+                "getOrchestrationCluster"
+              ]
+            },
+            "GetEdgeSlm": {
+              "methods": [
+                "getEdgeSlm"
+              ]
+            },
+            "CreateBlueprint": {
+              "methods": [
+                "createBlueprint"
+              ]
+            },
+            "UpdateBlueprint": {
+              "methods": [
+                "updateBlueprint"
+              ]
+            },
+            "GetBlueprint": {
+              "methods": [
+                "getBlueprint"
+              ]
+            },
+            "DeleteBlueprint": {
+              "methods": [
+                "deleteBlueprint"
+              ]
+            },
+            "ApproveBlueprint": {
+              "methods": [
+                "approveBlueprint"
+              ]
+            },
+            "ProposeBlueprint": {
+              "methods": [
+                "proposeBlueprint"
+              ]
+            },
+            "RejectBlueprint": {
+              "methods": [
+                "rejectBlueprint"
+              ]
+            },
+            "DiscardBlueprintChanges": {
+              "methods": [
+                "discardBlueprintChanges"
+              ]
+            },
+            "GetPublicBlueprint": {
+              "methods": [
+                "getPublicBlueprint"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "createDeployment"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "updateDeployment"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "RemoveDeployment": {
+              "methods": [
+                "removeDeployment"
+              ]
+            },
+            "DiscardDeploymentChanges": {
+              "methods": [
+                "discardDeploymentChanges"
+              ]
+            },
+            "ApplyDeployment": {
+              "methods": [
+                "applyDeployment"
+              ]
+            },
+            "ComputeDeploymentStatus": {
+              "methods": [
+                "computeDeploymentStatus"
+              ]
+            },
+            "RollbackDeployment": {
+              "methods": [
+                "rollbackDeployment"
+              ]
+            },
+            "GetHydratedDeployment": {
+              "methods": [
+                "getHydratedDeployment"
+              ]
+            },
+            "UpdateHydratedDeployment": {
+              "methods": [
+                "updateHydratedDeployment"
+              ]
+            },
+            "ApplyHydratedDeployment": {
+              "methods": [
+                "applyHydratedDeployment"
+              ]
+            },
+            "CreateOrchestrationCluster": {
+              "methods": [
+                "createOrchestrationCluster"
+              ]
+            },
+            "DeleteOrchestrationCluster": {
+              "methods": [
+                "deleteOrchestrationCluster"
+              ]
+            },
+            "CreateEdgeSlm": {
+              "methods": [
+                "createEdgeSlm"
+              ]
+            },
+            "DeleteEdgeSlm": {
+              "methods": [
+                "deleteEdgeSlm"
+              ]
+            },
+            "ListOrchestrationClusters": {
+              "methods": [
+                "listOrchestrationClusters",
+                "listOrchestrationClustersStream",
+                "listOrchestrationClustersAsync"
+              ]
+            },
+            "ListEdgeSlms": {
+              "methods": [
+                "listEdgeSlms",
+                "listEdgeSlmsStream",
+                "listEdgeSlmsAsync"
+              ]
+            },
+            "ListBlueprints": {
+              "methods": [
+                "listBlueprints",
+                "listBlueprintsStream",
+                "listBlueprintsAsync"
+              ]
+            },
+            "ListBlueprintRevisions": {
+              "methods": [
+                "listBlueprintRevisions",
+                "listBlueprintRevisionsStream",
+                "listBlueprintRevisionsAsync"
+              ]
+            },
+            "SearchBlueprintRevisions": {
+              "methods": [
+                "searchBlueprintRevisions",
+                "searchBlueprintRevisionsStream",
+                "searchBlueprintRevisionsAsync"
+              ]
+            },
+            "SearchDeploymentRevisions": {
+              "methods": [
+                "searchDeploymentRevisions",
+                "searchDeploymentRevisionsStream",
+                "searchDeploymentRevisionsAsync"
+              ]
+            },
+            "ListPublicBlueprints": {
+              "methods": [
+                "listPublicBlueprints",
+                "listPublicBlueprintsStream",
+                "listPublicBlueprintsAsync"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            },
+            "ListDeploymentRevisions": {
+              "methods": [
+                "listDeploymentRevisions",
+                "listDeploymentRevisionsStream",
+                "listDeploymentRevisionsAsync"
+              ]
+            },
+            "ListHydratedDeployments": {
+              "methods": [
+                "listHydratedDeployments",
+                "listHydratedDeploymentsStream",
+                "listHydratedDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
