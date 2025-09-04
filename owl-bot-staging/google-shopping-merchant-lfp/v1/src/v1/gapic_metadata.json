@@ -1,0 +1,139 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.lfp.v1",
+  "libraryPackage": "@google-cloud/lfp",
+  "services": {
+    "LfpInventoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LfpInventoryServiceClient",
+          "rpcs": {
+            "InsertLfpInventory": {
+              "methods": [
+                "insertLfpInventory"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LfpInventoryServiceClient",
+          "rpcs": {
+            "InsertLfpInventory": {
+              "methods": [
+                "insertLfpInventory"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LfpMerchantStateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LfpMerchantStateServiceClient",
+          "rpcs": {
+            "GetLfpMerchantState": {
+              "methods": [
+                "getLfpMerchantState"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LfpMerchantStateServiceClient",
+          "rpcs": {
+            "GetLfpMerchantState": {
+              "methods": [
+                "getLfpMerchantState"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LfpSaleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LfpSaleServiceClient",
+          "rpcs": {
+            "InsertLfpSale": {
+              "methods": [
+                "insertLfpSale"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LfpSaleServiceClient",
+          "rpcs": {
+            "InsertLfpSale": {
+              "methods": [
+                "insertLfpSale"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LfpStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LfpStoreServiceClient",
+          "rpcs": {
+            "GetLfpStore": {
+              "methods": [
+                "getLfpStore"
+              ]
+            },
+            "InsertLfpStore": {
+              "methods": [
+                "insertLfpStore"
+              ]
+            },
+            "DeleteLfpStore": {
+              "methods": [
+                "deleteLfpStore"
+              ]
+            },
+            "ListLfpStores": {
+              "methods": [
+                "listLfpStores",
+                "listLfpStoresStream",
+                "listLfpStoresAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LfpStoreServiceClient",
+          "rpcs": {
+            "GetLfpStore": {
+              "methods": [
+                "getLfpStore"
+              ]
+            },
+            "InsertLfpStore": {
+              "methods": [
+                "insertLfpStore"
+              ]
+            },
+            "DeleteLfpStore": {
+              "methods": [
+                "deleteLfpStore"
+              ]
+            },
+            "ListLfpStores": {
+              "methods": [
+                "listLfpStores",
+                "listLfpStoresStream",
+                "listLfpStoresAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
