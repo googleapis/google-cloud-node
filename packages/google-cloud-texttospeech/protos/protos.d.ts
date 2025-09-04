@@ -3743,6 +3743,9 @@ export namespace google {
                     /** SynthesisInput multiSpeakerMarkup */
                     multiSpeakerMarkup?: (google.cloud.texttospeech.v1beta1.IMultiSpeakerMarkup|null);
 
+                    /** SynthesisInput prompt */
+                    prompt?: (string|null);
+
                     /** SynthesisInput customPronunciations */
                     customPronunciations?: (google.cloud.texttospeech.v1beta1.ICustomPronunciations|null);
                 }
@@ -3767,6 +3770,9 @@ export namespace google {
 
                     /** SynthesisInput multiSpeakerMarkup. */
                     public multiSpeakerMarkup?: (google.cloud.texttospeech.v1beta1.IMultiSpeakerMarkup|null);
+
+                    /** SynthesisInput prompt. */
+                    public prompt?: (string|null);
 
                     /** SynthesisInput customPronunciations. */
                     public customPronunciations?: (google.cloud.texttospeech.v1beta1.ICustomPronunciations|null);
