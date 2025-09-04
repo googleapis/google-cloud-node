@@ -131,6 +131,20 @@ export namespace google {
                     public fetchInventory(request: google.cloud.vmmigration.v1.IFetchInventoryRequest): Promise<google.cloud.vmmigration.v1.FetchInventoryResponse>;
 
                     /**
+                     * Calls FetchStorageInventory.
+                     * @param request FetchStorageInventoryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchStorageInventoryResponse
+                     */
+                    public fetchStorageInventory(request: google.cloud.vmmigration.v1.IFetchStorageInventoryRequest, callback: google.cloud.vmmigration.v1.VmMigration.FetchStorageInventoryCallback): void;
+
+                    /**
+                     * Calls FetchStorageInventory.
+                     * @param request FetchStorageInventoryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchStorageInventory(request: google.cloud.vmmigration.v1.IFetchStorageInventoryRequest): Promise<google.cloud.vmmigration.v1.FetchStorageInventoryResponse>;
+
+                    /**
                      * Calls ListUtilizationReports.
                      * @param request ListUtilizationReportsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListUtilizationReportsResponse
@@ -381,6 +395,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public finalizeMigration(request: google.cloud.vmmigration.v1.IFinalizeMigrationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExtendMigration.
+                     * @param request ExtendMigrationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public extendMigration(request: google.cloud.vmmigration.v1.IExtendMigrationRequest, callback: google.cloud.vmmigration.v1.VmMigration.ExtendMigrationCallback): void;
+
+                    /**
+                     * Calls ExtendMigration.
+                     * @param request ExtendMigrationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public extendMigration(request: google.cloud.vmmigration.v1.IExtendMigrationRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls CreateCloneJob.
@@ -689,6 +717,202 @@ export namespace google {
                      * @returns Promise
                      */
                     public getReplicationCycle(request: google.cloud.vmmigration.v1.IGetReplicationCycleRequest): Promise<google.cloud.vmmigration.v1.ReplicationCycle>;
+
+                    /**
+                     * Calls ListImageImports.
+                     * @param request ListImageImportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListImageImportsResponse
+                     */
+                    public listImageImports(request: google.cloud.vmmigration.v1.IListImageImportsRequest, callback: google.cloud.vmmigration.v1.VmMigration.ListImageImportsCallback): void;
+
+                    /**
+                     * Calls ListImageImports.
+                     * @param request ListImageImportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listImageImports(request: google.cloud.vmmigration.v1.IListImageImportsRequest): Promise<google.cloud.vmmigration.v1.ListImageImportsResponse>;
+
+                    /**
+                     * Calls GetImageImport.
+                     * @param request GetImageImportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImageImport
+                     */
+                    public getImageImport(request: google.cloud.vmmigration.v1.IGetImageImportRequest, callback: google.cloud.vmmigration.v1.VmMigration.GetImageImportCallback): void;
+
+                    /**
+                     * Calls GetImageImport.
+                     * @param request GetImageImportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getImageImport(request: google.cloud.vmmigration.v1.IGetImageImportRequest): Promise<google.cloud.vmmigration.v1.ImageImport>;
+
+                    /**
+                     * Calls CreateImageImport.
+                     * @param request CreateImageImportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createImageImport(request: google.cloud.vmmigration.v1.ICreateImageImportRequest, callback: google.cloud.vmmigration.v1.VmMigration.CreateImageImportCallback): void;
+
+                    /**
+                     * Calls CreateImageImport.
+                     * @param request CreateImageImportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createImageImport(request: google.cloud.vmmigration.v1.ICreateImageImportRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteImageImport.
+                     * @param request DeleteImageImportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteImageImport(request: google.cloud.vmmigration.v1.IDeleteImageImportRequest, callback: google.cloud.vmmigration.v1.VmMigration.DeleteImageImportCallback): void;
+
+                    /**
+                     * Calls DeleteImageImport.
+                     * @param request DeleteImageImportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteImageImport(request: google.cloud.vmmigration.v1.IDeleteImageImportRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListImageImportJobs.
+                     * @param request ListImageImportJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListImageImportJobsResponse
+                     */
+                    public listImageImportJobs(request: google.cloud.vmmigration.v1.IListImageImportJobsRequest, callback: google.cloud.vmmigration.v1.VmMigration.ListImageImportJobsCallback): void;
+
+                    /**
+                     * Calls ListImageImportJobs.
+                     * @param request ListImageImportJobsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listImageImportJobs(request: google.cloud.vmmigration.v1.IListImageImportJobsRequest): Promise<google.cloud.vmmigration.v1.ListImageImportJobsResponse>;
+
+                    /**
+                     * Calls GetImageImportJob.
+                     * @param request GetImageImportJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImageImportJob
+                     */
+                    public getImageImportJob(request: google.cloud.vmmigration.v1.IGetImageImportJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.GetImageImportJobCallback): void;
+
+                    /**
+                     * Calls GetImageImportJob.
+                     * @param request GetImageImportJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getImageImportJob(request: google.cloud.vmmigration.v1.IGetImageImportJobRequest): Promise<google.cloud.vmmigration.v1.ImageImportJob>;
+
+                    /**
+                     * Calls CancelImageImportJob.
+                     * @param request CancelImageImportJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public cancelImageImportJob(request: google.cloud.vmmigration.v1.ICancelImageImportJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.CancelImageImportJobCallback): void;
+
+                    /**
+                     * Calls CancelImageImportJob.
+                     * @param request CancelImageImportJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelImageImportJob(request: google.cloud.vmmigration.v1.ICancelImageImportJobRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateDiskMigrationJob.
+                     * @param request CreateDiskMigrationJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDiskMigrationJob(request: google.cloud.vmmigration.v1.ICreateDiskMigrationJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.CreateDiskMigrationJobCallback): void;
+
+                    /**
+                     * Calls CreateDiskMigrationJob.
+                     * @param request CreateDiskMigrationJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDiskMigrationJob(request: google.cloud.vmmigration.v1.ICreateDiskMigrationJobRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListDiskMigrationJobs.
+                     * @param request ListDiskMigrationJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDiskMigrationJobsResponse
+                     */
+                    public listDiskMigrationJobs(request: google.cloud.vmmigration.v1.IListDiskMigrationJobsRequest, callback: google.cloud.vmmigration.v1.VmMigration.ListDiskMigrationJobsCallback): void;
+
+                    /**
+                     * Calls ListDiskMigrationJobs.
+                     * @param request ListDiskMigrationJobsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDiskMigrationJobs(request: google.cloud.vmmigration.v1.IListDiskMigrationJobsRequest): Promise<google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse>;
+
+                    /**
+                     * Calls GetDiskMigrationJob.
+                     * @param request GetDiskMigrationJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DiskMigrationJob
+                     */
+                    public getDiskMigrationJob(request: google.cloud.vmmigration.v1.IGetDiskMigrationJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.GetDiskMigrationJobCallback): void;
+
+                    /**
+                     * Calls GetDiskMigrationJob.
+                     * @param request GetDiskMigrationJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDiskMigrationJob(request: google.cloud.vmmigration.v1.IGetDiskMigrationJobRequest): Promise<google.cloud.vmmigration.v1.DiskMigrationJob>;
+
+                    /**
+                     * Calls UpdateDiskMigrationJob.
+                     * @param request UpdateDiskMigrationJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateDiskMigrationJob(request: google.cloud.vmmigration.v1.IUpdateDiskMigrationJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.UpdateDiskMigrationJobCallback): void;
+
+                    /**
+                     * Calls UpdateDiskMigrationJob.
+                     * @param request UpdateDiskMigrationJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDiskMigrationJob(request: google.cloud.vmmigration.v1.IUpdateDiskMigrationJobRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDiskMigrationJob.
+                     * @param request DeleteDiskMigrationJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDiskMigrationJob(request: google.cloud.vmmigration.v1.IDeleteDiskMigrationJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.DeleteDiskMigrationJobCallback): void;
+
+                    /**
+                     * Calls DeleteDiskMigrationJob.
+                     * @param request DeleteDiskMigrationJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDiskMigrationJob(request: google.cloud.vmmigration.v1.IDeleteDiskMigrationJobRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RunDiskMigrationJob.
+                     * @param request RunDiskMigrationJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public runDiskMigrationJob(request: google.cloud.vmmigration.v1.IRunDiskMigrationJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.RunDiskMigrationJobCallback): void;
+
+                    /**
+                     * Calls RunDiskMigrationJob.
+                     * @param request RunDiskMigrationJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runDiskMigrationJob(request: google.cloud.vmmigration.v1.IRunDiskMigrationJobRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CancelDiskMigrationJob.
+                     * @param request CancelDiskMigrationJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public cancelDiskMigrationJob(request: google.cloud.vmmigration.v1.ICancelDiskMigrationJobRequest, callback: google.cloud.vmmigration.v1.VmMigration.CancelDiskMigrationJobCallback): void;
+
+                    /**
+                     * Calls CancelDiskMigrationJob.
+                     * @param request CancelDiskMigrationJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelDiskMigrationJob(request: google.cloud.vmmigration.v1.ICancelDiskMigrationJobRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace VmMigration {
@@ -734,6 +958,13 @@ export namespace google {
                      * @param [response] FetchInventoryResponse
                      */
                     type FetchInventoryCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.FetchInventoryResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|fetchStorageInventory}.
+                     * @param error Error, if any
+                     * @param [response] FetchStorageInventoryResponse
+                     */
+                    type FetchStorageInventoryCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.FetchStorageInventoryResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|listUtilizationReports}.
@@ -860,6 +1091,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type FinalizeMigrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|extendMigration}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExtendMigrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|createCloneJob}.
@@ -1014,6 +1252,142 @@ export namespace google {
                      * @param [response] ReplicationCycle
                      */
                     type GetReplicationCycleCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ReplicationCycle) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|listImageImports}.
+                     * @param error Error, if any
+                     * @param [response] ListImageImportsResponse
+                     */
+                    type ListImageImportsCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ListImageImportsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|getImageImport}.
+                     * @param error Error, if any
+                     * @param [response] ImageImport
+                     */
+                    type GetImageImportCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ImageImport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|createImageImport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateImageImportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|deleteImageImport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteImageImportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|listImageImportJobs}.
+                     * @param error Error, if any
+                     * @param [response] ListImageImportJobsResponse
+                     */
+                    type ListImageImportJobsCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ListImageImportJobsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|getImageImportJob}.
+                     * @param error Error, if any
+                     * @param [response] ImageImportJob
+                     */
+                    type GetImageImportJobCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ImageImportJob) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|cancelImageImportJob}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CancelImageImportJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|createDiskMigrationJob}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDiskMigrationJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|listDiskMigrationJobs}.
+                     * @param error Error, if any
+                     * @param [response] ListDiskMigrationJobsResponse
+                     */
+                    type ListDiskMigrationJobsCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|getDiskMigrationJob}.
+                     * @param error Error, if any
+                     * @param [response] DiskMigrationJob
+                     */
+                    type GetDiskMigrationJobCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.DiskMigrationJob) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|updateDiskMigrationJob}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateDiskMigrationJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|deleteDiskMigrationJob}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDiskMigrationJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|runDiskMigrationJob}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RunDiskMigrationJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|cancelDiskMigrationJob}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CancelDiskMigrationJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** ComputeEngineDiskType enum. */
+                enum ComputeEngineDiskType {
+                    COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED = 0,
+                    COMPUTE_ENGINE_DISK_TYPE_STANDARD = 1,
+                    COMPUTE_ENGINE_DISK_TYPE_SSD = 2,
+                    COMPUTE_ENGINE_DISK_TYPE_BALANCED = 3,
+                    COMPUTE_ENGINE_DISK_TYPE_HYPERDISK_BALANCED = 4
+                }
+
+                /** ComputeEngineLicenseType enum. */
+                enum ComputeEngineLicenseType {
+                    COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT = 0,
+                    COMPUTE_ENGINE_LICENSE_TYPE_PAYG = 1,
+                    COMPUTE_ENGINE_LICENSE_TYPE_BYOL = 2
+                }
+
+                /** ComputeEngineBootOption enum. */
+                enum ComputeEngineBootOption {
+                    COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED = 0,
+                    COMPUTE_ENGINE_BOOT_OPTION_EFI = 1,
+                    COMPUTE_ENGINE_BOOT_OPTION_BIOS = 2
+                }
+
+                /** OsCapability enum. */
+                enum OsCapability {
+                    OS_CAPABILITY_UNSPECIFIED = 0,
+                    OS_CAPABILITY_NVME_STORAGE_ACCESS = 1,
+                    OS_CAPABILITY_GVNIC_NETWORK_INTERFACE = 2,
+                    OS_CAPABILITY_IDPF_NETWORK_INTERFACE = 3
+                }
+
+                /** BootConversion enum. */
+                enum BootConversion {
+                    BOOT_CONVERSION_UNSPECIFIED = 0,
+                    NONE = 1,
+                    BIOS_TO_EFI = 2
                 }
 
                 /** UtilizationReportView enum. */
@@ -1030,26 +1404,18 @@ export namespace google {
                     MIGRATING_VM_VIEW_FULL = 2
                 }
 
-                /** ComputeEngineDiskType enum. */
-                enum ComputeEngineDiskType {
-                    COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED = 0,
-                    COMPUTE_ENGINE_DISK_TYPE_STANDARD = 1,
-                    COMPUTE_ENGINE_DISK_TYPE_SSD = 2,
-                    COMPUTE_ENGINE_DISK_TYPE_BALANCED = 3
+                /** VmArchitecture enum. */
+                enum VmArchitecture {
+                    VM_ARCHITECTURE_UNSPECIFIED = 0,
+                    VM_ARCHITECTURE_X86_FAMILY = 1,
+                    VM_ARCHITECTURE_ARM64 = 2
                 }
 
-                /** ComputeEngineLicenseType enum. */
-                enum ComputeEngineLicenseType {
-                    COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT = 0,
-                    COMPUTE_ENGINE_LICENSE_TYPE_PAYG = 1,
-                    COMPUTE_ENGINE_LICENSE_TYPE_BYOL = 2
-                }
-
-                /** ComputeEngineBootOption enum. */
-                enum ComputeEngineBootOption {
-                    COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED = 0,
-                    COMPUTE_ENGINE_BOOT_OPTION_EFI = 1,
-                    COMPUTE_ENGINE_BOOT_OPTION_BIOS = 2
+                /** ComputeEngineNetworkTier enum. */
+                enum ComputeEngineNetworkTier {
+                    COMPUTE_ENGINE_NETWORK_TIER_UNSPECIFIED = 0,
+                    NETWORK_TIER_STANDARD = 1,
+                    NETWORK_TIER_PREMIUM = 2
                 }
 
                 /** Properties of a ReplicationCycle. */
@@ -1081,6 +1447,9 @@ export namespace google {
 
                     /** ReplicationCycle error */
                     error?: (google.rpc.IStatus|null);
+
+                    /** ReplicationCycle warnings */
+                    warnings?: (google.cloud.vmmigration.v1.IMigrationWarning[]|null);
                 }
 
                 /** Represents a ReplicationCycle. */
@@ -1118,6 +1487,9 @@ export namespace google {
 
                     /** ReplicationCycle error. */
                     public error?: (google.rpc.IStatus|null);
+
+                    /** ReplicationCycle warnings. */
+                    public warnings: google.cloud.vmmigration.v1.IMigrationWarning[];
 
                     /**
                      * Creates a new ReplicationCycle instance using the specified properties.
@@ -1733,8 +2105,17 @@ export namespace google {
                     /** MigratingVm computeEngineTargetDefaults */
                     computeEngineTargetDefaults?: (google.cloud.vmmigration.v1.IComputeEngineTargetDefaults|null);
 
+                    /** MigratingVm computeEngineDisksTargetDefaults */
+                    computeEngineDisksTargetDefaults?: (google.cloud.vmmigration.v1.IComputeEngineDisksTargetDefaults|null);
+
+                    /** MigratingVm vmwareSourceVmDetails */
+                    vmwareSourceVmDetails?: (google.cloud.vmmigration.v1.IVmwareSourceVmDetails|null);
+
                     /** MigratingVm awsSourceVmDetails */
                     awsSourceVmDetails?: (google.cloud.vmmigration.v1.IAwsSourceVmDetails|null);
+
+                    /** MigratingVm azureSourceVmDetails */
+                    azureSourceVmDetails?: (google.cloud.vmmigration.v1.IAzureSourceVmDetails|null);
 
                     /** MigratingVm name */
                     name?: (string|null);
@@ -1769,6 +2150,9 @@ export namespace google {
                     /** MigratingVm currentSyncInfo */
                     currentSyncInfo?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
 
+                    /** MigratingVm lastReplicationCycle */
+                    lastReplicationCycle?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
+
                     /** MigratingVm group */
                     group?: (string|null);
 
@@ -1783,6 +2167,12 @@ export namespace google {
 
                     /** MigratingVm recentCutoverJobs */
                     recentCutoverJobs?: (google.cloud.vmmigration.v1.ICutoverJob[]|null);
+
+                    /** MigratingVm cutoverForecast */
+                    cutoverForecast?: (google.cloud.vmmigration.v1.ICutoverForecast|null);
+
+                    /** MigratingVm expiration */
+                    expiration?: (google.cloud.vmmigration.v1.MigratingVm.IExpiration|null);
                 }
 
                 /** Represents a MigratingVm. */
@@ -1797,8 +2187,17 @@ export namespace google {
                     /** MigratingVm computeEngineTargetDefaults. */
                     public computeEngineTargetDefaults?: (google.cloud.vmmigration.v1.IComputeEngineTargetDefaults|null);
 
+                    /** MigratingVm computeEngineDisksTargetDefaults. */
+                    public computeEngineDisksTargetDefaults?: (google.cloud.vmmigration.v1.IComputeEngineDisksTargetDefaults|null);
+
+                    /** MigratingVm vmwareSourceVmDetails. */
+                    public vmwareSourceVmDetails?: (google.cloud.vmmigration.v1.IVmwareSourceVmDetails|null);
+
                     /** MigratingVm awsSourceVmDetails. */
                     public awsSourceVmDetails?: (google.cloud.vmmigration.v1.IAwsSourceVmDetails|null);
+
+                    /** MigratingVm azureSourceVmDetails. */
+                    public azureSourceVmDetails?: (google.cloud.vmmigration.v1.IAzureSourceVmDetails|null);
 
                     /** MigratingVm name. */
                     public name: string;
@@ -1833,6 +2232,9 @@ export namespace google {
                     /** MigratingVm currentSyncInfo. */
                     public currentSyncInfo?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
 
+                    /** MigratingVm lastReplicationCycle. */
+                    public lastReplicationCycle?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
+
                     /** MigratingVm group. */
                     public group: string;
 
@@ -1848,11 +2250,17 @@ export namespace google {
                     /** MigratingVm recentCutoverJobs. */
                     public recentCutoverJobs: google.cloud.vmmigration.v1.ICutoverJob[];
 
+                    /** MigratingVm cutoverForecast. */
+                    public cutoverForecast?: (google.cloud.vmmigration.v1.ICutoverForecast|null);
+
+                    /** MigratingVm expiration. */
+                    public expiration?: (google.cloud.vmmigration.v1.MigratingVm.IExpiration|null);
+
                     /** MigratingVm targetVmDefaults. */
-                    public targetVmDefaults?: "computeEngineTargetDefaults";
+                    public targetVmDefaults?: ("computeEngineTargetDefaults"|"computeEngineDisksTargetDefaults");
 
                     /** MigratingVm sourceVmDetails. */
-                    public sourceVmDetails?: "awsSourceVmDetails";
+                    public sourceVmDetails?: ("vmwareSourceVmDetails"|"awsSourceVmDetails"|"azureSourceVmDetails");
 
                     /**
                      * Creates a new MigratingVm instance using the specified properties.
@@ -1934,6 +2342,115 @@ export namespace google {
 
                 namespace MigratingVm {
 
+                    /** Properties of an Expiration. */
+                    interface IExpiration {
+
+                        /** Expiration expireTime */
+                        expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Expiration extensionCount */
+                        extensionCount?: (number|null);
+
+                        /** Expiration extendable */
+                        extendable?: (boolean|null);
+                    }
+
+                    /** Represents an Expiration. */
+                    class Expiration implements IExpiration {
+
+                        /**
+                         * Constructs a new Expiration.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.MigratingVm.IExpiration);
+
+                        /** Expiration expireTime. */
+                        public expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Expiration extensionCount. */
+                        public extensionCount: number;
+
+                        /** Expiration extendable. */
+                        public extendable: boolean;
+
+                        /**
+                         * Creates a new Expiration instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Expiration instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.MigratingVm.IExpiration): google.cloud.vmmigration.v1.MigratingVm.Expiration;
+
+                        /**
+                         * Encodes the specified Expiration message. Does not implicitly {@link google.cloud.vmmigration.v1.MigratingVm.Expiration.verify|verify} messages.
+                         * @param message Expiration message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.MigratingVm.IExpiration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Expiration message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.MigratingVm.Expiration.verify|verify} messages.
+                         * @param message Expiration message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.MigratingVm.IExpiration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Expiration message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Expiration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.MigratingVm.Expiration;
+
+                        /**
+                         * Decodes an Expiration message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Expiration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.MigratingVm.Expiration;
+
+                        /**
+                         * Verifies an Expiration message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Expiration message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Expiration
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.MigratingVm.Expiration;
+
+                        /**
+                         * Creates a plain object from an Expiration message. Also converts values to other types if specified.
+                         * @param message Expiration
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.MigratingVm.Expiration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Expiration to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Expiration
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -1947,8 +2464,107 @@ export namespace google {
                         PAUSED = 10,
                         FINALIZING = 11,
                         FINALIZED = 12,
-                        ERROR = 13
+                        ERROR = 13,
+                        EXPIRED = 14,
+                        FINALIZED_EXPIRED = 17
                     }
+                }
+
+                /** Properties of a CutoverForecast. */
+                interface ICutoverForecast {
+
+                    /** CutoverForecast estimatedCutoverJobDuration */
+                    estimatedCutoverJobDuration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a CutoverForecast. */
+                class CutoverForecast implements ICutoverForecast {
+
+                    /**
+                     * Constructs a new CutoverForecast.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICutoverForecast);
+
+                    /** CutoverForecast estimatedCutoverJobDuration. */
+                    public estimatedCutoverJobDuration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new CutoverForecast instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CutoverForecast instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICutoverForecast): google.cloud.vmmigration.v1.CutoverForecast;
+
+                    /**
+                     * Encodes the specified CutoverForecast message. Does not implicitly {@link google.cloud.vmmigration.v1.CutoverForecast.verify|verify} messages.
+                     * @param message CutoverForecast message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICutoverForecast, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CutoverForecast message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CutoverForecast.verify|verify} messages.
+                     * @param message CutoverForecast message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICutoverForecast, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CutoverForecast message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CutoverForecast
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CutoverForecast;
+
+                    /**
+                     * Decodes a CutoverForecast message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CutoverForecast
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CutoverForecast;
+
+                    /**
+                     * Verifies a CutoverForecast message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CutoverForecast message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CutoverForecast
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CutoverForecast;
+
+                    /**
+                     * Creates a plain object from a CutoverForecast message. Also converts values to other types if specified.
+                     * @param message CutoverForecast
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CutoverForecast, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CutoverForecast to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CutoverForecast
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CloneJob. */
@@ -1956,6 +2572,9 @@ export namespace google {
 
                     /** CloneJob computeEngineTargetDetails */
                     computeEngineTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineTargetDetails|null);
+
+                    /** CloneJob computeEngineDisksTargetDetails */
+                    computeEngineDisksTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails|null);
 
                     /** CloneJob createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -1991,6 +2610,9 @@ export namespace google {
                     /** CloneJob computeEngineTargetDetails. */
                     public computeEngineTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineTargetDetails|null);
 
+                    /** CloneJob computeEngineDisksTargetDetails. */
+                    public computeEngineDisksTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails|null);
+
                     /** CloneJob createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -2013,7 +2635,7 @@ export namespace google {
                     public steps: google.cloud.vmmigration.v1.ICloneStep[];
 
                     /** CloneJob targetVmDetails. */
-                    public targetVmDetails?: "computeEngineTargetDetails";
+                    public targetVmDetails?: ("computeEngineTargetDetails"|"computeEngineDisksTargetDetails");
 
                     /**
                      * Creates a new CloneJob instance using the specified properties.
@@ -2511,6 +3133,9 @@ export namespace google {
                     /** CutoverJob computeEngineTargetDetails */
                     computeEngineTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineTargetDetails|null);
 
+                    /** CutoverJob computeEngineDisksTargetDetails */
+                    computeEngineDisksTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails|null);
+
                     /** CutoverJob createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -2551,6 +3176,9 @@ export namespace google {
                     /** CutoverJob computeEngineTargetDetails. */
                     public computeEngineTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineTargetDetails|null);
 
+                    /** CutoverJob computeEngineDisksTargetDetails. */
+                    public computeEngineDisksTargetDetails?: (google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails|null);
+
                     /** CutoverJob createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -2579,7 +3207,7 @@ export namespace google {
                     public steps: google.cloud.vmmigration.v1.ICutoverStep[];
 
                     /** CutoverJob targetVmDetails. */
-                    public targetVmDetails?: "computeEngineTargetDetails";
+                    public targetVmDetails?: ("computeEngineTargetDetails"|"computeEngineDisksTargetDetails");
 
                     /**
                      * Creates a new CutoverJob instance using the specified properties.
@@ -3540,6 +4168,9 @@ export namespace google {
                     /** Source aws */
                     aws?: (google.cloud.vmmigration.v1.IAwsSourceDetails|null);
 
+                    /** Source azure */
+                    azure?: (google.cloud.vmmigration.v1.IAzureSourceDetails|null);
+
                     /** Source name */
                     name?: (string|null);
 
@@ -3554,6 +4185,9 @@ export namespace google {
 
                     /** Source description */
                     description?: (string|null);
+
+                    /** Source encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
                 }
 
                 /** Represents a Source. */
@@ -3571,6 +4205,9 @@ export namespace google {
                     /** Source aws. */
                     public aws?: (google.cloud.vmmigration.v1.IAwsSourceDetails|null);
 
+                    /** Source azure. */
+                    public azure?: (google.cloud.vmmigration.v1.IAzureSourceDetails|null);
+
                     /** Source name. */
                     public name: string;
 
@@ -3586,8 +4223,11 @@ export namespace google {
                     /** Source description. */
                     public description: string;
 
+                    /** Source encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
                     /** Source sourceDetails. */
-                    public sourceDetails?: ("vmware"|"aws");
+                    public sourceDetails?: ("vmware"|"aws"|"azure");
 
                     /**
                      * Creates a new Source instance using the specified properties.
@@ -3667,6 +4307,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an Encryption. */
+                interface IEncryption {
+
+                    /** Encryption kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents an Encryption. */
+                class Encryption implements IEncryption {
+
+                    /**
+                     * Constructs a new Encryption.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IEncryption);
+
+                    /** Encryption kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new Encryption instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Encryption instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IEncryption): google.cloud.vmmigration.v1.Encryption;
+
+                    /**
+                     * Encodes the specified Encryption message. Does not implicitly {@link google.cloud.vmmigration.v1.Encryption.verify|verify} messages.
+                     * @param message Encryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Encryption message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.Encryption.verify|verify} messages.
+                     * @param message Encryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Encryption message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Encryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.Encryption;
+
+                    /**
+                     * Decodes an Encryption message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Encryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.Encryption;
+
+                    /**
+                     * Verifies an Encryption message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Encryption message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Encryption
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.Encryption;
+
+                    /**
+                     * Creates a plain object from an Encryption message. Also converts values to other types if specified.
+                     * @param message Encryption
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.Encryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Encryption to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Encryption
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VmwareSourceDetails. */
                 interface IVmwareSourceDetails {
 
@@ -3681,6 +4418,9 @@ export namespace google {
 
                     /** VmwareSourceDetails thumbprint */
                     thumbprint?: (string|null);
+
+                    /** VmwareSourceDetails resolvedVcenterHost */
+                    resolvedVcenterHost?: (string|null);
                 }
 
                 /** Represents a VmwareSourceDetails. */
@@ -3703,6 +4443,9 @@ export namespace google {
 
                     /** VmwareSourceDetails thumbprint. */
                     public thumbprint: string;
+
+                    /** VmwareSourceDetails resolvedVcenterHost. */
+                    public resolvedVcenterHost: string;
 
                     /**
                      * Creates a new VmwareSourceDetails instance using the specified properties.
@@ -3934,6 +4677,9 @@ export namespace google {
 
                         /** AccessKeyCredentials secretAccessKey */
                         secretAccessKey?: (string|null);
+
+                        /** AccessKeyCredentials sessionToken */
+                        sessionToken?: (string|null);
                     }
 
                     /** Represents an AccessKeyCredentials. */
@@ -3950,6 +4696,9 @@ export namespace google {
 
                         /** AccessKeyCredentials secretAccessKey. */
                         public secretAccessKey: string;
+
+                        /** AccessKeyCredentials sessionToken. */
+                        public sessionToken: string;
 
                         /**
                          * Creates a new AccessKeyCredentials instance using the specified properties.
@@ -4126,6 +4875,262 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Tag
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        FAILED = 2,
+                        ACTIVE = 3
+                    }
+                }
+
+                /** Properties of an AzureSourceDetails. */
+                interface IAzureSourceDetails {
+
+                    /** AzureSourceDetails clientSecretCreds */
+                    clientSecretCreds?: (google.cloud.vmmigration.v1.AzureSourceDetails.IClientSecretCredentials|null);
+
+                    /** AzureSourceDetails subscriptionId */
+                    subscriptionId?: (string|null);
+
+                    /** AzureSourceDetails azureLocation */
+                    azureLocation?: (string|null);
+
+                    /** AzureSourceDetails state */
+                    state?: (google.cloud.vmmigration.v1.AzureSourceDetails.State|keyof typeof google.cloud.vmmigration.v1.AzureSourceDetails.State|null);
+
+                    /** AzureSourceDetails error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** AzureSourceDetails migrationResourcesUserTags */
+                    migrationResourcesUserTags?: ({ [k: string]: string }|null);
+
+                    /** AzureSourceDetails resourceGroupId */
+                    resourceGroupId?: (string|null);
+                }
+
+                /** Represents an AzureSourceDetails. */
+                class AzureSourceDetails implements IAzureSourceDetails {
+
+                    /**
+                     * Constructs a new AzureSourceDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAzureSourceDetails);
+
+                    /** AzureSourceDetails clientSecretCreds. */
+                    public clientSecretCreds?: (google.cloud.vmmigration.v1.AzureSourceDetails.IClientSecretCredentials|null);
+
+                    /** AzureSourceDetails subscriptionId. */
+                    public subscriptionId: string;
+
+                    /** AzureSourceDetails azureLocation. */
+                    public azureLocation: string;
+
+                    /** AzureSourceDetails state. */
+                    public state: (google.cloud.vmmigration.v1.AzureSourceDetails.State|keyof typeof google.cloud.vmmigration.v1.AzureSourceDetails.State);
+
+                    /** AzureSourceDetails error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** AzureSourceDetails migrationResourcesUserTags. */
+                    public migrationResourcesUserTags: { [k: string]: string };
+
+                    /** AzureSourceDetails resourceGroupId. */
+                    public resourceGroupId: string;
+
+                    /** AzureSourceDetails credentialsType. */
+                    public credentialsType?: "clientSecretCreds";
+
+                    /**
+                     * Creates a new AzureSourceDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AzureSourceDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAzureSourceDetails): google.cloud.vmmigration.v1.AzureSourceDetails;
+
+                    /**
+                     * Encodes the specified AzureSourceDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceDetails.verify|verify} messages.
+                     * @param message AzureSourceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAzureSourceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AzureSourceDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceDetails.verify|verify} messages.
+                     * @param message AzureSourceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAzureSourceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AzureSourceDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AzureSourceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureSourceDetails;
+
+                    /**
+                     * Decodes an AzureSourceDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AzureSourceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureSourceDetails;
+
+                    /**
+                     * Verifies an AzureSourceDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AzureSourceDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AzureSourceDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureSourceDetails;
+
+                    /**
+                     * Creates a plain object from an AzureSourceDetails message. Also converts values to other types if specified.
+                     * @param message AzureSourceDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AzureSourceDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AzureSourceDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AzureSourceDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AzureSourceDetails {
+
+                    /** Properties of a ClientSecretCredentials. */
+                    interface IClientSecretCredentials {
+
+                        /** ClientSecretCredentials tenantId */
+                        tenantId?: (string|null);
+
+                        /** ClientSecretCredentials clientId */
+                        clientId?: (string|null);
+
+                        /** ClientSecretCredentials clientSecret */
+                        clientSecret?: (string|null);
+                    }
+
+                    /** Represents a ClientSecretCredentials. */
+                    class ClientSecretCredentials implements IClientSecretCredentials {
+
+                        /**
+                         * Constructs a new ClientSecretCredentials.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AzureSourceDetails.IClientSecretCredentials);
+
+                        /** ClientSecretCredentials tenantId. */
+                        public tenantId: string;
+
+                        /** ClientSecretCredentials clientId. */
+                        public clientId: string;
+
+                        /** ClientSecretCredentials clientSecret. */
+                        public clientSecret: string;
+
+                        /**
+                         * Creates a new ClientSecretCredentials instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClientSecretCredentials instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AzureSourceDetails.IClientSecretCredentials): google.cloud.vmmigration.v1.AzureSourceDetails.ClientSecretCredentials;
+
+                        /**
+                         * Encodes the specified ClientSecretCredentials message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceDetails.ClientSecretCredentials.verify|verify} messages.
+                         * @param message ClientSecretCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AzureSourceDetails.IClientSecretCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClientSecretCredentials message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceDetails.ClientSecretCredentials.verify|verify} messages.
+                         * @param message ClientSecretCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AzureSourceDetails.IClientSecretCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClientSecretCredentials message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClientSecretCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureSourceDetails.ClientSecretCredentials;
+
+                        /**
+                         * Decodes a ClientSecretCredentials message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClientSecretCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureSourceDetails.ClientSecretCredentials;
+
+                        /**
+                         * Verifies a ClientSecretCredentials message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClientSecretCredentials message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClientSecretCredentials
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureSourceDetails.ClientSecretCredentials;
+
+                        /**
+                         * Creates a plain object from a ClientSecretCredentials message. Also converts values to other types if specified.
+                         * @param message ClientSecretCredentials
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AzureSourceDetails.ClientSecretCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClientSecretCredentials to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClientSecretCredentials
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -5473,6 +6478,9 @@ export namespace google {
 
                     /** VmwareVmDetails bootOption */
                     bootOption?: (google.cloud.vmmigration.v1.VmwareVmDetails.BootOption|keyof typeof google.cloud.vmmigration.v1.VmwareVmDetails.BootOption|null);
+
+                    /** VmwareVmDetails architecture */
+                    architecture?: (google.cloud.vmmigration.v1.VmwareVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmwareVmDetails.VmArchitecture|null);
                 }
 
                 /** Represents a VmwareVmDetails. */
@@ -5519,6 +6527,9 @@ export namespace google {
 
                     /** VmwareVmDetails bootOption. */
                     public bootOption: (google.cloud.vmmigration.v1.VmwareVmDetails.BootOption|keyof typeof google.cloud.vmmigration.v1.VmwareVmDetails.BootOption);
+
+                    /** VmwareVmDetails architecture. */
+                    public architecture: (google.cloud.vmmigration.v1.VmwareVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmwareVmDetails.VmArchitecture);
 
                     /**
                      * Creates a new VmwareVmDetails instance using the specified properties.
@@ -5614,6 +6625,13 @@ export namespace google {
                         EFI = 1,
                         BIOS = 2
                     }
+
+                    /** VmArchitecture enum. */
+                    enum VmArchitecture {
+                        VM_ARCHITECTURE_UNSPECIFIED = 0,
+                        VM_ARCHITECTURE_X86_FAMILY = 1,
+                        VM_ARCHITECTURE_ARM64 = 2
+                    }
                 }
 
                 /** Properties of an AwsVmDetails. */
@@ -5672,6 +6690,9 @@ export namespace google {
 
                     /** AwsVmDetails architecture */
                     architecture?: (google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture|null);
+
+                    /** AwsVmDetails vcpuCount */
+                    vcpuCount?: (number|null);
                 }
 
                 /** Represents an AwsVmDetails. */
@@ -5736,6 +6757,9 @@ export namespace google {
 
                     /** AwsVmDetails architecture. */
                     public architecture: (google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture);
+
+                    /** AwsVmDetails vcpuCount. */
+                    public vcpuCount: number;
 
                     /**
                      * Creates a new AwsVmDetails instance using the specified properties.
@@ -5953,6 +6977,543 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AzureVmDetails. */
+                interface IAzureVmDetails {
+
+                    /** AzureVmDetails vmId */
+                    vmId?: (string|null);
+
+                    /** AzureVmDetails powerState */
+                    powerState?: (google.cloud.vmmigration.v1.AzureVmDetails.PowerState|keyof typeof google.cloud.vmmigration.v1.AzureVmDetails.PowerState|null);
+
+                    /** AzureVmDetails vmSize */
+                    vmSize?: (string|null);
+
+                    /** AzureVmDetails cpuCount */
+                    cpuCount?: (number|null);
+
+                    /** AzureVmDetails memoryMb */
+                    memoryMb?: (number|null);
+
+                    /** AzureVmDetails diskCount */
+                    diskCount?: (number|null);
+
+                    /** AzureVmDetails committedStorageMb */
+                    committedStorageMb?: (number|Long|string|null);
+
+                    /** AzureVmDetails osDisk */
+                    osDisk?: (google.cloud.vmmigration.v1.AzureVmDetails.IOSDisk|null);
+
+                    /** AzureVmDetails disks */
+                    disks?: (google.cloud.vmmigration.v1.AzureVmDetails.IDisk[]|null);
+
+                    /** AzureVmDetails osDescription */
+                    osDescription?: (google.cloud.vmmigration.v1.AzureVmDetails.IOSDescription|null);
+
+                    /** AzureVmDetails bootOption */
+                    bootOption?: (google.cloud.vmmigration.v1.AzureVmDetails.BootOption|keyof typeof google.cloud.vmmigration.v1.AzureVmDetails.BootOption|null);
+
+                    /** AzureVmDetails tags */
+                    tags?: ({ [k: string]: string }|null);
+
+                    /** AzureVmDetails computerName */
+                    computerName?: (string|null);
+
+                    /** AzureVmDetails architecture */
+                    architecture?: (google.cloud.vmmigration.v1.AzureVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.AzureVmDetails.VmArchitecture|null);
+                }
+
+                /** Represents an AzureVmDetails. */
+                class AzureVmDetails implements IAzureVmDetails {
+
+                    /**
+                     * Constructs a new AzureVmDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAzureVmDetails);
+
+                    /** AzureVmDetails vmId. */
+                    public vmId: string;
+
+                    /** AzureVmDetails powerState. */
+                    public powerState: (google.cloud.vmmigration.v1.AzureVmDetails.PowerState|keyof typeof google.cloud.vmmigration.v1.AzureVmDetails.PowerState);
+
+                    /** AzureVmDetails vmSize. */
+                    public vmSize: string;
+
+                    /** AzureVmDetails cpuCount. */
+                    public cpuCount: number;
+
+                    /** AzureVmDetails memoryMb. */
+                    public memoryMb: number;
+
+                    /** AzureVmDetails diskCount. */
+                    public diskCount: number;
+
+                    /** AzureVmDetails committedStorageMb. */
+                    public committedStorageMb: (number|Long|string);
+
+                    /** AzureVmDetails osDisk. */
+                    public osDisk?: (google.cloud.vmmigration.v1.AzureVmDetails.IOSDisk|null);
+
+                    /** AzureVmDetails disks. */
+                    public disks: google.cloud.vmmigration.v1.AzureVmDetails.IDisk[];
+
+                    /** AzureVmDetails osDescription. */
+                    public osDescription?: (google.cloud.vmmigration.v1.AzureVmDetails.IOSDescription|null);
+
+                    /** AzureVmDetails bootOption. */
+                    public bootOption: (google.cloud.vmmigration.v1.AzureVmDetails.BootOption|keyof typeof google.cloud.vmmigration.v1.AzureVmDetails.BootOption);
+
+                    /** AzureVmDetails tags. */
+                    public tags: { [k: string]: string };
+
+                    /** AzureVmDetails computerName. */
+                    public computerName: string;
+
+                    /** AzureVmDetails architecture. */
+                    public architecture: (google.cloud.vmmigration.v1.AzureVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.AzureVmDetails.VmArchitecture);
+
+                    /**
+                     * Creates a new AzureVmDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AzureVmDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAzureVmDetails): google.cloud.vmmigration.v1.AzureVmDetails;
+
+                    /**
+                     * Encodes the specified AzureVmDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.verify|verify} messages.
+                     * @param message AzureVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAzureVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AzureVmDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.verify|verify} messages.
+                     * @param message AzureVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAzureVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AzureVmDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AzureVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureVmDetails;
+
+                    /**
+                     * Decodes an AzureVmDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AzureVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureVmDetails;
+
+                    /**
+                     * Verifies an AzureVmDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AzureVmDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AzureVmDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureVmDetails;
+
+                    /**
+                     * Creates a plain object from an AzureVmDetails message. Also converts values to other types if specified.
+                     * @param message AzureVmDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AzureVmDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AzureVmDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AzureVmDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AzureVmDetails {
+
+                    /** Properties of a OSDisk. */
+                    interface IOSDisk {
+
+                        /** OSDisk type */
+                        type?: (string|null);
+
+                        /** OSDisk name */
+                        name?: (string|null);
+
+                        /** OSDisk sizeGb */
+                        sizeGb?: (number|null);
+                    }
+
+                    /** Represents a OSDisk. */
+                    class OSDisk implements IOSDisk {
+
+                        /**
+                         * Constructs a new OSDisk.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AzureVmDetails.IOSDisk);
+
+                        /** OSDisk type. */
+                        public type: string;
+
+                        /** OSDisk name. */
+                        public name: string;
+
+                        /** OSDisk sizeGb. */
+                        public sizeGb: number;
+
+                        /**
+                         * Creates a new OSDisk instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OSDisk instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AzureVmDetails.IOSDisk): google.cloud.vmmigration.v1.AzureVmDetails.OSDisk;
+
+                        /**
+                         * Encodes the specified OSDisk message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.OSDisk.verify|verify} messages.
+                         * @param message OSDisk message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AzureVmDetails.IOSDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OSDisk message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.OSDisk.verify|verify} messages.
+                         * @param message OSDisk message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AzureVmDetails.IOSDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a OSDisk message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OSDisk
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureVmDetails.OSDisk;
+
+                        /**
+                         * Decodes a OSDisk message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OSDisk
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureVmDetails.OSDisk;
+
+                        /**
+                         * Verifies a OSDisk message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a OSDisk message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OSDisk
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureVmDetails.OSDisk;
+
+                        /**
+                         * Creates a plain object from a OSDisk message. Also converts values to other types if specified.
+                         * @param message OSDisk
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AzureVmDetails.OSDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OSDisk to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OSDisk
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Disk. */
+                    interface IDisk {
+
+                        /** Disk name */
+                        name?: (string|null);
+
+                        /** Disk sizeGb */
+                        sizeGb?: (number|null);
+
+                        /** Disk lun */
+                        lun?: (number|null);
+                    }
+
+                    /** Represents a Disk. */
+                    class Disk implements IDisk {
+
+                        /**
+                         * Constructs a new Disk.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AzureVmDetails.IDisk);
+
+                        /** Disk name. */
+                        public name: string;
+
+                        /** Disk sizeGb. */
+                        public sizeGb: number;
+
+                        /** Disk lun. */
+                        public lun: number;
+
+                        /**
+                         * Creates a new Disk instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Disk instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AzureVmDetails.IDisk): google.cloud.vmmigration.v1.AzureVmDetails.Disk;
+
+                        /**
+                         * Encodes the specified Disk message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.Disk.verify|verify} messages.
+                         * @param message Disk message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AzureVmDetails.IDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Disk message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.Disk.verify|verify} messages.
+                         * @param message Disk message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AzureVmDetails.IDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Disk message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Disk
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureVmDetails.Disk;
+
+                        /**
+                         * Decodes a Disk message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Disk
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureVmDetails.Disk;
+
+                        /**
+                         * Verifies a Disk message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Disk message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Disk
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureVmDetails.Disk;
+
+                        /**
+                         * Creates a plain object from a Disk message. Also converts values to other types if specified.
+                         * @param message Disk
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AzureVmDetails.Disk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Disk to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Disk
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a OSDescription. */
+                    interface IOSDescription {
+
+                        /** OSDescription type */
+                        type?: (string|null);
+
+                        /** OSDescription publisher */
+                        publisher?: (string|null);
+
+                        /** OSDescription offer */
+                        offer?: (string|null);
+
+                        /** OSDescription plan */
+                        plan?: (string|null);
+                    }
+
+                    /** Represents a OSDescription. */
+                    class OSDescription implements IOSDescription {
+
+                        /**
+                         * Constructs a new OSDescription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AzureVmDetails.IOSDescription);
+
+                        /** OSDescription type. */
+                        public type: string;
+
+                        /** OSDescription publisher. */
+                        public publisher: string;
+
+                        /** OSDescription offer. */
+                        public offer: string;
+
+                        /** OSDescription plan. */
+                        public plan: string;
+
+                        /**
+                         * Creates a new OSDescription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OSDescription instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AzureVmDetails.IOSDescription): google.cloud.vmmigration.v1.AzureVmDetails.OSDescription;
+
+                        /**
+                         * Encodes the specified OSDescription message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.OSDescription.verify|verify} messages.
+                         * @param message OSDescription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AzureVmDetails.IOSDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OSDescription message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmDetails.OSDescription.verify|verify} messages.
+                         * @param message OSDescription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AzureVmDetails.IOSDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a OSDescription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OSDescription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureVmDetails.OSDescription;
+
+                        /**
+                         * Decodes a OSDescription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OSDescription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureVmDetails.OSDescription;
+
+                        /**
+                         * Verifies a OSDescription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a OSDescription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OSDescription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureVmDetails.OSDescription;
+
+                        /**
+                         * Creates a plain object from a OSDescription message. Also converts values to other types if specified.
+                         * @param message OSDescription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AzureVmDetails.OSDescription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OSDescription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OSDescription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** PowerState enum. */
+                    enum PowerState {
+                        POWER_STATE_UNSPECIFIED = 0,
+                        STARTING = 1,
+                        RUNNING = 2,
+                        STOPPING = 3,
+                        STOPPED = 4,
+                        DEALLOCATING = 5,
+                        DEALLOCATED = 6,
+                        UNKNOWN = 7
+                    }
+
+                    /** BootOption enum. */
+                    enum BootOption {
+                        BOOT_OPTION_UNSPECIFIED = 0,
+                        EFI = 1,
+                        BIOS = 2
+                    }
+
+                    /** VmArchitecture enum. */
+                    enum VmArchitecture {
+                        VM_ARCHITECTURE_UNSPECIFIED = 0,
+                        VM_ARCHITECTURE_X86_FAMILY = 1,
+                        VM_ARCHITECTURE_ARM64 = 2
+                    }
+                }
+
                 /** Properties of a VmwareVmsDetails. */
                 interface IVmwareVmsDetails {
 
@@ -6147,6 +7708,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AzureVmsDetails. */
+                interface IAzureVmsDetails {
+
+                    /** AzureVmsDetails details */
+                    details?: (google.cloud.vmmigration.v1.IAzureVmDetails[]|null);
+                }
+
+                /** Represents an AzureVmsDetails. */
+                class AzureVmsDetails implements IAzureVmsDetails {
+
+                    /**
+                     * Constructs a new AzureVmsDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAzureVmsDetails);
+
+                    /** AzureVmsDetails details. */
+                    public details: google.cloud.vmmigration.v1.IAzureVmDetails[];
+
+                    /**
+                     * Creates a new AzureVmsDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AzureVmsDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAzureVmsDetails): google.cloud.vmmigration.v1.AzureVmsDetails;
+
+                    /**
+                     * Encodes the specified AzureVmsDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmsDetails.verify|verify} messages.
+                     * @param message AzureVmsDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAzureVmsDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AzureVmsDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureVmsDetails.verify|verify} messages.
+                     * @param message AzureVmsDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAzureVmsDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AzureVmsDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AzureVmsDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureVmsDetails;
+
+                    /**
+                     * Decodes an AzureVmsDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AzureVmsDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureVmsDetails;
+
+                    /**
+                     * Verifies an AzureVmsDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AzureVmsDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AzureVmsDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureVmsDetails;
+
+                    /**
+                     * Creates a plain object from an AzureVmsDetails message. Also converts values to other types if specified.
+                     * @param message AzureVmsDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AzureVmsDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AzureVmsDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AzureVmsDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a FetchInventoryResponse. */
                 interface IFetchInventoryResponse {
 
@@ -6155,6 +7813,9 @@ export namespace google {
 
                     /** FetchInventoryResponse awsVms */
                     awsVms?: (google.cloud.vmmigration.v1.IAwsVmsDetails|null);
+
+                    /** FetchInventoryResponse azureVms */
+                    azureVms?: (google.cloud.vmmigration.v1.IAzureVmsDetails|null);
 
                     /** FetchInventoryResponse updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
@@ -6175,11 +7836,14 @@ export namespace google {
                     /** FetchInventoryResponse awsVms. */
                     public awsVms?: (google.cloud.vmmigration.v1.IAwsVmsDetails|null);
 
+                    /** FetchInventoryResponse azureVms. */
+                    public azureVms?: (google.cloud.vmmigration.v1.IAzureVmsDetails|null);
+
                     /** FetchInventoryResponse updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** FetchInventoryResponse SourceVms. */
-                    public SourceVms?: ("vmwareVms"|"awsVms");
+                    public SourceVms?: ("vmwareVms"|"awsVms"|"azureVms");
 
                     /**
                      * Creates a new FetchInventoryResponse instance using the specified properties.
@@ -6253,6 +7917,346 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FetchInventoryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchStorageInventoryRequest. */
+                interface IFetchStorageInventoryRequest {
+
+                    /** FetchStorageInventoryRequest source */
+                    source?: (string|null);
+
+                    /** FetchStorageInventoryRequest type */
+                    type?: (google.cloud.vmmigration.v1.FetchStorageInventoryRequest.StorageType|keyof typeof google.cloud.vmmigration.v1.FetchStorageInventoryRequest.StorageType|null);
+
+                    /** FetchStorageInventoryRequest forceRefresh */
+                    forceRefresh?: (boolean|null);
+
+                    /** FetchStorageInventoryRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchStorageInventoryRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchStorageInventoryRequest. */
+                class FetchStorageInventoryRequest implements IFetchStorageInventoryRequest {
+
+                    /**
+                     * Constructs a new FetchStorageInventoryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IFetchStorageInventoryRequest);
+
+                    /** FetchStorageInventoryRequest source. */
+                    public source: string;
+
+                    /** FetchStorageInventoryRequest type. */
+                    public type: (google.cloud.vmmigration.v1.FetchStorageInventoryRequest.StorageType|keyof typeof google.cloud.vmmigration.v1.FetchStorageInventoryRequest.StorageType);
+
+                    /** FetchStorageInventoryRequest forceRefresh. */
+                    public forceRefresh: boolean;
+
+                    /** FetchStorageInventoryRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchStorageInventoryRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchStorageInventoryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchStorageInventoryRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IFetchStorageInventoryRequest): google.cloud.vmmigration.v1.FetchStorageInventoryRequest;
+
+                    /**
+                     * Encodes the specified FetchStorageInventoryRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.FetchStorageInventoryRequest.verify|verify} messages.
+                     * @param message FetchStorageInventoryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IFetchStorageInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchStorageInventoryRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.FetchStorageInventoryRequest.verify|verify} messages.
+                     * @param message FetchStorageInventoryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IFetchStorageInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchStorageInventoryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchStorageInventoryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.FetchStorageInventoryRequest;
+
+                    /**
+                     * Decodes a FetchStorageInventoryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchStorageInventoryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.FetchStorageInventoryRequest;
+
+                    /**
+                     * Verifies a FetchStorageInventoryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchStorageInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchStorageInventoryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.FetchStorageInventoryRequest;
+
+                    /**
+                     * Creates a plain object from a FetchStorageInventoryRequest message. Also converts values to other types if specified.
+                     * @param message FetchStorageInventoryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.FetchStorageInventoryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchStorageInventoryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchStorageInventoryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FetchStorageInventoryRequest {
+
+                    /** StorageType enum. */
+                    enum StorageType {
+                        STORAGE_TYPE_UNSPECIFIED = 0,
+                        DISKS = 1,
+                        SNAPSHOTS = 2
+                    }
+                }
+
+                /** Properties of a FetchStorageInventoryResponse. */
+                interface IFetchStorageInventoryResponse {
+
+                    /** FetchStorageInventoryResponse resources */
+                    resources?: (google.cloud.vmmigration.v1.ISourceStorageResource[]|null);
+
+                    /** FetchStorageInventoryResponse updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FetchStorageInventoryResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchStorageInventoryResponse. */
+                class FetchStorageInventoryResponse implements IFetchStorageInventoryResponse {
+
+                    /**
+                     * Constructs a new FetchStorageInventoryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IFetchStorageInventoryResponse);
+
+                    /** FetchStorageInventoryResponse resources. */
+                    public resources: google.cloud.vmmigration.v1.ISourceStorageResource[];
+
+                    /** FetchStorageInventoryResponse updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FetchStorageInventoryResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchStorageInventoryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchStorageInventoryResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IFetchStorageInventoryResponse): google.cloud.vmmigration.v1.FetchStorageInventoryResponse;
+
+                    /**
+                     * Encodes the specified FetchStorageInventoryResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.FetchStorageInventoryResponse.verify|verify} messages.
+                     * @param message FetchStorageInventoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IFetchStorageInventoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchStorageInventoryResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.FetchStorageInventoryResponse.verify|verify} messages.
+                     * @param message FetchStorageInventoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IFetchStorageInventoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchStorageInventoryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchStorageInventoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.FetchStorageInventoryResponse;
+
+                    /**
+                     * Decodes a FetchStorageInventoryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchStorageInventoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.FetchStorageInventoryResponse;
+
+                    /**
+                     * Verifies a FetchStorageInventoryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchStorageInventoryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchStorageInventoryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.FetchStorageInventoryResponse;
+
+                    /**
+                     * Creates a plain object from a FetchStorageInventoryResponse message. Also converts values to other types if specified.
+                     * @param message FetchStorageInventoryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.FetchStorageInventoryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchStorageInventoryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchStorageInventoryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SourceStorageResource. */
+                interface ISourceStorageResource {
+
+                    /** SourceStorageResource awsDiskDetails */
+                    awsDiskDetails?: (google.cloud.vmmigration.v1.IAwsSourceDiskDetails|null);
+                }
+
+                /** Represents a SourceStorageResource. */
+                class SourceStorageResource implements ISourceStorageResource {
+
+                    /**
+                     * Constructs a new SourceStorageResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ISourceStorageResource);
+
+                    /** SourceStorageResource awsDiskDetails. */
+                    public awsDiskDetails?: (google.cloud.vmmigration.v1.IAwsSourceDiskDetails|null);
+
+                    /** SourceStorageResource StorageResource. */
+                    public StorageResource?: "awsDiskDetails";
+
+                    /**
+                     * Creates a new SourceStorageResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceStorageResource instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ISourceStorageResource): google.cloud.vmmigration.v1.SourceStorageResource;
+
+                    /**
+                     * Encodes the specified SourceStorageResource message. Does not implicitly {@link google.cloud.vmmigration.v1.SourceStorageResource.verify|verify} messages.
+                     * @param message SourceStorageResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ISourceStorageResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceStorageResource message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.SourceStorageResource.verify|verify} messages.
+                     * @param message SourceStorageResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ISourceStorageResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceStorageResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceStorageResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.SourceStorageResource;
+
+                    /**
+                     * Decodes a SourceStorageResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceStorageResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.SourceStorageResource;
+
+                    /**
+                     * Verifies a SourceStorageResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceStorageResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceStorageResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.SourceStorageResource;
+
+                    /**
+                     * Creates a plain object from a SourceStorageResource message. Also converts values to other types if specified.
+                     * @param message SourceStorageResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.SourceStorageResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceStorageResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SourceStorageResource
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8021,6 +10025,12 @@ export namespace google {
                     /** ComputeEngineTargetDefaults secureBoot */
                     secureBoot?: (boolean|null);
 
+                    /** ComputeEngineTargetDefaults enableVtpm */
+                    enableVtpm?: (boolean|null);
+
+                    /** ComputeEngineTargetDefaults enableIntegrityMonitoring */
+                    enableIntegrityMonitoring?: (boolean|null);
+
                     /** ComputeEngineTargetDefaults bootOption */
                     bootOption?: (google.cloud.vmmigration.v1.ComputeEngineBootOption|keyof typeof google.cloud.vmmigration.v1.ComputeEngineBootOption|null);
 
@@ -8032,6 +10042,15 @@ export namespace google {
 
                     /** ComputeEngineTargetDefaults hostname */
                     hostname?: (string|null);
+
+                    /** ComputeEngineTargetDefaults encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** ComputeEngineTargetDefaults bootConversion */
+                    bootConversion?: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion|null);
+
+                    /** ComputeEngineTargetDefaults diskReplicaZones */
+                    diskReplicaZones?: (string[]|null);
                 }
 
                 /** Represents a ComputeEngineTargetDefaults. */
@@ -8085,6 +10104,12 @@ export namespace google {
                     /** ComputeEngineTargetDefaults secureBoot. */
                     public secureBoot: boolean;
 
+                    /** ComputeEngineTargetDefaults enableVtpm. */
+                    public enableVtpm: boolean;
+
+                    /** ComputeEngineTargetDefaults enableIntegrityMonitoring. */
+                    public enableIntegrityMonitoring: boolean;
+
                     /** ComputeEngineTargetDefaults bootOption. */
                     public bootOption: (google.cloud.vmmigration.v1.ComputeEngineBootOption|keyof typeof google.cloud.vmmigration.v1.ComputeEngineBootOption);
 
@@ -8096,6 +10121,15 @@ export namespace google {
 
                     /** ComputeEngineTargetDefaults hostname. */
                     public hostname: string;
+
+                    /** ComputeEngineTargetDefaults encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** ComputeEngineTargetDefaults bootConversion. */
+                    public bootConversion: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion);
+
+                    /** ComputeEngineTargetDefaults diskReplicaZones. */
+                    public diskReplicaZones: string[];
 
                     /**
                      * Creates a new ComputeEngineTargetDefaults instance using the specified properties.
@@ -8220,6 +10254,12 @@ export namespace google {
                     /** ComputeEngineTargetDetails secureBoot */
                     secureBoot?: (boolean|null);
 
+                    /** ComputeEngineTargetDetails enableVtpm */
+                    enableVtpm?: (boolean|null);
+
+                    /** ComputeEngineTargetDetails enableIntegrityMonitoring */
+                    enableIntegrityMonitoring?: (boolean|null);
+
                     /** ComputeEngineTargetDetails bootOption */
                     bootOption?: (google.cloud.vmmigration.v1.ComputeEngineBootOption|keyof typeof google.cloud.vmmigration.v1.ComputeEngineBootOption|null);
 
@@ -8231,6 +10271,15 @@ export namespace google {
 
                     /** ComputeEngineTargetDetails hostname */
                     hostname?: (string|null);
+
+                    /** ComputeEngineTargetDetails encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** ComputeEngineTargetDetails bootConversion */
+                    bootConversion?: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion|null);
+
+                    /** ComputeEngineTargetDetails diskReplicaZones */
+                    diskReplicaZones?: (string[]|null);
                 }
 
                 /** Represents a ComputeEngineTargetDetails. */
@@ -8284,6 +10333,12 @@ export namespace google {
                     /** ComputeEngineTargetDetails secureBoot. */
                     public secureBoot: boolean;
 
+                    /** ComputeEngineTargetDetails enableVtpm. */
+                    public enableVtpm: boolean;
+
+                    /** ComputeEngineTargetDetails enableIntegrityMonitoring. */
+                    public enableIntegrityMonitoring: boolean;
+
                     /** ComputeEngineTargetDetails bootOption. */
                     public bootOption: (google.cloud.vmmigration.v1.ComputeEngineBootOption|keyof typeof google.cloud.vmmigration.v1.ComputeEngineBootOption);
 
@@ -8295,6 +10350,15 @@ export namespace google {
 
                     /** ComputeEngineTargetDetails hostname. */
                     public hostname: string;
+
+                    /** ComputeEngineTargetDetails encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** ComputeEngineTargetDetails bootConversion. */
+                    public bootConversion: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion);
+
+                    /** ComputeEngineTargetDetails diskReplicaZones. */
+                    public diskReplicaZones: string[];
 
                     /**
                      * Creates a new ComputeEngineTargetDetails instance using the specified properties.
@@ -8388,6 +10452,9 @@ export namespace google {
 
                     /** NetworkInterface externalIp */
                     externalIp?: (string|null);
+
+                    /** NetworkInterface networkTier */
+                    networkTier?: (google.cloud.vmmigration.v1.ComputeEngineNetworkTier|keyof typeof google.cloud.vmmigration.v1.ComputeEngineNetworkTier|null);
                 }
 
                 /** Represents a NetworkInterface. */
@@ -8410,6 +10477,9 @@ export namespace google {
 
                     /** NetworkInterface externalIp. */
                     public externalIp: string;
+
+                    /** NetworkInterface networkTier. */
+                    public networkTier: (google.cloud.vmmigration.v1.ComputeEngineNetworkTier|keyof typeof google.cloud.vmmigration.v1.ComputeEngineNetworkTier);
 
                     /**
                      * Creates a new NetworkInterface instance using the specified properties.
@@ -8852,6 +10922,1262 @@ export namespace google {
                         AUTOMATIC_RESTART = 1,
                         NO_AUTOMATIC_RESTART = 2
                     }
+                }
+
+                /** Properties of a ComputeEngineDisksTargetDefaults. */
+                interface IComputeEngineDisksTargetDefaults {
+
+                    /** ComputeEngineDisksTargetDefaults zone */
+                    zone?: (string|null);
+
+                    /** ComputeEngineDisksTargetDefaults disksTargetDefaults */
+                    disksTargetDefaults?: (google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDefaults|null);
+
+                    /** ComputeEngineDisksTargetDefaults vmTargetDefaults */
+                    vmTargetDefaults?: (google.cloud.vmmigration.v1.IDisksMigrationVmTargetDefaults|null);
+
+                    /** ComputeEngineDisksTargetDefaults targetProject */
+                    targetProject?: (string|null);
+
+                    /** ComputeEngineDisksTargetDefaults disks */
+                    disks?: (google.cloud.vmmigration.v1.IPersistentDiskDefaults[]|null);
+                }
+
+                /** Represents a ComputeEngineDisksTargetDefaults. */
+                class ComputeEngineDisksTargetDefaults implements IComputeEngineDisksTargetDefaults {
+
+                    /**
+                     * Constructs a new ComputeEngineDisksTargetDefaults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDefaults);
+
+                    /** ComputeEngineDisksTargetDefaults zone. */
+                    public zone?: (string|null);
+
+                    /** ComputeEngineDisksTargetDefaults disksTargetDefaults. */
+                    public disksTargetDefaults?: (google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDefaults|null);
+
+                    /** ComputeEngineDisksTargetDefaults vmTargetDefaults. */
+                    public vmTargetDefaults?: (google.cloud.vmmigration.v1.IDisksMigrationVmTargetDefaults|null);
+
+                    /** ComputeEngineDisksTargetDefaults targetProject. */
+                    public targetProject: string;
+
+                    /** ComputeEngineDisksTargetDefaults disks. */
+                    public disks: google.cloud.vmmigration.v1.IPersistentDiskDefaults[];
+
+                    /** ComputeEngineDisksTargetDefaults location. */
+                    public location?: "zone";
+
+                    /** ComputeEngineDisksTargetDefaults vmTarget. */
+                    public vmTarget?: ("disksTargetDefaults"|"vmTargetDefaults");
+
+                    /**
+                     * Creates a new ComputeEngineDisksTargetDefaults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeEngineDisksTargetDefaults instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDefaults): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults;
+
+                    /**
+                     * Encodes the specified ComputeEngineDisksTargetDefaults message. Does not implicitly {@link google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults.verify|verify} messages.
+                     * @param message ComputeEngineDisksTargetDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeEngineDisksTargetDefaults message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults.verify|verify} messages.
+                     * @param message ComputeEngineDisksTargetDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeEngineDisksTargetDefaults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeEngineDisksTargetDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults;
+
+                    /**
+                     * Decodes a ComputeEngineDisksTargetDefaults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeEngineDisksTargetDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults;
+
+                    /**
+                     * Verifies a ComputeEngineDisksTargetDefaults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeEngineDisksTargetDefaults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeEngineDisksTargetDefaults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults;
+
+                    /**
+                     * Creates a plain object from a ComputeEngineDisksTargetDefaults message. Also converts values to other types if specified.
+                     * @param message ComputeEngineDisksTargetDefaults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeEngineDisksTargetDefaults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeEngineDisksTargetDefaults
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PersistentDiskDefaults. */
+                interface IPersistentDiskDefaults {
+
+                    /** PersistentDiskDefaults sourceDiskNumber */
+                    sourceDiskNumber?: (number|null);
+
+                    /** PersistentDiskDefaults diskName */
+                    diskName?: (string|null);
+
+                    /** PersistentDiskDefaults diskType */
+                    diskType?: (google.cloud.vmmigration.v1.ComputeEngineDiskType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineDiskType|null);
+
+                    /** PersistentDiskDefaults additionalLabels */
+                    additionalLabels?: ({ [k: string]: string }|null);
+
+                    /** PersistentDiskDefaults encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** PersistentDiskDefaults vmAttachmentDetails */
+                    vmAttachmentDetails?: (google.cloud.vmmigration.v1.IVmAttachmentDetails|null);
+                }
+
+                /** Represents a PersistentDiskDefaults. */
+                class PersistentDiskDefaults implements IPersistentDiskDefaults {
+
+                    /**
+                     * Constructs a new PersistentDiskDefaults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IPersistentDiskDefaults);
+
+                    /** PersistentDiskDefaults sourceDiskNumber. */
+                    public sourceDiskNumber: number;
+
+                    /** PersistentDiskDefaults diskName. */
+                    public diskName: string;
+
+                    /** PersistentDiskDefaults diskType. */
+                    public diskType: (google.cloud.vmmigration.v1.ComputeEngineDiskType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineDiskType);
+
+                    /** PersistentDiskDefaults additionalLabels. */
+                    public additionalLabels: { [k: string]: string };
+
+                    /** PersistentDiskDefaults encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** PersistentDiskDefaults vmAttachmentDetails. */
+                    public vmAttachmentDetails?: (google.cloud.vmmigration.v1.IVmAttachmentDetails|null);
+
+                    /**
+                     * Creates a new PersistentDiskDefaults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PersistentDiskDefaults instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IPersistentDiskDefaults): google.cloud.vmmigration.v1.PersistentDiskDefaults;
+
+                    /**
+                     * Encodes the specified PersistentDiskDefaults message. Does not implicitly {@link google.cloud.vmmigration.v1.PersistentDiskDefaults.verify|verify} messages.
+                     * @param message PersistentDiskDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IPersistentDiskDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PersistentDiskDefaults message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.PersistentDiskDefaults.verify|verify} messages.
+                     * @param message PersistentDiskDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IPersistentDiskDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PersistentDiskDefaults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PersistentDiskDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.PersistentDiskDefaults;
+
+                    /**
+                     * Decodes a PersistentDiskDefaults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PersistentDiskDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.PersistentDiskDefaults;
+
+                    /**
+                     * Verifies a PersistentDiskDefaults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PersistentDiskDefaults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PersistentDiskDefaults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.PersistentDiskDefaults;
+
+                    /**
+                     * Creates a plain object from a PersistentDiskDefaults message. Also converts values to other types if specified.
+                     * @param message PersistentDiskDefaults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.PersistentDiskDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PersistentDiskDefaults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PersistentDiskDefaults
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VmAttachmentDetails. */
+                interface IVmAttachmentDetails {
+
+                    /** VmAttachmentDetails deviceName */
+                    deviceName?: (string|null);
+                }
+
+                /** Represents a VmAttachmentDetails. */
+                class VmAttachmentDetails implements IVmAttachmentDetails {
+
+                    /**
+                     * Constructs a new VmAttachmentDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IVmAttachmentDetails);
+
+                    /** VmAttachmentDetails deviceName. */
+                    public deviceName: string;
+
+                    /**
+                     * Creates a new VmAttachmentDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VmAttachmentDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IVmAttachmentDetails): google.cloud.vmmigration.v1.VmAttachmentDetails;
+
+                    /**
+                     * Encodes the specified VmAttachmentDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.VmAttachmentDetails.verify|verify} messages.
+                     * @param message VmAttachmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IVmAttachmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VmAttachmentDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.VmAttachmentDetails.verify|verify} messages.
+                     * @param message VmAttachmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IVmAttachmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VmAttachmentDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VmAttachmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.VmAttachmentDetails;
+
+                    /**
+                     * Decodes a VmAttachmentDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VmAttachmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.VmAttachmentDetails;
+
+                    /**
+                     * Verifies a VmAttachmentDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VmAttachmentDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VmAttachmentDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.VmAttachmentDetails;
+
+                    /**
+                     * Creates a plain object from a VmAttachmentDetails message. Also converts values to other types if specified.
+                     * @param message VmAttachmentDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.VmAttachmentDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VmAttachmentDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VmAttachmentDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisksMigrationDisksTargetDefaults. */
+                interface IDisksMigrationDisksTargetDefaults {
+                }
+
+                /** Represents a DisksMigrationDisksTargetDefaults. */
+                class DisksMigrationDisksTargetDefaults implements IDisksMigrationDisksTargetDefaults {
+
+                    /**
+                     * Constructs a new DisksMigrationDisksTargetDefaults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDefaults);
+
+                    /**
+                     * Creates a new DisksMigrationDisksTargetDefaults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisksMigrationDisksTargetDefaults instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDefaults): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDefaults;
+
+                    /**
+                     * Encodes the specified DisksMigrationDisksTargetDefaults message. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationDisksTargetDefaults.verify|verify} messages.
+                     * @param message DisksMigrationDisksTargetDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisksMigrationDisksTargetDefaults message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationDisksTargetDefaults.verify|verify} messages.
+                     * @param message DisksMigrationDisksTargetDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisksMigrationDisksTargetDefaults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisksMigrationDisksTargetDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDefaults;
+
+                    /**
+                     * Decodes a DisksMigrationDisksTargetDefaults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisksMigrationDisksTargetDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDefaults;
+
+                    /**
+                     * Verifies a DisksMigrationDisksTargetDefaults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisksMigrationDisksTargetDefaults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisksMigrationDisksTargetDefaults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDefaults;
+
+                    /**
+                     * Creates a plain object from a DisksMigrationDisksTargetDefaults message. Also converts values to other types if specified.
+                     * @param message DisksMigrationDisksTargetDefaults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DisksMigrationDisksTargetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisksMigrationDisksTargetDefaults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisksMigrationDisksTargetDefaults
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisksMigrationVmTargetDefaults. */
+                interface IDisksMigrationVmTargetDefaults {
+
+                    /** DisksMigrationVmTargetDefaults vmName */
+                    vmName?: (string|null);
+
+                    /** DisksMigrationVmTargetDefaults machineTypeSeries */
+                    machineTypeSeries?: (string|null);
+
+                    /** DisksMigrationVmTargetDefaults machineType */
+                    machineType?: (string|null);
+
+                    /** DisksMigrationVmTargetDefaults networkTags */
+                    networkTags?: (string[]|null);
+
+                    /** DisksMigrationVmTargetDefaults networkInterfaces */
+                    networkInterfaces?: (google.cloud.vmmigration.v1.INetworkInterface[]|null);
+
+                    /** DisksMigrationVmTargetDefaults serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** DisksMigrationVmTargetDefaults computeScheduling */
+                    computeScheduling?: (google.cloud.vmmigration.v1.IComputeScheduling|null);
+
+                    /** DisksMigrationVmTargetDefaults secureBoot */
+                    secureBoot?: (boolean|null);
+
+                    /** DisksMigrationVmTargetDefaults enableVtpm */
+                    enableVtpm?: (boolean|null);
+
+                    /** DisksMigrationVmTargetDefaults enableIntegrityMonitoring */
+                    enableIntegrityMonitoring?: (boolean|null);
+
+                    /** DisksMigrationVmTargetDefaults metadata */
+                    metadata?: ({ [k: string]: string }|null);
+
+                    /** DisksMigrationVmTargetDefaults additionalLicenses */
+                    additionalLicenses?: (string[]|null);
+
+                    /** DisksMigrationVmTargetDefaults hostname */
+                    hostname?: (string|null);
+
+                    /** DisksMigrationVmTargetDefaults labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DisksMigrationVmTargetDefaults bootDiskDefaults */
+                    bootDiskDefaults?: (google.cloud.vmmigration.v1.IBootDiskDefaults|null);
+
+                    /** DisksMigrationVmTargetDefaults encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+                }
+
+                /** Represents a DisksMigrationVmTargetDefaults. */
+                class DisksMigrationVmTargetDefaults implements IDisksMigrationVmTargetDefaults {
+
+                    /**
+                     * Constructs a new DisksMigrationVmTargetDefaults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDefaults);
+
+                    /** DisksMigrationVmTargetDefaults vmName. */
+                    public vmName: string;
+
+                    /** DisksMigrationVmTargetDefaults machineTypeSeries. */
+                    public machineTypeSeries: string;
+
+                    /** DisksMigrationVmTargetDefaults machineType. */
+                    public machineType: string;
+
+                    /** DisksMigrationVmTargetDefaults networkTags. */
+                    public networkTags: string[];
+
+                    /** DisksMigrationVmTargetDefaults networkInterfaces. */
+                    public networkInterfaces: google.cloud.vmmigration.v1.INetworkInterface[];
+
+                    /** DisksMigrationVmTargetDefaults serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** DisksMigrationVmTargetDefaults computeScheduling. */
+                    public computeScheduling?: (google.cloud.vmmigration.v1.IComputeScheduling|null);
+
+                    /** DisksMigrationVmTargetDefaults secureBoot. */
+                    public secureBoot: boolean;
+
+                    /** DisksMigrationVmTargetDefaults enableVtpm. */
+                    public enableVtpm: boolean;
+
+                    /** DisksMigrationVmTargetDefaults enableIntegrityMonitoring. */
+                    public enableIntegrityMonitoring: boolean;
+
+                    /** DisksMigrationVmTargetDefaults metadata. */
+                    public metadata: { [k: string]: string };
+
+                    /** DisksMigrationVmTargetDefaults additionalLicenses. */
+                    public additionalLicenses: string[];
+
+                    /** DisksMigrationVmTargetDefaults hostname. */
+                    public hostname: string;
+
+                    /** DisksMigrationVmTargetDefaults labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DisksMigrationVmTargetDefaults bootDiskDefaults. */
+                    public bootDiskDefaults?: (google.cloud.vmmigration.v1.IBootDiskDefaults|null);
+
+                    /** DisksMigrationVmTargetDefaults encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /**
+                     * Creates a new DisksMigrationVmTargetDefaults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisksMigrationVmTargetDefaults instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDefaults): google.cloud.vmmigration.v1.DisksMigrationVmTargetDefaults;
+
+                    /**
+                     * Encodes the specified DisksMigrationVmTargetDefaults message. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationVmTargetDefaults.verify|verify} messages.
+                     * @param message DisksMigrationVmTargetDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisksMigrationVmTargetDefaults message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationVmTargetDefaults.verify|verify} messages.
+                     * @param message DisksMigrationVmTargetDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisksMigrationVmTargetDefaults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisksMigrationVmTargetDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DisksMigrationVmTargetDefaults;
+
+                    /**
+                     * Decodes a DisksMigrationVmTargetDefaults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisksMigrationVmTargetDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DisksMigrationVmTargetDefaults;
+
+                    /**
+                     * Verifies a DisksMigrationVmTargetDefaults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisksMigrationVmTargetDefaults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisksMigrationVmTargetDefaults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DisksMigrationVmTargetDefaults;
+
+                    /**
+                     * Creates a plain object from a DisksMigrationVmTargetDefaults message. Also converts values to other types if specified.
+                     * @param message DisksMigrationVmTargetDefaults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DisksMigrationVmTargetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisksMigrationVmTargetDefaults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisksMigrationVmTargetDefaults
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BootDiskDefaults. */
+                interface IBootDiskDefaults {
+
+                    /** BootDiskDefaults image */
+                    image?: (google.cloud.vmmigration.v1.BootDiskDefaults.IDiskImageDefaults|null);
+
+                    /** BootDiskDefaults diskName */
+                    diskName?: (string|null);
+
+                    /** BootDiskDefaults diskType */
+                    diskType?: (google.cloud.vmmigration.v1.ComputeEngineDiskType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineDiskType|null);
+
+                    /** BootDiskDefaults deviceName */
+                    deviceName?: (string|null);
+
+                    /** BootDiskDefaults encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+                }
+
+                /** Represents a BootDiskDefaults. */
+                class BootDiskDefaults implements IBootDiskDefaults {
+
+                    /**
+                     * Constructs a new BootDiskDefaults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IBootDiskDefaults);
+
+                    /** BootDiskDefaults image. */
+                    public image?: (google.cloud.vmmigration.v1.BootDiskDefaults.IDiskImageDefaults|null);
+
+                    /** BootDiskDefaults diskName. */
+                    public diskName: string;
+
+                    /** BootDiskDefaults diskType. */
+                    public diskType: (google.cloud.vmmigration.v1.ComputeEngineDiskType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineDiskType);
+
+                    /** BootDiskDefaults deviceName. */
+                    public deviceName: string;
+
+                    /** BootDiskDefaults encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** BootDiskDefaults source. */
+                    public source?: "image";
+
+                    /**
+                     * Creates a new BootDiskDefaults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BootDiskDefaults instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IBootDiskDefaults): google.cloud.vmmigration.v1.BootDiskDefaults;
+
+                    /**
+                     * Encodes the specified BootDiskDefaults message. Does not implicitly {@link google.cloud.vmmigration.v1.BootDiskDefaults.verify|verify} messages.
+                     * @param message BootDiskDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IBootDiskDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BootDiskDefaults message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.BootDiskDefaults.verify|verify} messages.
+                     * @param message BootDiskDefaults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IBootDiskDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BootDiskDefaults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BootDiskDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.BootDiskDefaults;
+
+                    /**
+                     * Decodes a BootDiskDefaults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BootDiskDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.BootDiskDefaults;
+
+                    /**
+                     * Verifies a BootDiskDefaults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BootDiskDefaults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BootDiskDefaults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.BootDiskDefaults;
+
+                    /**
+                     * Creates a plain object from a BootDiskDefaults message. Also converts values to other types if specified.
+                     * @param message BootDiskDefaults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.BootDiskDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BootDiskDefaults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BootDiskDefaults
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BootDiskDefaults {
+
+                    /** Properties of a DiskImageDefaults. */
+                    interface IDiskImageDefaults {
+
+                        /** DiskImageDefaults sourceImage */
+                        sourceImage?: (string|null);
+                    }
+
+                    /** Represents a DiskImageDefaults. */
+                    class DiskImageDefaults implements IDiskImageDefaults {
+
+                        /**
+                         * Constructs a new DiskImageDefaults.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.BootDiskDefaults.IDiskImageDefaults);
+
+                        /** DiskImageDefaults sourceImage. */
+                        public sourceImage: string;
+
+                        /**
+                         * Creates a new DiskImageDefaults instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DiskImageDefaults instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.BootDiskDefaults.IDiskImageDefaults): google.cloud.vmmigration.v1.BootDiskDefaults.DiskImageDefaults;
+
+                        /**
+                         * Encodes the specified DiskImageDefaults message. Does not implicitly {@link google.cloud.vmmigration.v1.BootDiskDefaults.DiskImageDefaults.verify|verify} messages.
+                         * @param message DiskImageDefaults message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.BootDiskDefaults.IDiskImageDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DiskImageDefaults message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.BootDiskDefaults.DiskImageDefaults.verify|verify} messages.
+                         * @param message DiskImageDefaults message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.BootDiskDefaults.IDiskImageDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DiskImageDefaults message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DiskImageDefaults
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.BootDiskDefaults.DiskImageDefaults;
+
+                        /**
+                         * Decodes a DiskImageDefaults message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DiskImageDefaults
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.BootDiskDefaults.DiskImageDefaults;
+
+                        /**
+                         * Verifies a DiskImageDefaults message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DiskImageDefaults message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DiskImageDefaults
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.BootDiskDefaults.DiskImageDefaults;
+
+                        /**
+                         * Creates a plain object from a DiskImageDefaults message. Also converts values to other types if specified.
+                         * @param message DiskImageDefaults
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.BootDiskDefaults.DiskImageDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DiskImageDefaults to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DiskImageDefaults
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ComputeEngineDisksTargetDetails. */
+                interface IComputeEngineDisksTargetDetails {
+
+                    /** ComputeEngineDisksTargetDetails disksTargetDetails */
+                    disksTargetDetails?: (google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDetails|null);
+
+                    /** ComputeEngineDisksTargetDetails vmTargetDetails */
+                    vmTargetDetails?: (google.cloud.vmmigration.v1.IDisksMigrationVmTargetDetails|null);
+
+                    /** ComputeEngineDisksTargetDetails disks */
+                    disks?: (google.cloud.vmmigration.v1.IPersistentDisk[]|null);
+                }
+
+                /** Represents a ComputeEngineDisksTargetDetails. */
+                class ComputeEngineDisksTargetDetails implements IComputeEngineDisksTargetDetails {
+
+                    /**
+                     * Constructs a new ComputeEngineDisksTargetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails);
+
+                    /** ComputeEngineDisksTargetDetails disksTargetDetails. */
+                    public disksTargetDetails?: (google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDetails|null);
+
+                    /** ComputeEngineDisksTargetDetails vmTargetDetails. */
+                    public vmTargetDetails?: (google.cloud.vmmigration.v1.IDisksMigrationVmTargetDetails|null);
+
+                    /** ComputeEngineDisksTargetDetails disks. */
+                    public disks: google.cloud.vmmigration.v1.IPersistentDisk[];
+
+                    /** ComputeEngineDisksTargetDetails vmTarget. */
+                    public vmTarget?: ("disksTargetDetails"|"vmTargetDetails");
+
+                    /**
+                     * Creates a new ComputeEngineDisksTargetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeEngineDisksTargetDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDetails;
+
+                    /**
+                     * Encodes the specified ComputeEngineDisksTargetDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.ComputeEngineDisksTargetDetails.verify|verify} messages.
+                     * @param message ComputeEngineDisksTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeEngineDisksTargetDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ComputeEngineDisksTargetDetails.verify|verify} messages.
+                     * @param message ComputeEngineDisksTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IComputeEngineDisksTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeEngineDisksTargetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeEngineDisksTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDetails;
+
+                    /**
+                     * Decodes a ComputeEngineDisksTargetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeEngineDisksTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDetails;
+
+                    /**
+                     * Verifies a ComputeEngineDisksTargetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeEngineDisksTargetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeEngineDisksTargetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ComputeEngineDisksTargetDetails;
+
+                    /**
+                     * Creates a plain object from a ComputeEngineDisksTargetDetails message. Also converts values to other types if specified.
+                     * @param message ComputeEngineDisksTargetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ComputeEngineDisksTargetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeEngineDisksTargetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeEngineDisksTargetDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PersistentDisk. */
+                interface IPersistentDisk {
+
+                    /** PersistentDisk sourceDiskNumber */
+                    sourceDiskNumber?: (number|null);
+
+                    /** PersistentDisk diskUri */
+                    diskUri?: (string|null);
+                }
+
+                /** Represents a PersistentDisk. */
+                class PersistentDisk implements IPersistentDisk {
+
+                    /**
+                     * Constructs a new PersistentDisk.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IPersistentDisk);
+
+                    /** PersistentDisk sourceDiskNumber. */
+                    public sourceDiskNumber: number;
+
+                    /** PersistentDisk diskUri. */
+                    public diskUri: string;
+
+                    /**
+                     * Creates a new PersistentDisk instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PersistentDisk instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IPersistentDisk): google.cloud.vmmigration.v1.PersistentDisk;
+
+                    /**
+                     * Encodes the specified PersistentDisk message. Does not implicitly {@link google.cloud.vmmigration.v1.PersistentDisk.verify|verify} messages.
+                     * @param message PersistentDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IPersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PersistentDisk message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.PersistentDisk.verify|verify} messages.
+                     * @param message PersistentDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IPersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PersistentDisk message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PersistentDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.PersistentDisk;
+
+                    /**
+                     * Decodes a PersistentDisk message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PersistentDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.PersistentDisk;
+
+                    /**
+                     * Verifies a PersistentDisk message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PersistentDisk message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PersistentDisk
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.PersistentDisk;
+
+                    /**
+                     * Creates a plain object from a PersistentDisk message. Also converts values to other types if specified.
+                     * @param message PersistentDisk
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.PersistentDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PersistentDisk to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PersistentDisk
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisksMigrationDisksTargetDetails. */
+                interface IDisksMigrationDisksTargetDetails {
+                }
+
+                /** Represents a DisksMigrationDisksTargetDetails. */
+                class DisksMigrationDisksTargetDetails implements IDisksMigrationDisksTargetDetails {
+
+                    /**
+                     * Constructs a new DisksMigrationDisksTargetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDetails);
+
+                    /**
+                     * Creates a new DisksMigrationDisksTargetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisksMigrationDisksTargetDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDetails): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDetails;
+
+                    /**
+                     * Encodes the specified DisksMigrationDisksTargetDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationDisksTargetDetails.verify|verify} messages.
+                     * @param message DisksMigrationDisksTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisksMigrationDisksTargetDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationDisksTargetDetails.verify|verify} messages.
+                     * @param message DisksMigrationDisksTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDisksMigrationDisksTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisksMigrationDisksTargetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisksMigrationDisksTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDetails;
+
+                    /**
+                     * Decodes a DisksMigrationDisksTargetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisksMigrationDisksTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDetails;
+
+                    /**
+                     * Verifies a DisksMigrationDisksTargetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisksMigrationDisksTargetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisksMigrationDisksTargetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DisksMigrationDisksTargetDetails;
+
+                    /**
+                     * Creates a plain object from a DisksMigrationDisksTargetDetails message. Also converts values to other types if specified.
+                     * @param message DisksMigrationDisksTargetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DisksMigrationDisksTargetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisksMigrationDisksTargetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisksMigrationDisksTargetDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisksMigrationVmTargetDetails. */
+                interface IDisksMigrationVmTargetDetails {
+
+                    /** DisksMigrationVmTargetDetails vmUri */
+                    vmUri?: (string|null);
+                }
+
+                /** Represents a DisksMigrationVmTargetDetails. */
+                class DisksMigrationVmTargetDetails implements IDisksMigrationVmTargetDetails {
+
+                    /**
+                     * Constructs a new DisksMigrationVmTargetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDetails);
+
+                    /** DisksMigrationVmTargetDetails vmUri. */
+                    public vmUri: string;
+
+                    /**
+                     * Creates a new DisksMigrationVmTargetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisksMigrationVmTargetDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDetails): google.cloud.vmmigration.v1.DisksMigrationVmTargetDetails;
+
+                    /**
+                     * Encodes the specified DisksMigrationVmTargetDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationVmTargetDetails.verify|verify} messages.
+                     * @param message DisksMigrationVmTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisksMigrationVmTargetDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DisksMigrationVmTargetDetails.verify|verify} messages.
+                     * @param message DisksMigrationVmTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDisksMigrationVmTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisksMigrationVmTargetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisksMigrationVmTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DisksMigrationVmTargetDetails;
+
+                    /**
+                     * Decodes a DisksMigrationVmTargetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisksMigrationVmTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DisksMigrationVmTargetDetails;
+
+                    /**
+                     * Verifies a DisksMigrationVmTargetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisksMigrationVmTargetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisksMigrationVmTargetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DisksMigrationVmTargetDetails;
+
+                    /**
+                     * Creates a plain object from a DisksMigrationVmTargetDetails message. Also converts values to other types if specified.
+                     * @param message DisksMigrationVmTargetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DisksMigrationVmTargetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisksMigrationVmTargetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisksMigrationVmTargetDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SchedulePolicy. */
@@ -10278,6 +13604,194 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExtendMigrationRequest. */
+                interface IExtendMigrationRequest {
+
+                    /** ExtendMigrationRequest migratingVm */
+                    migratingVm?: (string|null);
+                }
+
+                /** Represents an ExtendMigrationRequest. */
+                class ExtendMigrationRequest implements IExtendMigrationRequest {
+
+                    /**
+                     * Constructs a new ExtendMigrationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IExtendMigrationRequest);
+
+                    /** ExtendMigrationRequest migratingVm. */
+                    public migratingVm: string;
+
+                    /**
+                     * Creates a new ExtendMigrationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExtendMigrationRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IExtendMigrationRequest): google.cloud.vmmigration.v1.ExtendMigrationRequest;
+
+                    /**
+                     * Encodes the specified ExtendMigrationRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.ExtendMigrationRequest.verify|verify} messages.
+                     * @param message ExtendMigrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IExtendMigrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExtendMigrationRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ExtendMigrationRequest.verify|verify} messages.
+                     * @param message ExtendMigrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IExtendMigrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExtendMigrationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExtendMigrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ExtendMigrationRequest;
+
+                    /**
+                     * Decodes an ExtendMigrationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExtendMigrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ExtendMigrationRequest;
+
+                    /**
+                     * Verifies an ExtendMigrationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExtendMigrationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExtendMigrationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ExtendMigrationRequest;
+
+                    /**
+                     * Creates a plain object from an ExtendMigrationRequest message. Also converts values to other types if specified.
+                     * @param message ExtendMigrationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ExtendMigrationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExtendMigrationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExtendMigrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExtendMigrationResponse. */
+                interface IExtendMigrationResponse {
+                }
+
+                /** Represents an ExtendMigrationResponse. */
+                class ExtendMigrationResponse implements IExtendMigrationResponse {
+
+                    /**
+                     * Constructs a new ExtendMigrationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IExtendMigrationResponse);
+
+                    /**
+                     * Creates a new ExtendMigrationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExtendMigrationResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IExtendMigrationResponse): google.cloud.vmmigration.v1.ExtendMigrationResponse;
+
+                    /**
+                     * Encodes the specified ExtendMigrationResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.ExtendMigrationResponse.verify|verify} messages.
+                     * @param message ExtendMigrationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IExtendMigrationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExtendMigrationResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ExtendMigrationResponse.verify|verify} messages.
+                     * @param message ExtendMigrationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IExtendMigrationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExtendMigrationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExtendMigrationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ExtendMigrationResponse;
+
+                    /**
+                     * Decodes an ExtendMigrationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExtendMigrationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ExtendMigrationResponse;
+
+                    /**
+                     * Verifies an ExtendMigrationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExtendMigrationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExtendMigrationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ExtendMigrationResponse;
+
+                    /**
+                     * Creates a plain object from an ExtendMigrationResponse message. Also converts values to other types if specified.
+                     * @param message ExtendMigrationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ExtendMigrationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExtendMigrationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExtendMigrationResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a FinalizeMigrationResponse. */
                 interface IFinalizeMigrationResponse {
                 }
@@ -11161,6 +14675,9 @@ export namespace google {
 
                     /** Group displayName */
                     displayName?: (string|null);
+
+                    /** Group migrationTargetType */
+                    migrationTargetType?: (google.cloud.vmmigration.v1.Group.MigrationTargetType|keyof typeof google.cloud.vmmigration.v1.Group.MigrationTargetType|null);
                 }
 
                 /** Represents a Group. */
@@ -11186,6 +14703,9 @@ export namespace google {
 
                     /** Group displayName. */
                     public displayName: string;
+
+                    /** Group migrationTargetType. */
+                    public migrationTargetType: (google.cloud.vmmigration.v1.Group.MigrationTargetType|keyof typeof google.cloud.vmmigration.v1.Group.MigrationTargetType);
 
                     /**
                      * Creates a new Group instance using the specified properties.
@@ -11263,6 +14783,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Group {
+
+                    /** MigrationTargetType enum. */
+                    enum MigrationTargetType {
+                        MIGRATION_TARGET_TYPE_UNSPECIFIED = 0,
+                        MIGRATION_TARGET_TYPE_GCE = 1,
+                        MIGRATION_TARGET_TYPE_DISKS = 2
+                    }
                 }
 
                 /** Properties of a ListGroupsRequest. */
@@ -13204,7 +16734,379 @@ export namespace google {
                         CLONE_ERROR = 6,
                         CUTOVER_ERROR = 7,
                         UTILIZATION_REPORT_ERROR = 8,
-                        APPLIANCE_UPGRADE_ERROR = 9
+                        APPLIANCE_UPGRADE_ERROR = 9,
+                        IMAGE_IMPORT_ERROR = 10,
+                        DISK_MIGRATION_ERROR = 11
+                    }
+                }
+
+                /** Properties of a MigrationWarning. */
+                interface IMigrationWarning {
+
+                    /** MigrationWarning code */
+                    code?: (google.cloud.vmmigration.v1.MigrationWarning.WarningCode|keyof typeof google.cloud.vmmigration.v1.MigrationWarning.WarningCode|null);
+
+                    /** MigrationWarning warningMessage */
+                    warningMessage?: (google.rpc.ILocalizedMessage|null);
+
+                    /** MigrationWarning actionItem */
+                    actionItem?: (google.rpc.ILocalizedMessage|null);
+
+                    /** MigrationWarning helpLinks */
+                    helpLinks?: (google.rpc.Help.ILink[]|null);
+
+                    /** MigrationWarning warningTime */
+                    warningTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MigrationWarning. */
+                class MigrationWarning implements IMigrationWarning {
+
+                    /**
+                     * Constructs a new MigrationWarning.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IMigrationWarning);
+
+                    /** MigrationWarning code. */
+                    public code: (google.cloud.vmmigration.v1.MigrationWarning.WarningCode|keyof typeof google.cloud.vmmigration.v1.MigrationWarning.WarningCode);
+
+                    /** MigrationWarning warningMessage. */
+                    public warningMessage?: (google.rpc.ILocalizedMessage|null);
+
+                    /** MigrationWarning actionItem. */
+                    public actionItem?: (google.rpc.ILocalizedMessage|null);
+
+                    /** MigrationWarning helpLinks. */
+                    public helpLinks: google.rpc.Help.ILink[];
+
+                    /** MigrationWarning warningTime. */
+                    public warningTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new MigrationWarning instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MigrationWarning instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IMigrationWarning): google.cloud.vmmigration.v1.MigrationWarning;
+
+                    /**
+                     * Encodes the specified MigrationWarning message. Does not implicitly {@link google.cloud.vmmigration.v1.MigrationWarning.verify|verify} messages.
+                     * @param message MigrationWarning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IMigrationWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MigrationWarning message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.MigrationWarning.verify|verify} messages.
+                     * @param message MigrationWarning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IMigrationWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MigrationWarning message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MigrationWarning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.MigrationWarning;
+
+                    /**
+                     * Decodes a MigrationWarning message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MigrationWarning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.MigrationWarning;
+
+                    /**
+                     * Verifies a MigrationWarning message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MigrationWarning message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MigrationWarning
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.MigrationWarning;
+
+                    /**
+                     * Creates a plain object from a MigrationWarning message. Also converts values to other types if specified.
+                     * @param message MigrationWarning
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.MigrationWarning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MigrationWarning to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MigrationWarning
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MigrationWarning {
+
+                    /** WarningCode enum. */
+                    enum WarningCode {
+                        WARNING_CODE_UNSPECIFIED = 0,
+                        ADAPTATION_WARNING = 1
+                    }
+                }
+
+                /** Properties of a VmwareSourceVmDetails. */
+                interface IVmwareSourceVmDetails {
+
+                    /** VmwareSourceVmDetails firmware */
+                    firmware?: (google.cloud.vmmigration.v1.VmwareSourceVmDetails.Firmware|keyof typeof google.cloud.vmmigration.v1.VmwareSourceVmDetails.Firmware|null);
+
+                    /** VmwareSourceVmDetails committedStorageBytes */
+                    committedStorageBytes?: (number|Long|string|null);
+
+                    /** VmwareSourceVmDetails disks */
+                    disks?: (google.cloud.vmmigration.v1.VmwareSourceVmDetails.IVmwareDiskDetails[]|null);
+
+                    /** VmwareSourceVmDetails vmCapabilitiesInfo */
+                    vmCapabilitiesInfo?: (google.cloud.vmmigration.v1.IVmCapabilities|null);
+
+                    /** VmwareSourceVmDetails architecture */
+                    architecture?: (google.cloud.vmmigration.v1.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmArchitecture|null);
+                }
+
+                /** Represents a VmwareSourceVmDetails. */
+                class VmwareSourceVmDetails implements IVmwareSourceVmDetails {
+
+                    /**
+                     * Constructs a new VmwareSourceVmDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IVmwareSourceVmDetails);
+
+                    /** VmwareSourceVmDetails firmware. */
+                    public firmware: (google.cloud.vmmigration.v1.VmwareSourceVmDetails.Firmware|keyof typeof google.cloud.vmmigration.v1.VmwareSourceVmDetails.Firmware);
+
+                    /** VmwareSourceVmDetails committedStorageBytes. */
+                    public committedStorageBytes: (number|Long|string);
+
+                    /** VmwareSourceVmDetails disks. */
+                    public disks: google.cloud.vmmigration.v1.VmwareSourceVmDetails.IVmwareDiskDetails[];
+
+                    /** VmwareSourceVmDetails vmCapabilitiesInfo. */
+                    public vmCapabilitiesInfo?: (google.cloud.vmmigration.v1.IVmCapabilities|null);
+
+                    /** VmwareSourceVmDetails architecture. */
+                    public architecture: (google.cloud.vmmigration.v1.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmArchitecture);
+
+                    /**
+                     * Creates a new VmwareSourceVmDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VmwareSourceVmDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IVmwareSourceVmDetails): google.cloud.vmmigration.v1.VmwareSourceVmDetails;
+
+                    /**
+                     * Encodes the specified VmwareSourceVmDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.VmwareSourceVmDetails.verify|verify} messages.
+                     * @param message VmwareSourceVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IVmwareSourceVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VmwareSourceVmDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.VmwareSourceVmDetails.verify|verify} messages.
+                     * @param message VmwareSourceVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IVmwareSourceVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VmwareSourceVmDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VmwareSourceVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.VmwareSourceVmDetails;
+
+                    /**
+                     * Decodes a VmwareSourceVmDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VmwareSourceVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.VmwareSourceVmDetails;
+
+                    /**
+                     * Verifies a VmwareSourceVmDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VmwareSourceVmDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VmwareSourceVmDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.VmwareSourceVmDetails;
+
+                    /**
+                     * Creates a plain object from a VmwareSourceVmDetails message. Also converts values to other types if specified.
+                     * @param message VmwareSourceVmDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.VmwareSourceVmDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VmwareSourceVmDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VmwareSourceVmDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VmwareSourceVmDetails {
+
+                    /** Properties of a VmwareDiskDetails. */
+                    interface IVmwareDiskDetails {
+
+                        /** VmwareDiskDetails diskNumber */
+                        diskNumber?: (number|null);
+
+                        /** VmwareDiskDetails sizeGb */
+                        sizeGb?: (number|Long|string|null);
+
+                        /** VmwareDiskDetails label */
+                        label?: (string|null);
+                    }
+
+                    /** Represents a VmwareDiskDetails. */
+                    class VmwareDiskDetails implements IVmwareDiskDetails {
+
+                        /**
+                         * Constructs a new VmwareDiskDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.VmwareSourceVmDetails.IVmwareDiskDetails);
+
+                        /** VmwareDiskDetails diskNumber. */
+                        public diskNumber: number;
+
+                        /** VmwareDiskDetails sizeGb. */
+                        public sizeGb: (number|Long|string);
+
+                        /** VmwareDiskDetails label. */
+                        public label: string;
+
+                        /**
+                         * Creates a new VmwareDiskDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VmwareDiskDetails instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.VmwareSourceVmDetails.IVmwareDiskDetails): google.cloud.vmmigration.v1.VmwareSourceVmDetails.VmwareDiskDetails;
+
+                        /**
+                         * Encodes the specified VmwareDiskDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.VmwareSourceVmDetails.VmwareDiskDetails.verify|verify} messages.
+                         * @param message VmwareDiskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.VmwareSourceVmDetails.IVmwareDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VmwareDiskDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.VmwareSourceVmDetails.VmwareDiskDetails.verify|verify} messages.
+                         * @param message VmwareDiskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.VmwareSourceVmDetails.IVmwareDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VmwareDiskDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VmwareDiskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.VmwareSourceVmDetails.VmwareDiskDetails;
+
+                        /**
+                         * Decodes a VmwareDiskDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VmwareDiskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.VmwareSourceVmDetails.VmwareDiskDetails;
+
+                        /**
+                         * Verifies a VmwareDiskDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VmwareDiskDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VmwareDiskDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.VmwareSourceVmDetails.VmwareDiskDetails;
+
+                        /**
+                         * Creates a plain object from a VmwareDiskDetails message. Also converts values to other types if specified.
+                         * @param message VmwareDiskDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.VmwareSourceVmDetails.VmwareDiskDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VmwareDiskDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VmwareDiskDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Firmware enum. */
+                    enum Firmware {
+                        FIRMWARE_UNSPECIFIED = 0,
+                        EFI = 1,
+                        BIOS = 2
                     }
                 }
 
@@ -13216,6 +17118,15 @@ export namespace google {
 
                     /** AwsSourceVmDetails committedStorageBytes */
                     committedStorageBytes?: (number|Long|string|null);
+
+                    /** AwsSourceVmDetails disks */
+                    disks?: (google.cloud.vmmigration.v1.AwsSourceVmDetails.IAwsDiskDetails[]|null);
+
+                    /** AwsSourceVmDetails vmCapabilitiesInfo */
+                    vmCapabilitiesInfo?: (google.cloud.vmmigration.v1.IVmCapabilities|null);
+
+                    /** AwsSourceVmDetails architecture */
+                    architecture?: (google.cloud.vmmigration.v1.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmArchitecture|null);
                 }
 
                 /** Represents an AwsSourceVmDetails. */
@@ -13232,6 +17143,15 @@ export namespace google {
 
                     /** AwsSourceVmDetails committedStorageBytes. */
                     public committedStorageBytes: (number|Long|string);
+
+                    /** AwsSourceVmDetails disks. */
+                    public disks: google.cloud.vmmigration.v1.AwsSourceVmDetails.IAwsDiskDetails[];
+
+                    /** AwsSourceVmDetails vmCapabilitiesInfo. */
+                    public vmCapabilitiesInfo?: (google.cloud.vmmigration.v1.IVmCapabilities|null);
+
+                    /** AwsSourceVmDetails architecture. */
+                    public architecture: (google.cloud.vmmigration.v1.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmArchitecture);
 
                     /**
                      * Creates a new AwsSourceVmDetails instance using the specified properties.
@@ -13312,6 +17232,355 @@ export namespace google {
                 }
 
                 namespace AwsSourceVmDetails {
+
+                    /** Properties of an AwsDiskDetails. */
+                    interface IAwsDiskDetails {
+
+                        /** AwsDiskDetails diskNumber */
+                        diskNumber?: (number|null);
+
+                        /** AwsDiskDetails volumeId */
+                        volumeId?: (string|null);
+
+                        /** AwsDiskDetails sizeGb */
+                        sizeGb?: (number|Long|string|null);
+                    }
+
+                    /** Represents an AwsDiskDetails. */
+                    class AwsDiskDetails implements IAwsDiskDetails {
+
+                        /**
+                         * Constructs a new AwsDiskDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AwsSourceVmDetails.IAwsDiskDetails);
+
+                        /** AwsDiskDetails diskNumber. */
+                        public diskNumber: number;
+
+                        /** AwsDiskDetails volumeId. */
+                        public volumeId: string;
+
+                        /** AwsDiskDetails sizeGb. */
+                        public sizeGb: (number|Long|string);
+
+                        /**
+                         * Creates a new AwsDiskDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AwsDiskDetails instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AwsSourceVmDetails.IAwsDiskDetails): google.cloud.vmmigration.v1.AwsSourceVmDetails.AwsDiskDetails;
+
+                        /**
+                         * Encodes the specified AwsDiskDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceVmDetails.AwsDiskDetails.verify|verify} messages.
+                         * @param message AwsDiskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AwsSourceVmDetails.IAwsDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AwsDiskDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceVmDetails.AwsDiskDetails.verify|verify} messages.
+                         * @param message AwsDiskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AwsSourceVmDetails.IAwsDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AwsDiskDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AwsDiskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsSourceVmDetails.AwsDiskDetails;
+
+                        /**
+                         * Decodes an AwsDiskDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AwsDiskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsSourceVmDetails.AwsDiskDetails;
+
+                        /**
+                         * Verifies an AwsDiskDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AwsDiskDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AwsDiskDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsSourceVmDetails.AwsDiskDetails;
+
+                        /**
+                         * Creates a plain object from an AwsDiskDetails message. Also converts values to other types if specified.
+                         * @param message AwsDiskDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AwsSourceVmDetails.AwsDiskDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AwsDiskDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AwsDiskDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Firmware enum. */
+                    enum Firmware {
+                        FIRMWARE_UNSPECIFIED = 0,
+                        EFI = 1,
+                        BIOS = 2
+                    }
+                }
+
+                /** Properties of an AzureSourceVmDetails. */
+                interface IAzureSourceVmDetails {
+
+                    /** AzureSourceVmDetails firmware */
+                    firmware?: (google.cloud.vmmigration.v1.AzureSourceVmDetails.Firmware|keyof typeof google.cloud.vmmigration.v1.AzureSourceVmDetails.Firmware|null);
+
+                    /** AzureSourceVmDetails committedStorageBytes */
+                    committedStorageBytes?: (number|Long|string|null);
+
+                    /** AzureSourceVmDetails disks */
+                    disks?: (google.cloud.vmmigration.v1.AzureSourceVmDetails.IAzureDiskDetails[]|null);
+
+                    /** AzureSourceVmDetails vmCapabilitiesInfo */
+                    vmCapabilitiesInfo?: (google.cloud.vmmigration.v1.IVmCapabilities|null);
+
+                    /** AzureSourceVmDetails architecture */
+                    architecture?: (google.cloud.vmmigration.v1.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmArchitecture|null);
+                }
+
+                /** Represents an AzureSourceVmDetails. */
+                class AzureSourceVmDetails implements IAzureSourceVmDetails {
+
+                    /**
+                     * Constructs a new AzureSourceVmDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAzureSourceVmDetails);
+
+                    /** AzureSourceVmDetails firmware. */
+                    public firmware: (google.cloud.vmmigration.v1.AzureSourceVmDetails.Firmware|keyof typeof google.cloud.vmmigration.v1.AzureSourceVmDetails.Firmware);
+
+                    /** AzureSourceVmDetails committedStorageBytes. */
+                    public committedStorageBytes: (number|Long|string);
+
+                    /** AzureSourceVmDetails disks. */
+                    public disks: google.cloud.vmmigration.v1.AzureSourceVmDetails.IAzureDiskDetails[];
+
+                    /** AzureSourceVmDetails vmCapabilitiesInfo. */
+                    public vmCapabilitiesInfo?: (google.cloud.vmmigration.v1.IVmCapabilities|null);
+
+                    /** AzureSourceVmDetails architecture. */
+                    public architecture: (google.cloud.vmmigration.v1.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.VmArchitecture);
+
+                    /**
+                     * Creates a new AzureSourceVmDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AzureSourceVmDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAzureSourceVmDetails): google.cloud.vmmigration.v1.AzureSourceVmDetails;
+
+                    /**
+                     * Encodes the specified AzureSourceVmDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceVmDetails.verify|verify} messages.
+                     * @param message AzureSourceVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAzureSourceVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AzureSourceVmDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceVmDetails.verify|verify} messages.
+                     * @param message AzureSourceVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAzureSourceVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AzureSourceVmDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AzureSourceVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureSourceVmDetails;
+
+                    /**
+                     * Decodes an AzureSourceVmDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AzureSourceVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureSourceVmDetails;
+
+                    /**
+                     * Verifies an AzureSourceVmDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AzureSourceVmDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AzureSourceVmDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureSourceVmDetails;
+
+                    /**
+                     * Creates a plain object from an AzureSourceVmDetails message. Also converts values to other types if specified.
+                     * @param message AzureSourceVmDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AzureSourceVmDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AzureSourceVmDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AzureSourceVmDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AzureSourceVmDetails {
+
+                    /** Properties of an AzureDiskDetails. */
+                    interface IAzureDiskDetails {
+
+                        /** AzureDiskDetails diskNumber */
+                        diskNumber?: (number|null);
+
+                        /** AzureDiskDetails diskId */
+                        diskId?: (string|null);
+
+                        /** AzureDiskDetails sizeGb */
+                        sizeGb?: (number|Long|string|null);
+                    }
+
+                    /** Represents an AzureDiskDetails. */
+                    class AzureDiskDetails implements IAzureDiskDetails {
+
+                        /**
+                         * Constructs a new AzureDiskDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AzureSourceVmDetails.IAzureDiskDetails);
+
+                        /** AzureDiskDetails diskNumber. */
+                        public diskNumber: number;
+
+                        /** AzureDiskDetails diskId. */
+                        public diskId: string;
+
+                        /** AzureDiskDetails sizeGb. */
+                        public sizeGb: (number|Long|string);
+
+                        /**
+                         * Creates a new AzureDiskDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AzureDiskDetails instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AzureSourceVmDetails.IAzureDiskDetails): google.cloud.vmmigration.v1.AzureSourceVmDetails.AzureDiskDetails;
+
+                        /**
+                         * Encodes the specified AzureDiskDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceVmDetails.AzureDiskDetails.verify|verify} messages.
+                         * @param message AzureDiskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AzureSourceVmDetails.IAzureDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AzureDiskDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AzureSourceVmDetails.AzureDiskDetails.verify|verify} messages.
+                         * @param message AzureDiskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AzureSourceVmDetails.IAzureDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AzureDiskDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AzureDiskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AzureSourceVmDetails.AzureDiskDetails;
+
+                        /**
+                         * Decodes an AzureDiskDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AzureDiskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AzureSourceVmDetails.AzureDiskDetails;
+
+                        /**
+                         * Verifies an AzureDiskDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AzureDiskDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AzureDiskDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AzureSourceVmDetails.AzureDiskDetails;
+
+                        /**
+                         * Creates a plain object from an AzureDiskDetails message. Also converts values to other types if specified.
+                         * @param message AzureDiskDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AzureSourceVmDetails.AzureDiskDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AzureDiskDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AzureDiskDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Firmware enum. */
                     enum Firmware {
@@ -13642,6 +17911,4770 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetReplicationCycleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VmCapabilities. */
+                interface IVmCapabilities {
+
+                    /** VmCapabilities osCapabilities */
+                    osCapabilities?: (google.cloud.vmmigration.v1.OsCapability[]|null);
+
+                    /** VmCapabilities lastOsCapabilitiesUpdateTime */
+                    lastOsCapabilitiesUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a VmCapabilities. */
+                class VmCapabilities implements IVmCapabilities {
+
+                    /**
+                     * Constructs a new VmCapabilities.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IVmCapabilities);
+
+                    /** VmCapabilities osCapabilities. */
+                    public osCapabilities: google.cloud.vmmigration.v1.OsCapability[];
+
+                    /** VmCapabilities lastOsCapabilitiesUpdateTime. */
+                    public lastOsCapabilitiesUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new VmCapabilities instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VmCapabilities instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IVmCapabilities): google.cloud.vmmigration.v1.VmCapabilities;
+
+                    /**
+                     * Encodes the specified VmCapabilities message. Does not implicitly {@link google.cloud.vmmigration.v1.VmCapabilities.verify|verify} messages.
+                     * @param message VmCapabilities message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IVmCapabilities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VmCapabilities message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.VmCapabilities.verify|verify} messages.
+                     * @param message VmCapabilities message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IVmCapabilities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VmCapabilities message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VmCapabilities
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.VmCapabilities;
+
+                    /**
+                     * Decodes a VmCapabilities message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VmCapabilities
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.VmCapabilities;
+
+                    /**
+                     * Verifies a VmCapabilities message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VmCapabilities message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VmCapabilities
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.VmCapabilities;
+
+                    /**
+                     * Creates a plain object from a VmCapabilities message. Also converts values to other types if specified.
+                     * @param message VmCapabilities
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.VmCapabilities, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VmCapabilities to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VmCapabilities
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImageImport. */
+                interface IImageImport {
+
+                    /** ImageImport cloudStorageUri */
+                    cloudStorageUri?: (string|null);
+
+                    /** ImageImport diskImageTargetDefaults */
+                    diskImageTargetDefaults?: (google.cloud.vmmigration.v1.IDiskImageTargetDetails|null);
+
+                    /** ImageImport machineImageTargetDefaults */
+                    machineImageTargetDefaults?: (google.cloud.vmmigration.v1.IMachineImageTargetDetails|null);
+
+                    /** ImageImport name */
+                    name?: (string|null);
+
+                    /** ImageImport createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImport recentImageImportJobs */
+                    recentImageImportJobs?: (google.cloud.vmmigration.v1.IImageImportJob[]|null);
+
+                    /** ImageImport encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+                }
+
+                /** Represents an ImageImport. */
+                class ImageImport implements IImageImport {
+
+                    /**
+                     * Constructs a new ImageImport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IImageImport);
+
+                    /** ImageImport cloudStorageUri. */
+                    public cloudStorageUri?: (string|null);
+
+                    /** ImageImport diskImageTargetDefaults. */
+                    public diskImageTargetDefaults?: (google.cloud.vmmigration.v1.IDiskImageTargetDetails|null);
+
+                    /** ImageImport machineImageTargetDefaults. */
+                    public machineImageTargetDefaults?: (google.cloud.vmmigration.v1.IMachineImageTargetDetails|null);
+
+                    /** ImageImport name. */
+                    public name: string;
+
+                    /** ImageImport createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImport recentImageImportJobs. */
+                    public recentImageImportJobs: google.cloud.vmmigration.v1.IImageImportJob[];
+
+                    /** ImageImport encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** ImageImport source. */
+                    public source?: "cloudStorageUri";
+
+                    /** ImageImport targetDefaults. */
+                    public targetDefaults?: ("diskImageTargetDefaults"|"machineImageTargetDefaults");
+
+                    /**
+                     * Creates a new ImageImport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageImport instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IImageImport): google.cloud.vmmigration.v1.ImageImport;
+
+                    /**
+                     * Encodes the specified ImageImport message. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImport.verify|verify} messages.
+                     * @param message ImageImport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IImageImport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageImport message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImport.verify|verify} messages.
+                     * @param message ImageImport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IImageImport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageImport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageImport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ImageImport;
+
+                    /**
+                     * Decodes an ImageImport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageImport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ImageImport;
+
+                    /**
+                     * Verifies an ImageImport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageImport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageImport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ImageImport;
+
+                    /**
+                     * Creates a plain object from an ImageImport message. Also converts values to other types if specified.
+                     * @param message ImageImport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ImageImport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageImport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageImport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImageImportJob. */
+                interface IImageImportJob {
+
+                    /** ImageImportJob cloudStorageUri */
+                    cloudStorageUri?: (string|null);
+
+                    /** ImageImportJob diskImageTargetDetails */
+                    diskImageTargetDetails?: (google.cloud.vmmigration.v1.IDiskImageTargetDetails|null);
+
+                    /** ImageImportJob machineImageTargetDetails */
+                    machineImageTargetDetails?: (google.cloud.vmmigration.v1.IMachineImageTargetDetails|null);
+
+                    /** ImageImportJob name */
+                    name?: (string|null);
+
+                    /** ImageImportJob createdResources */
+                    createdResources?: (string[]|null);
+
+                    /** ImageImportJob state */
+                    state?: (google.cloud.vmmigration.v1.ImageImportJob.State|keyof typeof google.cloud.vmmigration.v1.ImageImportJob.State|null);
+
+                    /** ImageImportJob createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImportJob endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImportJob errors */
+                    errors?: (google.rpc.IStatus[]|null);
+
+                    /** ImageImportJob warnings */
+                    warnings?: (google.cloud.vmmigration.v1.IMigrationWarning[]|null);
+
+                    /** ImageImportJob steps */
+                    steps?: (google.cloud.vmmigration.v1.IImageImportStep[]|null);
+                }
+
+                /** Represents an ImageImportJob. */
+                class ImageImportJob implements IImageImportJob {
+
+                    /**
+                     * Constructs a new ImageImportJob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IImageImportJob);
+
+                    /** ImageImportJob cloudStorageUri. */
+                    public cloudStorageUri?: (string|null);
+
+                    /** ImageImportJob diskImageTargetDetails. */
+                    public diskImageTargetDetails?: (google.cloud.vmmigration.v1.IDiskImageTargetDetails|null);
+
+                    /** ImageImportJob machineImageTargetDetails. */
+                    public machineImageTargetDetails?: (google.cloud.vmmigration.v1.IMachineImageTargetDetails|null);
+
+                    /** ImageImportJob name. */
+                    public name: string;
+
+                    /** ImageImportJob createdResources. */
+                    public createdResources: string[];
+
+                    /** ImageImportJob state. */
+                    public state: (google.cloud.vmmigration.v1.ImageImportJob.State|keyof typeof google.cloud.vmmigration.v1.ImageImportJob.State);
+
+                    /** ImageImportJob createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImportJob endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImportJob errors. */
+                    public errors: google.rpc.IStatus[];
+
+                    /** ImageImportJob warnings. */
+                    public warnings: google.cloud.vmmigration.v1.IMigrationWarning[];
+
+                    /** ImageImportJob steps. */
+                    public steps: google.cloud.vmmigration.v1.IImageImportStep[];
+
+                    /** ImageImportJob source. */
+                    public source?: "cloudStorageUri";
+
+                    /** ImageImportJob targetDetails. */
+                    public targetDetails?: ("diskImageTargetDetails"|"machineImageTargetDetails");
+
+                    /**
+                     * Creates a new ImageImportJob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageImportJob instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IImageImportJob): google.cloud.vmmigration.v1.ImageImportJob;
+
+                    /**
+                     * Encodes the specified ImageImportJob message. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImportJob.verify|verify} messages.
+                     * @param message ImageImportJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IImageImportJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageImportJob message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImportJob.verify|verify} messages.
+                     * @param message ImageImportJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IImageImportJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageImportJob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageImportJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ImageImportJob;
+
+                    /**
+                     * Decodes an ImageImportJob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageImportJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ImageImportJob;
+
+                    /**
+                     * Verifies an ImageImportJob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageImportJob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageImportJob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ImageImportJob;
+
+                    /**
+                     * Creates a plain object from an ImageImportJob message. Also converts values to other types if specified.
+                     * @param message ImageImportJob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ImageImportJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageImportJob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageImportJob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImageImportJob {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        RUNNING = 2,
+                        SUCCEEDED = 3,
+                        FAILED = 4,
+                        CANCELLING = 5,
+                        CANCELLED = 6
+                    }
+                }
+
+                /** Properties of an ImageImportStep. */
+                interface IImageImportStep {
+
+                    /** ImageImportStep initializing */
+                    initializing?: (google.cloud.vmmigration.v1.IInitializingImageImportStep|null);
+
+                    /** ImageImportStep loadingSourceFiles */
+                    loadingSourceFiles?: (google.cloud.vmmigration.v1.ILoadingImageSourceFilesStep|null);
+
+                    /** ImageImportStep adaptingOs */
+                    adaptingOs?: (google.cloud.vmmigration.v1.IAdaptingOSStep|null);
+
+                    /** ImageImportStep creatingImage */
+                    creatingImage?: (google.cloud.vmmigration.v1.ICreatingImageStep|null);
+
+                    /** ImageImportStep startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImportStep endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an ImageImportStep. */
+                class ImageImportStep implements IImageImportStep {
+
+                    /**
+                     * Constructs a new ImageImportStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IImageImportStep);
+
+                    /** ImageImportStep initializing. */
+                    public initializing?: (google.cloud.vmmigration.v1.IInitializingImageImportStep|null);
+
+                    /** ImageImportStep loadingSourceFiles. */
+                    public loadingSourceFiles?: (google.cloud.vmmigration.v1.ILoadingImageSourceFilesStep|null);
+
+                    /** ImageImportStep adaptingOs. */
+                    public adaptingOs?: (google.cloud.vmmigration.v1.IAdaptingOSStep|null);
+
+                    /** ImageImportStep creatingImage. */
+                    public creatingImage?: (google.cloud.vmmigration.v1.ICreatingImageStep|null);
+
+                    /** ImageImportStep startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImportStep endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImageImportStep step. */
+                    public step?: ("initializing"|"loadingSourceFiles"|"adaptingOs"|"creatingImage");
+
+                    /**
+                     * Creates a new ImageImportStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageImportStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IImageImportStep): google.cloud.vmmigration.v1.ImageImportStep;
+
+                    /**
+                     * Encodes the specified ImageImportStep message. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImportStep.verify|verify} messages.
+                     * @param message ImageImportStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IImageImportStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageImportStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImportStep.verify|verify} messages.
+                     * @param message ImageImportStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IImageImportStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageImportStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageImportStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ImageImportStep;
+
+                    /**
+                     * Decodes an ImageImportStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageImportStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ImageImportStep;
+
+                    /**
+                     * Verifies an ImageImportStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageImportStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageImportStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ImageImportStep;
+
+                    /**
+                     * Creates a plain object from an ImageImportStep message. Also converts values to other types if specified.
+                     * @param message ImageImportStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ImageImportStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageImportStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageImportStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializingImageImportStep. */
+                interface IInitializingImageImportStep {
+                }
+
+                /** Represents an InitializingImageImportStep. */
+                class InitializingImageImportStep implements IInitializingImageImportStep {
+
+                    /**
+                     * Constructs a new InitializingImageImportStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IInitializingImageImportStep);
+
+                    /**
+                     * Creates a new InitializingImageImportStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializingImageImportStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IInitializingImageImportStep): google.cloud.vmmigration.v1.InitializingImageImportStep;
+
+                    /**
+                     * Encodes the specified InitializingImageImportStep message. Does not implicitly {@link google.cloud.vmmigration.v1.InitializingImageImportStep.verify|verify} messages.
+                     * @param message InitializingImageImportStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IInitializingImageImportStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializingImageImportStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.InitializingImageImportStep.verify|verify} messages.
+                     * @param message InitializingImageImportStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IInitializingImageImportStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializingImageImportStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializingImageImportStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.InitializingImageImportStep;
+
+                    /**
+                     * Decodes an InitializingImageImportStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializingImageImportStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.InitializingImageImportStep;
+
+                    /**
+                     * Verifies an InitializingImageImportStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializingImageImportStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializingImageImportStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.InitializingImageImportStep;
+
+                    /**
+                     * Creates a plain object from an InitializingImageImportStep message. Also converts values to other types if specified.
+                     * @param message InitializingImageImportStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.InitializingImageImportStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializingImageImportStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializingImageImportStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LoadingImageSourceFilesStep. */
+                interface ILoadingImageSourceFilesStep {
+                }
+
+                /** Represents a LoadingImageSourceFilesStep. */
+                class LoadingImageSourceFilesStep implements ILoadingImageSourceFilesStep {
+
+                    /**
+                     * Constructs a new LoadingImageSourceFilesStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ILoadingImageSourceFilesStep);
+
+                    /**
+                     * Creates a new LoadingImageSourceFilesStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LoadingImageSourceFilesStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ILoadingImageSourceFilesStep): google.cloud.vmmigration.v1.LoadingImageSourceFilesStep;
+
+                    /**
+                     * Encodes the specified LoadingImageSourceFilesStep message. Does not implicitly {@link google.cloud.vmmigration.v1.LoadingImageSourceFilesStep.verify|verify} messages.
+                     * @param message LoadingImageSourceFilesStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ILoadingImageSourceFilesStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LoadingImageSourceFilesStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.LoadingImageSourceFilesStep.verify|verify} messages.
+                     * @param message LoadingImageSourceFilesStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ILoadingImageSourceFilesStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LoadingImageSourceFilesStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LoadingImageSourceFilesStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.LoadingImageSourceFilesStep;
+
+                    /**
+                     * Decodes a LoadingImageSourceFilesStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LoadingImageSourceFilesStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.LoadingImageSourceFilesStep;
+
+                    /**
+                     * Verifies a LoadingImageSourceFilesStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LoadingImageSourceFilesStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LoadingImageSourceFilesStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.LoadingImageSourceFilesStep;
+
+                    /**
+                     * Creates a plain object from a LoadingImageSourceFilesStep message. Also converts values to other types if specified.
+                     * @param message LoadingImageSourceFilesStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.LoadingImageSourceFilesStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LoadingImageSourceFilesStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LoadingImageSourceFilesStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatingImageStep. */
+                interface ICreatingImageStep {
+                }
+
+                /** Represents a CreatingImageStep. */
+                class CreatingImageStep implements ICreatingImageStep {
+
+                    /**
+                     * Constructs a new CreatingImageStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICreatingImageStep);
+
+                    /**
+                     * Creates a new CreatingImageStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatingImageStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICreatingImageStep): google.cloud.vmmigration.v1.CreatingImageStep;
+
+                    /**
+                     * Encodes the specified CreatingImageStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CreatingImageStep.verify|verify} messages.
+                     * @param message CreatingImageStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICreatingImageStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatingImageStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CreatingImageStep.verify|verify} messages.
+                     * @param message CreatingImageStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICreatingImageStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatingImageStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatingImageStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CreatingImageStep;
+
+                    /**
+                     * Decodes a CreatingImageStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatingImageStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CreatingImageStep;
+
+                    /**
+                     * Verifies a CreatingImageStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatingImageStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatingImageStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CreatingImageStep;
+
+                    /**
+                     * Creates a plain object from a CreatingImageStep message. Also converts values to other types if specified.
+                     * @param message CreatingImageStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CreatingImageStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatingImageStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatingImageStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiskImageTargetDetails. */
+                interface IDiskImageTargetDetails {
+
+                    /** DiskImageTargetDetails osAdaptationParameters */
+                    osAdaptationParameters?: (google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters|null);
+
+                    /** DiskImageTargetDetails dataDiskImageImport */
+                    dataDiskImageImport?: (google.cloud.vmmigration.v1.IDataDiskImageImport|null);
+
+                    /** DiskImageTargetDetails imageName */
+                    imageName?: (string|null);
+
+                    /** DiskImageTargetDetails targetProject */
+                    targetProject?: (string|null);
+
+                    /** DiskImageTargetDetails description */
+                    description?: (string|null);
+
+                    /** DiskImageTargetDetails familyName */
+                    familyName?: (string|null);
+
+                    /** DiskImageTargetDetails labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DiskImageTargetDetails additionalLicenses */
+                    additionalLicenses?: (string[]|null);
+
+                    /** DiskImageTargetDetails singleRegionStorage */
+                    singleRegionStorage?: (boolean|null);
+
+                    /** DiskImageTargetDetails encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+                }
+
+                /** Represents a DiskImageTargetDetails. */
+                class DiskImageTargetDetails implements IDiskImageTargetDetails {
+
+                    /**
+                     * Constructs a new DiskImageTargetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDiskImageTargetDetails);
+
+                    /** DiskImageTargetDetails osAdaptationParameters. */
+                    public osAdaptationParameters?: (google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters|null);
+
+                    /** DiskImageTargetDetails dataDiskImageImport. */
+                    public dataDiskImageImport?: (google.cloud.vmmigration.v1.IDataDiskImageImport|null);
+
+                    /** DiskImageTargetDetails imageName. */
+                    public imageName: string;
+
+                    /** DiskImageTargetDetails targetProject. */
+                    public targetProject: string;
+
+                    /** DiskImageTargetDetails description. */
+                    public description: string;
+
+                    /** DiskImageTargetDetails familyName. */
+                    public familyName: string;
+
+                    /** DiskImageTargetDetails labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DiskImageTargetDetails additionalLicenses. */
+                    public additionalLicenses: string[];
+
+                    /** DiskImageTargetDetails singleRegionStorage. */
+                    public singleRegionStorage: boolean;
+
+                    /** DiskImageTargetDetails encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** DiskImageTargetDetails osAdaptationConfig. */
+                    public osAdaptationConfig?: ("osAdaptationParameters"|"dataDiskImageImport");
+
+                    /**
+                     * Creates a new DiskImageTargetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiskImageTargetDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDiskImageTargetDetails): google.cloud.vmmigration.v1.DiskImageTargetDetails;
+
+                    /**
+                     * Encodes the specified DiskImageTargetDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.DiskImageTargetDetails.verify|verify} messages.
+                     * @param message DiskImageTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDiskImageTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiskImageTargetDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DiskImageTargetDetails.verify|verify} messages.
+                     * @param message DiskImageTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDiskImageTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiskImageTargetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiskImageTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DiskImageTargetDetails;
+
+                    /**
+                     * Decodes a DiskImageTargetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiskImageTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DiskImageTargetDetails;
+
+                    /**
+                     * Verifies a DiskImageTargetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiskImageTargetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiskImageTargetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DiskImageTargetDetails;
+
+                    /**
+                     * Creates a plain object from a DiskImageTargetDetails message. Also converts values to other types if specified.
+                     * @param message DiskImageTargetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DiskImageTargetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiskImageTargetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiskImageTargetDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MachineImageTargetDetails. */
+                interface IMachineImageTargetDetails {
+
+                    /** MachineImageTargetDetails osAdaptationParameters */
+                    osAdaptationParameters?: (google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters|null);
+
+                    /** MachineImageTargetDetails skipOsAdaptation */
+                    skipOsAdaptation?: (google.cloud.vmmigration.v1.ISkipOsAdaptation|null);
+
+                    /** MachineImageTargetDetails machineImageName */
+                    machineImageName?: (string|null);
+
+                    /** MachineImageTargetDetails targetProject */
+                    targetProject?: (string|null);
+
+                    /** MachineImageTargetDetails description */
+                    description?: (string|null);
+
+                    /** MachineImageTargetDetails singleRegionStorage */
+                    singleRegionStorage?: (boolean|null);
+
+                    /** MachineImageTargetDetails encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** MachineImageTargetDetails machineImageParametersOverrides */
+                    machineImageParametersOverrides?: (google.cloud.vmmigration.v1.IMachineImageParametersOverrides|null);
+
+                    /** MachineImageTargetDetails serviceAccount */
+                    serviceAccount?: (google.cloud.vmmigration.v1.IServiceAccount|null);
+
+                    /** MachineImageTargetDetails additionalLicenses */
+                    additionalLicenses?: (string[]|null);
+
+                    /** MachineImageTargetDetails labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** MachineImageTargetDetails tags */
+                    tags?: (string[]|null);
+
+                    /** MachineImageTargetDetails shieldedInstanceConfig */
+                    shieldedInstanceConfig?: (google.cloud.vmmigration.v1.IShieldedInstanceConfig|null);
+
+                    /** MachineImageTargetDetails networkInterfaces */
+                    networkInterfaces?: (google.cloud.vmmigration.v1.INetworkInterface[]|null);
+                }
+
+                /** Represents a MachineImageTargetDetails. */
+                class MachineImageTargetDetails implements IMachineImageTargetDetails {
+
+                    /**
+                     * Constructs a new MachineImageTargetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IMachineImageTargetDetails);
+
+                    /** MachineImageTargetDetails osAdaptationParameters. */
+                    public osAdaptationParameters?: (google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters|null);
+
+                    /** MachineImageTargetDetails skipOsAdaptation. */
+                    public skipOsAdaptation?: (google.cloud.vmmigration.v1.ISkipOsAdaptation|null);
+
+                    /** MachineImageTargetDetails machineImageName. */
+                    public machineImageName: string;
+
+                    /** MachineImageTargetDetails targetProject. */
+                    public targetProject: string;
+
+                    /** MachineImageTargetDetails description. */
+                    public description: string;
+
+                    /** MachineImageTargetDetails singleRegionStorage. */
+                    public singleRegionStorage: boolean;
+
+                    /** MachineImageTargetDetails encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** MachineImageTargetDetails machineImageParametersOverrides. */
+                    public machineImageParametersOverrides?: (google.cloud.vmmigration.v1.IMachineImageParametersOverrides|null);
+
+                    /** MachineImageTargetDetails serviceAccount. */
+                    public serviceAccount?: (google.cloud.vmmigration.v1.IServiceAccount|null);
+
+                    /** MachineImageTargetDetails additionalLicenses. */
+                    public additionalLicenses: string[];
+
+                    /** MachineImageTargetDetails labels. */
+                    public labels: { [k: string]: string };
+
+                    /** MachineImageTargetDetails tags. */
+                    public tags: string[];
+
+                    /** MachineImageTargetDetails shieldedInstanceConfig. */
+                    public shieldedInstanceConfig?: (google.cloud.vmmigration.v1.IShieldedInstanceConfig|null);
+
+                    /** MachineImageTargetDetails networkInterfaces. */
+                    public networkInterfaces: google.cloud.vmmigration.v1.INetworkInterface[];
+
+                    /** MachineImageTargetDetails osAdaptationConfig. */
+                    public osAdaptationConfig?: ("osAdaptationParameters"|"skipOsAdaptation");
+
+                    /**
+                     * Creates a new MachineImageTargetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MachineImageTargetDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IMachineImageTargetDetails): google.cloud.vmmigration.v1.MachineImageTargetDetails;
+
+                    /**
+                     * Encodes the specified MachineImageTargetDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.MachineImageTargetDetails.verify|verify} messages.
+                     * @param message MachineImageTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IMachineImageTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MachineImageTargetDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.MachineImageTargetDetails.verify|verify} messages.
+                     * @param message MachineImageTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IMachineImageTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MachineImageTargetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MachineImageTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.MachineImageTargetDetails;
+
+                    /**
+                     * Decodes a MachineImageTargetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MachineImageTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.MachineImageTargetDetails;
+
+                    /**
+                     * Verifies a MachineImageTargetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MachineImageTargetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MachineImageTargetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.MachineImageTargetDetails;
+
+                    /**
+                     * Creates a plain object from a MachineImageTargetDetails message. Also converts values to other types if specified.
+                     * @param message MachineImageTargetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.MachineImageTargetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MachineImageTargetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MachineImageTargetDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceAccount. */
+                interface IServiceAccount {
+
+                    /** ServiceAccount email */
+                    email?: (string|null);
+
+                    /** ServiceAccount scopes */
+                    scopes?: (string[]|null);
+                }
+
+                /** Represents a ServiceAccount. */
+                class ServiceAccount implements IServiceAccount {
+
+                    /**
+                     * Constructs a new ServiceAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IServiceAccount);
+
+                    /** ServiceAccount email. */
+                    public email: string;
+
+                    /** ServiceAccount scopes. */
+                    public scopes: string[];
+
+                    /**
+                     * Creates a new ServiceAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceAccount instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IServiceAccount): google.cloud.vmmigration.v1.ServiceAccount;
+
+                    /**
+                     * Encodes the specified ServiceAccount message. Does not implicitly {@link google.cloud.vmmigration.v1.ServiceAccount.verify|verify} messages.
+                     * @param message ServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceAccount message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ServiceAccount.verify|verify} messages.
+                     * @param message ServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ServiceAccount;
+
+                    /**
+                     * Decodes a ServiceAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ServiceAccount;
+
+                    /**
+                     * Verifies a ServiceAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ServiceAccount;
+
+                    /**
+                     * Creates a plain object from a ServiceAccount message. Also converts values to other types if specified.
+                     * @param message ServiceAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ServiceAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceAccount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShieldedInstanceConfig. */
+                interface IShieldedInstanceConfig {
+
+                    /** ShieldedInstanceConfig secureBoot */
+                    secureBoot?: (google.cloud.vmmigration.v1.ShieldedInstanceConfig.SecureBoot|keyof typeof google.cloud.vmmigration.v1.ShieldedInstanceConfig.SecureBoot|null);
+
+                    /** ShieldedInstanceConfig enableVtpm */
+                    enableVtpm?: (boolean|null);
+
+                    /** ShieldedInstanceConfig enableIntegrityMonitoring */
+                    enableIntegrityMonitoring?: (boolean|null);
+                }
+
+                /** Represents a ShieldedInstanceConfig. */
+                class ShieldedInstanceConfig implements IShieldedInstanceConfig {
+
+                    /**
+                     * Constructs a new ShieldedInstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IShieldedInstanceConfig);
+
+                    /** ShieldedInstanceConfig secureBoot. */
+                    public secureBoot: (google.cloud.vmmigration.v1.ShieldedInstanceConfig.SecureBoot|keyof typeof google.cloud.vmmigration.v1.ShieldedInstanceConfig.SecureBoot);
+
+                    /** ShieldedInstanceConfig enableVtpm. */
+                    public enableVtpm: boolean;
+
+                    /** ShieldedInstanceConfig enableIntegrityMonitoring. */
+                    public enableIntegrityMonitoring: boolean;
+
+                    /**
+                     * Creates a new ShieldedInstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShieldedInstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IShieldedInstanceConfig): google.cloud.vmmigration.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message. Does not implicitly {@link google.cloud.vmmigration.v1.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Verifies a ShieldedInstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShieldedInstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Creates a plain object from a ShieldedInstanceConfig message. Also converts values to other types if specified.
+                     * @param message ShieldedInstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ShieldedInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShieldedInstanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShieldedInstanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ShieldedInstanceConfig {
+
+                    /** SecureBoot enum. */
+                    enum SecureBoot {
+                        SECURE_BOOT_UNSPECIFIED = 0,
+                        TRUE = 1,
+                        FALSE = 2
+                    }
+                }
+
+                /** Properties of a MachineImageParametersOverrides. */
+                interface IMachineImageParametersOverrides {
+
+                    /** MachineImageParametersOverrides machineType */
+                    machineType?: (string|null);
+                }
+
+                /** Represents a MachineImageParametersOverrides. */
+                class MachineImageParametersOverrides implements IMachineImageParametersOverrides {
+
+                    /**
+                     * Constructs a new MachineImageParametersOverrides.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IMachineImageParametersOverrides);
+
+                    /** MachineImageParametersOverrides machineType. */
+                    public machineType: string;
+
+                    /**
+                     * Creates a new MachineImageParametersOverrides instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MachineImageParametersOverrides instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IMachineImageParametersOverrides): google.cloud.vmmigration.v1.MachineImageParametersOverrides;
+
+                    /**
+                     * Encodes the specified MachineImageParametersOverrides message. Does not implicitly {@link google.cloud.vmmigration.v1.MachineImageParametersOverrides.verify|verify} messages.
+                     * @param message MachineImageParametersOverrides message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IMachineImageParametersOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MachineImageParametersOverrides message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.MachineImageParametersOverrides.verify|verify} messages.
+                     * @param message MachineImageParametersOverrides message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IMachineImageParametersOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MachineImageParametersOverrides message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MachineImageParametersOverrides
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.MachineImageParametersOverrides;
+
+                    /**
+                     * Decodes a MachineImageParametersOverrides message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MachineImageParametersOverrides
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.MachineImageParametersOverrides;
+
+                    /**
+                     * Verifies a MachineImageParametersOverrides message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MachineImageParametersOverrides message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MachineImageParametersOverrides
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.MachineImageParametersOverrides;
+
+                    /**
+                     * Creates a plain object from a MachineImageParametersOverrides message. Also converts values to other types if specified.
+                     * @param message MachineImageParametersOverrides
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.MachineImageParametersOverrides, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MachineImageParametersOverrides to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MachineImageParametersOverrides
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImageImportOsAdaptationParameters. */
+                interface IImageImportOsAdaptationParameters {
+
+                    /** ImageImportOsAdaptationParameters generalize */
+                    generalize?: (boolean|null);
+
+                    /** ImageImportOsAdaptationParameters licenseType */
+                    licenseType?: (google.cloud.vmmigration.v1.ComputeEngineLicenseType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineLicenseType|null);
+
+                    /** ImageImportOsAdaptationParameters bootConversion */
+                    bootConversion?: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion|null);
+                }
+
+                /** Represents an ImageImportOsAdaptationParameters. */
+                class ImageImportOsAdaptationParameters implements IImageImportOsAdaptationParameters {
+
+                    /**
+                     * Constructs a new ImageImportOsAdaptationParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters);
+
+                    /** ImageImportOsAdaptationParameters generalize. */
+                    public generalize: boolean;
+
+                    /** ImageImportOsAdaptationParameters licenseType. */
+                    public licenseType: (google.cloud.vmmigration.v1.ComputeEngineLicenseType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineLicenseType);
+
+                    /** ImageImportOsAdaptationParameters bootConversion. */
+                    public bootConversion: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion);
+
+                    /**
+                     * Creates a new ImageImportOsAdaptationParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageImportOsAdaptationParameters instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters): google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters;
+
+                    /**
+                     * Encodes the specified ImageImportOsAdaptationParameters message. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters.verify|verify} messages.
+                     * @param message ImageImportOsAdaptationParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageImportOsAdaptationParameters message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters.verify|verify} messages.
+                     * @param message ImageImportOsAdaptationParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageImportOsAdaptationParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageImportOsAdaptationParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters;
+
+                    /**
+                     * Decodes an ImageImportOsAdaptationParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageImportOsAdaptationParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters;
+
+                    /**
+                     * Verifies an ImageImportOsAdaptationParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageImportOsAdaptationParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageImportOsAdaptationParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters;
+
+                    /**
+                     * Creates a plain object from an ImageImportOsAdaptationParameters message. Also converts values to other types if specified.
+                     * @param message ImageImportOsAdaptationParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageImportOsAdaptationParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageImportOsAdaptationParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataDiskImageImport. */
+                interface IDataDiskImageImport {
+                }
+
+                /** Represents a DataDiskImageImport. */
+                class DataDiskImageImport implements IDataDiskImageImport {
+
+                    /**
+                     * Constructs a new DataDiskImageImport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDataDiskImageImport);
+
+                    /**
+                     * Creates a new DataDiskImageImport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataDiskImageImport instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDataDiskImageImport): google.cloud.vmmigration.v1.DataDiskImageImport;
+
+                    /**
+                     * Encodes the specified DataDiskImageImport message. Does not implicitly {@link google.cloud.vmmigration.v1.DataDiskImageImport.verify|verify} messages.
+                     * @param message DataDiskImageImport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDataDiskImageImport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataDiskImageImport message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DataDiskImageImport.verify|verify} messages.
+                     * @param message DataDiskImageImport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDataDiskImageImport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataDiskImageImport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataDiskImageImport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DataDiskImageImport;
+
+                    /**
+                     * Decodes a DataDiskImageImport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataDiskImageImport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DataDiskImageImport;
+
+                    /**
+                     * Verifies a DataDiskImageImport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataDiskImageImport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataDiskImageImport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DataDiskImageImport;
+
+                    /**
+                     * Creates a plain object from a DataDiskImageImport message. Also converts values to other types if specified.
+                     * @param message DataDiskImageImport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DataDiskImageImport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataDiskImageImport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataDiskImageImport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SkipOsAdaptation. */
+                interface ISkipOsAdaptation {
+                }
+
+                /** Represents a SkipOsAdaptation. */
+                class SkipOsAdaptation implements ISkipOsAdaptation {
+
+                    /**
+                     * Constructs a new SkipOsAdaptation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ISkipOsAdaptation);
+
+                    /**
+                     * Creates a new SkipOsAdaptation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SkipOsAdaptation instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ISkipOsAdaptation): google.cloud.vmmigration.v1.SkipOsAdaptation;
+
+                    /**
+                     * Encodes the specified SkipOsAdaptation message. Does not implicitly {@link google.cloud.vmmigration.v1.SkipOsAdaptation.verify|verify} messages.
+                     * @param message SkipOsAdaptation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ISkipOsAdaptation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SkipOsAdaptation message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.SkipOsAdaptation.verify|verify} messages.
+                     * @param message SkipOsAdaptation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ISkipOsAdaptation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SkipOsAdaptation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SkipOsAdaptation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.SkipOsAdaptation;
+
+                    /**
+                     * Decodes a SkipOsAdaptation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SkipOsAdaptation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.SkipOsAdaptation;
+
+                    /**
+                     * Verifies a SkipOsAdaptation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SkipOsAdaptation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SkipOsAdaptation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.SkipOsAdaptation;
+
+                    /**
+                     * Creates a plain object from a SkipOsAdaptation message. Also converts values to other types if specified.
+                     * @param message SkipOsAdaptation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.SkipOsAdaptation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SkipOsAdaptation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SkipOsAdaptation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetImageImportRequest. */
+                interface IGetImageImportRequest {
+
+                    /** GetImageImportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetImageImportRequest. */
+                class GetImageImportRequest implements IGetImageImportRequest {
+
+                    /**
+                     * Constructs a new GetImageImportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IGetImageImportRequest);
+
+                    /** GetImageImportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetImageImportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetImageImportRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IGetImageImportRequest): google.cloud.vmmigration.v1.GetImageImportRequest;
+
+                    /**
+                     * Encodes the specified GetImageImportRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.GetImageImportRequest.verify|verify} messages.
+                     * @param message GetImageImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IGetImageImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetImageImportRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.GetImageImportRequest.verify|verify} messages.
+                     * @param message GetImageImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IGetImageImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetImageImportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetImageImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.GetImageImportRequest;
+
+                    /**
+                     * Decodes a GetImageImportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetImageImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.GetImageImportRequest;
+
+                    /**
+                     * Verifies a GetImageImportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetImageImportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetImageImportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.GetImageImportRequest;
+
+                    /**
+                     * Creates a plain object from a GetImageImportRequest message. Also converts values to other types if specified.
+                     * @param message GetImageImportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.GetImageImportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetImageImportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetImageImportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListImageImportsRequest. */
+                interface IListImageImportsRequest {
+
+                    /** ListImageImportsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListImageImportsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListImageImportsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListImageImportsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListImageImportsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListImageImportsRequest. */
+                class ListImageImportsRequest implements IListImageImportsRequest {
+
+                    /**
+                     * Constructs a new ListImageImportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListImageImportsRequest);
+
+                    /** ListImageImportsRequest parent. */
+                    public parent: string;
+
+                    /** ListImageImportsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListImageImportsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListImageImportsRequest filter. */
+                    public filter: string;
+
+                    /** ListImageImportsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListImageImportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListImageImportsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListImageImportsRequest): google.cloud.vmmigration.v1.ListImageImportsRequest;
+
+                    /**
+                     * Encodes the specified ListImageImportsRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportsRequest.verify|verify} messages.
+                     * @param message ListImageImportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListImageImportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListImageImportsRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportsRequest.verify|verify} messages.
+                     * @param message ListImageImportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListImageImportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListImageImportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListImageImportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListImageImportsRequest;
+
+                    /**
+                     * Decodes a ListImageImportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListImageImportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListImageImportsRequest;
+
+                    /**
+                     * Verifies a ListImageImportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListImageImportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListImageImportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListImageImportsRequest;
+
+                    /**
+                     * Creates a plain object from a ListImageImportsRequest message. Also converts values to other types if specified.
+                     * @param message ListImageImportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListImageImportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListImageImportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListImageImportsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListImageImportsResponse. */
+                interface IListImageImportsResponse {
+
+                    /** ListImageImportsResponse imageImports */
+                    imageImports?: (google.cloud.vmmigration.v1.IImageImport[]|null);
+
+                    /** ListImageImportsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListImageImportsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListImageImportsResponse. */
+                class ListImageImportsResponse implements IListImageImportsResponse {
+
+                    /**
+                     * Constructs a new ListImageImportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListImageImportsResponse);
+
+                    /** ListImageImportsResponse imageImports. */
+                    public imageImports: google.cloud.vmmigration.v1.IImageImport[];
+
+                    /** ListImageImportsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListImageImportsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListImageImportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListImageImportsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListImageImportsResponse): google.cloud.vmmigration.v1.ListImageImportsResponse;
+
+                    /**
+                     * Encodes the specified ListImageImportsResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportsResponse.verify|verify} messages.
+                     * @param message ListImageImportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListImageImportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListImageImportsResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportsResponse.verify|verify} messages.
+                     * @param message ListImageImportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListImageImportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListImageImportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListImageImportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListImageImportsResponse;
+
+                    /**
+                     * Decodes a ListImageImportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListImageImportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListImageImportsResponse;
+
+                    /**
+                     * Verifies a ListImageImportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListImageImportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListImageImportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListImageImportsResponse;
+
+                    /**
+                     * Creates a plain object from a ListImageImportsResponse message. Also converts values to other types if specified.
+                     * @param message ListImageImportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListImageImportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListImageImportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListImageImportsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateImageImportRequest. */
+                interface ICreateImageImportRequest {
+
+                    /** CreateImageImportRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateImageImportRequest imageImportId */
+                    imageImportId?: (string|null);
+
+                    /** CreateImageImportRequest imageImport */
+                    imageImport?: (google.cloud.vmmigration.v1.IImageImport|null);
+
+                    /** CreateImageImportRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateImageImportRequest. */
+                class CreateImageImportRequest implements ICreateImageImportRequest {
+
+                    /**
+                     * Constructs a new CreateImageImportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICreateImageImportRequest);
+
+                    /** CreateImageImportRequest parent. */
+                    public parent: string;
+
+                    /** CreateImageImportRequest imageImportId. */
+                    public imageImportId: string;
+
+                    /** CreateImageImportRequest imageImport. */
+                    public imageImport?: (google.cloud.vmmigration.v1.IImageImport|null);
+
+                    /** CreateImageImportRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateImageImportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateImageImportRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICreateImageImportRequest): google.cloud.vmmigration.v1.CreateImageImportRequest;
+
+                    /**
+                     * Encodes the specified CreateImageImportRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.CreateImageImportRequest.verify|verify} messages.
+                     * @param message CreateImageImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICreateImageImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateImageImportRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CreateImageImportRequest.verify|verify} messages.
+                     * @param message CreateImageImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICreateImageImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateImageImportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateImageImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CreateImageImportRequest;
+
+                    /**
+                     * Decodes a CreateImageImportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateImageImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CreateImageImportRequest;
+
+                    /**
+                     * Verifies a CreateImageImportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateImageImportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateImageImportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CreateImageImportRequest;
+
+                    /**
+                     * Creates a plain object from a CreateImageImportRequest message. Also converts values to other types if specified.
+                     * @param message CreateImageImportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CreateImageImportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateImageImportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateImageImportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteImageImportRequest. */
+                interface IDeleteImageImportRequest {
+
+                    /** DeleteImageImportRequest name */
+                    name?: (string|null);
+
+                    /** DeleteImageImportRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteImageImportRequest. */
+                class DeleteImageImportRequest implements IDeleteImageImportRequest {
+
+                    /**
+                     * Constructs a new DeleteImageImportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDeleteImageImportRequest);
+
+                    /** DeleteImageImportRequest name. */
+                    public name: string;
+
+                    /** DeleteImageImportRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteImageImportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteImageImportRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDeleteImageImportRequest): google.cloud.vmmigration.v1.DeleteImageImportRequest;
+
+                    /**
+                     * Encodes the specified DeleteImageImportRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.DeleteImageImportRequest.verify|verify} messages.
+                     * @param message DeleteImageImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDeleteImageImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteImageImportRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DeleteImageImportRequest.verify|verify} messages.
+                     * @param message DeleteImageImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDeleteImageImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteImageImportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteImageImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DeleteImageImportRequest;
+
+                    /**
+                     * Decodes a DeleteImageImportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteImageImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DeleteImageImportRequest;
+
+                    /**
+                     * Verifies a DeleteImageImportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteImageImportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteImageImportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DeleteImageImportRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteImageImportRequest message. Also converts values to other types if specified.
+                     * @param message DeleteImageImportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DeleteImageImportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteImageImportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteImageImportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetImageImportJobRequest. */
+                interface IGetImageImportJobRequest {
+
+                    /** GetImageImportJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetImageImportJobRequest. */
+                class GetImageImportJobRequest implements IGetImageImportJobRequest {
+
+                    /**
+                     * Constructs a new GetImageImportJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IGetImageImportJobRequest);
+
+                    /** GetImageImportJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetImageImportJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetImageImportJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IGetImageImportJobRequest): google.cloud.vmmigration.v1.GetImageImportJobRequest;
+
+                    /**
+                     * Encodes the specified GetImageImportJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.GetImageImportJobRequest.verify|verify} messages.
+                     * @param message GetImageImportJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IGetImageImportJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetImageImportJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.GetImageImportJobRequest.verify|verify} messages.
+                     * @param message GetImageImportJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IGetImageImportJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetImageImportJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetImageImportJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.GetImageImportJobRequest;
+
+                    /**
+                     * Decodes a GetImageImportJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetImageImportJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.GetImageImportJobRequest;
+
+                    /**
+                     * Verifies a GetImageImportJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetImageImportJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetImageImportJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.GetImageImportJobRequest;
+
+                    /**
+                     * Creates a plain object from a GetImageImportJobRequest message. Also converts values to other types if specified.
+                     * @param message GetImageImportJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.GetImageImportJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetImageImportJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetImageImportJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListImageImportJobsRequest. */
+                interface IListImageImportJobsRequest {
+
+                    /** ListImageImportJobsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListImageImportJobsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListImageImportJobsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListImageImportJobsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListImageImportJobsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListImageImportJobsRequest. */
+                class ListImageImportJobsRequest implements IListImageImportJobsRequest {
+
+                    /**
+                     * Constructs a new ListImageImportJobsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListImageImportJobsRequest);
+
+                    /** ListImageImportJobsRequest parent. */
+                    public parent: string;
+
+                    /** ListImageImportJobsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListImageImportJobsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListImageImportJobsRequest filter. */
+                    public filter: string;
+
+                    /** ListImageImportJobsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListImageImportJobsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListImageImportJobsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListImageImportJobsRequest): google.cloud.vmmigration.v1.ListImageImportJobsRequest;
+
+                    /**
+                     * Encodes the specified ListImageImportJobsRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportJobsRequest.verify|verify} messages.
+                     * @param message ListImageImportJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListImageImportJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListImageImportJobsRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportJobsRequest.verify|verify} messages.
+                     * @param message ListImageImportJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListImageImportJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListImageImportJobsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListImageImportJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListImageImportJobsRequest;
+
+                    /**
+                     * Decodes a ListImageImportJobsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListImageImportJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListImageImportJobsRequest;
+
+                    /**
+                     * Verifies a ListImageImportJobsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListImageImportJobsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListImageImportJobsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListImageImportJobsRequest;
+
+                    /**
+                     * Creates a plain object from a ListImageImportJobsRequest message. Also converts values to other types if specified.
+                     * @param message ListImageImportJobsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListImageImportJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListImageImportJobsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListImageImportJobsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListImageImportJobsResponse. */
+                interface IListImageImportJobsResponse {
+
+                    /** ListImageImportJobsResponse imageImportJobs */
+                    imageImportJobs?: (google.cloud.vmmigration.v1.IImageImportJob[]|null);
+
+                    /** ListImageImportJobsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListImageImportJobsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListImageImportJobsResponse. */
+                class ListImageImportJobsResponse implements IListImageImportJobsResponse {
+
+                    /**
+                     * Constructs a new ListImageImportJobsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListImageImportJobsResponse);
+
+                    /** ListImageImportJobsResponse imageImportJobs. */
+                    public imageImportJobs: google.cloud.vmmigration.v1.IImageImportJob[];
+
+                    /** ListImageImportJobsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListImageImportJobsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListImageImportJobsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListImageImportJobsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListImageImportJobsResponse): google.cloud.vmmigration.v1.ListImageImportJobsResponse;
+
+                    /**
+                     * Encodes the specified ListImageImportJobsResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportJobsResponse.verify|verify} messages.
+                     * @param message ListImageImportJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListImageImportJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListImageImportJobsResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListImageImportJobsResponse.verify|verify} messages.
+                     * @param message ListImageImportJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListImageImportJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListImageImportJobsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListImageImportJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListImageImportJobsResponse;
+
+                    /**
+                     * Decodes a ListImageImportJobsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListImageImportJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListImageImportJobsResponse;
+
+                    /**
+                     * Verifies a ListImageImportJobsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListImageImportJobsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListImageImportJobsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListImageImportJobsResponse;
+
+                    /**
+                     * Creates a plain object from a ListImageImportJobsResponse message. Also converts values to other types if specified.
+                     * @param message ListImageImportJobsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListImageImportJobsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListImageImportJobsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListImageImportJobsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelImageImportJobRequest. */
+                interface ICancelImageImportJobRequest {
+
+                    /** CancelImageImportJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a CancelImageImportJobRequest. */
+                class CancelImageImportJobRequest implements ICancelImageImportJobRequest {
+
+                    /**
+                     * Constructs a new CancelImageImportJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICancelImageImportJobRequest);
+
+                    /** CancelImageImportJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new CancelImageImportJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelImageImportJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICancelImageImportJobRequest): google.cloud.vmmigration.v1.CancelImageImportJobRequest;
+
+                    /**
+                     * Encodes the specified CancelImageImportJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.CancelImageImportJobRequest.verify|verify} messages.
+                     * @param message CancelImageImportJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICancelImageImportJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelImageImportJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CancelImageImportJobRequest.verify|verify} messages.
+                     * @param message CancelImageImportJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICancelImageImportJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelImageImportJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelImageImportJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CancelImageImportJobRequest;
+
+                    /**
+                     * Decodes a CancelImageImportJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelImageImportJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CancelImageImportJobRequest;
+
+                    /**
+                     * Verifies a CancelImageImportJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelImageImportJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelImageImportJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CancelImageImportJobRequest;
+
+                    /**
+                     * Creates a plain object from a CancelImageImportJobRequest message. Also converts values to other types if specified.
+                     * @param message CancelImageImportJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CancelImageImportJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelImageImportJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelImageImportJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelImageImportJobResponse. */
+                interface ICancelImageImportJobResponse {
+                }
+
+                /** Represents a CancelImageImportJobResponse. */
+                class CancelImageImportJobResponse implements ICancelImageImportJobResponse {
+
+                    /**
+                     * Constructs a new CancelImageImportJobResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICancelImageImportJobResponse);
+
+                    /**
+                     * Creates a new CancelImageImportJobResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelImageImportJobResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICancelImageImportJobResponse): google.cloud.vmmigration.v1.CancelImageImportJobResponse;
+
+                    /**
+                     * Encodes the specified CancelImageImportJobResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.CancelImageImportJobResponse.verify|verify} messages.
+                     * @param message CancelImageImportJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICancelImageImportJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelImageImportJobResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CancelImageImportJobResponse.verify|verify} messages.
+                     * @param message CancelImageImportJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICancelImageImportJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelImageImportJobResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelImageImportJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CancelImageImportJobResponse;
+
+                    /**
+                     * Decodes a CancelImageImportJobResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelImageImportJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CancelImageImportJobResponse;
+
+                    /**
+                     * Verifies a CancelImageImportJobResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelImageImportJobResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelImageImportJobResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CancelImageImportJobResponse;
+
+                    /**
+                     * Creates a plain object from a CancelImageImportJobResponse message. Also converts values to other types if specified.
+                     * @param message CancelImageImportJobResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CancelImageImportJobResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelImageImportJobResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelImageImportJobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiskMigrationJob. */
+                interface IDiskMigrationJob {
+
+                    /** DiskMigrationJob awsSourceDiskDetails */
+                    awsSourceDiskDetails?: (google.cloud.vmmigration.v1.IAwsSourceDiskDetails|null);
+
+                    /** DiskMigrationJob name */
+                    name?: (string|null);
+
+                    /** DiskMigrationJob targetDetails */
+                    targetDetails?: (google.cloud.vmmigration.v1.IDiskMigrationJobTargetDetails|null);
+
+                    /** DiskMigrationJob createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiskMigrationJob updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiskMigrationJob state */
+                    state?: (google.cloud.vmmigration.v1.DiskMigrationJob.State|keyof typeof google.cloud.vmmigration.v1.DiskMigrationJob.State|null);
+
+                    /** DiskMigrationJob errors */
+                    errors?: (google.rpc.IStatus[]|null);
+
+                    /** DiskMigrationJob steps */
+                    steps?: (google.cloud.vmmigration.v1.IDiskMigrationStep[]|null);
+                }
+
+                /** Represents a DiskMigrationJob. */
+                class DiskMigrationJob implements IDiskMigrationJob {
+
+                    /**
+                     * Constructs a new DiskMigrationJob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDiskMigrationJob);
+
+                    /** DiskMigrationJob awsSourceDiskDetails. */
+                    public awsSourceDiskDetails?: (google.cloud.vmmigration.v1.IAwsSourceDiskDetails|null);
+
+                    /** DiskMigrationJob name. */
+                    public name: string;
+
+                    /** DiskMigrationJob targetDetails. */
+                    public targetDetails?: (google.cloud.vmmigration.v1.IDiskMigrationJobTargetDetails|null);
+
+                    /** DiskMigrationJob createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiskMigrationJob updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiskMigrationJob state. */
+                    public state: (google.cloud.vmmigration.v1.DiskMigrationJob.State|keyof typeof google.cloud.vmmigration.v1.DiskMigrationJob.State);
+
+                    /** DiskMigrationJob errors. */
+                    public errors: google.rpc.IStatus[];
+
+                    /** DiskMigrationJob steps. */
+                    public steps: google.cloud.vmmigration.v1.IDiskMigrationStep[];
+
+                    /** DiskMigrationJob sourceDiskDetails. */
+                    public sourceDiskDetails?: "awsSourceDiskDetails";
+
+                    /**
+                     * Creates a new DiskMigrationJob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiskMigrationJob instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDiskMigrationJob): google.cloud.vmmigration.v1.DiskMigrationJob;
+
+                    /**
+                     * Encodes the specified DiskMigrationJob message. Does not implicitly {@link google.cloud.vmmigration.v1.DiskMigrationJob.verify|verify} messages.
+                     * @param message DiskMigrationJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDiskMigrationJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiskMigrationJob message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DiskMigrationJob.verify|verify} messages.
+                     * @param message DiskMigrationJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDiskMigrationJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiskMigrationJob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiskMigrationJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DiskMigrationJob;
+
+                    /**
+                     * Decodes a DiskMigrationJob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiskMigrationJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DiskMigrationJob;
+
+                    /**
+                     * Verifies a DiskMigrationJob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiskMigrationJob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiskMigrationJob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DiskMigrationJob;
+
+                    /**
+                     * Creates a plain object from a DiskMigrationJob message. Also converts values to other types if specified.
+                     * @param message DiskMigrationJob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DiskMigrationJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiskMigrationJob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiskMigrationJob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DiskMigrationJob {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        READY = 1,
+                        RUNNING = 3,
+                        SUCCEEDED = 4,
+                        CANCELLING = 5,
+                        CANCELLED = 6,
+                        FAILED = 7
+                    }
+                }
+
+                /** Properties of a DiskMigrationJobTargetDetails. */
+                interface IDiskMigrationJobTargetDetails {
+
+                    /** DiskMigrationJobTargetDetails targetDisk */
+                    targetDisk?: (google.cloud.vmmigration.v1.IComputeEngineDisk|null);
+
+                    /** DiskMigrationJobTargetDetails targetProject */
+                    targetProject?: (string|null);
+
+                    /** DiskMigrationJobTargetDetails labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DiskMigrationJobTargetDetails encryption */
+                    encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+                }
+
+                /** Represents a DiskMigrationJobTargetDetails. */
+                class DiskMigrationJobTargetDetails implements IDiskMigrationJobTargetDetails {
+
+                    /**
+                     * Constructs a new DiskMigrationJobTargetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDiskMigrationJobTargetDetails);
+
+                    /** DiskMigrationJobTargetDetails targetDisk. */
+                    public targetDisk?: (google.cloud.vmmigration.v1.IComputeEngineDisk|null);
+
+                    /** DiskMigrationJobTargetDetails targetProject. */
+                    public targetProject: string;
+
+                    /** DiskMigrationJobTargetDetails labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DiskMigrationJobTargetDetails encryption. */
+                    public encryption?: (google.cloud.vmmigration.v1.IEncryption|null);
+
+                    /** DiskMigrationJobTargetDetails targetStorage. */
+                    public targetStorage?: "targetDisk";
+
+                    /**
+                     * Creates a new DiskMigrationJobTargetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiskMigrationJobTargetDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDiskMigrationJobTargetDetails): google.cloud.vmmigration.v1.DiskMigrationJobTargetDetails;
+
+                    /**
+                     * Encodes the specified DiskMigrationJobTargetDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.DiskMigrationJobTargetDetails.verify|verify} messages.
+                     * @param message DiskMigrationJobTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDiskMigrationJobTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiskMigrationJobTargetDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DiskMigrationJobTargetDetails.verify|verify} messages.
+                     * @param message DiskMigrationJobTargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDiskMigrationJobTargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiskMigrationJobTargetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiskMigrationJobTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DiskMigrationJobTargetDetails;
+
+                    /**
+                     * Decodes a DiskMigrationJobTargetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiskMigrationJobTargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DiskMigrationJobTargetDetails;
+
+                    /**
+                     * Verifies a DiskMigrationJobTargetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiskMigrationJobTargetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiskMigrationJobTargetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DiskMigrationJobTargetDetails;
+
+                    /**
+                     * Creates a plain object from a DiskMigrationJobTargetDetails message. Also converts values to other types if specified.
+                     * @param message DiskMigrationJobTargetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DiskMigrationJobTargetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiskMigrationJobTargetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiskMigrationJobTargetDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiskMigrationStep. */
+                interface IDiskMigrationStep {
+
+                    /** DiskMigrationStep creatingSourceDiskSnapshot */
+                    creatingSourceDiskSnapshot?: (google.cloud.vmmigration.v1.ICreatingSourceDiskSnapshotStep|null);
+
+                    /** DiskMigrationStep copyingSourceDiskSnapshot */
+                    copyingSourceDiskSnapshot?: (google.cloud.vmmigration.v1.ICopyingSourceDiskSnapshotStep|null);
+
+                    /** DiskMigrationStep provisioningTargetDisk */
+                    provisioningTargetDisk?: (google.cloud.vmmigration.v1.IProvisioningTargetDiskStep|null);
+
+                    /** DiskMigrationStep startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiskMigrationStep endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DiskMigrationStep. */
+                class DiskMigrationStep implements IDiskMigrationStep {
+
+                    /**
+                     * Constructs a new DiskMigrationStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDiskMigrationStep);
+
+                    /** DiskMigrationStep creatingSourceDiskSnapshot. */
+                    public creatingSourceDiskSnapshot?: (google.cloud.vmmigration.v1.ICreatingSourceDiskSnapshotStep|null);
+
+                    /** DiskMigrationStep copyingSourceDiskSnapshot. */
+                    public copyingSourceDiskSnapshot?: (google.cloud.vmmigration.v1.ICopyingSourceDiskSnapshotStep|null);
+
+                    /** DiskMigrationStep provisioningTargetDisk. */
+                    public provisioningTargetDisk?: (google.cloud.vmmigration.v1.IProvisioningTargetDiskStep|null);
+
+                    /** DiskMigrationStep startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiskMigrationStep endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiskMigrationStep step. */
+                    public step?: ("creatingSourceDiskSnapshot"|"copyingSourceDiskSnapshot"|"provisioningTargetDisk");
+
+                    /**
+                     * Creates a new DiskMigrationStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiskMigrationStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDiskMigrationStep): google.cloud.vmmigration.v1.DiskMigrationStep;
+
+                    /**
+                     * Encodes the specified DiskMigrationStep message. Does not implicitly {@link google.cloud.vmmigration.v1.DiskMigrationStep.verify|verify} messages.
+                     * @param message DiskMigrationStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDiskMigrationStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiskMigrationStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DiskMigrationStep.verify|verify} messages.
+                     * @param message DiskMigrationStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDiskMigrationStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiskMigrationStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiskMigrationStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DiskMigrationStep;
+
+                    /**
+                     * Decodes a DiskMigrationStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiskMigrationStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DiskMigrationStep;
+
+                    /**
+                     * Verifies a DiskMigrationStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiskMigrationStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiskMigrationStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DiskMigrationStep;
+
+                    /**
+                     * Creates a plain object from a DiskMigrationStep message. Also converts values to other types if specified.
+                     * @param message DiskMigrationStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DiskMigrationStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiskMigrationStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiskMigrationStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatingSourceDiskSnapshotStep. */
+                interface ICreatingSourceDiskSnapshotStep {
+                }
+
+                /** Represents a CreatingSourceDiskSnapshotStep. */
+                class CreatingSourceDiskSnapshotStep implements ICreatingSourceDiskSnapshotStep {
+
+                    /**
+                     * Constructs a new CreatingSourceDiskSnapshotStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICreatingSourceDiskSnapshotStep);
+
+                    /**
+                     * Creates a new CreatingSourceDiskSnapshotStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatingSourceDiskSnapshotStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICreatingSourceDiskSnapshotStep): google.cloud.vmmigration.v1.CreatingSourceDiskSnapshotStep;
+
+                    /**
+                     * Encodes the specified CreatingSourceDiskSnapshotStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CreatingSourceDiskSnapshotStep.verify|verify} messages.
+                     * @param message CreatingSourceDiskSnapshotStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICreatingSourceDiskSnapshotStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatingSourceDiskSnapshotStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CreatingSourceDiskSnapshotStep.verify|verify} messages.
+                     * @param message CreatingSourceDiskSnapshotStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICreatingSourceDiskSnapshotStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatingSourceDiskSnapshotStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatingSourceDiskSnapshotStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CreatingSourceDiskSnapshotStep;
+
+                    /**
+                     * Decodes a CreatingSourceDiskSnapshotStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatingSourceDiskSnapshotStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CreatingSourceDiskSnapshotStep;
+
+                    /**
+                     * Verifies a CreatingSourceDiskSnapshotStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatingSourceDiskSnapshotStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatingSourceDiskSnapshotStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CreatingSourceDiskSnapshotStep;
+
+                    /**
+                     * Creates a plain object from a CreatingSourceDiskSnapshotStep message. Also converts values to other types if specified.
+                     * @param message CreatingSourceDiskSnapshotStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CreatingSourceDiskSnapshotStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatingSourceDiskSnapshotStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatingSourceDiskSnapshotStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CopyingSourceDiskSnapshotStep. */
+                interface ICopyingSourceDiskSnapshotStep {
+                }
+
+                /** Represents a CopyingSourceDiskSnapshotStep. */
+                class CopyingSourceDiskSnapshotStep implements ICopyingSourceDiskSnapshotStep {
+
+                    /**
+                     * Constructs a new CopyingSourceDiskSnapshotStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICopyingSourceDiskSnapshotStep);
+
+                    /**
+                     * Creates a new CopyingSourceDiskSnapshotStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CopyingSourceDiskSnapshotStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICopyingSourceDiskSnapshotStep): google.cloud.vmmigration.v1.CopyingSourceDiskSnapshotStep;
+
+                    /**
+                     * Encodes the specified CopyingSourceDiskSnapshotStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CopyingSourceDiskSnapshotStep.verify|verify} messages.
+                     * @param message CopyingSourceDiskSnapshotStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICopyingSourceDiskSnapshotStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CopyingSourceDiskSnapshotStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CopyingSourceDiskSnapshotStep.verify|verify} messages.
+                     * @param message CopyingSourceDiskSnapshotStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICopyingSourceDiskSnapshotStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CopyingSourceDiskSnapshotStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CopyingSourceDiskSnapshotStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CopyingSourceDiskSnapshotStep;
+
+                    /**
+                     * Decodes a CopyingSourceDiskSnapshotStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CopyingSourceDiskSnapshotStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CopyingSourceDiskSnapshotStep;
+
+                    /**
+                     * Verifies a CopyingSourceDiskSnapshotStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CopyingSourceDiskSnapshotStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CopyingSourceDiskSnapshotStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CopyingSourceDiskSnapshotStep;
+
+                    /**
+                     * Creates a plain object from a CopyingSourceDiskSnapshotStep message. Also converts values to other types if specified.
+                     * @param message CopyingSourceDiskSnapshotStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CopyingSourceDiskSnapshotStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CopyingSourceDiskSnapshotStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CopyingSourceDiskSnapshotStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProvisioningTargetDiskStep. */
+                interface IProvisioningTargetDiskStep {
+                }
+
+                /** Represents a ProvisioningTargetDiskStep. */
+                class ProvisioningTargetDiskStep implements IProvisioningTargetDiskStep {
+
+                    /**
+                     * Constructs a new ProvisioningTargetDiskStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IProvisioningTargetDiskStep);
+
+                    /**
+                     * Creates a new ProvisioningTargetDiskStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisioningTargetDiskStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IProvisioningTargetDiskStep): google.cloud.vmmigration.v1.ProvisioningTargetDiskStep;
+
+                    /**
+                     * Encodes the specified ProvisioningTargetDiskStep message. Does not implicitly {@link google.cloud.vmmigration.v1.ProvisioningTargetDiskStep.verify|verify} messages.
+                     * @param message ProvisioningTargetDiskStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IProvisioningTargetDiskStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisioningTargetDiskStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ProvisioningTargetDiskStep.verify|verify} messages.
+                     * @param message ProvisioningTargetDiskStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IProvisioningTargetDiskStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisioningTargetDiskStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisioningTargetDiskStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ProvisioningTargetDiskStep;
+
+                    /**
+                     * Decodes a ProvisioningTargetDiskStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisioningTargetDiskStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ProvisioningTargetDiskStep;
+
+                    /**
+                     * Verifies a ProvisioningTargetDiskStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisioningTargetDiskStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisioningTargetDiskStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ProvisioningTargetDiskStep;
+
+                    /**
+                     * Creates a plain object from a ProvisioningTargetDiskStep message. Also converts values to other types if specified.
+                     * @param message ProvisioningTargetDiskStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ProvisioningTargetDiskStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisioningTargetDiskStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisioningTargetDiskStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ComputeEngineDisk. */
+                interface IComputeEngineDisk {
+
+                    /** ComputeEngineDisk diskId */
+                    diskId?: (string|null);
+
+                    /** ComputeEngineDisk zone */
+                    zone?: (string|null);
+
+                    /** ComputeEngineDisk replicaZones */
+                    replicaZones?: (string[]|null);
+
+                    /** ComputeEngineDisk diskType */
+                    diskType?: (google.cloud.vmmigration.v1.ComputeEngineDiskType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineDiskType|null);
+                }
+
+                /** Represents a ComputeEngineDisk. */
+                class ComputeEngineDisk implements IComputeEngineDisk {
+
+                    /**
+                     * Constructs a new ComputeEngineDisk.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IComputeEngineDisk);
+
+                    /** ComputeEngineDisk diskId. */
+                    public diskId: string;
+
+                    /** ComputeEngineDisk zone. */
+                    public zone: string;
+
+                    /** ComputeEngineDisk replicaZones. */
+                    public replicaZones: string[];
+
+                    /** ComputeEngineDisk diskType. */
+                    public diskType: (google.cloud.vmmigration.v1.ComputeEngineDiskType|keyof typeof google.cloud.vmmigration.v1.ComputeEngineDiskType);
+
+                    /**
+                     * Creates a new ComputeEngineDisk instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeEngineDisk instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IComputeEngineDisk): google.cloud.vmmigration.v1.ComputeEngineDisk;
+
+                    /**
+                     * Encodes the specified ComputeEngineDisk message. Does not implicitly {@link google.cloud.vmmigration.v1.ComputeEngineDisk.verify|verify} messages.
+                     * @param message ComputeEngineDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IComputeEngineDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeEngineDisk message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ComputeEngineDisk.verify|verify} messages.
+                     * @param message ComputeEngineDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IComputeEngineDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeEngineDisk message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeEngineDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ComputeEngineDisk;
+
+                    /**
+                     * Decodes a ComputeEngineDisk message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeEngineDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ComputeEngineDisk;
+
+                    /**
+                     * Verifies a ComputeEngineDisk message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeEngineDisk message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeEngineDisk
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ComputeEngineDisk;
+
+                    /**
+                     * Creates a plain object from a ComputeEngineDisk message. Also converts values to other types if specified.
+                     * @param message ComputeEngineDisk
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ComputeEngineDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeEngineDisk to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeEngineDisk
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AwsSourceDiskDetails. */
+                interface IAwsSourceDiskDetails {
+
+                    /** AwsSourceDiskDetails volumeId */
+                    volumeId?: (string|null);
+
+                    /** AwsSourceDiskDetails sizeGib */
+                    sizeGib?: (number|Long|string|null);
+
+                    /** AwsSourceDiskDetails diskType */
+                    diskType?: (google.cloud.vmmigration.v1.AwsSourceDiskDetails.Type|keyof typeof google.cloud.vmmigration.v1.AwsSourceDiskDetails.Type|null);
+
+                    /** AwsSourceDiskDetails tags */
+                    tags?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an AwsSourceDiskDetails. */
+                class AwsSourceDiskDetails implements IAwsSourceDiskDetails {
+
+                    /**
+                     * Constructs a new AwsSourceDiskDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAwsSourceDiskDetails);
+
+                    /** AwsSourceDiskDetails volumeId. */
+                    public volumeId: string;
+
+                    /** AwsSourceDiskDetails sizeGib. */
+                    public sizeGib: (number|Long|string);
+
+                    /** AwsSourceDiskDetails diskType. */
+                    public diskType: (google.cloud.vmmigration.v1.AwsSourceDiskDetails.Type|keyof typeof google.cloud.vmmigration.v1.AwsSourceDiskDetails.Type);
+
+                    /** AwsSourceDiskDetails tags. */
+                    public tags: { [k: string]: string };
+
+                    /**
+                     * Creates a new AwsSourceDiskDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsSourceDiskDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAwsSourceDiskDetails): google.cloud.vmmigration.v1.AwsSourceDiskDetails;
+
+                    /**
+                     * Encodes the specified AwsSourceDiskDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDiskDetails.verify|verify} messages.
+                     * @param message AwsSourceDiskDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAwsSourceDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsSourceDiskDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDiskDetails.verify|verify} messages.
+                     * @param message AwsSourceDiskDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAwsSourceDiskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsSourceDiskDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsSourceDiskDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsSourceDiskDetails;
+
+                    /**
+                     * Decodes an AwsSourceDiskDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsSourceDiskDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsSourceDiskDetails;
+
+                    /**
+                     * Verifies an AwsSourceDiskDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsSourceDiskDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsSourceDiskDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsSourceDiskDetails;
+
+                    /**
+                     * Creates a plain object from an AwsSourceDiskDetails message. Also converts values to other types if specified.
+                     * @param message AwsSourceDiskDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AwsSourceDiskDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsSourceDiskDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsSourceDiskDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AwsSourceDiskDetails {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        GP2 = 1,
+                        GP3 = 2,
+                        IO1 = 3,
+                        IO2 = 4,
+                        ST1 = 5,
+                        SC1 = 6,
+                        STANDARD = 7
+                    }
+                }
+
+                /** Properties of a CreateDiskMigrationJobRequest. */
+                interface ICreateDiskMigrationJobRequest {
+
+                    /** CreateDiskMigrationJobRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDiskMigrationJobRequest diskMigrationJobId */
+                    diskMigrationJobId?: (string|null);
+
+                    /** CreateDiskMigrationJobRequest diskMigrationJob */
+                    diskMigrationJob?: (google.cloud.vmmigration.v1.IDiskMigrationJob|null);
+
+                    /** CreateDiskMigrationJobRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateDiskMigrationJobRequest. */
+                class CreateDiskMigrationJobRequest implements ICreateDiskMigrationJobRequest {
+
+                    /**
+                     * Constructs a new CreateDiskMigrationJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICreateDiskMigrationJobRequest);
+
+                    /** CreateDiskMigrationJobRequest parent. */
+                    public parent: string;
+
+                    /** CreateDiskMigrationJobRequest diskMigrationJobId. */
+                    public diskMigrationJobId: string;
+
+                    /** CreateDiskMigrationJobRequest diskMigrationJob. */
+                    public diskMigrationJob?: (google.cloud.vmmigration.v1.IDiskMigrationJob|null);
+
+                    /** CreateDiskMigrationJobRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateDiskMigrationJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDiskMigrationJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICreateDiskMigrationJobRequest): google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest;
+
+                    /**
+                     * Encodes the specified CreateDiskMigrationJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message CreateDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICreateDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDiskMigrationJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message CreateDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICreateDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDiskMigrationJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest;
+
+                    /**
+                     * Decodes a CreateDiskMigrationJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest;
+
+                    /**
+                     * Verifies a CreateDiskMigrationJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDiskMigrationJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDiskMigrationJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDiskMigrationJobRequest message. Also converts values to other types if specified.
+                     * @param message CreateDiskMigrationJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDiskMigrationJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDiskMigrationJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDiskMigrationJobsRequest. */
+                interface IListDiskMigrationJobsRequest {
+
+                    /** ListDiskMigrationJobsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDiskMigrationJobsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDiskMigrationJobsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDiskMigrationJobsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDiskMigrationJobsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDiskMigrationJobsRequest. */
+                class ListDiskMigrationJobsRequest implements IListDiskMigrationJobsRequest {
+
+                    /**
+                     * Constructs a new ListDiskMigrationJobsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListDiskMigrationJobsRequest);
+
+                    /** ListDiskMigrationJobsRequest parent. */
+                    public parent: string;
+
+                    /** ListDiskMigrationJobsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDiskMigrationJobsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDiskMigrationJobsRequest filter. */
+                    public filter: string;
+
+                    /** ListDiskMigrationJobsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDiskMigrationJobsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDiskMigrationJobsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListDiskMigrationJobsRequest): google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest;
+
+                    /**
+                     * Encodes the specified ListDiskMigrationJobsRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest.verify|verify} messages.
+                     * @param message ListDiskMigrationJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListDiskMigrationJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDiskMigrationJobsRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest.verify|verify} messages.
+                     * @param message ListDiskMigrationJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListDiskMigrationJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDiskMigrationJobsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDiskMigrationJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest;
+
+                    /**
+                     * Decodes a ListDiskMigrationJobsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDiskMigrationJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest;
+
+                    /**
+                     * Verifies a ListDiskMigrationJobsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDiskMigrationJobsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDiskMigrationJobsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDiskMigrationJobsRequest message. Also converts values to other types if specified.
+                     * @param message ListDiskMigrationJobsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDiskMigrationJobsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDiskMigrationJobsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDiskMigrationJobsResponse. */
+                interface IListDiskMigrationJobsResponse {
+
+                    /** ListDiskMigrationJobsResponse diskMigrationJobs */
+                    diskMigrationJobs?: (google.cloud.vmmigration.v1.IDiskMigrationJob[]|null);
+
+                    /** ListDiskMigrationJobsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDiskMigrationJobsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDiskMigrationJobsResponse. */
+                class ListDiskMigrationJobsResponse implements IListDiskMigrationJobsResponse {
+
+                    /**
+                     * Constructs a new ListDiskMigrationJobsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListDiskMigrationJobsResponse);
+
+                    /** ListDiskMigrationJobsResponse diskMigrationJobs. */
+                    public diskMigrationJobs: google.cloud.vmmigration.v1.IDiskMigrationJob[];
+
+                    /** ListDiskMigrationJobsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDiskMigrationJobsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDiskMigrationJobsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDiskMigrationJobsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListDiskMigrationJobsResponse): google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse;
+
+                    /**
+                     * Encodes the specified ListDiskMigrationJobsResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse.verify|verify} messages.
+                     * @param message ListDiskMigrationJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListDiskMigrationJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDiskMigrationJobsResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse.verify|verify} messages.
+                     * @param message ListDiskMigrationJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListDiskMigrationJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDiskMigrationJobsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDiskMigrationJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse;
+
+                    /**
+                     * Decodes a ListDiskMigrationJobsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDiskMigrationJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse;
+
+                    /**
+                     * Verifies a ListDiskMigrationJobsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDiskMigrationJobsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDiskMigrationJobsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDiskMigrationJobsResponse message. Also converts values to other types if specified.
+                     * @param message ListDiskMigrationJobsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListDiskMigrationJobsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDiskMigrationJobsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDiskMigrationJobsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDiskMigrationJobRequest. */
+                interface IGetDiskMigrationJobRequest {
+
+                    /** GetDiskMigrationJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDiskMigrationJobRequest. */
+                class GetDiskMigrationJobRequest implements IGetDiskMigrationJobRequest {
+
+                    /**
+                     * Constructs a new GetDiskMigrationJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IGetDiskMigrationJobRequest);
+
+                    /** GetDiskMigrationJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDiskMigrationJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDiskMigrationJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IGetDiskMigrationJobRequest): google.cloud.vmmigration.v1.GetDiskMigrationJobRequest;
+
+                    /**
+                     * Encodes the specified GetDiskMigrationJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.GetDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message GetDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IGetDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDiskMigrationJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.GetDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message GetDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IGetDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDiskMigrationJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.GetDiskMigrationJobRequest;
+
+                    /**
+                     * Decodes a GetDiskMigrationJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.GetDiskMigrationJobRequest;
+
+                    /**
+                     * Verifies a GetDiskMigrationJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDiskMigrationJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDiskMigrationJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.GetDiskMigrationJobRequest;
+
+                    /**
+                     * Creates a plain object from a GetDiskMigrationJobRequest message. Also converts values to other types if specified.
+                     * @param message GetDiskMigrationJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.GetDiskMigrationJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDiskMigrationJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDiskMigrationJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDiskMigrationJobRequest. */
+                interface IUpdateDiskMigrationJobRequest {
+
+                    /** UpdateDiskMigrationJobRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDiskMigrationJobRequest diskMigrationJob */
+                    diskMigrationJob?: (google.cloud.vmmigration.v1.IDiskMigrationJob|null);
+
+                    /** UpdateDiskMigrationJobRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateDiskMigrationJobRequest. */
+                class UpdateDiskMigrationJobRequest implements IUpdateDiskMigrationJobRequest {
+
+                    /**
+                     * Constructs a new UpdateDiskMigrationJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IUpdateDiskMigrationJobRequest);
+
+                    /** UpdateDiskMigrationJobRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDiskMigrationJobRequest diskMigrationJob. */
+                    public diskMigrationJob?: (google.cloud.vmmigration.v1.IDiskMigrationJob|null);
+
+                    /** UpdateDiskMigrationJobRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateDiskMigrationJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDiskMigrationJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IUpdateDiskMigrationJobRequest): google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest;
+
+                    /**
+                     * Encodes the specified UpdateDiskMigrationJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message UpdateDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IUpdateDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDiskMigrationJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message UpdateDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IUpdateDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDiskMigrationJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest;
+
+                    /**
+                     * Decodes an UpdateDiskMigrationJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest;
+
+                    /**
+                     * Verifies an UpdateDiskMigrationJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDiskMigrationJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDiskMigrationJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDiskMigrationJobRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDiskMigrationJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDiskMigrationJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDiskMigrationJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDiskMigrationJobRequest. */
+                interface IDeleteDiskMigrationJobRequest {
+
+                    /** DeleteDiskMigrationJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDiskMigrationJobRequest. */
+                class DeleteDiskMigrationJobRequest implements IDeleteDiskMigrationJobRequest {
+
+                    /**
+                     * Constructs a new DeleteDiskMigrationJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IDeleteDiskMigrationJobRequest);
+
+                    /** DeleteDiskMigrationJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDiskMigrationJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDiskMigrationJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IDeleteDiskMigrationJobRequest): google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest;
+
+                    /**
+                     * Encodes the specified DeleteDiskMigrationJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message DeleteDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IDeleteDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDiskMigrationJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message DeleteDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IDeleteDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDiskMigrationJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest;
+
+                    /**
+                     * Decodes a DeleteDiskMigrationJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest;
+
+                    /**
+                     * Verifies a DeleteDiskMigrationJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDiskMigrationJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDiskMigrationJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDiskMigrationJobRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDiskMigrationJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDiskMigrationJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDiskMigrationJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunDiskMigrationJobRequest. */
+                interface IRunDiskMigrationJobRequest {
+
+                    /** RunDiskMigrationJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a RunDiskMigrationJobRequest. */
+                class RunDiskMigrationJobRequest implements IRunDiskMigrationJobRequest {
+
+                    /**
+                     * Constructs a new RunDiskMigrationJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IRunDiskMigrationJobRequest);
+
+                    /** RunDiskMigrationJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new RunDiskMigrationJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunDiskMigrationJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IRunDiskMigrationJobRequest): google.cloud.vmmigration.v1.RunDiskMigrationJobRequest;
+
+                    /**
+                     * Encodes the specified RunDiskMigrationJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.RunDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message RunDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IRunDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunDiskMigrationJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.RunDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message RunDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IRunDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunDiskMigrationJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.RunDiskMigrationJobRequest;
+
+                    /**
+                     * Decodes a RunDiskMigrationJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.RunDiskMigrationJobRequest;
+
+                    /**
+                     * Verifies a RunDiskMigrationJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunDiskMigrationJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunDiskMigrationJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.RunDiskMigrationJobRequest;
+
+                    /**
+                     * Creates a plain object from a RunDiskMigrationJobRequest message. Also converts values to other types if specified.
+                     * @param message RunDiskMigrationJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.RunDiskMigrationJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunDiskMigrationJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunDiskMigrationJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunDiskMigrationJobResponse. */
+                interface IRunDiskMigrationJobResponse {
+                }
+
+                /** Represents a RunDiskMigrationJobResponse. */
+                class RunDiskMigrationJobResponse implements IRunDiskMigrationJobResponse {
+
+                    /**
+                     * Constructs a new RunDiskMigrationJobResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IRunDiskMigrationJobResponse);
+
+                    /**
+                     * Creates a new RunDiskMigrationJobResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunDiskMigrationJobResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IRunDiskMigrationJobResponse): google.cloud.vmmigration.v1.RunDiskMigrationJobResponse;
+
+                    /**
+                     * Encodes the specified RunDiskMigrationJobResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.RunDiskMigrationJobResponse.verify|verify} messages.
+                     * @param message RunDiskMigrationJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IRunDiskMigrationJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunDiskMigrationJobResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.RunDiskMigrationJobResponse.verify|verify} messages.
+                     * @param message RunDiskMigrationJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IRunDiskMigrationJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunDiskMigrationJobResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunDiskMigrationJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.RunDiskMigrationJobResponse;
+
+                    /**
+                     * Decodes a RunDiskMigrationJobResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunDiskMigrationJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.RunDiskMigrationJobResponse;
+
+                    /**
+                     * Verifies a RunDiskMigrationJobResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunDiskMigrationJobResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunDiskMigrationJobResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.RunDiskMigrationJobResponse;
+
+                    /**
+                     * Creates a plain object from a RunDiskMigrationJobResponse message. Also converts values to other types if specified.
+                     * @param message RunDiskMigrationJobResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.RunDiskMigrationJobResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunDiskMigrationJobResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunDiskMigrationJobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelDiskMigrationJobRequest. */
+                interface ICancelDiskMigrationJobRequest {
+
+                    /** CancelDiskMigrationJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a CancelDiskMigrationJobRequest. */
+                class CancelDiskMigrationJobRequest implements ICancelDiskMigrationJobRequest {
+
+                    /**
+                     * Constructs a new CancelDiskMigrationJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICancelDiskMigrationJobRequest);
+
+                    /** CancelDiskMigrationJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new CancelDiskMigrationJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelDiskMigrationJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICancelDiskMigrationJobRequest): google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest;
+
+                    /**
+                     * Encodes the specified CancelDiskMigrationJobRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message CancelDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICancelDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelDiskMigrationJobRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest.verify|verify} messages.
+                     * @param message CancelDiskMigrationJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICancelDiskMigrationJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelDiskMigrationJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest;
+
+                    /**
+                     * Decodes a CancelDiskMigrationJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelDiskMigrationJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest;
+
+                    /**
+                     * Verifies a CancelDiskMigrationJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelDiskMigrationJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelDiskMigrationJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest;
+
+                    /**
+                     * Creates a plain object from a CancelDiskMigrationJobRequest message. Also converts values to other types if specified.
+                     * @param message CancelDiskMigrationJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelDiskMigrationJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelDiskMigrationJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelDiskMigrationJobResponse. */
+                interface ICancelDiskMigrationJobResponse {
+                }
+
+                /** Represents a CancelDiskMigrationJobResponse. */
+                class CancelDiskMigrationJobResponse implements ICancelDiskMigrationJobResponse {
+
+                    /**
+                     * Constructs a new CancelDiskMigrationJobResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICancelDiskMigrationJobResponse);
+
+                    /**
+                     * Creates a new CancelDiskMigrationJobResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelDiskMigrationJobResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICancelDiskMigrationJobResponse): google.cloud.vmmigration.v1.CancelDiskMigrationJobResponse;
+
+                    /**
+                     * Encodes the specified CancelDiskMigrationJobResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.CancelDiskMigrationJobResponse.verify|verify} messages.
+                     * @param message CancelDiskMigrationJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICancelDiskMigrationJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelDiskMigrationJobResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CancelDiskMigrationJobResponse.verify|verify} messages.
+                     * @param message CancelDiskMigrationJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICancelDiskMigrationJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelDiskMigrationJobResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelDiskMigrationJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CancelDiskMigrationJobResponse;
+
+                    /**
+                     * Decodes a CancelDiskMigrationJobResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelDiskMigrationJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CancelDiskMigrationJobResponse;
+
+                    /**
+                     * Verifies a CancelDiskMigrationJobResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelDiskMigrationJobResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelDiskMigrationJobResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CancelDiskMigrationJobResponse;
+
+                    /**
+                     * Creates a plain object from a CancelDiskMigrationJobResponse message. Also converts values to other types if specified.
+                     * @param message CancelDiskMigrationJobResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CancelDiskMigrationJobResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelDiskMigrationJobResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelDiskMigrationJobResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -15751,6 +24784,218 @@ export namespace google {
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7,
             IDENTIFIER = 8
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -18197,6 +27442,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);

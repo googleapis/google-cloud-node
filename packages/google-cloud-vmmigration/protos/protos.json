@@ -14,7 +14,9 @@
                     "java_outer_classname": "VmMigrationProto",
                     "java_package": "com.google.cloud.vmmigration.v1",
                     "php_namespace": "Google\\Cloud\\VMMigration\\V1",
-                    "ruby_package": "Google::Cloud::VMMigration::V1"
+                    "ruby_package": "Google::Cloud::VMMigration::V1",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Image",
+                    "(google.api.resource_definition).pattern": "projects/{project}/global/images/{image}"
                   },
                   "nested": {
                     "VmMigration": {
@@ -156,6 +158,24 @@
                             },
                             {
                               "(google.api.method_signature)": "source"
+                            }
+                          ]
+                        },
+                        "FetchStorageInventory": {
+                          "requestType": "FetchStorageInventoryRequest",
+                          "responseType": "FetchStorageInventoryResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{source=projects/*/locations/*/sources/*}:fetchStorageInventory",
+                            "(google.api.method_signature)": "source,type"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{source=projects/*/locations/*/sources/*}:fetchStorageInventory"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "source,type"
                             }
                           ]
                         },
@@ -580,6 +600,30 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "FinalizeMigrationResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExtendMigration": {
+                          "requestType": "ExtendMigrationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{migrating_vm=projects/*/locations/*/sources/*/migratingVms/*}:extendMigration",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ExtendMigrationResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{migrating_vm=projects/*/locations/*/sources/*/migratingVms/*}:extendMigration",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExtendMigrationResponse",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -1096,7 +1140,369 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "ListImageImports": {
+                          "requestType": "ListImageImportsRequest",
+                          "responseType": "ListImageImportsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/imageImports",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/imageImports"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetImageImport": {
+                          "requestType": "GetImageImportRequest",
+                          "responseType": "ImageImport",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/imageImports/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/imageImports/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateImageImport": {
+                          "requestType": "CreateImageImportRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/imageImports",
+                            "(google.api.http).body": "image_import",
+                            "(google.api.method_signature)": "parent,image_import,image_import_id",
+                            "(google.longrunning.operation_info).response_type": "ImageImport",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/imageImports",
+                                "body": "image_import"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,image_import,image_import_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImageImport",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteImageImport": {
+                          "requestType": "DeleteImageImportRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/imageImports/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/imageImports/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListImageImportJobs": {
+                          "requestType": "ListImageImportJobsRequest",
+                          "responseType": "ListImageImportJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/imageImports/*}/imageImportJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/imageImports/*}/imageImportJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetImageImportJob": {
+                          "requestType": "GetImageImportJobRequest",
+                          "responseType": "ImageImportJob",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/imageImports/*/imageImportJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/imageImports/*/imageImportJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CancelImageImportJob": {
+                          "requestType": "CancelImageImportJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/imageImports/*/imageImportJobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "CancelImageImportJobResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/imageImports/*/imageImportJobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CancelImageImportJobResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateDiskMigrationJob": {
+                          "requestType": "CreateDiskMigrationJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/sources/*}/diskMigrationJobs",
+                            "(google.api.http).body": "disk_migration_job",
+                            "(google.api.method_signature)": "parent,disk_migration_job,disk_migration_job_id",
+                            "(google.longrunning.operation_info).response_type": "DiskMigrationJob",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/sources/*}/diskMigrationJobs",
+                                "body": "disk_migration_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,disk_migration_job,disk_migration_job_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DiskMigrationJob",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListDiskMigrationJobs": {
+                          "requestType": "ListDiskMigrationJobsRequest",
+                          "responseType": "ListDiskMigrationJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/sources/*}/diskMigrationJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/sources/*}/diskMigrationJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetDiskMigrationJob": {
+                          "requestType": "GetDiskMigrationJobRequest",
+                          "responseType": "DiskMigrationJob",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateDiskMigrationJob": {
+                          "requestType": "UpdateDiskMigrationJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{disk_migration_job.name=projects/*/locations/*/sources/*/diskMigrationJobs/*}",
+                            "(google.api.http).body": "disk_migration_job",
+                            "(google.api.method_signature)": "disk_migration_job,update_mask",
+                            "(google.longrunning.operation_info).response_type": "DiskMigrationJob",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{disk_migration_job.name=projects/*/locations/*/sources/*/diskMigrationJobs/*}",
+                                "body": "disk_migration_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "disk_migration_job,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DiskMigrationJob",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteDiskMigrationJob": {
+                          "requestType": "DeleteDiskMigrationJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RunDiskMigrationJob": {
+                          "requestType": "RunDiskMigrationJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}:run",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "RunDiskMigrationJobResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RunDiskMigrationJobResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelDiskMigrationJob": {
+                          "requestType": "CancelDiskMigrationJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "CancelDiskMigrationJobResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/sources/*/diskMigrationJobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CancelDiskMigrationJobResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
+                      }
+                    },
+                    "ComputeEngineDiskType": {
+                      "values": {
+                        "COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED": 0,
+                        "COMPUTE_ENGINE_DISK_TYPE_STANDARD": 1,
+                        "COMPUTE_ENGINE_DISK_TYPE_SSD": 2,
+                        "COMPUTE_ENGINE_DISK_TYPE_BALANCED": 3,
+                        "COMPUTE_ENGINE_DISK_TYPE_HYPERDISK_BALANCED": 4
+                      }
+                    },
+                    "ComputeEngineLicenseType": {
+                      "values": {
+                        "COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT": 0,
+                        "COMPUTE_ENGINE_LICENSE_TYPE_PAYG": 1,
+                        "COMPUTE_ENGINE_LICENSE_TYPE_BYOL": 2
+                      }
+                    },
+                    "ComputeEngineBootOption": {
+                      "values": {
+                        "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED": 0,
+                        "COMPUTE_ENGINE_BOOT_OPTION_EFI": 1,
+                        "COMPUTE_ENGINE_BOOT_OPTION_BIOS": 2
+                      }
+                    },
+                    "OsCapability": {
+                      "values": {
+                        "OS_CAPABILITY_UNSPECIFIED": 0,
+                        "OS_CAPABILITY_NVME_STORAGE_ACCESS": 1,
+                        "OS_CAPABILITY_GVNIC_NETWORK_INTERFACE": 2,
+                        "OS_CAPABILITY_IDPF_NETWORK_INTERFACE": 3
+                      }
+                    },
+                    "BootConversion": {
+                      "values": {
+                        "BOOT_CONVERSION_UNSPECIFIED": 0,
+                        "NONE": 1,
+                        "BIOS_TO_EFI": 2
                       }
                     },
                     "UtilizationReportView": {
@@ -1113,26 +1519,18 @@
                         "MIGRATING_VM_VIEW_FULL": 2
                       }
                     },
-                    "ComputeEngineDiskType": {
+                    "VmArchitecture": {
                       "values": {
-                        "COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED": 0,
-                        "COMPUTE_ENGINE_DISK_TYPE_STANDARD": 1,
-                        "COMPUTE_ENGINE_DISK_TYPE_SSD": 2,
-                        "COMPUTE_ENGINE_DISK_TYPE_BALANCED": 3
+                        "VM_ARCHITECTURE_UNSPECIFIED": 0,
+                        "VM_ARCHITECTURE_X86_FAMILY": 1,
+                        "VM_ARCHITECTURE_ARM64": 2
                       }
                     },
-                    "ComputeEngineLicenseType": {
+                    "ComputeEngineNetworkTier": {
                       "values": {
-                        "COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT": 0,
-                        "COMPUTE_ENGINE_LICENSE_TYPE_PAYG": 1,
-                        "COMPUTE_ENGINE_LICENSE_TYPE_BYOL": 2
-                      }
-                    },
-                    "ComputeEngineBootOption": {
-                      "values": {
-                        "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED": 0,
-                        "COMPUTE_ENGINE_BOOT_OPTION_EFI": 1,
-                        "COMPUTE_ENGINE_BOOT_OPTION_BIOS": 2
+                        "COMPUTE_ENGINE_NETWORK_TIER_UNSPECIFIED": 0,
+                        "NETWORK_TIER_STANDARD": 1,
+                        "NETWORK_TIER_PREMIUM": 2
                       }
                     },
                     "ReplicationCycle": {
@@ -1179,7 +1577,18 @@
                         },
                         "error": {
                           "type": "google.rpc.Status",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "warnings": {
+                          "rule": "repeated",
+                          "type": "MigrationWarning",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1269,12 +1678,15 @@
                       "oneofs": {
                         "targetVmDefaults": {
                           "oneof": [
-                            "computeEngineTargetDefaults"
+                            "computeEngineTargetDefaults",
+                            "computeEngineDisksTargetDefaults"
                           ]
                         },
                         "sourceVmDetails": {
                           "oneof": [
-                            "awsSourceVmDetails"
+                            "vmwareSourceVmDetails",
+                            "awsSourceVmDetails",
+                            "azureSourceVmDetails"
                           ]
                         }
                       },
@@ -1283,9 +1695,27 @@
                           "type": "ComputeEngineTargetDefaults",
                           "id": 26
                         },
+                        "computeEngineDisksTargetDefaults": {
+                          "type": "ComputeEngineDisksTargetDefaults",
+                          "id": 34
+                        },
+                        "vmwareSourceVmDetails": {
+                          "type": "VmwareSourceVmDetails",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "awsSourceVmDetails": {
                           "type": "AwsSourceVmDetails",
                           "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "azureSourceVmDetails": {
+                          "type": "AzureSourceVmDetails",
+                          "id": 30,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1355,6 +1785,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "lastReplicationCycle": {
+                          "type": "ReplicationCycle",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "group": {
                           "type": "string",
                           "id": 15,
@@ -1390,9 +1827,48 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "cutoverForecast": {
+                          "type": "CutoverForecast",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expiration": {
+                          "type": "Expiration",
+                          "id": 37,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "Expiration": {
+                          "fields": {
+                            "expireTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "extensionCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "extendable": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -1406,7 +1882,20 @@
                             "PAUSED": 10,
                             "FINALIZING": 11,
                             "FINALIZED": 12,
-                            "ERROR": 13
+                            "ERROR": 13,
+                            "EXPIRED": 14,
+                            "FINALIZED_EXPIRED": 17
+                          }
+                        }
+                      }
+                    },
+                    "CutoverForecast": {
+                      "fields": {
+                        "estimatedCutoverJobDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -1419,7 +1908,8 @@
                       "oneofs": {
                         "targetVmDetails": {
                           "oneof": [
-                            "computeEngineTargetDetails"
+                            "computeEngineTargetDetails",
+                            "computeEngineDisksTargetDetails"
                           ]
                         }
                       },
@@ -1427,6 +1917,13 @@
                         "computeEngineTargetDetails": {
                           "type": "ComputeEngineTargetDetails",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "computeEngineDisksTargetDetails": {
+                          "type": "ComputeEngineDisksTargetDetails",
+                          "id": 25,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1547,7 +2044,8 @@
                       "oneofs": {
                         "targetVmDetails": {
                           "oneof": [
-                            "computeEngineTargetDetails"
+                            "computeEngineTargetDetails",
+                            "computeEngineDisksTargetDetails"
                           ]
                         }
                       },
@@ -1555,6 +2053,13 @@
                         "computeEngineTargetDetails": {
                           "type": "ComputeEngineTargetDetails",
                           "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "computeEngineDisksTargetDetails": {
+                          "type": "ComputeEngineDisksTargetDetails",
+                          "id": 20,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1818,7 +2323,8 @@
                         "sourceDetails": {
                           "oneof": [
                             "vmware",
-                            "aws"
+                            "aws",
+                            "azure"
                           ]
                         }
                       },
@@ -1830,6 +2336,10 @@
                         "aws": {
                           "type": "AwsSourceDetails",
                           "id": 12
+                        },
+                        "azure": {
+                          "type": "AzureSourceDetails",
+                          "id": 13
                         },
                         "name": {
                           "type": "string",
@@ -1860,6 +2370,25 @@
                         "description": {
                           "type": "string",
                           "id": 6
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "Encryption": {
+                      "fields": {
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         }
                       }
                     },
@@ -1883,6 +2412,10 @@
                         "thumbprint": {
                           "type": "string",
                           "id": 4
+                        },
+                        "resolvedVcenterHost": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -1956,6 +2489,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "INPUT_ONLY"
                               }
+                            },
+                            "sessionToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -1963,11 +2503,101 @@
                           "fields": {
                             "key": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "value": {
                               "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "FAILED": 2,
+                            "ACTIVE": 3
+                          }
+                        }
+                      }
+                    },
+                    "AzureSourceDetails": {
+                      "oneofs": {
+                        "credentialsType": {
+                          "oneof": [
+                            "clientSecretCreds"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "clientSecretCreds": {
+                          "type": "ClientSecretCredentials",
+                          "id": 9
+                        },
+                        "subscriptionId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "azureLocation": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "migrationResourcesUserTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "resourceGroupId": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ClientSecretCredentials": {
+                          "fields": {
+                            "tenantId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "clientId": {
+                              "type": "string",
                               "id": 2
+                            },
+                            "clientSecret": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -2104,7 +2734,10 @@
                         },
                         "error": {
                           "type": "google.rpc.Status",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
@@ -2373,6 +3006,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "architecture": {
+                          "type": "VmArchitecture",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2389,6 +3029,13 @@
                             "BOOT_OPTION_UNSPECIFIED": 0,
                             "EFI": 1,
                             "BIOS": 2
+                          }
+                        },
+                        "VmArchitecture": {
+                          "values": {
+                            "VM_ARCHITECTURE_UNSPECIFIED": 0,
+                            "VM_ARCHITECTURE_X86_FAMILY": 1,
+                            "VM_ARCHITECTURE_ARM64": 2
                           }
                         }
                       }
@@ -2471,6 +3118,10 @@
                         "architecture": {
                           "type": "VmArchitecture",
                           "id": 18
+                        },
+                        "vcpuCount": {
+                          "type": "int32",
+                          "id": 19
                         }
                       },
                       "nested": {
@@ -2520,6 +3171,148 @@
                         }
                       }
                     },
+                    "AzureVmDetails": {
+                      "fields": {
+                        "vmId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "powerState": {
+                          "type": "PowerState",
+                          "id": 2
+                        },
+                        "vmSize": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "cpuCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "memoryMb": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "diskCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "committedStorageMb": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "osDisk": {
+                          "type": "OSDisk",
+                          "id": 8
+                        },
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "Disk",
+                          "id": 9
+                        },
+                        "osDescription": {
+                          "type": "OSDescription",
+                          "id": 10
+                        },
+                        "bootOption": {
+                          "type": "BootOption",
+                          "id": 11
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "computerName": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "architecture": {
+                          "type": "VmArchitecture",
+                          "id": 14
+                        }
+                      },
+                      "nested": {
+                        "OSDisk": {
+                          "fields": {
+                            "type": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "sizeGb": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "Disk": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "sizeGb": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "lun": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "OSDescription": {
+                          "fields": {
+                            "type": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "publisher": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "offer": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "plan": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "PowerState": {
+                          "values": {
+                            "POWER_STATE_UNSPECIFIED": 0,
+                            "STARTING": 1,
+                            "RUNNING": 2,
+                            "STOPPING": 3,
+                            "STOPPED": 4,
+                            "DEALLOCATING": 5,
+                            "DEALLOCATED": 6,
+                            "UNKNOWN": 7
+                          }
+                        },
+                        "BootOption": {
+                          "values": {
+                            "BOOT_OPTION_UNSPECIFIED": 0,
+                            "EFI": 1,
+                            "BIOS": 2
+                          }
+                        },
+                        "VmArchitecture": {
+                          "values": {
+                            "VM_ARCHITECTURE_UNSPECIFIED": 0,
+                            "VM_ARCHITECTURE_X86_FAMILY": 1,
+                            "VM_ARCHITECTURE_ARM64": 2
+                          }
+                        }
+                      }
+                    },
                     "VmwareVmsDetails": {
                       "fields": {
                         "details": {
@@ -2538,12 +3331,22 @@
                         }
                       }
                     },
+                    "AzureVmsDetails": {
+                      "fields": {
+                        "details": {
+                          "rule": "repeated",
+                          "type": "AzureVmDetails",
+                          "id": 1
+                        }
+                      }
+                    },
                     "FetchInventoryResponse": {
                       "oneofs": {
                         "SourceVms": {
                           "oneof": [
                             "vmwareVms",
-                            "awsVms"
+                            "awsVms",
+                            "azureVms"
                           ]
                         }
                       },
@@ -2556,12 +3359,103 @@
                           "type": "AwsVmsDetails",
                           "id": 3
                         },
+                        "azureVms": {
+                          "type": "AzureVmsDetails",
+                          "id": 5
+                        },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "FetchStorageInventoryRequest": {
+                      "fields": {
+                        "source": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/Source"
+                          }
+                        },
+                        "type": {
+                          "type": "StorageType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "forceRefresh": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StorageType": {
+                          "values": {
+                            "STORAGE_TYPE_UNSPECIFIED": 0,
+                            "DISKS": 1,
+                            "SNAPSHOTS": 2
+                          }
+                        }
+                      }
+                    },
+                    "FetchStorageInventoryResponse": {
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "SourceStorageResource",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "SourceStorageResource": {
+                      "oneofs": {
+                        "StorageResource": {
+                          "oneof": [
+                            "awsDiskDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "awsDiskDetails": {
+                          "type": "AwsSourceDiskDetails",
+                          "id": 1
                         }
                       }
                     },
@@ -3035,7 +3929,10 @@
                         },
                         "serviceAccount": {
                           "type": "string",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "diskType": {
                           "type": "ComputeEngineDiskType",
@@ -3065,6 +3962,20 @@
                           "type": "bool",
                           "id": 14
                         },
+                        "enableVtpm": {
+                          "type": "bool",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableIntegrityMonitoring": {
+                          "type": "bool",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "bootOption": {
                           "type": "ComputeEngineBootOption",
                           "id": 15,
@@ -3085,6 +3996,28 @@
                         "hostname": {
                           "type": "string",
                           "id": 18
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "bootConversion": {
+                          "type": "BootConversion",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskReplicaZones": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3149,6 +4082,20 @@
                           "type": "bool",
                           "id": 14
                         },
+                        "enableVtpm": {
+                          "type": "bool",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableIntegrityMonitoring": {
+                          "type": "bool",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "bootOption": {
                           "type": "ComputeEngineBootOption",
                           "id": 15
@@ -3166,6 +4113,28 @@
                         "hostname": {
                           "type": "string",
                           "id": 18
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootConversion": {
+                          "type": "BootConversion",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskReplicaZones": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3173,19 +4142,38 @@
                       "fields": {
                         "network": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "subnetwork": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "internalIp": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "externalIp": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "networkTier": {
+                          "type": "ComputeEngineNetworkTier",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3270,6 +4258,331 @@
                             "RESTART_TYPE_UNSPECIFIED": 0,
                             "AUTOMATIC_RESTART": 1,
                             "NO_AUTOMATIC_RESTART": 2
+                          }
+                        }
+                      }
+                    },
+                    "ComputeEngineDisksTargetDefaults": {
+                      "oneofs": {
+                        "location": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        },
+                        "vmTarget": {
+                          "oneof": [
+                            "disksTargetDefaults",
+                            "vmTargetDefaults"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "zone": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "disksTargetDefaults": {
+                          "type": "DisksMigrationDisksTargetDefaults",
+                          "id": 5
+                        },
+                        "vmTargetDefaults": {
+                          "type": "DisksMigrationVmTargetDefaults",
+                          "id": 6
+                        },
+                        "targetProject": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/TargetProject"
+                          }
+                        },
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "PersistentDiskDefaults",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PersistentDiskDefaults": {
+                      "fields": {
+                        "sourceDiskNumber": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "diskName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskType": {
+                          "type": "ComputeEngineDiskType",
+                          "id": 3
+                        },
+                        "additionalLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vmAttachmentDetails": {
+                          "type": "VmAttachmentDetails",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VmAttachmentDetails": {
+                      "fields": {
+                        "deviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DisksMigrationDisksTargetDefaults": {
+                      "fields": {}
+                    },
+                    "DisksMigrationVmTargetDefaults": {
+                      "fields": {
+                        "vmName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "machineTypeSeries": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "networkInterfaces": {
+                          "rule": "repeated",
+                          "type": "NetworkInterface",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "computeScheduling": {
+                          "type": "ComputeScheduling",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "secureBoot": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableVtpm": {
+                          "type": "bool",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableIntegrityMonitoring": {
+                          "type": "bool",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalLicenses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hostname": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootDiskDefaults": {
+                          "type": "BootDiskDefaults",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BootDiskDefaults": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "image"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "image": {
+                          "type": "DiskImageDefaults",
+                          "id": 3
+                        },
+                        "diskName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskType": {
+                          "type": "ComputeEngineDiskType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deviceName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DiskImageDefaults": {
+                          "fields": {
+                            "sourceImage": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Image"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ComputeEngineDisksTargetDetails": {
+                      "oneofs": {
+                        "vmTarget": {
+                          "oneof": [
+                            "disksTargetDetails",
+                            "vmTargetDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disksTargetDetails": {
+                          "type": "DisksMigrationDisksTargetDetails",
+                          "id": 5
+                        },
+                        "vmTargetDetails": {
+                          "type": "DisksMigrationVmTargetDetails",
+                          "id": 6
+                        },
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "PersistentDisk",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PersistentDisk": {
+                      "fields": {
+                        "sourceDiskNumber": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "diskUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DisksMigrationDisksTargetDetails": {
+                      "fields": {}
+                    },
+                    "DisksMigrationVmTargetDetails": {
+                      "fields": {
+                        "vmUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -3497,6 +4810,21 @@
                         }
                       }
                     },
+                    "ExtendMigrationRequest": {
+                      "fields": {
+                        "migratingVm": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/MigratingVm"
+                          }
+                        }
+                      }
+                    },
+                    "ExtendMigrationResponse": {
+                      "fields": {}
+                    },
                     "FinalizeMigrationResponse": {
                       "fields": {}
                     },
@@ -3515,7 +4843,10 @@
                         },
                         "project": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -3718,6 +5049,22 @@
                         "displayName": {
                           "type": "string",
                           "id": 5
+                        },
+                        "migrationTargetType": {
+                          "type": "MigrationTargetType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MigrationTargetType": {
+                          "values": {
+                            "MIGRATION_TARGET_TYPE_UNSPECIFIED": 0,
+                            "MIGRATION_TARGET_TYPE_GCE": 1,
+                            "MIGRATION_TARGET_TYPE_DISKS": 2
+                          }
                         }
                       }
                     },
@@ -4140,7 +5487,125 @@
                             "CLONE_ERROR": 6,
                             "CUTOVER_ERROR": 7,
                             "UTILIZATION_REPORT_ERROR": 8,
-                            "APPLIANCE_UPGRADE_ERROR": 9
+                            "APPLIANCE_UPGRADE_ERROR": 9,
+                            "IMAGE_IMPORT_ERROR": 10,
+                            "DISK_MIGRATION_ERROR": 11
+                          }
+                        }
+                      }
+                    },
+                    "MigrationWarning": {
+                      "fields": {
+                        "code": {
+                          "type": "WarningCode",
+                          "id": 1
+                        },
+                        "warningMessage": {
+                          "type": "google.rpc.LocalizedMessage",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "actionItem": {
+                          "type": "google.rpc.LocalizedMessage",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "helpLinks": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Help.Link",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "warningTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "WarningCode": {
+                          "values": {
+                            "WARNING_CODE_UNSPECIFIED": 0,
+                            "ADAPTATION_WARNING": 1
+                          }
+                        }
+                      }
+                    },
+                    "VmwareSourceVmDetails": {
+                      "fields": {
+                        "firmware": {
+                          "type": "Firmware",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "committedStorageBytes": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "VmwareDiskDetails",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vmCapabilitiesInfo": {
+                          "type": "VmCapabilities",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "architecture": {
+                          "type": "VmArchitecture",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "VmwareDiskDetails": {
+                          "fields": {
+                            "diskNumber": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sizeGb": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "label": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Firmware": {
+                          "values": {
+                            "FIRMWARE_UNSPECIFIED": 0,
+                            "EFI": 1,
+                            "BIOS": 2
                           }
                         }
                       }
@@ -4149,14 +5614,141 @@
                       "fields": {
                         "firmware": {
                           "type": "Firmware",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "committedStorageBytes": {
                           "type": "int64",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "AwsDiskDetails",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vmCapabilitiesInfo": {
+                          "type": "VmCapabilities",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "architecture": {
+                          "type": "VmArchitecture",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "AwsDiskDetails": {
+                          "fields": {
+                            "diskNumber": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "volumeId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sizeGb": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Firmware": {
+                          "values": {
+                            "FIRMWARE_UNSPECIFIED": 0,
+                            "EFI": 1,
+                            "BIOS": 2
+                          }
+                        }
+                      }
+                    },
+                    "AzureSourceVmDetails": {
+                      "fields": {
+                        "firmware": {
+                          "type": "Firmware",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "committedStorageBytes": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "AzureDiskDetails",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vmCapabilitiesInfo": {
+                          "type": "VmCapabilities",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "architecture": {
+                          "type": "VmArchitecture",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AzureDiskDetails": {
+                          "fields": {
+                            "diskNumber": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "diskId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sizeGb": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "Firmware": {
                           "values": {
                             "FIRMWARE_UNSPECIFIED": 0,
@@ -4244,6 +5836,1227 @@
                           }
                         }
                       }
+                    },
+                    "VmCapabilities": {
+                      "fields": {
+                        "osCapabilities": {
+                          "rule": "repeated",
+                          "type": "OsCapability",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        },
+                        "lastOsCapabilitiesUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ImageImport": {
+                      "options": {
+                        "(google.api.resource).type": "vmmigration.googleapis.com/ImageImport",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/imageImports/{job}",
+                        "(google.api.resource).plural": "imageImports",
+                        "(google.api.resource).singular": "imageImport"
+                      },
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "cloudStorageUri"
+                          ]
+                        },
+                        "targetDefaults": {
+                          "oneof": [
+                            "diskImageTargetDefaults",
+                            "machineImageTargetDefaults"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cloudStorageUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "diskImageTargetDefaults": {
+                          "type": "DiskImageTargetDetails",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "machineImageTargetDefaults": {
+                          "type": "MachineImageTargetDetails",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "recentImageImportJobs": {
+                          "rule": "repeated",
+                          "type": "ImageImportJob",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "ImageImportJob": {
+                      "options": {
+                        "(google.api.resource).type": "vmmigration.googleapis.com/ImageImportJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/imageImports/{job}/imageImportJobs/{result}",
+                        "(google.api.resource).plural": "imageImportJobs",
+                        "(google.api.resource).singular": "imageImportJob"
+                      },
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "cloudStorageUri"
+                          ]
+                        },
+                        "targetDetails": {
+                          "oneof": [
+                            "diskImageTargetDetails",
+                            "machineImageTargetDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cloudStorageUri": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "diskImageTargetDetails": {
+                          "type": "DiskImageTargetDetails",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "machineImageTargetDetails": {
+                          "type": "MachineImageTargetDetails",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createdResources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "warnings": {
+                          "rule": "repeated",
+                          "type": "MigrationWarning",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "ImageImportStep",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "RUNNING": 2,
+                            "SUCCEEDED": 3,
+                            "FAILED": 4,
+                            "CANCELLING": 5,
+                            "CANCELLED": 6
+                          }
+                        }
+                      }
+                    },
+                    "ImageImportStep": {
+                      "oneofs": {
+                        "step": {
+                          "oneof": [
+                            "initializing",
+                            "loadingSourceFiles",
+                            "adaptingOs",
+                            "creatingImage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "initializing": {
+                          "type": "InitializingImageImportStep",
+                          "id": 3
+                        },
+                        "loadingSourceFiles": {
+                          "type": "LoadingImageSourceFilesStep",
+                          "id": 4
+                        },
+                        "adaptingOs": {
+                          "type": "AdaptingOSStep",
+                          "id": 5
+                        },
+                        "creatingImage": {
+                          "type": "CreatingImageStep",
+                          "id": 6
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "InitializingImageImportStep": {
+                      "fields": {}
+                    },
+                    "LoadingImageSourceFilesStep": {
+                      "fields": {}
+                    },
+                    "CreatingImageStep": {
+                      "fields": {}
+                    },
+                    "DiskImageTargetDetails": {
+                      "oneofs": {
+                        "osAdaptationConfig": {
+                          "oneof": [
+                            "osAdaptationParameters",
+                            "dataDiskImageImport"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "osAdaptationParameters": {
+                          "type": "ImageImportOsAdaptationParameters",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dataDiskImageImport": {
+                          "type": "DataDiskImageImport",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "imageName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetProject": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/TargetProject"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "familyName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalLicenses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "singleRegionStorage": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "MachineImageTargetDetails": {
+                      "oneofs": {
+                        "osAdaptationConfig": {
+                          "oneof": [
+                            "osAdaptationParameters",
+                            "skipOsAdaptation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "osAdaptationParameters": {
+                          "type": "ImageImportOsAdaptationParameters",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skipOsAdaptation": {
+                          "type": "SkipOsAdaptation",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "machineImageName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetProject": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/TargetProject"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "singleRegionStorage": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "machineImageParametersOverrides": {
+                          "type": "MachineImageParametersOverrides",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "ServiceAccount",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalLicenses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "shieldedInstanceConfig": {
+                          "type": "ShieldedInstanceConfig",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "networkInterfaces": {
+                          "rule": "repeated",
+                          "type": "NetworkInterface",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ServiceAccount": {
+                      "fields": {
+                        "email": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ShieldedInstanceConfig": {
+                      "fields": {
+                        "secureBoot": {
+                          "type": "SecureBoot",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableVtpm": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableIntegrityMonitoring": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SecureBoot": {
+                          "values": {
+                            "SECURE_BOOT_UNSPECIFIED": 0,
+                            "TRUE": 1,
+                            "FALSE": 2
+                          }
+                        }
+                      }
+                    },
+                    "MachineImageParametersOverrides": {
+                      "fields": {
+                        "machineType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ImageImportOsAdaptationParameters": {
+                      "fields": {
+                        "generalize": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "licenseType": {
+                          "type": "ComputeEngineLicenseType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootConversion": {
+                          "type": "BootConversion",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DataDiskImageImport": {
+                      "fields": {}
+                    },
+                    "SkipOsAdaptation": {
+                      "fields": {}
+                    },
+                    "GetImageImportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/ImageImport"
+                          }
+                        }
+                      }
+                    },
+                    "ListImageImportsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmmigration.googleapis.com/ImageImport"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListImageImportsResponse": {
+                      "fields": {
+                        "imageImports": {
+                          "rule": "repeated",
+                          "type": "ImageImport",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateImageImportRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmmigration.googleapis.com/ImageImport"
+                          }
+                        },
+                        "imageImportId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "imageImport": {
+                          "type": "ImageImport",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteImageImportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/ImageImport"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetImageImportJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/ImageImportJob"
+                          }
+                        }
+                      }
+                    },
+                    "ListImageImportJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmmigration.googleapis.com/ImageImportJob"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListImageImportJobsResponse": {
+                      "fields": {
+                        "imageImportJobs": {
+                          "rule": "repeated",
+                          "type": "ImageImportJob",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CancelImageImportJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/ImageImportJob"
+                          }
+                        }
+                      }
+                    },
+                    "CancelImageImportJobResponse": {
+                      "fields": {}
+                    },
+                    "DiskMigrationJob": {
+                      "options": {
+                        "(google.api.resource).type": "vmmigration.googleapis.com/DiskMigrationJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sources/{source}/diskMigrationJobs/{disk_migration_job}",
+                        "(google.api.resource).plural": "diskMigrationJobs",
+                        "(google.api.resource).singular": "diskMigrationJob"
+                      },
+                      "oneofs": {
+                        "sourceDiskDetails": {
+                          "oneof": [
+                            "awsSourceDiskDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "awsSourceDiskDetails": {
+                          "type": "AwsSourceDiskDetails",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetDetails": {
+                          "type": "DiskMigrationJobTargetDetails",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "DiskMigrationStep",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "READY": 1,
+                            "RUNNING": 3,
+                            "SUCCEEDED": 4,
+                            "CANCELLING": 5,
+                            "CANCELLED": 6,
+                            "FAILED": 7
+                          }
+                        }
+                      }
+                    },
+                    "DiskMigrationJobTargetDetails": {
+                      "oneofs": {
+                        "targetStorage": {
+                          "oneof": [
+                            "targetDisk"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "targetDisk": {
+                          "type": "ComputeEngineDisk",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetProject": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/TargetProject"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryption": {
+                          "type": "Encryption",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DiskMigrationStep": {
+                      "oneofs": {
+                        "step": {
+                          "oneof": [
+                            "creatingSourceDiskSnapshot",
+                            "copyingSourceDiskSnapshot",
+                            "provisioningTargetDisk"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creatingSourceDiskSnapshot": {
+                          "type": "CreatingSourceDiskSnapshotStep",
+                          "id": 3
+                        },
+                        "copyingSourceDiskSnapshot": {
+                          "type": "CopyingSourceDiskSnapshotStep",
+                          "id": 4
+                        },
+                        "provisioningTargetDisk": {
+                          "type": "ProvisioningTargetDiskStep",
+                          "id": 5
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreatingSourceDiskSnapshotStep": {
+                      "fields": {}
+                    },
+                    "CopyingSourceDiskSnapshotStep": {
+                      "fields": {}
+                    },
+                    "ProvisioningTargetDiskStep": {
+                      "fields": {}
+                    },
+                    "ComputeEngineDisk": {
+                      "fields": {
+                        "diskId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "replicaZones": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "diskType": {
+                          "type": "ComputeEngineDiskType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AwsSourceDiskDetails": {
+                      "fields": {
+                        "volumeId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sizeGib": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "diskType": {
+                          "type": "Type",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "GP2": 1,
+                            "GP3": 2,
+                            "IO1": 3,
+                            "IO2": 4,
+                            "ST1": 5,
+                            "SC1": 6,
+                            "STANDARD": 7
+                          }
+                        }
+                      }
+                    },
+                    "CreateDiskMigrationJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmmigration.googleapis.com/DiskMigrationJob"
+                          }
+                        },
+                        "diskMigrationJobId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "diskMigrationJob": {
+                          "type": "DiskMigrationJob",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDiskMigrationJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmmigration.googleapis.com/DiskMigrationJob"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDiskMigrationJobsResponse": {
+                      "fields": {
+                        "diskMigrationJobs": {
+                          "rule": "repeated",
+                          "type": "DiskMigrationJob",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
+                    "GetDiskMigrationJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/DiskMigrationJob"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDiskMigrationJobRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskMigrationJob": {
+                          "type": "DiskMigrationJob",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDiskMigrationJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/DiskMigrationJob"
+                          }
+                        }
+                      }
+                    },
+                    "RunDiskMigrationJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/DiskMigrationJob"
+                          }
+                        }
+                      }
+                    },
+                    "RunDiskMigrationJobResponse": {
+                      "fields": {}
+                    },
+                    "CancelDiskMigrationJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/DiskMigrationJob"
+                          }
+                        }
+                      }
+                    },
+                    "CancelDiskMigrationJobResponse": {
+                      "fields": {}
                     }
                   }
                 }
@@ -4715,6 +7528,43 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
+                }
               }
             },
             "resourceReference": {
