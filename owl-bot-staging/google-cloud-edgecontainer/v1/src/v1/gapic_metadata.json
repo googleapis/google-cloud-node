@@ -1,0 +1,239 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.edgecontainer.v1",
+  "libraryPackage": "@google-cloud/edgecontainer",
+  "services": {
+    "EdgeContainer": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EdgeContainerClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GenerateAccessToken": {
+              "methods": [
+                "generateAccessToken"
+              ]
+            },
+            "GenerateOfflineCredential": {
+              "methods": [
+                "generateOfflineCredential"
+              ]
+            },
+            "GetNodePool": {
+              "methods": [
+                "getNodePool"
+              ]
+            },
+            "GetMachine": {
+              "methods": [
+                "getMachine"
+              ]
+            },
+            "GetVpnConnection": {
+              "methods": [
+                "getVpnConnection"
+              ]
+            },
+            "GetServerConfig": {
+              "methods": [
+                "getServerConfig"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "UpgradeCluster": {
+              "methods": [
+                "upgradeCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "CreateNodePool": {
+              "methods": [
+                "createNodePool"
+              ]
+            },
+            "UpdateNodePool": {
+              "methods": [
+                "updateNodePool"
+              ]
+            },
+            "DeleteNodePool": {
+              "methods": [
+                "deleteNodePool"
+              ]
+            },
+            "CreateVpnConnection": {
+              "methods": [
+                "createVpnConnection"
+              ]
+            },
+            "DeleteVpnConnection": {
+              "methods": [
+                "deleteVpnConnection"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            },
+            "ListNodePools": {
+              "methods": [
+                "listNodePools",
+                "listNodePoolsStream",
+                "listNodePoolsAsync"
+              ]
+            },
+            "ListMachines": {
+              "methods": [
+                "listMachines",
+                "listMachinesStream",
+                "listMachinesAsync"
+              ]
+            },
+            "ListVpnConnections": {
+              "methods": [
+                "listVpnConnections",
+                "listVpnConnectionsStream",
+                "listVpnConnectionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EdgeContainerClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GenerateAccessToken": {
+              "methods": [
+                "generateAccessToken"
+              ]
+            },
+            "GenerateOfflineCredential": {
+              "methods": [
+                "generateOfflineCredential"
+              ]
+            },
+            "GetNodePool": {
+              "methods": [
+                "getNodePool"
+              ]
+            },
+            "GetMachine": {
+              "methods": [
+                "getMachine"
+              ]
+            },
+            "GetVpnConnection": {
+              "methods": [
+                "getVpnConnection"
+              ]
+            },
+            "GetServerConfig": {
+              "methods": [
+                "getServerConfig"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "UpgradeCluster": {
+              "methods": [
+                "upgradeCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "CreateNodePool": {
+              "methods": [
+                "createNodePool"
+              ]
+            },
+            "UpdateNodePool": {
+              "methods": [
+                "updateNodePool"
+              ]
+            },
+            "DeleteNodePool": {
+              "methods": [
+                "deleteNodePool"
+              ]
+            },
+            "CreateVpnConnection": {
+              "methods": [
+                "createVpnConnection"
+              ]
+            },
+            "DeleteVpnConnection": {
+              "methods": [
+                "deleteVpnConnection"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            },
+            "ListNodePools": {
+              "methods": [
+                "listNodePools",
+                "listNodePoolsStream",
+                "listNodePoolsAsync"
+              ]
+            },
+            "ListMachines": {
+              "methods": [
+                "listMachines",
+                "listMachinesStream",
+                "listMachinesAsync"
+              ]
+            },
+            "ListVpnConnections": {
+              "methods": [
+                "listVpnConnections",
+                "listVpnConnectionsStream",
+                "listVpnConnectionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
