@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const schemaregistry = require('@google-cloud/managedkafka-schemaregistry');
+const schemaregistry = require('@google-cloud/schemaregistry');
 
 function main() {
   const managedSchemaRegistryClient = new schemaregistry.ManagedSchemaRegistryClient();
