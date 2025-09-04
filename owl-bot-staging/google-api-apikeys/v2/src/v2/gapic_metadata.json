@@ -1,0 +1,107 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.api.apikeys.v2",
+  "libraryPackage": "@google-cloud/apikeys",
+  "services": {
+    "ApiKeys": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiKeysClient",
+          "rpcs": {
+            "GetKey": {
+              "methods": [
+                "getKey"
+              ]
+            },
+            "GetKeyString": {
+              "methods": [
+                "getKeyString"
+              ]
+            },
+            "LookupKey": {
+              "methods": [
+                "lookupKey"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "createKey"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "updateKey"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "deleteKey"
+              ]
+            },
+            "UndeleteKey": {
+              "methods": [
+                "undeleteKey"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "listKeys",
+                "listKeysStream",
+                "listKeysAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiKeysClient",
+          "rpcs": {
+            "GetKey": {
+              "methods": [
+                "getKey"
+              ]
+            },
+            "GetKeyString": {
+              "methods": [
+                "getKeyString"
+              ]
+            },
+            "LookupKey": {
+              "methods": [
+                "lookupKey"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "createKey"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "updateKey"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "deleteKey"
+              ]
+            },
+            "UndeleteKey": {
+              "methods": [
+                "undeleteKey"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "listKeys",
+                "listKeysStream",
+                "listKeysAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
