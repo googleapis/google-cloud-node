@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as schemaregistry from './schemaregistry';
 import * as v1 from './v1';
 
 const ManagedKafkaClient = v1.ManagedKafkaClient;
@@ -23,7 +24,7 @@ type ManagedKafkaClient = v1.ManagedKafkaClient;
 const ManagedKafkaConnectClient = v1.ManagedKafkaConnectClient;
 type ManagedKafkaConnectClient = v1.ManagedKafkaConnectClient;
 
-export {v1, ManagedKafkaClient, ManagedKafkaConnectClient};
-export default {v1, ManagedKafkaClient, ManagedKafkaConnectClient};
+export {schemaregistry, v1, ManagedKafkaClient, ManagedKafkaConnectClient};
+export default {schemaregistry, v1, ManagedKafkaClient, ManagedKafkaConnectClient};
 import * as protos from '../protos/protos';
 export {protos};
