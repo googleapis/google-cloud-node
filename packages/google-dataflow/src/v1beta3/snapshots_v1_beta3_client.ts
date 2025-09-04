@@ -387,9 +387,9 @@ export class SnapshotsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'snapshot_id': request.snapshotId ?? '',
+      'snapshot_id': request.snapshotId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getSnapshot request %j', request);
@@ -487,9 +487,9 @@ export class SnapshotsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'snapshot_id': request.snapshotId ?? '',
+      'snapshot_id': request.snapshotId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('deleteSnapshot request %j', request);
@@ -587,9 +587,9 @@ export class SnapshotsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('listSnapshots request %j', request);

@@ -1218,7 +1218,7 @@ export class CloudBuildClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'trigger': request.trigger ?? '',
       'name': request.name ?? '',
     });
