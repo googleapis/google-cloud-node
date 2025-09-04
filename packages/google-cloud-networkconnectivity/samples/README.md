@@ -30,6 +30,18 @@
   * [Cross_network_automation_service.update_service_class](#cross_network_automation_service.update_service_class)
   * [Cross_network_automation_service.update_service_connection_map](#cross_network_automation_service.update_service_connection_map)
   * [Cross_network_automation_service.update_service_connection_policy](#cross_network_automation_service.update_service_connection_policy)
+  * [Data_transfer_service.create_destination](#data_transfer_service.create_destination)
+  * [Data_transfer_service.create_multicloud_data_transfer_config](#data_transfer_service.create_multicloud_data_transfer_config)
+  * [Data_transfer_service.delete_destination](#data_transfer_service.delete_destination)
+  * [Data_transfer_service.delete_multicloud_data_transfer_config](#data_transfer_service.delete_multicloud_data_transfer_config)
+  * [Data_transfer_service.get_destination](#data_transfer_service.get_destination)
+  * [Data_transfer_service.get_multicloud_data_transfer_config](#data_transfer_service.get_multicloud_data_transfer_config)
+  * [Data_transfer_service.get_multicloud_data_transfer_supported_service](#data_transfer_service.get_multicloud_data_transfer_supported_service)
+  * [Data_transfer_service.list_destinations](#data_transfer_service.list_destinations)
+  * [Data_transfer_service.list_multicloud_data_transfer_configs](#data_transfer_service.list_multicloud_data_transfer_configs)
+  * [Data_transfer_service.list_multicloud_data_transfer_supported_services](#data_transfer_service.list_multicloud_data_transfer_supported_services)
+  * [Data_transfer_service.update_destination](#data_transfer_service.update_destination)
+  * [Data_transfer_service.update_multicloud_data_transfer_config](#data_transfer_service.update_multicloud_data_transfer_config)
   * [Hub_service.accept_hub_spoke](#hub_service.accept_hub_spoke)
   * [Hub_service.accept_spoke_update](#hub_service.accept_spoke_update)
   * [Hub_service.create_hub](#hub_service.create_hub)
@@ -388,6 +400,210 @@ __Usage:__
 
 
 `node packages/google-cloud-networkconnectivity/samples/generated/v1/cross_network_automation_service.update_service_connection_policy.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.create_destination
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.create_destination.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.create_destination.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.create_destination.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.create_multicloud_data_transfer_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.create_multicloud_data_transfer_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.create_multicloud_data_transfer_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.create_multicloud_data_transfer_config.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.delete_destination
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.delete_destination.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.delete_destination.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.delete_destination.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.delete_multicloud_data_transfer_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.delete_multicloud_data_transfer_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.delete_multicloud_data_transfer_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.delete_multicloud_data_transfer_config.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.get_destination
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_destination.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_destination.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_destination.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.get_multicloud_data_transfer_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_multicloud_data_transfer_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_multicloud_data_transfer_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_multicloud_data_transfer_config.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.get_multicloud_data_transfer_supported_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_multicloud_data_transfer_supported_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_multicloud_data_transfer_supported_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.get_multicloud_data_transfer_supported_service.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.list_destinations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_destinations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_destinations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_destinations.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.list_multicloud_data_transfer_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_multicloud_data_transfer_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_multicloud_data_transfer_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_multicloud_data_transfer_configs.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.list_multicloud_data_transfer_supported_services
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_multicloud_data_transfer_supported_services.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_multicloud_data_transfer_supported_services.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.list_multicloud_data_transfer_supported_services.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.update_destination
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.update_destination.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.update_destination.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.update_destination.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.update_multicloud_data_transfer_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.update_multicloud_data_transfer_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.update_multicloud_data_transfer_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/data_transfer_service.update_multicloud_data_transfer_config.js`
 
 
 -----

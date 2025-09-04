@@ -16,10 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CrossNetworkAutomationServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient} from '@google-cloud/network-connectivity';
+import {CrossNetworkAutomationServiceClient, DataTransferServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient} from '@google-cloud/network-connectivity';
 
 // check that the client class type name can be used
 function doStuffWithCrossNetworkAutomationServiceClient(client: CrossNetworkAutomationServiceClient) {
+  client.close();
+}
+function doStuffWithDataTransferServiceClient(client: DataTransferServiceClient) {
   client.close();
 }
 function doStuffWithHubServiceClient(client: HubServiceClient) {
@@ -36,6 +39,9 @@ function main() {
   // check that the client instance can be created
   const crossNetworkAutomationServiceClient = new CrossNetworkAutomationServiceClient();
   doStuffWithCrossNetworkAutomationServiceClient(crossNetworkAutomationServiceClient);
+  // check that the client instance can be created
+  const dataTransferServiceClient = new DataTransferServiceClient();
+  doStuffWithDataTransferServiceClient(dataTransferServiceClient);
   // check that the client instance can be created
   const hubServiceClient = new HubServiceClient();
   doStuffWithHubServiceClient(hubServiceClient);

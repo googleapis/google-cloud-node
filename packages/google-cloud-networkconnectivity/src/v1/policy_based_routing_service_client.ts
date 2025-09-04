@@ -188,6 +188,9 @@ export class PolicyBasedRoutingServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      destinationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/multicloudDataTransferConfigs/{multicloud_data_transfer_config}/destinations/{destination}'
+      ),
       groupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/hubs/{hub}/groups/{group}'
       ),
@@ -202,6 +205,12 @@ export class PolicyBasedRoutingServiceClient {
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      multicloudDataTransferConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/multicloudDataTransferConfigs/{multicloud_data_transfer_config}'
+      ),
+      multicloudDataTransferSupportedServicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/multicloudDataTransferSupportedServices/{multicloud_data_transfer_supported_service}'
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/global/networks/{resource_id}'
@@ -1416,6 +1425,68 @@ export class PolicyBasedRoutingServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified destination resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} multicloud_data_transfer_config
+   * @param {string} destination
+   * @returns {string} Resource name string.
+   */
+  destinationPath(project:string,location:string,multicloudDataTransferConfig:string,destination:string) {
+    return this.pathTemplates.destinationPathTemplate.render({
+      project: project,
+      location: location,
+      multicloud_data_transfer_config: multicloudDataTransferConfig,
+      destination: destination,
+    });
+  }
+
+  /**
+   * Parse the project from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).project;
+  }
+
+  /**
+   * Parse the location from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).location;
+  }
+
+  /**
+   * Parse the multicloud_data_transfer_config from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the multicloud_data_transfer_config.
+   */
+  matchMulticloudDataTransferConfigFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).multicloud_data_transfer_config;
+  }
+
+  /**
+   * Parse the destination from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the destination.
+   */
+  matchDestinationFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).destination;
+  }
+
+  /**
    * Return a fully-qualified group resource name string.
    *
    * @param {string} project
@@ -1645,6 +1716,104 @@ export class PolicyBasedRoutingServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified multicloudDataTransferConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} multicloud_data_transfer_config
+   * @returns {string} Resource name string.
+   */
+  multicloudDataTransferConfigPath(project:string,location:string,multicloudDataTransferConfig:string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.render({
+      project: project,
+      location: location,
+      multicloud_data_transfer_config: multicloudDataTransferConfig,
+    });
+  }
+
+  /**
+   * Parse the project from MulticloudDataTransferConfig resource.
+   *
+   * @param {string} multicloudDataTransferConfigName
+   *   A fully-qualified path representing MulticloudDataTransferConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMulticloudDataTransferConfigName(multicloudDataTransferConfigName: string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.match(multicloudDataTransferConfigName).project;
+  }
+
+  /**
+   * Parse the location from MulticloudDataTransferConfig resource.
+   *
+   * @param {string} multicloudDataTransferConfigName
+   *   A fully-qualified path representing MulticloudDataTransferConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMulticloudDataTransferConfigName(multicloudDataTransferConfigName: string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.match(multicloudDataTransferConfigName).location;
+  }
+
+  /**
+   * Parse the multicloud_data_transfer_config from MulticloudDataTransferConfig resource.
+   *
+   * @param {string} multicloudDataTransferConfigName
+   *   A fully-qualified path representing MulticloudDataTransferConfig resource.
+   * @returns {string} A string representing the multicloud_data_transfer_config.
+   */
+  matchMulticloudDataTransferConfigFromMulticloudDataTransferConfigName(multicloudDataTransferConfigName: string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.match(multicloudDataTransferConfigName).multicloud_data_transfer_config;
+  }
+
+  /**
+   * Return a fully-qualified multicloudDataTransferSupportedService resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} multicloud_data_transfer_supported_service
+   * @returns {string} Resource name string.
+   */
+  multicloudDataTransferSupportedServicePath(project:string,location:string,multicloudDataTransferSupportedService:string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.render({
+      project: project,
+      location: location,
+      multicloud_data_transfer_supported_service: multicloudDataTransferSupportedService,
+    });
+  }
+
+  /**
+   * Parse the project from MulticloudDataTransferSupportedService resource.
+   *
+   * @param {string} multicloudDataTransferSupportedServiceName
+   *   A fully-qualified path representing MulticloudDataTransferSupportedService resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMulticloudDataTransferSupportedServiceName(multicloudDataTransferSupportedServiceName: string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match(multicloudDataTransferSupportedServiceName).project;
+  }
+
+  /**
+   * Parse the location from MulticloudDataTransferSupportedService resource.
+   *
+   * @param {string} multicloudDataTransferSupportedServiceName
+   *   A fully-qualified path representing MulticloudDataTransferSupportedService resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMulticloudDataTransferSupportedServiceName(multicloudDataTransferSupportedServiceName: string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match(multicloudDataTransferSupportedServiceName).location;
+  }
+
+  /**
+   * Parse the multicloud_data_transfer_supported_service from MulticloudDataTransferSupportedService resource.
+   *
+   * @param {string} multicloudDataTransferSupportedServiceName
+   *   A fully-qualified path representing MulticloudDataTransferSupportedService resource.
+   * @returns {string} A string representing the multicloud_data_transfer_supported_service.
+   */
+  matchMulticloudDataTransferSupportedServiceFromMulticloudDataTransferSupportedServiceName(multicloudDataTransferSupportedServiceName: string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match(multicloudDataTransferSupportedServiceName).multicloud_data_transfer_supported_service;
   }
 
   /**
