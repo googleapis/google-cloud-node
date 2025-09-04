@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const issueresolution = require('@google-shopping/issueresolution');
+const issueresolution = require('@google-cloud/issueresolution');
 
 function main() {
   const aggregateProductStatusesServiceClient = new issueresolution.AggregateProductStatusesServiceClient();

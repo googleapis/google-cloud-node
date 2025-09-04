@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const quota = require('@google-shopping/quota');
+const quota = require('@google-cloud/quota');
 
 function main() {
   const quotaServiceClient = new quota.QuotaServiceClient();

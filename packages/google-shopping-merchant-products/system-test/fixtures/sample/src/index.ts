@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ProductInputsServiceClient, ProductsServiceClient} from '@google-shopping/products';
+import {ProductInputsServiceClient, ProductsServiceClient} from '@google-cloud/products';
 
 // check that the client class type name can be used
 function doStuffWithProductInputsServiceClient(client: ProductInputsServiceClient) {
