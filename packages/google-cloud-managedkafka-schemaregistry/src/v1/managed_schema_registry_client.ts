@@ -95,7 +95,7 @@ export class ManagedSchemaRegistryClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('schemaregistry');
+  private _log = logging.log('managedkafka-schemaregistry');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
