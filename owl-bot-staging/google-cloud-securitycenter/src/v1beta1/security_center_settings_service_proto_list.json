@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/securitycenter/settings/v1beta1/billing_settings.proto",
+  "../../protos/google/cloud/securitycenter/settings/v1beta1/component_settings.proto",
+  "../../protos/google/cloud/securitycenter/settings/v1beta1/detector.proto",
+  "../../protos/google/cloud/securitycenter/settings/v1beta1/securitycenter_settings_service.proto",
+  "../../protos/google/cloud/securitycenter/settings/v1beta1/settings.proto",
+  "../../protos/google/cloud/securitycenter/settings/v1beta1/sink_settings.proto"
+]
