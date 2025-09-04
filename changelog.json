@@ -4,6 +4,72 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "ba6a4977e89c5769d302e1a18d5ad305cae1bfdd",
+          "message": "[netapp] add new fields for flex auto tiering",
+          "issues": [
+            "6670"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "0b98a658-ccb4-4214-a075-0049931f6fad",
+      "createTime": "2025-09-04T20:33:14.674Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4aff726fbe811a53f24c6b5c883052716f897205",
+          "message": "[infra-manager] added support for service maintained provider",
+          "issues": [
+            "6651"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "d53ef116-efa6-4a71-98d7-4535d32bfe9a",
+      "createTime": "2025-09-04T20:33:14.635Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7fd10b45202d5031f6b283d9af2c15d72d76823d",
+          "message": "Add new `VerifyConfidentialSpace` and `VerifyConfidentialGke` rpcs and relevant fields",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "bf5157f9-1d2a-4c53-b369-1d39c65fd266",
+      "createTime": "2025-09-04T20:33:14.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "72c9729e3993588996cc3a4a69a378cd92bc2646",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20250810 (#1090)",
+          "issues": [
+            "6610"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "1d46451a-0825-4c84-8ba6-dd7b178c4a35",
+      "createTime": "2025-09-04T20:33:14.580Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "64d301886c7ed320ba1b03d850363e54bdd4657e",
           "message": "Make sure we are not overwriting the README when generating it",
@@ -62097,5 +62163,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-29T19:37:36.045Z"
+  "updateTime": "2025-09-04T20:33:14.674Z"
 }
