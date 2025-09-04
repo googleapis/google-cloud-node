@@ -3218,6 +3218,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "hybridReplicationUserCommands": {
+                          "type": "UserCommands",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3230,7 +3237,9 @@
                             "DELETING": 5,
                             "ERROR": 6,
                             "PENDING_CLUSTER_PEERING": 8,
-                            "PENDING_SVM_PEERING": 9
+                            "PENDING_SVM_PEERING": 9,
+                            "PENDING_REMOTE_RESYNC": 10,
+                            "EXTERNALLY_MANAGED_REPLICATION": 11
                           }
                         },
                         "ReplicationRole": {
@@ -3256,14 +3265,18 @@
                             "STOPPED": 3,
                             "TRANSFERRING": 4,
                             "BASELINE_TRANSFERRING": 5,
-                            "ABORTED": 6
+                            "ABORTED": 6,
+                            "EXTERNALLY_MANAGED": 7,
+                            "PENDING_PEERING": 8
                           }
                         },
                         "HybridReplicationType": {
                           "values": {
                             "HYBRID_REPLICATION_TYPE_UNSPECIFIED": 0,
                             "MIGRATION": 1,
-                            "CONTINUOUS_REPLICATION": 2
+                            "CONTINUOUS_REPLICATION": 2,
+                            "ONPREM_REPLICATION": 3,
+                            "REVERSE_ONPREM_REPLICATION": 4
                           }
                         }
                       }
@@ -3274,49 +3287,49 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "command": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "commandExpiryTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "passphrase": {
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "peerVolumeName": {
                           "type": "string",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "peerClusterName": {
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "peerSvmName": {
                           "type": "string",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -3571,6 +3584,89 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "netapp.googleapis.com/Replication"
+                          }
+                        }
+                      }
+                    },
+                    "ServiceLevel": {
+                      "values": {
+                        "SERVICE_LEVEL_UNSPECIFIED": 0,
+                        "PREMIUM": 1,
+                        "EXTREME": 2,
+                        "STANDARD": 3,
+                        "FLEX": 4
+                      }
+                    },
+                    "FlexPerformance": {
+                      "values": {
+                        "FLEX_PERFORMANCE_UNSPECIFIED": 0,
+                        "FLEX_PERFORMANCE_DEFAULT": 1,
+                        "FLEX_PERFORMANCE_CUSTOM": 2
+                      }
+                    },
+                    "EncryptionType": {
+                      "values": {
+                        "ENCRYPTION_TYPE_UNSPECIFIED": 0,
+                        "SERVICE_MANAGED": 1,
+                        "CLOUD_KMS": 2
+                      }
+                    },
+                    "DirectoryServiceType": {
+                      "values": {
+                        "DIRECTORY_SERVICE_TYPE_UNSPECIFIED": 0,
+                        "ACTIVE_DIRECTORY": 1
+                      }
+                    },
+                    "HybridReplicationSchedule": {
+                      "values": {
+                        "HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED": 0,
+                        "EVERY_10_MINUTES": 1,
+                        "HOURLY": 2,
+                        "DAILY": 3
+                      }
+                    },
+                    "QosType": {
+                      "values": {
+                        "QOS_TYPE_UNSPECIFIED": 0,
+                        "AUTO": 1,
+                        "MANUAL": 2
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "supportedServiceLevels": {
+                          "rule": "repeated",
+                          "type": "ServiceLevel",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "supportedFlexPerformance": {
+                          "rule": "repeated",
+                          "type": "FlexPerformance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "hasVcp": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserCommands": {
+                      "fields": {
+                        "commands": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -4048,6 +4144,20 @@
                           "id": 40,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "throughputMibps": {
+                          "type": "double",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hotTierSizeUsedGib": {
+                          "type": "int64",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -4572,6 +4682,11 @@
                           "oneof": [
                             "coolingThresholdDays"
                           ]
+                        },
+                        "_hotTierBypassModeEnabled": {
+                          "oneof": [
+                            "hotTierBypassModeEnabled"
+                          ]
                         }
                       },
                       "fields": {
@@ -4586,6 +4701,14 @@
                         "coolingThresholdDays": {
                           "type": "int32",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "hotTierBypassModeEnabled": {
+                          "type": "bool",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -4662,54 +4785,37 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
-                        }
-                      }
-                    },
-                    "ServiceLevel": {
-                      "values": {
-                        "SERVICE_LEVEL_UNSPECIFIED": 0,
-                        "PREMIUM": 1,
-                        "EXTREME": 2,
-                        "STANDARD": 3,
-                        "FLEX": 4
-                      }
-                    },
-                    "FlexPerformance": {
-                      "values": {
-                        "FLEX_PERFORMANCE_UNSPECIFIED": 0,
-                        "FLEX_PERFORMANCE_DEFAULT": 1,
-                        "FLEX_PERFORMANCE_CUSTOM": 2
-                      }
-                    },
-                    "EncryptionType": {
-                      "values": {
-                        "ENCRYPTION_TYPE_UNSPECIFIED": 0,
-                        "SERVICE_MANAGED": 1,
-                        "CLOUD_KMS": 2
-                      }
-                    },
-                    "DirectoryServiceType": {
-                      "values": {
-                        "DIRECTORY_SERVICE_TYPE_UNSPECIFIED": 0,
-                        "ACTIVE_DIRECTORY": 1
-                      }
-                    },
-                    "LocationMetadata": {
-                      "fields": {
-                        "supportedServiceLevels": {
-                          "rule": "repeated",
-                          "type": "ServiceLevel",
-                          "id": 1,
+                        },
+                        "replicationSchedule": {
+                          "type": "HybridReplicationSchedule",
+                          "id": 9,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "supportedFlexPerformance": {
-                          "rule": "repeated",
-                          "type": "FlexPerformance",
-                          "id": 2,
+                        "hybridReplicationType": {
+                          "type": "VolumeHybridReplicationType",
+                          "id": 10,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "largeVolumeConstituentCount": {
+                          "type": "int32",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "VolumeHybridReplicationType": {
+                          "values": {
+                            "VOLUME_HYBRID_REPLICATION_TYPE_UNSPECIFIED": 0,
+                            "MIGRATION": 1,
+                            "CONTINUOUS_REPLICATION": 2,
+                            "ONPREM_REPLICATION": 3,
+                            "REVERSE_ONPREM_REPLICATION": 4
                           }
                         }
                       }
@@ -5045,6 +5151,11 @@
                           "oneof": [
                             "globalAccessAllowed"
                           ]
+                        },
+                        "_enableHotTierAutoResize": {
+                          "oneof": [
+                            "enableHotTierAutoResize"
+                          ]
                         }
                       },
                       "fields": {
@@ -5227,6 +5338,49 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "hotTierSizeGib": {
+                          "type": "int64",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableHotTierAutoResize": {
+                          "type": "bool",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "qosType": {
+                          "type": "QosType",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "availableThroughputMibps": {
+                          "type": "double",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "coldTierSizeUsedGib": {
+                          "type": "int64",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "hotTierSizeUsedGib": {
+                          "type": "int64",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -5272,8 +5426,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "fieldBehavior": {
@@ -5496,6 +5649,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -5636,6 +5793,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -5693,6 +5872,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -5754,6 +5938,19 @@
                 "PACKAGE_MANAGER": 20
               }
             },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -5776,6 +5973,11 @@
                 "format": {
                   "type": "Format",
                   "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
                 }
               },
               "nested": {
@@ -5787,6 +5989,14 @@
                     "IPV6": 3,
                     "IPV4_OR_IPV6": 4
                   }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
                 }
               }
             }
@@ -5811,12 +6021,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -5854,6 +6071,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -5943,6 +6165,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -6168,6 +6394,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -6382,6 +6612,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -6517,7 +6748,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -6544,6 +6776,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -6612,6 +6848,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -6701,6 +6957,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -6844,6 +7104,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -6854,6 +7115,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -6864,6 +7126,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -6874,6 +7137,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -6884,7 +7148,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -6894,27 +7159,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -6959,7 +7235,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -6973,6 +7255,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -7001,11 +7310,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -7018,6 +7342,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -7103,6 +7433,14 @@
                 }
               }
             },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
+              }
+            },
             "FieldMask": {
               "fields": {
                 "paths": {
@@ -7161,6 +7499,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
+            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {
