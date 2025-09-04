@@ -61,7 +61,7 @@ function main(parent) {
   // const timeZone = 'abc123'
 
   // Imports the Accounts library
-  const {AccountIssueServiceClient} = require('@google-cloud/accounts').v1;
+  const {AccountIssueServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new AccountIssueServiceClient();

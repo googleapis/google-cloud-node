@@ -447,6 +447,222 @@ describe('v1.ConfidentialComputingClient', () => {
             await assert.rejects(client.verifyAttestation(request), expectedError);
         });
     });
+
+    describe('verifyConfidentialSpace', () => {
+        it('invokes verifyConfidentialSpace without error', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedHeaderRequestParams = `challenge=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceResponse()
+            );
+            client.innerApiCalls.verifyConfidentialSpace = stubSimpleCall(expectedResponse);
+            const [response] = await client.verifyConfidentialSpace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.verifyConfidentialSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifyConfidentialSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifyConfidentialSpace without error using callback', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedHeaderRequestParams = `challenge=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceResponse()
+            );
+            client.innerApiCalls.verifyConfidentialSpace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.verifyConfidentialSpace(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.verifyConfidentialSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifyConfidentialSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifyConfidentialSpace with error', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedHeaderRequestParams = `challenge=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.verifyConfidentialSpace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.verifyConfidentialSpace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.verifyConfidentialSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifyConfidentialSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifyConfidentialSpace with closed client', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.verifyConfidentialSpace(request), expectedError);
+        });
+    });
+
+    describe('verifyConfidentialGke', () => {
+        it('invokes verifyConfidentialGke without error', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedHeaderRequestParams = `challenge=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeResponse()
+            );
+            client.innerApiCalls.verifyConfidentialGke = stubSimpleCall(expectedResponse);
+            const [response] = await client.verifyConfidentialGke(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.verifyConfidentialGke as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifyConfidentialGke as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifyConfidentialGke without error using callback', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedHeaderRequestParams = `challenge=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeResponse()
+            );
+            client.innerApiCalls.verifyConfidentialGke = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.verifyConfidentialGke(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.verifyConfidentialGke as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifyConfidentialGke as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifyConfidentialGke with error', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedHeaderRequestParams = `challenge=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.verifyConfidentialGke = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.verifyConfidentialGke(request), expectedError);
+            const actualRequest = (client.innerApiCalls.verifyConfidentialGke as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifyConfidentialGke as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifyConfidentialGke with closed client', async () => {
+            const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest', ['challenge']);
+            request.challenge = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.verifyConfidentialGke(request), expectedError);
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new confidentialcomputingModule.v1.ConfidentialComputingClient({

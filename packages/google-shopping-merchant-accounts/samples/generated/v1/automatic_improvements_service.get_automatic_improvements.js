@@ -35,7 +35,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Accounts library
-  const {AutomaticImprovementsServiceClient} = require('@google-cloud/accounts').v1;
+  const {AutomaticImprovementsServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new AutomaticImprovementsServiceClient();

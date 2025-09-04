@@ -46,7 +46,7 @@ function main(businessIdentity) {
   // const updateMask = {}
 
   // Imports the Accounts library
-  const {BusinessIdentityServiceClient} = require('@google-cloud/accounts').v1;
+  const {BusinessIdentityServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new BusinessIdentityServiceClient();

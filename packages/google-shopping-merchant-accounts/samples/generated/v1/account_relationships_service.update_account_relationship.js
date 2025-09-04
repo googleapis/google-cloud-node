@@ -41,7 +41,7 @@ function main(accountRelationship) {
   // const updateMask = {}
 
   // Imports the Accounts library
-  const {AccountRelationshipsServiceClient} = require('@google-cloud/accounts').v1;
+  const {AccountRelationshipsServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new AccountRelationshipsServiceClient();
