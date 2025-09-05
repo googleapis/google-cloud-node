@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2025 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/schemaregistry',
+    systemName: '@google-cloud/managedkafka-schemaregistry',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
