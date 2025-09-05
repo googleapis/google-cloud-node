@@ -1,0 +1,91 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.products.v1",
+  "libraryPackage": "@google-cloud/products",
+  "services": {
+    "ProductInputsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProductInputsServiceClient",
+          "rpcs": {
+            "InsertProductInput": {
+              "methods": [
+                "insertProductInput"
+              ]
+            },
+            "UpdateProductInput": {
+              "methods": [
+                "updateProductInput"
+              ]
+            },
+            "DeleteProductInput": {
+              "methods": [
+                "deleteProductInput"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProductInputsServiceClient",
+          "rpcs": {
+            "InsertProductInput": {
+              "methods": [
+                "insertProductInput"
+              ]
+            },
+            "UpdateProductInput": {
+              "methods": [
+                "updateProductInput"
+              ]
+            },
+            "DeleteProductInput": {
+              "methods": [
+                "deleteProductInput"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProductsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProductsServiceClient",
+          "rpcs": {
+            "GetProduct": {
+              "methods": [
+                "getProduct"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProductsServiceClient",
+          "rpcs": {
+            "GetProduct": {
+              "methods": [
+                "getProduct"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
