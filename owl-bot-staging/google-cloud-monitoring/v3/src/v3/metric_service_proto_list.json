@@ -1,0 +1,21 @@
+[
+  "../../protos/google/monitoring/v3/alert.proto",
+  "../../protos/google/monitoring/v3/alert_service.proto",
+  "../../protos/google/monitoring/v3/common.proto",
+  "../../protos/google/monitoring/v3/dropped_labels.proto",
+  "../../protos/google/monitoring/v3/group.proto",
+  "../../protos/google/monitoring/v3/group_service.proto",
+  "../../protos/google/monitoring/v3/metric.proto",
+  "../../protos/google/monitoring/v3/metric_service.proto",
+  "../../protos/google/monitoring/v3/mutation_record.proto",
+  "../../protos/google/monitoring/v3/notification.proto",
+  "../../protos/google/monitoring/v3/notification_service.proto",
+  "../../protos/google/monitoring/v3/query_service.proto",
+  "../../protos/google/monitoring/v3/service.proto",
+  "../../protos/google/monitoring/v3/service_service.proto",
+  "../../protos/google/monitoring/v3/snooze.proto",
+  "../../protos/google/monitoring/v3/snooze_service.proto",
+  "../../protos/google/monitoring/v3/span_context.proto",
+  "../../protos/google/monitoring/v3/uptime.proto",
+  "../../protos/google/monitoring/v3/uptime_service.proto"
+]
