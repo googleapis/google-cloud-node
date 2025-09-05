@@ -1,0 +1,6 @@
+[
+  "../../protos/google/cloud/orgpolicy/v2/constraint.proto",
+  "../../protos/google/cloud/policysimulator/v1/explanations.proto",
+  "../../protos/google/cloud/policysimulator/v1/orgpolicy.proto",
+  "../../protos/google/cloud/policysimulator/v1/simulator.proto"
+]
