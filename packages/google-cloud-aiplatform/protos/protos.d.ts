@@ -228083,6 +228083,9 @@ export namespace google {
                     /** TuningJob baseModel */
                     baseModel?: (string|null);
 
+                    /** TuningJob preTunedModel */
+                    preTunedModel?: (google.cloud.aiplatform.v1beta1.IPreTunedModel|null);
+
                     /** TuningJob supervisedTuningSpec */
                     supervisedTuningSpec?: (google.cloud.aiplatform.v1beta1.ISupervisedTuningSpec|null);
 
@@ -228165,6 +228168,9 @@ export namespace google {
                     /** TuningJob baseModel. */
                     public baseModel?: (string|null);
 
+                    /** TuningJob preTunedModel. */
+                    public preTunedModel?: (google.cloud.aiplatform.v1beta1.IPreTunedModel|null);
+
                     /** TuningJob supervisedTuningSpec. */
                     public supervisedTuningSpec?: (google.cloud.aiplatform.v1beta1.ISupervisedTuningSpec|null);
 
@@ -228235,7 +228241,7 @@ export namespace google {
                     public evaluateDatasetRuns: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun[];
 
                     /** TuningJob sourceModel. */
-                    public sourceModel?: "baseModel";
+                    public sourceModel?: ("baseModel"|"preTunedModel");
 
                     /** TuningJob tuningSpec. */
                     public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec"|"veoTuningSpec");
@@ -230739,6 +230745,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TunedModelCheckpoint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PreTunedModel. */
+                interface IPreTunedModel {
+
+                    /** PreTunedModel tunedModelName */
+                    tunedModelName?: (string|null);
+
+                    /** PreTunedModel checkpointId */
+                    checkpointId?: (string|null);
+
+                    /** PreTunedModel baseModel */
+                    baseModel?: (string|null);
+                }
+
+                /** Represents a PreTunedModel. */
+                class PreTunedModel implements IPreTunedModel {
+
+                    /**
+                     * Constructs a new PreTunedModel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IPreTunedModel);
+
+                    /** PreTunedModel tunedModelName. */
+                    public tunedModelName: string;
+
+                    /** PreTunedModel checkpointId. */
+                    public checkpointId: string;
+
+                    /** PreTunedModel baseModel. */
+                    public baseModel: string;
+
+                    /**
+                     * Creates a new PreTunedModel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreTunedModel instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IPreTunedModel): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Encodes the specified PreTunedModel message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.PreTunedModel.verify|verify} messages.
+                     * @param message PreTunedModel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IPreTunedModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreTunedModel message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.PreTunedModel.verify|verify} messages.
+                     * @param message PreTunedModel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IPreTunedModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreTunedModel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreTunedModel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Decodes a PreTunedModel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreTunedModel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Verifies a PreTunedModel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreTunedModel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreTunedModel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Creates a plain object from a PreTunedModel message. Also converts values to other types if specified.
+                     * @param message PreTunedModel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.PreTunedModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreTunedModel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreTunedModel
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

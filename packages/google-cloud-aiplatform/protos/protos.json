@@ -60734,7 +60734,8 @@
                       "oneofs": {
                         "sourceModel": {
                           "oneof": [
-                            "baseModel"
+                            "baseModel",
+                            "preTunedModel"
                           ]
                         },
                         "tuningSpec": {
@@ -60750,6 +60751,10 @@
                         "baseModel": {
                           "type": "string",
                           "id": 4
+                        },
+                        "preTunedModel": {
+                          "type": "PreTunedModel",
+                          "id": 31
                         },
                         "supervisedTuningSpec": {
                           "type": "SupervisedTuningSpec",
@@ -61701,6 +61706,31 @@
                         "endpoint": {
                           "type": "string",
                           "id": 4
+                        }
+                      }
+                    },
+                    "PreTunedModel": {
+                      "fields": {
+                        "tunedModelName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "baseModel": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
