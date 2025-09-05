@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const products = require('@google-shopping/products');
+const products = require('@google-cloud/products');
 
 function main() {
   const productInputsServiceClient = new products.ProductInputsServiceClient();
