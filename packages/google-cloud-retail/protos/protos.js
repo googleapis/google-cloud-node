@@ -172812,6 +172812,3613 @@
                         return ListControlsResponse;
                     })();
     
+                    v2beta.ConversationalSearchService = (function() {
+    
+                        /**
+                         * Constructs a new ConversationalSearchService service.
+                         * @memberof google.cloud.retail.v2beta
+                         * @classdesc Represents a ConversationalSearchService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function ConversationalSearchService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (ConversationalSearchService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ConversationalSearchService;
+    
+                        /**
+                         * Creates new ConversationalSearchService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {ConversationalSearchService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        ConversationalSearchService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.retail.v2beta.ConversationalSearchService|conversationalSearch}.
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchService
+                         * @typedef ConversationalSearchCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.retail.v2beta.ConversationalSearchResponse} [response] ConversationalSearchResponse
+                         */
+    
+                        /**
+                         * Calls ConversationalSearch.
+                         * @function conversationalSearch
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchService
+                         * @instance
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchRequest} request ConversationalSearchRequest message or plain object
+                         * @param {google.cloud.retail.v2beta.ConversationalSearchService.ConversationalSearchCallback} callback Node-style callback called with the error, if any, and ConversationalSearchResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ConversationalSearchService.prototype.conversationalSearch = function conversationalSearch(request, callback) {
+                            return this.rpcCall(conversationalSearch, $root.google.cloud.retail.v2beta.ConversationalSearchRequest, $root.google.cloud.retail.v2beta.ConversationalSearchResponse, request, callback);
+                        }, "name", { value: "ConversationalSearch" });
+    
+                        /**
+                         * Calls ConversationalSearch.
+                         * @function conversationalSearch
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchService
+                         * @instance
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchRequest} request ConversationalSearchRequest message or plain object
+                         * @returns {Promise<google.cloud.retail.v2beta.ConversationalSearchResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return ConversationalSearchService;
+                    })();
+    
+                    v2beta.ConversationalSearchRequest = (function() {
+    
+                        /**
+                         * Properties of a ConversationalSearchRequest.
+                         * @memberof google.cloud.retail.v2beta
+                         * @interface IConversationalSearchRequest
+                         * @property {string|null} [placement] ConversationalSearchRequest placement
+                         * @property {string|null} [branch] ConversationalSearchRequest branch
+                         * @property {string|null} [query] ConversationalSearchRequest query
+                         * @property {Array.<string>|null} [pageCategories] ConversationalSearchRequest pageCategories
+                         * @property {string|null} [conversationId] ConversationalSearchRequest conversationId
+                         * @property {google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams|null} [searchParams] ConversationalSearchRequest searchParams
+                         * @property {string|null} [visitorId] ConversationalSearchRequest visitorId
+                         * @property {google.cloud.retail.v2beta.IUserInfo|null} [userInfo] ConversationalSearchRequest userInfo
+                         * @property {google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec|null} [conversationalFilteringSpec] ConversationalSearchRequest conversationalFilteringSpec
+                         * @property {Object.<string,string>|null} [userLabels] ConversationalSearchRequest userLabels
+                         * @property {Array.<google.cloud.retail.v2beta.ISafetySetting>|null} [safetySettings] ConversationalSearchRequest safetySettings
+                         */
+    
+                        /**
+                         * Constructs a new ConversationalSearchRequest.
+                         * @memberof google.cloud.retail.v2beta
+                         * @classdesc Represents a ConversationalSearchRequest.
+                         * @implements IConversationalSearchRequest
+                         * @constructor
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchRequest=} [properties] Properties to set
+                         */
+                        function ConversationalSearchRequest(properties) {
+                            this.pageCategories = [];
+                            this.userLabels = {};
+                            this.safetySettings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversationalSearchRequest placement.
+                         * @member {string} placement
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.placement = "";
+    
+                        /**
+                         * ConversationalSearchRequest branch.
+                         * @member {string} branch
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.branch = "";
+    
+                        /**
+                         * ConversationalSearchRequest query.
+                         * @member {string} query
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.query = "";
+    
+                        /**
+                         * ConversationalSearchRequest pageCategories.
+                         * @member {Array.<string>} pageCategories
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.pageCategories = $util.emptyArray;
+    
+                        /**
+                         * ConversationalSearchRequest conversationId.
+                         * @member {string} conversationId
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.conversationId = "";
+    
+                        /**
+                         * ConversationalSearchRequest searchParams.
+                         * @member {google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams|null|undefined} searchParams
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.searchParams = null;
+    
+                        /**
+                         * ConversationalSearchRequest visitorId.
+                         * @member {string} visitorId
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.visitorId = "";
+    
+                        /**
+                         * ConversationalSearchRequest userInfo.
+                         * @member {google.cloud.retail.v2beta.IUserInfo|null|undefined} userInfo
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.userInfo = null;
+    
+                        /**
+                         * ConversationalSearchRequest conversationalFilteringSpec.
+                         * @member {google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec|null|undefined} conversationalFilteringSpec
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.conversationalFilteringSpec = null;
+    
+                        /**
+                         * ConversationalSearchRequest userLabels.
+                         * @member {Object.<string,string>} userLabels
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.userLabels = $util.emptyObject;
+    
+                        /**
+                         * ConversationalSearchRequest safetySettings.
+                         * @member {Array.<google.cloud.retail.v2beta.ISafetySetting>} safetySettings
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.safetySettings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ConversationalSearchRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchRequest=} [properties] Properties to set
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest} ConversationalSearchRequest instance
+                         */
+                        ConversationalSearchRequest.create = function create(properties) {
+                            return new ConversationalSearchRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationalSearchRequest message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchRequest} message ConversationalSearchRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationalSearchRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.placement != null && Object.hasOwnProperty.call(message, "placement"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.placement);
+                            if (message.branch != null && Object.hasOwnProperty.call(message, "branch"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.branch);
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.query);
+                            if (message.pageCategories != null && message.pageCategories.length)
+                                for (var i = 0; i < message.pageCategories.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageCategories[i]);
+                            if (message.conversationId != null && Object.hasOwnProperty.call(message, "conversationId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.conversationId);
+                            if (message.searchParams != null && Object.hasOwnProperty.call(message, "searchParams"))
+                                $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.encode(message.searchParams, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.userInfo != null && Object.hasOwnProperty.call(message, "userInfo"))
+                                $root.google.cloud.retail.v2beta.UserInfo.encode(message.userInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.conversationalFilteringSpec != null && Object.hasOwnProperty.call(message, "conversationalFilteringSpec"))
+                                $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.encode(message.conversationalFilteringSpec, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.visitorId != null && Object.hasOwnProperty.call(message, "visitorId"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.visitorId);
+                            if (message.userLabels != null && Object.hasOwnProperty.call(message, "userLabels"))
+                                for (var keys = Object.keys(message.userLabels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userLabels[keys[i]]).ldelim();
+                            if (message.safetySettings != null && message.safetySettings.length)
+                                for (var i = 0; i < message.safetySettings.length; ++i)
+                                    $root.google.cloud.retail.v2beta.SafetySetting.encode(message.safetySettings[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationalSearchRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchRequest} message ConversationalSearchRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationalSearchRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversationalSearchRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest} ConversationalSearchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationalSearchRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.placement = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.branch = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.query = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.pageCategories && message.pageCategories.length))
+                                            message.pageCategories = [];
+                                        message.pageCategories.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.conversationId = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.searchParams = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.visitorId = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.userInfo = $root.google.cloud.retail.v2beta.UserInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.conversationalFilteringSpec = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (message.userLabels === $util.emptyObject)
+                                            message.userLabels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.userLabels[key] = value;
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.safetySettings && message.safetySettings.length))
+                                            message.safetySettings = [];
+                                        message.safetySettings.push($root.google.cloud.retail.v2beta.SafetySetting.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversationalSearchRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest} ConversationalSearchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationalSearchRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversationalSearchRequest message.
+                         * @function verify
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversationalSearchRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.placement != null && message.hasOwnProperty("placement"))
+                                if (!$util.isString(message.placement))
+                                    return "placement: string expected";
+                            if (message.branch != null && message.hasOwnProperty("branch"))
+                                if (!$util.isString(message.branch))
+                                    return "branch: string expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.pageCategories != null && message.hasOwnProperty("pageCategories")) {
+                                if (!Array.isArray(message.pageCategories))
+                                    return "pageCategories: array expected";
+                                for (var i = 0; i < message.pageCategories.length; ++i)
+                                    if (!$util.isString(message.pageCategories[i]))
+                                        return "pageCategories: string[] expected";
+                            }
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                if (!$util.isString(message.conversationId))
+                                    return "conversationId: string expected";
+                            if (message.searchParams != null && message.hasOwnProperty("searchParams")) {
+                                var error = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.verify(message.searchParams);
+                                if (error)
+                                    return "searchParams." + error;
+                            }
+                            if (message.visitorId != null && message.hasOwnProperty("visitorId"))
+                                if (!$util.isString(message.visitorId))
+                                    return "visitorId: string expected";
+                            if (message.userInfo != null && message.hasOwnProperty("userInfo")) {
+                                var error = $root.google.cloud.retail.v2beta.UserInfo.verify(message.userInfo);
+                                if (error)
+                                    return "userInfo." + error;
+                            }
+                            if (message.conversationalFilteringSpec != null && message.hasOwnProperty("conversationalFilteringSpec")) {
+                                var error = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.verify(message.conversationalFilteringSpec);
+                                if (error)
+                                    return "conversationalFilteringSpec." + error;
+                            }
+                            if (message.userLabels != null && message.hasOwnProperty("userLabels")) {
+                                if (!$util.isObject(message.userLabels))
+                                    return "userLabels: object expected";
+                                var key = Object.keys(message.userLabels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.userLabels[key[i]]))
+                                        return "userLabels: string{k:string} expected";
+                            }
+                            if (message.safetySettings != null && message.hasOwnProperty("safetySettings")) {
+                                if (!Array.isArray(message.safetySettings))
+                                    return "safetySettings: array expected";
+                                for (var i = 0; i < message.safetySettings.length; ++i) {
+                                    var error = $root.google.cloud.retail.v2beta.SafetySetting.verify(message.safetySettings[i]);
+                                    if (error)
+                                        return "safetySettings." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversationalSearchRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest} ConversationalSearchRequest
+                         */
+                        ConversationalSearchRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchRequest)
+                                return object;
+                            var message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest();
+                            if (object.placement != null)
+                                message.placement = String(object.placement);
+                            if (object.branch != null)
+                                message.branch = String(object.branch);
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.pageCategories) {
+                                if (!Array.isArray(object.pageCategories))
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.pageCategories: array expected");
+                                message.pageCategories = [];
+                                for (var i = 0; i < object.pageCategories.length; ++i)
+                                    message.pageCategories[i] = String(object.pageCategories[i]);
+                            }
+                            if (object.conversationId != null)
+                                message.conversationId = String(object.conversationId);
+                            if (object.searchParams != null) {
+                                if (typeof object.searchParams !== "object")
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.searchParams: object expected");
+                                message.searchParams = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.fromObject(object.searchParams);
+                            }
+                            if (object.visitorId != null)
+                                message.visitorId = String(object.visitorId);
+                            if (object.userInfo != null) {
+                                if (typeof object.userInfo !== "object")
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.userInfo: object expected");
+                                message.userInfo = $root.google.cloud.retail.v2beta.UserInfo.fromObject(object.userInfo);
+                            }
+                            if (object.conversationalFilteringSpec != null) {
+                                if (typeof object.conversationalFilteringSpec !== "object")
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.conversationalFilteringSpec: object expected");
+                                message.conversationalFilteringSpec = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.fromObject(object.conversationalFilteringSpec);
+                            }
+                            if (object.userLabels) {
+                                if (typeof object.userLabels !== "object")
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.userLabels: object expected");
+                                message.userLabels = {};
+                                for (var keys = Object.keys(object.userLabels), i = 0; i < keys.length; ++i)
+                                    message.userLabels[keys[i]] = String(object.userLabels[keys[i]]);
+                            }
+                            if (object.safetySettings) {
+                                if (!Array.isArray(object.safetySettings))
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.safetySettings: array expected");
+                                message.safetySettings = [];
+                                for (var i = 0; i < object.safetySettings.length; ++i) {
+                                    if (typeof object.safetySettings[i] !== "object")
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.safetySettings: object expected");
+                                    message.safetySettings[i] = $root.google.cloud.retail.v2beta.SafetySetting.fromObject(object.safetySettings[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversationalSearchRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {google.cloud.retail.v2beta.ConversationalSearchRequest} message ConversationalSearchRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversationalSearchRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.pageCategories = [];
+                                object.safetySettings = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.userLabels = {};
+                            if (options.defaults) {
+                                object.placement = "";
+                                object.branch = "";
+                                object.query = "";
+                                object.conversationId = "";
+                                object.searchParams = null;
+                                object.userInfo = null;
+                                object.conversationalFilteringSpec = null;
+                                object.visitorId = "";
+                            }
+                            if (message.placement != null && message.hasOwnProperty("placement"))
+                                object.placement = message.placement;
+                            if (message.branch != null && message.hasOwnProperty("branch"))
+                                object.branch = message.branch;
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.pageCategories && message.pageCategories.length) {
+                                object.pageCategories = [];
+                                for (var j = 0; j < message.pageCategories.length; ++j)
+                                    object.pageCategories[j] = message.pageCategories[j];
+                            }
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                object.conversationId = message.conversationId;
+                            if (message.searchParams != null && message.hasOwnProperty("searchParams"))
+                                object.searchParams = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.toObject(message.searchParams, options);
+                            if (message.userInfo != null && message.hasOwnProperty("userInfo"))
+                                object.userInfo = $root.google.cloud.retail.v2beta.UserInfo.toObject(message.userInfo, options);
+                            if (message.conversationalFilteringSpec != null && message.hasOwnProperty("conversationalFilteringSpec"))
+                                object.conversationalFilteringSpec = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.toObject(message.conversationalFilteringSpec, options);
+                            if (message.visitorId != null && message.hasOwnProperty("visitorId"))
+                                object.visitorId = message.visitorId;
+                            var keys2;
+                            if (message.userLabels && (keys2 = Object.keys(message.userLabels)).length) {
+                                object.userLabels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.userLabels[keys2[j]] = message.userLabels[keys2[j]];
+                            }
+                            if (message.safetySettings && message.safetySettings.length) {
+                                object.safetySettings = [];
+                                for (var j = 0; j < message.safetySettings.length; ++j)
+                                    object.safetySettings[j] = $root.google.cloud.retail.v2beta.SafetySetting.toObject(message.safetySettings[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversationalSearchRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversationalSearchRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConversationalSearchRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConversationalSearchRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchRequest";
+                        };
+    
+                        ConversationalSearchRequest.SearchParams = (function() {
+    
+                            /**
+                             * Properties of a SearchParams.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                             * @interface ISearchParams
+                             * @property {string|null} [filter] SearchParams filter
+                             * @property {string|null} [canonicalFilter] SearchParams canonicalFilter
+                             * @property {string|null} [sortBy] SearchParams sortBy
+                             * @property {google.cloud.retail.v2beta.SearchRequest.IBoostSpec|null} [boostSpec] SearchParams boostSpec
+                             */
+    
+                            /**
+                             * Constructs a new SearchParams.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                             * @classdesc Represents a SearchParams.
+                             * @implements ISearchParams
+                             * @constructor
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams=} [properties] Properties to set
+                             */
+                            function SearchParams(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchParams filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @instance
+                             */
+                            SearchParams.prototype.filter = "";
+    
+                            /**
+                             * SearchParams canonicalFilter.
+                             * @member {string} canonicalFilter
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @instance
+                             */
+                            SearchParams.prototype.canonicalFilter = "";
+    
+                            /**
+                             * SearchParams sortBy.
+                             * @member {string} sortBy
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @instance
+                             */
+                            SearchParams.prototype.sortBy = "";
+    
+                            /**
+                             * SearchParams boostSpec.
+                             * @member {google.cloud.retail.v2beta.SearchRequest.IBoostSpec|null|undefined} boostSpec
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @instance
+                             */
+                            SearchParams.prototype.boostSpec = null;
+    
+                            /**
+                             * Creates a new SearchParams instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams=} [properties] Properties to set
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams} SearchParams instance
+                             */
+                            SearchParams.create = function create(properties) {
+                                return new SearchParams(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchParams message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams} message SearchParams message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchParams.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                                if (message.canonicalFilter != null && Object.hasOwnProperty.call(message, "canonicalFilter"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.canonicalFilter);
+                                if (message.sortBy != null && Object.hasOwnProperty.call(message, "sortBy"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.sortBy);
+                                if (message.boostSpec != null && Object.hasOwnProperty.call(message, "boostSpec"))
+                                    $root.google.cloud.retail.v2beta.SearchRequest.BoostSpec.encode(message.boostSpec, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchParams message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams} message SearchParams message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchParams.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchParams message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams} SearchParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchParams.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.canonicalFilter = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.sortBy = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.boostSpec = $root.google.cloud.retail.v2beta.SearchRequest.BoostSpec.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchParams message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams} SearchParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchParams.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchParams message.
+                             * @function verify
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchParams.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.canonicalFilter != null && message.hasOwnProperty("canonicalFilter"))
+                                    if (!$util.isString(message.canonicalFilter))
+                                        return "canonicalFilter: string expected";
+                                if (message.sortBy != null && message.hasOwnProperty("sortBy"))
+                                    if (!$util.isString(message.sortBy))
+                                        return "sortBy: string expected";
+                                if (message.boostSpec != null && message.hasOwnProperty("boostSpec")) {
+                                    var error = $root.google.cloud.retail.v2beta.SearchRequest.BoostSpec.verify(message.boostSpec);
+                                    if (error)
+                                        return "boostSpec." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchParams message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams} SearchParams
+                             */
+                            SearchParams.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams)
+                                    return object;
+                                var message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams();
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.canonicalFilter != null)
+                                    message.canonicalFilter = String(object.canonicalFilter);
+                                if (object.sortBy != null)
+                                    message.sortBy = String(object.sortBy);
+                                if (object.boostSpec != null) {
+                                    if (typeof object.boostSpec !== "object")
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.boostSpec: object expected");
+                                    message.boostSpec = $root.google.cloud.retail.v2beta.SearchRequest.BoostSpec.fromObject(object.boostSpec);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchParams message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams} message SearchParams
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchParams.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.filter = "";
+                                    object.canonicalFilter = "";
+                                    object.sortBy = "";
+                                    object.boostSpec = null;
+                                }
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.canonicalFilter != null && message.hasOwnProperty("canonicalFilter"))
+                                    object.canonicalFilter = message.canonicalFilter;
+                                if (message.sortBy != null && message.hasOwnProperty("sortBy"))
+                                    object.sortBy = message.sortBy;
+                                if (message.boostSpec != null && message.hasOwnProperty("boostSpec"))
+                                    object.boostSpec = $root.google.cloud.retail.v2beta.SearchRequest.BoostSpec.toObject(message.boostSpec, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchParams to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchParams.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SearchParams
+                             * @function getTypeUrl
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SearchParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams";
+                            };
+    
+                            return SearchParams;
+                        })();
+    
+                        ConversationalSearchRequest.UserAnswer = (function() {
+    
+                            /**
+                             * Properties of a UserAnswer.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                             * @interface IUserAnswer
+                             * @property {string|null} [textAnswer] UserAnswer textAnswer
+                             * @property {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer|null} [selectedAnswer] UserAnswer selectedAnswer
+                             */
+    
+                            /**
+                             * Constructs a new UserAnswer.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                             * @classdesc Represents a UserAnswer.
+                             * @implements IUserAnswer
+                             * @constructor
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer=} [properties] Properties to set
+                             */
+                            function UserAnswer(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserAnswer textAnswer.
+                             * @member {string|null|undefined} textAnswer
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @instance
+                             */
+                            UserAnswer.prototype.textAnswer = null;
+    
+                            /**
+                             * UserAnswer selectedAnswer.
+                             * @member {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer|null|undefined} selectedAnswer
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @instance
+                             */
+                            UserAnswer.prototype.selectedAnswer = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * UserAnswer type.
+                             * @member {"textAnswer"|"selectedAnswer"|undefined} type
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @instance
+                             */
+                            Object.defineProperty(UserAnswer.prototype, "type", {
+                                get: $util.oneOfGetter($oneOfFields = ["textAnswer", "selectedAnswer"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new UserAnswer instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer=} [properties] Properties to set
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer} UserAnswer instance
+                             */
+                            UserAnswer.create = function create(properties) {
+                                return new UserAnswer(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserAnswer message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer} message UserAnswer message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserAnswer.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.textAnswer != null && Object.hasOwnProperty.call(message, "textAnswer"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.textAnswer);
+                                if (message.selectedAnswer != null && Object.hasOwnProperty.call(message, "selectedAnswer"))
+                                    $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.encode(message.selectedAnswer, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer} message UserAnswer message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserAnswer.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserAnswer message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer} UserAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserAnswer.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.textAnswer = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.selectedAnswer = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserAnswer message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer} UserAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserAnswer.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserAnswer message.
+                             * @function verify
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserAnswer.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.textAnswer != null && message.hasOwnProperty("textAnswer")) {
+                                    properties.type = 1;
+                                    if (!$util.isString(message.textAnswer))
+                                        return "textAnswer: string expected";
+                                }
+                                if (message.selectedAnswer != null && message.hasOwnProperty("selectedAnswer")) {
+                                    if (properties.type === 1)
+                                        return "type: multiple values";
+                                    properties.type = 1;
+                                    {
+                                        var error = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.verify(message.selectedAnswer);
+                                        if (error)
+                                            return "selectedAnswer." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer} UserAnswer
+                             */
+                            UserAnswer.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer)
+                                    return object;
+                                var message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer();
+                                if (object.textAnswer != null)
+                                    message.textAnswer = String(object.textAnswer);
+                                if (object.selectedAnswer != null) {
+                                    if (typeof object.selectedAnswer !== "object")
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.selectedAnswer: object expected");
+                                    message.selectedAnswer = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.fromObject(object.selectedAnswer);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserAnswer message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer} message UserAnswer
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserAnswer.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.textAnswer != null && message.hasOwnProperty("textAnswer")) {
+                                    object.textAnswer = message.textAnswer;
+                                    if (options.oneofs)
+                                        object.type = "textAnswer";
+                                }
+                                if (message.selectedAnswer != null && message.hasOwnProperty("selectedAnswer")) {
+                                    object.selectedAnswer = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.toObject(message.selectedAnswer, options);
+                                    if (options.oneofs)
+                                        object.type = "selectedAnswer";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserAnswer to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserAnswer.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserAnswer
+                             * @function getTypeUrl
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserAnswer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer";
+                            };
+    
+                            UserAnswer.SelectedAnswer = (function() {
+    
+                                /**
+                                 * Properties of a SelectedAnswer.
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                                 * @interface ISelectedAnswer
+                                 * @property {google.cloud.retail.v2beta.IProductAttributeValue|null} [productAttributeValue] SelectedAnswer productAttributeValue
+                                 */
+    
+                                /**
+                                 * Constructs a new SelectedAnswer.
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer
+                                 * @classdesc Represents a SelectedAnswer.
+                                 * @implements ISelectedAnswer
+                                 * @constructor
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer=} [properties] Properties to set
+                                 */
+                                function SelectedAnswer(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SelectedAnswer productAttributeValue.
+                                 * @member {google.cloud.retail.v2beta.IProductAttributeValue|null|undefined} productAttributeValue
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @instance
+                                 */
+                                SelectedAnswer.prototype.productAttributeValue = null;
+    
+                                /**
+                                 * Creates a new SelectedAnswer instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer=} [properties] Properties to set
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer} SelectedAnswer instance
+                                 */
+                                SelectedAnswer.create = function create(properties) {
+                                    return new SelectedAnswer(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SelectedAnswer message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer} message SelectedAnswer message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SelectedAnswer.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.productAttributeValue != null && Object.hasOwnProperty.call(message, "productAttributeValue"))
+                                        $root.google.cloud.retail.v2beta.ProductAttributeValue.encode(message.productAttributeValue, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SelectedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer} message SelectedAnswer message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SelectedAnswer.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SelectedAnswer message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer} SelectedAnswer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SelectedAnswer.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SelectedAnswer message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer} SelectedAnswer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SelectedAnswer.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SelectedAnswer message.
+                                 * @function verify
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SelectedAnswer.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.productAttributeValue != null && message.hasOwnProperty("productAttributeValue")) {
+                                        var error = $root.google.cloud.retail.v2beta.ProductAttributeValue.verify(message.productAttributeValue);
+                                        if (error)
+                                            return "productAttributeValue." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SelectedAnswer message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer} SelectedAnswer
+                                 */
+                                SelectedAnswer.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer)
+                                        return object;
+                                    var message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer();
+                                    if (object.productAttributeValue != null) {
+                                        if (typeof object.productAttributeValue !== "object")
+                                            throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.productAttributeValue: object expected");
+                                        message.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.fromObject(object.productAttributeValue);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SelectedAnswer message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer} message SelectedAnswer
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SelectedAnswer.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.productAttributeValue = null;
+                                    if (message.productAttributeValue != null && message.hasOwnProperty("productAttributeValue"))
+                                        object.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.toObject(message.productAttributeValue, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SelectedAnswer to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SelectedAnswer.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SelectedAnswer
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SelectedAnswer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer";
+                                };
+    
+                                return SelectedAnswer;
+                            })();
+    
+                            return UserAnswer;
+                        })();
+    
+                        ConversationalSearchRequest.ConversationalFilteringSpec = (function() {
+    
+                            /**
+                             * Properties of a ConversationalFilteringSpec.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                             * @interface IConversationalFilteringSpec
+                             * @property {boolean|null} [enableConversationalFiltering] ConversationalFilteringSpec enableConversationalFiltering
+                             * @property {google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer|null} [userAnswer] ConversationalFilteringSpec userAnswer
+                             * @property {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode|null} [conversationalFilteringMode] ConversationalFilteringSpec conversationalFilteringMode
+                             */
+    
+                            /**
+                             * Constructs a new ConversationalFilteringSpec.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest
+                             * @classdesc Represents a ConversationalFilteringSpec.
+                             * @implements IConversationalFilteringSpec
+                             * @constructor
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec=} [properties] Properties to set
+                             */
+                            function ConversationalFilteringSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConversationalFilteringSpec enableConversationalFiltering.
+                             * @member {boolean} enableConversationalFiltering
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @instance
+                             */
+                            ConversationalFilteringSpec.prototype.enableConversationalFiltering = false;
+    
+                            /**
+                             * ConversationalFilteringSpec userAnswer.
+                             * @member {google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer|null|undefined} userAnswer
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @instance
+                             */
+                            ConversationalFilteringSpec.prototype.userAnswer = null;
+    
+                            /**
+                             * ConversationalFilteringSpec conversationalFilteringMode.
+                             * @member {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode} conversationalFilteringMode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @instance
+                             */
+                            ConversationalFilteringSpec.prototype.conversationalFilteringMode = 0;
+    
+                            /**
+                             * Creates a new ConversationalFilteringSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec=} [properties] Properties to set
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec} ConversationalFilteringSpec instance
+                             */
+                            ConversationalFilteringSpec.create = function create(properties) {
+                                return new ConversationalFilteringSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConversationalFilteringSpec message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec} message ConversationalFilteringSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConversationalFilteringSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableConversationalFiltering != null && Object.hasOwnProperty.call(message, "enableConversationalFiltering"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableConversationalFiltering);
+                                if (message.userAnswer != null && Object.hasOwnProperty.call(message, "userAnswer"))
+                                    $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.encode(message.userAnswer, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.conversationalFilteringMode != null && Object.hasOwnProperty.call(message, "conversationalFilteringMode"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.conversationalFilteringMode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConversationalFilteringSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec} message ConversationalFilteringSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConversationalFilteringSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConversationalFilteringSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec} ConversationalFilteringSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConversationalFilteringSpec.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enableConversationalFiltering = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.userAnswer = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.conversationalFilteringMode = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConversationalFilteringSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec} ConversationalFilteringSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConversationalFilteringSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConversationalFilteringSpec message.
+                             * @function verify
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConversationalFilteringSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableConversationalFiltering != null && message.hasOwnProperty("enableConversationalFiltering"))
+                                    if (typeof message.enableConversationalFiltering !== "boolean")
+                                        return "enableConversationalFiltering: boolean expected";
+                                if (message.userAnswer != null && message.hasOwnProperty("userAnswer")) {
+                                    var error = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.verify(message.userAnswer);
+                                    if (error)
+                                        return "userAnswer." + error;
+                                }
+                                if (message.conversationalFilteringMode != null && message.hasOwnProperty("conversationalFilteringMode"))
+                                    switch (message.conversationalFilteringMode) {
+                                    default:
+                                        return "conversationalFilteringMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConversationalFilteringSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec} ConversationalFilteringSpec
+                             */
+                            ConversationalFilteringSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec)
+                                    return object;
+                                var message = new $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec();
+                                if (object.enableConversationalFiltering != null)
+                                    message.enableConversationalFiltering = Boolean(object.enableConversationalFiltering);
+                                if (object.userAnswer != null) {
+                                    if (typeof object.userAnswer !== "object")
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.userAnswer: object expected");
+                                    message.userAnswer = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.fromObject(object.userAnswer);
+                                }
+                                switch (object.conversationalFilteringMode) {
+                                default:
+                                    if (typeof object.conversationalFilteringMode === "number") {
+                                        message.conversationalFilteringMode = object.conversationalFilteringMode;
+                                        break;
+                                    }
+                                    break;
+                                case "MODE_UNSPECIFIED":
+                                case 0:
+                                    message.conversationalFilteringMode = 0;
+                                    break;
+                                case "DISABLED":
+                                case 1:
+                                    message.conversationalFilteringMode = 1;
+                                    break;
+                                case "ENABLED":
+                                case 2:
+                                    message.conversationalFilteringMode = 2;
+                                    break;
+                                case "CONVERSATIONAL_FILTER_ONLY":
+                                case 3:
+                                    message.conversationalFilteringMode = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConversationalFilteringSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec} message ConversationalFilteringSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConversationalFilteringSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.enableConversationalFiltering = false;
+                                    object.userAnswer = null;
+                                    object.conversationalFilteringMode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                                }
+                                if (message.enableConversationalFiltering != null && message.hasOwnProperty("enableConversationalFiltering"))
+                                    object.enableConversationalFiltering = message.enableConversationalFiltering;
+                                if (message.userAnswer != null && message.hasOwnProperty("userAnswer"))
+                                    object.userAnswer = $root.google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.toObject(message.userAnswer, options);
+                                if (message.conversationalFilteringMode != null && message.hasOwnProperty("conversationalFilteringMode"))
+                                    object.conversationalFilteringMode = options.enums === String ? $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode[message.conversationalFilteringMode] === undefined ? message.conversationalFilteringMode : $root.google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode[message.conversationalFilteringMode] : message.conversationalFilteringMode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConversationalFilteringSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConversationalFilteringSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConversationalFilteringSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConversationalFilteringSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec";
+                            };
+    
+                            /**
+                             * Mode enum.
+                             * @name google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode
+                             * @enum {number}
+                             * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                             * @property {number} DISABLED=1 DISABLED value
+                             * @property {number} ENABLED=2 ENABLED value
+                             * @property {number} CONVERSATIONAL_FILTER_ONLY=3 CONVERSATIONAL_FILTER_ONLY value
+                             */
+                            ConversationalFilteringSpec.Mode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DISABLED"] = 1;
+                                values[valuesById[2] = "ENABLED"] = 2;
+                                values[valuesById[3] = "CONVERSATIONAL_FILTER_ONLY"] = 3;
+                                return values;
+                            })();
+    
+                            return ConversationalFilteringSpec;
+                        })();
+    
+                        return ConversationalSearchRequest;
+                    })();
+    
+                    v2beta.ConversationalSearchResponse = (function() {
+    
+                        /**
+                         * Properties of a ConversationalSearchResponse.
+                         * @memberof google.cloud.retail.v2beta
+                         * @interface IConversationalSearchResponse
+                         * @property {Array.<string>|null} [userQueryTypes] ConversationalSearchResponse userQueryTypes
+                         * @property {string|null} [conversationalTextResponse] ConversationalSearchResponse conversationalTextResponse
+                         * @property {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null} [followupQuestion] ConversationalSearchResponse followupQuestion
+                         * @property {string|null} [conversationId] ConversationalSearchResponse conversationId
+                         * @property {Array.<google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch>|null} [refinedSearch] ConversationalSearchResponse refinedSearch
+                         * @property {google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult|null} [conversationalFilteringResult] ConversationalSearchResponse conversationalFilteringResult
+                         * @property {google.cloud.retail.v2beta.ConversationalSearchResponse.State|null} [state] ConversationalSearchResponse state
+                         */
+    
+                        /**
+                         * Constructs a new ConversationalSearchResponse.
+                         * @memberof google.cloud.retail.v2beta
+                         * @classdesc Represents a ConversationalSearchResponse.
+                         * @implements IConversationalSearchResponse
+                         * @constructor
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchResponse=} [properties] Properties to set
+                         */
+                        function ConversationalSearchResponse(properties) {
+                            this.userQueryTypes = [];
+                            this.refinedSearch = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversationalSearchResponse userQueryTypes.
+                         * @member {Array.<string>} userQueryTypes
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.userQueryTypes = $util.emptyArray;
+    
+                        /**
+                         * ConversationalSearchResponse conversationalTextResponse.
+                         * @member {string} conversationalTextResponse
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.conversationalTextResponse = "";
+    
+                        /**
+                         * ConversationalSearchResponse followupQuestion.
+                         * @member {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null|undefined} followupQuestion
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.followupQuestion = null;
+    
+                        /**
+                         * ConversationalSearchResponse conversationId.
+                         * @member {string} conversationId
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.conversationId = "";
+    
+                        /**
+                         * ConversationalSearchResponse refinedSearch.
+                         * @member {Array.<google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch>} refinedSearch
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.refinedSearch = $util.emptyArray;
+    
+                        /**
+                         * ConversationalSearchResponse conversationalFilteringResult.
+                         * @member {google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult|null|undefined} conversationalFilteringResult
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.conversationalFilteringResult = null;
+    
+                        /**
+                         * ConversationalSearchResponse state.
+                         * @member {google.cloud.retail.v2beta.ConversationalSearchResponse.State} state
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.state = 0;
+    
+                        /**
+                         * Creates a new ConversationalSearchResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchResponse=} [properties] Properties to set
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse} ConversationalSearchResponse instance
+                         */
+                        ConversationalSearchResponse.create = function create(properties) {
+                            return new ConversationalSearchResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationalSearchResponse message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchResponse} message ConversationalSearchResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationalSearchResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.conversationalTextResponse != null && Object.hasOwnProperty.call(message, "conversationalTextResponse"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.conversationalTextResponse);
+                            if (message.followupQuestion != null && Object.hasOwnProperty.call(message, "followupQuestion"))
+                                $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.encode(message.followupQuestion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.conversationId != null && Object.hasOwnProperty.call(message, "conversationId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.conversationId);
+                            if (message.refinedSearch != null && message.refinedSearch.length)
+                                for (var i = 0; i < message.refinedSearch.length; ++i)
+                                    $root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.encode(message.refinedSearch[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.conversationalFilteringResult != null && Object.hasOwnProperty.call(message, "conversationalFilteringResult"))
+                                $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.encode(message.conversationalFilteringResult, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
+                            if (message.userQueryTypes != null && message.userQueryTypes.length)
+                                for (var i = 0; i < message.userQueryTypes.length; ++i)
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.userQueryTypes[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationalSearchResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {google.cloud.retail.v2beta.IConversationalSearchResponse} message ConversationalSearchResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationalSearchResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversationalSearchResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse} ConversationalSearchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationalSearchResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 10: {
+                                        if (!(message.userQueryTypes && message.userQueryTypes.length))
+                                            message.userQueryTypes = [];
+                                        message.userQueryTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.conversationalTextResponse = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.followupQuestion = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.conversationId = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.refinedSearch && message.refinedSearch.length))
+                                            message.refinedSearch = [];
+                                        message.refinedSearch.push($root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        message.conversationalFilteringResult = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversationalSearchResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse} ConversationalSearchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationalSearchResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversationalSearchResponse message.
+                         * @function verify
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversationalSearchResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.userQueryTypes != null && message.hasOwnProperty("userQueryTypes")) {
+                                if (!Array.isArray(message.userQueryTypes))
+                                    return "userQueryTypes: array expected";
+                                for (var i = 0; i < message.userQueryTypes.length; ++i)
+                                    if (!$util.isString(message.userQueryTypes[i]))
+                                        return "userQueryTypes: string[] expected";
+                            }
+                            if (message.conversationalTextResponse != null && message.hasOwnProperty("conversationalTextResponse"))
+                                if (!$util.isString(message.conversationalTextResponse))
+                                    return "conversationalTextResponse: string expected";
+                            if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion")) {
+                                var error = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.verify(message.followupQuestion);
+                                if (error)
+                                    return "followupQuestion." + error;
+                            }
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                if (!$util.isString(message.conversationId))
+                                    return "conversationId: string expected";
+                            if (message.refinedSearch != null && message.hasOwnProperty("refinedSearch")) {
+                                if (!Array.isArray(message.refinedSearch))
+                                    return "refinedSearch: array expected";
+                                for (var i = 0; i < message.refinedSearch.length; ++i) {
+                                    var error = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.verify(message.refinedSearch[i]);
+                                    if (error)
+                                        return "refinedSearch." + error;
+                                }
+                            }
+                            if (message.conversationalFilteringResult != null && message.hasOwnProperty("conversationalFilteringResult")) {
+                                var error = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.verify(message.conversationalFilteringResult);
+                                if (error)
+                                    return "conversationalFilteringResult." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversationalSearchResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse} ConversationalSearchResponse
+                         */
+                        ConversationalSearchResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchResponse)
+                                return object;
+                            var message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse();
+                            if (object.userQueryTypes) {
+                                if (!Array.isArray(object.userQueryTypes))
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.userQueryTypes: array expected");
+                                message.userQueryTypes = [];
+                                for (var i = 0; i < object.userQueryTypes.length; ++i)
+                                    message.userQueryTypes[i] = String(object.userQueryTypes[i]);
+                            }
+                            if (object.conversationalTextResponse != null)
+                                message.conversationalTextResponse = String(object.conversationalTextResponse);
+                            if (object.followupQuestion != null) {
+                                if (typeof object.followupQuestion !== "object")
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.followupQuestion: object expected");
+                                message.followupQuestion = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.fromObject(object.followupQuestion);
+                            }
+                            if (object.conversationId != null)
+                                message.conversationId = String(object.conversationId);
+                            if (object.refinedSearch) {
+                                if (!Array.isArray(object.refinedSearch))
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.refinedSearch: array expected");
+                                message.refinedSearch = [];
+                                for (var i = 0; i < object.refinedSearch.length; ++i) {
+                                    if (typeof object.refinedSearch[i] !== "object")
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.refinedSearch: object expected");
+                                    message.refinedSearch[i] = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.fromObject(object.refinedSearch[i]);
+                                }
+                            }
+                            if (object.conversationalFilteringResult != null) {
+                                if (typeof object.conversationalFilteringResult !== "object")
+                                    throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.conversationalFilteringResult: object expected");
+                                message.conversationalFilteringResult = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.fromObject(object.conversationalFilteringResult);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "STREAMING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversationalSearchResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {google.cloud.retail.v2beta.ConversationalSearchResponse} message ConversationalSearchResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversationalSearchResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.refinedSearch = [];
+                                object.userQueryTypes = [];
+                            }
+                            if (options.defaults) {
+                                object.conversationalTextResponse = "";
+                                object.followupQuestion = null;
+                                object.conversationId = "";
+                                object.conversationalFilteringResult = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.conversationalTextResponse != null && message.hasOwnProperty("conversationalTextResponse"))
+                                object.conversationalTextResponse = message.conversationalTextResponse;
+                            if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion"))
+                                object.followupQuestion = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.toObject(message.followupQuestion, options);
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                object.conversationId = message.conversationId;
+                            if (message.refinedSearch && message.refinedSearch.length) {
+                                object.refinedSearch = [];
+                                for (var j = 0; j < message.refinedSearch.length; ++j)
+                                    object.refinedSearch[j] = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.toObject(message.refinedSearch[j], options);
+                            }
+                            if (message.conversationalFilteringResult != null && message.hasOwnProperty("conversationalFilteringResult"))
+                                object.conversationalFilteringResult = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.toObject(message.conversationalFilteringResult, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.retail.v2beta.ConversationalSearchResponse.State[message.state] === undefined ? message.state : $root.google.cloud.retail.v2beta.ConversationalSearchResponse.State[message.state] : message.state;
+                            if (message.userQueryTypes && message.userQueryTypes.length) {
+                                object.userQueryTypes = [];
+                                for (var j = 0; j < message.userQueryTypes.length; ++j)
+                                    object.userQueryTypes[j] = message.userQueryTypes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversationalSearchResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversationalSearchResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConversationalSearchResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConversationalSearchResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchResponse";
+                        };
+    
+                        ConversationalSearchResponse.FollowupQuestion = (function() {
+    
+                            /**
+                             * Properties of a FollowupQuestion.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                             * @interface IFollowupQuestion
+                             * @property {string|null} [followupQuestion] FollowupQuestion followupQuestion
+                             * @property {Array.<google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer>|null} [suggestedAnswers] FollowupQuestion suggestedAnswers
+                             */
+    
+                            /**
+                             * Constructs a new FollowupQuestion.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                             * @classdesc Represents a FollowupQuestion.
+                             * @implements IFollowupQuestion
+                             * @constructor
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion=} [properties] Properties to set
+                             */
+                            function FollowupQuestion(properties) {
+                                this.suggestedAnswers = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FollowupQuestion followupQuestion.
+                             * @member {string} followupQuestion
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @instance
+                             */
+                            FollowupQuestion.prototype.followupQuestion = "";
+    
+                            /**
+                             * FollowupQuestion suggestedAnswers.
+                             * @member {Array.<google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer>} suggestedAnswers
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @instance
+                             */
+                            FollowupQuestion.prototype.suggestedAnswers = $util.emptyArray;
+    
+                            /**
+                             * Creates a new FollowupQuestion instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion=} [properties] Properties to set
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion} FollowupQuestion instance
+                             */
+                            FollowupQuestion.create = function create(properties) {
+                                return new FollowupQuestion(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FollowupQuestion message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion} message FollowupQuestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FollowupQuestion.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.followupQuestion != null && Object.hasOwnProperty.call(message, "followupQuestion"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.followupQuestion);
+                                if (message.suggestedAnswers != null && message.suggestedAnswers.length)
+                                    for (var i = 0; i < message.suggestedAnswers.length; ++i)
+                                        $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.encode(message.suggestedAnswers[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FollowupQuestion message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion} message FollowupQuestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FollowupQuestion.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FollowupQuestion message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion} FollowupQuestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FollowupQuestion.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.followupQuestion = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.suggestedAnswers && message.suggestedAnswers.length))
+                                                message.suggestedAnswers = [];
+                                            message.suggestedAnswers.push($root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FollowupQuestion message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion} FollowupQuestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FollowupQuestion.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FollowupQuestion message.
+                             * @function verify
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FollowupQuestion.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion"))
+                                    if (!$util.isString(message.followupQuestion))
+                                        return "followupQuestion: string expected";
+                                if (message.suggestedAnswers != null && message.hasOwnProperty("suggestedAnswers")) {
+                                    if (!Array.isArray(message.suggestedAnswers))
+                                        return "suggestedAnswers: array expected";
+                                    for (var i = 0; i < message.suggestedAnswers.length; ++i) {
+                                        var error = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.verify(message.suggestedAnswers[i]);
+                                        if (error)
+                                            return "suggestedAnswers." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FollowupQuestion message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion} FollowupQuestion
+                             */
+                            FollowupQuestion.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion)
+                                    return object;
+                                var message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion();
+                                if (object.followupQuestion != null)
+                                    message.followupQuestion = String(object.followupQuestion);
+                                if (object.suggestedAnswers) {
+                                    if (!Array.isArray(object.suggestedAnswers))
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.suggestedAnswers: array expected");
+                                    message.suggestedAnswers = [];
+                                    for (var i = 0; i < object.suggestedAnswers.length; ++i) {
+                                        if (typeof object.suggestedAnswers[i] !== "object")
+                                            throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.suggestedAnswers: object expected");
+                                        message.suggestedAnswers[i] = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.fromObject(object.suggestedAnswers[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FollowupQuestion message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion} message FollowupQuestion
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FollowupQuestion.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.suggestedAnswers = [];
+                                if (options.defaults)
+                                    object.followupQuestion = "";
+                                if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion"))
+                                    object.followupQuestion = message.followupQuestion;
+                                if (message.suggestedAnswers && message.suggestedAnswers.length) {
+                                    object.suggestedAnswers = [];
+                                    for (var j = 0; j < message.suggestedAnswers.length; ++j)
+                                        object.suggestedAnswers[j] = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.toObject(message.suggestedAnswers[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FollowupQuestion to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FollowupQuestion.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FollowupQuestion
+                             * @function getTypeUrl
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FollowupQuestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion";
+                            };
+    
+                            FollowupQuestion.SuggestedAnswer = (function() {
+    
+                                /**
+                                 * Properties of a SuggestedAnswer.
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                                 * @interface ISuggestedAnswer
+                                 * @property {google.cloud.retail.v2beta.IProductAttributeValue|null} [productAttributeValue] SuggestedAnswer productAttributeValue
+                                 */
+    
+                                /**
+                                 * Constructs a new SuggestedAnswer.
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion
+                                 * @classdesc Represents a SuggestedAnswer.
+                                 * @implements ISuggestedAnswer
+                                 * @constructor
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer=} [properties] Properties to set
+                                 */
+                                function SuggestedAnswer(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SuggestedAnswer productAttributeValue.
+                                 * @member {google.cloud.retail.v2beta.IProductAttributeValue|null|undefined} productAttributeValue
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @instance
+                                 */
+                                SuggestedAnswer.prototype.productAttributeValue = null;
+    
+                                /**
+                                 * Creates a new SuggestedAnswer instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer=} [properties] Properties to set
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer} SuggestedAnswer instance
+                                 */
+                                SuggestedAnswer.create = function create(properties) {
+                                    return new SuggestedAnswer(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SuggestedAnswer message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer} message SuggestedAnswer message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SuggestedAnswer.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.productAttributeValue != null && Object.hasOwnProperty.call(message, "productAttributeValue"))
+                                        $root.google.cloud.retail.v2beta.ProductAttributeValue.encode(message.productAttributeValue, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SuggestedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer} message SuggestedAnswer message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SuggestedAnswer.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SuggestedAnswer message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer} SuggestedAnswer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SuggestedAnswer.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SuggestedAnswer message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer} SuggestedAnswer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SuggestedAnswer.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SuggestedAnswer message.
+                                 * @function verify
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SuggestedAnswer.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.productAttributeValue != null && message.hasOwnProperty("productAttributeValue")) {
+                                        var error = $root.google.cloud.retail.v2beta.ProductAttributeValue.verify(message.productAttributeValue);
+                                        if (error)
+                                            return "productAttributeValue." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SuggestedAnswer message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer} SuggestedAnswer
+                                 */
+                                SuggestedAnswer.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer)
+                                        return object;
+                                    var message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer();
+                                    if (object.productAttributeValue != null) {
+                                        if (typeof object.productAttributeValue !== "object")
+                                            throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.productAttributeValue: object expected");
+                                        message.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.fromObject(object.productAttributeValue);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SuggestedAnswer message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer} message SuggestedAnswer
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SuggestedAnswer.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.productAttributeValue = null;
+                                    if (message.productAttributeValue != null && message.hasOwnProperty("productAttributeValue"))
+                                        object.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.toObject(message.productAttributeValue, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SuggestedAnswer to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SuggestedAnswer.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SuggestedAnswer
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SuggestedAnswer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer";
+                                };
+    
+                                return SuggestedAnswer;
+                            })();
+    
+                            return FollowupQuestion;
+                        })();
+    
+                        ConversationalSearchResponse.RefinedSearch = (function() {
+    
+                            /**
+                             * Properties of a RefinedSearch.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                             * @interface IRefinedSearch
+                             * @property {string|null} [query] RefinedSearch query
+                             */
+    
+                            /**
+                             * Constructs a new RefinedSearch.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                             * @classdesc Represents a RefinedSearch.
+                             * @implements IRefinedSearch
+                             * @constructor
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch=} [properties] Properties to set
+                             */
+                            function RefinedSearch(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RefinedSearch query.
+                             * @member {string} query
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @instance
+                             */
+                            RefinedSearch.prototype.query = "";
+    
+                            /**
+                             * Creates a new RefinedSearch instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch=} [properties] Properties to set
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch} RefinedSearch instance
+                             */
+                            RefinedSearch.create = function create(properties) {
+                                return new RefinedSearch(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RefinedSearch message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch} message RefinedSearch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RefinedSearch.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RefinedSearch message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch} message RefinedSearch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RefinedSearch.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RefinedSearch message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch} RefinedSearch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RefinedSearch.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.query = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RefinedSearch message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch} RefinedSearch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RefinedSearch.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RefinedSearch message.
+                             * @function verify
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RefinedSearch.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RefinedSearch message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch} RefinedSearch
+                             */
+                            RefinedSearch.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch)
+                                    return object;
+                                var message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RefinedSearch message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch} message RefinedSearch
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RefinedSearch.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.query = "";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RefinedSearch to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RefinedSearch.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RefinedSearch
+                             * @function getTypeUrl
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RefinedSearch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch";
+                            };
+    
+                            return RefinedSearch;
+                        })();
+    
+                        ConversationalSearchResponse.ConversationalFilteringResult = (function() {
+    
+                            /**
+                             * Properties of a ConversationalFilteringResult.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                             * @interface IConversationalFilteringResult
+                             * @property {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null} [followupQuestion] ConversationalFilteringResult followupQuestion
+                             * @property {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter|null} [additionalFilter] ConversationalFilteringResult additionalFilter
+                             */
+    
+                            /**
+                             * Constructs a new ConversationalFilteringResult.
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse
+                             * @classdesc Represents a ConversationalFilteringResult.
+                             * @implements IConversationalFilteringResult
+                             * @constructor
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult=} [properties] Properties to set
+                             */
+                            function ConversationalFilteringResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConversationalFilteringResult followupQuestion.
+                             * @member {google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null|undefined} followupQuestion
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @instance
+                             */
+                            ConversationalFilteringResult.prototype.followupQuestion = null;
+    
+                            /**
+                             * ConversationalFilteringResult additionalFilter.
+                             * @member {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter|null|undefined} additionalFilter
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @instance
+                             */
+                            ConversationalFilteringResult.prototype.additionalFilter = null;
+    
+                            /**
+                             * Creates a new ConversationalFilteringResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult=} [properties] Properties to set
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult} ConversationalFilteringResult instance
+                             */
+                            ConversationalFilteringResult.create = function create(properties) {
+                                return new ConversationalFilteringResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConversationalFilteringResult message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult} message ConversationalFilteringResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConversationalFilteringResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.followupQuestion != null && Object.hasOwnProperty.call(message, "followupQuestion"))
+                                    $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.encode(message.followupQuestion, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.additionalFilter != null && Object.hasOwnProperty.call(message, "additionalFilter"))
+                                    $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.encode(message.additionalFilter, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConversationalFilteringResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult} message ConversationalFilteringResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConversationalFilteringResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConversationalFilteringResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult} ConversationalFilteringResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConversationalFilteringResult.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.followupQuestion = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.additionalFilter = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConversationalFilteringResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult} ConversationalFilteringResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConversationalFilteringResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConversationalFilteringResult message.
+                             * @function verify
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConversationalFilteringResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion")) {
+                                    var error = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.verify(message.followupQuestion);
+                                    if (error)
+                                        return "followupQuestion." + error;
+                                }
+                                if (message.additionalFilter != null && message.hasOwnProperty("additionalFilter")) {
+                                    var error = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.verify(message.additionalFilter);
+                                    if (error)
+                                        return "additionalFilter." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConversationalFilteringResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult} ConversationalFilteringResult
+                             */
+                            ConversationalFilteringResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult)
+                                    return object;
+                                var message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult();
+                                if (object.followupQuestion != null) {
+                                    if (typeof object.followupQuestion !== "object")
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.followupQuestion: object expected");
+                                    message.followupQuestion = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.fromObject(object.followupQuestion);
+                                }
+                                if (object.additionalFilter != null) {
+                                    if (typeof object.additionalFilter !== "object")
+                                        throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.additionalFilter: object expected");
+                                    message.additionalFilter = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.fromObject(object.additionalFilter);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConversationalFilteringResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult} message ConversationalFilteringResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConversationalFilteringResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.followupQuestion = null;
+                                    object.additionalFilter = null;
+                                }
+                                if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion"))
+                                    object.followupQuestion = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.toObject(message.followupQuestion, options);
+                                if (message.additionalFilter != null && message.hasOwnProperty("additionalFilter"))
+                                    object.additionalFilter = $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.toObject(message.additionalFilter, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConversationalFilteringResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConversationalFilteringResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConversationalFilteringResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConversationalFilteringResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult";
+                            };
+    
+                            ConversationalFilteringResult.AdditionalFilter = (function() {
+    
+                                /**
+                                 * Properties of an AdditionalFilter.
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                                 * @interface IAdditionalFilter
+                                 * @property {google.cloud.retail.v2beta.IProductAttributeValue|null} [productAttributeValue] AdditionalFilter productAttributeValue
+                                 */
+    
+                                /**
+                                 * Constructs a new AdditionalFilter.
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult
+                                 * @classdesc Represents an AdditionalFilter.
+                                 * @implements IAdditionalFilter
+                                 * @constructor
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter=} [properties] Properties to set
+                                 */
+                                function AdditionalFilter(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AdditionalFilter productAttributeValue.
+                                 * @member {google.cloud.retail.v2beta.IProductAttributeValue|null|undefined} productAttributeValue
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @instance
+                                 */
+                                AdditionalFilter.prototype.productAttributeValue = null;
+    
+                                /**
+                                 * Creates a new AdditionalFilter instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter=} [properties] Properties to set
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter} AdditionalFilter instance
+                                 */
+                                AdditionalFilter.create = function create(properties) {
+                                    return new AdditionalFilter(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AdditionalFilter message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter} message AdditionalFilter message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AdditionalFilter.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.productAttributeValue != null && Object.hasOwnProperty.call(message, "productAttributeValue"))
+                                        $root.google.cloud.retail.v2beta.ProductAttributeValue.encode(message.productAttributeValue, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AdditionalFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter} message AdditionalFilter message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AdditionalFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AdditionalFilter message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter} AdditionalFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AdditionalFilter.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AdditionalFilter message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter} AdditionalFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AdditionalFilter.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AdditionalFilter message.
+                                 * @function verify
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AdditionalFilter.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.productAttributeValue != null && message.hasOwnProperty("productAttributeValue")) {
+                                        var error = $root.google.cloud.retail.v2beta.ProductAttributeValue.verify(message.productAttributeValue);
+                                        if (error)
+                                            return "productAttributeValue." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AdditionalFilter message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter} AdditionalFilter
+                                 */
+                                AdditionalFilter.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter)
+                                        return object;
+                                    var message = new $root.google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter();
+                                    if (object.productAttributeValue != null) {
+                                        if (typeof object.productAttributeValue !== "object")
+                                            throw TypeError(".google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.productAttributeValue: object expected");
+                                        message.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.fromObject(object.productAttributeValue);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AdditionalFilter message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter} message AdditionalFilter
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AdditionalFilter.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.productAttributeValue = null;
+                                    if (message.productAttributeValue != null && message.hasOwnProperty("productAttributeValue"))
+                                        object.productAttributeValue = $root.google.cloud.retail.v2beta.ProductAttributeValue.toObject(message.productAttributeValue, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AdditionalFilter to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AdditionalFilter.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AdditionalFilter
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AdditionalFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter";
+                                };
+    
+                                return AdditionalFilter;
+                            })();
+    
+                            return ConversationalFilteringResult;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.retail.v2beta.ConversationalSearchResponse.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STREAMING=1 STREAMING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         */
+                        ConversationalSearchResponse.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STREAMING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            return values;
+                        })();
+    
+                        return ConversationalSearchResponse;
+                    })();
+    
+                    /**
+                     * HarmCategory enum.
+                     * @name google.cloud.retail.v2beta.HarmCategory
+                     * @enum {number}
+                     * @property {number} HARM_CATEGORY_UNSPECIFIED=0 HARM_CATEGORY_UNSPECIFIED value
+                     * @property {number} HARM_CATEGORY_HATE_SPEECH=1 HARM_CATEGORY_HATE_SPEECH value
+                     * @property {number} HARM_CATEGORY_DANGEROUS_CONTENT=2 HARM_CATEGORY_DANGEROUS_CONTENT value
+                     * @property {number} HARM_CATEGORY_HARASSMENT=3 HARM_CATEGORY_HARASSMENT value
+                     * @property {number} HARM_CATEGORY_SEXUALLY_EXPLICIT=4 HARM_CATEGORY_SEXUALLY_EXPLICIT value
+                     * @property {number} HARM_CATEGORY_CIVIC_INTEGRITY=5 HARM_CATEGORY_CIVIC_INTEGRITY value
+                     */
+                    v2beta.HarmCategory = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "HARM_CATEGORY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HARM_CATEGORY_HATE_SPEECH"] = 1;
+                        values[valuesById[2] = "HARM_CATEGORY_DANGEROUS_CONTENT"] = 2;
+                        values[valuesById[3] = "HARM_CATEGORY_HARASSMENT"] = 3;
+                        values[valuesById[4] = "HARM_CATEGORY_SEXUALLY_EXPLICIT"] = 4;
+                        values[valuesById[5] = "HARM_CATEGORY_CIVIC_INTEGRITY"] = 5;
+                        return values;
+                    })();
+    
+                    v2beta.SafetySetting = (function() {
+    
+                        /**
+                         * Properties of a SafetySetting.
+                         * @memberof google.cloud.retail.v2beta
+                         * @interface ISafetySetting
+                         * @property {google.cloud.retail.v2beta.HarmCategory|null} [category] SafetySetting category
+                         * @property {google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold|null} [threshold] SafetySetting threshold
+                         * @property {google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod|null} [method] SafetySetting method
+                         */
+    
+                        /**
+                         * Constructs a new SafetySetting.
+                         * @memberof google.cloud.retail.v2beta
+                         * @classdesc Represents a SafetySetting.
+                         * @implements ISafetySetting
+                         * @constructor
+                         * @param {google.cloud.retail.v2beta.ISafetySetting=} [properties] Properties to set
+                         */
+                        function SafetySetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SafetySetting category.
+                         * @member {google.cloud.retail.v2beta.HarmCategory} category
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.category = 0;
+    
+                        /**
+                         * SafetySetting threshold.
+                         * @member {google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold} threshold
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.threshold = 0;
+    
+                        /**
+                         * SafetySetting method.
+                         * @member {google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod} method
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.method = 0;
+    
+                        /**
+                         * Creates a new SafetySetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2beta.ISafetySetting=} [properties] Properties to set
+                         * @returns {google.cloud.retail.v2beta.SafetySetting} SafetySetting instance
+                         */
+                        SafetySetting.create = function create(properties) {
+                            return new SafetySetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.retail.v2beta.SafetySetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2beta.ISafetySetting} message SafetySetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetySetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.category);
+                            if (message.threshold != null && Object.hasOwnProperty.call(message, "threshold"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.threshold);
+                            if (message.method != null && Object.hasOwnProperty.call(message, "method"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.method);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.SafetySetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2beta.ISafetySetting} message SafetySetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetySetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.retail.v2beta.SafetySetting} SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetySetting.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2beta.SafetySetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.threshold = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.method = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.retail.v2beta.SafetySetting} SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetySetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SafetySetting message.
+                         * @function verify
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SafetySetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                switch (message.threshold) {
+                                default:
+                                    return "threshold: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                switch (message.method) {
+                                default:
+                                    return "method: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.retail.v2beta.SafetySetting} SafetySetting
+                         */
+                        SafetySetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.retail.v2beta.SafetySetting)
+                                return object;
+                            var message = new $root.google.cloud.retail.v2beta.SafetySetting();
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "HARM_CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "HARM_CATEGORY_HATE_SPEECH":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "HARM_CATEGORY_DANGEROUS_CONTENT":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            case "HARM_CATEGORY_HARASSMENT":
+                            case 3:
+                                message.category = 3;
+                                break;
+                            case "HARM_CATEGORY_SEXUALLY_EXPLICIT":
+                            case 4:
+                                message.category = 4;
+                                break;
+                            case "HARM_CATEGORY_CIVIC_INTEGRITY":
+                            case 5:
+                                message.category = 5;
+                                break;
+                            }
+                            switch (object.threshold) {
+                            default:
+                                if (typeof object.threshold === "number") {
+                                    message.threshold = object.threshold;
+                                    break;
+                                }
+                                break;
+                            case "HARM_BLOCK_THRESHOLD_UNSPECIFIED":
+                            case 0:
+                                message.threshold = 0;
+                                break;
+                            case "BLOCK_LOW_AND_ABOVE":
+                            case 1:
+                                message.threshold = 1;
+                                break;
+                            case "BLOCK_MEDIUM_AND_ABOVE":
+                            case 2:
+                                message.threshold = 2;
+                                break;
+                            case "BLOCK_ONLY_HIGH":
+                            case 3:
+                                message.threshold = 3;
+                                break;
+                            case "BLOCK_NONE":
+                            case 4:
+                                message.threshold = 4;
+                                break;
+                            case "OFF":
+                            case 5:
+                                message.threshold = 5;
+                                break;
+                            }
+                            switch (object.method) {
+                            default:
+                                if (typeof object.method === "number") {
+                                    message.method = object.method;
+                                    break;
+                                }
+                                break;
+                            case "HARM_BLOCK_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.method = 0;
+                                break;
+                            case "SEVERITY":
+                            case 1:
+                                message.method = 1;
+                                break;
+                            case "PROBABILITY":
+                            case 2:
+                                message.method = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2beta.SafetySetting} message SafetySetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SafetySetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.category = options.enums === String ? "HARM_CATEGORY_UNSPECIFIED" : 0;
+                                object.threshold = options.enums === String ? "HARM_BLOCK_THRESHOLD_UNSPECIFIED" : 0;
+                                object.method = options.enums === String ? "HARM_BLOCK_METHOD_UNSPECIFIED" : 0;
+                            }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.cloud.retail.v2beta.HarmCategory[message.category] === undefined ? message.category : $root.google.cloud.retail.v2beta.HarmCategory[message.category] : message.category;
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                object.threshold = options.enums === String ? $root.google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold[message.threshold] === undefined ? message.threshold : $root.google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold[message.threshold] : message.threshold;
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                object.method = options.enums === String ? $root.google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod[message.method] === undefined ? message.method : $root.google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod[message.method] : message.method;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SafetySetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SafetySetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SafetySetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.retail.v2beta.SafetySetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SafetySetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.retail.v2beta.SafetySetting";
+                        };
+    
+                        /**
+                         * HarmBlockThreshold enum.
+                         * @name google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold
+                         * @enum {number}
+                         * @property {number} HARM_BLOCK_THRESHOLD_UNSPECIFIED=0 HARM_BLOCK_THRESHOLD_UNSPECIFIED value
+                         * @property {number} BLOCK_LOW_AND_ABOVE=1 BLOCK_LOW_AND_ABOVE value
+                         * @property {number} BLOCK_MEDIUM_AND_ABOVE=2 BLOCK_MEDIUM_AND_ABOVE value
+                         * @property {number} BLOCK_ONLY_HIGH=3 BLOCK_ONLY_HIGH value
+                         * @property {number} BLOCK_NONE=4 BLOCK_NONE value
+                         * @property {number} OFF=5 OFF value
+                         */
+                        SafetySetting.HarmBlockThreshold = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_BLOCK_THRESHOLD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BLOCK_LOW_AND_ABOVE"] = 1;
+                            values[valuesById[2] = "BLOCK_MEDIUM_AND_ABOVE"] = 2;
+                            values[valuesById[3] = "BLOCK_ONLY_HIGH"] = 3;
+                            values[valuesById[4] = "BLOCK_NONE"] = 4;
+                            values[valuesById[5] = "OFF"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * HarmBlockMethod enum.
+                         * @name google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod
+                         * @enum {number}
+                         * @property {number} HARM_BLOCK_METHOD_UNSPECIFIED=0 HARM_BLOCK_METHOD_UNSPECIFIED value
+                         * @property {number} SEVERITY=1 SEVERITY value
+                         * @property {number} PROBABILITY=2 PROBABILITY value
+                         */
+                        SafetySetting.HarmBlockMethod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_BLOCK_METHOD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SEVERITY"] = 1;
+                            values[valuesById[2] = "PROBABILITY"] = 2;
+                            return values;
+                        })();
+    
+                        return SafetySetting;
+                    })();
+    
                     v2beta.GenerativeQuestionsFeatureConfig = (function() {
     
                         /**

@@ -17010,6 +17010,375 @@
                         }
                       }
                     },
+                    "ConversationalSearchService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ConversationalSearch": {
+                          "requestType": "ConversationalSearchRequest",
+                          "responseType": "ConversationalSearchResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v2beta/{placement=projects/*/locations/*/catalogs/*/placements/*}:conversationalSearch",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2beta/{placement=projects/*/locations/*/catalogs/*/servingConfigs/*}:conversationalSearch",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta/{placement=projects/*/locations/*/catalogs/*/placements/*}:conversationalSearch",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2beta/{placement=projects/*/locations/*/catalogs/*/servingConfigs/*}:conversationalSearch",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ConversationalSearchRequest": {
+                      "fields": {
+                        "placement": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "branch": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Branch"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageCategories": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversationId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "searchParams": {
+                          "type": "SearchParams",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "visitorId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "userInfo": {
+                          "type": "UserInfo",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversationalFilteringSpec": {
+                          "type": "ConversationalFilteringSpec",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "safetySettings": {
+                          "rule": "repeated",
+                          "type": "SafetySetting",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SearchParams": {
+                          "fields": {
+                            "filter": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "canonicalFilter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sortBy": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "boostSpec": {
+                              "type": "SearchRequest.BoostSpec",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "UserAnswer": {
+                          "oneofs": {
+                            "type": {
+                              "oneof": [
+                                "textAnswer",
+                                "selectedAnswer"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "textAnswer": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "selectedAnswer": {
+                              "type": "SelectedAnswer",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SelectedAnswer": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ConversationalFilteringSpec": {
+                          "fields": {
+                            "enableConversationalFiltering": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "userAnswer": {
+                              "type": "UserAnswer",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "conversationalFilteringMode": {
+                              "type": "Mode",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "DISABLED": 1,
+                                "ENABLED": 2,
+                                "CONVERSATIONAL_FILTER_ONLY": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ConversationalSearchResponse": {
+                      "fields": {
+                        "userQueryTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10
+                        },
+                        "conversationalTextResponse": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "followupQuestion": {
+                          "type": "FollowupQuestion",
+                          "id": 3
+                        },
+                        "conversationId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "refinedSearch": {
+                          "rule": "repeated",
+                          "type": "RefinedSearch",
+                          "id": 6
+                        },
+                        "conversationalFilteringResult": {
+                          "type": "ConversationalFilteringResult",
+                          "id": 7
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FollowupQuestion": {
+                          "fields": {
+                            "followupQuestion": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "suggestedAnswers": {
+                              "rule": "repeated",
+                              "type": "SuggestedAnswer",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SuggestedAnswer": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "RefinedSearch": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ConversationalFilteringResult": {
+                          "fields": {
+                            "followupQuestion": {
+                              "type": "FollowupQuestion",
+                              "id": 1
+                            },
+                            "additionalFilter": {
+                              "type": "AdditionalFilter",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "AdditionalFilter": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STREAMING": 1,
+                            "SUCCEEDED": 2
+                          }
+                        }
+                      }
+                    },
+                    "HarmCategory": {
+                      "values": {
+                        "HARM_CATEGORY_UNSPECIFIED": 0,
+                        "HARM_CATEGORY_HATE_SPEECH": 1,
+                        "HARM_CATEGORY_DANGEROUS_CONTENT": 2,
+                        "HARM_CATEGORY_HARASSMENT": 3,
+                        "HARM_CATEGORY_SEXUALLY_EXPLICIT": 4,
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": 5
+                      }
+                    },
+                    "SafetySetting": {
+                      "fields": {
+                        "category": {
+                          "type": "HarmCategory",
+                          "id": 1
+                        },
+                        "threshold": {
+                          "type": "HarmBlockThreshold",
+                          "id": 2
+                        },
+                        "method": {
+                          "type": "HarmBlockMethod",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HarmBlockThreshold": {
+                          "values": {
+                            "HARM_BLOCK_THRESHOLD_UNSPECIFIED": 0,
+                            "BLOCK_LOW_AND_ABOVE": 1,
+                            "BLOCK_MEDIUM_AND_ABOVE": 2,
+                            "BLOCK_ONLY_HIGH": 3,
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
+                          }
+                        },
+                        "HarmBlockMethod": {
+                          "values": {
+                            "HARM_BLOCK_METHOD_UNSPECIFIED": 0,
+                            "SEVERITY": 1,
+                            "PROBABILITY": 2
+                          }
+                        }
+                      }
+                    },
                     "GenerativeQuestionsFeatureConfig": {
                       "fields": {
                         "catalog": {
