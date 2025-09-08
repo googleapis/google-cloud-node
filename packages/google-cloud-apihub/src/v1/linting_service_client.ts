@@ -541,7 +541,7 @@ export class LintingServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'style_guide.name': request.styleGuide!.name ?? '',
+      'style_guide.name': request.styleGuide!.name?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateStyleGuide request %j', request);
