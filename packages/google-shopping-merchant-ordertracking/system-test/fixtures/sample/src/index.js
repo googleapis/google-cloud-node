@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const ordertracking = require('@google-shopping/ordertracking');
+const ordertracking = require('@google-cloud/ordertracking');
 
 function main() {
   const orderTrackingSignalsServiceClient = new ordertracking.OrderTrackingSignalsServiceClient();
