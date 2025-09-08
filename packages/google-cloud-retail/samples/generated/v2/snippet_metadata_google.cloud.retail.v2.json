@@ -892,6 +892,86 @@
             }
         },
         {
+            "regionTag": "retail_v2_generated_ConversationalSearchService_ConversationalSearch_async",
+            "title": "AnalyticsService conversationalSearch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs a conversational search. This feature is only available for users who have Conversational Search enabled.",
+            "canonical": true,
+            "file": "conversational_search_service.conversational_search.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 143,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ConversationalSearch",
+                "fullName": "google.cloud.retail.v2.ConversationalSearchService.ConversationalSearch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "placement",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "branch",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_categories",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "conversation_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "search_params",
+                        "type": ".google.cloud.retail.v2.ConversationalSearchRequest.SearchParams"
+                    },
+                    {
+                        "name": "visitor_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_info",
+                        "type": ".google.cloud.retail.v2.UserInfo"
+                    },
+                    {
+                        "name": "conversational_filtering_spec",
+                        "type": ".google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "safety_settings",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2.ConversationalSearchResponse",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.retail.v2.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "ConversationalSearch",
+                    "fullName": "google.cloud.retail.v2.ConversationalSearchService.ConversationalSearch",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.retail.v2.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "retail_v2_generated_GenerativeQuestionService_UpdateGenerativeQuestionsFeatureConfig_async",
             "title": "AnalyticsService updateGenerativeQuestionsFeatureConfig Sample",
             "origin": "API_DEFINITION",
