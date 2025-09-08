@@ -25,6 +25,7 @@ function main() {
   const catalogServiceClient = new retail.CatalogServiceClient();
   const completionServiceClient = new retail.CompletionServiceClient();
   const controlServiceClient = new retail.ControlServiceClient();
+  const conversationalSearchServiceClient = new retail.ConversationalSearchServiceClient();
   const generativeQuestionServiceClient = new retail.GenerativeQuestionServiceClient();
   const modelServiceClient = new retail.ModelServiceClient();
   const predictionServiceClient = new retail.PredictionServiceClient();

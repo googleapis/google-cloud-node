@@ -31,6 +31,7 @@
   * [Control_service.get_control](#control_service.get_control)
   * [Control_service.list_controls](#control_service.list_controls)
   * [Control_service.update_control](#control_service.update_control)
+  * [Conversational_search_service.conversational_search](#conversational_search_service.conversational_search)
   * [Generative_question_service.batch_update_generative_question_configs](#generative_question_service.batch_update_generative_question_configs)
   * [Generative_question_service.get_generative_questions_feature_config](#generative_question_service.get_generative_questions_feature_config)
   * [Generative_question_service.list_generative_question_configs](#generative_question_service.list_generative_question_configs)
@@ -165,6 +166,7 @@
   * [Control_service.get_control](#control_service.get_control)
   * [Control_service.list_controls](#control_service.list_controls)
   * [Control_service.update_control](#control_service.update_control)
+  * [Conversational_search_service.conversational_search](#conversational_search_service.conversational_search)
   * [Generative_question_service.batch_update_generative_question_configs](#generative_question_service.batch_update_generative_question_configs)
   * [Generative_question_service.get_generative_questions_feature_config](#generative_question_service.get_generative_questions_feature_config)
   * [Generative_question_service.list_generative_question_configs](#generative_question_service.list_generative_question_configs)
@@ -541,6 +543,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2/control_service.update_control.js`
+
+
+-----
+
+
+
+
+### Conversational_search_service.conversational_search
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/conversational_search_service.conversational_search.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/conversational_search_service.conversational_search.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/conversational_search_service.conversational_search.js`
 
 
 -----
@@ -2819,6 +2838,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2beta/control_service.update_control.js`
+
+
+-----
+
+
+
+
+### Conversational_search_service.conversational_search
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/conversational_search_service.conversational_search.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/conversational_search_service.conversational_search.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/conversational_search_service.conversational_search.js`
 
 
 -----

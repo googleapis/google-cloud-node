@@ -260974,6 +260974,9 @@ export namespace google {
                         /** EndpointConfig dedicatedEndpointDisabled */
                         dedicatedEndpointDisabled?: (boolean|null);
 
+                        /** EndpointConfig privateServiceConnectConfig */
+                        privateServiceConnectConfig?: (google.cloud.aiplatform.v1beta1.IPrivateServiceConnectConfig|null);
+
                         /** EndpointConfig endpointUserId */
                         endpointUserId?: (string|null);
                     }
@@ -260995,6 +260998,9 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointDisabled. */
                         public dedicatedEndpointDisabled: boolean;
+
+                        /** EndpointConfig privateServiceConnectConfig. */
+                        public privateServiceConnectConfig?: (google.cloud.aiplatform.v1beta1.IPrivateServiceConnectConfig|null);
 
                         /** EndpointConfig endpointUserId. */
                         public endpointUserId: string;
