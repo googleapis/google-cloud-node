@@ -5,6 +5,118 @@
   "protoPackage": "google.cloud.networksecurity.v1",
   "libraryPackage": "@google-cloud/networksecurity",
   "services": {
+    "AddressGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkSecurity": {
       "clients": {
         "grpc": {
@@ -175,6 +287,118 @@
                 "listClientTlsPolicies",
                 "listClientTlsPoliciesStream",
                 "listClientTlsPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OrganizationAddressGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrganizationAddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrganizationAddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
               ]
             }
           }

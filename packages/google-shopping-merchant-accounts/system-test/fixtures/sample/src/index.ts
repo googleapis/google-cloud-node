@@ -16,10 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AccountIssueServiceClient, AccountsServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-shopping/accounts';
+import {AccountIssueServiceClient, AccountRelationshipsServiceClient, AccountServicesServiceClient, AccountsServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, DeveloperRegistrationServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-shopping/accounts';
 
 // check that the client class type name can be used
 function doStuffWithAccountIssueServiceClient(client: AccountIssueServiceClient) {
+  client.close();
+}
+function doStuffWithAccountRelationshipsServiceClient(client: AccountRelationshipsServiceClient) {
+  client.close();
+}
+function doStuffWithAccountServicesServiceClient(client: AccountServicesServiceClient) {
   client.close();
 }
 function doStuffWithAccountsServiceClient(client: AccountsServiceClient) {
@@ -38,6 +44,9 @@ function doStuffWithBusinessInfoServiceClient(client: BusinessInfoServiceClient)
   client.close();
 }
 function doStuffWithCheckoutSettingsServiceClient(client: CheckoutSettingsServiceClient) {
+  client.close();
+}
+function doStuffWithDeveloperRegistrationServiceClient(client: DeveloperRegistrationServiceClient) {
   client.close();
 }
 function doStuffWithEmailPreferencesServiceClient(client: EmailPreferencesServiceClient) {
@@ -82,6 +91,12 @@ function main() {
   const accountIssueServiceClient = new AccountIssueServiceClient();
   doStuffWithAccountIssueServiceClient(accountIssueServiceClient);
   // check that the client instance can be created
+  const accountRelationshipsServiceClient = new AccountRelationshipsServiceClient();
+  doStuffWithAccountRelationshipsServiceClient(accountRelationshipsServiceClient);
+  // check that the client instance can be created
+  const accountServicesServiceClient = new AccountServicesServiceClient();
+  doStuffWithAccountServicesServiceClient(accountServicesServiceClient);
+  // check that the client instance can be created
   const accountsServiceClient = new AccountsServiceClient();
   doStuffWithAccountsServiceClient(accountsServiceClient);
   // check that the client instance can be created
@@ -99,6 +114,9 @@ function main() {
   // check that the client instance can be created
   const checkoutSettingsServiceClient = new CheckoutSettingsServiceClient();
   doStuffWithCheckoutSettingsServiceClient(checkoutSettingsServiceClient);
+  // check that the client instance can be created
+  const developerRegistrationServiceClient = new DeveloperRegistrationServiceClient();
+  doStuffWithDeveloperRegistrationServiceClient(developerRegistrationServiceClient);
   // check that the client instance can be created
   const emailPreferencesServiceClient = new EmailPreferencesServiceClient();
   doStuffWithEmailPreferencesServiceClient(emailPreferencesServiceClient);

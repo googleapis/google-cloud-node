@@ -242,7 +242,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -254,6 +254,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "failover_mode",
+                        "type": ".google.cloud.bigquery.reservation.v1.FailoverMode"
                     }
                 ],
                 "resultType": ".google.cloud.bigquery.reservation.v1.Reservation",

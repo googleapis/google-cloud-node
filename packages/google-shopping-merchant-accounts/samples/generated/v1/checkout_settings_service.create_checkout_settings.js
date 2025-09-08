@@ -39,7 +39,7 @@ function main(parent, checkoutSettings) {
   // const checkoutSettings = {}
 
   // Imports the Accounts library
-  const {CheckoutSettingsServiceClient} = require('@google-cloud/accounts').v1;
+  const {CheckoutSettingsServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new CheckoutSettingsServiceClient();

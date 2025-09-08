@@ -48,7 +48,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Accounts library
-  const {UserServiceClient} = require('@google-cloud/accounts').v1;
+  const {UserServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new UserServiceClient();

@@ -26,6 +26,1899 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Represents an AddressGroupService */
+                class AddressGroupService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new AddressGroupService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new AddressGroupService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AddressGroupService;
+
+                    /**
+                     * Calls ListAddressGroups.
+                     * @param request ListAddressGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAddressGroupsResponse
+                     */
+                    public listAddressGroups(request: google.cloud.networksecurity.v1.IListAddressGroupsRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.ListAddressGroupsCallback): void;
+
+                    /**
+                     * Calls ListAddressGroups.
+                     * @param request ListAddressGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAddressGroups(request: google.cloud.networksecurity.v1.IListAddressGroupsRequest): Promise<google.cloud.networksecurity.v1.ListAddressGroupsResponse>;
+
+                    /**
+                     * Calls GetAddressGroup.
+                     * @param request GetAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AddressGroup
+                     */
+                    public getAddressGroup(request: google.cloud.networksecurity.v1.IGetAddressGroupRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.GetAddressGroupCallback): void;
+
+                    /**
+                     * Calls GetAddressGroup.
+                     * @param request GetAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAddressGroup(request: google.cloud.networksecurity.v1.IGetAddressGroupRequest): Promise<google.cloud.networksecurity.v1.AddressGroup>;
+
+                    /**
+                     * Calls CreateAddressGroup.
+                     * @param request CreateAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAddressGroup(request: google.cloud.networksecurity.v1.ICreateAddressGroupRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.CreateAddressGroupCallback): void;
+
+                    /**
+                     * Calls CreateAddressGroup.
+                     * @param request CreateAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAddressGroup(request: google.cloud.networksecurity.v1.ICreateAddressGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAddressGroup.
+                     * @param request UpdateAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAddressGroup(request: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.UpdateAddressGroupCallback): void;
+
+                    /**
+                     * Calls UpdateAddressGroup.
+                     * @param request UpdateAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAddressGroup(request: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls AddAddressGroupItems.
+                     * @param request AddAddressGroupItemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public addAddressGroupItems(request: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.AddAddressGroupItemsCallback): void;
+
+                    /**
+                     * Calls AddAddressGroupItems.
+                     * @param request AddAddressGroupItemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addAddressGroupItems(request: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RemoveAddressGroupItems.
+                     * @param request RemoveAddressGroupItemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public removeAddressGroupItems(request: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.RemoveAddressGroupItemsCallback): void;
+
+                    /**
+                     * Calls RemoveAddressGroupItems.
+                     * @param request RemoveAddressGroupItemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeAddressGroupItems(request: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CloneAddressGroupItems.
+                     * @param request CloneAddressGroupItemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public cloneAddressGroupItems(request: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.CloneAddressGroupItemsCallback): void;
+
+                    /**
+                     * Calls CloneAddressGroupItems.
+                     * @param request CloneAddressGroupItemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cloneAddressGroupItems(request: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAddressGroup.
+                     * @param request DeleteAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAddressGroup(request: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.DeleteAddressGroupCallback): void;
+
+                    /**
+                     * Calls DeleteAddressGroup.
+                     * @param request DeleteAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAddressGroup(request: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListAddressGroupReferences.
+                     * @param request ListAddressGroupReferencesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAddressGroupReferencesResponse
+                     */
+                    public listAddressGroupReferences(request: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest, callback: google.cloud.networksecurity.v1.AddressGroupService.ListAddressGroupReferencesCallback): void;
+
+                    /**
+                     * Calls ListAddressGroupReferences.
+                     * @param request ListAddressGroupReferencesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAddressGroupReferences(request: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest): Promise<google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse>;
+                }
+
+                namespace AddressGroupService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|listAddressGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListAddressGroupsResponse
+                     */
+                    type ListAddressGroupsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListAddressGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|getAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] AddressGroup
+                     */
+                    type GetAddressGroupCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.AddressGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|createAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAddressGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|updateAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAddressGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|addAddressGroupItems}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type AddAddressGroupItemsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|removeAddressGroupItems}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RemoveAddressGroupItemsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|cloneAddressGroupItems}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CloneAddressGroupItemsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|deleteAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAddressGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.AddressGroupService|listAddressGroupReferences}.
+                     * @param error Error, if any
+                     * @param [response] ListAddressGroupReferencesResponse
+                     */
+                    type ListAddressGroupReferencesCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse) => void;
+                }
+
+                /** Represents an OrganizationAddressGroupService */
+                class OrganizationAddressGroupService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new OrganizationAddressGroupService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new OrganizationAddressGroupService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OrganizationAddressGroupService;
+
+                    /**
+                     * Calls ListAddressGroups.
+                     * @param request ListAddressGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAddressGroupsResponse
+                     */
+                    public listAddressGroups(request: google.cloud.networksecurity.v1.IListAddressGroupsRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.ListAddressGroupsCallback): void;
+
+                    /**
+                     * Calls ListAddressGroups.
+                     * @param request ListAddressGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAddressGroups(request: google.cloud.networksecurity.v1.IListAddressGroupsRequest): Promise<google.cloud.networksecurity.v1.ListAddressGroupsResponse>;
+
+                    /**
+                     * Calls GetAddressGroup.
+                     * @param request GetAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AddressGroup
+                     */
+                    public getAddressGroup(request: google.cloud.networksecurity.v1.IGetAddressGroupRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.GetAddressGroupCallback): void;
+
+                    /**
+                     * Calls GetAddressGroup.
+                     * @param request GetAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAddressGroup(request: google.cloud.networksecurity.v1.IGetAddressGroupRequest): Promise<google.cloud.networksecurity.v1.AddressGroup>;
+
+                    /**
+                     * Calls CreateAddressGroup.
+                     * @param request CreateAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAddressGroup(request: google.cloud.networksecurity.v1.ICreateAddressGroupRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.CreateAddressGroupCallback): void;
+
+                    /**
+                     * Calls CreateAddressGroup.
+                     * @param request CreateAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAddressGroup(request: google.cloud.networksecurity.v1.ICreateAddressGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAddressGroup.
+                     * @param request UpdateAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAddressGroup(request: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.UpdateAddressGroupCallback): void;
+
+                    /**
+                     * Calls UpdateAddressGroup.
+                     * @param request UpdateAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAddressGroup(request: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls AddAddressGroupItems.
+                     * @param request AddAddressGroupItemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public addAddressGroupItems(request: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.AddAddressGroupItemsCallback): void;
+
+                    /**
+                     * Calls AddAddressGroupItems.
+                     * @param request AddAddressGroupItemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addAddressGroupItems(request: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RemoveAddressGroupItems.
+                     * @param request RemoveAddressGroupItemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public removeAddressGroupItems(request: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.RemoveAddressGroupItemsCallback): void;
+
+                    /**
+                     * Calls RemoveAddressGroupItems.
+                     * @param request RemoveAddressGroupItemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeAddressGroupItems(request: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CloneAddressGroupItems.
+                     * @param request CloneAddressGroupItemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public cloneAddressGroupItems(request: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.CloneAddressGroupItemsCallback): void;
+
+                    /**
+                     * Calls CloneAddressGroupItems.
+                     * @param request CloneAddressGroupItemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cloneAddressGroupItems(request: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAddressGroup.
+                     * @param request DeleteAddressGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAddressGroup(request: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.DeleteAddressGroupCallback): void;
+
+                    /**
+                     * Calls DeleteAddressGroup.
+                     * @param request DeleteAddressGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAddressGroup(request: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListAddressGroupReferences.
+                     * @param request ListAddressGroupReferencesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAddressGroupReferencesResponse
+                     */
+                    public listAddressGroupReferences(request: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest, callback: google.cloud.networksecurity.v1.OrganizationAddressGroupService.ListAddressGroupReferencesCallback): void;
+
+                    /**
+                     * Calls ListAddressGroupReferences.
+                     * @param request ListAddressGroupReferencesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAddressGroupReferences(request: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest): Promise<google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse>;
+                }
+
+                namespace OrganizationAddressGroupService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|listAddressGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListAddressGroupsResponse
+                     */
+                    type ListAddressGroupsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListAddressGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|getAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] AddressGroup
+                     */
+                    type GetAddressGroupCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.AddressGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|createAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAddressGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|updateAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAddressGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|addAddressGroupItems}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type AddAddressGroupItemsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|removeAddressGroupItems}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RemoveAddressGroupItemsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|cloneAddressGroupItems}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CloneAddressGroupItemsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|deleteAddressGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAddressGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.OrganizationAddressGroupService|listAddressGroupReferences}.
+                     * @param error Error, if any
+                     * @param [response] ListAddressGroupReferencesResponse
+                     */
+                    type ListAddressGroupReferencesCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse) => void;
+                }
+
+                /** Properties of an AddressGroup. */
+                interface IAddressGroup {
+
+                    /** AddressGroup name */
+                    name?: (string|null);
+
+                    /** AddressGroup description */
+                    description?: (string|null);
+
+                    /** AddressGroup createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AddressGroup updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AddressGroup labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AddressGroup type */
+                    type?: (google.cloud.networksecurity.v1.AddressGroup.Type|keyof typeof google.cloud.networksecurity.v1.AddressGroup.Type|null);
+
+                    /** AddressGroup items */
+                    items?: (string[]|null);
+
+                    /** AddressGroup capacity */
+                    capacity?: (number|null);
+
+                    /** AddressGroup selfLink */
+                    selfLink?: (string|null);
+
+                    /** AddressGroup purpose */
+                    purpose?: (google.cloud.networksecurity.v1.AddressGroup.Purpose[]|null);
+                }
+
+                /** Represents an AddressGroup. */
+                class AddressGroup implements IAddressGroup {
+
+                    /**
+                     * Constructs a new AddressGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IAddressGroup);
+
+                    /** AddressGroup name. */
+                    public name: string;
+
+                    /** AddressGroup description. */
+                    public description: string;
+
+                    /** AddressGroup createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AddressGroup updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AddressGroup labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AddressGroup type. */
+                    public type: (google.cloud.networksecurity.v1.AddressGroup.Type|keyof typeof google.cloud.networksecurity.v1.AddressGroup.Type);
+
+                    /** AddressGroup items. */
+                    public items: string[];
+
+                    /** AddressGroup capacity. */
+                    public capacity: number;
+
+                    /** AddressGroup selfLink. */
+                    public selfLink: string;
+
+                    /** AddressGroup purpose. */
+                    public purpose: google.cloud.networksecurity.v1.AddressGroup.Purpose[];
+
+                    /**
+                     * Creates a new AddressGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddressGroup instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IAddressGroup): google.cloud.networksecurity.v1.AddressGroup;
+
+                    /**
+                     * Encodes the specified AddressGroup message. Does not implicitly {@link google.cloud.networksecurity.v1.AddressGroup.verify|verify} messages.
+                     * @param message AddressGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IAddressGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddressGroup message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AddressGroup.verify|verify} messages.
+                     * @param message AddressGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IAddressGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddressGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddressGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.AddressGroup;
+
+                    /**
+                     * Decodes an AddressGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddressGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.AddressGroup;
+
+                    /**
+                     * Verifies an AddressGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddressGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddressGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.AddressGroup;
+
+                    /**
+                     * Creates a plain object from an AddressGroup message. Also converts values to other types if specified.
+                     * @param message AddressGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.AddressGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddressGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddressGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AddressGroup {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        IPV4 = 1,
+                        IPV6 = 2
+                    }
+
+                    /** Purpose enum. */
+                    enum Purpose {
+                        PURPOSE_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        CLOUD_ARMOR = 2
+                    }
+                }
+
+                /** Properties of a ListAddressGroupsRequest. */
+                interface IListAddressGroupsRequest {
+
+                    /** ListAddressGroupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAddressGroupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAddressGroupsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAddressGroupsRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
+                }
+
+                /** Represents a ListAddressGroupsRequest. */
+                class ListAddressGroupsRequest implements IListAddressGroupsRequest {
+
+                    /**
+                     * Constructs a new ListAddressGroupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListAddressGroupsRequest);
+
+                    /** ListAddressGroupsRequest parent. */
+                    public parent: string;
+
+                    /** ListAddressGroupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAddressGroupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAddressGroupsRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
+
+                    /**
+                     * Creates a new ListAddressGroupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAddressGroupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListAddressGroupsRequest): google.cloud.networksecurity.v1.ListAddressGroupsRequest;
+
+                    /**
+                     * Encodes the specified ListAddressGroupsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsRequest.verify|verify} messages.
+                     * @param message ListAddressGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListAddressGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAddressGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsRequest.verify|verify} messages.
+                     * @param message ListAddressGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListAddressGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAddressGroupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAddressGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListAddressGroupsRequest;
+
+                    /**
+                     * Decodes a ListAddressGroupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAddressGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListAddressGroupsRequest;
+
+                    /**
+                     * Verifies a ListAddressGroupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAddressGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAddressGroupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListAddressGroupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAddressGroupsRequest message. Also converts values to other types if specified.
+                     * @param message ListAddressGroupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListAddressGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAddressGroupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAddressGroupsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAddressGroupsResponse. */
+                interface IListAddressGroupsResponse {
+
+                    /** ListAddressGroupsResponse addressGroups */
+                    addressGroups?: (google.cloud.networksecurity.v1.IAddressGroup[]|null);
+
+                    /** ListAddressGroupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAddressGroupsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAddressGroupsResponse. */
+                class ListAddressGroupsResponse implements IListAddressGroupsResponse {
+
+                    /**
+                     * Constructs a new ListAddressGroupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListAddressGroupsResponse);
+
+                    /** ListAddressGroupsResponse addressGroups. */
+                    public addressGroups: google.cloud.networksecurity.v1.IAddressGroup[];
+
+                    /** ListAddressGroupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAddressGroupsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAddressGroupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAddressGroupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListAddressGroupsResponse): google.cloud.networksecurity.v1.ListAddressGroupsResponse;
+
+                    /**
+                     * Encodes the specified ListAddressGroupsResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsResponse.verify|verify} messages.
+                     * @param message ListAddressGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListAddressGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAddressGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupsResponse.verify|verify} messages.
+                     * @param message ListAddressGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListAddressGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAddressGroupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAddressGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListAddressGroupsResponse;
+
+                    /**
+                     * Decodes a ListAddressGroupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAddressGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListAddressGroupsResponse;
+
+                    /**
+                     * Verifies a ListAddressGroupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAddressGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAddressGroupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListAddressGroupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAddressGroupsResponse message. Also converts values to other types if specified.
+                     * @param message ListAddressGroupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListAddressGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAddressGroupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAddressGroupsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAddressGroupRequest. */
+                interface IGetAddressGroupRequest {
+
+                    /** GetAddressGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAddressGroupRequest. */
+                class GetAddressGroupRequest implements IGetAddressGroupRequest {
+
+                    /**
+                     * Constructs a new GetAddressGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IGetAddressGroupRequest);
+
+                    /** GetAddressGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAddressGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAddressGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IGetAddressGroupRequest): google.cloud.networksecurity.v1.GetAddressGroupRequest;
+
+                    /**
+                     * Encodes the specified GetAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetAddressGroupRequest.verify|verify} messages.
+                     * @param message GetAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IGetAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetAddressGroupRequest.verify|verify} messages.
+                     * @param message GetAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IGetAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAddressGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.GetAddressGroupRequest;
+
+                    /**
+                     * Decodes a GetAddressGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.GetAddressGroupRequest;
+
+                    /**
+                     * Verifies a GetAddressGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAddressGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.GetAddressGroupRequest;
+
+                    /**
+                     * Creates a plain object from a GetAddressGroupRequest message. Also converts values to other types if specified.
+                     * @param message GetAddressGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.GetAddressGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAddressGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAddressGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAddressGroupRequest. */
+                interface ICreateAddressGroupRequest {
+
+                    /** CreateAddressGroupRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAddressGroupRequest addressGroupId */
+                    addressGroupId?: (string|null);
+
+                    /** CreateAddressGroupRequest addressGroup */
+                    addressGroup?: (google.cloud.networksecurity.v1.IAddressGroup|null);
+
+                    /** CreateAddressGroupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateAddressGroupRequest. */
+                class CreateAddressGroupRequest implements ICreateAddressGroupRequest {
+
+                    /**
+                     * Constructs a new CreateAddressGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICreateAddressGroupRequest);
+
+                    /** CreateAddressGroupRequest parent. */
+                    public parent: string;
+
+                    /** CreateAddressGroupRequest addressGroupId. */
+                    public addressGroupId: string;
+
+                    /** CreateAddressGroupRequest addressGroup. */
+                    public addressGroup?: (google.cloud.networksecurity.v1.IAddressGroup|null);
+
+                    /** CreateAddressGroupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateAddressGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAddressGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICreateAddressGroupRequest): google.cloud.networksecurity.v1.CreateAddressGroupRequest;
+
+                    /**
+                     * Encodes the specified CreateAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAddressGroupRequest.verify|verify} messages.
+                     * @param message CreateAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICreateAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAddressGroupRequest.verify|verify} messages.
+                     * @param message CreateAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICreateAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAddressGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CreateAddressGroupRequest;
+
+                    /**
+                     * Decodes a CreateAddressGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CreateAddressGroupRequest;
+
+                    /**
+                     * Verifies a CreateAddressGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAddressGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CreateAddressGroupRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAddressGroupRequest message. Also converts values to other types if specified.
+                     * @param message CreateAddressGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CreateAddressGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAddressGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAddressGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAddressGroupRequest. */
+                interface IUpdateAddressGroupRequest {
+
+                    /** UpdateAddressGroupRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAddressGroupRequest addressGroup */
+                    addressGroup?: (google.cloud.networksecurity.v1.IAddressGroup|null);
+
+                    /** UpdateAddressGroupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateAddressGroupRequest. */
+                class UpdateAddressGroupRequest implements IUpdateAddressGroupRequest {
+
+                    /**
+                     * Constructs a new UpdateAddressGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest);
+
+                    /** UpdateAddressGroupRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAddressGroupRequest addressGroup. */
+                    public addressGroup?: (google.cloud.networksecurity.v1.IAddressGroup|null);
+
+                    /** UpdateAddressGroupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateAddressGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAddressGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest): google.cloud.networksecurity.v1.UpdateAddressGroupRequest;
+
+                    /**
+                     * Encodes the specified UpdateAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAddressGroupRequest.verify|verify} messages.
+                     * @param message UpdateAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAddressGroupRequest.verify|verify} messages.
+                     * @param message UpdateAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IUpdateAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAddressGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.UpdateAddressGroupRequest;
+
+                    /**
+                     * Decodes an UpdateAddressGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.UpdateAddressGroupRequest;
+
+                    /**
+                     * Verifies an UpdateAddressGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAddressGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.UpdateAddressGroupRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAddressGroupRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAddressGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.UpdateAddressGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAddressGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAddressGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAddressGroupRequest. */
+                interface IDeleteAddressGroupRequest {
+
+                    /** DeleteAddressGroupRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAddressGroupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteAddressGroupRequest. */
+                class DeleteAddressGroupRequest implements IDeleteAddressGroupRequest {
+
+                    /**
+                     * Constructs a new DeleteAddressGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest);
+
+                    /** DeleteAddressGroupRequest name. */
+                    public name: string;
+
+                    /** DeleteAddressGroupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteAddressGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAddressGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest): google.cloud.networksecurity.v1.DeleteAddressGroupRequest;
+
+                    /**
+                     * Encodes the specified DeleteAddressGroupRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAddressGroupRequest.verify|verify} messages.
+                     * @param message DeleteAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAddressGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAddressGroupRequest.verify|verify} messages.
+                     * @param message DeleteAddressGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IDeleteAddressGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAddressGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.DeleteAddressGroupRequest;
+
+                    /**
+                     * Decodes a DeleteAddressGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAddressGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.DeleteAddressGroupRequest;
+
+                    /**
+                     * Verifies a DeleteAddressGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAddressGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAddressGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.DeleteAddressGroupRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAddressGroupRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAddressGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.DeleteAddressGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAddressGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAddressGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AddAddressGroupItemsRequest. */
+                interface IAddAddressGroupItemsRequest {
+
+                    /** AddAddressGroupItemsRequest addressGroup */
+                    addressGroup?: (string|null);
+
+                    /** AddAddressGroupItemsRequest items */
+                    items?: (string[]|null);
+
+                    /** AddAddressGroupItemsRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an AddAddressGroupItemsRequest. */
+                class AddAddressGroupItemsRequest implements IAddAddressGroupItemsRequest {
+
+                    /**
+                     * Constructs a new AddAddressGroupItemsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest);
+
+                    /** AddAddressGroupItemsRequest addressGroup. */
+                    public addressGroup: string;
+
+                    /** AddAddressGroupItemsRequest items. */
+                    public items: string[];
+
+                    /** AddAddressGroupItemsRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new AddAddressGroupItemsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddAddressGroupItemsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest): google.cloud.networksecurity.v1.AddAddressGroupItemsRequest;
+
+                    /**
+                     * Encodes the specified AddAddressGroupItemsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.AddAddressGroupItemsRequest.verify|verify} messages.
+                     * @param message AddAddressGroupItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddAddressGroupItemsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AddAddressGroupItemsRequest.verify|verify} messages.
+                     * @param message AddAddressGroupItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IAddAddressGroupItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddAddressGroupItemsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddAddressGroupItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.AddAddressGroupItemsRequest;
+
+                    /**
+                     * Decodes an AddAddressGroupItemsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddAddressGroupItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.AddAddressGroupItemsRequest;
+
+                    /**
+                     * Verifies an AddAddressGroupItemsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddAddressGroupItemsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddAddressGroupItemsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.AddAddressGroupItemsRequest;
+
+                    /**
+                     * Creates a plain object from an AddAddressGroupItemsRequest message. Also converts values to other types if specified.
+                     * @param message AddAddressGroupItemsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.AddAddressGroupItemsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddAddressGroupItemsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddAddressGroupItemsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveAddressGroupItemsRequest. */
+                interface IRemoveAddressGroupItemsRequest {
+
+                    /** RemoveAddressGroupItemsRequest addressGroup */
+                    addressGroup?: (string|null);
+
+                    /** RemoveAddressGroupItemsRequest items */
+                    items?: (string[]|null);
+
+                    /** RemoveAddressGroupItemsRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RemoveAddressGroupItemsRequest. */
+                class RemoveAddressGroupItemsRequest implements IRemoveAddressGroupItemsRequest {
+
+                    /**
+                     * Constructs a new RemoveAddressGroupItemsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest);
+
+                    /** RemoveAddressGroupItemsRequest addressGroup. */
+                    public addressGroup: string;
+
+                    /** RemoveAddressGroupItemsRequest items. */
+                    public items: string[];
+
+                    /** RemoveAddressGroupItemsRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RemoveAddressGroupItemsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveAddressGroupItemsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest): google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest;
+
+                    /**
+                     * Encodes the specified RemoveAddressGroupItemsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest.verify|verify} messages.
+                     * @param message RemoveAddressGroupItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveAddressGroupItemsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest.verify|verify} messages.
+                     * @param message RemoveAddressGroupItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IRemoveAddressGroupItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveAddressGroupItemsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveAddressGroupItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest;
+
+                    /**
+                     * Decodes a RemoveAddressGroupItemsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveAddressGroupItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest;
+
+                    /**
+                     * Verifies a RemoveAddressGroupItemsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveAddressGroupItemsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveAddressGroupItemsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveAddressGroupItemsRequest message. Also converts values to other types if specified.
+                     * @param message RemoveAddressGroupItemsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.RemoveAddressGroupItemsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveAddressGroupItemsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveAddressGroupItemsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloneAddressGroupItemsRequest. */
+                interface ICloneAddressGroupItemsRequest {
+
+                    /** CloneAddressGroupItemsRequest addressGroup */
+                    addressGroup?: (string|null);
+
+                    /** CloneAddressGroupItemsRequest sourceAddressGroup */
+                    sourceAddressGroup?: (string|null);
+
+                    /** CloneAddressGroupItemsRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CloneAddressGroupItemsRequest. */
+                class CloneAddressGroupItemsRequest implements ICloneAddressGroupItemsRequest {
+
+                    /**
+                     * Constructs a new CloneAddressGroupItemsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest);
+
+                    /** CloneAddressGroupItemsRequest addressGroup. */
+                    public addressGroup: string;
+
+                    /** CloneAddressGroupItemsRequest sourceAddressGroup. */
+                    public sourceAddressGroup: string;
+
+                    /** CloneAddressGroupItemsRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CloneAddressGroupItemsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloneAddressGroupItemsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest): google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest;
+
+                    /**
+                     * Encodes the specified CloneAddressGroupItemsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest.verify|verify} messages.
+                     * @param message CloneAddressGroupItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloneAddressGroupItemsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest.verify|verify} messages.
+                     * @param message CloneAddressGroupItemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICloneAddressGroupItemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloneAddressGroupItemsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloneAddressGroupItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest;
+
+                    /**
+                     * Decodes a CloneAddressGroupItemsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloneAddressGroupItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest;
+
+                    /**
+                     * Verifies a CloneAddressGroupItemsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloneAddressGroupItemsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloneAddressGroupItemsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest;
+
+                    /**
+                     * Creates a plain object from a CloneAddressGroupItemsRequest message. Also converts values to other types if specified.
+                     * @param message CloneAddressGroupItemsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CloneAddressGroupItemsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloneAddressGroupItemsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloneAddressGroupItemsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAddressGroupReferencesRequest. */
+                interface IListAddressGroupReferencesRequest {
+
+                    /** ListAddressGroupReferencesRequest addressGroup */
+                    addressGroup?: (string|null);
+
+                    /** ListAddressGroupReferencesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAddressGroupReferencesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAddressGroupReferencesRequest. */
+                class ListAddressGroupReferencesRequest implements IListAddressGroupReferencesRequest {
+
+                    /**
+                     * Constructs a new ListAddressGroupReferencesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest);
+
+                    /** ListAddressGroupReferencesRequest addressGroup. */
+                    public addressGroup: string;
+
+                    /** ListAddressGroupReferencesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAddressGroupReferencesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAddressGroupReferencesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAddressGroupReferencesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest): google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest;
+
+                    /**
+                     * Encodes the specified ListAddressGroupReferencesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest.verify|verify} messages.
+                     * @param message ListAddressGroupReferencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAddressGroupReferencesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest.verify|verify} messages.
+                     * @param message ListAddressGroupReferencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListAddressGroupReferencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAddressGroupReferencesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAddressGroupReferencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest;
+
+                    /**
+                     * Decodes a ListAddressGroupReferencesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAddressGroupReferencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest;
+
+                    /**
+                     * Verifies a ListAddressGroupReferencesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAddressGroupReferencesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAddressGroupReferencesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAddressGroupReferencesRequest message. Also converts values to other types if specified.
+                     * @param message ListAddressGroupReferencesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListAddressGroupReferencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAddressGroupReferencesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAddressGroupReferencesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAddressGroupReferencesResponse. */
+                interface IListAddressGroupReferencesResponse {
+
+                    /** ListAddressGroupReferencesResponse addressGroupReferences */
+                    addressGroupReferences?: (google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[]|null);
+
+                    /** ListAddressGroupReferencesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAddressGroupReferencesResponse. */
+                class ListAddressGroupReferencesResponse implements IListAddressGroupReferencesResponse {
+
+                    /**
+                     * Constructs a new ListAddressGroupReferencesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse);
+
+                    /** ListAddressGroupReferencesResponse addressGroupReferences. */
+                    public addressGroupReferences: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference[];
+
+                    /** ListAddressGroupReferencesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAddressGroupReferencesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAddressGroupReferencesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse;
+
+                    /**
+                     * Encodes the specified ListAddressGroupReferencesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.verify|verify} messages.
+                     * @param message ListAddressGroupReferencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAddressGroupReferencesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.verify|verify} messages.
+                     * @param message ListAddressGroupReferencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListAddressGroupReferencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAddressGroupReferencesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAddressGroupReferencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse;
+
+                    /**
+                     * Decodes a ListAddressGroupReferencesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAddressGroupReferencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse;
+
+                    /**
+                     * Verifies a ListAddressGroupReferencesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAddressGroupReferencesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAddressGroupReferencesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAddressGroupReferencesResponse message. Also converts values to other types if specified.
+                     * @param message ListAddressGroupReferencesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAddressGroupReferencesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAddressGroupReferencesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ListAddressGroupReferencesResponse {
+
+                    /** Properties of an AddressGroupReference. */
+                    interface IAddressGroupReference {
+
+                        /** AddressGroupReference firewallPolicy */
+                        firewallPolicy?: (string|null);
+
+                        /** AddressGroupReference securityPolicy */
+                        securityPolicy?: (string|null);
+
+                        /** AddressGroupReference rulePriority */
+                        rulePriority?: (number|null);
+                    }
+
+                    /** Represents an AddressGroupReference. */
+                    class AddressGroupReference implements IAddressGroupReference {
+
+                        /**
+                         * Constructs a new AddressGroupReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference);
+
+                        /** AddressGroupReference firewallPolicy. */
+                        public firewallPolicy: string;
+
+                        /** AddressGroupReference securityPolicy. */
+                        public securityPolicy: string;
+
+                        /** AddressGroupReference rulePriority. */
+                        public rulePriority: number;
+
+                        /**
+                         * Creates a new AddressGroupReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddressGroupReference instance
+                         */
+                        public static create(properties?: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference;
+
+                        /**
+                         * Encodes the specified AddressGroupReference message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.verify|verify} messages.
+                         * @param message AddressGroupReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddressGroupReference message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference.verify|verify} messages.
+                         * @param message AddressGroupReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.IAddressGroupReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddressGroupReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddressGroupReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference;
+
+                        /**
+                         * Decodes an AddressGroupReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddressGroupReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference;
+
+                        /**
+                         * Verifies an AddressGroupReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddressGroupReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddressGroupReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference;
+
+                        /**
+                         * Creates a plain object from an AddressGroupReference message. Also converts values to other types if specified.
+                         * @param message AddressGroupReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networksecurity.v1.ListAddressGroupReferencesResponse.AddressGroupReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddressGroupReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddressGroupReference
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of an AuthorizationPolicy. */
                 interface IAuthorizationPolicy {
 
@@ -8955,271 +10848,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -11304,6 +12932,271 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -15699,206 +17592,6 @@ export namespace google {
             VISIBILITY_EXPORT = 2
         }
 
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldMask
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -16190,6 +17883,206 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

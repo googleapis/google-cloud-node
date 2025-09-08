@@ -477,7 +477,7 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -577,9 +577,9 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getJob request %j', request);
@@ -687,9 +687,9 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateJob request %j', request);
@@ -792,9 +792,9 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('cancelJob request %j', request);
@@ -894,9 +894,9 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('deleteJob request %j', request);
@@ -1011,7 +1011,7 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -1153,7 +1153,7 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -1238,7 +1238,7 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     const defaultCallSettings = this._defaults['listJobs'];
@@ -1314,7 +1314,7 @@ export class JobControllerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'region': request.region ?? '',
     });
     const defaultCallSettings = this._defaults['listJobs'];

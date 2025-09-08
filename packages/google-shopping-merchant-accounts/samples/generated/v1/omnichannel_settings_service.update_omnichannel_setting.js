@@ -49,7 +49,7 @@ function main(omnichannelSetting, updateMask) {
   // const updateMask = {}
 
   // Imports the Accounts library
-  const {OmnichannelSettingsServiceClient} = require('@google-cloud/accounts').v1;
+  const {OmnichannelSettingsServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new OmnichannelSettingsServiceClient();

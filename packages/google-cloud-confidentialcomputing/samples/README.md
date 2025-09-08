@@ -14,6 +14,8 @@
 * [Samples](#samples)
   * [Confidential_computing.create_challenge](#confidential_computing.create_challenge)
   * [Confidential_computing.verify_attestation](#confidential_computing.verify_attestation)
+  * [Confidential_computing.verify_confidential_gke](#confidential_computing.verify_confidential_gke)
+  * [Confidential_computing.verify_confidential_space](#confidential_computing.verify_confidential_space)
   * [Confidential_computing.create_challenge](#confidential_computing.create_challenge)
   * [Confidential_computing.verify_attestation](#confidential_computing.verify_attestation)
   * [Quickstart](#quickstart)
@@ -60,6 +62,40 @@ __Usage:__
 
 
 `node packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_attestation.js`
+
+
+-----
+
+
+
+
+### Confidential_computing.verify_confidential_gke
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_gke.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_gke.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_gke.js`
+
+
+-----
+
+
+
+
+### Confidential_computing.verify_confidential_space
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_space.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_space.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_space.js`
 
 
 -----

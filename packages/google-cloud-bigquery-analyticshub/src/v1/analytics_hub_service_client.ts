@@ -192,6 +192,9 @@ export class AnalyticsHubServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      queryTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataExchanges/{data_exchange}/queryTemplates/{query_template}'
+      ),
       subscriptionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/subscriptions/{subscription}'
       ),
@@ -210,7 +213,9 @@ export class AnalyticsHubServiceClient {
       listSubscriptions:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'subscriptions'),
       listSharedResourceSubscriptions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sharedResourceSubscriptions')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sharedResourceSubscriptions'),
+      listQueryTemplates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'queryTemplates')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -297,7 +302,7 @@ export class AnalyticsHubServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const analyticsHubServiceStubMethods =
-        ['listDataExchanges', 'listOrgDataExchanges', 'getDataExchange', 'createDataExchange', 'updateDataExchange', 'deleteDataExchange', 'listListings', 'getListing', 'createListing', 'updateListing', 'deleteListing', 'subscribeListing', 'subscribeDataExchange', 'refreshSubscription', 'getSubscription', 'listSubscriptions', 'listSharedResourceSubscriptions', 'revokeSubscription', 'deleteSubscription', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
+        ['listDataExchanges', 'listOrgDataExchanges', 'getDataExchange', 'createDataExchange', 'updateDataExchange', 'deleteDataExchange', 'listListings', 'getListing', 'createListing', 'updateListing', 'deleteListing', 'subscribeListing', 'subscribeDataExchange', 'refreshSubscription', 'getSubscription', 'listSubscriptions', 'listSharedResourceSubscriptions', 'revokeSubscription', 'deleteSubscription', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions', 'createQueryTemplate', 'getQueryTemplate', 'listQueryTemplates', 'updateQueryTemplate', 'deleteQueryTemplate', 'submitQueryTemplate', 'approveQueryTemplate'];
     for (const methodName of analyticsHubServiceStubMethods) {
       const callPromise = this.analyticsHubServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1787,6 +1792,590 @@ export class AnalyticsHubServiceClient {
         throw error;
       });
   }
+/**
+ * Creates a new QueryTemplate
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the QueryTemplate.
+ *   e.g.
+ *   `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myQueryTemplate`.
+ * @param {string} request.queryTemplateId
+ *   Required. The ID of the QueryTemplate to create.
+ *   Must contain only Unicode letters, numbers (0-9), underscores (_).
+ *   Max length: 100 bytes.
+ * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} request.queryTemplate
+ *   Required. The QueryTemplate to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/analytics_hub_service.create_query_template.js</caption>
+ * region_tag:analyticshub_v1_generated_AnalyticsHubService_CreateQueryTemplate_async
+ */
+  createQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|undefined, {}|undefined
+      ]>;
+  createQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createQueryTemplate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createQueryTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createQueryTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createQueryTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a QueryTemplate
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The parent resource path of the QueryTemplate.
+ *   e.g.
+ *   `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/analytics_hub_service.get_query_template.js</caption>
+ * region_tag:analyticshub_v1_generated_AnalyticsHubService_GetQueryTemplate_async
+ */
+  getQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|undefined, {}|undefined
+      ]>;
+  getQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getQueryTemplate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQueryTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getQueryTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getQueryTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates an existing QueryTemplate
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask specifies the fields to update in the query template
+ *   resource. The fields specified in the `updateMask` are relative to the
+ *   resource and are not a full request.
+ * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} request.queryTemplate
+ *   Required. The QueryTemplate to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/analytics_hub_service.update_query_template.js</caption>
+ * region_tag:analyticshub_v1_generated_AnalyticsHubService_UpdateQueryTemplate_async
+ */
+  updateQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|undefined, {}|undefined
+      ]>;
+  updateQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'query_template.name': request.queryTemplate!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateQueryTemplate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateQueryTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateQueryTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateQueryTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a query template.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource path of the QueryTemplate.
+ *   e.g.
+ *   `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/analytics_hub_service.delete_query_template.js</caption>
+ * region_tag:analyticshub_v1_generated_AnalyticsHubService_DeleteQueryTemplate_async
+ */
+  deleteQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|undefined, {}|undefined
+      ]>;
+  deleteQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteQueryTemplate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteQueryTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteQueryTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteQueryTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Submits a query template for approval.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource path of the QueryTemplate.
+ *   e.g.
+ *   `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/analytics_hub_service.submit_query_template.js</caption>
+ * region_tag:analyticshub_v1_generated_AnalyticsHubService_SubmitQueryTemplate_async
+ */
+  submitQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|undefined, {}|undefined
+      ]>;
+  submitQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  submitQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  submitQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('submitQueryTemplate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('submitQueryTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.submitQueryTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('submitQueryTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Approves a query template.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource path of the QueryTemplate.
+ *   e.g.
+ *   `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/analytics_hub_service.approve_query_template.js</caption>
+ * region_tag:analyticshub_v1_generated_AnalyticsHubService_ApproveQueryTemplate_async
+ */
+  approveQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|undefined, {}|undefined
+      ]>;
+  approveQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  approveQueryTemplate(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  approveQueryTemplate(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+          protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('approveQueryTemplate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('approveQueryTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.approveQueryTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate,
+        protos.google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('approveQueryTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Creates a Subscription to a Data Clean Room. This is a
@@ -3179,6 +3768,206 @@ export class AnalyticsHubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.ISubscription>;
   }
+ /**
+ * Lists all QueryTemplates in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the QueryTemplates.
+ *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return in a single response
+ *   page. Leverage the page tokens to iterate through the entire collection.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token, returned by a previous call, to request the next page
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listQueryTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listQueryTemplates(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate[],
+        protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest|null,
+        protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse
+      ]>;
+  listQueryTemplates(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse|null|undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate>): void;
+  listQueryTemplates(
+      request: protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse|null|undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate>): void;
+  listQueryTemplates(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse|null|undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+          protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse|null|undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate>):
+      Promise<[
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate[],
+        protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest|null,
+        protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+      protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse|null|undefined,
+      protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQueryTemplates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQueryTemplates request %j', request);
+    return this.innerApiCalls
+      .listQueryTemplates(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate[],
+        protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest|null,
+        protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse
+      ]) => {
+        this._log.info('listQueryTemplates values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listQueryTemplates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the QueryTemplates.
+ *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return in a single response
+ *   page. Leverage the page tokens to iterate through the entire collection.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token, returned by a previous call, to request the next page
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listQueryTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listQueryTemplatesStream(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listQueryTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listQueryTemplates stream %j', request);
+    return this.descriptors.page.listQueryTemplates.createStream(
+      this.innerApiCalls.listQueryTemplates as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listQueryTemplates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource path of the QueryTemplates.
+ *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return in a single response
+ *   page. Leverage the page tokens to iterate through the entire collection.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token, returned by a previous call, to request the next page
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.analyticshub.v1.QueryTemplate|QueryTemplate}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/analytics_hub_service.list_query_templates.js</caption>
+ * region_tag:analyticshub_v1_generated_AnalyticsHubService_ListQueryTemplates_async
+ */
+  listQueryTemplatesAsync(
+      request?: protos.google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listQueryTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listQueryTemplates iterate %j', request);
+    return this.descriptors.page.listQueryTemplates.asyncIterate(
+      this.innerApiCalls['listQueryTemplates'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.IQueryTemplate>;
+  }
 /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
@@ -3575,6 +4364,68 @@ export class AnalyticsHubServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified queryTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_exchange
+   * @param {string} query_template
+   * @returns {string} Resource name string.
+   */
+  queryTemplatePath(project:string,location:string,dataExchange:string,queryTemplate:string) {
+    return this.pathTemplates.queryTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      data_exchange: dataExchange,
+      query_template: queryTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from QueryTemplate resource.
+   *
+   * @param {string} queryTemplateName
+   *   A fully-qualified path representing QueryTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromQueryTemplateName(queryTemplateName: string) {
+    return this.pathTemplates.queryTemplatePathTemplate.match(queryTemplateName).project;
+  }
+
+  /**
+   * Parse the location from QueryTemplate resource.
+   *
+   * @param {string} queryTemplateName
+   *   A fully-qualified path representing QueryTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromQueryTemplateName(queryTemplateName: string) {
+    return this.pathTemplates.queryTemplatePathTemplate.match(queryTemplateName).location;
+  }
+
+  /**
+   * Parse the data_exchange from QueryTemplate resource.
+   *
+   * @param {string} queryTemplateName
+   *   A fully-qualified path representing QueryTemplate resource.
+   * @returns {string} A string representing the data_exchange.
+   */
+  matchDataExchangeFromQueryTemplateName(queryTemplateName: string) {
+    return this.pathTemplates.queryTemplatePathTemplate.match(queryTemplateName).data_exchange;
+  }
+
+  /**
+   * Parse the query_template from QueryTemplate resource.
+   *
+   * @param {string} queryTemplateName
+   *   A fully-qualified path representing QueryTemplate resource.
+   * @returns {string} A string representing the query_template.
+   */
+  matchQueryTemplateFromQueryTemplateName(queryTemplateName: string) {
+    return this.pathTemplates.queryTemplatePathTemplate.match(queryTemplateName).query_template;
   }
 
   /**

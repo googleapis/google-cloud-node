@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.shopping.merchant.conversions.v1",
-  "libraryPackage": "@google-cloud/conversions",
+  "libraryPackage": "@google-shopping/conversions",
   "services": {
     "ConversionSourcesService": {
       "clients": {

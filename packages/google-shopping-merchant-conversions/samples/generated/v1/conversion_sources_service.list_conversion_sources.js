@@ -52,7 +52,7 @@ function main(parent) {
   // const showDeleted = true
 
   // Imports the Conversions library
-  const {ConversionSourcesServiceClient} = require('@google-cloud/conversions').v1;
+  const {ConversionSourcesServiceClient} = require('@google-shopping/conversions').v1;
 
   // Instantiates a client
   const conversionsClient = new ConversionSourcesServiceClient();

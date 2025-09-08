@@ -2553,6 +2553,7 @@
                          * @property {string|null} [markup] SynthesisInput markup
                          * @property {string|null} [ssml] SynthesisInput ssml
                          * @property {google.cloud.texttospeech.v1.IMultiSpeakerMarkup|null} [multiSpeakerMarkup] SynthesisInput multiSpeakerMarkup
+                         * @property {string|null} [prompt] SynthesisInput prompt
                          * @property {google.cloud.texttospeech.v1.ICustomPronunciations|null} [customPronunciations] SynthesisInput customPronunciations
                          */
     
@@ -2604,6 +2605,14 @@
                         SynthesisInput.prototype.multiSpeakerMarkup = null;
     
                         /**
+                         * SynthesisInput prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.texttospeech.v1.SynthesisInput
+                         * @instance
+                         */
+                        SynthesisInput.prototype.prompt = null;
+    
+                        /**
                          * SynthesisInput customPronunciations.
                          * @member {google.cloud.texttospeech.v1.ICustomPronunciations|null|undefined} customPronunciations
                          * @memberof google.cloud.texttospeech.v1.SynthesisInput
@@ -2622,6 +2631,12 @@
                          */
                         Object.defineProperty(SynthesisInput.prototype, "inputSource", {
                             get: $util.oneOfGetter($oneOfFields = ["text", "markup", "ssml", "multiSpeakerMarkup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SynthesisInput.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2659,6 +2674,8 @@
                                 $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.encode(message.multiSpeakerMarkup, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prompt);
                             return writer;
                         };
     
@@ -2709,6 +2726,10 @@
                                     }
                                 case 4: {
                                         message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prompt = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -2780,6 +2801,11 @@
                                         return "multiSpeakerMarkup." + error;
                                 }
                             }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
+                            }
                             if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations")) {
                                 var error = $root.google.cloud.texttospeech.v1.CustomPronunciations.verify(message.customPronunciations);
                                 if (error)
@@ -2811,6 +2837,8 @@
                                     throw TypeError(".google.cloud.texttospeech.v1.SynthesisInput.multiSpeakerMarkup: object expected");
                                 message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.fromObject(object.multiSpeakerMarkup);
                             }
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             if (object.customPronunciations != null) {
                                 if (typeof object.customPronunciations !== "object")
                                     throw TypeError(".google.cloud.texttospeech.v1.SynthesisInput.customPronunciations: object expected");
@@ -2855,6 +2883,11 @@
                                 object.markup = message.markup;
                                 if (options.oneofs)
                                     object.inputSource = "markup";
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
                             }
                             return object;
                         };
@@ -9056,6 +9089,7 @@
                          * @property {string|null} [markup] SynthesisInput markup
                          * @property {string|null} [ssml] SynthesisInput ssml
                          * @property {google.cloud.texttospeech.v1beta1.IMultiSpeakerMarkup|null} [multiSpeakerMarkup] SynthesisInput multiSpeakerMarkup
+                         * @property {string|null} [prompt] SynthesisInput prompt
                          * @property {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null} [customPronunciations] SynthesisInput customPronunciations
                          */
     
@@ -9107,6 +9141,14 @@
                         SynthesisInput.prototype.multiSpeakerMarkup = null;
     
                         /**
+                         * SynthesisInput prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
+                         * @instance
+                         */
+                        SynthesisInput.prototype.prompt = null;
+    
+                        /**
                          * SynthesisInput customPronunciations.
                          * @member {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null|undefined} customPronunciations
                          * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
@@ -9125,6 +9167,12 @@
                          */
                         Object.defineProperty(SynthesisInput.prototype, "inputSource", {
                             get: $util.oneOfGetter($oneOfFields = ["text", "markup", "ssml", "multiSpeakerMarkup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SynthesisInput.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -9162,6 +9210,8 @@
                                 $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.encode(message.multiSpeakerMarkup, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prompt);
                             return writer;
                         };
     
@@ -9212,6 +9262,10 @@
                                     }
                                 case 4: {
                                         message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prompt = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -9283,6 +9337,11 @@
                                         return "multiSpeakerMarkup." + error;
                                 }
                             }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
+                            }
                             if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations")) {
                                 var error = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.verify(message.customPronunciations);
                                 if (error)
@@ -9314,6 +9373,8 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesisInput.multiSpeakerMarkup: object expected");
                                 message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.fromObject(object.multiSpeakerMarkup);
                             }
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             if (object.customPronunciations != null) {
                                 if (typeof object.customPronunciations !== "object")
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesisInput.customPronunciations: object expected");
@@ -9358,6 +9419,11 @@
                                 object.markup = message.markup;
                                 if (options.oneofs)
                                     object.inputSource = "markup";
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
                             }
                             return object;
                         };

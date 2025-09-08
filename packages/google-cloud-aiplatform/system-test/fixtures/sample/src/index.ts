@@ -16,9 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DataFoundryServiceClient, DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
+function doStuffWithDataFoundryServiceClient(client: DataFoundryServiceClient) {
+  client.close();
+}
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
   client.close();
 }
@@ -117,6 +120,9 @@ function doStuffWithVizierServiceClient(client: VizierServiceClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const dataFoundryServiceClient = new DataFoundryServiceClient();
+  doStuffWithDataFoundryServiceClient(dataFoundryServiceClient);
   // check that the client instance can be created
   const datasetServiceClient = new DatasetServiceClient();
   doStuffWithDatasetServiceClient(datasetServiceClient);

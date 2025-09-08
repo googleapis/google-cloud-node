@@ -1728,6 +1728,965 @@
                         }
                       }
                     },
+                    "DataTransferService": {
+                      "options": {
+                        "(google.api.default_host)": "networkconnectivity.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListMulticloudDataTransferConfigs": {
+                          "requestType": "ListMulticloudDataTransferConfigsRequest",
+                          "responseType": "ListMulticloudDataTransferConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/multicloudDataTransferConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/multicloudDataTransferConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetMulticloudDataTransferConfig": {
+                          "requestType": "GetMulticloudDataTransferConfigRequest",
+                          "responseType": "MulticloudDataTransferConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateMulticloudDataTransferConfig": {
+                          "requestType": "CreateMulticloudDataTransferConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/multicloudDataTransferConfigs",
+                            "(google.api.http).body": "multicloud_data_transfer_config",
+                            "(google.api.method_signature)": "parent,multicloud_data_transfer_config,multicloud_data_transfer_config_id",
+                            "(google.longrunning.operation_info).response_type": "MulticloudDataTransferConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/multicloudDataTransferConfigs",
+                                "body": "multicloud_data_transfer_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,multicloud_data_transfer_config,multicloud_data_transfer_config_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MulticloudDataTransferConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateMulticloudDataTransferConfig": {
+                          "requestType": "UpdateMulticloudDataTransferConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{multicloud_data_transfer_config.name=projects/*/locations/*/multicloudDataTransferConfigs/*}",
+                            "(google.api.http).body": "multicloud_data_transfer_config",
+                            "(google.api.method_signature)": "multicloud_data_transfer_config,update_mask",
+                            "(google.longrunning.operation_info).response_type": "MulticloudDataTransferConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{multicloud_data_transfer_config.name=projects/*/locations/*/multicloudDataTransferConfigs/*}",
+                                "body": "multicloud_data_transfer_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "multicloud_data_transfer_config,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MulticloudDataTransferConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteMulticloudDataTransferConfig": {
+                          "requestType": "DeleteMulticloudDataTransferConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListDestinations": {
+                          "requestType": "ListDestinationsRequest",
+                          "responseType": "ListDestinationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/multicloudDataTransferConfigs/*}/destinations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/multicloudDataTransferConfigs/*}/destinations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetDestination": {
+                          "requestType": "GetDestinationRequest",
+                          "responseType": "Destination",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*/destinations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*/destinations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateDestination": {
+                          "requestType": "CreateDestinationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/multicloudDataTransferConfigs/*}/destinations",
+                            "(google.api.http).body": "destination",
+                            "(google.api.method_signature)": "parent,destination,destination_id",
+                            "(google.longrunning.operation_info).response_type": "Destination",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/multicloudDataTransferConfigs/*}/destinations",
+                                "body": "destination"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,destination,destination_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Destination",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateDestination": {
+                          "requestType": "UpdateDestinationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{destination.name=projects/*/locations/*/multicloudDataTransferConfigs/*/destinations/*}",
+                            "(google.api.http).body": "destination",
+                            "(google.api.method_signature)": "destination,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Destination",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{destination.name=projects/*/locations/*/multicloudDataTransferConfigs/*/destinations/*}",
+                                "body": "destination"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "destination,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Destination",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteDestination": {
+                          "requestType": "DeleteDestinationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*/destinations/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/multicloudDataTransferConfigs/*/destinations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetMulticloudDataTransferSupportedService": {
+                          "requestType": "GetMulticloudDataTransferSupportedServiceRequest",
+                          "responseType": "MulticloudDataTransferSupportedService",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/multicloudDataTransferSupportedServices/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/multicloudDataTransferSupportedServices/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMulticloudDataTransferSupportedServices": {
+                          "requestType": "ListMulticloudDataTransferSupportedServicesRequest",
+                          "responseType": "ListMulticloudDataTransferSupportedServicesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/multicloudDataTransferSupportedServices",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/multicloudDataTransferSupportedServices"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "MulticloudDataTransferConfig": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/MulticloudDataTransferConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/multicloudDataTransferConfigs/{multicloud_data_transfer_config}",
+                        "(google.api.resource).plural": "multicloudDataTransferConfigs",
+                        "(google.api.resource).singular": "multicloudDataTransferConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "destinationsCount": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destinationsActiveCount": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "services": {
+                          "keyType": "string",
+                          "type": "StateTimeline",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListMulticloudDataTransferConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMulticloudDataTransferConfigsResponse": {
+                      "fields": {
+                        "multicloudDataTransferConfigs": {
+                          "rule": "repeated",
+                          "type": "MulticloudDataTransferConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetMulticloudDataTransferConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/MulticloudDataTransferConfig"
+                          }
+                        }
+                      }
+                    },
+                    "CreateMulticloudDataTransferConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "multicloudDataTransferConfigId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "multicloudDataTransferConfig": {
+                          "type": "MulticloudDataTransferConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateMulticloudDataTransferConfigRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multicloudDataTransferConfig": {
+                          "type": "MulticloudDataTransferConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMulticloudDataTransferConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/MulticloudDataTransferConfig"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Destination": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/Destination",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/multicloudDataTransferConfigs/{multicloud_data_transfer_config}/destinations/{destination}",
+                        "(google.api.resource).plural": "destinations",
+                        "(google.api.resource).singular": "destination"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ipPrefix": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "endpoints": {
+                          "rule": "repeated",
+                          "type": "DestinationEndpoint",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "stateTimeline": {
+                          "type": "StateTimeline",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DestinationEndpoint": {
+                          "fields": {
+                            "asn": {
+                              "type": "int64",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "csp": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "VALID": 1,
+                                "INVALID": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ListDestinationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/MulticloudDataTransferConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDestinationsResponse": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetDestinationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Destination"
+                          }
+                        }
+                      }
+                    },
+                    "CreateDestinationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/MulticloudDataTransferConfig"
+                          }
+                        },
+                        "destinationId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destination": {
+                          "type": "Destination",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDestinationRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "destination": {
+                          "type": "Destination",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDestinationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Destination"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StateTimeline": {
+                      "fields": {
+                        "states": {
+                          "rule": "repeated",
+                          "type": "StateMetadata",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StateMetadata": {
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "effectiveTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ADDING": 1,
+                                "ACTIVE": 2,
+                                "DELETING": 3,
+                                "SUSPENDING": 4,
+                                "SUSPENDED": 5
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MulticloudDataTransferSupportedService": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/MulticloudDataTransferSupportedService",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/multicloudDataTransferSupportedServices/{multicloud_data_transfer_supported_service}",
+                        "(google.api.resource).plural": "multicloudDataTransferSupportedServices",
+                        "(google.api.resource).singular": "multicloudDataTransferSupportedService"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "serviceConfigs": {
+                          "rule": "repeated",
+                          "type": "ServiceConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ServiceConfig": {
+                      "fields": {
+                        "eligibilityCriteria": {
+                          "type": "EligibilityCriteria",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "supportEndTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EligibilityCriteria": {
+                          "values": {
+                            "ELIGIBILITY_CRITERIA_UNSPECIFIED": 0,
+                            "NETWORK_SERVICE_TIER_PREMIUM_ONLY": 1,
+                            "NETWORK_SERVICE_TIER_STANDARD_ONLY": 2,
+                            "REQUEST_ENDPOINT_REGIONAL_ENDPOINT_ONLY": 3
+                          }
+                        }
+                      }
+                    },
+                    "GetMulticloudDataTransferSupportedServiceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/MulticloudDataTransferSupportedService"
+                          }
+                        }
+                      }
+                    },
+                    "ListMulticloudDataTransferSupportedServicesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMulticloudDataTransferSupportedServicesResponse": {
+                      "fields": {
+                        "multicloudDataTransferSupportedServices": {
+                          "rule": "repeated",
+                          "type": "MulticloudDataTransferSupportedService",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "HubService": {
                       "options": {
                         "(google.api.default_host)": "networkconnectivity.googleapis.com",

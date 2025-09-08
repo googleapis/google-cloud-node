@@ -22557,6 +22557,690 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents a DataFoundryService */
+                class DataFoundryService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataFoundryService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataFoundryService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataFoundryService;
+
+                    /**
+                     * Calls GenerateSyntheticData.
+                     * @param request GenerateSyntheticDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateSyntheticDataResponse
+                     */
+                    public generateSyntheticData(request: google.cloud.aiplatform.v1.IGenerateSyntheticDataRequest, callback: google.cloud.aiplatform.v1.DataFoundryService.GenerateSyntheticDataCallback): void;
+
+                    /**
+                     * Calls GenerateSyntheticData.
+                     * @param request GenerateSyntheticDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateSyntheticData(request: google.cloud.aiplatform.v1.IGenerateSyntheticDataRequest): Promise<google.cloud.aiplatform.v1.GenerateSyntheticDataResponse>;
+                }
+
+                namespace DataFoundryService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.DataFoundryService|generateSyntheticData}.
+                     * @param error Error, if any
+                     * @param [response] GenerateSyntheticDataResponse
+                     */
+                    type GenerateSyntheticDataCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.GenerateSyntheticDataResponse) => void;
+                }
+
+                /** Properties of a GenerateSyntheticDataRequest. */
+                interface IGenerateSyntheticDataRequest {
+
+                    /** GenerateSyntheticDataRequest taskDescription */
+                    taskDescription?: (google.cloud.aiplatform.v1.ITaskDescriptionStrategy|null);
+
+                    /** GenerateSyntheticDataRequest location */
+                    location?: (string|null);
+
+                    /** GenerateSyntheticDataRequest count */
+                    count?: (number|null);
+
+                    /** GenerateSyntheticDataRequest outputFieldSpecs */
+                    outputFieldSpecs?: (google.cloud.aiplatform.v1.IOutputFieldSpec[]|null);
+
+                    /** GenerateSyntheticDataRequest examples */
+                    examples?: (google.cloud.aiplatform.v1.ISyntheticExample[]|null);
+                }
+
+                /** Represents a GenerateSyntheticDataRequest. */
+                class GenerateSyntheticDataRequest implements IGenerateSyntheticDataRequest {
+
+                    /**
+                     * Constructs a new GenerateSyntheticDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGenerateSyntheticDataRequest);
+
+                    /** GenerateSyntheticDataRequest taskDescription. */
+                    public taskDescription?: (google.cloud.aiplatform.v1.ITaskDescriptionStrategy|null);
+
+                    /** GenerateSyntheticDataRequest location. */
+                    public location: string;
+
+                    /** GenerateSyntheticDataRequest count. */
+                    public count: number;
+
+                    /** GenerateSyntheticDataRequest outputFieldSpecs. */
+                    public outputFieldSpecs: google.cloud.aiplatform.v1.IOutputFieldSpec[];
+
+                    /** GenerateSyntheticDataRequest examples. */
+                    public examples: google.cloud.aiplatform.v1.ISyntheticExample[];
+
+                    /** GenerateSyntheticDataRequest strategy. */
+                    public strategy?: "taskDescription";
+
+                    /**
+                     * Creates a new GenerateSyntheticDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateSyntheticDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGenerateSyntheticDataRequest): google.cloud.aiplatform.v1.GenerateSyntheticDataRequest;
+
+                    /**
+                     * Encodes the specified GenerateSyntheticDataRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateSyntheticDataRequest.verify|verify} messages.
+                     * @param message GenerateSyntheticDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGenerateSyntheticDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateSyntheticDataRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateSyntheticDataRequest.verify|verify} messages.
+                     * @param message GenerateSyntheticDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGenerateSyntheticDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateSyntheticDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateSyntheticDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GenerateSyntheticDataRequest;
+
+                    /**
+                     * Decodes a GenerateSyntheticDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateSyntheticDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GenerateSyntheticDataRequest;
+
+                    /**
+                     * Verifies a GenerateSyntheticDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateSyntheticDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateSyntheticDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GenerateSyntheticDataRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateSyntheticDataRequest message. Also converts values to other types if specified.
+                     * @param message GenerateSyntheticDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GenerateSyntheticDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateSyntheticDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateSyntheticDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SyntheticField. */
+                interface ISyntheticField {
+
+                    /** SyntheticField fieldName */
+                    fieldName?: (string|null);
+
+                    /** SyntheticField content */
+                    content?: (google.cloud.aiplatform.v1.IContent|null);
+                }
+
+                /** Represents a SyntheticField. */
+                class SyntheticField implements ISyntheticField {
+
+                    /**
+                     * Constructs a new SyntheticField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ISyntheticField);
+
+                    /** SyntheticField fieldName. */
+                    public fieldName: string;
+
+                    /** SyntheticField content. */
+                    public content?: (google.cloud.aiplatform.v1.IContent|null);
+
+                    /**
+                     * Creates a new SyntheticField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SyntheticField instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ISyntheticField): google.cloud.aiplatform.v1.SyntheticField;
+
+                    /**
+                     * Encodes the specified SyntheticField message. Does not implicitly {@link google.cloud.aiplatform.v1.SyntheticField.verify|verify} messages.
+                     * @param message SyntheticField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ISyntheticField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SyntheticField message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.SyntheticField.verify|verify} messages.
+                     * @param message SyntheticField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ISyntheticField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SyntheticField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SyntheticField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.SyntheticField;
+
+                    /**
+                     * Decodes a SyntheticField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SyntheticField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.SyntheticField;
+
+                    /**
+                     * Verifies a SyntheticField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SyntheticField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SyntheticField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.SyntheticField;
+
+                    /**
+                     * Creates a plain object from a SyntheticField message. Also converts values to other types if specified.
+                     * @param message SyntheticField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.SyntheticField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SyntheticField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SyntheticField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SyntheticExample. */
+                interface ISyntheticExample {
+
+                    /** SyntheticExample fields */
+                    fields?: (google.cloud.aiplatform.v1.ISyntheticField[]|null);
+                }
+
+                /** Represents a SyntheticExample. */
+                class SyntheticExample implements ISyntheticExample {
+
+                    /**
+                     * Constructs a new SyntheticExample.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ISyntheticExample);
+
+                    /** SyntheticExample fields. */
+                    public fields: google.cloud.aiplatform.v1.ISyntheticField[];
+
+                    /**
+                     * Creates a new SyntheticExample instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SyntheticExample instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ISyntheticExample): google.cloud.aiplatform.v1.SyntheticExample;
+
+                    /**
+                     * Encodes the specified SyntheticExample message. Does not implicitly {@link google.cloud.aiplatform.v1.SyntheticExample.verify|verify} messages.
+                     * @param message SyntheticExample message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ISyntheticExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SyntheticExample message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.SyntheticExample.verify|verify} messages.
+                     * @param message SyntheticExample message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ISyntheticExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SyntheticExample message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SyntheticExample
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.SyntheticExample;
+
+                    /**
+                     * Decodes a SyntheticExample message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SyntheticExample
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.SyntheticExample;
+
+                    /**
+                     * Verifies a SyntheticExample message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SyntheticExample message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SyntheticExample
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.SyntheticExample;
+
+                    /**
+                     * Creates a plain object from a SyntheticExample message. Also converts values to other types if specified.
+                     * @param message SyntheticExample
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.SyntheticExample, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SyntheticExample to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SyntheticExample
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OutputFieldSpec. */
+                interface IOutputFieldSpec {
+
+                    /** OutputFieldSpec fieldName */
+                    fieldName?: (string|null);
+
+                    /** OutputFieldSpec guidance */
+                    guidance?: (string|null);
+
+                    /** OutputFieldSpec fieldType */
+                    fieldType?: (google.cloud.aiplatform.v1.OutputFieldSpec.FieldType|keyof typeof google.cloud.aiplatform.v1.OutputFieldSpec.FieldType|null);
+                }
+
+                /** Represents an OutputFieldSpec. */
+                class OutputFieldSpec implements IOutputFieldSpec {
+
+                    /**
+                     * Constructs a new OutputFieldSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IOutputFieldSpec);
+
+                    /** OutputFieldSpec fieldName. */
+                    public fieldName: string;
+
+                    /** OutputFieldSpec guidance. */
+                    public guidance: string;
+
+                    /** OutputFieldSpec fieldType. */
+                    public fieldType: (google.cloud.aiplatform.v1.OutputFieldSpec.FieldType|keyof typeof google.cloud.aiplatform.v1.OutputFieldSpec.FieldType);
+
+                    /**
+                     * Creates a new OutputFieldSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OutputFieldSpec instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IOutputFieldSpec): google.cloud.aiplatform.v1.OutputFieldSpec;
+
+                    /**
+                     * Encodes the specified OutputFieldSpec message. Does not implicitly {@link google.cloud.aiplatform.v1.OutputFieldSpec.verify|verify} messages.
+                     * @param message OutputFieldSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IOutputFieldSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OutputFieldSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.OutputFieldSpec.verify|verify} messages.
+                     * @param message OutputFieldSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IOutputFieldSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OutputFieldSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OutputFieldSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.OutputFieldSpec;
+
+                    /**
+                     * Decodes an OutputFieldSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OutputFieldSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.OutputFieldSpec;
+
+                    /**
+                     * Verifies an OutputFieldSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OutputFieldSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OutputFieldSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.OutputFieldSpec;
+
+                    /**
+                     * Creates a plain object from an OutputFieldSpec message. Also converts values to other types if specified.
+                     * @param message OutputFieldSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.OutputFieldSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OutputFieldSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutputFieldSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OutputFieldSpec {
+
+                    /** FieldType enum. */
+                    enum FieldType {
+                        FIELD_TYPE_UNSPECIFIED = 0,
+                        CONTENT = 1,
+                        TEXT = 2,
+                        IMAGE = 3,
+                        AUDIO = 4
+                    }
+                }
+
+                /** Properties of a TaskDescriptionStrategy. */
+                interface ITaskDescriptionStrategy {
+
+                    /** TaskDescriptionStrategy taskDescription */
+                    taskDescription?: (string|null);
+                }
+
+                /** Represents a TaskDescriptionStrategy. */
+                class TaskDescriptionStrategy implements ITaskDescriptionStrategy {
+
+                    /**
+                     * Constructs a new TaskDescriptionStrategy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ITaskDescriptionStrategy);
+
+                    /** TaskDescriptionStrategy taskDescription. */
+                    public taskDescription: string;
+
+                    /**
+                     * Creates a new TaskDescriptionStrategy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TaskDescriptionStrategy instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ITaskDescriptionStrategy): google.cloud.aiplatform.v1.TaskDescriptionStrategy;
+
+                    /**
+                     * Encodes the specified TaskDescriptionStrategy message. Does not implicitly {@link google.cloud.aiplatform.v1.TaskDescriptionStrategy.verify|verify} messages.
+                     * @param message TaskDescriptionStrategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ITaskDescriptionStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TaskDescriptionStrategy message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.TaskDescriptionStrategy.verify|verify} messages.
+                     * @param message TaskDescriptionStrategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ITaskDescriptionStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TaskDescriptionStrategy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TaskDescriptionStrategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.TaskDescriptionStrategy;
+
+                    /**
+                     * Decodes a TaskDescriptionStrategy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TaskDescriptionStrategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.TaskDescriptionStrategy;
+
+                    /**
+                     * Verifies a TaskDescriptionStrategy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TaskDescriptionStrategy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TaskDescriptionStrategy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.TaskDescriptionStrategy;
+
+                    /**
+                     * Creates a plain object from a TaskDescriptionStrategy message. Also converts values to other types if specified.
+                     * @param message TaskDescriptionStrategy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.TaskDescriptionStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TaskDescriptionStrategy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TaskDescriptionStrategy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateSyntheticDataResponse. */
+                interface IGenerateSyntheticDataResponse {
+
+                    /** GenerateSyntheticDataResponse syntheticExamples */
+                    syntheticExamples?: (google.cloud.aiplatform.v1.ISyntheticExample[]|null);
+                }
+
+                /** Represents a GenerateSyntheticDataResponse. */
+                class GenerateSyntheticDataResponse implements IGenerateSyntheticDataResponse {
+
+                    /**
+                     * Constructs a new GenerateSyntheticDataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGenerateSyntheticDataResponse);
+
+                    /** GenerateSyntheticDataResponse syntheticExamples. */
+                    public syntheticExamples: google.cloud.aiplatform.v1.ISyntheticExample[];
+
+                    /**
+                     * Creates a new GenerateSyntheticDataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateSyntheticDataResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGenerateSyntheticDataResponse): google.cloud.aiplatform.v1.GenerateSyntheticDataResponse;
+
+                    /**
+                     * Encodes the specified GenerateSyntheticDataResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateSyntheticDataResponse.verify|verify} messages.
+                     * @param message GenerateSyntheticDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGenerateSyntheticDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateSyntheticDataResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateSyntheticDataResponse.verify|verify} messages.
+                     * @param message GenerateSyntheticDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGenerateSyntheticDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateSyntheticDataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateSyntheticDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GenerateSyntheticDataResponse;
+
+                    /**
+                     * Decodes a GenerateSyntheticDataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateSyntheticDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GenerateSyntheticDataResponse;
+
+                    /**
+                     * Verifies a GenerateSyntheticDataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateSyntheticDataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateSyntheticDataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GenerateSyntheticDataResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateSyntheticDataResponse message. Also converts values to other types if specified.
+                     * @param message GenerateSyntheticDataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GenerateSyntheticDataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateSyntheticDataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateSyntheticDataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DataItem. */
                 interface IDataItem {
 
@@ -160519,7 +161203,8 @@ export namespace google {
                         MODE_UNSPECIFIED = 0,
                         AUTO = 1,
                         ANY = 2,
-                        NONE = 3
+                        NONE = 3,
+                        VALIDATED = 5
                     }
                 }
 
@@ -176517,6 +177202,9 @@ export namespace google {
                     /** DeployedModel enableContainerLogging */
                     enableContainerLogging?: (boolean|null);
 
+                    /** DeployedModel disableContainerLogging */
+                    disableContainerLogging?: (boolean|null);
+
                     /** DeployedModel enableAccessLogging */
                     enableAccessLogging?: (boolean|null);
 
@@ -176586,6 +177274,9 @@ export namespace google {
 
                     /** DeployedModel enableContainerLogging. */
                     public enableContainerLogging: boolean;
+
+                    /** DeployedModel disableContainerLogging. */
+                    public disableContainerLogging: boolean;
 
                     /** DeployedModel enableAccessLogging. */
                     public enableAccessLogging: boolean;
@@ -227392,6 +228083,9 @@ export namespace google {
                     /** TuningJob baseModel */
                     baseModel?: (string|null);
 
+                    /** TuningJob preTunedModel */
+                    preTunedModel?: (google.cloud.aiplatform.v1beta1.IPreTunedModel|null);
+
                     /** TuningJob supervisedTuningSpec */
                     supervisedTuningSpec?: (google.cloud.aiplatform.v1beta1.ISupervisedTuningSpec|null);
 
@@ -227474,6 +228168,9 @@ export namespace google {
                     /** TuningJob baseModel. */
                     public baseModel?: (string|null);
 
+                    /** TuningJob preTunedModel. */
+                    public preTunedModel?: (google.cloud.aiplatform.v1beta1.IPreTunedModel|null);
+
                     /** TuningJob supervisedTuningSpec. */
                     public supervisedTuningSpec?: (google.cloud.aiplatform.v1beta1.ISupervisedTuningSpec|null);
 
@@ -227544,7 +228241,7 @@ export namespace google {
                     public evaluateDatasetRuns: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun[];
 
                     /** TuningJob sourceModel. */
-                    public sourceModel?: "baseModel";
+                    public sourceModel?: ("baseModel"|"preTunedModel");
 
                     /** TuningJob tuningSpec. */
                     public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec"|"veoTuningSpec");
@@ -229833,6 +230530,9 @@ export namespace google {
                     /** EvaluateDatasetRun checkpointId */
                     checkpointId?: (string|null);
 
+                    /** EvaluateDatasetRun evaluateDatasetResponse */
+                    evaluateDatasetResponse?: (google.cloud.aiplatform.v1beta1.IEvaluateDatasetResponse|null);
+
                     /** EvaluateDatasetRun error */
                     error?: (google.rpc.IStatus|null);
                 }
@@ -229851,6 +230551,9 @@ export namespace google {
 
                     /** EvaluateDatasetRun checkpointId. */
                     public checkpointId: string;
+
+                    /** EvaluateDatasetRun evaluateDatasetResponse. */
+                    public evaluateDatasetResponse?: (google.cloud.aiplatform.v1beta1.IEvaluateDatasetResponse|null);
 
                     /** EvaluateDatasetRun error. */
                     public error?: (google.rpc.IStatus|null);
@@ -230042,6 +230745,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TunedModelCheckpoint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PreTunedModel. */
+                interface IPreTunedModel {
+
+                    /** PreTunedModel tunedModelName */
+                    tunedModelName?: (string|null);
+
+                    /** PreTunedModel checkpointId */
+                    checkpointId?: (string|null);
+
+                    /** PreTunedModel baseModel */
+                    baseModel?: (string|null);
+                }
+
+                /** Represents a PreTunedModel. */
+                class PreTunedModel implements IPreTunedModel {
+
+                    /**
+                     * Constructs a new PreTunedModel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IPreTunedModel);
+
+                    /** PreTunedModel tunedModelName. */
+                    public tunedModelName: string;
+
+                    /** PreTunedModel checkpointId. */
+                    public checkpointId: string;
+
+                    /** PreTunedModel baseModel. */
+                    public baseModel: string;
+
+                    /**
+                     * Creates a new PreTunedModel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreTunedModel instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IPreTunedModel): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Encodes the specified PreTunedModel message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.PreTunedModel.verify|verify} messages.
+                     * @param message PreTunedModel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IPreTunedModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreTunedModel message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.PreTunedModel.verify|verify} messages.
+                     * @param message PreTunedModel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IPreTunedModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreTunedModel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreTunedModel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Decodes a PreTunedModel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreTunedModel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Verifies a PreTunedModel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreTunedModel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreTunedModel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.PreTunedModel;
+
+                    /**
+                     * Creates a plain object from a PreTunedModel message. Also converts values to other types if specified.
+                     * @param message PreTunedModel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.PreTunedModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreTunedModel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreTunedModel
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

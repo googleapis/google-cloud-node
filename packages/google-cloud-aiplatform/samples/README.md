@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Data_foundry_service.generate_synthetic_data](#data_foundry_service.generate_synthetic_data)
   * [Dataset_service.create_dataset](#dataset_service.create_dataset)
   * [Dataset_service.create_dataset_version](#dataset_service.create_dataset_version)
   * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
@@ -752,6 +753,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Data_foundry_service.generate_synthetic_data
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/data_foundry_service.generate_synthetic_data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/data_foundry_service.generate_synthetic_data.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/data_foundry_service.generate_synthetic_data.js`
+
+
+-----
+
 
 
 

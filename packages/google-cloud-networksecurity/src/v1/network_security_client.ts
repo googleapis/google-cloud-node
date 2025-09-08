@@ -195,6 +195,12 @@ export class NetworkSecurityClient {
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
       ),
+      organizationLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/addressGroups/{address_group}'
+      ),
+      projectLocationAddressGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/addressGroups/{address_group}'
+      ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
       ),
@@ -222,10 +228,16 @@ export class NetworkSecurityClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
+      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
+      }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createAuthorizationPolicyResponse = protoFilesRoot.lookup(
@@ -2897,6 +2909,104 @@ export class NetworkSecurityClient {
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationAddressGroup resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} address_group
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAddressGroupPath(organization:string,location:string,addressGroup:string) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.render({
+      organization: organization,
+      location: location,
+      address_group: addressGroup,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAddressGroup resource.
+   *
+   * @param {string} organizationLocationAddressGroupName
+   *   A fully-qualified path representing organization_location_address_group resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAddressGroup resource.
+   *
+   * @param {string} organizationLocationAddressGroupName
+   *   A fully-qualified path representing organization_location_address_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).location;
+  }
+
+  /**
+   * Parse the address_group from OrganizationLocationAddressGroup resource.
+   *
+   * @param {string} organizationLocationAddressGroupName
+   *   A fully-qualified path representing organization_location_address_group resource.
+   * @returns {string} A string representing the address_group.
+   */
+  matchAddressGroupFromOrganizationLocationAddressGroupName(organizationLocationAddressGroupName: string) {
+    return this.pathTemplates.organizationLocationAddressGroupPathTemplate.match(organizationLocationAddressGroupName).address_group;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAddressGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} address_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAddressGroupPath(project:string,location:string,addressGroup:string) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.render({
+      project: project,
+      location: location,
+      address_group: addressGroup,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAddressGroup resource.
+   *
+   * @param {string} projectLocationAddressGroupName
+   *   A fully-qualified path representing project_location_address_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAddressGroup resource.
+   *
+   * @param {string} projectLocationAddressGroupName
+   *   A fully-qualified path representing project_location_address_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).location;
+  }
+
+  /**
+   * Parse the address_group from ProjectLocationAddressGroup resource.
+   *
+   * @param {string} projectLocationAddressGroupName
+   *   A fully-qualified path representing project_location_address_group resource.
+   * @returns {string} A string representing the address_group.
+   */
+  matchAddressGroupFromProjectLocationAddressGroupName(projectLocationAddressGroupName: string) {
+    return this.pathTemplates.projectLocationAddressGroupPathTemplate.match(projectLocationAddressGroupName).address_group;
   }
 
   /**

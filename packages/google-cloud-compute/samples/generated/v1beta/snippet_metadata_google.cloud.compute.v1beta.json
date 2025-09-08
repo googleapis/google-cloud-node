@@ -44662,7 +44662,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -44681,6 +44681,10 @@
                     },
                     {
                         "name": "subnetwork",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "views",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -44814,7 +44818,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 85,
                     "type": "FULL"
                 }
             ],
@@ -44850,6 +44854,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "views",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1beta.SubnetworkList",

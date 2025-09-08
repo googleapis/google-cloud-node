@@ -22,6 +22,7 @@ const networkconnectivity = require('@google-cloud/network-connectivity');
 
 function main() {
   const crossNetworkAutomationServiceClient = new networkconnectivity.CrossNetworkAutomationServiceClient();
+  const dataTransferServiceClient = new networkconnectivity.DataTransferServiceClient();
   const hubServiceClient = new networkconnectivity.HubServiceClient();
   const internalRangeServiceClient = new networkconnectivity.InternalRangeServiceClient();
   const policyBasedRoutingServiceClient = new networkconnectivity.PolicyBasedRoutingServiceClient();

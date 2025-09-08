@@ -45,7 +45,7 @@ function main(parent) {
   // const pageSize = 1234
 
   // Imports the Accounts library
-  const {AccountServicesServiceClient} = require('@google-cloud/accounts').v1;
+  const {AccountServicesServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new AccountServicesServiceClient();

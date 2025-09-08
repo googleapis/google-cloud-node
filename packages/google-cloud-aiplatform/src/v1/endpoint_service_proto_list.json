@@ -10,6 +10,7 @@
   "../../protos/google/cloud/aiplatform/v1/content.proto",
   "../../protos/google/cloud/aiplatform/v1/context.proto",
   "../../protos/google/cloud/aiplatform/v1/custom_job.proto",
+  "../../protos/google/cloud/aiplatform/v1/data_foundry_service.proto",
   "../../protos/google/cloud/aiplatform/v1/data_item.proto",
   "../../protos/google/cloud/aiplatform/v1/data_labeling_job.proto",
   "../../protos/google/cloud/aiplatform/v1/dataset.proto",

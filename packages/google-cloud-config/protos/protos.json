@@ -788,6 +788,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "providerConfig": {
+                          "type": "ProviderConfig",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1337,6 +1344,13 @@
                           "id": 20,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "providerConfig": {
+                          "type": "ProviderConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -1958,6 +1972,13 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "providerConfig": {
+                          "type": "ProviderConfig",
+                          "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2734,6 +2755,33 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "config.googleapis.com/ResourceDrift"
+                          }
+                        }
+                      }
+                    },
+                    "ProviderConfig": {
+                      "oneofs": {
+                        "_sourceType": {
+                          "oneof": [
+                            "sourceType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceType": {
+                          "type": "ProviderSource",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProviderSource": {
+                          "values": {
+                            "PROVIDER_SOURCE_UNSPECIFIED": 0,
+                            "SERVICE_MAINTAINED": 1
                           }
                         }
                       }
