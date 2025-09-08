@@ -536,6 +536,94 @@
                               "(google.api.method_signature)": "intelligence_config,update_mask"
                             }
                           ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "resource",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": [
+                                  {
+                                    "field": "resource",
+                                    "path_template": "{bucket=**}"
+                                  },
+                                  {
+                                    "field": "resource",
+                                    "path_template": "{bucket=projects/*/buckets/*}/**"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "resource",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "resource,policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": [
+                                  {
+                                    "field": "resource",
+                                    "path_template": "{bucket=**}"
+                                  },
+                                  {
+                                    "field": "resource",
+                                    "path_template": "{bucket=projects/*/buckets/*}/**"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "resource",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/managedFolders/**",
+                            "(google.api.method_signature)": "resource,permissions"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": [
+                                  {
+                                    "field": "resource",
+                                    "path_template": "{bucket=**}"
+                                  },
+                                  {
+                                    "field": "resource",
+                                    "path_template": "{bucket=projects/*/buckets/*}/objects/**"
+                                  },
+                                  {
+                                    "field": "resource",
+                                    "path_template": "{bucket=projects/*/buckets/*}/managedFolders/**"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3915,6 +4003,15 @@
                 }
               }
             },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -3930,15 +4027,6 @@
             "Empty": {
               "fields": {}
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -3948,6 +4036,332 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            }
+          }
+        },
+        "iam": {
+          "nested": {
+            "v1": {
+              "options": {
+                "csharp_namespace": "Google.Cloud.Iam.V1",
+                "go_package": "cloud.google.com/go/iam/apiv1/iampb;iampb",
+                "java_multiple_files": true,
+                "java_outer_classname": "PolicyProto",
+                "java_package": "com.google.iam.v1",
+                "php_namespace": "Google\\Cloud\\Iam\\V1",
+                "cc_enable_arenas": true
+              },
+              "nested": {
+                "IAMPolicy": {
+                  "options": {
+                    "(google.api.default_host)": "iam-meta-api.googleapis.com"
+                  },
+                  "methods": {
+                    "SetIamPolicy": {
+                      "requestType": "SetIamPolicyRequest",
+                      "responseType": "Policy",
+                      "options": {
+                        "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "GetIamPolicy": {
+                      "requestType": "GetIamPolicyRequest",
+                      "responseType": "Policy",
+                      "options": {
+                        "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "TestIamPermissions": {
+                      "requestType": "TestIamPermissionsRequest",
+                      "responseType": "TestIamPermissionsResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "SetIamPolicyRequest": {
+                  "fields": {
+                    "resource": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
+                    },
+                    "policy": {
+                      "type": "Policy",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 3
+                    }
+                  }
+                },
+                "GetIamPolicyRequest": {
+                  "fields": {
+                    "resource": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
+                    },
+                    "options": {
+                      "type": "GetPolicyOptions",
+                      "id": 2
+                    }
+                  }
+                },
+                "TestIamPermissionsRequest": {
+                  "fields": {
+                    "resource": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
+                    },
+                    "permissions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "TestIamPermissionsResponse": {
+                  "fields": {
+                    "permissions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "GetPolicyOptions": {
+                  "fields": {
+                    "requestedPolicyVersion": {
+                      "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "Policy": {
+                  "fields": {
+                    "version": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "bindings": {
+                      "rule": "repeated",
+                      "type": "Binding",
+                      "id": 4
+                    },
+                    "auditConfigs": {
+                      "rule": "repeated",
+                      "type": "AuditConfig",
+                      "id": 6
+                    },
+                    "etag": {
+                      "type": "bytes",
+                      "id": 3
+                    }
+                  }
+                },
+                "Binding": {
+                  "fields": {
+                    "role": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "members": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2
+                    },
+                    "condition": {
+                      "type": "google.type.Expr",
+                      "id": 3
+                    }
+                  }
+                },
+                "AuditConfig": {
+                  "fields": {
+                    "service": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "auditLogConfigs": {
+                      "rule": "repeated",
+                      "type": "AuditLogConfig",
+                      "id": 3
+                    }
+                  }
+                },
+                "AuditLogConfig": {
+                  "fields": {
+                    "logType": {
+                      "type": "LogType",
+                      "id": 1
+                    },
+                    "exemptedMembers": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "LogType": {
+                      "values": {
+                        "LOG_TYPE_UNSPECIFIED": 0,
+                        "ADMIN_READ": 1,
+                        "DATA_WRITE": 2,
+                        "DATA_READ": 3
+                      }
+                    }
+                  }
+                },
+                "PolicyDelta": {
+                  "fields": {
+                    "bindingDeltas": {
+                      "rule": "repeated",
+                      "type": "BindingDelta",
+                      "id": 1
+                    },
+                    "auditConfigDeltas": {
+                      "rule": "repeated",
+                      "type": "AuditConfigDelta",
+                      "id": 2
+                    }
+                  }
+                },
+                "BindingDelta": {
+                  "fields": {
+                    "action": {
+                      "type": "Action",
+                      "id": 1
+                    },
+                    "role": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "member": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "condition": {
+                      "type": "google.type.Expr",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "Action": {
+                      "values": {
+                        "ACTION_UNSPECIFIED": 0,
+                        "ADD": 1,
+                        "REMOVE": 2
+                      }
+                    }
+                  }
+                },
+                "AuditConfigDelta": {
+                  "fields": {
+                    "action": {
+                      "type": "Action",
+                      "id": 1
+                    },
+                    "service": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "exemptedMember": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "logType": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "Action": {
+                      "values": {
+                        "ACTION_UNSPECIFIED": 0,
+                        "ADD": 1,
+                        "REMOVE": 2
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/expr;expr",
+            "java_multiple_files": true,
+            "java_outer_classname": "ExprProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Expr": {
+              "fields": {
+                "expression": {
+                  "type": "string",
+                  "id": 1
+                },
+                "title": {
+                  "type": "string",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "location": {
+                  "type": "string",
+                  "id": 4
                 }
               }
             }

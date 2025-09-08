@@ -1146,6 +1146,142 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_GetIamPolicy_async",
+            "title": "StorageControl getIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the IAM policy for a specified bucket. The `resource` field in the request should be `projects/_/buckets/{bucket}` for a bucket, or `projects/_/buckets/{bucket}/managedFolders/{managedFolder}` for a managed folder.",
+            "canonical": true,
+            "file": "storage_control.get_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetIamPolicy",
+                "fullName": "google.storage.control.v2.StorageControl.GetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "options",
+                        "type": ".google.iam.v1.GetPolicyOptions"
+                    }
+                ],
+                "resultType": ".google.iam.v1.Policy",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "GetIamPolicy",
+                    "fullName": "google.storage.control.v2.StorageControl.GetIamPolicy",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_SetIamPolicy_async",
+            "title": "StorageControl setIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an IAM policy for the specified bucket. The `resource` field in the request should be `projects/_/buckets/{bucket}` for a bucket, or `projects/_/buckets/{bucket}/managedFolders/{managedFolder}` for a managed folder.",
+            "canonical": true,
+            "file": "storage_control.set_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetIamPolicy",
+                "fullName": "google.storage.control.v2.StorageControl.SetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "policy",
+                        "type": ".google.iam.v1.Policy"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.iam.v1.Policy",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "SetIamPolicy",
+                    "fullName": "google.storage.control.v2.StorageControl.SetIamPolicy",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_TestIamPermissions_async",
+            "title": "StorageControl testIamPermissions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Tests a set of permissions on the given bucket, object, or managed folder to see which, if any, are held by the caller. The `resource` field in the request should be `projects/_/buckets/{bucket}` for a bucket, `projects/_/buckets/{bucket}/objects/{object}` for an object, or `projects/_/buckets/{bucket}/managedFolders/{managedFolder}` for a managed folder.",
+            "canonical": true,
+            "file": "storage_control.test_iam_permissions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TestIamPermissions",
+                "fullName": "google.storage.control.v2.StorageControl.TestIamPermissions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "permissions",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "TestIamPermissions",
+                    "fullName": "google.storage.control.v2.StorageControl.TestIamPermissions",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
         }
     ]
 }

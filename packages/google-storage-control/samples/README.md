@@ -21,6 +21,7 @@
   * [Storage_control.get_anywhere_cache](#storage_control.get_anywhere_cache)
   * [Storage_control.get_folder](#storage_control.get_folder)
   * [Storage_control.get_folder_intelligence_config](#storage_control.get_folder_intelligence_config)
+  * [Storage_control.get_iam_policy](#storage_control.get_iam_policy)
   * [Storage_control.get_managed_folder](#storage_control.get_managed_folder)
   * [Storage_control.get_organization_intelligence_config](#storage_control.get_organization_intelligence_config)
   * [Storage_control.get_project_intelligence_config](#storage_control.get_project_intelligence_config)
@@ -31,6 +32,8 @@
   * [Storage_control.pause_anywhere_cache](#storage_control.pause_anywhere_cache)
   * [Storage_control.rename_folder](#storage_control.rename_folder)
   * [Storage_control.resume_anywhere_cache](#storage_control.resume_anywhere_cache)
+  * [Storage_control.set_iam_policy](#storage_control.set_iam_policy)
+  * [Storage_control.test_iam_permissions](#storage_control.test_iam_permissions)
   * [Storage_control.update_anywhere_cache](#storage_control.update_anywhere_cache)
   * [Storage_control.update_folder_intelligence_config](#storage_control.update_folder_intelligence_config)
   * [Storage_control.update_organization_intelligence_config](#storage_control.update_organization_intelligence_config)
@@ -205,6 +208,23 @@ __Usage:__
 
 
 
+### Storage_control.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_iam_policy.js`
+
+
+-----
+
+
+
+
 ### Storage_control.get_managed_folder
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_managed_folder.js).
@@ -368,6 +388,40 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.resume_anywhere_cache.js`
+
+
+-----
+
+
+
+
+### Storage_control.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Storage_control.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.test_iam_permissions.js`
 
 
 -----
