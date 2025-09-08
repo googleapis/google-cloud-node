@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {DataFoundryServiceClient} from './data_foundry_service_client';
 export {DatasetServiceClient} from './dataset_service_client';
 export {DeploymentResourcePoolServiceClient} from './deployment_resource_pool_service_client';
 export {EndpointServiceClient} from './endpoint_service_client';

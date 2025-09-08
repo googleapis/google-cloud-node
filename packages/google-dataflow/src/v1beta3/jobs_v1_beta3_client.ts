@@ -414,7 +414,7 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -523,9 +523,9 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getJob request %j', request);
@@ -641,9 +641,9 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateJob request %j', request);
@@ -836,9 +836,9 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('snapshotJob request %j', request);
@@ -967,7 +967,7 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -1039,7 +1039,7 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
     });
     const defaultCallSettings = this._defaults['listJobs'];
@@ -1102,7 +1102,7 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
     });
     const defaultCallSettings = this._defaults['listJobs'];
@@ -1206,7 +1206,7 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
@@ -1277,7 +1277,7 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1339,7 +1339,7 @@ export class JobsV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);

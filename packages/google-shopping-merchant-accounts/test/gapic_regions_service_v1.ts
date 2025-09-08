@@ -475,6 +475,114 @@ describe('v1.RegionsServiceClient', () => {
         });
     });
 
+    describe('batchCreateRegions', () => {
+        it('invokes batchCreateRegions without error', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse()
+            );
+            client.innerApiCalls.batchCreateRegions = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreateRegions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateRegions without error using callback', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse()
+            );
+            client.innerApiCalls.batchCreateRegions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateRegions(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateRegions with error', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateRegions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateRegions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateRegions with closed client', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreateRegions(request), expectedError);
+        });
+    });
+
     describe('updateRegion', () => {
         it('invokes updateRegion without error', async () => {
             const client = new regionsserviceModule.v1.RegionsServiceClient({
@@ -587,6 +695,114 @@ describe('v1.RegionsServiceClient', () => {
         });
     });
 
+    describe('batchUpdateRegions', () => {
+        it('invokes batchUpdateRegions without error', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse()
+            );
+            client.innerApiCalls.batchUpdateRegions = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdateRegions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateRegions without error using callback', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse()
+            );
+            client.innerApiCalls.batchUpdateRegions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdateRegions(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateRegions with error', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdateRegions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdateRegions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdateRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateRegions with closed client', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdateRegions(request), expectedError);
+        });
+    });
+
     describe('deleteRegion', () => {
         it('invokes deleteRegion without error', async () => {
             const client = new regionsserviceModule.v1.RegionsServiceClient({
@@ -692,6 +908,114 @@ describe('v1.RegionsServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.deleteRegion(request), expectedError);
+        });
+    });
+
+    describe('batchDeleteRegions', () => {
+        it('invokes batchDeleteRegions without error', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.batchDeleteRegions = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeleteRegions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeleteRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeleteRegions without error using callback', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.batchDeleteRegions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeleteRegions(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeleteRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeleteRegions with error', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeleteRegions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeleteRegions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeleteRegions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteRegions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeleteRegions with closed client', async () => {
+            const client = new regionsserviceModule.v1.RegionsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeleteRegions(request), expectedError);
         });
     });
 

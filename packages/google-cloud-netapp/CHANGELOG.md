@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.13.0...netapp-v0.14.0) (2025-09-04)
+
+
+### Features
+
+* [netapp] add new fields for flex auto tiering ([#6670](https://github.com/googleapis/google-cloud-node/issues/6670)) ([ba6a497](https://github.com/googleapis/google-cloud-node/commit/ba6a4977e89c5769d302e1a18d5ad305cae1bfdd))
+
 ## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.12.0...netapp-v0.13.0) (2025-07-09)
 
 

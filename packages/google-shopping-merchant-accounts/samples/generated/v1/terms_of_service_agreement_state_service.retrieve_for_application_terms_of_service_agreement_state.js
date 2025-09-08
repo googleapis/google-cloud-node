@@ -35,7 +35,7 @@ function main(parent) {
   // const parent = 'abc123'
 
   // Imports the Accounts library
-  const {TermsOfServiceAgreementStateServiceClient} = require('@google-cloud/accounts').v1;
+  const {TermsOfServiceAgreementStateServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new TermsOfServiceAgreementStateServiceClient();

@@ -40,7 +40,7 @@ function main(regionCode, kind) {
   // const kind = {}
 
   // Imports the Accounts library
-  const {TermsOfServiceServiceClient} = require('@google-cloud/accounts').v1;
+  const {TermsOfServiceServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new TermsOfServiceServiceClient();

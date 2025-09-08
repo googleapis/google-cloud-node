@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.1.0...confidentialcomputing-v2.2.0) (2025-09-04)
+
+
+### Features
+
+* Add new `VerifyConfidentialSpace` and `VerifyConfidentialGke` rpcs and relevant fields ([7fd10b4](https://github.com/googleapis/google-cloud-node/commit/7fd10b45202d5031f6b283d9af2c15d72d76823d))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.0.1...confidentialcomputing-v2.1.0) (2025-07-09)
 
 

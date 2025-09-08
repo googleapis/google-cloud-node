@@ -820,6 +820,9 @@ export namespace google {
 
                             /** ReplicationStatus lastReplicationTime */
                             lastReplicationTime?: (google.protobuf.ITimestamp|null);
+
+                            /** ReplicationStatus softFailoverStartTime */
+                            softFailoverStartTime?: (google.protobuf.ITimestamp|null);
                         }
 
                         /** Represents a ReplicationStatus. */
@@ -839,6 +842,9 @@ export namespace google {
 
                             /** ReplicationStatus lastReplicationTime. */
                             public lastReplicationTime?: (google.protobuf.ITimestamp|null);
+
+                            /** ReplicationStatus softFailoverStartTime. */
+                            public softFailoverStartTime?: (google.protobuf.ITimestamp|null);
 
                             /**
                              * Creates a new ReplicationStatus instance using the specified properties.
@@ -1724,6 +1730,9 @@ export namespace google {
 
                         /** FailoverReservationRequest name */
                         name?: (string|null);
+
+                        /** FailoverReservationRequest failoverMode */
+                        failoverMode?: (google.cloud.bigquery.reservation.v1.FailoverMode|keyof typeof google.cloud.bigquery.reservation.v1.FailoverMode|null);
                     }
 
                     /** Represents a FailoverReservationRequest. */
@@ -1737,6 +1746,9 @@ export namespace google {
 
                         /** FailoverReservationRequest name. */
                         public name: string;
+
+                        /** FailoverReservationRequest failoverMode. */
+                        public failoverMode: (google.cloud.bigquery.reservation.v1.FailoverMode|keyof typeof google.cloud.bigquery.reservation.v1.FailoverMode);
 
                         /**
                          * Creates a new FailoverReservationRequest instance using the specified properties.
@@ -4392,6 +4404,13 @@ export namespace google {
                         STANDARD = 1,
                         ENTERPRISE = 2,
                         ENTERPRISE_PLUS = 3
+                    }
+
+                    /** FailoverMode enum. */
+                    enum FailoverMode {
+                        FAILOVER_MODE_UNSPECIFIED = 0,
+                        SOFT = 1,
+                        HARD = 2
                     }
                 }
             }

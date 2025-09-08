@@ -1037,6 +1037,7 @@
                          * @property {string|null} [tfVersion] Deployment tfVersion
                          * @property {google.cloud.config.v1.QuotaValidation|null} [quotaValidation] Deployment quotaValidation
                          * @property {Object.<string,string>|null} [annotations] Deployment annotations
+                         * @property {google.cloud.config.v1.IProviderConfig|null} [providerConfig] Deployment providerConfig
                          */
     
                         /**
@@ -1241,6 +1242,14 @@
                          */
                         Deployment.prototype.annotations = $util.emptyObject;
     
+                        /**
+                         * Deployment providerConfig.
+                         * @member {google.cloud.config.v1.IProviderConfig|null|undefined} providerConfig
+                         * @memberof google.cloud.config.v1.Deployment
+                         * @instance
+                         */
+                        Deployment.prototype.providerConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1358,6 +1367,8 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 24, wireType 2 =*/194).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.providerConfig != null && Object.hasOwnProperty.call(message, "providerConfig"))
+                                $root.google.cloud.config.v1.ProviderConfig.encode(message.providerConfig, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             return writer;
                         };
     
@@ -1524,6 +1535,10 @@
                                             }
                                         }
                                         message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 25: {
+                                        message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1704,6 +1719,11 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
+                            }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig")) {
+                                var error = $root.google.cloud.config.v1.ProviderConfig.verify(message.providerConfig);
+                                if (error)
+                                    return "providerConfig." + error;
                             }
                             return null;
                         };
@@ -1920,6 +1940,11 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.providerConfig != null) {
+                                if (typeof object.providerConfig !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Deployment.providerConfig: object expected");
+                                message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.fromObject(object.providerConfig);
+                            }
                             return message;
                         };
     
@@ -1957,6 +1982,7 @@
                                 object.lockState = options.enums === String ? "LOCK_STATE_UNSPECIFIED" : 0;
                                 object.tfVersion = "";
                                 object.quotaValidation = options.enums === String ? "QUOTA_VALIDATION_UNSPECIFIED" : 0;
+                                object.providerConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2032,6 +2058,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig"))
+                                object.providerConfig = $root.google.cloud.config.v1.ProviderConfig.toObject(message.providerConfig, options);
                             return object;
                         };
     
@@ -6107,6 +6135,7 @@
                          * @property {string|null} [tfVersion] Revision tfVersion
                          * @property {string|null} [quotaValidationResults] Revision quotaValidationResults
                          * @property {google.cloud.config.v1.QuotaValidation|null} [quotaValidation] Revision quotaValidation
+                         * @property {google.cloud.config.v1.IProviderConfig|null} [providerConfig] Revision providerConfig
                          */
     
                         /**
@@ -6285,6 +6314,14 @@
                          */
                         Revision.prototype.quotaValidation = 0;
     
+                        /**
+                         * Revision providerConfig.
+                         * @member {google.cloud.config.v1.IProviderConfig|null|undefined} providerConfig
+                         * @memberof google.cloud.config.v1.Revision
+                         * @instance
+                         */
+                        Revision.prototype.providerConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6362,6 +6399,8 @@
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.tfVersion);
                             if (message.quotaValidation != null && Object.hasOwnProperty.call(message, "quotaValidation"))
                                 writer.uint32(/* id 20, wireType 0 =*/160).int32(message.quotaValidation);
+                            if (message.providerConfig != null && Object.hasOwnProperty.call(message, "providerConfig"))
+                                $root.google.cloud.config.v1.ProviderConfig.encode(message.providerConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.quotaValidationResults != null && Object.hasOwnProperty.call(message, "quotaValidationResults"))
                                 writer.uint32(/* id 29, wireType 2 =*/234).string(message.quotaValidationResults);
                             return writer;
@@ -6480,6 +6519,10 @@
                                     }
                                 case 20: {
                                         message.quotaValidation = reader.int32();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -6623,6 +6666,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig")) {
+                                var error = $root.google.cloud.config.v1.ProviderConfig.verify(message.providerConfig);
+                                if (error)
+                                    return "providerConfig." + error;
+                            }
                             return null;
                         };
     
@@ -6786,6 +6834,11 @@
                                 message.quotaValidation = 2;
                                 break;
                             }
+                            if (object.providerConfig != null) {
+                                if (typeof object.providerConfig !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Revision.providerConfig: object expected");
+                                message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.fromObject(object.providerConfig);
+                            }
                             return message;
                         };
     
@@ -6822,6 +6875,7 @@
                                 object.tfVersionConstraint = "";
                                 object.tfVersion = "";
                                 object.quotaValidation = options.enums === String ? "QUOTA_VALIDATION_UNSPECIFIED" : 0;
+                                object.providerConfig = null;
                                 object.quotaValidationResults = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -6868,6 +6922,8 @@
                                 object.tfVersion = message.tfVersion;
                             if (message.quotaValidation != null && message.hasOwnProperty("quotaValidation"))
                                 object.quotaValidation = options.enums === String ? $root.google.cloud.config.v1.QuotaValidation[message.quotaValidation] === undefined ? message.quotaValidation : $root.google.cloud.config.v1.QuotaValidation[message.quotaValidation] : message.quotaValidation;
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig"))
+                                object.providerConfig = $root.google.cloud.config.v1.ProviderConfig.toObject(message.providerConfig, options);
                             if (message.quotaValidationResults != null && message.hasOwnProperty("quotaValidationResults"))
                                 object.quotaValidationResults = message.quotaValidationResults;
                             return object;
@@ -11790,6 +11846,7 @@
                          * @property {string|null} [tfVersion] Preview tfVersion
                          * @property {string|null} [tfVersionConstraint] Preview tfVersionConstraint
                          * @property {Object.<string,string>|null} [annotations] Preview annotations
+                         * @property {google.cloud.config.v1.IProviderConfig|null} [providerConfig] Preview providerConfig
                          */
     
                         /**
@@ -11970,6 +12027,14 @@
                          */
                         Preview.prototype.annotations = $util.emptyObject;
     
+                        /**
+                         * Preview providerConfig.
+                         * @member {google.cloud.config.v1.IProviderConfig|null|undefined} providerConfig
+                         * @memberof google.cloud.config.v1.Preview
+                         * @instance
+                         */
+                        Preview.prototype.providerConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -12069,6 +12134,8 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 20, wireType 2 =*/162).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.providerConfig != null && Object.hasOwnProperty.call(message, "providerConfig"))
+                                $root.google.cloud.config.v1.ProviderConfig.encode(message.providerConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -12223,6 +12290,10 @@
                                             }
                                         }
                                         message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 21: {
+                                        message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -12380,6 +12451,11 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
+                            }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig")) {
+                                var error = $root.google.cloud.config.v1.ProviderConfig.verify(message.providerConfig);
+                                if (error)
+                                    return "providerConfig." + error;
                             }
                             return null;
                         };
@@ -12556,6 +12632,11 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.providerConfig != null) {
+                                if (typeof object.providerConfig !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Preview.providerConfig: object expected");
+                                message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.fromObject(object.providerConfig);
+                            }
                             return message;
                         };
     
@@ -12592,6 +12673,7 @@
                                 object.previewArtifacts = null;
                                 object.logs = "";
                                 object.tfVersion = "";
+                                object.providerConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12655,6 +12737,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig"))
+                                object.providerConfig = $root.google.cloud.config.v1.ProviderConfig.toObject(message.providerConfig, options);
                             return object;
                         };
     
@@ -19983,6 +20067,257 @@
                         };
     
                         return GetResourceDriftRequest;
+                    })();
+    
+                    v1.ProviderConfig = (function() {
+    
+                        /**
+                         * Properties of a ProviderConfig.
+                         * @memberof google.cloud.config.v1
+                         * @interface IProviderConfig
+                         * @property {google.cloud.config.v1.ProviderConfig.ProviderSource|null} [sourceType] ProviderConfig sourceType
+                         */
+    
+                        /**
+                         * Constructs a new ProviderConfig.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ProviderConfig.
+                         * @implements IProviderConfig
+                         * @constructor
+                         * @param {google.cloud.config.v1.IProviderConfig=} [properties] Properties to set
+                         */
+                        function ProviderConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProviderConfig sourceType.
+                         * @member {google.cloud.config.v1.ProviderConfig.ProviderSource|null|undefined} sourceType
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @instance
+                         */
+                        ProviderConfig.prototype.sourceType = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ProviderConfig.prototype, "_sourceType", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ProviderConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IProviderConfig=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig instance
+                         */
+                        ProviderConfig.create = function create(properties) {
+                            return new ProviderConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProviderConfig message. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IProviderConfig} message ProviderConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProviderConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceType != null && Object.hasOwnProperty.call(message, "sourceType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.sourceType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProviderConfig message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IProviderConfig} message ProviderConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProviderConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProviderConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProviderConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ProviderConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProviderConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProviderConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProviderConfig message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProviderConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.sourceType != null && message.hasOwnProperty("sourceType")) {
+                                properties._sourceType = 1;
+                                switch (message.sourceType) {
+                                default:
+                                    return "sourceType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProviderConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig
+                         */
+                        ProviderConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ProviderConfig)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ProviderConfig();
+                            switch (object.sourceType) {
+                            default:
+                                if (typeof object.sourceType === "number") {
+                                    message.sourceType = object.sourceType;
+                                    break;
+                                }
+                                break;
+                            case "PROVIDER_SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.sourceType = 0;
+                                break;
+                            case "SERVICE_MAINTAINED":
+                            case 1:
+                                message.sourceType = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProviderConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.ProviderConfig} message ProviderConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProviderConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.sourceType != null && message.hasOwnProperty("sourceType")) {
+                                object.sourceType = options.enums === String ? $root.google.cloud.config.v1.ProviderConfig.ProviderSource[message.sourceType] === undefined ? message.sourceType : $root.google.cloud.config.v1.ProviderConfig.ProviderSource[message.sourceType] : message.sourceType;
+                                if (options.oneofs)
+                                    object._sourceType = "sourceType";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProviderConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProviderConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProviderConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProviderConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ProviderConfig";
+                        };
+    
+                        /**
+                         * ProviderSource enum.
+                         * @name google.cloud.config.v1.ProviderConfig.ProviderSource
+                         * @enum {number}
+                         * @property {number} PROVIDER_SOURCE_UNSPECIFIED=0 PROVIDER_SOURCE_UNSPECIFIED value
+                         * @property {number} SERVICE_MAINTAINED=1 SERVICE_MAINTAINED value
+                         */
+                        ProviderConfig.ProviderSource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVIDER_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVICE_MAINTAINED"] = 1;
+                            return values;
+                        })();
+    
+                        return ProviderConfig;
                     })();
     
                     return v1;

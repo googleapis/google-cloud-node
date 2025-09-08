@@ -80,6 +80,36 @@
                 "testIamPermissions"
               ]
             },
+            "CreateQueryTemplate": {
+              "methods": [
+                "createQueryTemplate"
+              ]
+            },
+            "GetQueryTemplate": {
+              "methods": [
+                "getQueryTemplate"
+              ]
+            },
+            "UpdateQueryTemplate": {
+              "methods": [
+                "updateQueryTemplate"
+              ]
+            },
+            "DeleteQueryTemplate": {
+              "methods": [
+                "deleteQueryTemplate"
+              ]
+            },
+            "SubmitQueryTemplate": {
+              "methods": [
+                "submitQueryTemplate"
+              ]
+            },
+            "ApproveQueryTemplate": {
+              "methods": [
+                "approveQueryTemplate"
+              ]
+            },
             "SubscribeDataExchange": {
               "methods": [
                 "subscribeDataExchange"
@@ -128,6 +158,13 @@
                 "listSharedResourceSubscriptions",
                 "listSharedResourceSubscriptionsStream",
                 "listSharedResourceSubscriptionsAsync"
+              ]
+            },
+            "ListQueryTemplates": {
+              "methods": [
+                "listQueryTemplates",
+                "listQueryTemplatesStream",
+                "listQueryTemplatesAsync"
               ]
             }
           }
@@ -205,6 +242,36 @@
                 "testIamPermissions"
               ]
             },
+            "CreateQueryTemplate": {
+              "methods": [
+                "createQueryTemplate"
+              ]
+            },
+            "GetQueryTemplate": {
+              "methods": [
+                "getQueryTemplate"
+              ]
+            },
+            "UpdateQueryTemplate": {
+              "methods": [
+                "updateQueryTemplate"
+              ]
+            },
+            "DeleteQueryTemplate": {
+              "methods": [
+                "deleteQueryTemplate"
+              ]
+            },
+            "SubmitQueryTemplate": {
+              "methods": [
+                "submitQueryTemplate"
+              ]
+            },
+            "ApproveQueryTemplate": {
+              "methods": [
+                "approveQueryTemplate"
+              ]
+            },
             "SubscribeDataExchange": {
               "methods": [
                 "subscribeDataExchange"
@@ -253,6 +320,13 @@
                 "listSharedResourceSubscriptions",
                 "listSharedResourceSubscriptionsStream",
                 "listSharedResourceSubscriptionsAsync"
+              ]
+            },
+            "ListQueryTemplates": {
+              "methods": [
+                "listQueryTemplates",
+                "listQueryTemplatesStream",
+                "listQueryTemplatesAsync"
               ]
             }
           }

@@ -4294,6 +4294,22 @@
                                 }
                               ]
                             },
+                            "BatchCreateRegions": {
+                              "requestType": "BatchCreateRegionsRequest",
+                              "responseType": "BatchCreateRegionsResponse",
+                              "options": {
+                                "(google.api.http).post": "/accounts/v1/{parent=accounts/*}/regions:batchCreate",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/accounts/v1/{parent=accounts/*}/regions:batchCreate",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            },
                             "UpdateRegion": {
                               "requestType": "UpdateRegionRequest",
                               "responseType": "Region",
@@ -4314,6 +4330,22 @@
                                 }
                               ]
                             },
+                            "BatchUpdateRegions": {
+                              "requestType": "BatchUpdateRegionsRequest",
+                              "responseType": "BatchUpdateRegionsResponse",
+                              "options": {
+                                "(google.api.http).post": "/accounts/v1/{parent=accounts/*}/regions:batchUpdate",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/accounts/v1/{parent=accounts/*}/regions:batchUpdate",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            },
                             "DeleteRegion": {
                               "requestType": "DeleteRegionRequest",
                               "responseType": "google.protobuf.Empty",
@@ -4329,6 +4361,22 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "BatchDeleteRegions": {
+                              "requestType": "BatchDeleteRegionsRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).post": "/accounts/v1/{parent=accounts/*}/regions:batchDelete",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/accounts/v1/{parent=accounts/*}/regions:batchDelete",
+                                    "body": "*"
+                                  }
                                 }
                               ]
                             },
@@ -4390,6 +4438,35 @@
                             }
                           }
                         },
+                        "BatchCreateRegionsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "requests": {
+                              "rule": "repeated",
+                              "type": "CreateRegionRequest",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "BatchCreateRegionsResponse": {
+                          "fields": {
+                            "regions": {
+                              "rule": "repeated",
+                              "type": "Region",
+                              "id": 1
+                            }
+                          }
+                        },
                         "UpdateRegionRequest": {
                           "fields": {
                             "region": {
@@ -4408,6 +4485,35 @@
                             }
                           }
                         },
+                        "BatchUpdateRegionsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "requests": {
+                              "rule": "repeated",
+                              "type": "UpdateRegionRequest",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "BatchUpdateRegionsResponse": {
+                          "fields": {
+                            "regions": {
+                              "rule": "repeated",
+                              "type": "Region",
+                              "id": 1
+                            }
+                          }
+                        },
                         "DeleteRegionRequest": {
                           "fields": {
                             "name": {
@@ -4416,6 +4522,26 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/Region"
+                              }
+                            }
+                          }
+                        },
+                        "BatchDeleteRegionsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "requests": {
+                              "rule": "repeated",
+                              "type": "DeleteRegionRequest",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }

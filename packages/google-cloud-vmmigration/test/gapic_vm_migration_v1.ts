@@ -25,7 +25,7 @@ import * as vmmigrationModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -1352,6 +1352,330 @@ describe('v1.VmMigrationClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getReplicationCycle(request), expectedError);
+        });
+    });
+
+    describe('getImageImport', () => {
+        it('invokes getImageImport without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ImageImport()
+            );
+            client.innerApiCalls.getImageImport = stubSimpleCall(expectedResponse);
+            const [response] = await client.getImageImport(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImageImport without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ImageImport()
+            );
+            client.innerApiCalls.getImageImport = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getImageImport(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.vmmigration.v1.IImageImport|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImageImport with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getImageImport = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getImageImport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImageImport with closed client', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getImageImport(request), expectedError);
+        });
+    });
+
+    describe('getImageImportJob', () => {
+        it('invokes getImageImportJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ImageImportJob()
+            );
+            client.innerApiCalls.getImageImportJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.getImageImportJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImageImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImageImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImageImportJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ImageImportJob()
+            );
+            client.innerApiCalls.getImageImportJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getImageImportJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.vmmigration.v1.IImageImportJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImageImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImageImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImageImportJob with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getImageImportJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getImageImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getImageImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImageImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImageImportJob with closed client', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getImageImportJob(request), expectedError);
+        });
+    });
+
+    describe('getDiskMigrationJob', () => {
+        it('invokes getDiskMigrationJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DiskMigrationJob()
+            );
+            client.innerApiCalls.getDiskMigrationJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDiskMigrationJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDiskMigrationJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DiskMigrationJob()
+            );
+            client.innerApiCalls.getDiskMigrationJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDiskMigrationJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.vmmigration.v1.IDiskMigrationJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDiskMigrationJob with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDiskMigrationJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDiskMigrationJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDiskMigrationJob with closed client', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.GetDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDiskMigrationJob(request), expectedError);
         });
     });
 
@@ -3673,6 +3997,160 @@ describe('v1.VmMigrationClient', () => {
         });
     });
 
+    describe('extendMigration', () => {
+        it('invokes extendMigration without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ExtendMigrationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ExtendMigrationRequest', ['migratingVm']);
+            request.migratingVm = defaultValue1;
+            const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.extendMigration = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.extendMigration(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes extendMigration without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ExtendMigrationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ExtendMigrationRequest', ['migratingVm']);
+            request.migratingVm = defaultValue1;
+            const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.extendMigration = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.extendMigration(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vmmigration.v1.IExtendMigrationResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vmmigration.v1.IExtendMigrationResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes extendMigration with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ExtendMigrationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ExtendMigrationRequest', ['migratingVm']);
+            request.migratingVm = defaultValue1;
+            const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.extendMigration = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.extendMigration(request), expectedError);
+            const actualRequest = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes extendMigration with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ExtendMigrationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ExtendMigrationRequest', ['migratingVm']);
+            request.migratingVm = defaultValue1;
+            const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.extendMigration = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.extendMigration(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.extendMigration as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExtendMigrationProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExtendMigrationProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExtendMigrationProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExtendMigrationProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('createCloneJob', () => {
         it('invokes createCloneJob without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
@@ -5529,6 +6007,1242 @@ describe('v1.VmMigrationClient', () => {
         });
     });
 
+    describe('createImageImport', () => {
+        it('invokes createImageImport without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateImageImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createImageImport = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createImageImport(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImageImport without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateImageImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createImageImport = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createImageImport(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vmmigration.v1.IImageImport, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vmmigration.v1.IImageImport, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImageImport with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateImageImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createImageImport = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createImageImport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImageImport with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateImageImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createImageImport = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createImageImport(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateImageImportProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateImageImportProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateImageImportProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateImageImportProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteImageImport', () => {
+        it('invokes deleteImageImport without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteImageImport = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteImageImport(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImageImport without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteImageImport = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteImageImport(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImageImport with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteImageImport = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteImageImport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImageImport with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteImageImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteImageImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteImageImport = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteImageImport(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImageImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteImageImportProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteImageImportProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteImageImportProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteImageImportProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('cancelImageImportJob', () => {
+        it('invokes cancelImageImportJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.cancelImageImportJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.cancelImageImportJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelImageImportJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.cancelImageImportJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelImageImportJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vmmigration.v1.ICancelImageImportJobResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vmmigration.v1.ICancelImageImportJobResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelImageImportJob with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelImageImportJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.cancelImageImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelImageImportJob with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelImageImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelImageImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelImageImportJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.cancelImageImportJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelImageImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCancelImageImportJobProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCancelImageImportJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCancelImageImportJobProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCancelImageImportJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createDiskMigrationJob', () => {
+        it('invokes createDiskMigrationJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDiskMigrationJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createDiskMigrationJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDiskMigrationJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDiskMigrationJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDiskMigrationJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vmmigration.v1.IDiskMigrationJob, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vmmigration.v1.IDiskMigrationJob, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDiskMigrationJob with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDiskMigrationJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createDiskMigrationJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDiskMigrationJob with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CreateDiskMigrationJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDiskMigrationJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createDiskMigrationJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateDiskMigrationJobProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateDiskMigrationJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateDiskMigrationJobProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateDiskMigrationJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateDiskMigrationJob', () => {
+        it('invokes updateDiskMigrationJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest()
+            );
+            request.diskMigrationJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest', ['diskMigrationJob', 'name']);
+            request.diskMigrationJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `disk_migration_job.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateDiskMigrationJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateDiskMigrationJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDiskMigrationJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest()
+            );
+            request.diskMigrationJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest', ['diskMigrationJob', 'name']);
+            request.diskMigrationJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `disk_migration_job.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateDiskMigrationJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDiskMigrationJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vmmigration.v1.IDiskMigrationJob, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vmmigration.v1.IDiskMigrationJob, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDiskMigrationJob with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest()
+            );
+            request.diskMigrationJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest', ['diskMigrationJob', 'name']);
+            request.diskMigrationJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `disk_migration_job.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDiskMigrationJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateDiskMigrationJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDiskMigrationJob with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest()
+            );
+            request.diskMigrationJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.UpdateDiskMigrationJobRequest', ['diskMigrationJob', 'name']);
+            request.diskMigrationJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `disk_migration_job.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDiskMigrationJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateDiskMigrationJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateDiskMigrationJobProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateDiskMigrationJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateDiskMigrationJobProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateDiskMigrationJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteDiskMigrationJob', () => {
+        it('invokes deleteDiskMigrationJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDiskMigrationJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteDiskMigrationJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDiskMigrationJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDiskMigrationJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDiskMigrationJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDiskMigrationJob with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDiskMigrationJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteDiskMigrationJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDiskMigrationJob with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.DeleteDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDiskMigrationJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteDiskMigrationJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteDiskMigrationJobProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteDiskMigrationJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteDiskMigrationJobProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteDiskMigrationJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('runDiskMigrationJob', () => {
+        it('invokes runDiskMigrationJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.runDiskMigrationJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.runDiskMigrationJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runDiskMigrationJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.runDiskMigrationJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.runDiskMigrationJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vmmigration.v1.IRunDiskMigrationJobResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vmmigration.v1.IRunDiskMigrationJobResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runDiskMigrationJob with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runDiskMigrationJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.runDiskMigrationJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runDiskMigrationJob with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.RunDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runDiskMigrationJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.runDiskMigrationJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRunDiskMigrationJobProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRunDiskMigrationJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRunDiskMigrationJobProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRunDiskMigrationJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('cancelDiskMigrationJob', () => {
+        it('invokes cancelDiskMigrationJob without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.cancelDiskMigrationJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.cancelDiskMigrationJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelDiskMigrationJob without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.cancelDiskMigrationJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelDiskMigrationJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vmmigration.v1.ICancelDiskMigrationJobResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vmmigration.v1.ICancelDiskMigrationJobResponse, protos.google.cloud.vmmigration.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelDiskMigrationJob with call error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelDiskMigrationJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.cancelDiskMigrationJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelDiskMigrationJob with LRO error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.CancelDiskMigrationJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelDiskMigrationJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.cancelDiskMigrationJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelDiskMigrationJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCancelDiskMigrationJobProgress without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCancelDiskMigrationJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCancelDiskMigrationJobProgress with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCancelDiskMigrationJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listSources', () => {
         it('invokes listSources without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
@@ -5767,6 +7481,251 @@ describe('v1.VmMigrationClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('fetchStorageInventory', () => {
+        it('invokes fetchStorageInventory without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.FetchStorageInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.FetchStorageInventoryRequest', ['source']);
+            request.source = defaultValue1;
+            const expectedHeaderRequestParams = `source=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+            ];
+            client.innerApiCalls.fetchStorageInventory = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchStorageInventory(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchStorageInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchStorageInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchStorageInventory without error using callback', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.FetchStorageInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.FetchStorageInventoryRequest', ['source']);
+            request.source = defaultValue1;
+            const expectedHeaderRequestParams = `source=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+            ];
+            client.innerApiCalls.fetchStorageInventory = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchStorageInventory(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.vmmigration.v1.ISourceStorageResource[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchStorageInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchStorageInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchStorageInventory with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.FetchStorageInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.FetchStorageInventoryRequest', ['source']);
+            request.source = defaultValue1;
+            const expectedHeaderRequestParams = `source=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchStorageInventory = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchStorageInventory(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchStorageInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchStorageInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchStorageInventoryStream without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.FetchStorageInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.FetchStorageInventoryRequest', ['source']);
+            request.source = defaultValue1;
+            const expectedHeaderRequestParams = `source=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+            ];
+            client.descriptors.page.fetchStorageInventory.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.fetchStorageInventoryStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.SourceStorageResource[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.SourceStorageResource) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.fetchStorageInventory.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchStorageInventory, request));
+            assert(
+                (client.descriptors.page.fetchStorageInventory.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes fetchStorageInventoryStream with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.FetchStorageInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.FetchStorageInventoryRequest', ['source']);
+            request.source = defaultValue1;
+            const expectedHeaderRequestParams = `source=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchStorageInventory.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.fetchStorageInventoryStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.SourceStorageResource[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.SourceStorageResource) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.fetchStorageInventory.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchStorageInventory, request));
+            assert(
+                (client.descriptors.page.fetchStorageInventory.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with fetchStorageInventory without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.FetchStorageInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.FetchStorageInventoryRequest', ['source']);
+            request.source = defaultValue1;
+            const expectedHeaderRequestParams = `source=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.SourceStorageResource()),
+            ];
+            client.descriptors.page.fetchStorageInventory.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.vmmigration.v1.ISourceStorageResource[] = [];
+            const iterable = client.fetchStorageInventoryAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchStorageInventory.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchStorageInventory.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with fetchStorageInventory with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.FetchStorageInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.FetchStorageInventoryRequest', ['source']);
+            request.source = defaultValue1;
+            const expectedHeaderRequestParams = `source=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchStorageInventory.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.fetchStorageInventoryAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.vmmigration.v1.ISourceStorageResource[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchStorageInventory.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchStorageInventory.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -7733,280 +9692,739 @@ describe('v1.VmMigrationClient', () => {
             );
         });
     });
-    describe('getIamPolicy', () => {
-        it('invokes getIamPolicy without error', async () => {
+
+    describe('listImageImports', () => {
+        it('invokes listImageImports without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+              new protos.google.cloud.vmmigration.v1.ListImageImportsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.getIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+            ];
+            client.innerApiCalls.listImageImports = stubSimpleCall(expectedResponse);
+            const [response] = await client.listImageImports(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImageImports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageImports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        it('invokes getIamPolicy without error using callback', async () => {
+
+        it('invokes listImageImports without error using callback', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+              new protos.google.cloud.vmmigration.v1.ListImageImportsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+            ];
+            client.innerApiCalls.listImageImports = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.getIamPolicy(
+                 client.listImageImports(
                     request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                    (err?: Error|null, result?: protos.google.cloud.vmmigration.v1.IImageImport[]|null) => {
                         if (err) {
                             reject(err);
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    });
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0));
+            const actualRequest = (client.innerApiCalls.listImageImports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageImports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        it('invokes getIamPolicy with error', async () => {
+
+        it('invokes listImageImports with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listImageImports = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listImageImports(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listImageImports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageImports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listImageImportsStream without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+            ];
+            client.descriptors.page.listImageImports.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listImageImportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.ImageImport[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.ImageImport) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listImageImports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImageImports, request));
+            assert(
+                (client.descriptors.page.listImageImports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listImageImportsStream with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImageImports.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listImageImportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.ImageImport[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.ImageImport) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listImageImports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImageImports, request));
+            assert(
+                (client.descriptors.page.listImageImports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listImageImports without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+              new protos.google.cloud.vmmigration.v1.ListImageImportsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImport()),
+            ];
+            client.descriptors.page.listImageImports.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.vmmigration.v1.IImageImport[] = [];
+            const iterable = client.listImageImportsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listImageImports with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
+            client.descriptors.page.listImageImports.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listImageImportsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.vmmigration.v1.IImageImport[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
     });
-    describe('setIamPolicy', () => {
-        it('invokes setIamPolicy without error', async () => {
+
+    describe('listImageImportJobs', () => {
+        it('invokes listImageImportJobs without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+              new protos.google.cloud.vmmigration.v1.ListImageImportJobsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.setIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+            ];
+            client.innerApiCalls.listImageImportJobs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listImageImportJobs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImageImportJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageImportJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        it('invokes setIamPolicy without error using callback', async () => {
+
+        it('invokes listImageImportJobs without error using callback', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+              new protos.google.cloud.vmmigration.v1.ListImageImportJobsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+            ];
+            client.innerApiCalls.listImageImportJobs = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.setIamPolicy(
+                 client.listImageImportJobs(
                     request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                    (err?: Error|null, result?: protos.google.cloud.vmmigration.v1.IImageImportJob[]|null) => {
                         if (err) {
                             reject(err);
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    });
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0));
+            const actualRequest = (client.innerApiCalls.listImageImportJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageImportJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        it('invokes setIamPolicy with error', async () => {
+
+        it('invokes listImageImportJobs with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listImageImportJobs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listImageImportJobs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listImageImportJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageImportJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listImageImportJobsStream without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+            ];
+            client.descriptors.page.listImageImportJobs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listImageImportJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.ImageImportJob[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.ImageImportJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listImageImportJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImageImportJobs, request));
+            assert(
+                (client.descriptors.page.listImageImportJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listImageImportJobsStream with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImageImportJobs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listImageImportJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.ImageImportJob[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.ImageImportJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listImageImportJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImageImportJobs, request));
+            assert(
+                (client.descriptors.page.listImageImportJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listImageImportJobs without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+              new protos.google.cloud.vmmigration.v1.ListImageImportJobsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.ImageImportJob()),
+            ];
+            client.descriptors.page.listImageImportJobs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.vmmigration.v1.IImageImportJob[] = [];
+            const iterable = client.listImageImportJobsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listImageImportJobs with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListImageImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListImageImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
+            client.descriptors.page.listImageImportJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listImageImportJobsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.vmmigration.v1.IImageImportJob[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
     });
-    describe('testIamPermissions', () => {
-        it('invokes testIamPermissions without error', async () => {
+
+    describe('listDiskMigrationJobs', () => {
+        it('invokes listDiskMigrationJobs without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+              new protos.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-            const response = await client.testIamPermissions(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+            ];
+            client.innerApiCalls.listDiskMigrationJobs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDiskMigrationJobs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDiskMigrationJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDiskMigrationJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        it('invokes testIamPermissions without error using callback', async () => {
+
+        it('invokes listDiskMigrationJobs without error using callback', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+              new protos.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+            ];
+            client.innerApiCalls.listDiskMigrationJobs = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.testIamPermissions(
+                 client.listDiskMigrationJobs(
                     request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
+                    (err?: Error|null, result?: protos.google.cloud.vmmigration.v1.IDiskMigrationJob[]|null) => {
                         if (err) {
                             reject(err);
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    });
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0));
+            const actualRequest = (client.innerApiCalls.listDiskMigrationJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDiskMigrationJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        it('invokes testIamPermissions with error', async () => {
+
+        it('invokes listDiskMigrationJobs with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDiskMigrationJobs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDiskMigrationJobs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDiskMigrationJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDiskMigrationJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDiskMigrationJobsStream without error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+            ];
+            client.descriptors.page.listDiskMigrationJobs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDiskMigrationJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.DiskMigrationJob[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.DiskMigrationJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDiskMigrationJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDiskMigrationJobs, request));
+            assert(
+                (client.descriptors.page.listDiskMigrationJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDiskMigrationJobsStream with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDiskMigrationJobs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDiskMigrationJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.vmmigration.v1.DiskMigrationJob[] = [];
+                stream.on('data', (response: protos.google.cloud.vmmigration.v1.DiskMigrationJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDiskMigrationJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDiskMigrationJobs, request));
+            assert(
+                (client.descriptors.page.listDiskMigrationJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDiskMigrationJobs without error', async () => {
             const client = new vmmigrationModule.v1.VmMigrationClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+              new protos.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest()
             );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+              generateSampleMessage(new protos.google.cloud.vmmigration.v1.DiskMigrationJob()),
+            ];
+            client.descriptors.page.listDiskMigrationJobs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.vmmigration.v1.IDiskMigrationJob[] = [];
+            const iterable = client.listDiskMigrationJobsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDiskMigrationJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDiskMigrationJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDiskMigrationJobs with error', async () => {
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vmmigration.v1.ListDiskMigrationJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
+            client.descriptors.page.listDiskMigrationJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDiskMigrationJobsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.vmmigration.v1.IDiskMigrationJob[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDiskMigrationJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDiskMigrationJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
     });
     describe('getLocation', () => {
@@ -8495,6 +10913,60 @@ describe('v1.VmMigrationClient', () => {
             });
         });
 
+        describe('cryptoKey', async () => {
+            const fakePath = "/rendered/path/cryptoKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+            };
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyPath', () => {
+                const result = client.cryptoKeyPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyName', () => {
+                const result = client.matchProjectFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyName', () => {
+                const result = client.matchLocationFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromCryptoKeyName', () => {
+                const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('cutoverJob', async () => {
             const fakePath = "/rendered/path/cutoverJob";
             const expectedParameters = {
@@ -8611,6 +11083,60 @@ describe('v1.VmMigrationClient', () => {
             });
         });
 
+        describe('diskMigrationJob', async () => {
+            const fakePath = "/rendered/path/diskMigrationJob";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                source: "sourceValue",
+                disk_migration_job: "diskMigrationJobValue",
+            };
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.diskMigrationJobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.diskMigrationJobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('diskMigrationJobPath', () => {
+                const result = client.diskMigrationJobPath("projectValue", "locationValue", "sourceValue", "diskMigrationJobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.diskMigrationJobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDiskMigrationJobName', () => {
+                const result = client.matchProjectFromDiskMigrationJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.diskMigrationJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDiskMigrationJobName', () => {
+                const result = client.matchLocationFromDiskMigrationJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.diskMigrationJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromDiskMigrationJobName', () => {
+                const result = client.matchSourceFromDiskMigrationJobName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.diskMigrationJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiskMigrationJobFromDiskMigrationJobName', () => {
+                const result = client.matchDiskMigrationJobFromDiskMigrationJobName(fakePath);
+                assert.strictEqual(result, "diskMigrationJobValue");
+                assert((client.pathTemplates.diskMigrationJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('group', async () => {
             const fakePath = "/rendered/path/group";
             const expectedParameters = {
@@ -8653,6 +11179,106 @@ describe('v1.VmMigrationClient', () => {
                 const result = client.matchGroupFromGroupName(fakePath);
                 assert.strictEqual(result, "groupValue");
                 assert((client.pathTemplates.groupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('imageImport', async () => {
+            const fakePath = "/rendered/path/imageImport";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                job: "jobValue",
+            };
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.imageImportPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.imageImportPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('imageImportPath', () => {
+                const result = client.imageImportPath("projectValue", "locationValue", "jobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.imageImportPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromImageImportName', () => {
+                const result = client.matchProjectFromImageImportName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.imageImportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromImageImportName', () => {
+                const result = client.matchLocationFromImageImportName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.imageImportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromImageImportName', () => {
+                const result = client.matchJobFromImageImportName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.imageImportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('imageImportJob', async () => {
+            const fakePath = "/rendered/path/imageImportJob";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                job: "jobValue",
+                result: "resultValue",
+            };
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.imageImportJobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.imageImportJobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('imageImportJobPath', () => {
+                const result = client.imageImportJobPath("projectValue", "locationValue", "jobValue", "resultValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.imageImportJobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromImageImportJobName', () => {
+                const result = client.matchProjectFromImageImportJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.imageImportJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromImageImportJobName', () => {
+                const result = client.matchLocationFromImageImportJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.imageImportJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromImageImportJobName', () => {
+                const result = client.matchJobFromImageImportJobName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.imageImportJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchResultFromImageImportJobName', () => {
+                const result = client.matchResultFromImageImportJobName(fakePath);
+                assert.strictEqual(result, "resultValue");
+                assert((client.pathTemplates.imageImportJobPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -8837,6 +11463,44 @@ describe('v1.VmMigrationClient', () => {
                 const result = client.matchReplicationCycleFromReplicationCycleName(fakePath);
                 assert.strictEqual(result, "replicationCycleValue");
                 assert((client.pathTemplates.replicationCyclePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('serviceAccount', async () => {
+            const fakePath = "/rendered/path/serviceAccount";
+            const expectedParameters = {
+                project: "projectValue",
+                service_account: "serviceAccountValue",
+            };
+            const client = new vmmigrationModule.v1.VmMigrationClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.serviceAccountPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.serviceAccountPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('serviceAccountPath', () => {
+                const result = client.serviceAccountPath("projectValue", "serviceAccountValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.serviceAccountPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceAccountName', () => {
+                const result = client.matchProjectFromServiceAccountName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceAccountFromServiceAccountName', () => {
+                const result = client.matchServiceAccountFromServiceAccountName(fakePath);
+                assert.strictEqual(result, "serviceAccountValue");
+                assert((client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

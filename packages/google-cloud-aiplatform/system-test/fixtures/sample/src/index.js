@@ -21,6 +21,7 @@
 const aiplatform = require('@google-cloud/aiplatform');
 
 function main() {
+  const dataFoundryServiceClient = new aiplatform.DataFoundryServiceClient();
   const datasetServiceClient = new aiplatform.DatasetServiceClient();
   const deploymentResourcePoolServiceClient = new aiplatform.DeploymentResourcePoolServiceClient();
   const endpointServiceClient = new aiplatform.EndpointServiceClient();

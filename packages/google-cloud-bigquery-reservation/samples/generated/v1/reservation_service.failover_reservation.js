@@ -33,6 +33,12 @@ function main(name) {
    *     `projects/myproject/locations/US/reservations/team1-prod`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. A parameter that determines how writes that are pending
+   *  replication are handled after a failover is initiated. If not specified,
+   *  HARD failover mode is used by default.
+   */
+  // const failoverMode = {}
 
   // Imports the Reservation library
   const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;
