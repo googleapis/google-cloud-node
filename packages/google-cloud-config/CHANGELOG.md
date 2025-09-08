@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.10.0...config-v0.11.0) (2025-09-04)
+
+
+### Features
+
+* [infra-manager] added support for service maintained provider ([#6651](https://github.com/googleapis/google-cloud-node/issues/6651)) ([4aff726](https://github.com/googleapis/google-cloud-node/commit/4aff726fbe811a53f24c6b5c883052716f897205))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.9.0...config-v0.10.0) (2025-07-17)
 
 

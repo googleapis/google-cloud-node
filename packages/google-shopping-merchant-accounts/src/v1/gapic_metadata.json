@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.shopping.merchant.accounts.v1",
-  "libraryPackage": "@google-cloud/accounts",
+  "libraryPackage": "@google-shopping/accounts",
   "services": {
     "AccountIssueService": {
       "clients": {
@@ -828,14 +828,29 @@
                 "createRegion"
               ]
             },
+            "BatchCreateRegions": {
+              "methods": [
+                "batchCreateRegions"
+              ]
+            },
             "UpdateRegion": {
               "methods": [
                 "updateRegion"
               ]
             },
+            "BatchUpdateRegions": {
+              "methods": [
+                "batchUpdateRegions"
+              ]
+            },
             "DeleteRegion": {
               "methods": [
                 "deleteRegion"
+              ]
+            },
+            "BatchDeleteRegions": {
+              "methods": [
+                "batchDeleteRegions"
               ]
             },
             "ListRegions": {
@@ -860,14 +875,29 @@
                 "createRegion"
               ]
             },
+            "BatchCreateRegions": {
+              "methods": [
+                "batchCreateRegions"
+              ]
+            },
             "UpdateRegion": {
               "methods": [
                 "updateRegion"
               ]
             },
+            "BatchUpdateRegions": {
+              "methods": [
+                "batchUpdateRegions"
+              ]
+            },
             "DeleteRegion": {
               "methods": [
                 "deleteRegion"
+              ]
+            },
+            "BatchDeleteRegions": {
+              "methods": [
+                "batchDeleteRegions"
               ]
             },
             "ListRegions": {

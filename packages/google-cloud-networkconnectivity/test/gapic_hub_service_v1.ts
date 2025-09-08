@@ -4935,6 +4935,60 @@ describe('v1.HubServiceClient', () => {
 
     describe('Path templates', () => {
 
+        describe('destination', async () => {
+            const fakePath = "/rendered/path/destination";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                multicloud_data_transfer_config: "multicloudDataTransferConfigValue",
+                destination: "destinationValue",
+            };
+            const client = new hubserviceModule.v1.HubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.destinationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.destinationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('destinationPath', () => {
+                const result = client.destinationPath("projectValue", "locationValue", "multicloudDataTransferConfigValue", "destinationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.destinationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDestinationName', () => {
+                const result = client.matchProjectFromDestinationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.destinationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDestinationName', () => {
+                const result = client.matchLocationFromDestinationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.destinationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMulticloudDataTransferConfigFromDestinationName', () => {
+                const result = client.matchMulticloudDataTransferConfigFromDestinationName(fakePath);
+                assert.strictEqual(result, "multicloudDataTransferConfigValue");
+                assert((client.pathTemplates.destinationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDestinationFromDestinationName', () => {
+                const result = client.matchDestinationFromDestinationName(fakePath);
+                assert.strictEqual(result, "destinationValue");
+                assert((client.pathTemplates.destinationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('group', async () => {
             const fakePath = "/rendered/path/group";
             const expectedParameters = {
@@ -5245,6 +5299,98 @@ describe('v1.HubServiceClient', () => {
                 const result = client.matchLocationFromLocationName(fakePath);
                 assert.strictEqual(result, "locationValue");
                 assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('multicloudDataTransferConfig', async () => {
+            const fakePath = "/rendered/path/multicloudDataTransferConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                multicloud_data_transfer_config: "multicloudDataTransferConfigValue",
+            };
+            const client = new hubserviceModule.v1.HubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.multicloudDataTransferConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.multicloudDataTransferConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('multicloudDataTransferConfigPath', () => {
+                const result = client.multicloudDataTransferConfigPath("projectValue", "locationValue", "multicloudDataTransferConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.multicloudDataTransferConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMulticloudDataTransferConfigName', () => {
+                const result = client.matchProjectFromMulticloudDataTransferConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.multicloudDataTransferConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMulticloudDataTransferConfigName', () => {
+                const result = client.matchLocationFromMulticloudDataTransferConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.multicloudDataTransferConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMulticloudDataTransferConfigFromMulticloudDataTransferConfigName', () => {
+                const result = client.matchMulticloudDataTransferConfigFromMulticloudDataTransferConfigName(fakePath);
+                assert.strictEqual(result, "multicloudDataTransferConfigValue");
+                assert((client.pathTemplates.multicloudDataTransferConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('multicloudDataTransferSupportedService', async () => {
+            const fakePath = "/rendered/path/multicloudDataTransferSupportedService";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                multicloud_data_transfer_supported_service: "multicloudDataTransferSupportedServiceValue",
+            };
+            const client = new hubserviceModule.v1.HubServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('multicloudDataTransferSupportedServicePath', () => {
+                const result = client.multicloudDataTransferSupportedServicePath("projectValue", "locationValue", "multicloudDataTransferSupportedServiceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMulticloudDataTransferSupportedServiceName', () => {
+                const result = client.matchProjectFromMulticloudDataTransferSupportedServiceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMulticloudDataTransferSupportedServiceName', () => {
+                const result = client.matchLocationFromMulticloudDataTransferSupportedServiceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMulticloudDataTransferSupportedServiceFromMulticloudDataTransferSupportedServiceName', () => {
+                const result = client.matchMulticloudDataTransferSupportedServiceFromMulticloudDataTransferSupportedServiceName(fakePath);
+                assert.strictEqual(result, "multicloudDataTransferSupportedServiceValue");
+                assert((client.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

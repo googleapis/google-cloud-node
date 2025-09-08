@@ -29,11 +29,11 @@ function main(operation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the Operations resource to return, or its unique numeric identifier.
+   *  Name of the Operations resource to return. Parent is derived from this field.
    */
   // const operation = 'abc123'
   /**
-   *  Parent ID for this request.
+   *  Parent ID for this request. Not used. Parent is derived from resource_id.
    */
   // const parentId = 'abc123'
 

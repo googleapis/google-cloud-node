@@ -6085,6 +6085,162 @@
                         }
                       }
                     },
+                    "DataFoundryService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GenerateSyntheticData": {
+                          "requestType": "GenerateSyntheticDataRequest",
+                          "responseType": "GenerateSyntheticDataResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{location=projects/*/locations/*}:generateSyntheticData",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{location=projects/*/locations/*}:generateSyntheticData",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GenerateSyntheticDataRequest": {
+                      "oneofs": {
+                        "strategy": {
+                          "oneof": [
+                            "taskDescription"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "taskDescription": {
+                          "type": "TaskDescriptionStrategy",
+                          "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "count": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputFieldSpecs": {
+                          "rule": "repeated",
+                          "type": "OutputFieldSpec",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "examples": {
+                          "rule": "repeated",
+                          "type": "SyntheticExample",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SyntheticField": {
+                      "fields": {
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "content": {
+                          "type": "Content",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SyntheticExample": {
+                      "fields": {
+                        "fields": {
+                          "rule": "repeated",
+                          "type": "SyntheticField",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "OutputFieldSpec": {
+                      "fields": {
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "guidance": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fieldType": {
+                          "type": "FieldType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FieldType": {
+                          "values": {
+                            "FIELD_TYPE_UNSPECIFIED": 0,
+                            "CONTENT": 1,
+                            "TEXT": 2,
+                            "IMAGE": 3,
+                            "AUDIO": 4
+                          }
+                        }
+                      }
+                    },
+                    "TaskDescriptionStrategy": {
+                      "fields": {
+                        "taskDescription": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateSyntheticDataResponse": {
+                      "fields": {
+                        "syntheticExamples": {
+                          "rule": "repeated",
+                          "type": "SyntheticExample",
+                          "id": 1
+                        }
+                      }
+                    },
                     "DataItem": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/DataItem",
@@ -43124,8 +43280,15 @@
                             "MODE_UNSPECIFIED": 0,
                             "AUTO": 1,
                             "ANY": 2,
-                            "NONE": 3
-                          }
+                            "NONE": 3,
+                            "VALIDATED": 5
+                          },
+                          "reserved": [
+                            [
+                              4,
+                              4
+                            ]
+                          ]
                         }
                       }
                     },
@@ -47646,6 +47809,10 @@
                         "enableContainerLogging": {
                           "type": "bool",
                           "id": 12
+                        },
+                        "disableContainerLogging": {
+                          "type": "bool",
+                          "id": 15
                         },
                         "enableAccessLogging": {
                           "type": "bool",
@@ -60567,7 +60734,8 @@
                       "oneofs": {
                         "sourceModel": {
                           "oneof": [
-                            "baseModel"
+                            "baseModel",
+                            "preTunedModel"
                           ]
                         },
                         "tuningSpec": {
@@ -60583,6 +60751,10 @@
                         "baseModel": {
                           "type": "string",
                           "id": 4
+                        },
+                        "preTunedModel": {
+                          "type": "PreTunedModel",
+                          "id": 31
                         },
                         "supervisedTuningSpec": {
                           "type": "SupervisedTuningSpec",
@@ -61501,6 +61673,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "evaluateDatasetResponse": {
+                          "type": "EvaluateDatasetResponse",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "error": {
                           "type": "google.rpc.Status",
                           "id": 4,
@@ -61527,6 +61706,31 @@
                         "endpoint": {
                           "type": "string",
                           "id": 4
+                        }
+                      }
+                    },
+                    "PreTunedModel": {
+                      "fields": {
+                        "tunedModelName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "baseModel": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },

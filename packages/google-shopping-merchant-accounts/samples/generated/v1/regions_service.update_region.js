@@ -40,7 +40,7 @@ function main(region) {
   // const updateMask = {}
 
   // Imports the Accounts library
-  const {RegionsServiceClient} = require('@google-cloud/accounts').v1;
+  const {RegionsServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new RegionsServiceClient();

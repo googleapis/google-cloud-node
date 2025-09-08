@@ -775,6 +775,10 @@ export class ReservationServiceClient {
  * @param {string} request.name
  *   Required. Resource name of the reservation to failover. E.g.,
  *      `projects/myproject/locations/US/reservations/team1-prod`
+ * @param {google.cloud.bigquery.reservation.v1.FailoverMode} [request.failoverMode]
+ *   Optional. A parameter that determines how writes that are pending
+ *   replication are handled after a failover is initiated. If not specified,
+ *   HARD failover mode is used by default.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

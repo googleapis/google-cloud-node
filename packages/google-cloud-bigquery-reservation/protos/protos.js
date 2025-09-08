@@ -1775,6 +1775,7 @@
                                  * @property {google.rpc.IStatus|null} [error] ReplicationStatus error
                                  * @property {google.protobuf.ITimestamp|null} [lastErrorTime] ReplicationStatus lastErrorTime
                                  * @property {google.protobuf.ITimestamp|null} [lastReplicationTime] ReplicationStatus lastReplicationTime
+                                 * @property {google.protobuf.ITimestamp|null} [softFailoverStartTime] ReplicationStatus softFailoverStartTime
                                  */
     
                                 /**
@@ -1817,6 +1818,14 @@
                                 ReplicationStatus.prototype.lastReplicationTime = null;
     
                                 /**
+                                 * ReplicationStatus softFailoverStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} softFailoverStartTime
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @instance
+                                 */
+                                ReplicationStatus.prototype.softFailoverStartTime = null;
+    
+                                /**
                                  * Creates a new ReplicationStatus instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
@@ -1846,6 +1855,8 @@
                                         $root.google.protobuf.Timestamp.encode(message.lastErrorTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                     if (message.lastReplicationTime != null && Object.hasOwnProperty.call(message, "lastReplicationTime"))
                                         $root.google.protobuf.Timestamp.encode(message.lastReplicationTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.softFailoverStartTime != null && Object.hasOwnProperty.call(message, "softFailoverStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.softFailoverStartTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -1892,6 +1903,10 @@
                                             }
                                         case 3: {
                                                 message.lastReplicationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.softFailoverStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -1944,6 +1959,11 @@
                                         if (error)
                                             return "lastReplicationTime." + error;
                                     }
+                                    if (message.softFailoverStartTime != null && message.hasOwnProperty("softFailoverStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.softFailoverStartTime);
+                                        if (error)
+                                            return "softFailoverStartTime." + error;
+                                    }
                                     return null;
                                 };
     
@@ -1974,6 +1994,11 @@
                                             throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.lastReplicationTime: object expected");
                                         message.lastReplicationTime = $root.google.protobuf.Timestamp.fromObject(object.lastReplicationTime);
                                     }
+                                    if (object.softFailoverStartTime != null) {
+                                        if (typeof object.softFailoverStartTime !== "object")
+                                            throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.softFailoverStartTime: object expected");
+                                        message.softFailoverStartTime = $root.google.protobuf.Timestamp.fromObject(object.softFailoverStartTime);
+                                    }
                                     return message;
                                 };
     
@@ -1994,6 +2019,7 @@
                                         object.error = null;
                                         object.lastErrorTime = null;
                                         object.lastReplicationTime = null;
+                                        object.softFailoverStartTime = null;
                                     }
                                     if (message.error != null && message.hasOwnProperty("error"))
                                         object.error = $root.google.rpc.Status.toObject(message.error, options);
@@ -2001,6 +2027,8 @@
                                         object.lastErrorTime = $root.google.protobuf.Timestamp.toObject(message.lastErrorTime, options);
                                     if (message.lastReplicationTime != null && message.hasOwnProperty("lastReplicationTime"))
                                         object.lastReplicationTime = $root.google.protobuf.Timestamp.toObject(message.lastReplicationTime, options);
+                                    if (message.softFailoverStartTime != null && message.hasOwnProperty("softFailoverStartTime"))
+                                        object.softFailoverStartTime = $root.google.protobuf.Timestamp.toObject(message.softFailoverStartTime, options);
                                     return object;
                                 };
     
@@ -4140,6 +4168,7 @@
                              * @memberof google.cloud.bigquery.reservation.v1
                              * @interface IFailoverReservationRequest
                              * @property {string|null} [name] FailoverReservationRequest name
+                             * @property {google.cloud.bigquery.reservation.v1.FailoverMode|null} [failoverMode] FailoverReservationRequest failoverMode
                              */
     
                             /**
@@ -4164,6 +4193,14 @@
                              * @instance
                              */
                             FailoverReservationRequest.prototype.name = "";
+    
+                            /**
+                             * FailoverReservationRequest failoverMode.
+                             * @member {google.cloud.bigquery.reservation.v1.FailoverMode} failoverMode
+                             * @memberof google.cloud.bigquery.reservation.v1.FailoverReservationRequest
+                             * @instance
+                             */
+                            FailoverReservationRequest.prototype.failoverMode = 0;
     
                             /**
                              * Creates a new FailoverReservationRequest instance using the specified properties.
@@ -4191,6 +4228,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.failoverMode != null && Object.hasOwnProperty.call(message, "failoverMode"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.failoverMode);
                                 return writer;
                             };
     
@@ -4231,6 +4270,10 @@
                                             message.name = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.failoverMode = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -4269,6 +4312,15 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.failoverMode != null && message.hasOwnProperty("failoverMode"))
+                                    switch (message.failoverMode) {
+                                    default:
+                                        return "failoverMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -4286,6 +4338,26 @@
                                 var message = new $root.google.cloud.bigquery.reservation.v1.FailoverReservationRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                switch (object.failoverMode) {
+                                default:
+                                    if (typeof object.failoverMode === "number") {
+                                        message.failoverMode = object.failoverMode;
+                                        break;
+                                    }
+                                    break;
+                                case "FAILOVER_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.failoverMode = 0;
+                                    break;
+                                case "SOFT":
+                                case 1:
+                                    message.failoverMode = 1;
+                                    break;
+                                case "HARD":
+                                case 2:
+                                    message.failoverMode = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -4302,10 +4374,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.failoverMode = options.enums === String ? "FAILOVER_MODE_UNSPECIFIED" : 0;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.failoverMode != null && message.hasOwnProperty("failoverMode"))
+                                    object.failoverMode = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.FailoverMode[message.failoverMode] === undefined ? message.failoverMode : $root.google.cloud.bigquery.reservation.v1.FailoverMode[message.failoverMode] : message.failoverMode;
                                 return object;
                             };
     
@@ -10451,6 +10527,22 @@
                             values[valuesById[1] = "STANDARD"] = 1;
                             values[valuesById[2] = "ENTERPRISE"] = 2;
                             values[valuesById[3] = "ENTERPRISE_PLUS"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * FailoverMode enum.
+                         * @name google.cloud.bigquery.reservation.v1.FailoverMode
+                         * @enum {number}
+                         * @property {number} FAILOVER_MODE_UNSPECIFIED=0 FAILOVER_MODE_UNSPECIFIED value
+                         * @property {number} SOFT=1 SOFT value
+                         * @property {number} HARD=2 HARD value
+                         */
+                        v1.FailoverMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FAILOVER_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SOFT"] = 1;
+                            values[valuesById[2] = "HARD"] = 2;
                             return values;
                         })();
     

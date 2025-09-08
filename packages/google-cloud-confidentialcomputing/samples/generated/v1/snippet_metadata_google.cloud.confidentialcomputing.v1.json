@@ -59,7 +59,7 @@
             "regionTag": "confidentialcomputing_v1_generated_ConfidentialComputing_VerifyAttestation_async",
             "title": "ConfidentialComputing verifyAttestation Sample",
             "origin": "API_DEFINITION",
-            "description": " Verifies the provided attestation info, returning a signed OIDC token.",
+            "description": " Verifies the provided attestation info, returning a signed attestation token.",
             "canonical": true,
             "file": "confidential_computing.verify_attestation.js",
             "language": "JAVASCRIPT",
@@ -116,6 +116,114 @@
                 "method": {
                     "shortName": "VerifyAttestation",
                     "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyAttestation",
+                    "service": {
+                        "shortName": "ConfidentialComputing",
+                        "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "confidentialcomputing_v1_generated_ConfidentialComputing_VerifyConfidentialSpace_async",
+            "title": "ConfidentialComputing verifyConfidentialSpace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Verifies whether the provided attestation info is valid, returning a signed attestation token if so.",
+            "canonical": true,
+            "file": "confidential_computing.verify_confidential_space.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "VerifyConfidentialSpace",
+                "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyConfidentialSpace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "td_ccel",
+                        "type": ".google.cloud.confidentialcomputing.v1.TdxCcelAttestation"
+                    },
+                    {
+                        "name": "tpm_attestation",
+                        "type": ".google.cloud.confidentialcomputing.v1.TpmAttestation"
+                    },
+                    {
+                        "name": "challenge",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gcp_credentials",
+                        "type": ".google.cloud.confidentialcomputing.v1.GcpCredentials"
+                    },
+                    {
+                        "name": "signed_entities",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "gce_shielded_identity",
+                        "type": ".google.cloud.confidentialcomputing.v1.GceShieldedIdentity"
+                    },
+                    {
+                        "name": "options",
+                        "type": ".google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions"
+                    }
+                ],
+                "resultType": ".google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceResponse",
+                "client": {
+                    "shortName": "ConfidentialComputingClient",
+                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputingClient"
+                },
+                "method": {
+                    "shortName": "VerifyConfidentialSpace",
+                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyConfidentialSpace",
+                    "service": {
+                        "shortName": "ConfidentialComputing",
+                        "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "confidentialcomputing_v1_generated_ConfidentialComputing_VerifyConfidentialGke_async",
+            "title": "ConfidentialComputing verifyConfidentialGke Sample",
+            "origin": "API_DEFINITION",
+            "description": " Verifies the provided Confidential GKE attestation info, returning a signed OIDC token.",
+            "canonical": true,
+            "file": "confidential_computing.verify_confidential_gke.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "VerifyConfidentialGke",
+                "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyConfidentialGke",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tpm_attestation",
+                        "type": ".google.cloud.confidentialcomputing.v1.TpmAttestation"
+                    },
+                    {
+                        "name": "challenge",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeResponse",
+                "client": {
+                    "shortName": "ConfidentialComputingClient",
+                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputingClient"
+                },
+                "method": {
+                    "shortName": "VerifyConfidentialGke",
+                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyConfidentialGke",
                     "service": {
                         "shortName": "ConfidentialComputing",
                         "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing"

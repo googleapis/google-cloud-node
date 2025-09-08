@@ -234,7 +234,7 @@ export class ConfidentialComputingClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const confidentialComputingStubMethods =
-        ['createChallenge', 'verifyAttestation'];
+        ['createChallenge', 'verifyAttestation', 'verifyConfidentialSpace', 'verifyConfidentialGke'];
     for (const methodName of confidentialComputingStubMethods) {
       const callPromise = this.confidentialComputingStub.then(
         stub => (...args: Array<{}>) => {
@@ -435,7 +435,8 @@ export class ConfidentialComputingClient {
       });
   }
 /**
- * Verifies the provided attestation info, returning a signed OIDC token.
+ * Verifies the provided attestation info, returning a signed attestation
+ * token.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -539,6 +540,220 @@ export class ConfidentialComputingClient {
         {}|undefined
       ]) => {
         this._log.info('verifyAttestation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Verifies whether the provided attestation info is valid, returning a signed
+ * attestation token if so.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.confidentialcomputing.v1.TdxCcelAttestation} request.tdCcel
+ *   Input only. A TDX with CCEL and RTMR Attestation Quote.
+ * @param {google.cloud.confidentialcomputing.v1.TpmAttestation} request.tpmAttestation
+ *   Input only. The TPM-specific data provided by the attesting platform,
+ *   used to populate any of the claims regarding platform state.
+ * @param {string} request.challenge
+ *   Required. The name of the Challenge whose nonce was used to generate the
+ *   attestation, in the format `projects/* /locations/* /challenges/*`. The
+ *   provided Challenge will be consumed, and cannot be used again.
+ * @param {google.cloud.confidentialcomputing.v1.GcpCredentials} [request.gcpCredentials]
+ *   Optional. Credentials used to populate the "emails" claim in the
+ *   claims_token. If not present, token will not contain the "emails" claim.
+ * @param {number[]} [request.signedEntities]
+ *   Optional. A list of signed entities containing container image signatures
+ *   that can be used for server-side signature verification.
+ * @param {google.cloud.confidentialcomputing.v1.GceShieldedIdentity} [request.gceShieldedIdentity]
+ *   Optional. Information about the associated Compute Engine instance.
+ *   Required for td_ccel requests only - tpm_attestation requests will provide
+ *   this information in the attestation.
+ * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions} [request.options]
+ *   Optional. A collection of fields that modify the token output.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceResponse|VerifyConfidentialSpaceResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/confidential_computing.verify_confidential_space.js</caption>
+ * region_tag:confidentialcomputing_v1_generated_ConfidentialComputing_VerifyConfidentialSpace_async
+ */
+  verifyConfidentialSpace(
+      request?: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|undefined, {}|undefined
+      ]>;
+  verifyConfidentialSpace(
+      request: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyConfidentialSpace(
+      request: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest,
+      callback: Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyConfidentialSpace(
+      request?: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'challenge': request.challenge ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('verifyConfidentialSpace request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyConfidentialSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.verifyConfidentialSpace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('verifyConfidentialSpace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Verifies the provided Confidential GKE attestation info, returning a signed
+ * OIDC token.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.confidentialcomputing.v1.TpmAttestation} request.tpmAttestation
+ *   The TPM-specific data provided by the attesting platform, used to
+ *   populate any of the claims regarding platform state.
+ * @param {string} request.challenge
+ *   Required. The name of the Challenge whose nonce was used to generate the
+ *   attestation, in the format projects/* /locations/* /challenges/*. The
+ *   provided Challenge will be consumed, and cannot be used again.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeResponse|VerifyConfidentialGkeResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/confidential_computing.verify_confidential_gke.js</caption>
+ * region_tag:confidentialcomputing_v1_generated_ConfidentialComputing_VerifyConfidentialGke_async
+ */
+  verifyConfidentialGke(
+      request?: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|undefined, {}|undefined
+      ]>;
+  verifyConfidentialGke(
+      request: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyConfidentialGke(
+      request: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest,
+      callback: Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyConfidentialGke(
+      request?: protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+          protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'challenge': request.challenge ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('verifyConfidentialGke request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyConfidentialGke response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.verifyConfidentialGke(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
+        protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('verifyConfidentialGke response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

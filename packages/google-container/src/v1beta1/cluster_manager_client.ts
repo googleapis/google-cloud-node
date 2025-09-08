@@ -417,7 +417,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'parent': request.parent ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -526,9 +526,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getCluster request %j', request);
@@ -649,7 +649,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'parent': request.parent ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -760,9 +760,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateCluster request %j', request);
@@ -977,10 +977,10 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
-      'node_pool_id': request.nodePoolId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
+      'node_pool_id': request.nodePoolId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateNodePool request %j', request);
@@ -1094,10 +1094,10 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
-      'node_pool_id': request.nodePoolId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
+      'node_pool_id': request.nodePoolId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setNodePoolAutoscaling request %j', request);
@@ -1217,9 +1217,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setLoggingService request %j', request);
@@ -1339,9 +1339,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setMonitoringService request %j', request);
@@ -1452,9 +1452,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setAddonsConfig request %j', request);
@@ -1574,9 +1574,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this.warn('DEP$ClusterManager-$SetLocations','SetLocations is deprecated and may be removed in a future version.', 'DeprecationWarning');
@@ -1696,9 +1696,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateMaster request %j', request);
@@ -1812,9 +1812,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setMasterAuth request %j', request);
@@ -1930,9 +1930,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('deleteCluster request %j', request);
@@ -2038,7 +2038,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'parent': request.parent ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -2147,9 +2147,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'operation_id': request.operationId ?? '',
+      'operation_id': request.operationId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getOperation request %j', request);
@@ -2257,9 +2257,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'operation_id': request.operationId ?? '',
+      'operation_id': request.operationId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('cancelOperation request %j', request);
@@ -2364,7 +2364,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
     });
     this.initialize().catch(err => {throw err});
@@ -2569,9 +2569,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'parent': request.parent ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('listNodePools request %j', request);
@@ -2683,10 +2683,10 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
-      'node_pool_id': request.nodePoolId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
+      'node_pool_id': request.nodePoolId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getNodePool request %j', request);
@@ -2797,9 +2797,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'parent': request.parent ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('createNodePool request %j', request);
@@ -2911,10 +2911,10 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
-      'node_pool_id': request.nodePoolId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
+      'node_pool_id': request.nodePoolId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('deleteNodePool request %j', request);
@@ -3127,10 +3127,10 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
-      'node_pool_id': request.nodePoolId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
+      'node_pool_id': request.nodePoolId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('rollbackNodePoolUpgrade request %j', request);
@@ -3244,10 +3244,10 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
-      'node_pool_id': request.nodePoolId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
+      'node_pool_id': request.nodePoolId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setNodePoolManagement request %j', request);
@@ -3364,9 +3364,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setLabels request %j', request);
@@ -3476,9 +3476,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setLegacyAbac request %j', request);
@@ -3588,9 +3588,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('startIPRotation request %j', request);
@@ -3698,9 +3698,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('completeIPRotation request %j', request);
@@ -3816,10 +3816,10 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
-      'node_pool_id': request.nodePoolId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
+      'node_pool_id': request.nodePoolId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setNodePoolSize request %j', request);
@@ -3929,9 +3929,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setNetworkPolicy request %j', request);
@@ -4040,9 +4040,9 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'name': request.name ?? '',
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'zone': request.zone ?? '',
-      'cluster_id': request.clusterId ?? '',
+      'cluster_id': request.clusterId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('setMaintenancePolicy request %j', request);

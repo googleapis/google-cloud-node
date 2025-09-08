@@ -2396,6 +2396,50 @@
             }
         },
         {
+            "regionTag": "merchantapi_v1_generated_RegionsService_BatchCreateRegions_async",
+            "title": "AccountIssueService batchCreateRegions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates one or more regions in your Merchant Center account. Executing this method requires admin access.",
+            "canonical": true,
+            "file": "regions_service.batch_create_regions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchCreateRegions",
+                "fullName": "google.shopping.merchant.accounts.v1.RegionsService.BatchCreateRegions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requests",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse",
+                "client": {
+                    "shortName": "RegionsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1.RegionsServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchCreateRegions",
+                    "fullName": "google.shopping.merchant.accounts.v1.RegionsService.BatchCreateRegions",
+                    "service": {
+                        "shortName": "RegionsService",
+                        "fullName": "google.shopping.merchant.accounts.v1.RegionsService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "merchantapi_v1_generated_RegionsService_UpdateRegion_async",
             "title": "AccountIssueService updateRegion Sample",
             "origin": "API_DEFINITION",
@@ -2440,6 +2484,50 @@
             }
         },
         {
+            "regionTag": "merchantapi_v1_generated_RegionsService_BatchUpdateRegions_async",
+            "title": "AccountIssueService batchUpdateRegions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates one or more regions in your Merchant Center account. Executing this method requires admin access.",
+            "canonical": true,
+            "file": "regions_service.batch_update_regions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchUpdateRegions",
+                "fullName": "google.shopping.merchant.accounts.v1.RegionsService.BatchUpdateRegions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requests",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse",
+                "client": {
+                    "shortName": "RegionsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1.RegionsServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchUpdateRegions",
+                    "fullName": "google.shopping.merchant.accounts.v1.RegionsService.BatchUpdateRegions",
+                    "service": {
+                        "shortName": "RegionsService",
+                        "fullName": "google.shopping.merchant.accounts.v1.RegionsService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "merchantapi_v1_generated_RegionsService_DeleteRegion_async",
             "title": "AccountIssueService deleteRegion Sample",
             "origin": "API_DEFINITION",
@@ -2472,6 +2560,50 @@
                 "method": {
                     "shortName": "DeleteRegion",
                     "fullName": "google.shopping.merchant.accounts.v1.RegionsService.DeleteRegion",
+                    "service": {
+                        "shortName": "RegionsService",
+                        "fullName": "google.shopping.merchant.accounts.v1.RegionsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1_generated_RegionsService_BatchDeleteRegions_async",
+            "title": "AccountIssueService batchDeleteRegions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes multiple regions by name from your Merchant Center account. Executing this method requires admin access.",
+            "canonical": true,
+            "file": "regions_service.batch_delete_regions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchDeleteRegions",
+                "fullName": "google.shopping.merchant.accounts.v1.RegionsService.BatchDeleteRegions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requests",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "RegionsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1.RegionsServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchDeleteRegions",
+                    "fullName": "google.shopping.merchant.accounts.v1.RegionsService.BatchDeleteRegions",
                     "service": {
                         "shortName": "RegionsService",
                         "fullName": "google.shopping.merchant.accounts.v1.RegionsService"

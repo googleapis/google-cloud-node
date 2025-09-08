@@ -12,6 +12,15 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Address_group_service.add_address_group_items](#address_group_service.add_address_group_items)
+  * [Address_group_service.clone_address_group_items](#address_group_service.clone_address_group_items)
+  * [Address_group_service.create_address_group](#address_group_service.create_address_group)
+  * [Address_group_service.delete_address_group](#address_group_service.delete_address_group)
+  * [Address_group_service.get_address_group](#address_group_service.get_address_group)
+  * [Address_group_service.list_address_group_references](#address_group_service.list_address_group_references)
+  * [Address_group_service.list_address_groups](#address_group_service.list_address_groups)
+  * [Address_group_service.remove_address_group_items](#address_group_service.remove_address_group_items)
+  * [Address_group_service.update_address_group](#address_group_service.update_address_group)
   * [Network_security.create_authorization_policy](#network_security.create_authorization_policy)
   * [Network_security.create_client_tls_policy](#network_security.create_client_tls_policy)
   * [Network_security.create_server_tls_policy](#network_security.create_server_tls_policy)
@@ -27,6 +36,15 @@
   * [Network_security.update_authorization_policy](#network_security.update_authorization_policy)
   * [Network_security.update_client_tls_policy](#network_security.update_client_tls_policy)
   * [Network_security.update_server_tls_policy](#network_security.update_server_tls_policy)
+  * [Organization_address_group_service.add_address_group_items](#organization_address_group_service.add_address_group_items)
+  * [Organization_address_group_service.clone_address_group_items](#organization_address_group_service.clone_address_group_items)
+  * [Organization_address_group_service.create_address_group](#organization_address_group_service.create_address_group)
+  * [Organization_address_group_service.delete_address_group](#organization_address_group_service.delete_address_group)
+  * [Organization_address_group_service.get_address_group](#organization_address_group_service.get_address_group)
+  * [Organization_address_group_service.list_address_group_references](#organization_address_group_service.list_address_group_references)
+  * [Organization_address_group_service.list_address_groups](#organization_address_group_service.list_address_groups)
+  * [Organization_address_group_service.remove_address_group_items](#organization_address_group_service.remove_address_group_items)
+  * [Organization_address_group_service.update_address_group](#organization_address_group_service.update_address_group)
   * [Network_security.create_client_tls_policy](#network_security.create_client_tls_policy)
   * [Network_security.delete_client_tls_policy](#network_security.delete_client_tls_policy)
   * [Network_security.get_client_tls_policy](#network_security.get_client_tls_policy)
@@ -61,6 +79,159 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Address_group_service.add_address_group_items
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.add_address_group_items.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.add_address_group_items.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.add_address_group_items.js`
+
+
+-----
+
+
+
+
+### Address_group_service.clone_address_group_items
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.clone_address_group_items.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.clone_address_group_items.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.clone_address_group_items.js`
+
+
+-----
+
+
+
+
+### Address_group_service.create_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.create_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.create_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.create_address_group.js`
+
+
+-----
+
+
+
+
+### Address_group_service.delete_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.delete_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.delete_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.delete_address_group.js`
+
+
+-----
+
+
+
+
+### Address_group_service.get_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.get_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.get_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.get_address_group.js`
+
+
+-----
+
+
+
+
+### Address_group_service.list_address_group_references
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.list_address_group_references.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.list_address_group_references.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.list_address_group_references.js`
+
+
+-----
+
+
+
+
+### Address_group_service.list_address_groups
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.list_address_groups.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.list_address_groups.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.list_address_groups.js`
+
+
+-----
+
+
+
+
+### Address_group_service.remove_address_group_items
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.remove_address_group_items.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.remove_address_group_items.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.remove_address_group_items.js`
+
+
+-----
+
+
+
+
+### Address_group_service.update_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.update_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.update_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/address_group_service.update_address_group.js`
+
+
+-----
+
 
 
 
@@ -312,6 +483,159 @@ __Usage:__
 
 
 `node packages/google-cloud-networksecurity/samples/generated/v1/network_security.update_server_tls_policy.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.add_address_group_items
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.add_address_group_items.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.add_address_group_items.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.add_address_group_items.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.clone_address_group_items
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.clone_address_group_items.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.clone_address_group_items.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.clone_address_group_items.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.create_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.create_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.create_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.create_address_group.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.delete_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.delete_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.delete_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.delete_address_group.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.get_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.get_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.get_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.get_address_group.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.list_address_group_references
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.list_address_group_references.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.list_address_group_references.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.list_address_group_references.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.list_address_groups
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.list_address_groups.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.list_address_groups.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.list_address_groups.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.remove_address_group_items
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.remove_address_group_items.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.remove_address_group_items.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.remove_address_group_items.js`
+
+
+-----
+
+
+
+
+### Organization_address_group_service.update_address_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.update_address_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.update_address_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networksecurity/samples/generated/v1/organization_address_group_service.update_address_group.js`
 
 
 -----

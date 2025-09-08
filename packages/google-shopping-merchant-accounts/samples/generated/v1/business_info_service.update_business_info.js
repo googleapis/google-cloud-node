@@ -43,7 +43,7 @@ function main(businessInfo) {
   // const updateMask = {}
 
   // Imports the Accounts library
-  const {BusinessInfoServiceClient} = require('@google-cloud/accounts').v1;
+  const {BusinessInfoServiceClient} = require('@google-shopping/accounts').v1;
 
   // Instantiates a client
   const accountsClient = new BusinessInfoServiceClient();

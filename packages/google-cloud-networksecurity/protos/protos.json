@@ -14,9 +14,830 @@
                     "java_outer_classname": "ServerTlsPolicyProto",
                     "java_package": "com.google.cloud.networksecurity.v1",
                     "php_namespace": "Google\\Cloud\\NetworkSecurity\\V1",
-                    "ruby_package": "Google::Cloud::NetworkSecurity::V1"
+                    "ruby_package": "Google::Cloud::NetworkSecurity::V1",
+                    "(google.api.resource_definition).type": "networksecurity.googleapis.com/OrganizationLocation",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
                   "nested": {
+                    "AddressGroupService": {
+                      "options": {
+                        "(google.api.default_host)": "networksecurity.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListAddressGroups": {
+                          "requestType": "ListAddressGroupsRequest",
+                          "responseType": "ListAddressGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/addressGroups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/addressGroups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetAddressGroup": {
+                          "requestType": "GetAddressGroupRequest",
+                          "responseType": "AddressGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/addressGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/addressGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateAddressGroup": {
+                          "requestType": "CreateAddressGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/addressGroups",
+                            "(google.api.http).body": "address_group",
+                            "(google.api.method_signature)": "parent,address_group,address_group_id",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/addressGroups",
+                                "body": "address_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,address_group,address_group_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateAddressGroup": {
+                          "requestType": "UpdateAddressGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{address_group.name=projects/*/locations/*/addressGroups/*}",
+                            "(google.api.http).body": "address_group",
+                            "(google.api.method_signature)": "address_group,update_mask",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{address_group.name=projects/*/locations/*/addressGroups/*}",
+                                "body": "address_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "AddAddressGroupItems": {
+                          "requestType": "AddAddressGroupItemsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:addItems",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "address_group,items",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:addItems",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,items"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RemoveAddressGroupItems": {
+                          "requestType": "RemoveAddressGroupItemsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:removeItems",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "address_group,items",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:removeItems",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,items"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CloneAddressGroupItems": {
+                          "requestType": "CloneAddressGroupItemsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:cloneItems",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "address_group,source_address_group",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:cloneItems",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,source_address_group"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteAddressGroup": {
+                          "requestType": "DeleteAddressGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/addressGroups/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/addressGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListAddressGroupReferences": {
+                          "requestType": "ListAddressGroupReferencesRequest",
+                          "responseType": "ListAddressGroupReferencesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:listReferences",
+                            "(google.api.method_signature)": "address_group"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{address_group=projects/*/locations/*/addressGroups/*}:listReferences"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "OrganizationAddressGroupService": {
+                      "options": {
+                        "(google.api.default_host)": "networksecurity.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListAddressGroups": {
+                          "requestType": "ListAddressGroupsRequest",
+                          "responseType": "ListAddressGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/addressGroups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/locations/*}/addressGroups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetAddressGroup": {
+                          "requestType": "GetAddressGroupRequest",
+                          "responseType": "AddressGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*/addressGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*/addressGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateAddressGroup": {
+                          "requestType": "CreateAddressGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/addressGroups",
+                            "(google.api.http).body": "address_group",
+                            "(google.api.method_signature)": "parent,address_group,address_group_id",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/locations/*}/addressGroups",
+                                "body": "address_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,address_group,address_group_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateAddressGroup": {
+                          "requestType": "UpdateAddressGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{address_group.name=organizations/*/locations/*/addressGroups/*}",
+                            "(google.api.http).body": "address_group",
+                            "(google.api.method_signature)": "address_group,update_mask",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{address_group.name=organizations/*/locations/*/addressGroups/*}",
+                                "body": "address_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "AddAddressGroupItems": {
+                          "requestType": "AddAddressGroupItemsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:addItems",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "address_group,items",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:addItems",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,items"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RemoveAddressGroupItems": {
+                          "requestType": "RemoveAddressGroupItemsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:removeItems",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "address_group,items",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:removeItems",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,items"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CloneAddressGroupItems": {
+                          "requestType": "CloneAddressGroupItemsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:cloneItems",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "address_group,source_address_group",
+                            "(google.longrunning.operation_info).response_type": "AddressGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:cloneItems",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group,source_address_group"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AddressGroup",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteAddressGroup": {
+                          "requestType": "DeleteAddressGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/locations/*/addressGroups/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/locations/*/addressGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.networksecurity.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListAddressGroupReferences": {
+                          "requestType": "ListAddressGroupReferencesRequest",
+                          "responseType": "ListAddressGroupReferencesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:listReferences",
+                            "(google.api.method_signature)": "address_group"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{address_group=organizations/*/locations/*/addressGroups/*}:listReferences"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "address_group"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "AddressGroup": {
+                      "options": {
+                        "(google.api.resource).type": "networksecurity.googleapis.com/AddressGroup",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/addressGroups/{address_group}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "capacity": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "purpose": {
+                          "rule": "repeated",
+                          "type": "Purpose",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "IPV4": 1,
+                            "IPV6": 2
+                          }
+                        },
+                        "Purpose": {
+                          "values": {
+                            "PURPOSE_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "CLOUD_ARMOR": 2
+                          }
+                        }
+                      }
+                    },
+                    "ListAddressGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAddressGroupsResponse": {
+                      "fields": {
+                        "addressGroups": {
+                          "rule": "repeated",
+                          "type": "AddressGroup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetAddressGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        }
+                      }
+                    },
+                    "CreateAddressGroupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        },
+                        "addressGroupId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "addressGroup": {
+                          "type": "AddressGroup",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAddressGroupRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "addressGroup": {
+                          "type": "AddressGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteAddressGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AddAddressGroupItemsRequest": {
+                      "fields": {
+                        "addressGroup": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveAddressGroupItemsRequest": {
+                      "fields": {
+                        "addressGroup": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CloneAddressGroupItemsRequest": {
+                      "fields": {
+                        "addressGroup": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        },
+                        "sourceAddressGroup": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAddressGroupReferencesRequest": {
+                      "fields": {
+                        "addressGroup": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AddressGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAddressGroupReferencesResponse": {
+                      "fields": {
+                        "addressGroupReferences": {
+                          "rule": "repeated",
+                          "type": "AddressGroupReference",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "AddressGroupReference": {
+                          "fields": {
+                            "firewallPolicy": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "securityPolicy": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "rulePriority": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "AuthorizationPolicy": {
                       "options": {
                         "(google.api.resource).type": "networksecurity.googleapis.com/AuthorizationPolicy",
@@ -2647,112 +3468,13 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI"
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions",
-              "options": {
-                "packed": false
-              }
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -3186,6 +3908,105 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }
@@ -4629,27 +5450,6 @@
                 "VISIBILITY_EXPORT": 2
               }
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -4676,6 +5476,27 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
             }
           }
         },

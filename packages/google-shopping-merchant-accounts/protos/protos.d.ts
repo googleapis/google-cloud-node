@@ -14653,6 +14653,20 @@ export namespace google {
                         public createRegion(request: google.shopping.merchant.accounts.v1.ICreateRegionRequest): Promise<google.shopping.merchant.accounts.v1.Region>;
 
                         /**
+                         * Calls BatchCreateRegions.
+                         * @param request BatchCreateRegionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and BatchCreateRegionsResponse
+                         */
+                        public batchCreateRegions(request: google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest, callback: google.shopping.merchant.accounts.v1.RegionsService.BatchCreateRegionsCallback): void;
+
+                        /**
+                         * Calls BatchCreateRegions.
+                         * @param request BatchCreateRegionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public batchCreateRegions(request: google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest): Promise<google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse>;
+
+                        /**
                          * Calls UpdateRegion.
                          * @param request UpdateRegionRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Region
@@ -14667,6 +14681,20 @@ export namespace google {
                         public updateRegion(request: google.shopping.merchant.accounts.v1.IUpdateRegionRequest): Promise<google.shopping.merchant.accounts.v1.Region>;
 
                         /**
+                         * Calls BatchUpdateRegions.
+                         * @param request BatchUpdateRegionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and BatchUpdateRegionsResponse
+                         */
+                        public batchUpdateRegions(request: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest, callback: google.shopping.merchant.accounts.v1.RegionsService.BatchUpdateRegionsCallback): void;
+
+                        /**
+                         * Calls BatchUpdateRegions.
+                         * @param request BatchUpdateRegionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public batchUpdateRegions(request: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest): Promise<google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse>;
+
+                        /**
                          * Calls DeleteRegion.
                          * @param request DeleteRegionRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Empty
@@ -14679,6 +14707,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public deleteRegion(request: google.shopping.merchant.accounts.v1.IDeleteRegionRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls BatchDeleteRegions.
+                         * @param request BatchDeleteRegionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public batchDeleteRegions(request: google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest, callback: google.shopping.merchant.accounts.v1.RegionsService.BatchDeleteRegionsCallback): void;
+
+                        /**
+                         * Calls BatchDeleteRegions.
+                         * @param request BatchDeleteRegionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public batchDeleteRegions(request: google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest): Promise<google.protobuf.Empty>;
 
                         /**
                          * Calls ListRegions.
@@ -14712,6 +14754,13 @@ export namespace google {
                         type CreateRegionCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1.Region) => void;
 
                         /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|batchCreateRegions}.
+                         * @param error Error, if any
+                         * @param [response] BatchCreateRegionsResponse
+                         */
+                        type BatchCreateRegionsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse) => void;
+
+                        /**
                          * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|updateRegion}.
                          * @param error Error, if any
                          * @param [response] Region
@@ -14719,11 +14768,25 @@ export namespace google {
                         type UpdateRegionCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1.Region) => void;
 
                         /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|batchUpdateRegions}.
+                         * @param error Error, if any
+                         * @param [response] BatchUpdateRegionsResponse
+                         */
+                        type BatchUpdateRegionsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse) => void;
+
+                        /**
                          * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|deleteRegion}.
                          * @param error Error, if any
                          * @param [response] Empty
                          */
                         type DeleteRegionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|batchDeleteRegions}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type BatchDeleteRegionsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                         /**
                          * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|listRegions}.
@@ -14939,6 +15002,206 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a BatchCreateRegionsRequest. */
+                    interface IBatchCreateRegionsRequest {
+
+                        /** BatchCreateRegionsRequest parent */
+                        parent?: (string|null);
+
+                        /** BatchCreateRegionsRequest requests */
+                        requests?: (google.shopping.merchant.accounts.v1.ICreateRegionRequest[]|null);
+                    }
+
+                    /** Represents a BatchCreateRegionsRequest. */
+                    class BatchCreateRegionsRequest implements IBatchCreateRegionsRequest {
+
+                        /**
+                         * Constructs a new BatchCreateRegionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest);
+
+                        /** BatchCreateRegionsRequest parent. */
+                        public parent: string;
+
+                        /** BatchCreateRegionsRequest requests. */
+                        public requests: google.shopping.merchant.accounts.v1.ICreateRegionRequest[];
+
+                        /**
+                         * Creates a new BatchCreateRegionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BatchCreateRegionsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest): google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest;
+
+                        /**
+                         * Encodes the specified BatchCreateRegionsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest.verify|verify} messages.
+                         * @param message BatchCreateRegionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BatchCreateRegionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest.verify|verify} messages.
+                         * @param message BatchCreateRegionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BatchCreateRegionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BatchCreateRegionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest;
+
+                        /**
+                         * Decodes a BatchCreateRegionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BatchCreateRegionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest;
+
+                        /**
+                         * Verifies a BatchCreateRegionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BatchCreateRegionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BatchCreateRegionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest;
+
+                        /**
+                         * Creates a plain object from a BatchCreateRegionsRequest message. Also converts values to other types if specified.
+                         * @param message BatchCreateRegionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BatchCreateRegionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BatchCreateRegionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BatchCreateRegionsResponse. */
+                    interface IBatchCreateRegionsResponse {
+
+                        /** BatchCreateRegionsResponse regions */
+                        regions?: (google.shopping.merchant.accounts.v1.IRegion[]|null);
+                    }
+
+                    /** Represents a BatchCreateRegionsResponse. */
+                    class BatchCreateRegionsResponse implements IBatchCreateRegionsResponse {
+
+                        /**
+                         * Constructs a new BatchCreateRegionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse);
+
+                        /** BatchCreateRegionsResponse regions. */
+                        public regions: google.shopping.merchant.accounts.v1.IRegion[];
+
+                        /**
+                         * Creates a new BatchCreateRegionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BatchCreateRegionsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse): google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse;
+
+                        /**
+                         * Encodes the specified BatchCreateRegionsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse.verify|verify} messages.
+                         * @param message BatchCreateRegionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BatchCreateRegionsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse.verify|verify} messages.
+                         * @param message BatchCreateRegionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BatchCreateRegionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BatchCreateRegionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse;
+
+                        /**
+                         * Decodes a BatchCreateRegionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BatchCreateRegionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse;
+
+                        /**
+                         * Verifies a BatchCreateRegionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BatchCreateRegionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BatchCreateRegionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse;
+
+                        /**
+                         * Creates a plain object from a BatchCreateRegionsResponse message. Also converts values to other types if specified.
+                         * @param message BatchCreateRegionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BatchCreateRegionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BatchCreateRegionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an UpdateRegionRequest. */
                     interface IUpdateRegionRequest {
 
@@ -15042,6 +15305,206 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a BatchUpdateRegionsRequest. */
+                    interface IBatchUpdateRegionsRequest {
+
+                        /** BatchUpdateRegionsRequest parent */
+                        parent?: (string|null);
+
+                        /** BatchUpdateRegionsRequest requests */
+                        requests?: (google.shopping.merchant.accounts.v1.IUpdateRegionRequest[]|null);
+                    }
+
+                    /** Represents a BatchUpdateRegionsRequest. */
+                    class BatchUpdateRegionsRequest implements IBatchUpdateRegionsRequest {
+
+                        /**
+                         * Constructs a new BatchUpdateRegionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest);
+
+                        /** BatchUpdateRegionsRequest parent. */
+                        public parent: string;
+
+                        /** BatchUpdateRegionsRequest requests. */
+                        public requests: google.shopping.merchant.accounts.v1.IUpdateRegionRequest[];
+
+                        /**
+                         * Creates a new BatchUpdateRegionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BatchUpdateRegionsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest): google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest;
+
+                        /**
+                         * Encodes the specified BatchUpdateRegionsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest.verify|verify} messages.
+                         * @param message BatchUpdateRegionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BatchUpdateRegionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest.verify|verify} messages.
+                         * @param message BatchUpdateRegionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BatchUpdateRegionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BatchUpdateRegionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest;
+
+                        /**
+                         * Decodes a BatchUpdateRegionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BatchUpdateRegionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest;
+
+                        /**
+                         * Verifies a BatchUpdateRegionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BatchUpdateRegionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BatchUpdateRegionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest;
+
+                        /**
+                         * Creates a plain object from a BatchUpdateRegionsRequest message. Also converts values to other types if specified.
+                         * @param message BatchUpdateRegionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BatchUpdateRegionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BatchUpdateRegionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BatchUpdateRegionsResponse. */
+                    interface IBatchUpdateRegionsResponse {
+
+                        /** BatchUpdateRegionsResponse regions */
+                        regions?: (google.shopping.merchant.accounts.v1.IRegion[]|null);
+                    }
+
+                    /** Represents a BatchUpdateRegionsResponse. */
+                    class BatchUpdateRegionsResponse implements IBatchUpdateRegionsResponse {
+
+                        /**
+                         * Constructs a new BatchUpdateRegionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse);
+
+                        /** BatchUpdateRegionsResponse regions. */
+                        public regions: google.shopping.merchant.accounts.v1.IRegion[];
+
+                        /**
+                         * Creates a new BatchUpdateRegionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BatchUpdateRegionsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse): google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse;
+
+                        /**
+                         * Encodes the specified BatchUpdateRegionsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse.verify|verify} messages.
+                         * @param message BatchUpdateRegionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BatchUpdateRegionsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse.verify|verify} messages.
+                         * @param message BatchUpdateRegionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BatchUpdateRegionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BatchUpdateRegionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse;
+
+                        /**
+                         * Decodes a BatchUpdateRegionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BatchUpdateRegionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse;
+
+                        /**
+                         * Verifies a BatchUpdateRegionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BatchUpdateRegionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BatchUpdateRegionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse;
+
+                        /**
+                         * Creates a plain object from a BatchUpdateRegionsResponse message. Also converts values to other types if specified.
+                         * @param message BatchUpdateRegionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BatchUpdateRegionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BatchUpdateRegionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a DeleteRegionRequest. */
                     interface IDeleteRegionRequest {
 
@@ -15133,6 +15596,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for DeleteRegionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BatchDeleteRegionsRequest. */
+                    interface IBatchDeleteRegionsRequest {
+
+                        /** BatchDeleteRegionsRequest parent */
+                        parent?: (string|null);
+
+                        /** BatchDeleteRegionsRequest requests */
+                        requests?: (google.shopping.merchant.accounts.v1.IDeleteRegionRequest[]|null);
+                    }
+
+                    /** Represents a BatchDeleteRegionsRequest. */
+                    class BatchDeleteRegionsRequest implements IBatchDeleteRegionsRequest {
+
+                        /**
+                         * Constructs a new BatchDeleteRegionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest);
+
+                        /** BatchDeleteRegionsRequest parent. */
+                        public parent: string;
+
+                        /** BatchDeleteRegionsRequest requests. */
+                        public requests: google.shopping.merchant.accounts.v1.IDeleteRegionRequest[];
+
+                        /**
+                         * Creates a new BatchDeleteRegionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BatchDeleteRegionsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest): google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest;
+
+                        /**
+                         * Encodes the specified BatchDeleteRegionsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest.verify|verify} messages.
+                         * @param message BatchDeleteRegionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BatchDeleteRegionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest.verify|verify} messages.
+                         * @param message BatchDeleteRegionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BatchDeleteRegionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BatchDeleteRegionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest;
+
+                        /**
+                         * Decodes a BatchDeleteRegionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BatchDeleteRegionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest;
+
+                        /**
+                         * Verifies a BatchDeleteRegionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BatchDeleteRegionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BatchDeleteRegionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest;
+
+                        /**
+                         * Creates a plain object from a BatchDeleteRegionsRequest message. Also converts values to other types if specified.
+                         * @param message BatchDeleteRegionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BatchDeleteRegionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BatchDeleteRegionsRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

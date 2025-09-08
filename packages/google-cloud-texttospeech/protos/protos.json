@@ -293,6 +293,11 @@
                             "ssml",
                             "multiSpeakerMarkup"
                           ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
+                          ]
                         }
                       },
                       "fields": {
@@ -311,6 +316,13 @@
                         "multiSpeakerMarkup": {
                           "type": "MultiSpeakerMarkup",
                           "id": 4
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "customPronunciations": {
                           "type": "CustomPronunciations",
@@ -956,6 +968,11 @@
                             "ssml",
                             "multiSpeakerMarkup"
                           ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
+                          ]
                         }
                       },
                       "fields": {
@@ -974,6 +991,13 @@
                         "multiSpeakerMarkup": {
                           "type": "MultiSpeakerMarkup",
                           "id": 4
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "customPronunciations": {
                           "type": "CustomPronunciations",

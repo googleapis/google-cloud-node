@@ -3523,6 +3523,98 @@ describe('v1.NetworkSecurityClient', () => {
             });
         });
 
+        describe('organizationLocationAddressGroup', async () => {
+            const fakePath = "/rendered/path/organizationLocationAddressGroup";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                address_group: "addressGroupValue",
+            };
+            const client = new networksecurityModule.v1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationAddressGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationAddressGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationAddressGroupPath', () => {
+                const result = client.organizationLocationAddressGroupPath("organizationValue", "locationValue", "addressGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationAddressGroupName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationAddressGroupName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationAddressGroupName', () => {
+                const result = client.matchLocationFromOrganizationLocationAddressGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAddressGroupFromOrganizationLocationAddressGroupName', () => {
+                const result = client.matchAddressGroupFromOrganizationLocationAddressGroupName(fakePath);
+                assert.strictEqual(result, "addressGroupValue");
+                assert((client.pathTemplates.organizationLocationAddressGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAddressGroup', async () => {
+            const fakePath = "/rendered/path/projectLocationAddressGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                address_group: "addressGroupValue",
+            };
+            const client = new networksecurityModule.v1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationAddressGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAddressGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAddressGroupPath', () => {
+                const result = client.projectLocationAddressGroupPath("projectValue", "locationValue", "addressGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAddressGroupName', () => {
+                const result = client.matchProjectFromProjectLocationAddressGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAddressGroupName', () => {
+                const result = client.matchLocationFromProjectLocationAddressGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAddressGroupFromProjectLocationAddressGroupName', () => {
+                const result = client.matchAddressGroupFromProjectLocationAddressGroupName(fakePath);
+                assert.strictEqual(result, "addressGroupValue");
+                assert((client.pathTemplates.projectLocationAddressGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('serverTlsPolicy', async () => {
             const fakePath = "/rendered/path/serverTlsPolicy";
             const expectedParameters = {
