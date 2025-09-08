@@ -212,7 +212,8 @@
     "packages/google-cloud-licensemanager": {},
     "packages/google-cloud-configdelivery": {},
     "packages/google-cloud-saasplatform-saasservicemgmt": {},
-    "packages/google-cloud-cloudsecuritycompliance": {}
+    "packages/google-cloud-cloudsecuritycompliance": {},
+    "packages/google-cloud-capacityplanner": {}
   },
   "plugins": [
     {

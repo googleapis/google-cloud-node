@@ -1,0 +1,659 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-capacityplanner",
+        "version": "0.0.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.cloud.capacityplanner.v1beta",
+                "version": "v1beta"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "capacityplanner_v1beta_generated_CapacityPlanningService_GetCapacityPlan_async",
+            "title": "CapacityPlanningService getCapacityPlan Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns information about the capacity plan.",
+            "canonical": true,
+            "file": "capacity_planning_service.get_capacity_plan.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetCapacityPlan",
+                "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService.GetCapacityPlan",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.capacityplanner.v1beta.CapacityPlan",
+                "client": {
+                    "shortName": "CapacityPlanningServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningServiceClient"
+                },
+                "method": {
+                    "shortName": "GetCapacityPlan",
+                    "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService.GetCapacityPlan",
+                    "service": {
+                        "shortName": "CapacityPlanningService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_CapacityPlanningService_QueryCapacityPlans_async",
+            "title": "CapacityPlanningService queryCapacityPlans Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of the capacity plans that are in the parent parameter and match your specified filters. (The maximum list length is limited by the pageSize parameter.)",
+            "canonical": true,
+            "file": "capacity_planning_service.query_capacity_plans.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 76,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryCapacityPlans",
+                "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService.QueryCapacityPlans",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.capacityplanner.v1beta.QueryCapacityPlansResponse",
+                "client": {
+                    "shortName": "CapacityPlanningServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryCapacityPlans",
+                    "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService.QueryCapacityPlans",
+                    "service": {
+                        "shortName": "CapacityPlanningService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_CapacityPlanningService_QueryCapacityPlanInsights_async",
+            "title": "CapacityPlanningService queryCapacityPlanInsights Sample",
+            "origin": "API_DEFINITION",
+            "description": " Query capacity plan insights that are in the parent parameter and match your specified filters.",
+            "canonical": true,
+            "file": "capacity_planning_service.query_capacity_plan_insights.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryCapacityPlanInsights",
+                "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService.QueryCapacityPlanInsights",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "capacity_plan_filters",
+                        "type": ".google.cloud.capacityplanner.v1beta.CapacityPlanFilters"
+                    }
+                ],
+                "resultType": ".google.cloud.capacityplanner.v1beta.QueryCapacityPlanInsightsResponse",
+                "client": {
+                    "shortName": "CapacityPlanningServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryCapacityPlanInsights",
+                    "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService.QueryCapacityPlanInsights",
+                    "service": {
+                        "shortName": "CapacityPlanningService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.CapacityPlanningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_UsageService_QueryUsageHistories_async",
+            "title": "CapacityPlanningService queryUsageHistories Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of the usage histories that are in the parent parameter and match your specified filters.",
+            "canonical": true,
+            "file": "usage_service.query_usage_histories.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 121,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryUsageHistories",
+                "fullName": "google.cloud.capacityplanner.v1beta.UsageService.QueryUsageHistories",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_level",
+                        "type": ".google.cloud.capacityplanner.v1beta.TimeSeries.LocationType"
+                    },
+                    {
+                        "name": "is_spot",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "machine_family",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_shape",
+                        "type": ".google.cloud.capacityplanner.v1beta.MachineShape"
+                    },
+                    {
+                        "name": "disk_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "confidential_mode",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "gpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cloud_resource_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "usage_aggregation_method",
+                        "type": ".google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod"
+                    },
+                    {
+                        "name": "start_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "end_date",
+                        "type": ".google.type.Date"
+                    }
+                ],
+                "resultType": ".google.cloud.capacityplanner.v1beta.QueryUsageHistoriesResponse",
+                "client": {
+                    "shortName": "UsageServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryUsageHistories",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageService.QueryUsageHistories",
+                    "service": {
+                        "shortName": "UsageService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.UsageService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_UsageService_QueryForecasts_async",
+            "title": "CapacityPlanningService queryForecasts Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of the forecasts that are in the parent parameter and match your specified filters.",
+            "canonical": true,
+            "file": "usage_service.query_forecasts.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 113,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryForecasts",
+                "fullName": "google.cloud.capacityplanner.v1beta.UsageService.QueryForecasts",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_family",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_shape",
+                        "type": ".google.cloud.capacityplanner.v1beta.MachineShape"
+                    },
+                    {
+                        "name": "disk_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "confidential_mode",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "gpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cloud_resource_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "forecast_type",
+                        "type": ".google.cloud.capacityplanner.v1beta.Forecast.ForecastType"
+                    },
+                    {
+                        "name": "prediction_interval",
+                        "type": ".google.cloud.capacityplanner.v1beta.Forecast.PredictionInterval"
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": ".google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod"
+                    }
+                ],
+                "resultType": ".google.cloud.capacityplanner.v1beta.QueryForecastsResponse",
+                "client": {
+                    "shortName": "UsageServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryForecasts",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageService.QueryForecasts",
+                    "service": {
+                        "shortName": "UsageService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.UsageService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_UsageService_QueryReservations_async",
+            "title": "CapacityPlanningService queryReservations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of the reservations that are in the parent parameter and match your specified filters.",
+            "canonical": true,
+            "file": "usage_service.query_reservations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 122,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryReservations",
+                "fullName": "google.cloud.capacityplanner.v1beta.UsageService.QueryReservations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_level",
+                        "type": ".google.cloud.capacityplanner.v1beta.TimeSeries.LocationType"
+                    },
+                    {
+                        "name": "machine_family",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_shape",
+                        "type": ".google.cloud.capacityplanner.v1beta.MachineShape"
+                    },
+                    {
+                        "name": "gpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cloud_resource_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reservation_type",
+                        "type": ".google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ReservationType"
+                    },
+                    {
+                        "name": "share_type",
+                        "type": ".google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ShareType"
+                    },
+                    {
+                        "name": "ownership_type",
+                        "type": ".google.cloud.capacityplanner.v1beta.QueryReservationsRequest.OwnershipType"
+                    },
+                    {
+                        "name": "reservation_data_level",
+                        "type": ".google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ReservationDataLevel"
+                    },
+                    {
+                        "name": "include_unapproved_reservations",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": ".google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod"
+                    },
+                    {
+                        "name": "start_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "end_date",
+                        "type": ".google.type.Date"
+                    }
+                ],
+                "resultType": ".google.cloud.capacityplanner.v1beta.QueryReservationsResponse",
+                "client": {
+                    "shortName": "UsageServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryReservations",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageService.QueryReservations",
+                    "service": {
+                        "shortName": "UsageService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.UsageService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_UsageService_ExportUsageHistories_async",
+            "title": "CapacityPlanningService exportUsageHistories Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports historical usage data requested by user into either an existing Cloud Storage bucket or a BigQuery table.",
+            "canonical": true,
+            "file": "usage_service.export_usage_histories.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 117,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportUsageHistories",
+                "fullName": "google.cloud.capacityplanner.v1beta.UsageService.ExportUsageHistories",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "is_spot",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "machine_family",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_shape",
+                        "type": ".google.cloud.capacityplanner.v1beta.MachineShape"
+                    },
+                    {
+                        "name": "disk_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "usage_aggregation_method",
+                        "type": ".google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod"
+                    },
+                    {
+                        "name": "start_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "end_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "output_config",
+                        "type": ".google.cloud.capacityplanner.v1beta.OutputConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "UsageServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageServiceClient"
+                },
+                "method": {
+                    "shortName": "ExportUsageHistories",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageService.ExportUsageHistories",
+                    "service": {
+                        "shortName": "UsageService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.UsageService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_UsageService_ExportForecasts_async",
+            "title": "CapacityPlanningService exportForecasts Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports forecasted usage data requested by user into either an existing Cloud Storage bucket or a BigQuery table.",
+            "canonical": true,
+            "file": "usage_service.export_forecasts.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 116,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportForecasts",
+                "fullName": "google.cloud.capacityplanner.v1beta.UsageService.ExportForecasts",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_family",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_shape",
+                        "type": ".google.cloud.capacityplanner.v1beta.MachineShape"
+                    },
+                    {
+                        "name": "disk_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "prediction_interval",
+                        "type": ".google.cloud.capacityplanner.v1beta.Forecast.PredictionInterval"
+                    },
+                    {
+                        "name": "aggregation_method",
+                        "type": ".google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod"
+                    },
+                    {
+                        "name": "start_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "end_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "output_config",
+                        "type": ".google.cloud.capacityplanner.v1beta.OutputConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "UsageServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageServiceClient"
+                },
+                "method": {
+                    "shortName": "ExportForecasts",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageService.ExportForecasts",
+                    "service": {
+                        "shortName": "UsageService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.UsageService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "capacityplanner_v1beta_generated_UsageService_ExportReservationsUsage_async",
+            "title": "CapacityPlanningService exportReservationsUsage Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports reservations usage data requested by user into either an existing Cloud Storage bucket or a new/existing BigQuery table.",
+            "canonical": true,
+            "file": "usage_service.export_reservations_usage.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 109,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportReservationsUsage",
+                "fullName": "google.cloud.capacityplanner.v1beta.UsageService.ExportReservationsUsage",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "machine_family",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "machine_shape",
+                        "type": ".google.cloud.capacityplanner.v1beta.MachineShape"
+                    },
+                    {
+                        "name": "gpu_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_level",
+                        "type": ".google.cloud.capacityplanner.v1beta.TimeSeries.LocationType"
+                    },
+                    {
+                        "name": "cloud_resource_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "usage_aggregation_method",
+                        "type": ".google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod"
+                    },
+                    {
+                        "name": "share_type",
+                        "type": ".google.cloud.capacityplanner.v1beta.ExportReservationsUsageRequest.ShareType"
+                    },
+                    {
+                        "name": "start_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "end_date",
+                        "type": ".google.type.Date"
+                    },
+                    {
+                        "name": "output_config",
+                        "type": ".google.cloud.capacityplanner.v1beta.OutputConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "UsageServiceClient",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageServiceClient"
+                },
+                "method": {
+                    "shortName": "ExportReservationsUsage",
+                    "fullName": "google.cloud.capacityplanner.v1beta.UsageService.ExportReservationsUsage",
+                    "service": {
+                        "shortName": "UsageService",
+                        "fullName": "google.cloud.capacityplanner.v1beta.UsageService"
+                    }
+                }
+            }
+        }
+    ]
+}
