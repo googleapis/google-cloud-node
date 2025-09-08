@@ -42,7 +42,7 @@ function main(parent) {
   // const deleted = true
 
   // Imports the Schemaregistry library
-  const {ManagedSchemaRegistryClient} = require('@google-cloud/schemaregistry').v1;
+  const {ManagedSchemaRegistryClient} = require('@google-cloud/managedkafka-schemaregistry').v1;
 
   // Instantiates a client
   const schemaregistryClient = new ManagedSchemaRegistryClient();
