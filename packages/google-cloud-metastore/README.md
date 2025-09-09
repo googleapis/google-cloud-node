@@ -228,3 +228,6 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=metastore.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
+
+
+[//]: # "partials.introduction"
