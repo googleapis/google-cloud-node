@@ -14,7 +14,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
 /**
  * Replaces all occurrences of a pattern in a file with a specified replacement string.
@@ -33,7 +32,35 @@ function replaceInFile(filePath, pattern, replacement) {
   }
 }
 
-const files = glob.sync('packages/google-cloud-documentai/src/*/document_*_service_client.ts');
+/**
+ * Recursively gets all files matching a pattern in a directory.
+ * @param {string} dirPath The path to the directory.
+ * @param {RegExp} pattern The pattern to match filenames against.
+ * @returns {string[]} An array of file paths.
+ */
+function getFiles(dirPath, pattern) {
+  let filePaths = [];
+  const files = fs.readdirSync(dirPath);
+
+  for (const file of files) {
+    const filePath = path.join(dirPath, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat.isDirectory()) {
+      // Recursively search subdirectories
+      filePaths = filePaths.concat(getFiles(filePath, pattern));
+    } else if (pattern.test(file)) {
+      // Add file path if it matches the pattern
+      filePaths.push(filePath);
+    }
+  }
+
+  return filePaths;
+}
+
+const rootDir = 'packages/google-cloud-documentai/src';
+const filePattern = /^document_.*_service_client\.ts$/;
+const files = getFiles(rootDir, filePattern);
 
 files.forEach(file => {
   replaceInFile(path.resolve(file), /servicePath !== staticMembers.servicePath && /g, '');
