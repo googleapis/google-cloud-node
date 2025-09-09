@@ -1,3 +1,4 @@
+[//]: # "partials.introduction"
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
@@ -6,7 +7,6 @@
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/speech.svg)](https://www.npmjs.org/package/@google-cloud/speech)
-
 
 
 
@@ -97,7 +97,7 @@ quickstart();
 
 Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-speech/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
+| Sample                      | Source Code                       | Try it | 
 | --------------------------- | --------------------------------- | ------ |
 | Adaptation.create_custom_class | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js,packages/google-cloud-speech/samples/README.md) |
 | Adaptation.create_phrase_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.create_phrase_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.create_phrase_set.js,packages/google-cloud-speech/samples/README.md) |
@@ -186,6 +186,7 @@ This library is considered to be **stable**. The code surface will not change in
 unless absolutely necessary (e.g. because of critical security issues) or with
 an extensive deprecation period. Issues and requests against **stable** libraries
 are addressed with the highest priority.
+
 
 
 
