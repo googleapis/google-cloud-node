@@ -17,6 +17,9 @@
     "prelint": "npm install",
     "precompile": "gts clean"
   },
+  "files": [
+    "build/src"
+  ],
   "author": "Google LLC",
   "license": "Apache-2.0",
   "devDependencies": {
