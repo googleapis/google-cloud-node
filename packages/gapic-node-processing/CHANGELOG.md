@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.1...gapic-node-processing-v0.1.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* [gapic-node-processing] remove hardlinks ([#6699](https://github.com/googleapis/google-cloud-node/issues/6699)) ([3478080](https://github.com/googleapis/google-cloud-node/commit/3478080d2c37b236c90feb1ad4a7643b4cb04aa4))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.0...gapic-node-processing-v0.1.1) (2025-08-29)
 
 

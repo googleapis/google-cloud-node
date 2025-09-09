@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/locationfinder",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Cloud Location Finder API client for Node.js",
   "repository": {
     "type": "git",
