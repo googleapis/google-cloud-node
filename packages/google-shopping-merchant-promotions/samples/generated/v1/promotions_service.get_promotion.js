@@ -35,7 +35,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Promotions library
-  const {PromotionsServiceClient} = require('@google-cloud/promotions').v1;
+  const {PromotionsServiceClient} = require('@google-shopping/promotions').v1;
 
   // Instantiates a client
   const promotionsClient = new PromotionsServiceClient();
