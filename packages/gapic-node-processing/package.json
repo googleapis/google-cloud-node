@@ -16,6 +16,7 @@
     "test": "cross-env c8 mocha --exit build/test",
     "prelint": "npm install",
     "precompile": "gts clean"
+    "docs": "echo 'no docs to publish'"
   },
   "files": [
     "build/src"
