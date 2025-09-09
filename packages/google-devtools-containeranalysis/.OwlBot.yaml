@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/devtools/containeranalysis/(v.*)/.*-nodejs
-    dest: /owl-bot-staging/google-devtools-containeranalysis/$1
+  - source: /google/devtools/google-devtools-containeranalysis-nodejs
+    dest: /owl-bot-staging/google-devtools-containeranalysis
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: containeranalysis

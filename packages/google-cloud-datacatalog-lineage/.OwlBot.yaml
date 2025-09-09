@@ -13,5 +13,5 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/datacatalog/lineage/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-datacatalog-lineage/$1
+    - source: /google/cloud/datacatalog/google-cloud-datacatalog-lineage-nodejs
+      dest: /owl-bot-staging/google-cloud-datacatalog-lineage

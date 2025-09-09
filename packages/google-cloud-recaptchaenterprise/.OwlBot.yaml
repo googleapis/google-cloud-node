@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/recaptchaenterprise/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-recaptchaenterprise/$1
+  - source: /google/cloud/google-cloud-recaptchaenterprise-nodejs
+    dest: /owl-bot-staging/google-cloud-recaptchaenterprise
 api-name: recaptchaenterprise

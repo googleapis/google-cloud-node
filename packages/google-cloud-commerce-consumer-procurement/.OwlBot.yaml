@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/commerce/consumer/procurement/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-commerce-consumer-procurement/$1
+    - source: /google/cloud/commerce/consumer/google-cloud-commerce-consumer-procurement-nodejs
+      dest: /owl-bot-staging/google-cloud-commerce-consumer-procurement
 
 api-name: cloudcommerceconsumerprocurement

@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/devtools/artifactregistry/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-devtools-artifactregistry/$1
+  - source: /google/devtools/google-devtools-artifactregistry-nodejs
+    dest: /owl-bot-staging/google-devtools-artifactregistry
 api-name: artifactregistry

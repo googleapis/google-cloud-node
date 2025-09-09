@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/memorystore/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-memorystore/$1
+    - source: /google/cloud/google-cloud-memorystore-nodejs
+      dest: /owl-bot-staging/google-cloud-memorystore
 
 api-name: memorystore

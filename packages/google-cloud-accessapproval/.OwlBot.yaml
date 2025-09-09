@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/accessapproval/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-accessapproval/$1
+  - source: /google/cloud/google-cloud-accessapproval-nodejs
+    dest: /owl-bot-staging/google-cloud-accessapproval
 api-name: accessapproval

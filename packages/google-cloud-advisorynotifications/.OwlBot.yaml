@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/advisorynotifications/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-advisorynotifications/$1
+    - source: /google/cloud/google-cloud-advisorynotifications-nodejs
+      dest: /owl-bot-staging/google-cloud-advisorynotifications
 
 api-name: advisorynotifications

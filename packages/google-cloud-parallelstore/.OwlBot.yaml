@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/parallelstore/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-parallelstore/$1
+    - source: /google/cloud/google-cloud-parallelstore-nodejs
+      dest: /owl-bot-staging/google-cloud-parallelstore
 
 api-name: parallelstore

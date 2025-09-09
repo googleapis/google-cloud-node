@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/apps/meet/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-apps-meet/$1
+    - source: /google/apps/google-apps-meet-nodejs
+      dest: /owl-bot-staging/google-apps-meet
 
 api-name: meet

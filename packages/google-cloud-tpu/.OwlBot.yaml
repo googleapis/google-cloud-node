@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/tpu/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-tpu/$1
+  - source: /google/cloud/google-cloud-tpu-nodejs
+    dest: /owl-bot-staging/google-cloud-tpu
 api-name: tpu

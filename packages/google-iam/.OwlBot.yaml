@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/iam/(v[2-9]+)/.*-nodejs
-    dest: /owl-bot-staging/google-iam/$1
+  - source: /google/google-iam-nodejs
+    dest: /owl-bot-staging/google-iam
 api-name: iam

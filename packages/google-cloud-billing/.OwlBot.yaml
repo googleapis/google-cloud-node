@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/billing/(v.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-billing/$1
+  - source: /google/cloud/google-cloud-billing-nodejs
+    dest: /owl-bot-staging/google-cloud-billing
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: billing

@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/beyondcorp/clientgateways/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-beyondcorp-clientgateways/$1
+  - source: /google/cloud/beyondcorp/google-cloud-beyondcorp-clientgateways-nodejs
+    dest: /owl-bot-staging/google-cloud-beyondcorp-clientgateways
 api-name: beyondcorp-clientgateways

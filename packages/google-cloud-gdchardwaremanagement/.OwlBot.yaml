@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/gdchardwaremanagement/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-gdchardwaremanagement/$1
+    - source: /google/cloud/google-cloud-gdchardwaremanagement-nodejs
+      dest: /owl-bot-staging/google-cloud-gdchardwaremanagement
 
 api-name: gdchardwaremanagement

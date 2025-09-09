@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/shopping/merchant/quota/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-shopping-merchant-quota/$1
+    - source: /google/shopping/merchant/google-shopping-merchant-quota-nodejs
+      dest: /owl-bot-staging/google-shopping-merchant-quota
 
 api-name: merchantapi

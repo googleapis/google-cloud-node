@@ -17,7 +17,7 @@ deep-remove-regex:
 deep-preserve-regex:
   - /owl-bot-staging/v1beta1
 deep-copy-regex:
-  - source: /google/container/(v.*)/.*-nodejs
-    dest: /owl-bot-staging/google-container/$1
+  - source: /google/google-container-nodejs
+    dest: /owl-bot-staging/google-container
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: container

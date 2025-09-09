@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/bigquery/analyticshub/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-bigquery-analyticshub/$1
+  - source: /google/cloud/bigquery/google-cloud-bigquery-analyticshub-nodejs
+    dest: /owl-bot-staging/google-cloud-bigquery-analyticshub
 api-name: bigquery-analyticshub

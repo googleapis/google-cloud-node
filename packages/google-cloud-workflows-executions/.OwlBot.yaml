@@ -15,8 +15,8 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/workflows/executions/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-workflows-executions/$1
-  - source: /google/cloud/workflows/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-workflows-executions/$1
+  - source: /google/cloud/workflows/google-cloud-workflows-executions-nodejs
+    dest: /owl-bot-staging/google-cloud-workflows-executions
+  - source: /google/cloud/google-cloud-workflows-executions-nodejs
+    dest: /owl-bot-staging/google-cloud-workflows-executions
 api-name: workflows

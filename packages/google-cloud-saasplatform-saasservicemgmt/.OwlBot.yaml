@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/saasplatform/saasservicemgmt/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-saasplatform-saasservicemgmt/$1
+    - source: /google/cloud/saasplatform/google-cloud-saasplatform-saasservicemgmt-nodejs
+      dest: /owl-bot-staging/google-cloud-saasplatform-saasservicemgmt
 
 api-name: saasservicemgmt

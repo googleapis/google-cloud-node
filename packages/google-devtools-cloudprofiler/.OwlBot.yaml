@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/devtools/cloudprofiler/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-devtools-cloudprofiler/$1
+    - source: /google/devtools/google-devtools-cloudprofiler-nodejs
+      dest: /owl-bot-staging/google-devtools-cloudprofiler
 
 api-name: cloudprofiler

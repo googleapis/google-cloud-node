@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/apigeeconnect/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-apigeeconnect/$1
+  - source: /google/cloud/google-cloud-apigeeconnect-nodejs
+    dest: /owl-bot-staging/google-cloud-apigeeconnect
 api-name: apigeeconnect

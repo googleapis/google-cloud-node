@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/api/cloudquotas/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-api-cloudquotas/$1
+    - source: /google/api/google-api-cloudquotas-nodejs
+      dest: /owl-bot-staging/google-api-cloudquotas
 
 api-name: cloudquotas

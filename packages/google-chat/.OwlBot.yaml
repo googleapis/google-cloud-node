@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/chat/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-chat/$1
+    - source: /google/google-chat-nodejs
+      dest: /owl-bot-staging/google-chat
 
 api-name: chat

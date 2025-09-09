@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/scheduler/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-scheduler/$1
+  - source: /google/cloud/google-cloud-scheduler-nodejs
+    dest: /owl-bot-staging/google-cloud-scheduler
 api-name: scheduler

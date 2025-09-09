@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/datastream/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-datastream/$1
+  - source: /google/cloud/google-cloud-datastream-nodejs
+    dest: /owl-bot-staging/google-cloud-datastream
 api-name: datastream

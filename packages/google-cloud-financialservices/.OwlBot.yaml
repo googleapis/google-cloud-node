@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/financialservices/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-financialservices/$1
+    - source: /google/cloud/google-cloud-financialservices-nodejs
+      dest: /owl-bot-staging/google-cloud-financialservices
 
 api-name: financialservices

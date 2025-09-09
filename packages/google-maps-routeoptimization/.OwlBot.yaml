@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/maps/routeoptimization/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-maps-routeoptimization/$1
+    - source: /google/maps/google-maps-routeoptimization-nodejs
+      dest: /owl-bot-staging/google-maps-routeoptimization
 
 api-name: routeoptimization

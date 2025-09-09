@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/netapp/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-netapp/$1
+    - source: /google/cloud/google-cloud-netapp-nodejs
+      dest: /owl-bot-staging/google-cloud-netapp
 
 api-name: netapp

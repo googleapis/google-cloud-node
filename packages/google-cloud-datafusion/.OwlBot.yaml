@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/datafusion/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-datafusion/$1
+  - source: /google/cloud/google-cloud-datafusion-nodejs
+    dest: /owl-bot-staging/google-cloud-datafusion
 api-name: datafusion

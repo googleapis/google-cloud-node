@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/bigquery/dataexchange/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-bigquery-dataexchange/$1
+  - source: /google/cloud/bigquery/google-cloud-bigquery-dataexchange-nodejs
+    dest: /owl-bot-staging/google-cloud-bigquery-dataexchange
 api-name: bigquery-dataexchange

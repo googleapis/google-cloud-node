@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/websecurityscanner/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-websecurityscanner/$1
+  - source: /google/cloud/google-cloud-websecurityscanner-nodejs
+    dest: /owl-bot-staging/google-cloud-websecurityscanner
 api-name: websecurityscanner

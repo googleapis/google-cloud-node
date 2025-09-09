@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/channel/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-channel/$1
+  - source: /google/cloud/google-cloud-channel-nodejs
+    dest: /owl-bot-staging/google-cloud-channel
 api-name: channel

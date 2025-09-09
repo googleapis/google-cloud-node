@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/video/livestream/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-video-livestream/$1
+  - source: /google/cloud/video/google-cloud-video-livestream-nodejs
+    dest: /owl-bot-staging/google-cloud-video-livestream
 api-name: video

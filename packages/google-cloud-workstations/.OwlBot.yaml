@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/workstations/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-workstations/$1
+    - source: /google/cloud/google-cloud-workstations-nodejs
+      dest: /owl-bot-staging/google-cloud-workstations
 
 api-name: workstations

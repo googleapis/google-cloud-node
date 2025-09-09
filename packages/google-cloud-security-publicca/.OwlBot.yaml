@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/security/publicca/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-security-publicca/$1
+  - source: /google/cloud/security/google-cloud-security-publicca-nodejs
+    dest: /owl-bot-staging/google-cloud-security-publicca
 api-name: security

@@ -16,8 +16,8 @@ deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /grafeas/(.*)/.*-nodejs
-    dest: /owl-bot-staging/grafeas/$1
+  - source: /grafeas-nodejs
+    dest: /owl-bot-staging/grafeas
 
 api-name: grafeas
 

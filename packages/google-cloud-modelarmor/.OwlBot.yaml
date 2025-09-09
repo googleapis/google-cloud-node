@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/modelarmor/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-modelarmor/$1
+    - source: /google/cloud/google-cloud-modelarmor-nodejs
+      dest: /owl-bot-staging/google-cloud-modelarmor
 
 api-name: modelarmor

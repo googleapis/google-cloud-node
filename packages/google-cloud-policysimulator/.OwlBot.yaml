@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/policysimulator/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-policysimulator/$1
+    - source: /google/cloud/google-cloud-policysimulator-nodejs
+      dest: /owl-bot-staging/google-cloud-policysimulator
 
 api-name: policysimulator

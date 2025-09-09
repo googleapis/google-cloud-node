@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/api/servicecontrol/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-api-servicecontrol/$1
+  - source: /google/api/google-api-servicecontrol-nodejs
+    dest: /owl-bot-staging/google-api-servicecontrol
 begin-after-commit-hash: ef7685951dedbb18bce99dcbc0dfd8bdac0fec86
 api-name: servicecontrol

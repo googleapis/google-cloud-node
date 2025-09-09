@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/chronicle/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-chronicle/$1
+    - source: /google/cloud/google-cloud-chronicle-nodejs
+      dest: /owl-bot-staging/google-cloud-chronicle
 
 api-name: chronicle

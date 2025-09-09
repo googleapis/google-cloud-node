@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/translate/(v.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-translate/$1
+  - source: /google/cloud/google-cloud-translate-nodejs
+    dest: /owl-bot-staging/google-cloud-translate
 begin-after-commit-hash: f43939eac6a0bb5998c1fa0f79063194e699230e
 api-name: translate

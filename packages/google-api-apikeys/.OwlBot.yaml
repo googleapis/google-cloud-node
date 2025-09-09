@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/api/apikeys/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-api-apikeys/$1
+  - source: /google/api/google-api-apikeys-nodejs
+    dest: /owl-bot-staging/google-api-apikeys
 api-name: apikeys

@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/dialogflow/cx/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-dialogflow-cx/$1
+  - source: /google/cloud/dialogflow/google-cloud-dialogflow-cx-nodejs
+    dest: /owl-bot-staging/google-cloud-dialogflow-cx
 api-name: dialogflow-cx

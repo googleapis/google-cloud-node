@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/vmwareengine/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-vmwareengine/$1
+  - source: /google/cloud/google-cloud-vmwareengine-nodejs
+    dest: /owl-bot-staging/google-cloud-vmwareengine
 api-name: vmwareengine

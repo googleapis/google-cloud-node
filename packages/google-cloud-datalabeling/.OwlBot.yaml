@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/datalabeling/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-datalabeling/$1
+  - source: /google/cloud/google-cloud-datalabeling-nodejs
+    dest: /owl-bot-staging/google-cloud-datalabeling
 api-name: datalabeling

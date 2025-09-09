@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/monitoring/dashboard/(v.*)/.*-nodejs
-    dest: /owl-bot-staging/google-monitoring-dashboard/$1
+  - source: /google/monitoring/google-monitoring-dashboard-nodejs
+    dest: /owl-bot-staging/google-monitoring-dashboard
 begin-after-commit-hash: dea0fe87a4015bc79a036811aafe13c8f9aa8528
 api-name: dashboard

@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/networkmanagement/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-networkmanagement/$1
+  - source: /google/cloud/google-cloud-networkmanagement-nodejs
+    dest: /owl-bot-staging/google-cloud-networkmanagement
 api-name: networkmanagement

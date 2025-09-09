@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/analytics/admin/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-analytics-admin/$1
+  - source: /google/analytics/google-analytics-admin-nodejs
+    dest: /owl-bot-staging/google-analytics-admin
 api-name: analytics-admin

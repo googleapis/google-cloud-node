@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/maps/mapsplatformdatasets/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-maps-mapsplatformdatasets/$1
+    - source: /google/maps/google-maps-mapsplatformdatasets-nodejs
+      dest: /owl-bot-staging/google-maps-mapsplatformdatasets
 
 api-name: mapsplatformdatasets

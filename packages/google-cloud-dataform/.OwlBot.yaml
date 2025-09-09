@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/dataform/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-dataform/$1
+    - source: /google/cloud/google-cloud-dataform-nodejs
+      dest: /owl-bot-staging/google-cloud-dataform
 
 api-name: dataform

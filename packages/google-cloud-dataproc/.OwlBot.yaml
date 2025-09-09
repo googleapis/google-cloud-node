@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/dataproc/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-dataproc/$1
+  - source: /google/cloud/google-cloud-dataproc-nodejs
+    dest: /owl-bot-staging/google-cloud-dataproc
 api-name: dataproc

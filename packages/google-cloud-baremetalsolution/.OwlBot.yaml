@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/baremetalsolution/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-baremetalsolution/$1
+  - source: /google/cloud/google-cloud-baremetalsolution-nodejs
+    dest: /owl-bot-staging/google-cloud-baremetalsolution
 api-name: baremetalsolution

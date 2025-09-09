@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/streetview/publish/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-streetview-publish/$1
+    - source: /google/streetview/google-streetview-publish-nodejs
+      dest: /owl-bot-staging/google-streetview-publish
 
 api-name: publish

@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/deploy/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-deploy/$1
+  - source: /google/cloud/google-cloud-deploy-nodejs
+    dest: /owl-bot-staging/google-cloud-deploy
 api-name: deploy

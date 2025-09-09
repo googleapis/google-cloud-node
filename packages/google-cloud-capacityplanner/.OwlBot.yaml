@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/capacityplanner/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-capacityplanner/$1
+    - source: /google/cloud/google-cloud-capacityplanner-nodejs
+      dest: /owl-bot-staging/google-cloud-capacityplanner
 
 api-name: capacityplanner

@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/memcache/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-memcache/$1
+  - source: /google/cloud/google-cloud-memcache-nodejs
+    dest: /owl-bot-staging/google-cloud-memcache
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: memcache

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/ads/admanager/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-ads-admanager/$1
+    - source: /google/ads/google-ads-admanager-nodejs
+      dest: /owl-bot-staging/google-ads-admanager
 
 api-name: admanager

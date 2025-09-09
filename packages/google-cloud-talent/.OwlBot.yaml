@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/talent/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-talent/$1
+  - source: /google/cloud/google-cloud-talent-nodejs
+    dest: /owl-bot-staging/google-cloud-talent
 api-name: talent

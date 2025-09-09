@@ -17,7 +17,7 @@ deep-remove-regex:
 deep-preserve-regex:
   - /owl-bot-staging/v1beta1
 deep-copy-regex:
-  - source: /google/cloud/bigquery/reservation/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-bigquery-reservation/$1
+  - source: /google/cloud/bigquery/google-cloud-bigquery-reservation-nodejs
+    dest: /owl-bot-staging/google-cloud-bigquery-reservation
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: bigquery-reservation

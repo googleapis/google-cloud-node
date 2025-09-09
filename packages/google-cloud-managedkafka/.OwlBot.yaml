@@ -16,7 +16,7 @@ deep-remove-regex:
     - /google/cloud/managedkafka/schemaregistry/(.*)/.*-nodejs
 
 deep-copy-regex:
-    - source: /google/cloud/managedkafka/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-managedkafka/$1
+    - source: /google/cloud/google-cloud-managedkafka-nodejs
+      dest: /owl-bot-staging/google-cloud-managedkafka
 
 api-name: managedkafka

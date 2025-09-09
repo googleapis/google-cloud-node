@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/bigquery/datapolicies/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-bigquery-datapolicies/$1
+  - source: /google/cloud/bigquery/google-cloud-bigquery-datapolicies-nodejs
+    dest: /owl-bot-staging/google-cloud-bigquery-datapolicies
 api-name: bigquery-datapolicies

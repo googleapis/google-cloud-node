@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/servicedirectory/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-servicedirectory/$1
+  - source: /google/cloud/google-cloud-servicedirectory-nodejs
+    dest: /owl-bot-staging/google-cloud-servicedirectory
 api-name: servicedirectory

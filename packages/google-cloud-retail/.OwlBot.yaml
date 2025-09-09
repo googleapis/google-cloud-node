@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/retail/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-retail/$1
+  - source: /google/cloud/google-cloud-retail-nodejs
+    dest: /owl-bot-staging/google-cloud-retail
 api-name: retail
