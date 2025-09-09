@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql.proto",
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_connect.proto",
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_iam_policies.proto",
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_resources.proto",
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_tiers.proto",
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_users.proto"
+]
