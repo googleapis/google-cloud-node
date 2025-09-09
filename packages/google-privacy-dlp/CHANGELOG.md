@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.3.0...dlp-v6.4.0) (2025-09-09)
+
+
+### Features
+
+* [dlp] add LocationSupport,Domain,DocumentFallbackLocation ([#6700](https://github.com/googleapis/google-cloud-node/issues/6700)) ([cf24104](https://github.com/googleapis/google-cloud-node/commit/cf241049e4b2ad5ca3e01c28275c3a54f6d24c8f))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.2.0...dlp-v6.3.0) (2025-07-09)
 
 

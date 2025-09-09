@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.4.0...network-connectivity-v4.5.0) (2025-09-09)
+
+
+### Features
+
+* [networkconnectivity] introduce DataTransfer APIs ([#6673](https://github.com/googleapis/google-cloud-node/issues/6673)) ([44d6bbb](https://github.com/googleapis/google-cloud-node/commit/44d6bbb3855a7f8fe1b516a9294c0451036bba2f))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.3.0...network-connectivity-v4.4.0) (2025-07-22)
 
 

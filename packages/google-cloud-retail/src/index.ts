@@ -28,6 +28,8 @@ const CompletionServiceClient = v2beta.CompletionServiceClient;
 type CompletionServiceClient = v2beta.CompletionServiceClient;
 const ControlServiceClient = v2beta.ControlServiceClient;
 type ControlServiceClient = v2beta.ControlServiceClient;
+const ConversationalSearchServiceClient = v2beta.ConversationalSearchServiceClient;
+type ConversationalSearchServiceClient = v2beta.ConversationalSearchServiceClient;
 const GenerativeQuestionServiceClient = v2beta.GenerativeQuestionServiceClient;
 type GenerativeQuestionServiceClient = v2beta.GenerativeQuestionServiceClient;
 const ModelServiceClient = v2beta.ModelServiceClient;
@@ -45,7 +47,7 @@ type ServingConfigServiceClient = v2beta.ServingConfigServiceClient;
 const UserEventServiceClient = v2beta.UserEventServiceClient;
 type UserEventServiceClient = v2beta.UserEventServiceClient;
 
-export {v2, v2alpha, v2beta, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
-export default {v2, v2alpha, v2beta, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
+export {v2, v2alpha, v2beta, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
+export default {v2, v2alpha, v2beta, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
