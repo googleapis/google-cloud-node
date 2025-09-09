@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v4.2.0...vmmigration-v4.3.0) (2025-09-09)
+
+
+### Features
+
+* [vmmigration] Azure as a source ([#6677](https://github.com/googleapis/google-cloud-node/issues/6677)) ([3e0730f](https://github.com/googleapis/google-cloud-node/commit/3e0730f20bc212207398e93605865b5a560addb6))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v4.1.0...vmmigration-v4.2.0) (2025-07-09)
 
 

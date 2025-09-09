@@ -36,7 +36,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Datasources library
-  const {FileUploadsServiceClient} = require('@google-cloud/datasources').v1;
+  const {FileUploadsServiceClient} = require('@google-shopping/datasources').v1;
 
   // Instantiates a client
   const datasourcesClient = new FileUploadsServiceClient();
