@@ -14,7 +14,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
 /**
  * Replaces all occurrences of a pattern in a file with a specified replacement string.
@@ -31,6 +30,38 @@ function replaceInFile(filePath, pattern, replacement) {
   } catch (err) {
     console.error(`Error processing file ${filePath}:`, err);
   }
+}
+
+/**
+ * Recursively finds files that match a specific pattern without using glob.
+ * @param {string} baseDir The base directory to start the search from.
+ * @param {string} filePattern A regular expression pattern to match against file paths.
+ * @returns {string[]} An array of file paths that match the pattern.
+ */
+function findFiles(baseDir, filePattern) {
+  const matches = [];
+  const patternRegex = new RegExp(filePattern.replace(/\*/g, '[^/]*'), 'i');
+
+  function traverse(dir) {
+    try {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          traverse(fullPath);
+        } else if (patternRegex.test(fullPath)) {
+          matches.push(fullPath);
+        }
+      }
+    } catch (err) {
+      if (err.code !== 'ENOENT') {
+        console.error(`Error reading directory ${dir}:`, err);
+      }
+    }
+  }
+
+  traverse(baseDir);
+  return matches;
 }
 
 const filesToDelete = [
@@ -181,7 +212,7 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /\n  const sqlAvailableDatabaseVersionsServiceClient =\n    newSqlAvailableDatabaseVersionsServiceClient\(\);\n  doStuffWithSqlAvailableDatabaseVersionsServiceClient\(\n    sqlAvailableDatabaseVersionsServiceClient  \);\n}/gs,
+    searchPattern: /\n  const sqlAvailableDatabaseVersionsServiceClient =\n    new SqlAvailableDatabaseVersionsServiceClient\(\);\n  doStuffWithSqlAvailableDatabaseVersionsServiceClient\(\n    sqlAvailableDatabaseVersionsServiceClient\n  \);/gs,
     replacement: ''
   },
   {
@@ -207,8 +238,9 @@ const replacements = [
 ];
 
 replacements.forEach(r => {
-  const files = glob.sync(r.files);
+  const files = findFiles(path.resolve('.'), r.files);
   files.forEach(file => {
     replaceInFile(path.resolve(file), r.searchPattern, r.replacement);
   });
+});
 });
