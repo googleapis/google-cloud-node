@@ -235,4 +235,7 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
 
 
-[//]: # "partials.introduction"
+> Node.js idiomatic client for [Kubernetes Engine][product-docs] cluster management.
+
+[Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/) is used for
+building and managing container based applications, powered by the open source Kubernetes technology.

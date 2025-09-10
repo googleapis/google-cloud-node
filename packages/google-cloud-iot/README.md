@@ -154,4 +154,6 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
 
 
-[//]: # "partials.introduction"
+> Node.js idiomatic client for [Cloud IoT Core][product-docs].
+
+[Google Cloud Internet of Things (IoT) Core](https://cloud.google.com/iot/docs) is a fully managed service for securely connecting and managing IoT devices, from a few to millions. Ingest data from connected devices and build rich applications that integrate with the other big data services of Google Cloud Platform.

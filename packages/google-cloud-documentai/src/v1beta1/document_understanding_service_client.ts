@@ -147,7 +147,7 @@ export class DocumentUnderstandingServiceClient {
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
 
-    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    // If scopes are unset in options set scopes.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
@@ -175,10 +175,7 @@ export class DocumentUnderstandingServiceClient {
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = this._servicePath;
 
-    // Set the default scopes in auth client if needed.
-    if (servicePath === this._servicePath) {
-      this.auth.defaultScopes = staticMembers.scopes;
-    }
+    
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];

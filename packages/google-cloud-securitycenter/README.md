@@ -1,4 +1,12 @@
-[//]: # "partials.introduction"
+> Node.js idiomatic client for [Cloud Security Command Center][product-docs].
+
+[Cloud Security Command Center](https://cloud.google.com/security-command-center/docs/) helps
+security teams gather data, identify threats, and act on them before they result in business
+damage or loss. It offers deep insight into application and data risk so that you can quickly
+mitigate threats to your cloud resources and evaluate overall health. With Cloud Security
+Command Center, you can view and monitor an inventory of your cloud assets, scan storage
+systems for sensitive data, detect common web vulnerabilities, and review access rights
+to your critical resources, all from a single, centralized dashboard.
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
