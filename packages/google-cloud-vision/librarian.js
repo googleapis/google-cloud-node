@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,18 +14,39 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
-const files = glob.sync('packages/google-cloud-vision/src/*/image_annotator_client.ts');
+/**
+ * Recursively finds a file with a specific name in a directory and its subdirectories.
+ * @param {string} dirPath The directory to search.
+ * @param {string} fileName The name of the file to find.
+ * @returns {string[]} An array of matching file paths.
+ */
+function findFileRecursively(dirPath, fileName) {
+  let foundFiles = [];
+  const items = fs.readdirSync(dirPath, { withFileTypes: true });
+
+  for (const item of items) {
+    const fullPath = path.join(dirPath, item.name);
+    if (item.isDirectory()) {
+      foundFiles = foundFiles.concat(findFileRecursively(fullPath, fileName));
+    } else if (item.isFile() && item.name === fileName) {
+      foundFiles.push(fullPath);
+    }
+  }
+  return foundFiles;
+}
+
+const baseDir = path.resolve('packages/google-cloud-vision/src');
+const filesToProcess = findFileRecursively(baseDir, 'image_annotator_client.ts');
 
 const appendContent = '\n' +
   "import {FeaturesMethod} from '../helpers';\n" +
   '// eslint-disable-next-line @typescript-eslint/no-empty-interface\n' +
   'export interface ImageAnnotatorClient extends FeaturesMethod {}\n';
 
-files.forEach(file => {
+filesToProcess.forEach(file => {
   try {
-    fs.appendFileSync(path.resolve(file), appendContent, 'utf8');
+    fs.appendFileSync(file, appendContent, 'utf8');
     console.log(`Successfully appended to: ${file}`);
   } catch (err) {
     console.error(`Error appending to file ${file}:`, err);
