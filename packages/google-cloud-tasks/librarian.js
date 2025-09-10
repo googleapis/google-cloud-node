@@ -14,7 +14,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
 /**
  * Replaces all occurrences of a pattern in a file with a specified replacement string.
@@ -33,9 +32,34 @@ function replaceInFile(filePath, pattern, replacement) {
   }
 }
 
-const files = glob.sync('packages/google-cloud-tasks/esm/src/*/cloud_tasks_client_config.json');
+/**
+ * Recursively finds files that match a given name in a directory and its subdirectories.
+ * @param {string} dirPath The directory to search.
+ * @param {string} fileName The name of the file to match.
+ * @returns {string[]} An array of matching file paths.
+ */
+function findFile(dirPath, fileName) {
+  let fileList = [];
+  const filesAndDirs = fs.readdirSync(dirPath, { withFileTypes: true });
+
+  for (const item of filesAndDirs) {
+    const fullPath = path.join(dirPath, item.name);
+    if (item.isDirectory()) {
+      // Recurse into subdirectories
+      fileList = fileList.concat(findFile(fullPath, fileName));
+    } else if (item.isFile() && item.name === fileName) {
+      // Check if the file name matches
+      fileList.push(fullPath);
+    }
+  }
+  return fileList;
+}
+
+const baseDir = path.resolve('packages/google-cloud-tasks/esm/src');
+const targetFile = 'cloud_tasks_client_config.json';
+const files = findFile(baseDir, targetFile);
 
 files.forEach(file => {
-  replaceInFile(path.resolve(file), /"initial_rpc_timeout_millis": 60000/g, '"initial_rpc_timeout_millis": 20000');
-  replaceInFile(path.resolve(file), /"max_rpc_timeout_millis": 60000/g, '"max_rpc_timeout_millis": 20000');
+  replaceInFile(file, /"initial_rpc_timeout_millis": 60000/g, '"initial_rpc_timeout_millis": 20000');
+  replaceInFile(file, /"max_rpc_timeout_millis": 60000/g, '"max_rpc_timeout_millis": 20000');
 });
