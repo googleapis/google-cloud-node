@@ -12,9 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+Here is the rewritten script without using the glob module.
+
+JavaScript
+
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
 /**
  * Replaces all occurrences of a pattern in a file with a specified replacement string.
@@ -33,7 +50,26 @@ function replaceInFile(filePath, pattern, replacement) {
   }
 }
 
-const versions = glob.sync('packages/google-cloud-speech/src/v*');
+// Function to get all top-level directories starting with 'v'
+function getVersionDirectories(baseDir) {
+  const versions = [];
+  try {
+    const filesAndDirs = fs.readdirSync(baseDir);
+    for (const item of filesAndDirs) {
+      const fullPath = path.join(baseDir, item);
+      const stat = fs.statSync(fullPath);
+      if (stat.isDirectory() && item.startsWith('v')) {
+        versions.push(fullPath);
+      }
+    }
+  } catch (err) {
+    console.error(`Error reading directory ${baseDir}:`, err);
+  }
+  return versions;
+}
+
+const baseDir = path.resolve('packages/google-cloud-speech/src');
+const versions = getVersionDirectories(baseDir);
 
 versions.forEach(versionDir => {
   const version = path.basename(versionDir);
