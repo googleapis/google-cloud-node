@@ -243,4 +243,3 @@ replacements.forEach(r => {
     replaceInFile(path.resolve(file), r.searchPattern, r.replacement);
   });
 });
-});
