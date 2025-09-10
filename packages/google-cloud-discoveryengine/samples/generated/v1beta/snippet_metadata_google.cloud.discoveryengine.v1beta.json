@@ -3450,7 +3450,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 347,
+                    "end": 408,
                     "type": "FULL"
                 }
             ],
@@ -3556,6 +3556,10 @@
                         "type": "TYPE_STRING"
                     },
                     {
+                        "name": "ranking_expression_backend",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend"
+                    },
+                    {
                         "name": "safe_search",
                         "type": "TYPE_BOOL"
                     },
@@ -3614,7 +3618,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 347,
+                    "end": 408,
                     "type": "FULL"
                 }
             ],
@@ -3718,6 +3722,10 @@
                     {
                         "name": "ranking_expression",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ranking_expression_backend",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend"
                     },
                     {
                         "name": "safe_search",
