@@ -4,4 +4,3 @@ test/fixtures
 build/
 docs/
 protos/
-templates/bootstrap-templates/samples/test/quickstart.js
