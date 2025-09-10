@@ -14,7 +14,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
 /**
  * Replaces all occurrences of a pattern in a file with a specified replacement string.
@@ -33,8 +32,33 @@ function replaceInFile(filePath, pattern, replacement) {
   }
 }
 
-const files = glob.sync('packages/google-cloud-redis/src/v*/*_client.ts');
+/**
+ * Recursively finds files that match a given pattern in a directory and its subdirectories.
+ * @param {string} dirPath The directory to search.
+ * @param {RegExp} filePattern The regex pattern for file names to match.
+ * @returns {string[]} An array of matching file paths.
+ */
+function findMatchingFiles(dirPath, filePattern) {
+  let fileList = [];
+  const filesAndDirs = fs.readdirSync(dirPath, { withFileTypes: true });
+
+  for (const item of filesAndDirs) {
+    const fullPath = path.join(dirPath, item.name);
+    if (item.isDirectory()) {
+      // Recursively search subdirectories
+      fileList = fileList.concat(findMatchingFiles(fullPath, filePattern));
+    } else if (item.isFile() && filePattern.test(item.name)) {
+      // Check if the file matches the pattern
+      fileList.push(fullPath);
+    }
+  }
+  return fileList;
+}
+
+const baseDir = path.resolve('packages/google-cloud-redis/src');
+const filePattern = /_client\.ts$/;
+const files = findMatchingFiles(baseDir, filePattern);
 
 files.forEach(file => {
-  replaceInFile(path.resolve(file), /\/compute\/docs\//g, 'https://cloud.google.com/compute/docs/');
+  replaceInFile(file, /\/compute\/docs\//g, 'https://cloud.google.com/compute/docs/');
 });
