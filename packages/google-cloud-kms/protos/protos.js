@@ -7217,6 +7217,7 @@
                                 case 6:
                                 case 7:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -7318,6 +7319,10 @@
                             case "MAC":
                             case 9:
                                 message.purpose = 9;
+                                break;
+                            case "KEY_ENCAPSULATION":
+                            case 10:
+                                message.purpose = 10;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -7461,6 +7466,7 @@
                          * @property {number} ASYMMETRIC_DECRYPT=6 ASYMMETRIC_DECRYPT value
                          * @property {number} RAW_ENCRYPT_DECRYPT=7 RAW_ENCRYPT_DECRYPT value
                          * @property {number} MAC=9 MAC value
+                         * @property {number} KEY_ENCAPSULATION=10 KEY_ENCAPSULATION value
                          */
                         CryptoKey.CryptoKeyPurpose = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7470,6 +7476,7 @@
                             values[valuesById[6] = "ASYMMETRIC_DECRYPT"] = 6;
                             values[valuesById[7] = "RAW_ENCRYPT_DECRYPT"] = 7;
                             values[valuesById[9] = "MAC"] = 9;
+                            values[valuesById[10] = "KEY_ENCAPSULATION"] = 10;
                             return values;
                         })();
     
@@ -7675,6 +7682,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -7872,6 +7882,18 @@
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
+                                break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
                                 break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
@@ -8973,6 +8995,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -9275,6 +9300,18 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
@@ -9464,6 +9501,9 @@
                          * @property {number} HMAC_SHA512=35 HMAC_SHA512 value
                          * @property {number} HMAC_SHA224=36 HMAC_SHA224 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
+                         * @property {number} ML_KEM_768=47 ML_KEM_768 value
+                         * @property {number} ML_KEM_1024=48 ML_KEM_1024 value
+                         * @property {number} KEM_XWING=63 KEM_XWING value
                          * @property {number} PQ_SIGN_ML_DSA_65=56 PQ_SIGN_ML_DSA_65 value
                          * @property {number} PQ_SIGN_SLH_DSA_SHA2_128S=57 PQ_SIGN_SLH_DSA_SHA2_128S value
                          */
@@ -9505,6 +9545,9 @@
                             values[valuesById[35] = "HMAC_SHA512"] = 35;
                             values[valuesById[36] = "HMAC_SHA224"] = 36;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
+                            values[valuesById[47] = "ML_KEM_768"] = 47;
+                            values[valuesById[48] = "ML_KEM_1024"] = 48;
+                            values[valuesById[63] = "KEM_XWING"] = 63;
                             values[valuesById[56] = "PQ_SIGN_ML_DSA_65"] = 56;
                             values[valuesById[57] = "PQ_SIGN_SLH_DSA_SHA2_128S"] = 57;
                             return values;
@@ -10068,6 +10111,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -10097,7 +10143,9 @@
                                     return "publicKeyFormat: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
@@ -10273,6 +10321,18 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
@@ -10332,9 +10392,17 @@
                             case 1:
                                 message.publicKeyFormat = 1;
                                 break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
                             case "NIST_PQC":
                             case 3:
                                 message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
                                 break;
                             }
                             if (object.publicKey != null) {
@@ -10416,13 +10484,17 @@
                          * @enum {number}
                          * @property {number} PUBLIC_KEY_FORMAT_UNSPECIFIED=0 PUBLIC_KEY_FORMAT_UNSPECIFIED value
                          * @property {number} PEM=1 PEM value
+                         * @property {number} DER=2 DER value
                          * @property {number} NIST_PQC=3 NIST_PQC value
+                         * @property {number} XWING_RAW_BYTES=4 XWING_RAW_BYTES value
                          */
                         PublicKey.PublicKeyFormat = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "PUBLIC_KEY_FORMAT_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PEM"] = 1;
+                            values[valuesById[2] = "DER"] = 2;
                             values[valuesById[3] = "NIST_PQC"] = 3;
+                            values[valuesById[4] = "XWING_RAW_BYTES"] = 4;
                             return values;
                         })();
     
@@ -12727,6 +12799,39 @@
                          * @instance
                          * @param {google.cloud.kms.v1.IMacVerifyRequest} request MacVerifyRequest message or plain object
                          * @returns {Promise<google.cloud.kms.v1.MacVerifyResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|decapsulate}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef DecapsulateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.DecapsulateResponse} [response] DecapsulateResponse
+                         */
+    
+                        /**
+                         * Calls Decapsulate.
+                         * @function decapsulate
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} request DecapsulateRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.DecapsulateCallback} callback Node-style callback called with the error, if any, and DecapsulateResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.decapsulate = function decapsulate(request, callback) {
+                            return this.rpcCall(decapsulate, $root.google.cloud.kms.v1.DecapsulateRequest, $root.google.cloud.kms.v1.DecapsulateResponse, request, callback);
+                        }, "name", { value: "Decapsulate" });
+    
+                        /**
+                         * Calls Decapsulate.
+                         * @function decapsulate
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} request DecapsulateRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.DecapsulateResponse>} Promise
                          * @variation 2
                          */
     
@@ -15910,7 +16015,9 @@
                                     return "publicKeyFormat: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -15945,9 +16052,17 @@
                             case 1:
                                 message.publicKeyFormat = 1;
                                 break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
                             case "NIST_PQC":
                             case 3:
                                 message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
                                 break;
                             }
                             return message;
@@ -17251,6 +17366,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -17435,6 +17553,18 @@
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
+                                break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
                                 break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
@@ -21534,6 +21664,272 @@
                         return MacVerifyRequest;
                     })();
     
+                    v1.DecapsulateRequest = (function() {
+    
+                        /**
+                         * Properties of a DecapsulateRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDecapsulateRequest
+                         * @property {string|null} [name] DecapsulateRequest name
+                         * @property {Uint8Array|null} [ciphertext] DecapsulateRequest ciphertext
+                         * @property {google.protobuf.IInt64Value|null} [ciphertextCrc32c] DecapsulateRequest ciphertextCrc32c
+                         */
+    
+                        /**
+                         * Constructs a new DecapsulateRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DecapsulateRequest.
+                         * @implements IDecapsulateRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest=} [properties] Properties to set
+                         */
+                        function DecapsulateRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DecapsulateRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         */
+                        DecapsulateRequest.prototype.name = "";
+    
+                        /**
+                         * DecapsulateRequest ciphertext.
+                         * @member {Uint8Array} ciphertext
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         */
+                        DecapsulateRequest.prototype.ciphertext = $util.newBuffer([]);
+    
+                        /**
+                         * DecapsulateRequest ciphertextCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} ciphertextCrc32c
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         */
+                        DecapsulateRequest.prototype.ciphertextCrc32c = null;
+    
+                        /**
+                         * Creates a new DecapsulateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest instance
+                         */
+                        DecapsulateRequest.create = function create(properties) {
+                            return new DecapsulateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateRequest message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} message DecapsulateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ciphertext != null && Object.hasOwnProperty.call(message, "ciphertext"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.ciphertext);
+                            if (message.ciphertextCrc32c != null && Object.hasOwnProperty.call(message, "ciphertextCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.ciphertextCrc32c, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} message DecapsulateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecapsulateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ciphertext = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ciphertextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DecapsulateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DecapsulateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                if (!(message.ciphertext && typeof message.ciphertext.length === "number" || $util.isString(message.ciphertext)))
+                                    return "ciphertext: buffer expected";
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.ciphertextCrc32c);
+                                if (error)
+                                    return "ciphertextCrc32c." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DecapsulateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest
+                         */
+                        DecapsulateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DecapsulateRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DecapsulateRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ciphertext != null)
+                                if (typeof object.ciphertext === "string")
+                                    $util.base64.decode(object.ciphertext, message.ciphertext = $util.newBuffer($util.base64.length(object.ciphertext)), 0);
+                                else if (object.ciphertext.length >= 0)
+                                    message.ciphertext = object.ciphertext;
+                            if (object.ciphertextCrc32c != null) {
+                                if (typeof object.ciphertextCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.DecapsulateRequest.ciphertextCrc32c: object expected");
+                                message.ciphertextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.ciphertextCrc32c);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DecapsulateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.DecapsulateRequest} message DecapsulateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DecapsulateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.ciphertext = "";
+                                else {
+                                    object.ciphertext = [];
+                                    if (options.bytes !== Array)
+                                        object.ciphertext = $util.newBuffer(object.ciphertext);
+                                }
+                                object.ciphertextCrc32c = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                object.ciphertext = options.bytes === String ? $util.base64.encode(message.ciphertext, 0, message.ciphertext.length) : options.bytes === Array ? Array.prototype.slice.call(message.ciphertext) : message.ciphertext;
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c"))
+                                object.ciphertextCrc32c = $root.google.protobuf.Int64Value.toObject(message.ciphertextCrc32c, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DecapsulateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DecapsulateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DecapsulateRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DecapsulateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DecapsulateRequest";
+                        };
+    
+                        return DecapsulateRequest;
+                    })();
+    
                     v1.GenerateRandomBytesRequest = (function() {
     
                         /**
@@ -24747,6 +25143,371 @@
                         };
     
                         return MacVerifyResponse;
+                    })();
+    
+                    v1.DecapsulateResponse = (function() {
+    
+                        /**
+                         * Properties of a DecapsulateResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDecapsulateResponse
+                         * @property {string|null} [name] DecapsulateResponse name
+                         * @property {Uint8Array|null} [sharedSecret] DecapsulateResponse sharedSecret
+                         * @property {number|Long|null} [sharedSecretCrc32c] DecapsulateResponse sharedSecretCrc32c
+                         * @property {boolean|null} [verifiedCiphertextCrc32c] DecapsulateResponse verifiedCiphertextCrc32c
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] DecapsulateResponse protectionLevel
+                         */
+    
+                        /**
+                         * Constructs a new DecapsulateResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DecapsulateResponse.
+                         * @implements IDecapsulateResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse=} [properties] Properties to set
+                         */
+                        function DecapsulateResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DecapsulateResponse name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.name = "";
+    
+                        /**
+                         * DecapsulateResponse sharedSecret.
+                         * @member {Uint8Array} sharedSecret
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.sharedSecret = $util.newBuffer([]);
+    
+                        /**
+                         * DecapsulateResponse sharedSecretCrc32c.
+                         * @member {number|Long|null|undefined} sharedSecretCrc32c
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.sharedSecretCrc32c = null;
+    
+                        /**
+                         * DecapsulateResponse verifiedCiphertextCrc32c.
+                         * @member {boolean} verifiedCiphertextCrc32c
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.verifiedCiphertextCrc32c = false;
+    
+                        /**
+                         * DecapsulateResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.protectionLevel = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DecapsulateResponse.prototype, "_sharedSecretCrc32c", {
+                            get: $util.oneOfGetter($oneOfFields = ["sharedSecretCrc32c"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DecapsulateResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse instance
+                         */
+                        DecapsulateResponse.create = function create(properties) {
+                            return new DecapsulateResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateResponse message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse} message DecapsulateResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.sharedSecret != null && Object.hasOwnProperty.call(message, "sharedSecret"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.sharedSecret);
+                            if (message.sharedSecretCrc32c != null && Object.hasOwnProperty.call(message, "sharedSecretCrc32c"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.sharedSecretCrc32c);
+                            if (message.verifiedCiphertextCrc32c != null && Object.hasOwnProperty.call(message, "verifiedCiphertextCrc32c"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.verifiedCiphertextCrc32c);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.protectionLevel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse} message DecapsulateResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecapsulateResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sharedSecret = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sharedSecretCrc32c = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verifiedCiphertextCrc32c = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.protectionLevel = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DecapsulateResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DecapsulateResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.sharedSecret != null && message.hasOwnProperty("sharedSecret"))
+                                if (!(message.sharedSecret && typeof message.sharedSecret.length === "number" || $util.isString(message.sharedSecret)))
+                                    return "sharedSecret: buffer expected";
+                            if (message.sharedSecretCrc32c != null && message.hasOwnProperty("sharedSecretCrc32c")) {
+                                properties._sharedSecretCrc32c = 1;
+                                if (!$util.isInteger(message.sharedSecretCrc32c) && !(message.sharedSecretCrc32c && $util.isInteger(message.sharedSecretCrc32c.low) && $util.isInteger(message.sharedSecretCrc32c.high)))
+                                    return "sharedSecretCrc32c: integer|Long expected";
+                            }
+                            if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
+                                if (typeof message.verifiedCiphertextCrc32c !== "boolean")
+                                    return "verifiedCiphertextCrc32c: boolean expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DecapsulateResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse
+                         */
+                        DecapsulateResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DecapsulateResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DecapsulateResponse();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.sharedSecret != null)
+                                if (typeof object.sharedSecret === "string")
+                                    $util.base64.decode(object.sharedSecret, message.sharedSecret = $util.newBuffer($util.base64.length(object.sharedSecret)), 0);
+                                else if (object.sharedSecret.length >= 0)
+                                    message.sharedSecret = object.sharedSecret;
+                            if (object.sharedSecretCrc32c != null)
+                                if ($util.Long)
+                                    (message.sharedSecretCrc32c = $util.Long.fromValue(object.sharedSecretCrc32c)).unsigned = false;
+                                else if (typeof object.sharedSecretCrc32c === "string")
+                                    message.sharedSecretCrc32c = parseInt(object.sharedSecretCrc32c, 10);
+                                else if (typeof object.sharedSecretCrc32c === "number")
+                                    message.sharedSecretCrc32c = object.sharedSecretCrc32c;
+                                else if (typeof object.sharedSecretCrc32c === "object")
+                                    message.sharedSecretCrc32c = new $util.LongBits(object.sharedSecretCrc32c.low >>> 0, object.sharedSecretCrc32c.high >>> 0).toNumber();
+                            if (object.verifiedCiphertextCrc32c != null)
+                                message.verifiedCiphertextCrc32c = Boolean(object.verifiedCiphertextCrc32c);
+                            switch (object.protectionLevel) {
+                            default:
+                                if (typeof object.protectionLevel === "number") {
+                                    message.protectionLevel = object.protectionLevel;
+                                    break;
+                                }
+                                break;
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DecapsulateResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.DecapsulateResponse} message DecapsulateResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DecapsulateResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.sharedSecret = "";
+                                else {
+                                    object.sharedSecret = [];
+                                    if (options.bytes !== Array)
+                                        object.sharedSecret = $util.newBuffer(object.sharedSecret);
+                                }
+                                object.verifiedCiphertextCrc32c = false;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.sharedSecret != null && message.hasOwnProperty("sharedSecret"))
+                                object.sharedSecret = options.bytes === String ? $util.base64.encode(message.sharedSecret, 0, message.sharedSecret.length) : options.bytes === Array ? Array.prototype.slice.call(message.sharedSecret) : message.sharedSecret;
+                            if (message.sharedSecretCrc32c != null && message.hasOwnProperty("sharedSecretCrc32c")) {
+                                if (typeof message.sharedSecretCrc32c === "number")
+                                    object.sharedSecretCrc32c = options.longs === String ? String(message.sharedSecretCrc32c) : message.sharedSecretCrc32c;
+                                else
+                                    object.sharedSecretCrc32c = options.longs === String ? $util.Long.prototype.toString.call(message.sharedSecretCrc32c) : options.longs === Number ? new $util.LongBits(message.sharedSecretCrc32c.low >>> 0, message.sharedSecretCrc32c.high >>> 0).toNumber() : message.sharedSecretCrc32c;
+                                if (options.oneofs)
+                                    object._sharedSecretCrc32c = "sharedSecretCrc32c";
+                            }
+                            if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
+                                object.verifiedCiphertextCrc32c = message.verifiedCiphertextCrc32c;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DecapsulateResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DecapsulateResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DecapsulateResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DecapsulateResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DecapsulateResponse";
+                        };
+    
+                        return DecapsulateResponse;
                     })();
     
                     v1.GenerateRandomBytesResponse = (function() {
