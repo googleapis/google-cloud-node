@@ -12,8 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const fs = require('fs');
-const path = require('path');
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve, join } from 'node:path';
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Replaces all occurrences of a pattern in a file with a specified replacement string.
@@ -23,9 +27,9 @@ const path = require('path');
  */
 function replaceInFile(filePath, pattern, replacement) {
   try {
-    const data = fs.readFileSync(filePath, 'utf8');
+    const data = readFileSync(filePath, 'utf8');
     const result = data.replace(pattern, replacement);
-    fs.writeFileSync(filePath, result, 'utf8');
+    writeFileSync(filePath, result, 'utf8');
     console.log(`Successfully updated: ${filePath}`);
   } catch (err) {
     console.error(`Error processing file ${filePath}:`, err);
@@ -40,10 +44,10 @@ function replaceInFile(filePath, pattern, replacement) {
  */
 function findFile(dirPath, fileName) {
   let fileList = [];
-  const filesAndDirs = fs.readdirSync(dirPath, { withFileTypes: true });
+  const filesAndDirs = readdirSync(dirPath, { withFileTypes: true });
 
   for (const item of filesAndDirs) {
-    const fullPath = path.join(dirPath, item.name);
+    const fullPath = join(dirPath, item.name);
     if (item.isDirectory()) {
       // Recurse into subdirectories
       fileList = fileList.concat(findFile(fullPath, fileName));
@@ -55,7 +59,7 @@ function findFile(dirPath, fileName) {
   return fileList;
 }
 
-const baseDir = path.resolve('packages/google-cloud-tasks/esm/src');
+const baseDir = resolve(__dirname, 'packages/google-cloud-tasks/esm/src');
 const targetFile = 'cloud_tasks_client_config.json';
 const files = findFile(baseDir, targetFile);
 
