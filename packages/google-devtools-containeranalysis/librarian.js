@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
 /**
  * Replaces all occurrences of a pattern in a file with a specified replacement string.
@@ -33,15 +32,40 @@ function replaceInFile(filePath, pattern, replacement) {
   }
 }
 
-// fix the URL of grafeas.io
-const v1beta1Files = glob.sync('packages/google-devtools-containeranalysis/src/v1beta1/*.ts');
+/**
+ * Finds files in a directory that match a specific extension.
+ * @param {string} dirPath The directory to search.
+ * @param {string} extension The file extension to match (e.g., '.ts').
+ * @param {RegExp} [fileNamePattern] An optional regex to match file names.
+ * @returns {string[]} An array of matching file paths.
+ */
+function findFilesByExtension(dirPath, extension, fileNamePattern = null) {
+  const files = [];
+  try {
+    const items = fs.readdirSync(dirPath, { withFileTypes: true });
+    for (const item of items) {
+      if (item.isFile() && path.extname(item.name) === extension) {
+        if (!fileNamePattern || fileNamePattern.test(item.name)) {
+          files.push(path.join(dirPath, item.name));
+        }
+      }
+    }
+  } catch (err) {
+    console.error(`Error reading directory ${dirPath}:`, err);
+  }
+  return files;
+}
+
+// Fix the URL of grafeas.io
+const v1beta1Dir = path.resolve('packages/google-devtools-containeranalysis/src/v1beta1');
+const v1beta1Files = findFilesByExtension(v1beta1Dir, '.ts');
 v1beta1Files.forEach(file => {
-  replaceInFile(path.resolve(file), /grafeas\.io/g, 'https://grafeas.io');
+  replaceInFile(file, /grafeas\.io/g, 'https://grafeas.io');
 });
 
-// perform surgery inserting the Grafeas client.
-const containerAnalysisClientFile = 'packages/google-devtools-containeranalysis/src/v1/container_analysis_client.ts';
-replaceInFile(path.resolve(containerAnalysisClientFile), /import type * as gax from 'google-gax';/g, "import type * as gax from 'google-gax';\nimport {GrafeasClient} from '@google-cloud/grafeas';");
+// Perform surgery inserting the Grafeas client.
+const containerAnalysisClientFile = path.resolve('packages/google-devtools-containeranalysis/src/v1/container_analysis_client.ts');
+replaceInFile(containerAnalysisClientFile, /import type \* as gax from 'google-gax';/g, "import type * as gax from 'google-gax';\nimport {GrafeasClient} from '@google-cloud/grafeas';");
 const grafeasClientMethod = `
     /**
     * Returns an instance of a @google-cloud/grafeas client, configured to
@@ -56,11 +80,13 @@ const grafeasClientMethod = `
         return new GrafeasClient(this._opts as {});
     }
     }`;
-replaceInFile(path.resolve(containerAnalysisClientFile), /^}/m, grafeasClientMethod);
+replaceInFile(containerAnalysisClientFile, /^}/m, grafeasClientMethod);
 
-const grafeasV1beta1Files = glob.sync('packages/google-devtools-containeranalysis/src/v1beta1/grafeas_v1_beta1_client*.*');
+// Fix Grafeas client files
+const grafeasV1beta1Dir = path.resolve('packages/google-devtools-containeranalysis/src/v1beta1');
+const grafeasV1beta1Files = findFilesByExtension(grafeasV1beta1Dir, '.ts', /^grafeas_v1_beta1_client/);
 grafeasV1beta1Files.forEach(file => {
-  replaceInFile(path.resolve(file), /google\.devtools\.containeranalysis/g, 'grafeas');
+  replaceInFile(file, /google\.devtools\.containeranalysis/g, 'grafeas');
 });
 
 const filesToDelete = [
@@ -83,13 +109,15 @@ filesToDelete.forEach(file => {
 });
 
 // Add beta version GrafeasClient to export
-const indexFile = 'packages/google-devtools-containeranalysis/src/index.ts';
-const searchPattern1 = /const GrafeasClient = v1.GrafeasClient;\ntype GrafeasClient = v1.GrafeasClient;/g;
+const indexFile = path.resolve('packages/google-devtools-containeranalysis/src/index.ts');
+const searchPattern1 = /const GrafeasClient = v1\.GrafeasClient;\ntype GrafeasClient = v1\.GrafeasClient;/g;
 const replacement1 = '\nconst GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n' +
         'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;';
-replaceInFile(path.resolve(indexFile), searchPattern1, replacement1);
+replaceInFile(indexFile, searchPattern1, replacement1);
 
-const v1IndexFile = 'packages/google-devtools-containeranalysis/src/v1/index.ts';
+const v1IndexFile = path.resolve('packages/google-devtools-containeranalysis/src/v1/index.ts');
 const searchPattern2 = /export {GrafeasClient} from '\.\/grafeas_client';/g;
+const replacement2 = '\n';
+replaceInFile(v1IndexFile, searchPattern2, replacement2);
 const replacement2 = '\n';
 replaceInFile(path.resolve(v1IndexFile), searchPattern2, replacement2);
