@@ -119,5 +119,3 @@ const v1IndexFile = path.resolve('packages/google-devtools-containeranalysis/src
 const searchPattern2 = /export {GrafeasClient} from '\.\/grafeas_client';/g;
 const replacement2 = '\n';
 replaceInFile(v1IndexFile, searchPattern2, replacement2);
-const replacement2 = '\n';
-replaceInFile(path.resolve(v1IndexFile), searchPattern2, replacement2);
