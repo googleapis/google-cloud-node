@@ -2,7 +2,7 @@ createTime: '2022-12-09T00:51:41.619581321Z'
 description: Presubmit build with node 18
 filename: ci/cloudbuild.yaml
 github:
-  name: google-cloud-node
+  name: google-cloud-node-core
   owner: googleapis
   pullRequest:
     branch: ^main$

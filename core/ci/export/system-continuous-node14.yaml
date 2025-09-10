@@ -2,7 +2,7 @@ createTime: '2022-06-22T20:37:15.591560546Z'
 description: Continuous build with node 18
 filename: ci/cloudbuild.yaml
 github:
-  name: google-cloud-node
+  name: google-cloud-node-core
   owner: googleapis
   push:
     branch: ^main$

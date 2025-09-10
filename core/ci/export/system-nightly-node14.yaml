@@ -4,7 +4,7 @@ gitFileSource:
   path: ci/cloudbuild.yaml
   repoType: GITHUB
   revision: refs/heads/main
-  uri: https://github.com/googleapis/google-cloud-node
+  uri: https://github.com/googleapis/google-cloud-node-core
 id: 99dfe29e-f360-4f08-a026-2cbd7c24cd41
 name: system-nightly-node18
 resourceName: projects/long-door-651/locations/global/triggers/99dfe29e-f360-4f08-a026-2cbd7c24cd41
@@ -12,7 +12,7 @@ serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-d
 sourceToBuild:
   ref: refs/heads/main
   repoType: GITHUB
-  uri: https://github.com/googleapis/google-cloud-node
+  uri: https://github.com/googleapis/google-cloud-node-core
 substitutions:
   _BUILD_TYPE: nightly
   _LOGS_BUCKET: cloud-node-public-logs
