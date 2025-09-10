@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//       http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -72,9 +72,16 @@ versions.forEach(versionDir => {
     'export interface SpeechClient extends ImprovedStreamingClient {}\n';
 
   try {
-    fs.appendFileSync(clientFile, appendContent, 'utf8');
-    console.log(`Successfully appended to: ${clientFile}`);
+    // Read the file's current content
+    const fileContent = fs.readFileSync(clientFile, 'utf8');
+    // Check if the content to be appended already exists
+    if (!fileContent.includes(appendContent.trim())) {
+      fs.appendFileSync(clientFile, appendContent, 'utf8');
+      console.log(`Successfully appended to: ${clientFile}`);
+    } else {
+      console.log(`Content already exists in: ${clientFile}, skipping append.`);
+    }
   } catch (err) {
-    console.error(`Error appending to file ${clientFile}:`, err);
+    console.error(`Error processing file ${clientFile}:`, err);
   }
 });
