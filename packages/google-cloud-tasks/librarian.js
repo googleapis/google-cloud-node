@@ -59,7 +59,7 @@ function findFile(dirPath, fileName) {
   return fileList;
 }
 
-const baseDir = resolve(__dirname, 'packages/google-cloud-tasks/esm/src');
+const baseDir = resolve(__dirname, 'esm/src');
 const targetFile = 'cloud_tasks_client_config.json';
 const files = findFile(baseDir, targetFile);
 
