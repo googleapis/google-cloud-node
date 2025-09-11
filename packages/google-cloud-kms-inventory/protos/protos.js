@@ -3058,6 +3058,7 @@
                                 case 6:
                                 case 7:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -3159,6 +3160,10 @@
                             case "MAC":
                             case 9:
                                 message.purpose = 9;
+                                break;
+                            case "KEY_ENCAPSULATION":
+                            case 10:
+                                message.purpose = 10;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -3302,6 +3307,7 @@
                          * @property {number} ASYMMETRIC_DECRYPT=6 ASYMMETRIC_DECRYPT value
                          * @property {number} RAW_ENCRYPT_DECRYPT=7 RAW_ENCRYPT_DECRYPT value
                          * @property {number} MAC=9 MAC value
+                         * @property {number} KEY_ENCAPSULATION=10 KEY_ENCAPSULATION value
                          */
                         CryptoKey.CryptoKeyPurpose = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3311,6 +3317,7 @@
                             values[valuesById[6] = "ASYMMETRIC_DECRYPT"] = 6;
                             values[valuesById[7] = "RAW_ENCRYPT_DECRYPT"] = 7;
                             values[valuesById[9] = "MAC"] = 9;
+                            values[valuesById[10] = "KEY_ENCAPSULATION"] = 10;
                             return values;
                         })();
     
@@ -3516,6 +3523,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -3713,6 +3723,18 @@
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
+                                break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
                                 break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
@@ -4814,6 +4836,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -5116,6 +5141,18 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
@@ -5305,6 +5342,9 @@
                          * @property {number} HMAC_SHA512=35 HMAC_SHA512 value
                          * @property {number} HMAC_SHA224=36 HMAC_SHA224 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
+                         * @property {number} ML_KEM_768=47 ML_KEM_768 value
+                         * @property {number} ML_KEM_1024=48 ML_KEM_1024 value
+                         * @property {number} KEM_XWING=63 KEM_XWING value
                          * @property {number} PQ_SIGN_ML_DSA_65=56 PQ_SIGN_ML_DSA_65 value
                          * @property {number} PQ_SIGN_SLH_DSA_SHA2_128S=57 PQ_SIGN_SLH_DSA_SHA2_128S value
                          */
@@ -5346,6 +5386,9 @@
                             values[valuesById[35] = "HMAC_SHA512"] = 35;
                             values[valuesById[36] = "HMAC_SHA224"] = 36;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
+                            values[valuesById[47] = "ML_KEM_768"] = 47;
+                            values[valuesById[48] = "ML_KEM_1024"] = 48;
+                            values[valuesById[63] = "KEM_XWING"] = 63;
                             values[valuesById[56] = "PQ_SIGN_ML_DSA_65"] = 56;
                             values[valuesById[57] = "PQ_SIGN_SLH_DSA_SHA2_128S"] = 57;
                             return values;
@@ -5909,6 +5952,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -5938,7 +5984,9 @@
                                     return "publicKeyFormat: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
@@ -6114,6 +6162,18 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
@@ -6173,9 +6233,17 @@
                             case 1:
                                 message.publicKeyFormat = 1;
                                 break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
                             case "NIST_PQC":
                             case 3:
                                 message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
                                 break;
                             }
                             if (object.publicKey != null) {
@@ -6257,13 +6325,17 @@
                          * @enum {number}
                          * @property {number} PUBLIC_KEY_FORMAT_UNSPECIFIED=0 PUBLIC_KEY_FORMAT_UNSPECIFIED value
                          * @property {number} PEM=1 PEM value
+                         * @property {number} DER=2 DER value
                          * @property {number} NIST_PQC=3 NIST_PQC value
+                         * @property {number} XWING_RAW_BYTES=4 XWING_RAW_BYTES value
                          */
                         PublicKey.PublicKeyFormat = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "PUBLIC_KEY_FORMAT_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PEM"] = 1;
+                            values[valuesById[2] = "DER"] = 2;
                             values[valuesById[3] = "NIST_PQC"] = 3;
+                            values[valuesById[4] = "XWING_RAW_BYTES"] = 4;
                             return values;
                         })();
     
