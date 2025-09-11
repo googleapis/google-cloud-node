@@ -286,7 +286,7 @@ export class KeyManagementServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const keyManagementServiceStubMethods =
-        ['listKeyRings', 'listCryptoKeys', 'listCryptoKeyVersions', 'listImportJobs', 'getKeyRing', 'getCryptoKey', 'getCryptoKeyVersion', 'getPublicKey', 'getImportJob', 'createKeyRing', 'createCryptoKey', 'createCryptoKeyVersion', 'importCryptoKeyVersion', 'createImportJob', 'updateCryptoKey', 'updateCryptoKeyVersion', 'updateCryptoKeyPrimaryVersion', 'destroyCryptoKeyVersion', 'restoreCryptoKeyVersion', 'encrypt', 'decrypt', 'rawEncrypt', 'rawDecrypt', 'asymmetricSign', 'asymmetricDecrypt', 'macSign', 'macVerify', 'generateRandomBytes'];
+        ['listKeyRings', 'listCryptoKeys', 'listCryptoKeyVersions', 'listImportJobs', 'getKeyRing', 'getCryptoKey', 'getCryptoKeyVersion', 'getPublicKey', 'getImportJob', 'createKeyRing', 'createCryptoKey', 'createCryptoKeyVersion', 'importCryptoKeyVersion', 'createImportJob', 'updateCryptoKey', 'updateCryptoKeyVersion', 'updateCryptoKeyPrimaryVersion', 'destroyCryptoKeyVersion', 'restoreCryptoKeyVersion', 'encrypt', 'decrypt', 'rawEncrypt', 'rawDecrypt', 'asymmetricSign', 'asymmetricDecrypt', 'macSign', 'macVerify', 'decapsulate', 'generateRandomBytes'];
     for (const methodName of keyManagementServiceStubMethods) {
       const callPromise = this.keyManagementServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -3204,6 +3204,130 @@ export class KeyManagementServiceClient {
         {}|undefined
       ]) => {
         this._log.info('macVerify response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Decapsulates data that was encapsulated with a public key retrieved from
+ * {@link protos.google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}
+ * corresponding to a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+ * with {@link protos.google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
+ * KEY_ENCAPSULATION.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+ *   decapsulation.
+ * @param {Buffer} request.ciphertext
+ *   Required. The ciphertext produced from encapsulation with the
+ *   named {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public
+ *   key(s).
+ * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
+ *   Optional. A CRC32C checksum of the
+ *   {@link protos.google.cloud.kms.v1.DecapsulateRequest.ciphertext|DecapsulateRequest.ciphertext}.
+ *   If specified,
+ *   {@link protos.google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link protos.google.cloud.kms.v1.DecapsulateRequest.ciphertext|DecapsulateRequest.ciphertext}
+ *   using this checksum.
+ *   {@link protos.google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link protos.google.cloud.kms.v1.DecapsulateRequest.ciphertext|DecapsulateRequest.ciphertext})
+ *   is equal to
+ *   {@link protos.google.cloud.kms.v1.DecapsulateRequest.ciphertext_crc32c|DecapsulateRequest.ciphertext_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.DecapsulateResponse|DecapsulateResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.decapsulate.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_Decapsulate_async
+ */
+  decapsulate(
+      request?: protos.google.cloud.kms.v1.IDecapsulateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IDecapsulateResponse,
+        protos.google.cloud.kms.v1.IDecapsulateRequest|undefined, {}|undefined
+      ]>;
+  decapsulate(
+      request: protos.google.cloud.kms.v1.IDecapsulateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IDecapsulateResponse,
+          protos.google.cloud.kms.v1.IDecapsulateRequest|null|undefined,
+          {}|null|undefined>): void;
+  decapsulate(
+      request: protos.google.cloud.kms.v1.IDecapsulateRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IDecapsulateResponse,
+          protos.google.cloud.kms.v1.IDecapsulateRequest|null|undefined,
+          {}|null|undefined>): void;
+  decapsulate(
+      request?: protos.google.cloud.kms.v1.IDecapsulateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IDecapsulateResponse,
+          protos.google.cloud.kms.v1.IDecapsulateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IDecapsulateResponse,
+          protos.google.cloud.kms.v1.IDecapsulateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IDecapsulateResponse,
+        protos.google.cloud.kms.v1.IDecapsulateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('decapsulate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.kms.v1.IDecapsulateResponse,
+        protos.google.cloud.kms.v1.IDecapsulateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('decapsulate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.decapsulate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.kms.v1.IDecapsulateResponse,
+        protos.google.cloud.kms.v1.IDecapsulateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('decapsulate response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

@@ -5,6 +5,182 @@
   "protoPackage": "google.cloud.dataplex.v1",
   "libraryPackage": "@google-cloud/dataplex",
   "services": {
+    "BusinessGlossaryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BusinessGlossaryServiceClient",
+          "rpcs": {
+            "GetGlossary": {
+              "methods": [
+                "getGlossary"
+              ]
+            },
+            "CreateGlossaryCategory": {
+              "methods": [
+                "createGlossaryCategory"
+              ]
+            },
+            "UpdateGlossaryCategory": {
+              "methods": [
+                "updateGlossaryCategory"
+              ]
+            },
+            "DeleteGlossaryCategory": {
+              "methods": [
+                "deleteGlossaryCategory"
+              ]
+            },
+            "GetGlossaryCategory": {
+              "methods": [
+                "getGlossaryCategory"
+              ]
+            },
+            "CreateGlossaryTerm": {
+              "methods": [
+                "createGlossaryTerm"
+              ]
+            },
+            "UpdateGlossaryTerm": {
+              "methods": [
+                "updateGlossaryTerm"
+              ]
+            },
+            "DeleteGlossaryTerm": {
+              "methods": [
+                "deleteGlossaryTerm"
+              ]
+            },
+            "GetGlossaryTerm": {
+              "methods": [
+                "getGlossaryTerm"
+              ]
+            },
+            "CreateGlossary": {
+              "methods": [
+                "createGlossary"
+              ]
+            },
+            "UpdateGlossary": {
+              "methods": [
+                "updateGlossary"
+              ]
+            },
+            "DeleteGlossary": {
+              "methods": [
+                "deleteGlossary"
+              ]
+            },
+            "ListGlossaries": {
+              "methods": [
+                "listGlossaries",
+                "listGlossariesStream",
+                "listGlossariesAsync"
+              ]
+            },
+            "ListGlossaryCategories": {
+              "methods": [
+                "listGlossaryCategories",
+                "listGlossaryCategoriesStream",
+                "listGlossaryCategoriesAsync"
+              ]
+            },
+            "ListGlossaryTerms": {
+              "methods": [
+                "listGlossaryTerms",
+                "listGlossaryTermsStream",
+                "listGlossaryTermsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BusinessGlossaryServiceClient",
+          "rpcs": {
+            "GetGlossary": {
+              "methods": [
+                "getGlossary"
+              ]
+            },
+            "CreateGlossaryCategory": {
+              "methods": [
+                "createGlossaryCategory"
+              ]
+            },
+            "UpdateGlossaryCategory": {
+              "methods": [
+                "updateGlossaryCategory"
+              ]
+            },
+            "DeleteGlossaryCategory": {
+              "methods": [
+                "deleteGlossaryCategory"
+              ]
+            },
+            "GetGlossaryCategory": {
+              "methods": [
+                "getGlossaryCategory"
+              ]
+            },
+            "CreateGlossaryTerm": {
+              "methods": [
+                "createGlossaryTerm"
+              ]
+            },
+            "UpdateGlossaryTerm": {
+              "methods": [
+                "updateGlossaryTerm"
+              ]
+            },
+            "DeleteGlossaryTerm": {
+              "methods": [
+                "deleteGlossaryTerm"
+              ]
+            },
+            "GetGlossaryTerm": {
+              "methods": [
+                "getGlossaryTerm"
+              ]
+            },
+            "CreateGlossary": {
+              "methods": [
+                "createGlossary"
+              ]
+            },
+            "UpdateGlossary": {
+              "methods": [
+                "updateGlossary"
+              ]
+            },
+            "DeleteGlossary": {
+              "methods": [
+                "deleteGlossary"
+              ]
+            },
+            "ListGlossaries": {
+              "methods": [
+                "listGlossaries",
+                "listGlossariesStream",
+                "listGlossariesAsync"
+              ]
+            },
+            "ListGlossaryCategories": {
+              "methods": [
+                "listGlossaryCategories",
+                "listGlossaryCategoriesStream",
+                "listGlossaryCategoriesAsync"
+              ]
+            },
+            "ListGlossaryTerms": {
+              "methods": [
+                "listGlossaryTerms",
+                "listGlossaryTermsStream",
+                "listGlossaryTermsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CatalogService": {
       "clients": {
         "grpc": {
@@ -58,6 +234,21 @@
             "CancelMetadataJob": {
               "methods": [
                 "cancelMetadataJob"
+              ]
+            },
+            "CreateEntryLink": {
+              "methods": [
+                "createEntryLink"
+              ]
+            },
+            "DeleteEntryLink": {
+              "methods": [
+                "deleteEntryLink"
+              ]
+            },
+            "GetEntryLink": {
+              "methods": [
+                "getEntryLink"
               ]
             },
             "CreateEntryType": {
@@ -205,6 +396,21 @@
             "CancelMetadataJob": {
               "methods": [
                 "cancelMetadataJob"
+              ]
+            },
+            "CreateEntryLink": {
+              "methods": [
+                "createEntryLink"
+              ]
+            },
+            "DeleteEntryLink": {
+              "methods": [
+                "deleteEntryLink"
+              ]
+            },
+            "GetEntryLink": {
+              "methods": [
+                "getEntryLink"
               ]
             },
             "CreateEntryType": {
