@@ -1319,6 +1319,52 @@ describe('v1.ApiHubDependenciesClient', () => {
             });
         });
 
+        describe('curation', async () => {
+            const fakePath = "/rendered/path/curation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                curation: "curationValue",
+            };
+            const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.curationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.curationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('curationPath', () => {
+                const result = client.curationPath("projectValue", "locationValue", "curationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.curationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCurationName', () => {
+                const result = client.matchProjectFromCurationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCurationName', () => {
+                const result = client.matchLocationFromCurationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCurationFromCurationName', () => {
+                const result = client.matchCurationFromCurationName(fakePath);
+                assert.strictEqual(result, "curationValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('definition', async () => {
             const fakePath = "/rendered/path/definition";
             const expectedParameters = {
@@ -1469,6 +1515,106 @@ describe('v1.ApiHubDependenciesClient', () => {
                 const result = client.matchDeploymentFromDeploymentName(fakePath);
                 assert.strictEqual(result, "deploymentValue");
                 assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('discoveredApiObservation', async () => {
+            const fakePath = "/rendered/path/discoveredApiObservation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                discovered_api_observation: "discoveredApiObservationValue",
+            };
+            const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.discoveredApiObservationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.discoveredApiObservationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('discoveredApiObservationPath', () => {
+                const result = client.discoveredApiObservationPath("projectValue", "locationValue", "discoveredApiObservationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDiscoveredApiObservationName', () => {
+                const result = client.matchProjectFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDiscoveredApiObservationName', () => {
+                const result = client.matchLocationFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiObservationFromDiscoveredApiObservationName', () => {
+                const result = client.matchDiscoveredApiObservationFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "discoveredApiObservationValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('discoveredApiOperation', async () => {
+            const fakePath = "/rendered/path/discoveredApiOperation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                discovered_api_observation: "discoveredApiObservationValue",
+                discovered_api_operation: "discoveredApiOperationValue",
+            };
+            const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.discoveredApiOperationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.discoveredApiOperationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('discoveredApiOperationPath', () => {
+                const result = client.discoveredApiOperationPath("projectValue", "locationValue", "discoveredApiObservationValue", "discoveredApiOperationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDiscoveredApiOperationName', () => {
+                const result = client.matchProjectFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDiscoveredApiOperationName', () => {
+                const result = client.matchLocationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiObservationFromDiscoveredApiOperationName', () => {
+                const result = client.matchDiscoveredApiObservationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "discoveredApiObservationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiOperationFromDiscoveredApiOperationName', () => {
+                const result = client.matchDiscoveredApiOperationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "discoveredApiOperationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1645,6 +1791,60 @@ describe('v1.ApiHubDependenciesClient', () => {
                 const result = client.matchPluginFromPluginName(fakePath);
                 assert.strictEqual(result, "pluginValue");
                 assert((client.pathTemplates.pluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('pluginInstance', async () => {
+            const fakePath = "/rendered/path/pluginInstance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                plugin: "pluginValue",
+                instance: "instanceValue",
+            };
+            const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.pluginInstancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.pluginInstancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('pluginInstancePath', () => {
+                const result = client.pluginInstancePath("projectValue", "locationValue", "pluginValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.pluginInstancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPluginInstanceName', () => {
+                const result = client.matchProjectFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPluginInstanceName', () => {
+                const result = client.matchLocationFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPluginFromPluginInstanceName', () => {
+                const result = client.matchPluginFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "pluginValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromPluginInstanceName', () => {
+                const result = client.matchInstanceFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

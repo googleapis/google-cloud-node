@@ -20,8 +20,14 @@ import * as v1 from './v1';
 
 const ApiHubClient = v1.ApiHubClient;
 type ApiHubClient = v1.ApiHubClient;
+const ApiHubCollectClient = v1.ApiHubCollectClient;
+type ApiHubCollectClient = v1.ApiHubCollectClient;
+const ApiHubCurateClient = v1.ApiHubCurateClient;
+type ApiHubCurateClient = v1.ApiHubCurateClient;
 const ApiHubDependenciesClient = v1.ApiHubDependenciesClient;
 type ApiHubDependenciesClient = v1.ApiHubDependenciesClient;
+const ApiHubDiscoveryClient = v1.ApiHubDiscoveryClient;
+type ApiHubDiscoveryClient = v1.ApiHubDiscoveryClient;
 const ApiHubPluginClient = v1.ApiHubPluginClient;
 type ApiHubPluginClient = v1.ApiHubPluginClient;
 const HostProjectRegistrationServiceClient = v1.HostProjectRegistrationServiceClient;
@@ -33,7 +39,7 @@ type ProvisioningClient = v1.ProvisioningClient;
 const RuntimeProjectAttachmentServiceClient = v1.RuntimeProjectAttachmentServiceClient;
 type RuntimeProjectAttachmentServiceClient = v1.RuntimeProjectAttachmentServiceClient;
 
-export {v1, ApiHubClient, ApiHubDependenciesClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient};
-export default {v1, ApiHubClient, ApiHubDependenciesClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient};
+export {v1, ApiHubClient, ApiHubCollectClient, ApiHubCurateClient, ApiHubDependenciesClient, ApiHubDiscoveryClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient};
+export default {v1, ApiHubClient, ApiHubCollectClient, ApiHubCurateClient, ApiHubDependenciesClient, ApiHubDiscoveryClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

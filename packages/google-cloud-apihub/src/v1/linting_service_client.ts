@@ -201,6 +201,9 @@ export class LintingServiceClient {
       attributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/attributes/{attribute}'
       ),
+      curationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/curations/{curation}'
+      ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
       ),
@@ -210,6 +213,12 @@ export class LintingServiceClient {
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}'
       ),
+      discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+      ),
+      discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
+      ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/externalApis/{external_api}'
       ),
@@ -218,6 +227,9 @@ export class LintingServiceClient {
       ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/plugins/{plugin}'
+      ),
+      pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
       ),
       runtimeProjectAttachmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}'
@@ -1071,6 +1083,55 @@ export class LintingServiceClient {
   }
 
   /**
+   * Return a fully-qualified curation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} curation
+   * @returns {string} Resource name string.
+   */
+  curationPath(project:string,location:string,curation:string) {
+    return this.pathTemplates.curationPathTemplate.render({
+      project: project,
+      location: location,
+      curation: curation,
+    });
+  }
+
+  /**
+   * Parse the project from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).project;
+  }
+
+  /**
+   * Parse the location from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).location;
+  }
+
+  /**
+   * Parse the curation from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the curation.
+   */
+  matchCurationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).curation;
+  }
+
+  /**
    * Return a fully-qualified definition resource name string.
    *
    * @param {string} project
@@ -1244,6 +1305,117 @@ export class LintingServiceClient {
   }
 
   /**
+   * Return a fully-qualified discoveredApiObservation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiOperation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @param {string} discovered_api_operation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+      discovered_api_operation: discoveredApiOperation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  }
+
+  /**
+   * Parse the discovered_api_operation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_operation.
+   */
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
+  }
+
+  /**
    * Return a fully-qualified externalApi resource name string.
    *
    * @param {string} project
@@ -1388,6 +1560,68 @@ export class LintingServiceClient {
    */
   matchPluginFromPluginName(pluginName: string) {
     return this.pathTemplates.pluginPathTemplate.match(pluginName).plugin;
+  }
+
+  /**
+   * Return a fully-qualified pluginInstance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} plugin
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+    return this.pathTemplates.pluginInstancePathTemplate.render({
+      project: project,
+      location: location,
+      plugin: plugin,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+  }
+
+  /**
+   * Parse the location from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+  }
+
+  /**
+   * Parse the plugin from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the plugin.
+   */
+  matchPluginFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+  }
+
+  /**
+   * Parse the instance from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
   }
 
   /**
