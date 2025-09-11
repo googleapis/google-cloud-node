@@ -60,7 +60,7 @@ function findFilesByExtension(dirPath, extension, fileNamePattern = null) {
 const v1beta1Dir = path.resolve('packages/google-devtools-containeranalysis/src/v1beta1');
 const v1beta1Files = findFilesByExtension(v1beta1Dir, '.ts');
 v1beta1Files.forEach(file => {
-  replaceInFile(file, /grafeas\.io/g, 'https://grafeas.io');
+  replaceInFile(file, /(?<!https:\/\/)grafeas\.io/g, 'https://grafeas.io');
 });
 
 // Perform surgery inserting the Grafeas client.
