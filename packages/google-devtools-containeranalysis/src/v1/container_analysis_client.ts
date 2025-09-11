@@ -23,6 +23,7 @@ import {GrafeasClient} from '@google-cloud/grafeas';
 import {GrafeasClient} from '@google-cloud/grafeas';
 import {GrafeasClient} from '@google-cloud/grafeas';
 import {GrafeasClient} from '@google-cloud/grafeas';
+import {GrafeasClient} from '@google-cloud/grafeas';
 import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
