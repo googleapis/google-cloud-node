@@ -41923,6 +41923,7 @@
                          * @property {string|null} [connectVersion] ResourceOptions connectVersion
                          * @property {boolean|null} [v1beta1Crd] ResourceOptions v1beta1Crd
                          * @property {string|null} [k8sVersion] ResourceOptions k8sVersion
+                         * @property {string|null} [k8sGitVersion] ResourceOptions k8sGitVersion
                          */
     
                         /**
@@ -41965,6 +41966,14 @@
                         ResourceOptions.prototype.k8sVersion = "";
     
                         /**
+                         * ResourceOptions k8sGitVersion.
+                         * @member {string} k8sGitVersion
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.k8sGitVersion = "";
+    
+                        /**
                          * Creates a new ResourceOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkehub.v1.ResourceOptions
@@ -41994,6 +42003,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.v1beta1Crd);
                             if (message.k8sVersion != null && Object.hasOwnProperty.call(message, "k8sVersion"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.k8sVersion);
+                            if (message.k8sGitVersion != null && Object.hasOwnProperty.call(message, "k8sGitVersion"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.k8sGitVersion);
                             return writer;
                         };
     
@@ -42042,6 +42053,10 @@
                                         message.k8sVersion = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.k8sGitVersion = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -42086,6 +42101,9 @@
                             if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
                                 if (!$util.isString(message.k8sVersion))
                                     return "k8sVersion: string expected";
+                            if (message.k8sGitVersion != null && message.hasOwnProperty("k8sGitVersion"))
+                                if (!$util.isString(message.k8sGitVersion))
+                                    return "k8sGitVersion: string expected";
                             return null;
                         };
     
@@ -42107,6 +42125,8 @@
                                 message.v1beta1Crd = Boolean(object.v1beta1Crd);
                             if (object.k8sVersion != null)
                                 message.k8sVersion = String(object.k8sVersion);
+                            if (object.k8sGitVersion != null)
+                                message.k8sGitVersion = String(object.k8sGitVersion);
                             return message;
                         };
     
@@ -42127,6 +42147,7 @@
                                 object.connectVersion = "";
                                 object.v1beta1Crd = false;
                                 object.k8sVersion = "";
+                                object.k8sGitVersion = "";
                             }
                             if (message.connectVersion != null && message.hasOwnProperty("connectVersion"))
                                 object.connectVersion = message.connectVersion;
@@ -42134,6 +42155,8 @@
                                 object.v1beta1Crd = message.v1beta1Crd;
                             if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
                                 object.k8sVersion = message.k8sVersion;
+                            if (message.k8sGitVersion != null && message.hasOwnProperty("k8sGitVersion"))
+                                object.k8sGitVersion = message.k8sGitVersion;
                             return object;
                         };
     
@@ -75208,6 +75231,7 @@
                          * @property {string|null} [connectVersion] ResourceOptions connectVersion
                          * @property {boolean|null} [v1beta1Crd] ResourceOptions v1beta1Crd
                          * @property {string|null} [k8sVersion] ResourceOptions k8sVersion
+                         * @property {string|null} [k8sGitVersion] ResourceOptions k8sGitVersion
                          */
     
                         /**
@@ -75250,6 +75274,14 @@
                         ResourceOptions.prototype.k8sVersion = "";
     
                         /**
+                         * ResourceOptions k8sGitVersion.
+                         * @member {string} k8sGitVersion
+                         * @memberof google.cloud.gkehub.v1beta1.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.k8sGitVersion = "";
+    
+                        /**
                          * Creates a new ResourceOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkehub.v1beta1.ResourceOptions
@@ -75279,6 +75311,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.v1beta1Crd);
                             if (message.k8sVersion != null && Object.hasOwnProperty.call(message, "k8sVersion"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.k8sVersion);
+                            if (message.k8sGitVersion != null && Object.hasOwnProperty.call(message, "k8sGitVersion"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.k8sGitVersion);
                             return writer;
                         };
     
@@ -75327,6 +75361,10 @@
                                         message.k8sVersion = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.k8sGitVersion = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -75371,6 +75409,9 @@
                             if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
                                 if (!$util.isString(message.k8sVersion))
                                     return "k8sVersion: string expected";
+                            if (message.k8sGitVersion != null && message.hasOwnProperty("k8sGitVersion"))
+                                if (!$util.isString(message.k8sGitVersion))
+                                    return "k8sGitVersion: string expected";
                             return null;
                         };
     
@@ -75392,6 +75433,8 @@
                                 message.v1beta1Crd = Boolean(object.v1beta1Crd);
                             if (object.k8sVersion != null)
                                 message.k8sVersion = String(object.k8sVersion);
+                            if (object.k8sGitVersion != null)
+                                message.k8sGitVersion = String(object.k8sGitVersion);
                             return message;
                         };
     
@@ -75412,6 +75455,7 @@
                                 object.connectVersion = "";
                                 object.v1beta1Crd = false;
                                 object.k8sVersion = "";
+                                object.k8sGitVersion = "";
                             }
                             if (message.connectVersion != null && message.hasOwnProperty("connectVersion"))
                                 object.connectVersion = message.connectVersion;
@@ -75419,6 +75463,8 @@
                                 object.v1beta1Crd = message.v1beta1Crd;
                             if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
                                 object.k8sVersion = message.k8sVersion;
+                            if (message.k8sGitVersion != null && message.hasOwnProperty("k8sGitVersion"))
+                                object.k8sGitVersion = message.k8sGitVersion;
                             return object;
                         };
     
