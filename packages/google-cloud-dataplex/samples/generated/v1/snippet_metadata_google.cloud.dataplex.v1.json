@@ -12,8 +12,704 @@
     },
     "snippets": [
         {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_CreateGlossary_async",
+            "title": "BusinessGlossaryService createGlossary Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new Glossary resource.",
+            "canonical": true,
+            "file": "business_glossary_service.create_glossary.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateGlossary",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.CreateGlossary",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "glossary_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "glossary",
+                        "type": ".google.cloud.dataplex.v1.Glossary"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateGlossary",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.CreateGlossary",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_UpdateGlossary_async",
+            "title": "BusinessGlossaryService updateGlossary Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a Glossary resource.",
+            "canonical": true,
+            "file": "business_glossary_service.update_glossary.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateGlossary",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.UpdateGlossary",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "glossary",
+                        "type": ".google.cloud.dataplex.v1.Glossary"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateGlossary",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.UpdateGlossary",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_DeleteGlossary_async",
+            "title": "BusinessGlossaryService deleteGlossary Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a Glossary resource. All the categories and terms within the Glossary must be deleted before the Glossary can be deleted.",
+            "canonical": true,
+            "file": "business_glossary_service.delete_glossary.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteGlossary",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.DeleteGlossary",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "etag",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteGlossary",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.DeleteGlossary",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_GetGlossary_async",
+            "title": "BusinessGlossaryService getGlossary Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Glossary resource.",
+            "canonical": true,
+            "file": "business_glossary_service.get_glossary.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetGlossary",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.GetGlossary",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.Glossary",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "GetGlossary",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.GetGlossary",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_ListGlossaries_async",
+            "title": "BusinessGlossaryService listGlossaries Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists Glossary resources in a project and location.",
+            "canonical": true,
+            "file": "business_glossary_service.list_glossaries.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListGlossaries",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.ListGlossaries",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.ListGlossariesResponse",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "ListGlossaries",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.ListGlossaries",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_CreateGlossaryCategory_async",
+            "title": "BusinessGlossaryService createGlossaryCategory Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new GlossaryCategory resource.",
+            "canonical": true,
+            "file": "business_glossary_service.create_glossary_category.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateGlossaryCategory",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.CreateGlossaryCategory",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "category_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "category",
+                        "type": ".google.cloud.dataplex.v1.GlossaryCategory"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.GlossaryCategory",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateGlossaryCategory",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.CreateGlossaryCategory",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_UpdateGlossaryCategory_async",
+            "title": "BusinessGlossaryService updateGlossaryCategory Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a GlossaryCategory resource.",
+            "canonical": true,
+            "file": "business_glossary_service.update_glossary_category.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateGlossaryCategory",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.UpdateGlossaryCategory",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "category",
+                        "type": ".google.cloud.dataplex.v1.GlossaryCategory"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.GlossaryCategory",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateGlossaryCategory",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.UpdateGlossaryCategory",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_DeleteGlossaryCategory_async",
+            "title": "BusinessGlossaryService deleteGlossaryCategory Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a GlossaryCategory resource. All the GlossaryCategories and GlossaryTerms nested directly under the specified GlossaryCategory will be moved one level up to the parent in the hierarchy.",
+            "canonical": true,
+            "file": "business_glossary_service.delete_glossary_category.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteGlossaryCategory",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.DeleteGlossaryCategory",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteGlossaryCategory",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.DeleteGlossaryCategory",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_GetGlossaryCategory_async",
+            "title": "BusinessGlossaryService getGlossaryCategory Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a GlossaryCategory resource.",
+            "canonical": true,
+            "file": "business_glossary_service.get_glossary_category.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetGlossaryCategory",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.GetGlossaryCategory",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.GlossaryCategory",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "GetGlossaryCategory",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.GetGlossaryCategory",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_ListGlossaryCategories_async",
+            "title": "BusinessGlossaryService listGlossaryCategories Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists GlossaryCategory resources in a Glossary.",
+            "canonical": true,
+            "file": "business_glossary_service.list_glossary_categories.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 91,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListGlossaryCategories",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.ListGlossaryCategories",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.ListGlossaryCategoriesResponse",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "ListGlossaryCategories",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.ListGlossaryCategories",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_CreateGlossaryTerm_async",
+            "title": "BusinessGlossaryService createGlossaryTerm Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new GlossaryTerm resource.",
+            "canonical": true,
+            "file": "business_glossary_service.create_glossary_term.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateGlossaryTerm",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.CreateGlossaryTerm",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "term_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "term",
+                        "type": ".google.cloud.dataplex.v1.GlossaryTerm"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.GlossaryTerm",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateGlossaryTerm",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.CreateGlossaryTerm",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_UpdateGlossaryTerm_async",
+            "title": "BusinessGlossaryService updateGlossaryTerm Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a GlossaryTerm resource.",
+            "canonical": true,
+            "file": "business_glossary_service.update_glossary_term.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateGlossaryTerm",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.UpdateGlossaryTerm",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "term",
+                        "type": ".google.cloud.dataplex.v1.GlossaryTerm"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.GlossaryTerm",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateGlossaryTerm",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.UpdateGlossaryTerm",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_DeleteGlossaryTerm_async",
+            "title": "BusinessGlossaryService deleteGlossaryTerm Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a GlossaryTerm resource.",
+            "canonical": true,
+            "file": "business_glossary_service.delete_glossary_term.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteGlossaryTerm",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.DeleteGlossaryTerm",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteGlossaryTerm",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.DeleteGlossaryTerm",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_GetGlossaryTerm_async",
+            "title": "BusinessGlossaryService getGlossaryTerm Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a GlossaryTerm resource.",
+            "canonical": true,
+            "file": "business_glossary_service.get_glossary_term.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetGlossaryTerm",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.GetGlossaryTerm",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.GlossaryTerm",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "GetGlossaryTerm",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.GetGlossaryTerm",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_BusinessGlossaryService_ListGlossaryTerms_async",
+            "title": "BusinessGlossaryService listGlossaryTerms Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists GlossaryTerm resources in a Glossary.",
+            "canonical": true,
+            "file": "business_glossary_service.list_glossary_terms.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 91,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListGlossaryTerms",
+                "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.ListGlossaryTerms",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.ListGlossaryTermsResponse",
+                "client": {
+                    "shortName": "BusinessGlossaryServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryServiceClient"
+                },
+                "method": {
+                    "shortName": "ListGlossaryTerms",
+                    "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService.ListGlossaryTerms",
+                    "service": {
+                        "shortName": "BusinessGlossaryService",
+                        "fullName": "google.cloud.dataplex.v1.BusinessGlossaryService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dataplex_v1_generated_CatalogService_CreateEntryType_async",
-            "title": "CatalogService createEntryType Sample",
+            "title": "BusinessGlossaryService createEntryType Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an EntryType.",
             "canonical": true,
@@ -65,7 +761,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_UpdateEntryType_async",
-            "title": "CatalogService updateEntryType Sample",
+            "title": "BusinessGlossaryService updateEntryType Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an EntryType.",
             "canonical": true,
@@ -113,7 +809,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_DeleteEntryType_async",
-            "title": "CatalogService deleteEntryType Sample",
+            "title": "BusinessGlossaryService deleteEntryType Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an EntryType.",
             "canonical": true,
@@ -157,7 +853,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_ListEntryTypes_async",
-            "title": "CatalogService listEntryTypes Sample",
+            "title": "BusinessGlossaryService listEntryTypes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists EntryType resources in a project and location.",
             "canonical": true,
@@ -213,7 +909,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_GetEntryType_async",
-            "title": "CatalogService getEntryType Sample",
+            "title": "BusinessGlossaryService getEntryType Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an EntryType.",
             "canonical": true,
@@ -253,7 +949,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_CreateAspectType_async",
-            "title": "CatalogService createAspectType Sample",
+            "title": "BusinessGlossaryService createAspectType Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an AspectType.",
             "canonical": true,
@@ -305,7 +1001,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_UpdateAspectType_async",
-            "title": "CatalogService updateAspectType Sample",
+            "title": "BusinessGlossaryService updateAspectType Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an AspectType.",
             "canonical": true,
@@ -353,7 +1049,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_DeleteAspectType_async",
-            "title": "CatalogService deleteAspectType Sample",
+            "title": "BusinessGlossaryService deleteAspectType Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an AspectType.",
             "canonical": true,
@@ -397,7 +1093,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_ListAspectTypes_async",
-            "title": "CatalogService listAspectTypes Sample",
+            "title": "BusinessGlossaryService listAspectTypes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists AspectType resources in a project and location.",
             "canonical": true,
@@ -453,7 +1149,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_GetAspectType_async",
-            "title": "CatalogService getAspectType Sample",
+            "title": "BusinessGlossaryService getAspectType Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an AspectType.",
             "canonical": true,
@@ -493,7 +1189,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_CreateEntryGroup_async",
-            "title": "CatalogService createEntryGroup Sample",
+            "title": "BusinessGlossaryService createEntryGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an EntryGroup.",
             "canonical": true,
@@ -545,7 +1241,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_UpdateEntryGroup_async",
-            "title": "CatalogService updateEntryGroup Sample",
+            "title": "BusinessGlossaryService updateEntryGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an EntryGroup.",
             "canonical": true,
@@ -593,7 +1289,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_DeleteEntryGroup_async",
-            "title": "CatalogService deleteEntryGroup Sample",
+            "title": "BusinessGlossaryService deleteEntryGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an EntryGroup.",
             "canonical": true,
@@ -637,7 +1333,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_ListEntryGroups_async",
-            "title": "CatalogService listEntryGroups Sample",
+            "title": "BusinessGlossaryService listEntryGroups Sample",
             "origin": "API_DEFINITION",
             "description": " Lists EntryGroup resources in a project and location.",
             "canonical": true,
@@ -693,7 +1389,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_GetEntryGroup_async",
-            "title": "CatalogService getEntryGroup Sample",
+            "title": "BusinessGlossaryService getEntryGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an EntryGroup.",
             "canonical": true,
@@ -733,7 +1429,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_CreateEntry_async",
-            "title": "CatalogService createEntry Sample",
+            "title": "BusinessGlossaryService createEntry Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an Entry.",
             "canonical": true,
@@ -781,7 +1477,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_UpdateEntry_async",
-            "title": "CatalogService updateEntry Sample",
+            "title": "BusinessGlossaryService updateEntry Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an Entry.",
             "canonical": true,
@@ -837,7 +1533,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_DeleteEntry_async",
-            "title": "CatalogService deleteEntry Sample",
+            "title": "BusinessGlossaryService deleteEntry Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an Entry.",
             "canonical": true,
@@ -877,7 +1573,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_ListEntries_async",
-            "title": "CatalogService listEntries Sample",
+            "title": "BusinessGlossaryService listEntries Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Entries within an EntryGroup.",
             "canonical": true,
@@ -929,7 +1625,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_GetEntry_async",
-            "title": "CatalogService getEntry Sample",
+            "title": "BusinessGlossaryService getEntry Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an Entry.",
             "canonical": true,
@@ -981,7 +1677,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_LookupEntry_async",
-            "title": "CatalogService lookupEntry Sample",
+            "title": "BusinessGlossaryService lookupEntry Sample",
             "origin": "API_DEFINITION",
             "description": " Looks up an entry by name using the permission on the source system.",
             "canonical": true,
@@ -1037,7 +1733,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_SearchEntries_async",
-            "title": "CatalogService searchEntries Sample",
+            "title": "BusinessGlossaryService searchEntries Sample",
             "origin": "API_DEFINITION",
             "description": " Searches for Entries matching the given query and scope.",
             "canonical": true,
@@ -1101,9 +1797,9 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_CreateMetadataJob_async",
-            "title": "CatalogService createMetadataJob Sample",
+            "title": "BusinessGlossaryService createMetadataJob Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a metadata job. For example, use a metadata job to import Dataplex Catalog entries and aspects from a third-party system into Dataplex.",
+            "description": " Creates a metadata job. For example, use a metadata job to import metadata from a third-party system into Dataplex Universal Catalog.",
             "canonical": true,
             "file": "catalog_service.create_metadata_job.js",
             "language": "JAVASCRIPT",
@@ -1153,7 +1849,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_GetMetadataJob_async",
-            "title": "CatalogService getMetadataJob Sample",
+            "title": "BusinessGlossaryService getMetadataJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a metadata job.",
             "canonical": true,
@@ -1193,7 +1889,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_ListMetadataJobs_async",
-            "title": "CatalogService listMetadataJobs Sample",
+            "title": "BusinessGlossaryService listMetadataJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists metadata jobs.",
             "canonical": true,
@@ -1249,7 +1945,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CatalogService_CancelMetadataJob_async",
-            "title": "CatalogService cancelMetadataJob Sample",
+            "title": "BusinessGlossaryService cancelMetadataJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a metadata job. If you cancel a metadata import job that is in progress, the changes in the job might be partially applied. We recommend that you reset the state of the entry groups in your project by running another metadata job that reverts the changes from the canceled job.",
             "canonical": true,
@@ -1288,8 +1984,136 @@
             }
         },
         {
+            "regionTag": "dataplex_v1_generated_CatalogService_CreateEntryLink_async",
+            "title": "BusinessGlossaryService createEntryLink Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates an Entry Link.",
+            "canonical": true,
+            "file": "catalog_service.create_entry_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateEntryLink",
+                "fullName": "google.cloud.dataplex.v1.CatalogService.CreateEntryLink",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entry_link_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entry_link",
+                        "type": ".google.cloud.dataplex.v1.EntryLink"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.EntryLink",
+                "client": {
+                    "shortName": "CatalogServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateEntryLink",
+                    "fullName": "google.cloud.dataplex.v1.CatalogService.CreateEntryLink",
+                    "service": {
+                        "shortName": "CatalogService",
+                        "fullName": "google.cloud.dataplex.v1.CatalogService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_CatalogService_DeleteEntryLink_async",
+            "title": "BusinessGlossaryService deleteEntryLink Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an Entry Link.",
+            "canonical": true,
+            "file": "catalog_service.delete_entry_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteEntryLink",
+                "fullName": "google.cloud.dataplex.v1.CatalogService.DeleteEntryLink",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.EntryLink",
+                "client": {
+                    "shortName": "CatalogServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteEntryLink",
+                    "fullName": "google.cloud.dataplex.v1.CatalogService.DeleteEntryLink",
+                    "service": {
+                        "shortName": "CatalogService",
+                        "fullName": "google.cloud.dataplex.v1.CatalogService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataplex_v1_generated_CatalogService_GetEntryLink_async",
+            "title": "BusinessGlossaryService getEntryLink Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets an Entry Link.",
+            "canonical": true,
+            "file": "catalog_service.get_entry_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetEntryLink",
+                "fullName": "google.cloud.dataplex.v1.CatalogService.GetEntryLink",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.EntryLink",
+                "client": {
+                    "shortName": "CatalogServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.CatalogServiceClient"
+                },
+                "method": {
+                    "shortName": "GetEntryLink",
+                    "fullName": "google.cloud.dataplex.v1.CatalogService.GetEntryLink",
+                    "service": {
+                        "shortName": "CatalogService",
+                        "fullName": "google.cloud.dataplex.v1.CatalogService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dataplex_v1_generated_CmekService_CreateEncryptionConfig_async",
-            "title": "CatalogService createEncryptionConfig Sample",
+            "title": "BusinessGlossaryService createEncryptionConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Create an EncryptionConfig.",
             "canonical": true,
@@ -1337,7 +2161,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CmekService_UpdateEncryptionConfig_async",
-            "title": "CatalogService updateEncryptionConfig Sample",
+            "title": "BusinessGlossaryService updateEncryptionConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Update an EncryptionConfig.",
             "canonical": true,
@@ -1381,7 +2205,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CmekService_DeleteEncryptionConfig_async",
-            "title": "CatalogService deleteEncryptionConfig Sample",
+            "title": "BusinessGlossaryService deleteEncryptionConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Delete an EncryptionConfig.",
             "canonical": true,
@@ -1425,7 +2249,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CmekService_ListEncryptionConfigs_async",
-            "title": "CatalogService listEncryptionConfigs Sample",
+            "title": "BusinessGlossaryService listEncryptionConfigs Sample",
             "origin": "API_DEFINITION",
             "description": " List EncryptionConfigs.",
             "canonical": true,
@@ -1481,7 +2305,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_CmekService_GetEncryptionConfig_async",
-            "title": "CatalogService getEncryptionConfig Sample",
+            "title": "BusinessGlossaryService getEncryptionConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Get an EncryptionConfig.",
             "canonical": true,
@@ -1521,7 +2345,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_CreateContent_async",
-            "title": "CatalogService createContent Sample",
+            "title": "BusinessGlossaryService createContent Sample",
             "origin": "API_DEFINITION",
             "description": " Create a content.",
             "canonical": true,
@@ -1569,7 +2393,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_UpdateContent_async",
-            "title": "CatalogService updateContent Sample",
+            "title": "BusinessGlossaryService updateContent Sample",
             "origin": "API_DEFINITION",
             "description": " Update a content. Only supports full resource update.",
             "canonical": true,
@@ -1617,7 +2441,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_DeleteContent_async",
-            "title": "CatalogService deleteContent Sample",
+            "title": "BusinessGlossaryService deleteContent Sample",
             "origin": "API_DEFINITION",
             "description": " Delete a content.",
             "canonical": true,
@@ -1657,7 +2481,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_GetContent_async",
-            "title": "CatalogService getContent Sample",
+            "title": "BusinessGlossaryService getContent Sample",
             "origin": "API_DEFINITION",
             "description": " Get a content resource.",
             "canonical": true,
@@ -1701,7 +2525,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_GetIamPolicy_async",
-            "title": "CatalogService getIamPolicy Sample",
+            "title": "BusinessGlossaryService getIamPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Gets the access control policy for a contentitem resource. A `NOT_FOUND` error is returned if the resource does not exist. An empty policy is returned if the resource exists but does not have a policy set on it. Caller must have Google IAM `dataplex.content.getIamPolicy` permission on the resource.",
             "canonical": true,
@@ -1745,7 +2569,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_SetIamPolicy_async",
-            "title": "CatalogService setIamPolicy Sample",
+            "title": "BusinessGlossaryService setIamPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Sets the access control policy on the specified contentitem resource. Replaces any existing policy. Caller must have Google IAM `dataplex.content.setIamPolicy` permission on the resource.",
             "canonical": true,
@@ -1793,7 +2617,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_TestIamPermissions_async",
-            "title": "CatalogService testIamPermissions Sample",
+            "title": "BusinessGlossaryService testIamPermissions Sample",
             "origin": "API_DEFINITION",
             "description": " Returns the caller's permissions on a resource. If the resource does not exist, an empty set of permissions is returned (a `NOT_FOUND` error is not returned). A caller is not required to have Google IAM permission to make this request. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
             "canonical": true,
@@ -1837,7 +2661,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_ContentService_ListContent_async",
-            "title": "CatalogService listContent Sample",
+            "title": "BusinessGlossaryService listContent Sample",
             "origin": "API_DEFINITION",
             "description": " List content.",
             "canonical": true,
@@ -1889,7 +2713,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_CreateLake_async",
-            "title": "CatalogService createLake Sample",
+            "title": "BusinessGlossaryService createLake Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a lake resource.",
             "canonical": true,
@@ -1941,7 +2765,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_UpdateLake_async",
-            "title": "CatalogService updateLake Sample",
+            "title": "BusinessGlossaryService updateLake Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a lake resource.",
             "canonical": true,
@@ -1989,7 +2813,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_DeleteLake_async",
-            "title": "CatalogService deleteLake Sample",
+            "title": "BusinessGlossaryService deleteLake Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a lake resource. All zones within the lake must be deleted before the lake can be deleted.",
             "canonical": true,
@@ -2029,7 +2853,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListLakes_async",
-            "title": "CatalogService listLakes Sample",
+            "title": "BusinessGlossaryService listLakes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists lake resources in a project and location.",
             "canonical": true,
@@ -2085,7 +2909,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_GetLake_async",
-            "title": "CatalogService getLake Sample",
+            "title": "BusinessGlossaryService getLake Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a lake resource.",
             "canonical": true,
@@ -2125,7 +2949,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListLakeActions_async",
-            "title": "CatalogService listLakeActions Sample",
+            "title": "BusinessGlossaryService listLakeActions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists action resources in a lake.",
             "canonical": true,
@@ -2173,7 +2997,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_CreateZone_async",
-            "title": "CatalogService createZone Sample",
+            "title": "BusinessGlossaryService createZone Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a zone resource within a lake.",
             "canonical": true,
@@ -2225,7 +3049,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_UpdateZone_async",
-            "title": "CatalogService updateZone Sample",
+            "title": "BusinessGlossaryService updateZone Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a zone resource.",
             "canonical": true,
@@ -2273,7 +3097,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_DeleteZone_async",
-            "title": "CatalogService deleteZone Sample",
+            "title": "BusinessGlossaryService deleteZone Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a zone resource. All assets within a zone must be deleted before the zone can be deleted.",
             "canonical": true,
@@ -2313,7 +3137,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListZones_async",
-            "title": "CatalogService listZones Sample",
+            "title": "BusinessGlossaryService listZones Sample",
             "origin": "API_DEFINITION",
             "description": " Lists zone resources in a lake.",
             "canonical": true,
@@ -2369,7 +3193,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_GetZone_async",
-            "title": "CatalogService getZone Sample",
+            "title": "BusinessGlossaryService getZone Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a zone resource.",
             "canonical": true,
@@ -2409,7 +3233,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListZoneActions_async",
-            "title": "CatalogService listZoneActions Sample",
+            "title": "BusinessGlossaryService listZoneActions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists action resources in a zone.",
             "canonical": true,
@@ -2457,7 +3281,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_CreateAsset_async",
-            "title": "CatalogService createAsset Sample",
+            "title": "BusinessGlossaryService createAsset Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an asset resource.",
             "canonical": true,
@@ -2509,7 +3333,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_UpdateAsset_async",
-            "title": "CatalogService updateAsset Sample",
+            "title": "BusinessGlossaryService updateAsset Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an asset resource.",
             "canonical": true,
@@ -2557,7 +3381,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_DeleteAsset_async",
-            "title": "CatalogService deleteAsset Sample",
+            "title": "BusinessGlossaryService deleteAsset Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an asset resource. The referenced storage resource is detached (default) or deleted based on the associated Lifecycle policy.",
             "canonical": true,
@@ -2597,7 +3421,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListAssets_async",
-            "title": "CatalogService listAssets Sample",
+            "title": "BusinessGlossaryService listAssets Sample",
             "origin": "API_DEFINITION",
             "description": " Lists asset resources in a zone.",
             "canonical": true,
@@ -2653,7 +3477,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_GetAsset_async",
-            "title": "CatalogService getAsset Sample",
+            "title": "BusinessGlossaryService getAsset Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves an asset resource.",
             "canonical": true,
@@ -2693,7 +3517,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListAssetActions_async",
-            "title": "CatalogService listAssetActions Sample",
+            "title": "BusinessGlossaryService listAssetActions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists action resources in an asset.",
             "canonical": true,
@@ -2741,7 +3565,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_CreateTask_async",
-            "title": "CatalogService createTask Sample",
+            "title": "BusinessGlossaryService createTask Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a task resource within a lake.",
             "canonical": true,
@@ -2793,7 +3617,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_UpdateTask_async",
-            "title": "CatalogService updateTask Sample",
+            "title": "BusinessGlossaryService updateTask Sample",
             "origin": "API_DEFINITION",
             "description": " Update the task resource.",
             "canonical": true,
@@ -2841,7 +3665,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_DeleteTask_async",
-            "title": "CatalogService deleteTask Sample",
+            "title": "BusinessGlossaryService deleteTask Sample",
             "origin": "API_DEFINITION",
             "description": " Delete the task resource.",
             "canonical": true,
@@ -2881,7 +3705,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListTasks_async",
-            "title": "CatalogService listTasks Sample",
+            "title": "BusinessGlossaryService listTasks Sample",
             "origin": "API_DEFINITION",
             "description": " Lists tasks under the given lake.",
             "canonical": true,
@@ -2937,7 +3761,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_GetTask_async",
-            "title": "CatalogService getTask Sample",
+            "title": "BusinessGlossaryService getTask Sample",
             "origin": "API_DEFINITION",
             "description": " Get task resource.",
             "canonical": true,
@@ -2977,7 +3801,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListJobs_async",
-            "title": "CatalogService listJobs Sample",
+            "title": "BusinessGlossaryService listJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Jobs under the given task.",
             "canonical": true,
@@ -3025,7 +3849,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_RunTask_async",
-            "title": "CatalogService runTask Sample",
+            "title": "BusinessGlossaryService runTask Sample",
             "origin": "API_DEFINITION",
             "description": " Run an on demand execution of a Task.",
             "canonical": true,
@@ -3073,7 +3897,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_GetJob_async",
-            "title": "CatalogService getJob Sample",
+            "title": "BusinessGlossaryService getJob Sample",
             "origin": "API_DEFINITION",
             "description": " Get job resource.",
             "canonical": true,
@@ -3113,7 +3937,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_CancelJob_async",
-            "title": "CatalogService cancelJob Sample",
+            "title": "BusinessGlossaryService cancelJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancel jobs running for the task resource.",
             "canonical": true,
@@ -3153,7 +3977,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_CreateEnvironment_async",
-            "title": "CatalogService createEnvironment Sample",
+            "title": "BusinessGlossaryService createEnvironment Sample",
             "origin": "API_DEFINITION",
             "description": " Create an environment resource.",
             "canonical": true,
@@ -3205,7 +4029,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_UpdateEnvironment_async",
-            "title": "CatalogService updateEnvironment Sample",
+            "title": "BusinessGlossaryService updateEnvironment Sample",
             "origin": "API_DEFINITION",
             "description": " Update the environment resource.",
             "canonical": true,
@@ -3253,7 +4077,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_DeleteEnvironment_async",
-            "title": "CatalogService deleteEnvironment Sample",
+            "title": "BusinessGlossaryService deleteEnvironment Sample",
             "origin": "API_DEFINITION",
             "description": " Delete the environment resource. All the child resources must have been deleted before environment deletion can be initiated.",
             "canonical": true,
@@ -3293,7 +4117,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListEnvironments_async",
-            "title": "CatalogService listEnvironments Sample",
+            "title": "BusinessGlossaryService listEnvironments Sample",
             "origin": "API_DEFINITION",
             "description": " Lists environments under the given lake.",
             "canonical": true,
@@ -3349,7 +4173,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_GetEnvironment_async",
-            "title": "CatalogService getEnvironment Sample",
+            "title": "BusinessGlossaryService getEnvironment Sample",
             "origin": "API_DEFINITION",
             "description": " Get environment resource.",
             "canonical": true,
@@ -3389,7 +4213,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataplexService_ListSessions_async",
-            "title": "CatalogService listSessions Sample",
+            "title": "BusinessGlossaryService listSessions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists session resources in an environment.",
             "canonical": true,
@@ -3441,7 +4265,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_CreateDataScan_async",
-            "title": "CatalogService createDataScan Sample",
+            "title": "BusinessGlossaryService createDataScan Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a DataScan resource.",
             "canonical": true,
@@ -3493,7 +4317,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_UpdateDataScan_async",
-            "title": "CatalogService updateDataScan Sample",
+            "title": "BusinessGlossaryService updateDataScan Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a DataScan resource.",
             "canonical": true,
@@ -3541,7 +4365,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_DeleteDataScan_async",
-            "title": "CatalogService deleteDataScan Sample",
+            "title": "BusinessGlossaryService deleteDataScan Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a DataScan resource.",
             "canonical": true,
@@ -3585,7 +4409,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_GetDataScan_async",
-            "title": "CatalogService getDataScan Sample",
+            "title": "BusinessGlossaryService getDataScan Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a DataScan resource.",
             "canonical": true,
@@ -3629,7 +4453,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_ListDataScans_async",
-            "title": "CatalogService listDataScans Sample",
+            "title": "BusinessGlossaryService listDataScans Sample",
             "origin": "API_DEFINITION",
             "description": " Lists DataScans.",
             "canonical": true,
@@ -3685,7 +4509,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_RunDataScan_async",
-            "title": "CatalogService runDataScan Sample",
+            "title": "BusinessGlossaryService runDataScan Sample",
             "origin": "API_DEFINITION",
             "description": " Runs an on-demand execution of a DataScan",
             "canonical": true,
@@ -3725,7 +4549,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_GetDataScanJob_async",
-            "title": "CatalogService getDataScanJob Sample",
+            "title": "BusinessGlossaryService getDataScanJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a DataScanJob resource.",
             "canonical": true,
@@ -3769,7 +4593,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_ListDataScanJobs_async",
-            "title": "CatalogService listDataScanJobs Sample",
+            "title": "BusinessGlossaryService listDataScanJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists DataScanJobs under the given DataScan.",
             "canonical": true,
@@ -3821,7 +4645,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataScanService_GenerateDataQualityRules_async",
-            "title": "CatalogService generateDataQualityRules Sample",
+            "title": "BusinessGlossaryService generateDataQualityRules Sample",
             "origin": "API_DEFINITION",
             "description": " Generates recommended data quality rules based on the results of a data profiling scan. Use the recommendations to build rules for a data quality scan.",
             "canonical": true,
@@ -3861,7 +4685,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_CreateDataTaxonomy_async",
-            "title": "CatalogService createDataTaxonomy Sample",
+            "title": "BusinessGlossaryService createDataTaxonomy Sample",
             "origin": "API_DEFINITION",
             "description": " Create a DataTaxonomy resource.",
             "canonical": true,
@@ -3913,7 +4737,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_UpdateDataTaxonomy_async",
-            "title": "CatalogService updateDataTaxonomy Sample",
+            "title": "BusinessGlossaryService updateDataTaxonomy Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a DataTaxonomy resource.",
             "canonical": true,
@@ -3961,7 +4785,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_DeleteDataTaxonomy_async",
-            "title": "CatalogService deleteDataTaxonomy Sample",
+            "title": "BusinessGlossaryService deleteDataTaxonomy Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a DataTaxonomy resource. All attributes within the DataTaxonomy must be deleted before the DataTaxonomy can be deleted.",
             "canonical": true,
@@ -4005,7 +4829,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_ListDataTaxonomies_async",
-            "title": "CatalogService listDataTaxonomies Sample",
+            "title": "BusinessGlossaryService listDataTaxonomies Sample",
             "origin": "API_DEFINITION",
             "description": " Lists DataTaxonomy resources in a project and location.",
             "canonical": true,
@@ -4061,7 +4885,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_GetDataTaxonomy_async",
-            "title": "CatalogService getDataTaxonomy Sample",
+            "title": "BusinessGlossaryService getDataTaxonomy Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a DataTaxonomy resource.",
             "canonical": true,
@@ -4101,7 +4925,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_CreateDataAttributeBinding_async",
-            "title": "CatalogService createDataAttributeBinding Sample",
+            "title": "BusinessGlossaryService createDataAttributeBinding Sample",
             "origin": "API_DEFINITION",
             "description": " Create a DataAttributeBinding resource.",
             "canonical": true,
@@ -4153,7 +4977,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_UpdateDataAttributeBinding_async",
-            "title": "CatalogService updateDataAttributeBinding Sample",
+            "title": "BusinessGlossaryService updateDataAttributeBinding Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a DataAttributeBinding resource.",
             "canonical": true,
@@ -4201,7 +5025,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_DeleteDataAttributeBinding_async",
-            "title": "CatalogService deleteDataAttributeBinding Sample",
+            "title": "BusinessGlossaryService deleteDataAttributeBinding Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a DataAttributeBinding resource. All attributes within the DataAttributeBinding must be deleted before the DataAttributeBinding can be deleted.",
             "canonical": true,
@@ -4245,7 +5069,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_ListDataAttributeBindings_async",
-            "title": "CatalogService listDataAttributeBindings Sample",
+            "title": "BusinessGlossaryService listDataAttributeBindings Sample",
             "origin": "API_DEFINITION",
             "description": " Lists DataAttributeBinding resources in a project and location.",
             "canonical": true,
@@ -4301,7 +5125,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_GetDataAttributeBinding_async",
-            "title": "CatalogService getDataAttributeBinding Sample",
+            "title": "BusinessGlossaryService getDataAttributeBinding Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a DataAttributeBinding resource.",
             "canonical": true,
@@ -4341,7 +5165,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_CreateDataAttribute_async",
-            "title": "CatalogService createDataAttribute Sample",
+            "title": "BusinessGlossaryService createDataAttribute Sample",
             "origin": "API_DEFINITION",
             "description": " Create a DataAttribute resource.",
             "canonical": true,
@@ -4393,7 +5217,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_UpdateDataAttribute_async",
-            "title": "CatalogService updateDataAttribute Sample",
+            "title": "BusinessGlossaryService updateDataAttribute Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a DataAttribute resource.",
             "canonical": true,
@@ -4441,7 +5265,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_DeleteDataAttribute_async",
-            "title": "CatalogService deleteDataAttribute Sample",
+            "title": "BusinessGlossaryService deleteDataAttribute Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Data Attribute resource.",
             "canonical": true,
@@ -4485,7 +5309,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_ListDataAttributes_async",
-            "title": "CatalogService listDataAttributes Sample",
+            "title": "BusinessGlossaryService listDataAttributes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Data Attribute resources in a DataTaxonomy.",
             "canonical": true,
@@ -4541,7 +5365,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_DataTaxonomyService_GetDataAttribute_async",
-            "title": "CatalogService getDataAttribute Sample",
+            "title": "BusinessGlossaryService getDataAttribute Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a Data Attribute resource.",
             "canonical": true,
@@ -4581,7 +5405,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_CreateEntity_async",
-            "title": "CatalogService createEntity Sample",
+            "title": "BusinessGlossaryService createEntity Sample",
             "origin": "API_DEFINITION",
             "description": " Create a metadata entity.",
             "canonical": true,
@@ -4629,7 +5453,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_UpdateEntity_async",
-            "title": "CatalogService updateEntity Sample",
+            "title": "BusinessGlossaryService updateEntity Sample",
             "origin": "API_DEFINITION",
             "description": " Update a metadata entity. Only supports full resource update.",
             "canonical": true,
@@ -4673,7 +5497,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_DeleteEntity_async",
-            "title": "CatalogService deleteEntity Sample",
+            "title": "BusinessGlossaryService deleteEntity Sample",
             "origin": "API_DEFINITION",
             "description": " Delete a metadata entity.",
             "canonical": true,
@@ -4717,7 +5541,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_GetEntity_async",
-            "title": "CatalogService getEntity Sample",
+            "title": "BusinessGlossaryService getEntity Sample",
             "origin": "API_DEFINITION",
             "description": " Get a metadata entity.",
             "canonical": true,
@@ -4761,7 +5585,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_ListEntities_async",
-            "title": "CatalogService listEntities Sample",
+            "title": "BusinessGlossaryService listEntities Sample",
             "origin": "API_DEFINITION",
             "description": " List metadata entities in a zone.",
             "canonical": true,
@@ -4817,7 +5641,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_CreatePartition_async",
-            "title": "CatalogService createPartition Sample",
+            "title": "BusinessGlossaryService createPartition Sample",
             "origin": "API_DEFINITION",
             "description": " Create a metadata partition.",
             "canonical": true,
@@ -4865,7 +5689,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_DeletePartition_async",
-            "title": "CatalogService deletePartition Sample",
+            "title": "BusinessGlossaryService deletePartition Sample",
             "origin": "API_DEFINITION",
             "description": " Delete a metadata partition.",
             "canonical": true,
@@ -4909,7 +5733,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_GetPartition_async",
-            "title": "CatalogService getPartition Sample",
+            "title": "BusinessGlossaryService getPartition Sample",
             "origin": "API_DEFINITION",
             "description": " Get a metadata partition of an entity.",
             "canonical": true,
@@ -4949,7 +5773,7 @@
         },
         {
             "regionTag": "dataplex_v1_generated_MetadataService_ListPartitions_async",
-            "title": "CatalogService listPartitions Sample",
+            "title": "BusinessGlossaryService listPartitions Sample",
             "origin": "API_DEFINITION",
             "description": " List metadata partitions of an entity.",
             "canonical": true,

@@ -32,7 +32,7 @@ function main(parent) {
    *  Required. The resource name of the parent environment:
    *  `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
    *  where `project` refers to a *project_id* or *project_number* and
-   *  `location_id` refers to a GCP region.
+   *  `location_id` refers to a Google Cloud region.
    */
   // const parent = 'abc123'
   /**
