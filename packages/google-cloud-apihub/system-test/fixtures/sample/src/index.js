@@ -22,7 +22,10 @@ const apihub = require('@google-cloud/apihub');
 
 function main() {
   const apiHubClient = new apihub.ApiHubClient();
+  const apiHubCollectClient = new apihub.ApiHubCollectClient();
+  const apiHubCurateClient = new apihub.ApiHubCurateClient();
   const apiHubDependenciesClient = new apihub.ApiHubDependenciesClient();
+  const apiHubDiscoveryClient = new apihub.ApiHubDiscoveryClient();
   const apiHubPluginClient = new apihub.ApiHubPluginClient();
   const hostProjectRegistrationServiceClient = new apihub.HostProjectRegistrationServiceClient();
   const lintingServiceClient = new apihub.LintingServiceClient();

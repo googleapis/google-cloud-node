@@ -23,7 +23,9 @@ import {SinonStub} from 'sinon';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as apihubpluginModule from '../src';
 
-import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
+import {PassThrough} from 'stream';
+
+import {GoogleAuth, protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -50,6 +52,47 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
+    }
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
+    }
+    return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -566,6 +609,1748 @@ describe('v1.ApiHubPluginClient', () => {
             await assert.rejects(client.disablePlugin(request), expectedError);
         });
     });
+
+    describe('createPlugin', () => {
+        it('invokes createPlugin without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.Plugin()
+            );
+            client.innerApiCalls.createPlugin = stubSimpleCall(expectedResponse);
+            const [response] = await client.createPlugin(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlugin without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.Plugin()
+            );
+            client.innerApiCalls.createPlugin = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPlugin(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.apihub.v1.IPlugin|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlugin with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPlugin = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createPlugin(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlugin with closed client', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createPlugin(request), expectedError);
+        });
+    });
+
+    describe('getPluginInstance', () => {
+        it('invokes getPluginInstance without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.GetPluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.GetPluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.PluginInstance()
+            );
+            client.innerApiCalls.getPluginInstance = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPluginInstance(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPluginInstance without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.GetPluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.GetPluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.PluginInstance()
+            );
+            client.innerApiCalls.getPluginInstance = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPluginInstance(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.apihub.v1.IPluginInstance|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPluginInstance with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.GetPluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.GetPluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPluginInstance = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPluginInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPluginInstance with closed client', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.GetPluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.GetPluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPluginInstance(request), expectedError);
+        });
+    });
+
+    describe('updatePluginInstance', () => {
+        it('invokes updatePluginInstance without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.UpdatePluginInstanceRequest()
+            );
+            request.pluginInstance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.UpdatePluginInstanceRequest', ['pluginInstance', 'name']);
+            request.pluginInstance.name = defaultValue1;
+            const expectedHeaderRequestParams = `plugin_instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.PluginInstance()
+            );
+            client.innerApiCalls.updatePluginInstance = stubSimpleCall(expectedResponse);
+            const [response] = await client.updatePluginInstance(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePluginInstance without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.UpdatePluginInstanceRequest()
+            );
+            request.pluginInstance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.UpdatePluginInstanceRequest', ['pluginInstance', 'name']);
+            request.pluginInstance.name = defaultValue1;
+            const expectedHeaderRequestParams = `plugin_instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.PluginInstance()
+            );
+            client.innerApiCalls.updatePluginInstance = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePluginInstance(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.apihub.v1.IPluginInstance|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePluginInstance with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.UpdatePluginInstanceRequest()
+            );
+            request.pluginInstance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.UpdatePluginInstanceRequest', ['pluginInstance', 'name']);
+            request.pluginInstance.name = defaultValue1;
+            const expectedHeaderRequestParams = `plugin_instance.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePluginInstance = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updatePluginInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePluginInstance with closed client', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.UpdatePluginInstanceRequest()
+            );
+            request.pluginInstance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.UpdatePluginInstanceRequest', ['pluginInstance', 'name']);
+            request.pluginInstance.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updatePluginInstance(request), expectedError);
+        });
+    });
+
+    describe('deletePlugin', () => {
+        it('invokes deletePlugin without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePlugin = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deletePlugin(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlugin without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePlugin = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePlugin(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlugin with call error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePlugin = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deletePlugin(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlugin with LRO error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePlugin = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deletePlugin(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlugin as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeletePluginProgress without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeletePluginProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeletePluginProgress with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeletePluginProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createPluginInstance', () => {
+        it('invokes createPluginInstance without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPluginInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createPluginInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPluginInstance without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPluginInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPluginInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPluginInstance with call error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPluginInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createPluginInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPluginInstance with LRO error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.CreatePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.CreatePluginInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPluginInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createPluginInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreatePluginInstanceProgress without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreatePluginInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreatePluginInstanceProgress with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreatePluginInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('executePluginInstanceAction', () => {
+        it('invokes executePluginInstanceAction without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.executePluginInstanceAction = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.executePluginInstanceAction(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executePluginInstanceAction without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.executePluginInstanceAction = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executePluginInstanceAction(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executePluginInstanceAction with call error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executePluginInstanceAction = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.executePluginInstanceAction(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executePluginInstanceAction with LRO error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ExecutePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executePluginInstanceAction = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.executePluginInstanceAction(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExecutePluginInstanceActionProgress without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExecutePluginInstanceActionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExecutePluginInstanceActionProgress with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExecutePluginInstanceActionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('enablePluginInstanceAction', () => {
+        it('invokes enablePluginInstanceAction without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.EnablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.EnablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.enablePluginInstanceAction = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.enablePluginInstanceAction(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enablePluginInstanceAction without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.EnablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.EnablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.enablePluginInstanceAction = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.enablePluginInstanceAction(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enablePluginInstanceAction with call error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.EnablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.EnablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.enablePluginInstanceAction = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.enablePluginInstanceAction(request), expectedError);
+            const actualRequest = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enablePluginInstanceAction with LRO error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.EnablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.EnablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.enablePluginInstanceAction = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.enablePluginInstanceAction(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkEnablePluginInstanceActionProgress without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkEnablePluginInstanceActionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkEnablePluginInstanceActionProgress with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkEnablePluginInstanceActionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('disablePluginInstanceAction', () => {
+        it('invokes disablePluginInstanceAction without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DisablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DisablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.disablePluginInstanceAction = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.disablePluginInstanceAction(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disablePluginInstanceAction without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DisablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DisablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.disablePluginInstanceAction = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.disablePluginInstanceAction(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disablePluginInstanceAction with call error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DisablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DisablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.disablePluginInstanceAction = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.disablePluginInstanceAction(request), expectedError);
+            const actualRequest = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disablePluginInstanceAction with LRO error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DisablePluginInstanceActionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DisablePluginInstanceActionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.disablePluginInstanceAction = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.disablePluginInstanceAction(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disablePluginInstanceAction as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDisablePluginInstanceActionProgress without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDisablePluginInstanceActionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDisablePluginInstanceActionProgress with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDisablePluginInstanceActionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deletePluginInstance', () => {
+        it('invokes deletePluginInstance without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePluginInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deletePluginInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePluginInstance without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePluginInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePluginInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePluginInstance with call error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePluginInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deletePluginInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePluginInstance with LRO error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeletePluginInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeletePluginInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePluginInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deletePluginInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePluginInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeletePluginInstanceProgress without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeletePluginInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeletePluginInstanceProgress with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeletePluginInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listPlugins', () => {
+        it('invokes listPlugins without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+            ];
+            client.innerApiCalls.listPlugins = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPlugins(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPlugins as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlugins as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPlugins without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+            ];
+            client.innerApiCalls.listPlugins = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPlugins(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.apihub.v1.IPlugin[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPlugins as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlugins as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPlugins with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPlugins = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPlugins(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPlugins as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlugins as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPluginsStream without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+            ];
+            client.descriptors.page.listPlugins.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPluginsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.apihub.v1.Plugin[] = [];
+                stream.on('data', (response: protos.google.cloud.apihub.v1.Plugin) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPlugins.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPlugins, request));
+            assert(
+                (client.descriptors.page.listPlugins.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPluginsStream with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPlugins.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPluginsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.apihub.v1.Plugin[] = [];
+                stream.on('data', (response: protos.google.cloud.apihub.v1.Plugin) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPlugins.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPlugins, request));
+            assert(
+                (client.descriptors.page.listPlugins.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPlugins without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.Plugin()),
+            ];
+            client.descriptors.page.listPlugins.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.apihub.v1.IPlugin[] = [];
+            const iterable = client.listPluginsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPlugins with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPlugins.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPluginsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.apihub.v1.IPlugin[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPlugins.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listPluginInstances', () => {
+        it('invokes listPluginInstances without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+            ];
+            client.innerApiCalls.listPluginInstances = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPluginInstances(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPluginInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPluginInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPluginInstances without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+            ];
+            client.innerApiCalls.listPluginInstances = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPluginInstances(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.apihub.v1.IPluginInstance[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPluginInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPluginInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPluginInstances with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPluginInstances = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPluginInstances(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPluginInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPluginInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPluginInstancesStream without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+            ];
+            client.descriptors.page.listPluginInstances.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPluginInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.apihub.v1.PluginInstance[] = [];
+                stream.on('data', (response: protos.google.cloud.apihub.v1.PluginInstance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPluginInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPluginInstances, request));
+            assert(
+                (client.descriptors.page.listPluginInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPluginInstancesStream with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPluginInstances.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPluginInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.apihub.v1.PluginInstance[] = [];
+                stream.on('data', (response: protos.google.cloud.apihub.v1.PluginInstance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPluginInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPluginInstances, request));
+            assert(
+                (client.descriptors.page.listPluginInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPluginInstances without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+              generateSampleMessage(new protos.google.cloud.apihub.v1.PluginInstance()),
+            ];
+            client.descriptors.page.listPluginInstances.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.apihub.v1.IPluginInstance[] = [];
+            const iterable = client.listPluginInstancesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPluginInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPluginInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPluginInstances with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.ListPluginInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.ListPluginInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPluginInstances.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPluginInstancesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.apihub.v1.IPluginInstance[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPluginInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPluginInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new apihubpluginModule.v1.ApiHubPluginClient({
@@ -730,6 +2515,261 @@ describe('v1.ApiHubPluginClient', () => {
                         expectedHeaderRequestParams
                     )
             );
+        });
+    });
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
     });
 
@@ -935,6 +2975,52 @@ describe('v1.ApiHubPluginClient', () => {
             });
         });
 
+        describe('curation', async () => {
+            const fakePath = "/rendered/path/curation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                curation: "curationValue",
+            };
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.curationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.curationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('curationPath', () => {
+                const result = client.curationPath("projectValue", "locationValue", "curationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.curationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCurationName', () => {
+                const result = client.matchProjectFromCurationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCurationName', () => {
+                const result = client.matchLocationFromCurationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCurationFromCurationName', () => {
+                const result = client.matchCurationFromCurationName(fakePath);
+                assert.strictEqual(result, "curationValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('definition', async () => {
             const fakePath = "/rendered/path/definition";
             const expectedParameters = {
@@ -1089,6 +3175,106 @@ describe('v1.ApiHubPluginClient', () => {
             });
         });
 
+        describe('discoveredApiObservation', async () => {
+            const fakePath = "/rendered/path/discoveredApiObservation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                discovered_api_observation: "discoveredApiObservationValue",
+            };
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.discoveredApiObservationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.discoveredApiObservationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('discoveredApiObservationPath', () => {
+                const result = client.discoveredApiObservationPath("projectValue", "locationValue", "discoveredApiObservationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDiscoveredApiObservationName', () => {
+                const result = client.matchProjectFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDiscoveredApiObservationName', () => {
+                const result = client.matchLocationFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiObservationFromDiscoveredApiObservationName', () => {
+                const result = client.matchDiscoveredApiObservationFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "discoveredApiObservationValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('discoveredApiOperation', async () => {
+            const fakePath = "/rendered/path/discoveredApiOperation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                discovered_api_observation: "discoveredApiObservationValue",
+                discovered_api_operation: "discoveredApiOperationValue",
+            };
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.discoveredApiOperationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.discoveredApiOperationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('discoveredApiOperationPath', () => {
+                const result = client.discoveredApiOperationPath("projectValue", "locationValue", "discoveredApiObservationValue", "discoveredApiOperationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDiscoveredApiOperationName', () => {
+                const result = client.matchProjectFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDiscoveredApiOperationName', () => {
+                const result = client.matchLocationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiObservationFromDiscoveredApiOperationName', () => {
+                const result = client.matchDiscoveredApiObservationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "discoveredApiObservationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiOperationFromDiscoveredApiOperationName', () => {
+                const result = client.matchDiscoveredApiOperationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "discoveredApiOperationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('externalApi', async () => {
             const fakePath = "/rendered/path/externalApi";
             const expectedParameters = {
@@ -1181,6 +3367,44 @@ describe('v1.ApiHubPluginClient', () => {
             });
         });
 
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('plugin', async () => {
             const fakePath = "/rendered/path/plugin";
             const expectedParameters = {
@@ -1223,6 +3447,90 @@ describe('v1.ApiHubPluginClient', () => {
                 const result = client.matchPluginFromPluginName(fakePath);
                 assert.strictEqual(result, "pluginValue");
                 assert((client.pathTemplates.pluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('pluginInstance', async () => {
+            const fakePath = "/rendered/path/pluginInstance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                plugin: "pluginValue",
+                instance: "instanceValue",
+            };
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.pluginInstancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.pluginInstancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('pluginInstancePath', () => {
+                const result = client.pluginInstancePath("projectValue", "locationValue", "pluginValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.pluginInstancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPluginInstanceName', () => {
+                const result = client.matchProjectFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPluginInstanceName', () => {
+                const result = client.matchLocationFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPluginFromPluginInstanceName', () => {
+                const result = client.matchPluginFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "pluginValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromPluginInstanceName', () => {
+                const result = client.matchInstanceFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new apihubpluginModule.v1.ApiHubPluginClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -34,10 +34,10 @@ const version = require('../../../package.json').version;
 
 /**
  *  The primary resources offered by this service are EntryGroups, EntryTypes,
- *  AspectTypes, and Entries. They collectively let data administrators organize,
- *  manage, secure, and catalog data located across cloud projects in their
- *  organization in a variety of storage systems, including Cloud Storage and
- *  BigQuery.
+ *  AspectTypes, Entries and EntryLinks. They collectively let data
+ *  administrators organize, manage, secure, and catalog data located across
+ *  cloud projects in their organization in a variety of storage systems,
+ *  including Cloud Storage and BigQuery.
  * @class
  * @memberof v1
  */
@@ -224,11 +224,23 @@ export class CatalogServiceClient {
       entryGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
+      entryLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}'
+      ),
       entryTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryTypes/{entry_type}'
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
+      ),
+      glossaryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}'
+      ),
+      glossaryCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}'
+      ),
+      glossaryTermPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}'
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
@@ -294,12 +306,12 @@ export class CatalogServiceClient {
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*/dataAssets/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*/dataAssets/*}:testIamPermissions',body: '*',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
       },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
       },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
       }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
@@ -430,7 +442,7 @@ export class CatalogServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const catalogServiceStubMethods =
-        ['createEntryType', 'updateEntryType', 'deleteEntryType', 'listEntryTypes', 'getEntryType', 'createAspectType', 'updateAspectType', 'deleteAspectType', 'listAspectTypes', 'getAspectType', 'createEntryGroup', 'updateEntryGroup', 'deleteEntryGroup', 'listEntryGroups', 'getEntryGroup', 'createEntry', 'updateEntry', 'deleteEntry', 'listEntries', 'getEntry', 'lookupEntry', 'searchEntries', 'createMetadataJob', 'getMetadataJob', 'listMetadataJobs', 'cancelMetadataJob'];
+        ['createEntryType', 'updateEntryType', 'deleteEntryType', 'listEntryTypes', 'getEntryType', 'createAspectType', 'updateAspectType', 'deleteAspectType', 'listAspectTypes', 'getAspectType', 'createEntryGroup', 'updateEntryGroup', 'deleteEntryGroup', 'listEntryGroups', 'getEntryGroup', 'createEntry', 'updateEntry', 'deleteEntry', 'listEntries', 'getEntry', 'lookupEntry', 'searchEntries', 'createMetadataJob', 'getMetadataJob', 'listMetadataJobs', 'cancelMetadataJob', 'createEntryLink', 'deleteEntryLink', 'getEntryLink'];
     for (const methodName of catalogServiceStubMethods) {
       const callPromise = this.catalogServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1564,6 +1576,300 @@ export class CatalogServiceClient {
         throw error;
       });
   }
+/**
+ * Creates an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent Entry Group:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+ * @param {string} request.entryLinkId
+ *   Required. Entry Link identifier
+ *   * Must contain only lowercase letters, numbers and hyphens.
+ *   * Must start with a letter.
+ *   * Must be between 1-63 characters.
+ *   * Must end with a number or a letter.
+ *   * Must be unique within the EntryGroup.
+ * @param {google.cloud.dataplex.v1.EntryLink} request.entryLink
+ *   Required. Entry Link resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateEntryLink_async
+ */
+  createEntryLink(
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  createEntryLink(
+      request: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntryLink(
+      request: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntryLink(
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Entry Link:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryLink_async
+ */
+  deleteEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  deleteEntryLink(
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntryLink(
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Entry Link:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetEntryLink_async
+ */
+  getEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  getEntryLink(
+      request: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryLink(
+      request: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Creates an EntryType.
@@ -2252,7 +2558,7 @@ export class CatalogServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the entryGroup, of the form:
  *   projects/{project_number}/locations/{location_id}
- *   where `location_id` refers to a GCP region.
+ *   where `location_id` refers to a Google Cloud region.
  * @param {string} request.entryGroupId
  *   Required. EntryGroup identifier.
  * @param {google.cloud.dataplex.v1.EntryGroup} request.entryGroup
@@ -2585,8 +2891,8 @@ export class CatalogServiceClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
 /**
- * Creates a metadata job. For example, use a metadata job to import Dataplex
- * Catalog entries and aspects from a third-party system into Dataplex.
+ * Creates a metadata job. For example, use a metadata job to import metadata
+ * from a third-party system into Dataplex Universal Catalog.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -3709,10 +4015,10 @@ export class CatalogServiceClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The project to which the request should be attributed in the
- *   following form: `projects/{project}/locations/{location}`.
+ *   following form: `projects/{project}/locations/global`.
  * @param {string} request.query
  *   Required. The query against which entries in scope should be matched.
- *   The query syntax is defined in [Search syntax for Dataplex
+ *   The query syntax is defined in [Search syntax for Dataplex Universal
  *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
  * @param {number} [request.pageSize]
  *   Optional. Number of results in the search page. If <=0, then defaults
@@ -3725,7 +4031,7 @@ export class CatalogServiceClient {
  *   Optional. Specifies the ordering of results.
  *   Supported values are:
  *
- *   * `relevance` (default)
+ *   * `relevance`
  *   * `last_modified_timestamp`
  *   * `last_modified_timestamp asc`
  * @param {string} [request.scope]
@@ -3830,10 +4136,10 @@ export class CatalogServiceClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The project to which the request should be attributed in the
- *   following form: `projects/{project}/locations/{location}`.
+ *   following form: `projects/{project}/locations/global`.
  * @param {string} request.query
  *   Required. The query against which entries in scope should be matched.
- *   The query syntax is defined in [Search syntax for Dataplex
+ *   The query syntax is defined in [Search syntax for Dataplex Universal
  *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
  * @param {number} [request.pageSize]
  *   Optional. Number of results in the search page. If <=0, then defaults
@@ -3846,7 +4152,7 @@ export class CatalogServiceClient {
  *   Optional. Specifies the ordering of results.
  *   Supported values are:
  *
- *   * `relevance` (default)
+ *   * `relevance`
  *   * `last_modified_timestamp`
  *   * `last_modified_timestamp asc`
  * @param {string} [request.scope]
@@ -3900,10 +4206,10 @@ export class CatalogServiceClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The project to which the request should be attributed in the
- *   following form: `projects/{project}/locations/{location}`.
+ *   following form: `projects/{project}/locations/global`.
  * @param {string} request.query
  *   Required. The query against which entries in scope should be matched.
- *   The query syntax is defined in [Search syntax for Dataplex
+ *   The query syntax is defined in [Search syntax for Dataplex Universal
  *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
  * @param {number} [request.pageSize]
  *   Optional. Number of results in the search page. If <=0, then defaults
@@ -3916,7 +4222,7 @@ export class CatalogServiceClient {
  *   Optional. Specifies the ordering of results.
  *   Supported values are:
  *
- *   * `relevance` (default)
+ *   * `relevance`
  *   * `last_modified_timestamp`
  *   * `last_modified_timestamp asc`
  * @param {string} [request.scope]
@@ -5209,6 +5515,68 @@ export class CatalogServiceClient {
   }
 
   /**
+   * Return a fully-qualified entryLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry_link
+   * @returns {string} Resource name string.
+   */
+  entryLinkPath(project:string,location:string,entryGroup:string,entryLink:string) {
+    return this.pathTemplates.entryLinkPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+      entry_link: entryLink,
+    });
+  }
+
+  /**
+   * Parse the project from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).project;
+  }
+
+  /**
+   * Parse the location from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).location;
+  }
+
+  /**
+   * Parse the entry_group from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_group;
+  }
+
+  /**
+   * Parse the entry_link from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_link.
+   */
+  matchEntryLinkFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_link;
+  }
+
+  /**
    * Return a fully-qualified entryType resource name string.
    *
    * @param {string} project
@@ -5317,6 +5685,179 @@ export class CatalogServiceClient {
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
     return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+  }
+
+  /**
+   * Return a fully-qualified glossary resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @returns {string} Resource name string.
+   */
+  glossaryPath(project:string,location:string,glossary:string) {
+    return this.pathTemplates.glossaryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+    });
+  }
+
+  /**
+   * Parse the project from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).project;
+  }
+
+  /**
+   * Parse the location from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).location;
+  }
+
+  /**
+   * Parse the glossary from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).glossary;
+  }
+
+  /**
+   * Return a fully-qualified glossaryCategory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_category
+   * @returns {string} Resource name string.
+   */
+  glossaryCategoryPath(project:string,location:string,glossary:string,glossaryCategory:string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_category: glossaryCategory,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary;
+  }
+
+  /**
+   * Parse the glossary_category from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary_category.
+   */
+  matchGlossaryCategoryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary_category;
+  }
+
+  /**
+   * Return a fully-qualified glossaryTerm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_term
+   * @returns {string} Resource name string.
+   */
+  glossaryTermPath(project:string,location:string,glossary:string,glossaryTerm:string) {
+    return this.pathTemplates.glossaryTermPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_term: glossaryTerm,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary;
+  }
+
+  /**
+   * Parse the glossary_term from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary_term.
+   */
+  matchGlossaryTermFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary_term;
   }
 
   /**

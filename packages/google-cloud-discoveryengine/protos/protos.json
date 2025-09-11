@@ -1385,6 +1385,17 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "rankingExpression": {
+                          "type": "string",
+                          "id": 26
+                        },
+                        "rankingExpressionBackend": {
+                          "type": "RankingExpressionBackend",
+                          "id": 53,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1848,6 +1859,23 @@
                             "MEDIUM": 3,
                             "HIGH": 4
                           }
+                        },
+                        "RankingExpressionBackend": {
+                          "values": {
+                            "RANKING_EXPRESSION_BACKEND_UNSPECIFIED": 0,
+                            "RANK_BY_EMBEDDING": 3,
+                            "RANK_BY_FORMULA": 4
+                          },
+                          "reserved": [
+                            [
+                              1,
+                              1
+                            ],
+                            [
+                              2,
+                              2
+                            ]
+                          ]
                         }
                       }
                     },
@@ -1922,6 +1950,153 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "rankSignals": {
+                              "type": "RankSignals",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RankSignals": {
+                              "oneofs": {
+                                "_keywordSimilarityScore": {
+                                  "oneof": [
+                                    "keywordSimilarityScore"
+                                  ]
+                                },
+                                "_relevanceScore": {
+                                  "oneof": [
+                                    "relevanceScore"
+                                  ]
+                                },
+                                "_semanticSimilarityScore": {
+                                  "oneof": [
+                                    "semanticSimilarityScore"
+                                  ]
+                                },
+                                "_pctrRank": {
+                                  "oneof": [
+                                    "pctrRank"
+                                  ]
+                                },
+                                "_topicalityRank": {
+                                  "oneof": [
+                                    "topicalityRank"
+                                  ]
+                                },
+                                "_documentAge": {
+                                  "oneof": [
+                                    "documentAge"
+                                  ]
+                                },
+                                "_boostingFactor": {
+                                  "oneof": [
+                                    "boostingFactor"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "keywordSimilarityScore": {
+                                  "type": "float",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "relevanceScore": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "semanticSimilarityScore": {
+                                  "type": "float",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "pctrRank": {
+                                  "type": "float",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topicalityRank": {
+                                  "type": "float",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "documentAge": {
+                                  "type": "float",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "boostingFactor": {
+                                  "type": "float",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "defaultRank": {
+                                  "type": "float",
+                                  "id": 32,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "customSignals": {
+                                  "rule": "repeated",
+                                  "type": "CustomSignal",
+                                  "id": 33,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "reserved": [
+                                [
+                                  5,
+                                  5
+                                ]
+                              ],
+                              "nested": {
+                                "CustomSignal": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "value": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
@@ -15968,6 +16143,13 @@
                           "type": "string",
                           "id": 26
                         },
+                        "rankingExpressionBackend": {
+                          "type": "RankingExpressionBackend",
+                          "id": 53,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "safeSearch": {
                           "type": "bool",
                           "id": 20
@@ -16455,6 +16637,23 @@
                             "MEDIUM": 3,
                             "HIGH": 4
                           }
+                        },
+                        "RankingExpressionBackend": {
+                          "values": {
+                            "RANKING_EXPRESSION_BACKEND_UNSPECIFIED": 0,
+                            "RANK_BY_EMBEDDING": 3,
+                            "RANK_BY_FORMULA": 4
+                          },
+                          "reserved": [
+                            [
+                              1,
+                              1
+                            ],
+                            [
+                              2,
+                              2
+                            ]
+                          ]
                         }
                       }
                     },
@@ -16545,6 +16744,153 @@
                               "keyType": "string",
                               "type": "DoubleList",
                               "id": 4
+                            },
+                            "rankSignals": {
+                              "type": "RankSignals",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RankSignals": {
+                              "oneofs": {
+                                "_keywordSimilarityScore": {
+                                  "oneof": [
+                                    "keywordSimilarityScore"
+                                  ]
+                                },
+                                "_relevanceScore": {
+                                  "oneof": [
+                                    "relevanceScore"
+                                  ]
+                                },
+                                "_semanticSimilarityScore": {
+                                  "oneof": [
+                                    "semanticSimilarityScore"
+                                  ]
+                                },
+                                "_pctrRank": {
+                                  "oneof": [
+                                    "pctrRank"
+                                  ]
+                                },
+                                "_topicalityRank": {
+                                  "oneof": [
+                                    "topicalityRank"
+                                  ]
+                                },
+                                "_documentAge": {
+                                  "oneof": [
+                                    "documentAge"
+                                  ]
+                                },
+                                "_boostingFactor": {
+                                  "oneof": [
+                                    "boostingFactor"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "keywordSimilarityScore": {
+                                  "type": "float",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "relevanceScore": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "semanticSimilarityScore": {
+                                  "type": "float",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "pctrRank": {
+                                  "type": "float",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topicalityRank": {
+                                  "type": "float",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "documentAge": {
+                                  "type": "float",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "boostingFactor": {
+                                  "type": "float",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "defaultRank": {
+                                  "type": "float",
+                                  "id": 32,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "customSignals": {
+                                  "rule": "repeated",
+                                  "type": "CustomSignal",
+                                  "id": 33,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "reserved": [
+                                [
+                                  5,
+                                  5
+                                ]
+                              ],
+                              "nested": {
+                                "CustomSignal": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "value": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -27685,6 +28031,13 @@
                           "type": "string",
                           "id": 26
                         },
+                        "rankingExpressionBackend": {
+                          "type": "RankingExpressionBackend",
+                          "id": 53,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "safeSearch": {
                           "type": "bool",
                           "id": 20
@@ -28203,6 +28556,23 @@
                             "MEDIUM": 3,
                             "HIGH": 4
                           }
+                        },
+                        "RankingExpressionBackend": {
+                          "values": {
+                            "RANKING_EXPRESSION_BACKEND_UNSPECIFIED": 0,
+                            "RANK_BY_EMBEDDING": 3,
+                            "RANK_BY_FORMULA": 4
+                          },
+                          "reserved": [
+                            [
+                              1,
+                              1
+                            ],
+                            [
+                              2,
+                              2
+                            ]
+                          ]
                         }
                       }
                     },
@@ -28293,6 +28663,153 @@
                               "keyType": "string",
                               "type": "DoubleList",
                               "id": 4
+                            },
+                            "rankSignals": {
+                              "type": "RankSignals",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RankSignals": {
+                              "oneofs": {
+                                "_keywordSimilarityScore": {
+                                  "oneof": [
+                                    "keywordSimilarityScore"
+                                  ]
+                                },
+                                "_relevanceScore": {
+                                  "oneof": [
+                                    "relevanceScore"
+                                  ]
+                                },
+                                "_semanticSimilarityScore": {
+                                  "oneof": [
+                                    "semanticSimilarityScore"
+                                  ]
+                                },
+                                "_pctrRank": {
+                                  "oneof": [
+                                    "pctrRank"
+                                  ]
+                                },
+                                "_topicalityRank": {
+                                  "oneof": [
+                                    "topicalityRank"
+                                  ]
+                                },
+                                "_documentAge": {
+                                  "oneof": [
+                                    "documentAge"
+                                  ]
+                                },
+                                "_boostingFactor": {
+                                  "oneof": [
+                                    "boostingFactor"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "keywordSimilarityScore": {
+                                  "type": "float",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "relevanceScore": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "semanticSimilarityScore": {
+                                  "type": "float",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "pctrRank": {
+                                  "type": "float",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topicalityRank": {
+                                  "type": "float",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "documentAge": {
+                                  "type": "float",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "boostingFactor": {
+                                  "type": "float",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "defaultRank": {
+                                  "type": "float",
+                                  "id": 32,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "customSignals": {
+                                  "rule": "repeated",
+                                  "type": "CustomSignal",
+                                  "id": 33,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "reserved": [
+                                [
+                                  5,
+                                  5
+                                ]
+                              ],
+                              "nested": {
+                                "CustomSignal": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "value": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         },

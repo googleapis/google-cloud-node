@@ -41,8 +41,11 @@ function main(parent, spec) {
    *  the specified id is already used by another spec in the API
    *  resource.
    *  * If not provided, a system generated id will be used.
-   *  This value should be 4-500 characters, and valid characters
-   *  are /[a-z][A-Z][0-9]-_/.
+   *  This value should be 4-500 characters, overall resource name which will be
+   *  of format
+   *  `projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}`,
+   *  its length is limited to 1000 characters and valid characters are
+   *  /[a-z][A-Z][0-9]-_/.
    */
   // const specId = 'abc123'
   /**
