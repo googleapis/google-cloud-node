@@ -33,7 +33,7 @@ import * as gapicConfig from './grafeas_v1_beta1_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  [Grafeas](https://https://https://https://grafeas.io) API.
+ *  [Grafeas](https://https://https://https://https://grafeas.io) API.
  *
  *  Retrieves analysis results of Cloud components such as Docker container
  *  images.
