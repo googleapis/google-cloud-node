@@ -65,7 +65,6 @@ v1beta1Files.forEach(file => {
 
 // Perform surgery inserting the Grafeas client.
 const containerAnalysisClientFile = path.resolve('packages/google-devtools-containeranalysis/src/v1/container_analysis_client.ts');
-replaceInFile(containerAnalysisClientFile, /import type \* as gax from 'google-gax';/g, "import type * as gax from 'google-gax';\nimport {GrafeasClient} from '@google-cloud/grafeas';");
 const grafeasClientMethod = `
     /**
     * Returns an instance of a @google-cloud/grafeas client, configured to
@@ -80,7 +79,19 @@ const grafeasClientMethod = `
         return new GrafeasClient(this._opts as {});
     }
     }`;
-replaceInFile(containerAnalysisClientFile, /^}/m, grafeasClientMethod);
+
+try {
+  const clientContent = fs.readFileSync(containerAnalysisClientFile, 'utf8');
+  if (!clientContent.includes('getGrafeasClient()')) {
+    replaceInFile(containerAnalysisClientFile, /import type \* as gax from 'google-gax';/g, "import type * as gax from 'google-gax';\nimport {GrafeasClient} from '@google-cloud/grafeas';");
+    replaceInFile(containerAnalysisClientFile, /^}/m, grafeasClientMethod);
+    console.log('Successfully added getGrafeasClient method.');
+  } else {
+    console.log('getGrafeasClient method already exists, skipping.');
+  }
+} catch (err) {
+  console.error(`Error processing file ${containerAnalysisClientFile}:`, err);
+}
 
 // Fix Grafeas client files
 const grafeasV1beta1Dir = path.resolve('packages/google-devtools-containeranalysis/src/v1beta1');

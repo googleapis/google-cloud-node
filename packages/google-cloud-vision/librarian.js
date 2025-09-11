@@ -46,9 +46,14 @@ const appendContent = '\n' +
 
 filesToProcess.forEach(file => {
   try {
-    fs.appendFileSync(file, appendContent, 'utf8');
-    console.log(`Successfully appended to: ${file}`);
+    const fileContent = fs.readFileSync(file, 'utf8');
+    if (!fileContent.includes(appendContent.trim())) {
+      fs.appendFileSync(file, appendContent, 'utf8');
+      console.log(`Successfully appended to: ${file}`);
+    } else {
+      console.log(`Content already exists in ${file}, skipping.`);
+    }
   } catch (err) {
-    console.error(`Error appending to file ${file}:`, err);
+    console.error(`Error processing file ${file}:`, err);
   }
 });
