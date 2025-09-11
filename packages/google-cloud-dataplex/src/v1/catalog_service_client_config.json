@@ -158,6 +158,18 @@
         "CancelMetadataJob": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "CreateEntryLink": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteEntryLink": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetEntryLink": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

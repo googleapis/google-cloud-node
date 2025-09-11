@@ -12,19 +12,37 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Business_glossary_service.create_glossary](#business_glossary_service.create_glossary)
+  * [Business_glossary_service.create_glossary_category](#business_glossary_service.create_glossary_category)
+  * [Business_glossary_service.create_glossary_term](#business_glossary_service.create_glossary_term)
+  * [Business_glossary_service.delete_glossary](#business_glossary_service.delete_glossary)
+  * [Business_glossary_service.delete_glossary_category](#business_glossary_service.delete_glossary_category)
+  * [Business_glossary_service.delete_glossary_term](#business_glossary_service.delete_glossary_term)
+  * [Business_glossary_service.get_glossary](#business_glossary_service.get_glossary)
+  * [Business_glossary_service.get_glossary_category](#business_glossary_service.get_glossary_category)
+  * [Business_glossary_service.get_glossary_term](#business_glossary_service.get_glossary_term)
+  * [Business_glossary_service.list_glossaries](#business_glossary_service.list_glossaries)
+  * [Business_glossary_service.list_glossary_categories](#business_glossary_service.list_glossary_categories)
+  * [Business_glossary_service.list_glossary_terms](#business_glossary_service.list_glossary_terms)
+  * [Business_glossary_service.update_glossary](#business_glossary_service.update_glossary)
+  * [Business_glossary_service.update_glossary_category](#business_glossary_service.update_glossary_category)
+  * [Business_glossary_service.update_glossary_term](#business_glossary_service.update_glossary_term)
   * [Catalog_service.cancel_metadata_job](#catalog_service.cancel_metadata_job)
   * [Catalog_service.create_aspect_type](#catalog_service.create_aspect_type)
   * [Catalog_service.create_entry](#catalog_service.create_entry)
   * [Catalog_service.create_entry_group](#catalog_service.create_entry_group)
+  * [Catalog_service.create_entry_link](#catalog_service.create_entry_link)
   * [Catalog_service.create_entry_type](#catalog_service.create_entry_type)
   * [Catalog_service.create_metadata_job](#catalog_service.create_metadata_job)
   * [Catalog_service.delete_aspect_type](#catalog_service.delete_aspect_type)
   * [Catalog_service.delete_entry](#catalog_service.delete_entry)
   * [Catalog_service.delete_entry_group](#catalog_service.delete_entry_group)
+  * [Catalog_service.delete_entry_link](#catalog_service.delete_entry_link)
   * [Catalog_service.delete_entry_type](#catalog_service.delete_entry_type)
   * [Catalog_service.get_aspect_type](#catalog_service.get_aspect_type)
   * [Catalog_service.get_entry](#catalog_service.get_entry)
   * [Catalog_service.get_entry_group](#catalog_service.get_entry_group)
+  * [Catalog_service.get_entry_link](#catalog_service.get_entry_link)
   * [Catalog_service.get_entry_type](#catalog_service.get_entry_type)
   * [Catalog_service.get_metadata_job](#catalog_service.get_metadata_job)
   * [Catalog_service.list_aspect_types](#catalog_service.list_aspect_types)
@@ -134,6 +152,261 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
+### Business_glossary_service.create_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.create_glossary_category
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary_category.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary_category.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary_category.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.create_glossary_term
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary_term.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary_term.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.create_glossary_term.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.delete_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.delete_glossary_category
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary_category.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary_category.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary_category.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.delete_glossary_term
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary_term.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary_term.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.delete_glossary_term.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.get_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.get_glossary_category
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary_category.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary_category.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary_category.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.get_glossary_term
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary_term.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary_term.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.get_glossary_term.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.list_glossaries
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossaries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossaries.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossaries.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.list_glossary_categories
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossary_categories.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossary_categories.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossary_categories.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.list_glossary_terms
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossary_terms.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossary_terms.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.list_glossary_terms.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.update_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.update_glossary_category
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary_category.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary_category.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary_category.js`
+
+
+-----
+
+
+
+
+### Business_glossary_service.update_glossary_term
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary_term.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary_term.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/business_glossary_service.update_glossary_term.js`
+
+
+-----
+
+
+
+
 ### Catalog_service.cancel_metadata_job
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.cancel_metadata_job.js).
@@ -195,6 +468,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_group.js`
+
+
+-----
+
+
+
+
+### Catalog_service.create_entry_link
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_link.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_link.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/catalog_service.create_entry_link.js`
 
 
 -----
@@ -287,6 +577,23 @@ __Usage:__
 
 
 
+### Catalog_service.delete_entry_link
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_link.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_link.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_link.js`
+
+
+-----
+
+
+
+
 ### Catalog_service.delete_entry_type
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.delete_entry_type.js).
@@ -348,6 +655,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_group.js`
+
+
+-----
+
+
+
+
+### Catalog_service.get_entry_link
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_link.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_link.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/catalog_service.get_entry_link.js`
 
 
 -----

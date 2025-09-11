@@ -222,11 +222,23 @@ export class DataTaxonomyServiceClient {
       entryGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
+      entryLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}'
+      ),
       entryTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryTypes/{entry_type}'
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
+      ),
+      glossaryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}'
+      ),
+      glossaryCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}'
+      ),
+      glossaryTermPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}'
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
@@ -286,12 +298,12 @@ export class DataTaxonomyServiceClient {
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*/dataAssets/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*/dataAssets/*}:testIamPermissions',body: '*',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
       },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
       },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
       }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
@@ -1886,7 +1898,7 @@ export class DataTaxonomyServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the DataTaxonomy location, of the form:
  *   projects/{project_number}/locations/{location_id}
- *   where `location_id` refers to a GCP region.
+ *   where `location_id` refers to a Google Cloud region.
  * @param {number} [request.pageSize]
  *   Optional. Maximum number of DataTaxonomies to return. The service may
  *   return fewer than this value. If unspecified, at most 10 DataTaxonomies
@@ -1998,7 +2010,7 @@ export class DataTaxonomyServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the DataTaxonomy location, of the form:
  *   projects/{project_number}/locations/{location_id}
- *   where `location_id` refers to a GCP region.
+ *   where `location_id` refers to a Google Cloud region.
  * @param {number} [request.pageSize]
  *   Optional. Maximum number of DataTaxonomies to return. The service may
  *   return fewer than this value. If unspecified, at most 10 DataTaxonomies
@@ -2059,7 +2071,7 @@ export class DataTaxonomyServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the DataTaxonomy location, of the form:
  *   projects/{project_number}/locations/{location_id}
- *   where `location_id` refers to a GCP region.
+ *   where `location_id` refers to a Google Cloud region.
  * @param {number} [request.pageSize]
  *   Optional. Maximum number of DataTaxonomies to return. The service may
  *   return fewer than this value. If unspecified, at most 10 DataTaxonomies
@@ -3582,6 +3594,68 @@ export class DataTaxonomyServiceClient {
   }
 
   /**
+   * Return a fully-qualified entryLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry_link
+   * @returns {string} Resource name string.
+   */
+  entryLinkPath(project:string,location:string,entryGroup:string,entryLink:string) {
+    return this.pathTemplates.entryLinkPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+      entry_link: entryLink,
+    });
+  }
+
+  /**
+   * Parse the project from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).project;
+  }
+
+  /**
+   * Parse the location from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).location;
+  }
+
+  /**
+   * Parse the entry_group from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_group;
+  }
+
+  /**
+   * Parse the entry_link from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_link.
+   */
+  matchEntryLinkFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_link;
+  }
+
+  /**
    * Return a fully-qualified entryType resource name string.
    *
    * @param {string} project
@@ -3690,6 +3764,179 @@ export class DataTaxonomyServiceClient {
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
     return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+  }
+
+  /**
+   * Return a fully-qualified glossary resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @returns {string} Resource name string.
+   */
+  glossaryPath(project:string,location:string,glossary:string) {
+    return this.pathTemplates.glossaryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+    });
+  }
+
+  /**
+   * Parse the project from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).project;
+  }
+
+  /**
+   * Parse the location from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).location;
+  }
+
+  /**
+   * Parse the glossary from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).glossary;
+  }
+
+  /**
+   * Return a fully-qualified glossaryCategory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_category
+   * @returns {string} Resource name string.
+   */
+  glossaryCategoryPath(project:string,location:string,glossary:string,glossaryCategory:string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_category: glossaryCategory,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary;
+  }
+
+  /**
+   * Parse the glossary_category from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary_category.
+   */
+  matchGlossaryCategoryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary_category;
+  }
+
+  /**
+   * Return a fully-qualified glossaryTerm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_term
+   * @returns {string} Resource name string.
+   */
+  glossaryTermPath(project:string,location:string,glossary:string,glossaryTerm:string) {
+    return this.pathTemplates.glossaryTermPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_term: glossaryTerm,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary;
+  }
+
+  /**
+   * Parse the glossary_term from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary_term.
+   */
+  matchGlossaryTermFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary_term;
   }
 
   /**

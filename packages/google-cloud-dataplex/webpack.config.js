@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'CatalogService',
-    filename: './catalog-service.js',
+    library: 'BusinessGlossaryService',
+    filename: './business-glossary-service.js',
   },
   node: {
     child_process: 'empty',
