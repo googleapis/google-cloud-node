@@ -10337,7 +10337,9 @@ export namespace google {
                         PROVISIONING_MODEL_UNSPECIFIED = 0,
                         STANDARD = 1,
                         SPOT = 2,
-                        PREEMPTIBLE = 3
+                        PREEMPTIBLE = 3,
+                        RESERVATION_BOUND = 4,
+                        FLEX_START = 5
                     }
                 }
 
