@@ -46,7 +46,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Notifications library
-  const {NotificationsApiServiceClient} = require('@google-cloud/notifications').v1;
+  const {NotificationsApiServiceClient} = require('@google-shopping/notifications').v1;
 
   // Instantiates a client
   const notificationsClient = new NotificationsApiServiceClient();
