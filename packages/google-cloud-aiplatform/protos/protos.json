@@ -69864,6 +69864,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "privateServiceConnectConfig": {
+                              "type": "PrivateServiceConnectConfig",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "endpointUserId": {
                               "type": "string",
                               "id": 3,

@@ -44,7 +44,7 @@ function main(dataSource, updateMask) {
   // const updateMask = {}
 
   // Imports the Datasources library
-  const {DataSourcesServiceClient} = require('@google-cloud/datasources').v1;
+  const {DataSourcesServiceClient} = require('@google-shopping/datasources').v1;
 
   // Instantiates a client
   const datasourcesClient = new DataSourcesServiceClient();

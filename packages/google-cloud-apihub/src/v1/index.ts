@@ -17,7 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 export {ApiHubClient} from './api_hub_client';
+export {ApiHubCollectClient} from './api_hub_collect_client';
+export {ApiHubCurateClient} from './api_hub_curate_client';
 export {ApiHubDependenciesClient} from './api_hub_dependencies_client';
+export {ApiHubDiscoveryClient} from './api_hub_discovery_client';
 export {ApiHubPluginClient} from './api_hub_plugin_client';
 export {HostProjectRegistrationServiceClient} from './host_project_registration_service_client';
 export {LintingServiceClient} from './linting_service_client';

@@ -20,6 +20,7 @@ export {AnalyticsServiceClient} from './analytics_service_client';
 export {CatalogServiceClient} from './catalog_service_client';
 export {CompletionServiceClient} from './completion_service_client';
 export {ControlServiceClient} from './control_service_client';
+export {ConversationalSearchServiceClient} from './conversational_search_service_client';
 export {GenerativeQuestionServiceClient} from './generative_question_service_client';
 export {ModelServiceClient} from './model_service_client';
 export {PredictionServiceClient} from './prediction_service_client';

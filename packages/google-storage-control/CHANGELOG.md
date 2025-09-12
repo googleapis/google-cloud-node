@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.5.0...storage-control-v0.6.0) (2025-09-09)
+
+
+### Features
+
+* [storage] Add new GetIamPolicy, SetIamPolicy, and TestIamPermissions RPCs ([#6698](https://github.com/googleapis/google-cloud-node/issues/6698)) ([70aaf8c](https://github.com/googleapis/google-cloud-node/commit/70aaf8c5d61f93cd5a13d1c1d2f5b80b5c44fe02))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.4.0...storage-control-v0.5.0) (2025-07-09)
 
 

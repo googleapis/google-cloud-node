@@ -5,6 +5,167 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6f28d82717d79347864fb948caaab517b6fe7134",
+          "message": "Add initial files for google.cloud.locationfinder.v1",
+          "issues": [
+            "6703"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/locationfinder",
+      "id": "6e3ab7b2-ebad-4368-b6a4-5a826c13f2b2",
+      "createTime": "2025-09-09T17:15:02.362Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dcd94ec566dc0009b3672d62046dc4a302e9c4b0",
+          "message": "Add initial files for google.cloud.capacityplanner.v1beta",
+          "issues": [
+            "6696"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "52484899-a4fc-4d95-bc8f-377beff38862",
+      "createTime": "2025-09-09T17:15:02.340Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "70aaf8c5d61f93cd5a13d1c1d2f5b80b5c44fe02",
+          "message": "[storage] Add new GetIamPolicy, SetIamPolicy, and TestIamPermissions RPCs",
+          "issues": [
+            "6698"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "b98ddcb3-426c-481a-bbbb-8345767c0b8d",
+      "createTime": "2025-09-09T17:15:02.320Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cf241049e4b2ad5ca3e01c28275c3a54f6d24c8f",
+          "message": "[dlp] add LocationSupport,Domain,DocumentFallbackLocation",
+          "issues": [
+            "6700"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "49dc50ae-70a2-4cfe-b7b7-8c324d168749",
+      "createTime": "2025-09-09T17:15:02.296Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3e0730f20bc212207398e93605865b5a560addb6",
+          "message": "[vmmigration] Azure as a source",
+          "issues": [
+            "6677"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "8007fe4f-6853-47d2-a28f-841b85351176",
+      "createTime": "2025-09-09T17:15:02.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "44d6bbb3855a7f8fe1b516a9294c0451036bba2f",
+          "message": "[networkconnectivity] introduce DataTransfer APIs",
+          "issues": [
+            "6673"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "e1e678f6-b20a-4c64-ad25-c5eaa41b93cf",
+      "createTime": "2025-09-09T17:15:02.247Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3478080d2c37b236c90feb1ad4a7643b4cb04aa4",
+          "message": "[gapic-node-processing] remove hardlinks",
+          "issues": [
+            "6699"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "7ab487e6-80a1-403f-a071-cfd6ab68511e",
+      "createTime": "2025-09-09T17:15:02.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "961ac1ae3d0144b2cc5e5ba95378e2c02d12b5c5",
+          "message": "PSC support for custom weights deploy",
+          "issues": [
+            "6695"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "f48ce9b66bbc17b0615fc22f08e07694f0e83135",
+          "message": "Tuning PreTunedModel API field",
+          "issues": [
+            "6612"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "11d250bf-d85c-41ce-a7bd-7b71488418c5",
+      "createTime": "2025-09-09T17:15:02.204Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3478080d2c37b236c90feb1ad4a7643b4cb04aa4",
+          "message": "[gapic-node-processing] remove hardlinks",
+          "issues": [
+            "6699"
+          ]
+        }
+      ],
+      "version": "0.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "4484ef68-5081-4056-ac7b-9b431395a458",
+      "createTime": "2025-09-09T17:15:02.184Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ba6a4977e89c5769d302e1a18d5ad305cae1bfdd",
           "message": "[netapp] add new fields for flex auto tiering",
           "issues": [
@@ -62163,5 +62324,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-09-04T20:33:14.674Z"
+  "updateTime": "2025-09-09T17:15:02.362Z"
 }

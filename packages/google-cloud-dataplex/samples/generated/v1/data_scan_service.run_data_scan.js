@@ -32,7 +32,7 @@ function main(name) {
    *  Required. The resource name of the DataScan:
    *  `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`.
    *  where `project` refers to a *project_id* or *project_number* and
-   *  `location_id` refers to a GCP region.
+   *  `location_id` refers to a Google Cloud region.
    *  Only **OnDemand** data scans are allowed.
    */
   // const name = 'abc123'

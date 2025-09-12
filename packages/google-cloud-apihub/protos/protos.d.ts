@@ -271,6 +271,20 @@ export namespace google {
                     public deleteSpec(request: google.cloud.apihub.v1.IDeleteSpecRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls CreateApiOperation.
+                     * @param request CreateApiOperationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ApiOperation
+                     */
+                    public createApiOperation(request: google.cloud.apihub.v1.ICreateApiOperationRequest, callback: google.cloud.apihub.v1.ApiHub.CreateApiOperationCallback): void;
+
+                    /**
+                     * Calls CreateApiOperation.
+                     * @param request CreateApiOperationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createApiOperation(request: google.cloud.apihub.v1.ICreateApiOperationRequest): Promise<google.cloud.apihub.v1.ApiOperation>;
+
+                    /**
                      * Calls GetApiOperation.
                      * @param request GetApiOperationRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ApiOperation
@@ -297,6 +311,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public listApiOperations(request: google.cloud.apihub.v1.IListApiOperationsRequest): Promise<google.cloud.apihub.v1.ListApiOperationsResponse>;
+
+                    /**
+                     * Calls UpdateApiOperation.
+                     * @param request UpdateApiOperationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ApiOperation
+                     */
+                    public updateApiOperation(request: google.cloud.apihub.v1.IUpdateApiOperationRequest, callback: google.cloud.apihub.v1.ApiHub.UpdateApiOperationCallback): void;
+
+                    /**
+                     * Calls UpdateApiOperation.
+                     * @param request UpdateApiOperationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateApiOperation(request: google.cloud.apihub.v1.IUpdateApiOperationRequest): Promise<google.cloud.apihub.v1.ApiOperation>;
+
+                    /**
+                     * Calls DeleteApiOperation.
+                     * @param request DeleteApiOperationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteApiOperation(request: google.cloud.apihub.v1.IDeleteApiOperationRequest, callback: google.cloud.apihub.v1.ApiHub.DeleteApiOperationCallback): void;
+
+                    /**
+                     * Calls DeleteApiOperation.
+                     * @param request DeleteApiOperationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteApiOperation(request: google.cloud.apihub.v1.IDeleteApiOperationRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls GetDefinition.
@@ -652,6 +694,13 @@ export namespace google {
                     type DeleteSpecCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHub|createApiOperation}.
+                     * @param error Error, if any
+                     * @param [response] ApiOperation
+                     */
+                    type CreateApiOperationCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ApiOperation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.apihub.v1.ApiHub|getApiOperation}.
                      * @param error Error, if any
                      * @param [response] ApiOperation
@@ -664,6 +713,20 @@ export namespace google {
                      * @param [response] ListApiOperationsResponse
                      */
                     type ListApiOperationsCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ListApiOperationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHub|updateApiOperation}.
+                     * @param error Error, if any
+                     * @param [response] ApiOperation
+                     */
+                    type UpdateApiOperationCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ApiOperation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHub|deleteApiOperation}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteApiOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.apihub.v1.ApiHub|getDefinition}.
@@ -2895,6 +2958,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateApiOperationRequest. */
+                interface ICreateApiOperationRequest {
+
+                    /** CreateApiOperationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateApiOperationRequest apiOperationId */
+                    apiOperationId?: (string|null);
+
+                    /** CreateApiOperationRequest apiOperation */
+                    apiOperation?: (google.cloud.apihub.v1.IApiOperation|null);
+                }
+
+                /** Represents a CreateApiOperationRequest. */
+                class CreateApiOperationRequest implements ICreateApiOperationRequest {
+
+                    /**
+                     * Constructs a new CreateApiOperationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICreateApiOperationRequest);
+
+                    /** CreateApiOperationRequest parent. */
+                    public parent: string;
+
+                    /** CreateApiOperationRequest apiOperationId. */
+                    public apiOperationId: string;
+
+                    /** CreateApiOperationRequest apiOperation. */
+                    public apiOperation?: (google.cloud.apihub.v1.IApiOperation|null);
+
+                    /**
+                     * Creates a new CreateApiOperationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateApiOperationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICreateApiOperationRequest): google.cloud.apihub.v1.CreateApiOperationRequest;
+
+                    /**
+                     * Encodes the specified CreateApiOperationRequest message. Does not implicitly {@link google.cloud.apihub.v1.CreateApiOperationRequest.verify|verify} messages.
+                     * @param message CreateApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICreateApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateApiOperationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CreateApiOperationRequest.verify|verify} messages.
+                     * @param message CreateApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICreateApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateApiOperationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CreateApiOperationRequest;
+
+                    /**
+                     * Decodes a CreateApiOperationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CreateApiOperationRequest;
+
+                    /**
+                     * Verifies a CreateApiOperationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateApiOperationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateApiOperationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CreateApiOperationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateApiOperationRequest message. Also converts values to other types if specified.
+                     * @param message CreateApiOperationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.CreateApiOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateApiOperationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateApiOperationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetApiOperationRequest. */
                 interface IGetApiOperationRequest {
 
@@ -2986,6 +3158,206 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetApiOperationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateApiOperationRequest. */
+                interface IUpdateApiOperationRequest {
+
+                    /** UpdateApiOperationRequest apiOperation */
+                    apiOperation?: (google.cloud.apihub.v1.IApiOperation|null);
+
+                    /** UpdateApiOperationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateApiOperationRequest. */
+                class UpdateApiOperationRequest implements IUpdateApiOperationRequest {
+
+                    /**
+                     * Constructs a new UpdateApiOperationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IUpdateApiOperationRequest);
+
+                    /** UpdateApiOperationRequest apiOperation. */
+                    public apiOperation?: (google.cloud.apihub.v1.IApiOperation|null);
+
+                    /** UpdateApiOperationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateApiOperationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateApiOperationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IUpdateApiOperationRequest): google.cloud.apihub.v1.UpdateApiOperationRequest;
+
+                    /**
+                     * Encodes the specified UpdateApiOperationRequest message. Does not implicitly {@link google.cloud.apihub.v1.UpdateApiOperationRequest.verify|verify} messages.
+                     * @param message UpdateApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IUpdateApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateApiOperationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.UpdateApiOperationRequest.verify|verify} messages.
+                     * @param message UpdateApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IUpdateApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateApiOperationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.UpdateApiOperationRequest;
+
+                    /**
+                     * Decodes an UpdateApiOperationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.UpdateApiOperationRequest;
+
+                    /**
+                     * Verifies an UpdateApiOperationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateApiOperationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateApiOperationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.UpdateApiOperationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateApiOperationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateApiOperationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.UpdateApiOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateApiOperationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateApiOperationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteApiOperationRequest. */
+                interface IDeleteApiOperationRequest {
+
+                    /** DeleteApiOperationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteApiOperationRequest. */
+                class DeleteApiOperationRequest implements IDeleteApiOperationRequest {
+
+                    /**
+                     * Constructs a new DeleteApiOperationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDeleteApiOperationRequest);
+
+                    /** DeleteApiOperationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteApiOperationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteApiOperationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDeleteApiOperationRequest): google.cloud.apihub.v1.DeleteApiOperationRequest;
+
+                    /**
+                     * Encodes the specified DeleteApiOperationRequest message. Does not implicitly {@link google.cloud.apihub.v1.DeleteApiOperationRequest.verify|verify} messages.
+                     * @param message DeleteApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDeleteApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteApiOperationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DeleteApiOperationRequest.verify|verify} messages.
+                     * @param message DeleteApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDeleteApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteApiOperationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DeleteApiOperationRequest;
+
+                    /**
+                     * Decodes a DeleteApiOperationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DeleteApiOperationRequest;
+
+                    /**
+                     * Verifies a DeleteApiOperationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteApiOperationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteApiOperationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DeleteApiOperationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteApiOperationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteApiOperationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DeleteApiOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteApiOperationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteApiOperationRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6271,6 +6643,23 @@ export namespace google {
                     SEVERITY_HINT = 4
                 }
 
+                /** AuthType enum. */
+                enum AuthType {
+                    AUTH_TYPE_UNSPECIFIED = 0,
+                    NO_AUTH = 1,
+                    GOOGLE_SERVICE_ACCOUNT = 2,
+                    USER_PASSWORD = 3,
+                    API_KEY = 4,
+                    OAUTH2_CLIENT_CREDENTIALS = 5
+                }
+
+                /** PluginCategory enum. */
+                enum PluginCategory {
+                    PLUGIN_CATEGORY_UNSPECIFIED = 0,
+                    API_GATEWAY = 1,
+                    API_PRODUCER = 2
+                }
+
                 /** Properties of an Api. */
                 interface IApi {
 
@@ -6318,6 +6707,21 @@ export namespace google {
 
                     /** Api selectedVersion */
                     selectedVersion?: (string|null);
+
+                    /** Api apiRequirements */
+                    apiRequirements?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Api fingerprint */
+                    fingerprint?: (string|null);
+
+                    /** Api sourceMetadata */
+                    sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata[]|null);
+
+                    /** Api apiFunctionalRequirements */
+                    apiFunctionalRequirements?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Api apiTechnicalRequirements */
+                    apiTechnicalRequirements?: (google.cloud.apihub.v1.IAttributeValues|null);
                 }
 
                 /** Represents an Api. */
@@ -6373,6 +6777,21 @@ export namespace google {
 
                     /** Api selectedVersion. */
                     public selectedVersion: string;
+
+                    /** Api apiRequirements. */
+                    public apiRequirements?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Api fingerprint. */
+                    public fingerprint: string;
+
+                    /** Api sourceMetadata. */
+                    public sourceMetadata: google.cloud.apihub.v1.ISourceMetadata[];
+
+                    /** Api apiFunctionalRequirements. */
+                    public apiFunctionalRequirements?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Api apiTechnicalRequirements. */
+                    public apiTechnicalRequirements?: (google.cloud.apihub.v1.IAttributeValues|null);
 
                     /**
                      * Creates a new Api instance using the specified properties.
@@ -6499,6 +6918,9 @@ export namespace google {
 
                     /** Version selectedDeployment */
                     selectedDeployment?: (string|null);
+
+                    /** Version sourceMetadata */
+                    sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata[]|null);
                 }
 
                 /** Represents a Version. */
@@ -6554,6 +6976,9 @@ export namespace google {
 
                     /** Version selectedDeployment. */
                     public selectedDeployment: string;
+
+                    /** Version sourceMetadata. */
+                    public sourceMetadata: google.cloud.apihub.v1.ISourceMetadata[];
 
                     /**
                      * Creates a new Version instance using the specified properties.
@@ -6671,6 +7096,9 @@ export namespace google {
 
                     /** Spec parsingMode */
                     parsingMode?: (google.cloud.apihub.v1.Spec.ParsingMode|keyof typeof google.cloud.apihub.v1.Spec.ParsingMode|null);
+
+                    /** Spec sourceMetadata */
+                    sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata[]|null);
                 }
 
                 /** Represents a Spec. */
@@ -6717,6 +7145,9 @@ export namespace google {
 
                     /** Spec parsingMode. */
                     public parsingMode: (google.cloud.apihub.v1.Spec.ParsingMode|keyof typeof google.cloud.apihub.v1.Spec.ParsingMode);
+
+                    /** Spec sourceMetadata. */
+                    public sourceMetadata: google.cloud.apihub.v1.ISourceMetadata[];
 
                     /**
                      * Creates a new Spec instance using the specified properties.
@@ -6847,6 +7278,21 @@ export namespace google {
 
                     /** Deployment attributes */
                     attributes?: ({ [k: string]: google.cloud.apihub.v1.IAttributeValues }|null);
+
+                    /** Deployment sourceMetadata */
+                    sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata[]|null);
+
+                    /** Deployment managementUrl */
+                    managementUrl?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Deployment sourceUri */
+                    sourceUri?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Deployment sourceProject */
+                    sourceProject?: (string|null);
+
+                    /** Deployment sourceEnvironment */
+                    sourceEnvironment?: (string|null);
                 }
 
                 /** Represents a Deployment. */
@@ -6896,6 +7342,21 @@ export namespace google {
 
                     /** Deployment attributes. */
                     public attributes: { [k: string]: google.cloud.apihub.v1.IAttributeValues };
+
+                    /** Deployment sourceMetadata. */
+                    public sourceMetadata: google.cloud.apihub.v1.ISourceMetadata[];
+
+                    /** Deployment managementUrl. */
+                    public managementUrl?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Deployment sourceUri. */
+                    public sourceUri?: (google.cloud.apihub.v1.IAttributeValues|null);
+
+                    /** Deployment sourceProject. */
+                    public sourceProject: string;
+
+                    /** Deployment sourceEnvironment. */
+                    public sourceEnvironment: string;
 
                     /**
                      * Creates a new Deployment instance using the specified properties.
@@ -6995,6 +7456,9 @@ export namespace google {
 
                     /** ApiOperation attributes */
                     attributes?: ({ [k: string]: google.cloud.apihub.v1.IAttributeValues }|null);
+
+                    /** ApiOperation sourceMetadata */
+                    sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata[]|null);
                 }
 
                 /** Represents an ApiOperation. */
@@ -7023,6 +7487,9 @@ export namespace google {
 
                     /** ApiOperation attributes. */
                     public attributes: { [k: string]: google.cloud.apihub.v1.IAttributeValues };
+
+                    /** ApiOperation sourceMetadata. */
+                    public sourceMetadata: google.cloud.apihub.v1.ISourceMetadata[];
 
                     /**
                      * Creates a new ApiOperation instance using the specified properties.
@@ -7547,7 +8014,8 @@ export namespace google {
                         DATA_TYPE_UNSPECIFIED = 0,
                         ENUM = 1,
                         JSON = 2,
-                        STRING = 3
+                        STRING = 3,
+                        URI = 4
                     }
                 }
 
@@ -8535,6 +9003,9 @@ export namespace google {
                     /** AttributeValues jsonValues */
                     jsonValues?: (google.cloud.apihub.v1.AttributeValues.IStringAttributeValues|null);
 
+                    /** AttributeValues uriValues */
+                    uriValues?: (google.cloud.apihub.v1.AttributeValues.IStringAttributeValues|null);
+
                     /** AttributeValues attribute */
                     attribute?: (string|null);
                 }
@@ -8557,11 +9028,14 @@ export namespace google {
                     /** AttributeValues jsonValues. */
                     public jsonValues?: (google.cloud.apihub.v1.AttributeValues.IStringAttributeValues|null);
 
+                    /** AttributeValues uriValues. */
+                    public uriValues?: (google.cloud.apihub.v1.AttributeValues.IStringAttributeValues|null);
+
                     /** AttributeValues attribute. */
                     public attribute: string;
 
                     /** AttributeValues Value. */
-                    public Value?: ("enumValues"|"stringValues"|"jsonValues");
+                    public Value?: ("enumValues"|"stringValues"|"jsonValues"|"uriValues");
 
                     /**
                      * Creates a new AttributeValues instance using the specified properties.
@@ -10069,6 +10543,15 @@ export namespace google {
 
                         /** Config cmekKeyName */
                         cmekKeyName?: (string|null);
+
+                        /** Config disableSearch */
+                        disableSearch?: (boolean|null);
+
+                        /** Config vertexLocation */
+                        vertexLocation?: (string|null);
+
+                        /** Config encryptionType */
+                        encryptionType?: (google.cloud.apihub.v1.ApiHubInstance.Config.EncryptionType|keyof typeof google.cloud.apihub.v1.ApiHubInstance.Config.EncryptionType|null);
                     }
 
                     /** Represents a Config. */
@@ -10082,6 +10565,15 @@ export namespace google {
 
                         /** Config cmekKeyName. */
                         public cmekKeyName: string;
+
+                        /** Config disableSearch. */
+                        public disableSearch: boolean;
+
+                        /** Config vertexLocation. */
+                        public vertexLocation: string;
+
+                        /** Config encryptionType. */
+                        public encryptionType: (google.cloud.apihub.v1.ApiHubInstance.Config.EncryptionType|keyof typeof google.cloud.apihub.v1.ApiHubInstance.Config.EncryptionType);
 
                         /**
                          * Creates a new Config instance using the specified properties.
@@ -10159,6 +10651,16 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Config {
+
+                        /** EncryptionType enum. */
+                        enum EncryptionType {
+                            ENCRYPTION_TYPE_UNSPECIFIED = 0,
+                            GMEK = 1,
+                            CMEK = 2
+                        }
                     }
 
                     /** State enum. */
@@ -10312,6 +10814,5592 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ExternalApi
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConfigValueOption. */
+                interface IConfigValueOption {
+
+                    /** ConfigValueOption id */
+                    id?: (string|null);
+
+                    /** ConfigValueOption displayName */
+                    displayName?: (string|null);
+
+                    /** ConfigValueOption description */
+                    description?: (string|null);
+                }
+
+                /** Represents a ConfigValueOption. */
+                class ConfigValueOption implements IConfigValueOption {
+
+                    /**
+                     * Constructs a new ConfigValueOption.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IConfigValueOption);
+
+                    /** ConfigValueOption id. */
+                    public id: string;
+
+                    /** ConfigValueOption displayName. */
+                    public displayName: string;
+
+                    /** ConfigValueOption description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new ConfigValueOption instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConfigValueOption instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IConfigValueOption): google.cloud.apihub.v1.ConfigValueOption;
+
+                    /**
+                     * Encodes the specified ConfigValueOption message. Does not implicitly {@link google.cloud.apihub.v1.ConfigValueOption.verify|verify} messages.
+                     * @param message ConfigValueOption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IConfigValueOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConfigValueOption message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ConfigValueOption.verify|verify} messages.
+                     * @param message ConfigValueOption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IConfigValueOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConfigValueOption message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConfigValueOption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ConfigValueOption;
+
+                    /**
+                     * Decodes a ConfigValueOption message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConfigValueOption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ConfigValueOption;
+
+                    /**
+                     * Verifies a ConfigValueOption message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConfigValueOption message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConfigValueOption
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ConfigValueOption;
+
+                    /**
+                     * Creates a plain object from a ConfigValueOption message. Also converts values to other types if specified.
+                     * @param message ConfigValueOption
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ConfigValueOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConfigValueOption to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigValueOption
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Secret. */
+                interface ISecret {
+
+                    /** Secret secretVersion */
+                    secretVersion?: (string|null);
+                }
+
+                /** Represents a Secret. */
+                class Secret implements ISecret {
+
+                    /**
+                     * Constructs a new Secret.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ISecret);
+
+                    /** Secret secretVersion. */
+                    public secretVersion: string;
+
+                    /**
+                     * Creates a new Secret instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Secret instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ISecret): google.cloud.apihub.v1.Secret;
+
+                    /**
+                     * Encodes the specified Secret message. Does not implicitly {@link google.cloud.apihub.v1.Secret.verify|verify} messages.
+                     * @param message Secret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ISecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Secret message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.Secret.verify|verify} messages.
+                     * @param message Secret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ISecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Secret message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Secret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.Secret;
+
+                    /**
+                     * Decodes a Secret message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Secret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.Secret;
+
+                    /**
+                     * Verifies a Secret message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Secret message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Secret
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.Secret;
+
+                    /**
+                     * Creates a plain object from a Secret message. Also converts values to other types if specified.
+                     * @param message Secret
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.Secret, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Secret to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Secret
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConfigVariableTemplate. */
+                interface IConfigVariableTemplate {
+
+                    /** ConfigVariableTemplate id */
+                    id?: (string|null);
+
+                    /** ConfigVariableTemplate valueType */
+                    valueType?: (google.cloud.apihub.v1.ConfigVariableTemplate.ValueType|keyof typeof google.cloud.apihub.v1.ConfigVariableTemplate.ValueType|null);
+
+                    /** ConfigVariableTemplate description */
+                    description?: (string|null);
+
+                    /** ConfigVariableTemplate validationRegex */
+                    validationRegex?: (string|null);
+
+                    /** ConfigVariableTemplate required */
+                    required?: (boolean|null);
+
+                    /** ConfigVariableTemplate enumOptions */
+                    enumOptions?: (google.cloud.apihub.v1.IConfigValueOption[]|null);
+
+                    /** ConfigVariableTemplate multiSelectOptions */
+                    multiSelectOptions?: (google.cloud.apihub.v1.IConfigValueOption[]|null);
+                }
+
+                /** Represents a ConfigVariableTemplate. */
+                class ConfigVariableTemplate implements IConfigVariableTemplate {
+
+                    /**
+                     * Constructs a new ConfigVariableTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IConfigVariableTemplate);
+
+                    /** ConfigVariableTemplate id. */
+                    public id: string;
+
+                    /** ConfigVariableTemplate valueType. */
+                    public valueType: (google.cloud.apihub.v1.ConfigVariableTemplate.ValueType|keyof typeof google.cloud.apihub.v1.ConfigVariableTemplate.ValueType);
+
+                    /** ConfigVariableTemplate description. */
+                    public description: string;
+
+                    /** ConfigVariableTemplate validationRegex. */
+                    public validationRegex: string;
+
+                    /** ConfigVariableTemplate required. */
+                    public required: boolean;
+
+                    /** ConfigVariableTemplate enumOptions. */
+                    public enumOptions: google.cloud.apihub.v1.IConfigValueOption[];
+
+                    /** ConfigVariableTemplate multiSelectOptions. */
+                    public multiSelectOptions: google.cloud.apihub.v1.IConfigValueOption[];
+
+                    /**
+                     * Creates a new ConfigVariableTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConfigVariableTemplate instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IConfigVariableTemplate): google.cloud.apihub.v1.ConfigVariableTemplate;
+
+                    /**
+                     * Encodes the specified ConfigVariableTemplate message. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariableTemplate.verify|verify} messages.
+                     * @param message ConfigVariableTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IConfigVariableTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConfigVariableTemplate message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariableTemplate.verify|verify} messages.
+                     * @param message ConfigVariableTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IConfigVariableTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConfigVariableTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConfigVariableTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ConfigVariableTemplate;
+
+                    /**
+                     * Decodes a ConfigVariableTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConfigVariableTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ConfigVariableTemplate;
+
+                    /**
+                     * Verifies a ConfigVariableTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConfigVariableTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConfigVariableTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ConfigVariableTemplate;
+
+                    /**
+                     * Creates a plain object from a ConfigVariableTemplate message. Also converts values to other types if specified.
+                     * @param message ConfigVariableTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ConfigVariableTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConfigVariableTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigVariableTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConfigVariableTemplate {
+
+                    /** ValueType enum. */
+                    enum ValueType {
+                        VALUE_TYPE_UNSPECIFIED = 0,
+                        STRING = 1,
+                        INT = 2,
+                        BOOL = 3,
+                        SECRET = 4,
+                        ENUM = 5,
+                        MULTI_SELECT = 6,
+                        MULTI_STRING = 7,
+                        MULTI_INT = 8
+                    }
+                }
+
+                /** Properties of a ConfigVariable. */
+                interface IConfigVariable {
+
+                    /** ConfigVariable stringValue */
+                    stringValue?: (string|null);
+
+                    /** ConfigVariable intValue */
+                    intValue?: (number|Long|string|null);
+
+                    /** ConfigVariable boolValue */
+                    boolValue?: (boolean|null);
+
+                    /** ConfigVariable secretValue */
+                    secretValue?: (google.cloud.apihub.v1.ISecret|null);
+
+                    /** ConfigVariable enumValue */
+                    enumValue?: (google.cloud.apihub.v1.IConfigValueOption|null);
+
+                    /** ConfigVariable multiSelectValues */
+                    multiSelectValues?: (google.cloud.apihub.v1.ConfigVariable.IMultiSelectValues|null);
+
+                    /** ConfigVariable multiStringValues */
+                    multiStringValues?: (google.cloud.apihub.v1.ConfigVariable.IMultiStringValues|null);
+
+                    /** ConfigVariable multiIntValues */
+                    multiIntValues?: (google.cloud.apihub.v1.ConfigVariable.IMultiIntValues|null);
+
+                    /** ConfigVariable key */
+                    key?: (string|null);
+                }
+
+                /** Represents a ConfigVariable. */
+                class ConfigVariable implements IConfigVariable {
+
+                    /**
+                     * Constructs a new ConfigVariable.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IConfigVariable);
+
+                    /** ConfigVariable stringValue. */
+                    public stringValue?: (string|null);
+
+                    /** ConfigVariable intValue. */
+                    public intValue?: (number|Long|string|null);
+
+                    /** ConfigVariable boolValue. */
+                    public boolValue?: (boolean|null);
+
+                    /** ConfigVariable secretValue. */
+                    public secretValue?: (google.cloud.apihub.v1.ISecret|null);
+
+                    /** ConfigVariable enumValue. */
+                    public enumValue?: (google.cloud.apihub.v1.IConfigValueOption|null);
+
+                    /** ConfigVariable multiSelectValues. */
+                    public multiSelectValues?: (google.cloud.apihub.v1.ConfigVariable.IMultiSelectValues|null);
+
+                    /** ConfigVariable multiStringValues. */
+                    public multiStringValues?: (google.cloud.apihub.v1.ConfigVariable.IMultiStringValues|null);
+
+                    /** ConfigVariable multiIntValues. */
+                    public multiIntValues?: (google.cloud.apihub.v1.ConfigVariable.IMultiIntValues|null);
+
+                    /** ConfigVariable key. */
+                    public key: string;
+
+                    /** ConfigVariable value. */
+                    public value?: ("stringValue"|"intValue"|"boolValue"|"secretValue"|"enumValue"|"multiSelectValues"|"multiStringValues"|"multiIntValues");
+
+                    /**
+                     * Creates a new ConfigVariable instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConfigVariable instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IConfigVariable): google.cloud.apihub.v1.ConfigVariable;
+
+                    /**
+                     * Encodes the specified ConfigVariable message. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.verify|verify} messages.
+                     * @param message ConfigVariable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IConfigVariable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConfigVariable message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.verify|verify} messages.
+                     * @param message ConfigVariable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IConfigVariable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConfigVariable message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConfigVariable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ConfigVariable;
+
+                    /**
+                     * Decodes a ConfigVariable message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConfigVariable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ConfigVariable;
+
+                    /**
+                     * Verifies a ConfigVariable message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConfigVariable message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConfigVariable
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ConfigVariable;
+
+                    /**
+                     * Creates a plain object from a ConfigVariable message. Also converts values to other types if specified.
+                     * @param message ConfigVariable
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ConfigVariable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConfigVariable to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigVariable
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConfigVariable {
+
+                    /** Properties of a MultiSelectValues. */
+                    interface IMultiSelectValues {
+
+                        /** MultiSelectValues values */
+                        values?: (google.cloud.apihub.v1.IConfigValueOption[]|null);
+                    }
+
+                    /** Represents a MultiSelectValues. */
+                    class MultiSelectValues implements IMultiSelectValues {
+
+                        /**
+                         * Constructs a new MultiSelectValues.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.ConfigVariable.IMultiSelectValues);
+
+                        /** MultiSelectValues values. */
+                        public values: google.cloud.apihub.v1.IConfigValueOption[];
+
+                        /**
+                         * Creates a new MultiSelectValues instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MultiSelectValues instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.ConfigVariable.IMultiSelectValues): google.cloud.apihub.v1.ConfigVariable.MultiSelectValues;
+
+                        /**
+                         * Encodes the specified MultiSelectValues message. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.MultiSelectValues.verify|verify} messages.
+                         * @param message MultiSelectValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.ConfigVariable.IMultiSelectValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MultiSelectValues message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.MultiSelectValues.verify|verify} messages.
+                         * @param message MultiSelectValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.ConfigVariable.IMultiSelectValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MultiSelectValues message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MultiSelectValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ConfigVariable.MultiSelectValues;
+
+                        /**
+                         * Decodes a MultiSelectValues message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MultiSelectValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ConfigVariable.MultiSelectValues;
+
+                        /**
+                         * Verifies a MultiSelectValues message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MultiSelectValues message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MultiSelectValues
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ConfigVariable.MultiSelectValues;
+
+                        /**
+                         * Creates a plain object from a MultiSelectValues message. Also converts values to other types if specified.
+                         * @param message MultiSelectValues
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.ConfigVariable.MultiSelectValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MultiSelectValues to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MultiSelectValues
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MultiStringValues. */
+                    interface IMultiStringValues {
+
+                        /** MultiStringValues values */
+                        values?: (string[]|null);
+                    }
+
+                    /** Represents a MultiStringValues. */
+                    class MultiStringValues implements IMultiStringValues {
+
+                        /**
+                         * Constructs a new MultiStringValues.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.ConfigVariable.IMultiStringValues);
+
+                        /** MultiStringValues values. */
+                        public values: string[];
+
+                        /**
+                         * Creates a new MultiStringValues instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MultiStringValues instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.ConfigVariable.IMultiStringValues): google.cloud.apihub.v1.ConfigVariable.MultiStringValues;
+
+                        /**
+                         * Encodes the specified MultiStringValues message. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.MultiStringValues.verify|verify} messages.
+                         * @param message MultiStringValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.ConfigVariable.IMultiStringValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MultiStringValues message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.MultiStringValues.verify|verify} messages.
+                         * @param message MultiStringValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.ConfigVariable.IMultiStringValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MultiStringValues message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MultiStringValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ConfigVariable.MultiStringValues;
+
+                        /**
+                         * Decodes a MultiStringValues message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MultiStringValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ConfigVariable.MultiStringValues;
+
+                        /**
+                         * Verifies a MultiStringValues message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MultiStringValues message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MultiStringValues
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ConfigVariable.MultiStringValues;
+
+                        /**
+                         * Creates a plain object from a MultiStringValues message. Also converts values to other types if specified.
+                         * @param message MultiStringValues
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.ConfigVariable.MultiStringValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MultiStringValues to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MultiStringValues
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MultiIntValues. */
+                    interface IMultiIntValues {
+
+                        /** MultiIntValues values */
+                        values?: (number[]|null);
+                    }
+
+                    /** Represents a MultiIntValues. */
+                    class MultiIntValues implements IMultiIntValues {
+
+                        /**
+                         * Constructs a new MultiIntValues.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.ConfigVariable.IMultiIntValues);
+
+                        /** MultiIntValues values. */
+                        public values: number[];
+
+                        /**
+                         * Creates a new MultiIntValues instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MultiIntValues instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.ConfigVariable.IMultiIntValues): google.cloud.apihub.v1.ConfigVariable.MultiIntValues;
+
+                        /**
+                         * Encodes the specified MultiIntValues message. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.MultiIntValues.verify|verify} messages.
+                         * @param message MultiIntValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.ConfigVariable.IMultiIntValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MultiIntValues message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ConfigVariable.MultiIntValues.verify|verify} messages.
+                         * @param message MultiIntValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.ConfigVariable.IMultiIntValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MultiIntValues message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MultiIntValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ConfigVariable.MultiIntValues;
+
+                        /**
+                         * Decodes a MultiIntValues message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MultiIntValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ConfigVariable.MultiIntValues;
+
+                        /**
+                         * Verifies a MultiIntValues message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MultiIntValues message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MultiIntValues
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ConfigVariable.MultiIntValues;
+
+                        /**
+                         * Creates a plain object from a MultiIntValues message. Also converts values to other types if specified.
+                         * @param message MultiIntValues
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.ConfigVariable.MultiIntValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MultiIntValues to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MultiIntValues
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GoogleServiceAccountConfig. */
+                interface IGoogleServiceAccountConfig {
+
+                    /** GoogleServiceAccountConfig serviceAccount */
+                    serviceAccount?: (string|null);
+                }
+
+                /** Represents a GoogleServiceAccountConfig. */
+                class GoogleServiceAccountConfig implements IGoogleServiceAccountConfig {
+
+                    /**
+                     * Constructs a new GoogleServiceAccountConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IGoogleServiceAccountConfig);
+
+                    /** GoogleServiceAccountConfig serviceAccount. */
+                    public serviceAccount: string;
+
+                    /**
+                     * Creates a new GoogleServiceAccountConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleServiceAccountConfig instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IGoogleServiceAccountConfig): google.cloud.apihub.v1.GoogleServiceAccountConfig;
+
+                    /**
+                     * Encodes the specified GoogleServiceAccountConfig message. Does not implicitly {@link google.cloud.apihub.v1.GoogleServiceAccountConfig.verify|verify} messages.
+                     * @param message GoogleServiceAccountConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IGoogleServiceAccountConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleServiceAccountConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.GoogleServiceAccountConfig.verify|verify} messages.
+                     * @param message GoogleServiceAccountConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IGoogleServiceAccountConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleServiceAccountConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleServiceAccountConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.GoogleServiceAccountConfig;
+
+                    /**
+                     * Decodes a GoogleServiceAccountConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleServiceAccountConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.GoogleServiceAccountConfig;
+
+                    /**
+                     * Verifies a GoogleServiceAccountConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleServiceAccountConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleServiceAccountConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.GoogleServiceAccountConfig;
+
+                    /**
+                     * Creates a plain object from a GoogleServiceAccountConfig message. Also converts values to other types if specified.
+                     * @param message GoogleServiceAccountConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.GoogleServiceAccountConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleServiceAccountConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleServiceAccountConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AuthConfig. */
+                interface IAuthConfig {
+
+                    /** AuthConfig googleServiceAccountConfig */
+                    googleServiceAccountConfig?: (google.cloud.apihub.v1.IGoogleServiceAccountConfig|null);
+
+                    /** AuthConfig userPasswordConfig */
+                    userPasswordConfig?: (google.cloud.apihub.v1.AuthConfig.IUserPasswordConfig|null);
+
+                    /** AuthConfig apiKeyConfig */
+                    apiKeyConfig?: (google.cloud.apihub.v1.AuthConfig.IApiKeyConfig|null);
+
+                    /** AuthConfig oauth2ClientCredentialsConfig */
+                    oauth2ClientCredentialsConfig?: (google.cloud.apihub.v1.AuthConfig.IOauth2ClientCredentialsConfig|null);
+
+                    /** AuthConfig authType */
+                    authType?: (google.cloud.apihub.v1.AuthType|keyof typeof google.cloud.apihub.v1.AuthType|null);
+                }
+
+                /** Represents an AuthConfig. */
+                class AuthConfig implements IAuthConfig {
+
+                    /**
+                     * Constructs a new AuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IAuthConfig);
+
+                    /** AuthConfig googleServiceAccountConfig. */
+                    public googleServiceAccountConfig?: (google.cloud.apihub.v1.IGoogleServiceAccountConfig|null);
+
+                    /** AuthConfig userPasswordConfig. */
+                    public userPasswordConfig?: (google.cloud.apihub.v1.AuthConfig.IUserPasswordConfig|null);
+
+                    /** AuthConfig apiKeyConfig. */
+                    public apiKeyConfig?: (google.cloud.apihub.v1.AuthConfig.IApiKeyConfig|null);
+
+                    /** AuthConfig oauth2ClientCredentialsConfig. */
+                    public oauth2ClientCredentialsConfig?: (google.cloud.apihub.v1.AuthConfig.IOauth2ClientCredentialsConfig|null);
+
+                    /** AuthConfig authType. */
+                    public authType: (google.cloud.apihub.v1.AuthType|keyof typeof google.cloud.apihub.v1.AuthType);
+
+                    /** AuthConfig config. */
+                    public config?: ("googleServiceAccountConfig"|"userPasswordConfig"|"apiKeyConfig"|"oauth2ClientCredentialsConfig");
+
+                    /**
+                     * Creates a new AuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IAuthConfig): google.cloud.apihub.v1.AuthConfig;
+
+                    /**
+                     * Encodes the specified AuthConfig message. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.verify|verify} messages.
+                     * @param message AuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuthConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.verify|verify} messages.
+                     * @param message AuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.AuthConfig;
+
+                    /**
+                     * Decodes an AuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.AuthConfig;
+
+                    /**
+                     * Verifies an AuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.AuthConfig;
+
+                    /**
+                     * Creates a plain object from an AuthConfig message. Also converts values to other types if specified.
+                     * @param message AuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.AuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AuthConfig {
+
+                    /** Properties of a UserPasswordConfig. */
+                    interface IUserPasswordConfig {
+
+                        /** UserPasswordConfig username */
+                        username?: (string|null);
+
+                        /** UserPasswordConfig password */
+                        password?: (google.cloud.apihub.v1.ISecret|null);
+                    }
+
+                    /** Represents a UserPasswordConfig. */
+                    class UserPasswordConfig implements IUserPasswordConfig {
+
+                        /**
+                         * Constructs a new UserPasswordConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.AuthConfig.IUserPasswordConfig);
+
+                        /** UserPasswordConfig username. */
+                        public username: string;
+
+                        /** UserPasswordConfig password. */
+                        public password?: (google.cloud.apihub.v1.ISecret|null);
+
+                        /**
+                         * Creates a new UserPasswordConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserPasswordConfig instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.AuthConfig.IUserPasswordConfig): google.cloud.apihub.v1.AuthConfig.UserPasswordConfig;
+
+                        /**
+                         * Encodes the specified UserPasswordConfig message. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.UserPasswordConfig.verify|verify} messages.
+                         * @param message UserPasswordConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.AuthConfig.IUserPasswordConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserPasswordConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.UserPasswordConfig.verify|verify} messages.
+                         * @param message UserPasswordConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.AuthConfig.IUserPasswordConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserPasswordConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserPasswordConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.AuthConfig.UserPasswordConfig;
+
+                        /**
+                         * Decodes a UserPasswordConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserPasswordConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.AuthConfig.UserPasswordConfig;
+
+                        /**
+                         * Verifies a UserPasswordConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserPasswordConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserPasswordConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.AuthConfig.UserPasswordConfig;
+
+                        /**
+                         * Creates a plain object from a UserPasswordConfig message. Also converts values to other types if specified.
+                         * @param message UserPasswordConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.AuthConfig.UserPasswordConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserPasswordConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserPasswordConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Oauth2ClientCredentialsConfig. */
+                    interface IOauth2ClientCredentialsConfig {
+
+                        /** Oauth2ClientCredentialsConfig clientId */
+                        clientId?: (string|null);
+
+                        /** Oauth2ClientCredentialsConfig clientSecret */
+                        clientSecret?: (google.cloud.apihub.v1.ISecret|null);
+                    }
+
+                    /** Represents an Oauth2ClientCredentialsConfig. */
+                    class Oauth2ClientCredentialsConfig implements IOauth2ClientCredentialsConfig {
+
+                        /**
+                         * Constructs a new Oauth2ClientCredentialsConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.AuthConfig.IOauth2ClientCredentialsConfig);
+
+                        /** Oauth2ClientCredentialsConfig clientId. */
+                        public clientId: string;
+
+                        /** Oauth2ClientCredentialsConfig clientSecret. */
+                        public clientSecret?: (google.cloud.apihub.v1.ISecret|null);
+
+                        /**
+                         * Creates a new Oauth2ClientCredentialsConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Oauth2ClientCredentialsConfig instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.AuthConfig.IOauth2ClientCredentialsConfig): google.cloud.apihub.v1.AuthConfig.Oauth2ClientCredentialsConfig;
+
+                        /**
+                         * Encodes the specified Oauth2ClientCredentialsConfig message. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.Oauth2ClientCredentialsConfig.verify|verify} messages.
+                         * @param message Oauth2ClientCredentialsConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.AuthConfig.IOauth2ClientCredentialsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Oauth2ClientCredentialsConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.Oauth2ClientCredentialsConfig.verify|verify} messages.
+                         * @param message Oauth2ClientCredentialsConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.AuthConfig.IOauth2ClientCredentialsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Oauth2ClientCredentialsConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Oauth2ClientCredentialsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.AuthConfig.Oauth2ClientCredentialsConfig;
+
+                        /**
+                         * Decodes an Oauth2ClientCredentialsConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Oauth2ClientCredentialsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.AuthConfig.Oauth2ClientCredentialsConfig;
+
+                        /**
+                         * Verifies an Oauth2ClientCredentialsConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Oauth2ClientCredentialsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Oauth2ClientCredentialsConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.AuthConfig.Oauth2ClientCredentialsConfig;
+
+                        /**
+                         * Creates a plain object from an Oauth2ClientCredentialsConfig message. Also converts values to other types if specified.
+                         * @param message Oauth2ClientCredentialsConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.AuthConfig.Oauth2ClientCredentialsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Oauth2ClientCredentialsConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Oauth2ClientCredentialsConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ApiKeyConfig. */
+                    interface IApiKeyConfig {
+
+                        /** ApiKeyConfig name */
+                        name?: (string|null);
+
+                        /** ApiKeyConfig apiKey */
+                        apiKey?: (google.cloud.apihub.v1.ISecret|null);
+
+                        /** ApiKeyConfig httpElementLocation */
+                        httpElementLocation?: (google.cloud.apihub.v1.AuthConfig.ApiKeyConfig.HttpElementLocation|keyof typeof google.cloud.apihub.v1.AuthConfig.ApiKeyConfig.HttpElementLocation|null);
+                    }
+
+                    /** Represents an ApiKeyConfig. */
+                    class ApiKeyConfig implements IApiKeyConfig {
+
+                        /**
+                         * Constructs a new ApiKeyConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.AuthConfig.IApiKeyConfig);
+
+                        /** ApiKeyConfig name. */
+                        public name: string;
+
+                        /** ApiKeyConfig apiKey. */
+                        public apiKey?: (google.cloud.apihub.v1.ISecret|null);
+
+                        /** ApiKeyConfig httpElementLocation. */
+                        public httpElementLocation: (google.cloud.apihub.v1.AuthConfig.ApiKeyConfig.HttpElementLocation|keyof typeof google.cloud.apihub.v1.AuthConfig.ApiKeyConfig.HttpElementLocation);
+
+                        /**
+                         * Creates a new ApiKeyConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ApiKeyConfig instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.AuthConfig.IApiKeyConfig): google.cloud.apihub.v1.AuthConfig.ApiKeyConfig;
+
+                        /**
+                         * Encodes the specified ApiKeyConfig message. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.ApiKeyConfig.verify|verify} messages.
+                         * @param message ApiKeyConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.AuthConfig.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ApiKeyConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.AuthConfig.ApiKeyConfig.verify|verify} messages.
+                         * @param message ApiKeyConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.AuthConfig.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ApiKeyConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ApiKeyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.AuthConfig.ApiKeyConfig;
+
+                        /**
+                         * Decodes an ApiKeyConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ApiKeyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.AuthConfig.ApiKeyConfig;
+
+                        /**
+                         * Verifies an ApiKeyConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ApiKeyConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ApiKeyConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.AuthConfig.ApiKeyConfig;
+
+                        /**
+                         * Creates a plain object from an ApiKeyConfig message. Also converts values to other types if specified.
+                         * @param message ApiKeyConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.AuthConfig.ApiKeyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ApiKeyConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ApiKeyConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ApiKeyConfig {
+
+                        /** HttpElementLocation enum. */
+                        enum HttpElementLocation {
+                            HTTP_ELEMENT_LOCATION_UNSPECIFIED = 0,
+                            QUERY = 1,
+                            HEADER = 2,
+                            PATH = 3,
+                            BODY = 4,
+                            COOKIE = 5
+                        }
+                    }
+                }
+
+                /** Properties of a SourceMetadata. */
+                interface ISourceMetadata {
+
+                    /** SourceMetadata pluginInstanceActionSource */
+                    pluginInstanceActionSource?: (google.cloud.apihub.v1.SourceMetadata.IPluginInstanceActionSource|null);
+
+                    /** SourceMetadata sourceType */
+                    sourceType?: (google.cloud.apihub.v1.SourceMetadata.SourceType|keyof typeof google.cloud.apihub.v1.SourceMetadata.SourceType|null);
+
+                    /** SourceMetadata originalResourceId */
+                    originalResourceId?: (string|null);
+
+                    /** SourceMetadata originalResourceCreateTime */
+                    originalResourceCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SourceMetadata originalResourceUpdateTime */
+                    originalResourceUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SourceMetadata. */
+                class SourceMetadata implements ISourceMetadata {
+
+                    /**
+                     * Constructs a new SourceMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ISourceMetadata);
+
+                    /** SourceMetadata pluginInstanceActionSource. */
+                    public pluginInstanceActionSource?: (google.cloud.apihub.v1.SourceMetadata.IPluginInstanceActionSource|null);
+
+                    /** SourceMetadata sourceType. */
+                    public sourceType: (google.cloud.apihub.v1.SourceMetadata.SourceType|keyof typeof google.cloud.apihub.v1.SourceMetadata.SourceType);
+
+                    /** SourceMetadata originalResourceId. */
+                    public originalResourceId: string;
+
+                    /** SourceMetadata originalResourceCreateTime. */
+                    public originalResourceCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SourceMetadata originalResourceUpdateTime. */
+                    public originalResourceUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SourceMetadata source. */
+                    public source?: "pluginInstanceActionSource";
+
+                    /**
+                     * Creates a new SourceMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceMetadata instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ISourceMetadata): google.cloud.apihub.v1.SourceMetadata;
+
+                    /**
+                     * Encodes the specified SourceMetadata message. Does not implicitly {@link google.cloud.apihub.v1.SourceMetadata.verify|verify} messages.
+                     * @param message SourceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ISourceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceMetadata message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.SourceMetadata.verify|verify} messages.
+                     * @param message SourceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ISourceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.SourceMetadata;
+
+                    /**
+                     * Decodes a SourceMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.SourceMetadata;
+
+                    /**
+                     * Verifies a SourceMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.SourceMetadata;
+
+                    /**
+                     * Creates a plain object from a SourceMetadata message. Also converts values to other types if specified.
+                     * @param message SourceMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.SourceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SourceMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SourceMetadata {
+
+                    /** Properties of a PluginInstanceActionSource. */
+                    interface IPluginInstanceActionSource {
+
+                        /** PluginInstanceActionSource pluginInstance */
+                        pluginInstance?: (string|null);
+
+                        /** PluginInstanceActionSource actionId */
+                        actionId?: (string|null);
+                    }
+
+                    /** Represents a PluginInstanceActionSource. */
+                    class PluginInstanceActionSource implements IPluginInstanceActionSource {
+
+                        /**
+                         * Constructs a new PluginInstanceActionSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.SourceMetadata.IPluginInstanceActionSource);
+
+                        /** PluginInstanceActionSource pluginInstance. */
+                        public pluginInstance: string;
+
+                        /** PluginInstanceActionSource actionId. */
+                        public actionId: string;
+
+                        /**
+                         * Creates a new PluginInstanceActionSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PluginInstanceActionSource instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.SourceMetadata.IPluginInstanceActionSource): google.cloud.apihub.v1.SourceMetadata.PluginInstanceActionSource;
+
+                        /**
+                         * Encodes the specified PluginInstanceActionSource message. Does not implicitly {@link google.cloud.apihub.v1.SourceMetadata.PluginInstanceActionSource.verify|verify} messages.
+                         * @param message PluginInstanceActionSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.SourceMetadata.IPluginInstanceActionSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PluginInstanceActionSource message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.SourceMetadata.PluginInstanceActionSource.verify|verify} messages.
+                         * @param message PluginInstanceActionSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.SourceMetadata.IPluginInstanceActionSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PluginInstanceActionSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PluginInstanceActionSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.SourceMetadata.PluginInstanceActionSource;
+
+                        /**
+                         * Decodes a PluginInstanceActionSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PluginInstanceActionSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.SourceMetadata.PluginInstanceActionSource;
+
+                        /**
+                         * Verifies a PluginInstanceActionSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PluginInstanceActionSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PluginInstanceActionSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.SourceMetadata.PluginInstanceActionSource;
+
+                        /**
+                         * Creates a plain object from a PluginInstanceActionSource message. Also converts values to other types if specified.
+                         * @param message PluginInstanceActionSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.SourceMetadata.PluginInstanceActionSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PluginInstanceActionSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PluginInstanceActionSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** SourceType enum. */
+                    enum SourceType {
+                        SOURCE_TYPE_UNSPECIFIED = 0,
+                        PLUGIN = 1
+                    }
+                }
+
+                /** Properties of a DiscoveredApiObservation. */
+                interface IDiscoveredApiObservation {
+
+                    /** DiscoveredApiObservation name */
+                    name?: (string|null);
+
+                    /** DiscoveredApiObservation style */
+                    style?: (google.cloud.apihub.v1.DiscoveredApiObservation.Style|keyof typeof google.cloud.apihub.v1.DiscoveredApiObservation.Style|null);
+
+                    /** DiscoveredApiObservation serverIps */
+                    serverIps?: (string[]|null);
+
+                    /** DiscoveredApiObservation hostname */
+                    hostname?: (string|null);
+
+                    /** DiscoveredApiObservation lastEventDetectedTime */
+                    lastEventDetectedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiObservation sourceLocations */
+                    sourceLocations?: (string[]|null);
+
+                    /** DiscoveredApiObservation apiOperationCount */
+                    apiOperationCount?: (number|Long|string|null);
+
+                    /** DiscoveredApiObservation origin */
+                    origin?: (string|null);
+
+                    /** DiscoveredApiObservation sourceTypes */
+                    sourceTypes?: (google.cloud.apihub.v1.DiscoveredApiObservation.SourceType[]|null);
+
+                    /** DiscoveredApiObservation knownOperationsCount */
+                    knownOperationsCount?: (number|Long|string|null);
+
+                    /** DiscoveredApiObservation unknownOperationsCount */
+                    unknownOperationsCount?: (number|Long|string|null);
+
+                    /** DiscoveredApiObservation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiObservation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiObservation sourceMetadata */
+                    sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata|null);
+                }
+
+                /** Represents a DiscoveredApiObservation. */
+                class DiscoveredApiObservation implements IDiscoveredApiObservation {
+
+                    /**
+                     * Constructs a new DiscoveredApiObservation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDiscoveredApiObservation);
+
+                    /** DiscoveredApiObservation name. */
+                    public name: string;
+
+                    /** DiscoveredApiObservation style. */
+                    public style: (google.cloud.apihub.v1.DiscoveredApiObservation.Style|keyof typeof google.cloud.apihub.v1.DiscoveredApiObservation.Style);
+
+                    /** DiscoveredApiObservation serverIps. */
+                    public serverIps: string[];
+
+                    /** DiscoveredApiObservation hostname. */
+                    public hostname: string;
+
+                    /** DiscoveredApiObservation lastEventDetectedTime. */
+                    public lastEventDetectedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiObservation sourceLocations. */
+                    public sourceLocations: string[];
+
+                    /** DiscoveredApiObservation apiOperationCount. */
+                    public apiOperationCount: (number|Long|string);
+
+                    /** DiscoveredApiObservation origin. */
+                    public origin: string;
+
+                    /** DiscoveredApiObservation sourceTypes. */
+                    public sourceTypes: google.cloud.apihub.v1.DiscoveredApiObservation.SourceType[];
+
+                    /** DiscoveredApiObservation knownOperationsCount. */
+                    public knownOperationsCount: (number|Long|string);
+
+                    /** DiscoveredApiObservation unknownOperationsCount. */
+                    public unknownOperationsCount: (number|Long|string);
+
+                    /** DiscoveredApiObservation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiObservation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiObservation sourceMetadata. */
+                    public sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata|null);
+
+                    /**
+                     * Creates a new DiscoveredApiObservation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveredApiObservation instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDiscoveredApiObservation): google.cloud.apihub.v1.DiscoveredApiObservation;
+
+                    /**
+                     * Encodes the specified DiscoveredApiObservation message. Does not implicitly {@link google.cloud.apihub.v1.DiscoveredApiObservation.verify|verify} messages.
+                     * @param message DiscoveredApiObservation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDiscoveredApiObservation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveredApiObservation message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DiscoveredApiObservation.verify|verify} messages.
+                     * @param message DiscoveredApiObservation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDiscoveredApiObservation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveredApiObservation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveredApiObservation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DiscoveredApiObservation;
+
+                    /**
+                     * Decodes a DiscoveredApiObservation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveredApiObservation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DiscoveredApiObservation;
+
+                    /**
+                     * Verifies a DiscoveredApiObservation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveredApiObservation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveredApiObservation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DiscoveredApiObservation;
+
+                    /**
+                     * Creates a plain object from a DiscoveredApiObservation message. Also converts values to other types if specified.
+                     * @param message DiscoveredApiObservation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DiscoveredApiObservation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveredApiObservation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveredApiObservation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DiscoveredApiObservation {
+
+                    /** Style enum. */
+                    enum Style {
+                        STYLE_UNSPECIFIED = 0,
+                        REST = 1,
+                        GRPC = 2,
+                        GRAPHQL = 3
+                    }
+
+                    /** SourceType enum. */
+                    enum SourceType {
+                        SOURCE_TYPE_UNSPECIFIED = 0,
+                        GCP_XLB = 1,
+                        GCP_ILB = 2
+                    }
+                }
+
+                /** Properties of a DiscoveredApiOperation. */
+                interface IDiscoveredApiOperation {
+
+                    /** DiscoveredApiOperation httpOperation */
+                    httpOperation?: (google.cloud.apihub.v1.IHttpOperationDetails|null);
+
+                    /** DiscoveredApiOperation name */
+                    name?: (string|null);
+
+                    /** DiscoveredApiOperation firstSeenTime */
+                    firstSeenTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiOperation lastSeenTime */
+                    lastSeenTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiOperation count */
+                    count?: (number|Long|string|null);
+
+                    /** DiscoveredApiOperation classification */
+                    classification?: (google.cloud.apihub.v1.DiscoveredApiOperation.Classification|keyof typeof google.cloud.apihub.v1.DiscoveredApiOperation.Classification|null);
+
+                    /** DiscoveredApiOperation matchResults */
+                    matchResults?: (google.cloud.apihub.v1.DiscoveredApiOperation.IMatchResult[]|null);
+
+                    /** DiscoveredApiOperation sourceMetadata */
+                    sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata|null);
+
+                    /** DiscoveredApiOperation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiOperation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DiscoveredApiOperation. */
+                class DiscoveredApiOperation implements IDiscoveredApiOperation {
+
+                    /**
+                     * Constructs a new DiscoveredApiOperation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDiscoveredApiOperation);
+
+                    /** DiscoveredApiOperation httpOperation. */
+                    public httpOperation?: (google.cloud.apihub.v1.IHttpOperationDetails|null);
+
+                    /** DiscoveredApiOperation name. */
+                    public name: string;
+
+                    /** DiscoveredApiOperation firstSeenTime. */
+                    public firstSeenTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiOperation lastSeenTime. */
+                    public lastSeenTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiOperation count. */
+                    public count: (number|Long|string);
+
+                    /** DiscoveredApiOperation classification. */
+                    public classification: (google.cloud.apihub.v1.DiscoveredApiOperation.Classification|keyof typeof google.cloud.apihub.v1.DiscoveredApiOperation.Classification);
+
+                    /** DiscoveredApiOperation matchResults. */
+                    public matchResults: google.cloud.apihub.v1.DiscoveredApiOperation.IMatchResult[];
+
+                    /** DiscoveredApiOperation sourceMetadata. */
+                    public sourceMetadata?: (google.cloud.apihub.v1.ISourceMetadata|null);
+
+                    /** DiscoveredApiOperation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiOperation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveredApiOperation operation. */
+                    public operation?: "httpOperation";
+
+                    /**
+                     * Creates a new DiscoveredApiOperation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveredApiOperation instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDiscoveredApiOperation): google.cloud.apihub.v1.DiscoveredApiOperation;
+
+                    /**
+                     * Encodes the specified DiscoveredApiOperation message. Does not implicitly {@link google.cloud.apihub.v1.DiscoveredApiOperation.verify|verify} messages.
+                     * @param message DiscoveredApiOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDiscoveredApiOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveredApiOperation message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DiscoveredApiOperation.verify|verify} messages.
+                     * @param message DiscoveredApiOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDiscoveredApiOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveredApiOperation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveredApiOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DiscoveredApiOperation;
+
+                    /**
+                     * Decodes a DiscoveredApiOperation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveredApiOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DiscoveredApiOperation;
+
+                    /**
+                     * Verifies a DiscoveredApiOperation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveredApiOperation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveredApiOperation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DiscoveredApiOperation;
+
+                    /**
+                     * Creates a plain object from a DiscoveredApiOperation message. Also converts values to other types if specified.
+                     * @param message DiscoveredApiOperation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DiscoveredApiOperation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveredApiOperation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveredApiOperation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DiscoveredApiOperation {
+
+                    /** Properties of a MatchResult. */
+                    interface IMatchResult {
+
+                        /** MatchResult name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a MatchResult. */
+                    class MatchResult implements IMatchResult {
+
+                        /**
+                         * Constructs a new MatchResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.DiscoveredApiOperation.IMatchResult);
+
+                        /** MatchResult name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new MatchResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MatchResult instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.DiscoveredApiOperation.IMatchResult): google.cloud.apihub.v1.DiscoveredApiOperation.MatchResult;
+
+                        /**
+                         * Encodes the specified MatchResult message. Does not implicitly {@link google.cloud.apihub.v1.DiscoveredApiOperation.MatchResult.verify|verify} messages.
+                         * @param message MatchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.DiscoveredApiOperation.IMatchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MatchResult message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DiscoveredApiOperation.MatchResult.verify|verify} messages.
+                         * @param message MatchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.DiscoveredApiOperation.IMatchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MatchResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MatchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DiscoveredApiOperation.MatchResult;
+
+                        /**
+                         * Decodes a MatchResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MatchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DiscoveredApiOperation.MatchResult;
+
+                        /**
+                         * Verifies a MatchResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MatchResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MatchResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DiscoveredApiOperation.MatchResult;
+
+                        /**
+                         * Creates a plain object from a MatchResult message. Also converts values to other types if specified.
+                         * @param message MatchResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.DiscoveredApiOperation.MatchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MatchResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MatchResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Classification enum. */
+                    enum Classification {
+                        CLASSIFICATION_UNSPECIFIED = 0,
+                        KNOWN = 1,
+                        UNKNOWN = 2
+                    }
+                }
+
+                /** Properties of a HttpOperationDetails. */
+                interface IHttpOperationDetails {
+
+                    /** HttpOperationDetails httpOperation */
+                    httpOperation?: (google.cloud.apihub.v1.IHttpOperation|null);
+
+                    /** HttpOperationDetails pathParams */
+                    pathParams?: (google.cloud.apihub.v1.HttpOperationDetails.IPathParam[]|null);
+
+                    /** HttpOperationDetails queryParams */
+                    queryParams?: ({ [k: string]: google.cloud.apihub.v1.HttpOperationDetails.IQueryParam }|null);
+
+                    /** HttpOperationDetails request */
+                    request?: (google.cloud.apihub.v1.HttpOperationDetails.IHttpRequest|null);
+
+                    /** HttpOperationDetails response */
+                    response?: (google.cloud.apihub.v1.HttpOperationDetails.IHttpResponse|null);
+                }
+
+                /** Represents a HttpOperationDetails. */
+                class HttpOperationDetails implements IHttpOperationDetails {
+
+                    /**
+                     * Constructs a new HttpOperationDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IHttpOperationDetails);
+
+                    /** HttpOperationDetails httpOperation. */
+                    public httpOperation?: (google.cloud.apihub.v1.IHttpOperation|null);
+
+                    /** HttpOperationDetails pathParams. */
+                    public pathParams: google.cloud.apihub.v1.HttpOperationDetails.IPathParam[];
+
+                    /** HttpOperationDetails queryParams. */
+                    public queryParams: { [k: string]: google.cloud.apihub.v1.HttpOperationDetails.IQueryParam };
+
+                    /** HttpOperationDetails request. */
+                    public request?: (google.cloud.apihub.v1.HttpOperationDetails.IHttpRequest|null);
+
+                    /** HttpOperationDetails response. */
+                    public response?: (google.cloud.apihub.v1.HttpOperationDetails.IHttpResponse|null);
+
+                    /**
+                     * Creates a new HttpOperationDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HttpOperationDetails instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IHttpOperationDetails): google.cloud.apihub.v1.HttpOperationDetails;
+
+                    /**
+                     * Encodes the specified HttpOperationDetails message. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.verify|verify} messages.
+                     * @param message HttpOperationDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IHttpOperationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HttpOperationDetails message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.verify|verify} messages.
+                     * @param message HttpOperationDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IHttpOperationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HttpOperationDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HttpOperationDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.HttpOperationDetails;
+
+                    /**
+                     * Decodes a HttpOperationDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HttpOperationDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.HttpOperationDetails;
+
+                    /**
+                     * Verifies a HttpOperationDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HttpOperationDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HttpOperationDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.HttpOperationDetails;
+
+                    /**
+                     * Creates a plain object from a HttpOperationDetails message. Also converts values to other types if specified.
+                     * @param message HttpOperationDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.HttpOperationDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HttpOperationDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HttpOperationDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace HttpOperationDetails {
+
+                    /** Properties of a PathParam. */
+                    interface IPathParam {
+
+                        /** PathParam position */
+                        position?: (number|null);
+
+                        /** PathParam dataType */
+                        dataType?: (google.cloud.apihub.v1.HttpOperationDetails.DataType|keyof typeof google.cloud.apihub.v1.HttpOperationDetails.DataType|null);
+                    }
+
+                    /** Represents a PathParam. */
+                    class PathParam implements IPathParam {
+
+                        /**
+                         * Constructs a new PathParam.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.HttpOperationDetails.IPathParam);
+
+                        /** PathParam position. */
+                        public position: number;
+
+                        /** PathParam dataType. */
+                        public dataType: (google.cloud.apihub.v1.HttpOperationDetails.DataType|keyof typeof google.cloud.apihub.v1.HttpOperationDetails.DataType);
+
+                        /**
+                         * Creates a new PathParam instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PathParam instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.HttpOperationDetails.IPathParam): google.cloud.apihub.v1.HttpOperationDetails.PathParam;
+
+                        /**
+                         * Encodes the specified PathParam message. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.PathParam.verify|verify} messages.
+                         * @param message PathParam message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.HttpOperationDetails.IPathParam, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PathParam message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.PathParam.verify|verify} messages.
+                         * @param message PathParam message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.HttpOperationDetails.IPathParam, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PathParam message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PathParam
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.HttpOperationDetails.PathParam;
+
+                        /**
+                         * Decodes a PathParam message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PathParam
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.HttpOperationDetails.PathParam;
+
+                        /**
+                         * Verifies a PathParam message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PathParam message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PathParam
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.HttpOperationDetails.PathParam;
+
+                        /**
+                         * Creates a plain object from a PathParam message. Also converts values to other types if specified.
+                         * @param message PathParam
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.HttpOperationDetails.PathParam, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PathParam to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PathParam
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QueryParam. */
+                    interface IQueryParam {
+
+                        /** QueryParam name */
+                        name?: (string|null);
+
+                        /** QueryParam count */
+                        count?: (number|Long|string|null);
+
+                        /** QueryParam dataType */
+                        dataType?: (google.cloud.apihub.v1.HttpOperationDetails.DataType|keyof typeof google.cloud.apihub.v1.HttpOperationDetails.DataType|null);
+                    }
+
+                    /** Represents a QueryParam. */
+                    class QueryParam implements IQueryParam {
+
+                        /**
+                         * Constructs a new QueryParam.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.HttpOperationDetails.IQueryParam);
+
+                        /** QueryParam name. */
+                        public name: string;
+
+                        /** QueryParam count. */
+                        public count: (number|Long|string);
+
+                        /** QueryParam dataType. */
+                        public dataType: (google.cloud.apihub.v1.HttpOperationDetails.DataType|keyof typeof google.cloud.apihub.v1.HttpOperationDetails.DataType);
+
+                        /**
+                         * Creates a new QueryParam instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryParam instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.HttpOperationDetails.IQueryParam): google.cloud.apihub.v1.HttpOperationDetails.QueryParam;
+
+                        /**
+                         * Encodes the specified QueryParam message. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.QueryParam.verify|verify} messages.
+                         * @param message QueryParam message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.HttpOperationDetails.IQueryParam, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryParam message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.QueryParam.verify|verify} messages.
+                         * @param message QueryParam message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.HttpOperationDetails.IQueryParam, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryParam message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryParam
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.HttpOperationDetails.QueryParam;
+
+                        /**
+                         * Decodes a QueryParam message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryParam
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.HttpOperationDetails.QueryParam;
+
+                        /**
+                         * Verifies a QueryParam message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryParam message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryParam
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.HttpOperationDetails.QueryParam;
+
+                        /**
+                         * Creates a plain object from a QueryParam message. Also converts values to other types if specified.
+                         * @param message QueryParam
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.HttpOperationDetails.QueryParam, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryParam to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryParam
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Header. */
+                    interface IHeader {
+
+                        /** Header name */
+                        name?: (string|null);
+
+                        /** Header count */
+                        count?: (number|Long|string|null);
+
+                        /** Header dataType */
+                        dataType?: (google.cloud.apihub.v1.HttpOperationDetails.DataType|keyof typeof google.cloud.apihub.v1.HttpOperationDetails.DataType|null);
+                    }
+
+                    /** Represents a Header. */
+                    class Header implements IHeader {
+
+                        /**
+                         * Constructs a new Header.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.HttpOperationDetails.IHeader);
+
+                        /** Header name. */
+                        public name: string;
+
+                        /** Header count. */
+                        public count: (number|Long|string);
+
+                        /** Header dataType. */
+                        public dataType: (google.cloud.apihub.v1.HttpOperationDetails.DataType|keyof typeof google.cloud.apihub.v1.HttpOperationDetails.DataType);
+
+                        /**
+                         * Creates a new Header instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Header instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.HttpOperationDetails.IHeader): google.cloud.apihub.v1.HttpOperationDetails.Header;
+
+                        /**
+                         * Encodes the specified Header message. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.Header.verify|verify} messages.
+                         * @param message Header message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.HttpOperationDetails.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Header message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.Header.verify|verify} messages.
+                         * @param message Header message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.HttpOperationDetails.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Header message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Header
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.HttpOperationDetails.Header;
+
+                        /**
+                         * Decodes a Header message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Header
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.HttpOperationDetails.Header;
+
+                        /**
+                         * Verifies a Header message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Header message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Header
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.HttpOperationDetails.Header;
+
+                        /**
+                         * Creates a plain object from a Header message. Also converts values to other types if specified.
+                         * @param message Header
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.HttpOperationDetails.Header, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Header to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Header
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a HttpRequest. */
+                    interface IHttpRequest {
+
+                        /** HttpRequest headers */
+                        headers?: ({ [k: string]: google.cloud.apihub.v1.HttpOperationDetails.IHeader }|null);
+                    }
+
+                    /** Represents a HttpRequest. */
+                    class HttpRequest implements IHttpRequest {
+
+                        /**
+                         * Constructs a new HttpRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.HttpOperationDetails.IHttpRequest);
+
+                        /** HttpRequest headers. */
+                        public headers: { [k: string]: google.cloud.apihub.v1.HttpOperationDetails.IHeader };
+
+                        /**
+                         * Creates a new HttpRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HttpRequest instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.HttpOperationDetails.IHttpRequest): google.cloud.apihub.v1.HttpOperationDetails.HttpRequest;
+
+                        /**
+                         * Encodes the specified HttpRequest message. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.HttpRequest.verify|verify} messages.
+                         * @param message HttpRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.HttpOperationDetails.IHttpRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HttpRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.HttpRequest.verify|verify} messages.
+                         * @param message HttpRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.HttpOperationDetails.IHttpRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HttpRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HttpRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.HttpOperationDetails.HttpRequest;
+
+                        /**
+                         * Decodes a HttpRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HttpRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.HttpOperationDetails.HttpRequest;
+
+                        /**
+                         * Verifies a HttpRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HttpRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HttpRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.HttpOperationDetails.HttpRequest;
+
+                        /**
+                         * Creates a plain object from a HttpRequest message. Also converts values to other types if specified.
+                         * @param message HttpRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.HttpOperationDetails.HttpRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HttpRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HttpRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a HttpResponse. */
+                    interface IHttpResponse {
+
+                        /** HttpResponse headers */
+                        headers?: ({ [k: string]: google.cloud.apihub.v1.HttpOperationDetails.IHeader }|null);
+
+                        /** HttpResponse responseCodes */
+                        responseCodes?: ({ [k: string]: (number|Long|string) }|null);
+                    }
+
+                    /** Represents a HttpResponse. */
+                    class HttpResponse implements IHttpResponse {
+
+                        /**
+                         * Constructs a new HttpResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.HttpOperationDetails.IHttpResponse);
+
+                        /** HttpResponse headers. */
+                        public headers: { [k: string]: google.cloud.apihub.v1.HttpOperationDetails.IHeader };
+
+                        /** HttpResponse responseCodes. */
+                        public responseCodes: { [k: string]: (number|Long|string) };
+
+                        /**
+                         * Creates a new HttpResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HttpResponse instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.HttpOperationDetails.IHttpResponse): google.cloud.apihub.v1.HttpOperationDetails.HttpResponse;
+
+                        /**
+                         * Encodes the specified HttpResponse message. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.HttpResponse.verify|verify} messages.
+                         * @param message HttpResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.HttpOperationDetails.IHttpResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HttpResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.HttpOperationDetails.HttpResponse.verify|verify} messages.
+                         * @param message HttpResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.HttpOperationDetails.IHttpResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HttpResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HttpResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.HttpOperationDetails.HttpResponse;
+
+                        /**
+                         * Decodes a HttpResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HttpResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.HttpOperationDetails.HttpResponse;
+
+                        /**
+                         * Verifies a HttpResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HttpResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HttpResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.HttpOperationDetails.HttpResponse;
+
+                        /**
+                         * Creates a plain object from a HttpResponse message. Also converts values to other types if specified.
+                         * @param message HttpResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.HttpOperationDetails.HttpResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HttpResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HttpResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DataType enum. */
+                    enum DataType {
+                        DATA_TYPE_UNSPECIFIED = 0,
+                        BOOL = 1,
+                        INTEGER = 2,
+                        FLOAT = 3,
+                        STRING = 4,
+                        UUID = 5
+                    }
+                }
+
+                /** Represents an ApiHubCollect */
+                class ApiHubCollect extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ApiHubCollect service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ApiHubCollect service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ApiHubCollect;
+
+                    /**
+                     * Calls CollectApiData.
+                     * @param request CollectApiDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public collectApiData(request: google.cloud.apihub.v1.ICollectApiDataRequest, callback: google.cloud.apihub.v1.ApiHubCollect.CollectApiDataCallback): void;
+
+                    /**
+                     * Calls CollectApiData.
+                     * @param request CollectApiDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public collectApiData(request: google.cloud.apihub.v1.ICollectApiDataRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace ApiHubCollect {
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubCollect|collectApiData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CollectApiDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** CollectionType enum. */
+                enum CollectionType {
+                    COLLECTION_TYPE_UNSPECIFIED = 0,
+                    COLLECTION_TYPE_UPSERT = 1,
+                    COLLECTION_TYPE_DELETE = 2
+                }
+
+                /** Properties of a CollectApiDataRequest. */
+                interface ICollectApiDataRequest {
+
+                    /** CollectApiDataRequest location */
+                    location?: (string|null);
+
+                    /** CollectApiDataRequest collectionType */
+                    collectionType?: (google.cloud.apihub.v1.CollectionType|keyof typeof google.cloud.apihub.v1.CollectionType|null);
+
+                    /** CollectApiDataRequest pluginInstance */
+                    pluginInstance?: (string|null);
+
+                    /** CollectApiDataRequest actionId */
+                    actionId?: (string|null);
+
+                    /** CollectApiDataRequest apiData */
+                    apiData?: (google.cloud.apihub.v1.IApiData|null);
+                }
+
+                /** Represents a CollectApiDataRequest. */
+                class CollectApiDataRequest implements ICollectApiDataRequest {
+
+                    /**
+                     * Constructs a new CollectApiDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICollectApiDataRequest);
+
+                    /** CollectApiDataRequest location. */
+                    public location: string;
+
+                    /** CollectApiDataRequest collectionType. */
+                    public collectionType: (google.cloud.apihub.v1.CollectionType|keyof typeof google.cloud.apihub.v1.CollectionType);
+
+                    /** CollectApiDataRequest pluginInstance. */
+                    public pluginInstance: string;
+
+                    /** CollectApiDataRequest actionId. */
+                    public actionId: string;
+
+                    /** CollectApiDataRequest apiData. */
+                    public apiData?: (google.cloud.apihub.v1.IApiData|null);
+
+                    /**
+                     * Creates a new CollectApiDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CollectApiDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICollectApiDataRequest): google.cloud.apihub.v1.CollectApiDataRequest;
+
+                    /**
+                     * Encodes the specified CollectApiDataRequest message. Does not implicitly {@link google.cloud.apihub.v1.CollectApiDataRequest.verify|verify} messages.
+                     * @param message CollectApiDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICollectApiDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CollectApiDataRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CollectApiDataRequest.verify|verify} messages.
+                     * @param message CollectApiDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICollectApiDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CollectApiDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CollectApiDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CollectApiDataRequest;
+
+                    /**
+                     * Decodes a CollectApiDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CollectApiDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CollectApiDataRequest;
+
+                    /**
+                     * Verifies a CollectApiDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CollectApiDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CollectApiDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CollectApiDataRequest;
+
+                    /**
+                     * Creates a plain object from a CollectApiDataRequest message. Also converts values to other types if specified.
+                     * @param message CollectApiDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.CollectApiDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CollectApiDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CollectApiDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ApiData. */
+                interface IApiData {
+
+                    /** ApiData apiMetadataList */
+                    apiMetadataList?: (google.cloud.apihub.v1.IApiMetadataList|null);
+                }
+
+                /** Represents an ApiData. */
+                class ApiData implements IApiData {
+
+                    /**
+                     * Constructs a new ApiData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IApiData);
+
+                    /** ApiData apiMetadataList. */
+                    public apiMetadataList?: (google.cloud.apihub.v1.IApiMetadataList|null);
+
+                    /** ApiData Data. */
+                    public Data?: "apiMetadataList";
+
+                    /**
+                     * Creates a new ApiData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApiData instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IApiData): google.cloud.apihub.v1.ApiData;
+
+                    /**
+                     * Encodes the specified ApiData message. Does not implicitly {@link google.cloud.apihub.v1.ApiData.verify|verify} messages.
+                     * @param message ApiData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IApiData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApiData message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ApiData.verify|verify} messages.
+                     * @param message ApiData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IApiData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApiData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApiData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ApiData;
+
+                    /**
+                     * Decodes an ApiData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApiData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ApiData;
+
+                    /**
+                     * Verifies an ApiData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApiData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApiData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ApiData;
+
+                    /**
+                     * Creates a plain object from an ApiData message. Also converts values to other types if specified.
+                     * @param message ApiData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ApiData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApiData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApiData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ApiMetadataList. */
+                interface IApiMetadataList {
+
+                    /** ApiMetadataList apiMetadata */
+                    apiMetadata?: (google.cloud.apihub.v1.IAPIMetadata[]|null);
+                }
+
+                /** Represents an ApiMetadataList. */
+                class ApiMetadataList implements IApiMetadataList {
+
+                    /**
+                     * Constructs a new ApiMetadataList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IApiMetadataList);
+
+                    /** ApiMetadataList apiMetadata. */
+                    public apiMetadata: google.cloud.apihub.v1.IAPIMetadata[];
+
+                    /**
+                     * Creates a new ApiMetadataList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApiMetadataList instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IApiMetadataList): google.cloud.apihub.v1.ApiMetadataList;
+
+                    /**
+                     * Encodes the specified ApiMetadataList message. Does not implicitly {@link google.cloud.apihub.v1.ApiMetadataList.verify|verify} messages.
+                     * @param message ApiMetadataList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IApiMetadataList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApiMetadataList message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ApiMetadataList.verify|verify} messages.
+                     * @param message ApiMetadataList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IApiMetadataList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApiMetadataList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApiMetadataList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ApiMetadataList;
+
+                    /**
+                     * Decodes an ApiMetadataList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApiMetadataList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ApiMetadataList;
+
+                    /**
+                     * Verifies an ApiMetadataList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApiMetadataList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApiMetadataList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ApiMetadataList;
+
+                    /**
+                     * Creates a plain object from an ApiMetadataList message. Also converts values to other types if specified.
+                     * @param message ApiMetadataList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ApiMetadataList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApiMetadataList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApiMetadataList
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a APIMetadata. */
+                interface IAPIMetadata {
+
+                    /** APIMetadata api */
+                    api?: (google.cloud.apihub.v1.IApi|null);
+
+                    /** APIMetadata versions */
+                    versions?: (google.cloud.apihub.v1.IVersionMetadata[]|null);
+
+                    /** APIMetadata originalId */
+                    originalId?: (string|null);
+
+                    /** APIMetadata originalCreateTime */
+                    originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** APIMetadata originalUpdateTime */
+                    originalUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a APIMetadata. */
+                class APIMetadata implements IAPIMetadata {
+
+                    /**
+                     * Constructs a new APIMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IAPIMetadata);
+
+                    /** APIMetadata api. */
+                    public api?: (google.cloud.apihub.v1.IApi|null);
+
+                    /** APIMetadata versions. */
+                    public versions: google.cloud.apihub.v1.IVersionMetadata[];
+
+                    /** APIMetadata originalId. */
+                    public originalId: string;
+
+                    /** APIMetadata originalCreateTime. */
+                    public originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** APIMetadata originalUpdateTime. */
+                    public originalUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new APIMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns APIMetadata instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IAPIMetadata): google.cloud.apihub.v1.APIMetadata;
+
+                    /**
+                     * Encodes the specified APIMetadata message. Does not implicitly {@link google.cloud.apihub.v1.APIMetadata.verify|verify} messages.
+                     * @param message APIMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IAPIMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified APIMetadata message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.APIMetadata.verify|verify} messages.
+                     * @param message APIMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IAPIMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a APIMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns APIMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.APIMetadata;
+
+                    /**
+                     * Decodes a APIMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns APIMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.APIMetadata;
+
+                    /**
+                     * Verifies a APIMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a APIMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns APIMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.APIMetadata;
+
+                    /**
+                     * Creates a plain object from a APIMetadata message. Also converts values to other types if specified.
+                     * @param message APIMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.APIMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this APIMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for APIMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VersionMetadata. */
+                interface IVersionMetadata {
+
+                    /** VersionMetadata version */
+                    version?: (google.cloud.apihub.v1.IVersion|null);
+
+                    /** VersionMetadata specs */
+                    specs?: (google.cloud.apihub.v1.ISpecMetadata[]|null);
+
+                    /** VersionMetadata deployments */
+                    deployments?: (google.cloud.apihub.v1.IDeploymentMetadata[]|null);
+
+                    /** VersionMetadata originalId */
+                    originalId?: (string|null);
+
+                    /** VersionMetadata originalCreateTime */
+                    originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VersionMetadata originalUpdateTime */
+                    originalUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a VersionMetadata. */
+                class VersionMetadata implements IVersionMetadata {
+
+                    /**
+                     * Constructs a new VersionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IVersionMetadata);
+
+                    /** VersionMetadata version. */
+                    public version?: (google.cloud.apihub.v1.IVersion|null);
+
+                    /** VersionMetadata specs. */
+                    public specs: google.cloud.apihub.v1.ISpecMetadata[];
+
+                    /** VersionMetadata deployments. */
+                    public deployments: google.cloud.apihub.v1.IDeploymentMetadata[];
+
+                    /** VersionMetadata originalId. */
+                    public originalId: string;
+
+                    /** VersionMetadata originalCreateTime. */
+                    public originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VersionMetadata originalUpdateTime. */
+                    public originalUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new VersionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VersionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IVersionMetadata): google.cloud.apihub.v1.VersionMetadata;
+
+                    /**
+                     * Encodes the specified VersionMetadata message. Does not implicitly {@link google.cloud.apihub.v1.VersionMetadata.verify|verify} messages.
+                     * @param message VersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VersionMetadata message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.VersionMetadata.verify|verify} messages.
+                     * @param message VersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VersionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.VersionMetadata;
+
+                    /**
+                     * Decodes a VersionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.VersionMetadata;
+
+                    /**
+                     * Verifies a VersionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VersionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VersionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.VersionMetadata;
+
+                    /**
+                     * Creates a plain object from a VersionMetadata message. Also converts values to other types if specified.
+                     * @param message VersionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.VersionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VersionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VersionMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SpecMetadata. */
+                interface ISpecMetadata {
+
+                    /** SpecMetadata spec */
+                    spec?: (google.cloud.apihub.v1.ISpec|null);
+
+                    /** SpecMetadata originalId */
+                    originalId?: (string|null);
+
+                    /** SpecMetadata originalCreateTime */
+                    originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SpecMetadata originalUpdateTime */
+                    originalUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SpecMetadata. */
+                class SpecMetadata implements ISpecMetadata {
+
+                    /**
+                     * Constructs a new SpecMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ISpecMetadata);
+
+                    /** SpecMetadata spec. */
+                    public spec?: (google.cloud.apihub.v1.ISpec|null);
+
+                    /** SpecMetadata originalId. */
+                    public originalId: string;
+
+                    /** SpecMetadata originalCreateTime. */
+                    public originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SpecMetadata originalUpdateTime. */
+                    public originalUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SpecMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpecMetadata instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ISpecMetadata): google.cloud.apihub.v1.SpecMetadata;
+
+                    /**
+                     * Encodes the specified SpecMetadata message. Does not implicitly {@link google.cloud.apihub.v1.SpecMetadata.verify|verify} messages.
+                     * @param message SpecMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ISpecMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpecMetadata message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.SpecMetadata.verify|verify} messages.
+                     * @param message SpecMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ISpecMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpecMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpecMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.SpecMetadata;
+
+                    /**
+                     * Decodes a SpecMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpecMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.SpecMetadata;
+
+                    /**
+                     * Verifies a SpecMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpecMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpecMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.SpecMetadata;
+
+                    /**
+                     * Creates a plain object from a SpecMetadata message. Also converts values to other types if specified.
+                     * @param message SpecMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.SpecMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpecMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpecMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentMetadata. */
+                interface IDeploymentMetadata {
+
+                    /** DeploymentMetadata deployment */
+                    deployment?: (google.cloud.apihub.v1.IDeployment|null);
+
+                    /** DeploymentMetadata originalId */
+                    originalId?: (string|null);
+
+                    /** DeploymentMetadata originalCreateTime */
+                    originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentMetadata originalUpdateTime */
+                    originalUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeploymentMetadata. */
+                class DeploymentMetadata implements IDeploymentMetadata {
+
+                    /**
+                     * Constructs a new DeploymentMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDeploymentMetadata);
+
+                    /** DeploymentMetadata deployment. */
+                    public deployment?: (google.cloud.apihub.v1.IDeployment|null);
+
+                    /** DeploymentMetadata originalId. */
+                    public originalId: string;
+
+                    /** DeploymentMetadata originalCreateTime. */
+                    public originalCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentMetadata originalUpdateTime. */
+                    public originalUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DeploymentMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentMetadata instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDeploymentMetadata): google.cloud.apihub.v1.DeploymentMetadata;
+
+                    /**
+                     * Encodes the specified DeploymentMetadata message. Does not implicitly {@link google.cloud.apihub.v1.DeploymentMetadata.verify|verify} messages.
+                     * @param message DeploymentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDeploymentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentMetadata message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DeploymentMetadata.verify|verify} messages.
+                     * @param message DeploymentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDeploymentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DeploymentMetadata;
+
+                    /**
+                     * Decodes a DeploymentMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DeploymentMetadata;
+
+                    /**
+                     * Verifies a DeploymentMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DeploymentMetadata;
+
+                    /**
+                     * Creates a plain object from a DeploymentMetadata message. Also converts values to other types if specified.
+                     * @param message DeploymentMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DeploymentMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CollectApiDataResponse. */
+                interface ICollectApiDataResponse {
+                }
+
+                /** Represents a CollectApiDataResponse. */
+                class CollectApiDataResponse implements ICollectApiDataResponse {
+
+                    /**
+                     * Constructs a new CollectApiDataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICollectApiDataResponse);
+
+                    /**
+                     * Creates a new CollectApiDataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CollectApiDataResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICollectApiDataResponse): google.cloud.apihub.v1.CollectApiDataResponse;
+
+                    /**
+                     * Encodes the specified CollectApiDataResponse message. Does not implicitly {@link google.cloud.apihub.v1.CollectApiDataResponse.verify|verify} messages.
+                     * @param message CollectApiDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICollectApiDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CollectApiDataResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CollectApiDataResponse.verify|verify} messages.
+                     * @param message CollectApiDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICollectApiDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CollectApiDataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CollectApiDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CollectApiDataResponse;
+
+                    /**
+                     * Decodes a CollectApiDataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CollectApiDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CollectApiDataResponse;
+
+                    /**
+                     * Verifies a CollectApiDataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CollectApiDataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CollectApiDataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CollectApiDataResponse;
+
+                    /**
+                     * Creates a plain object from a CollectApiDataResponse message. Also converts values to other types if specified.
+                     * @param message CollectApiDataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.CollectApiDataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CollectApiDataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CollectApiDataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents an ApiHubCurate */
+                class ApiHubCurate extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ApiHubCurate service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ApiHubCurate service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ApiHubCurate;
+
+                    /**
+                     * Calls CreateCuration.
+                     * @param request CreateCurationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Curation
+                     */
+                    public createCuration(request: google.cloud.apihub.v1.ICreateCurationRequest, callback: google.cloud.apihub.v1.ApiHubCurate.CreateCurationCallback): void;
+
+                    /**
+                     * Calls CreateCuration.
+                     * @param request CreateCurationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCuration(request: google.cloud.apihub.v1.ICreateCurationRequest): Promise<google.cloud.apihub.v1.Curation>;
+
+                    /**
+                     * Calls GetCuration.
+                     * @param request GetCurationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Curation
+                     */
+                    public getCuration(request: google.cloud.apihub.v1.IGetCurationRequest, callback: google.cloud.apihub.v1.ApiHubCurate.GetCurationCallback): void;
+
+                    /**
+                     * Calls GetCuration.
+                     * @param request GetCurationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCuration(request: google.cloud.apihub.v1.IGetCurationRequest): Promise<google.cloud.apihub.v1.Curation>;
+
+                    /**
+                     * Calls ListCurations.
+                     * @param request ListCurationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCurationsResponse
+                     */
+                    public listCurations(request: google.cloud.apihub.v1.IListCurationsRequest, callback: google.cloud.apihub.v1.ApiHubCurate.ListCurationsCallback): void;
+
+                    /**
+                     * Calls ListCurations.
+                     * @param request ListCurationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCurations(request: google.cloud.apihub.v1.IListCurationsRequest): Promise<google.cloud.apihub.v1.ListCurationsResponse>;
+
+                    /**
+                     * Calls UpdateCuration.
+                     * @param request UpdateCurationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Curation
+                     */
+                    public updateCuration(request: google.cloud.apihub.v1.IUpdateCurationRequest, callback: google.cloud.apihub.v1.ApiHubCurate.UpdateCurationCallback): void;
+
+                    /**
+                     * Calls UpdateCuration.
+                     * @param request UpdateCurationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCuration(request: google.cloud.apihub.v1.IUpdateCurationRequest): Promise<google.cloud.apihub.v1.Curation>;
+
+                    /**
+                     * Calls DeleteCuration.
+                     * @param request DeleteCurationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteCuration(request: google.cloud.apihub.v1.IDeleteCurationRequest, callback: google.cloud.apihub.v1.ApiHubCurate.DeleteCurationCallback): void;
+
+                    /**
+                     * Calls DeleteCuration.
+                     * @param request DeleteCurationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCuration(request: google.cloud.apihub.v1.IDeleteCurationRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace ApiHubCurate {
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubCurate|createCuration}.
+                     * @param error Error, if any
+                     * @param [response] Curation
+                     */
+                    type CreateCurationCallback = (error: (Error|null), response?: google.cloud.apihub.v1.Curation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubCurate|getCuration}.
+                     * @param error Error, if any
+                     * @param [response] Curation
+                     */
+                    type GetCurationCallback = (error: (Error|null), response?: google.cloud.apihub.v1.Curation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubCurate|listCurations}.
+                     * @param error Error, if any
+                     * @param [response] ListCurationsResponse
+                     */
+                    type ListCurationsCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ListCurationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubCurate|updateCuration}.
+                     * @param error Error, if any
+                     * @param [response] Curation
+                     */
+                    type UpdateCurationCallback = (error: (Error|null), response?: google.cloud.apihub.v1.Curation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubCurate|deleteCuration}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteCurationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a CreateCurationRequest. */
+                interface ICreateCurationRequest {
+
+                    /** CreateCurationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCurationRequest curationId */
+                    curationId?: (string|null);
+
+                    /** CreateCurationRequest curation */
+                    curation?: (google.cloud.apihub.v1.ICuration|null);
+                }
+
+                /** Represents a CreateCurationRequest. */
+                class CreateCurationRequest implements ICreateCurationRequest {
+
+                    /**
+                     * Constructs a new CreateCurationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICreateCurationRequest);
+
+                    /** CreateCurationRequest parent. */
+                    public parent: string;
+
+                    /** CreateCurationRequest curationId. */
+                    public curationId: string;
+
+                    /** CreateCurationRequest curation. */
+                    public curation?: (google.cloud.apihub.v1.ICuration|null);
+
+                    /**
+                     * Creates a new CreateCurationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCurationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICreateCurationRequest): google.cloud.apihub.v1.CreateCurationRequest;
+
+                    /**
+                     * Encodes the specified CreateCurationRequest message. Does not implicitly {@link google.cloud.apihub.v1.CreateCurationRequest.verify|verify} messages.
+                     * @param message CreateCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICreateCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCurationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CreateCurationRequest.verify|verify} messages.
+                     * @param message CreateCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICreateCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCurationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CreateCurationRequest;
+
+                    /**
+                     * Decodes a CreateCurationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CreateCurationRequest;
+
+                    /**
+                     * Verifies a CreateCurationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCurationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCurationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CreateCurationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCurationRequest message. Also converts values to other types if specified.
+                     * @param message CreateCurationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.CreateCurationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCurationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCurationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCurationRequest. */
+                interface IGetCurationRequest {
+
+                    /** GetCurationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCurationRequest. */
+                class GetCurationRequest implements IGetCurationRequest {
+
+                    /**
+                     * Constructs a new GetCurationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IGetCurationRequest);
+
+                    /** GetCurationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCurationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCurationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IGetCurationRequest): google.cloud.apihub.v1.GetCurationRequest;
+
+                    /**
+                     * Encodes the specified GetCurationRequest message. Does not implicitly {@link google.cloud.apihub.v1.GetCurationRequest.verify|verify} messages.
+                     * @param message GetCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IGetCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCurationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.GetCurationRequest.verify|verify} messages.
+                     * @param message GetCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IGetCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCurationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.GetCurationRequest;
+
+                    /**
+                     * Decodes a GetCurationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.GetCurationRequest;
+
+                    /**
+                     * Verifies a GetCurationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCurationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCurationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.GetCurationRequest;
+
+                    /**
+                     * Creates a plain object from a GetCurationRequest message. Also converts values to other types if specified.
+                     * @param message GetCurationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.GetCurationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCurationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCurationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCurationRequest. */
+                interface IUpdateCurationRequest {
+
+                    /** UpdateCurationRequest curation */
+                    curation?: (google.cloud.apihub.v1.ICuration|null);
+
+                    /** UpdateCurationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCurationRequest. */
+                class UpdateCurationRequest implements IUpdateCurationRequest {
+
+                    /**
+                     * Constructs a new UpdateCurationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IUpdateCurationRequest);
+
+                    /** UpdateCurationRequest curation. */
+                    public curation?: (google.cloud.apihub.v1.ICuration|null);
+
+                    /** UpdateCurationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCurationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCurationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IUpdateCurationRequest): google.cloud.apihub.v1.UpdateCurationRequest;
+
+                    /**
+                     * Encodes the specified UpdateCurationRequest message. Does not implicitly {@link google.cloud.apihub.v1.UpdateCurationRequest.verify|verify} messages.
+                     * @param message UpdateCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IUpdateCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCurationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.UpdateCurationRequest.verify|verify} messages.
+                     * @param message UpdateCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IUpdateCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCurationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.UpdateCurationRequest;
+
+                    /**
+                     * Decodes an UpdateCurationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.UpdateCurationRequest;
+
+                    /**
+                     * Verifies an UpdateCurationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCurationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCurationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.UpdateCurationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCurationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCurationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.UpdateCurationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCurationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCurationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCurationRequest. */
+                interface IDeleteCurationRequest {
+
+                    /** DeleteCurationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCurationRequest. */
+                class DeleteCurationRequest implements IDeleteCurationRequest {
+
+                    /**
+                     * Constructs a new DeleteCurationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDeleteCurationRequest);
+
+                    /** DeleteCurationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCurationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCurationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDeleteCurationRequest): google.cloud.apihub.v1.DeleteCurationRequest;
+
+                    /**
+                     * Encodes the specified DeleteCurationRequest message. Does not implicitly {@link google.cloud.apihub.v1.DeleteCurationRequest.verify|verify} messages.
+                     * @param message DeleteCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDeleteCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCurationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DeleteCurationRequest.verify|verify} messages.
+                     * @param message DeleteCurationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDeleteCurationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCurationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DeleteCurationRequest;
+
+                    /**
+                     * Decodes a DeleteCurationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCurationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DeleteCurationRequest;
+
+                    /**
+                     * Verifies a DeleteCurationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCurationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCurationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DeleteCurationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCurationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCurationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DeleteCurationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCurationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCurationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCurationsRequest. */
+                interface IListCurationsRequest {
+
+                    /** ListCurationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCurationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCurationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCurationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListCurationsRequest. */
+                class ListCurationsRequest implements IListCurationsRequest {
+
+                    /**
+                     * Constructs a new ListCurationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListCurationsRequest);
+
+                    /** ListCurationsRequest parent. */
+                    public parent: string;
+
+                    /** ListCurationsRequest filter. */
+                    public filter: string;
+
+                    /** ListCurationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCurationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListCurationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCurationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListCurationsRequest): google.cloud.apihub.v1.ListCurationsRequest;
+
+                    /**
+                     * Encodes the specified ListCurationsRequest message. Does not implicitly {@link google.cloud.apihub.v1.ListCurationsRequest.verify|verify} messages.
+                     * @param message ListCurationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListCurationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCurationsRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListCurationsRequest.verify|verify} messages.
+                     * @param message ListCurationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListCurationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCurationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCurationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListCurationsRequest;
+
+                    /**
+                     * Decodes a ListCurationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCurationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListCurationsRequest;
+
+                    /**
+                     * Verifies a ListCurationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCurationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCurationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListCurationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListCurationsRequest message. Also converts values to other types if specified.
+                     * @param message ListCurationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListCurationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCurationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCurationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCurationsResponse. */
+                interface IListCurationsResponse {
+
+                    /** ListCurationsResponse curations */
+                    curations?: (google.cloud.apihub.v1.ICuration[]|null);
+
+                    /** ListCurationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListCurationsResponse. */
+                class ListCurationsResponse implements IListCurationsResponse {
+
+                    /**
+                     * Constructs a new ListCurationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListCurationsResponse);
+
+                    /** ListCurationsResponse curations. */
+                    public curations: google.cloud.apihub.v1.ICuration[];
+
+                    /** ListCurationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListCurationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCurationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListCurationsResponse): google.cloud.apihub.v1.ListCurationsResponse;
+
+                    /**
+                     * Encodes the specified ListCurationsResponse message. Does not implicitly {@link google.cloud.apihub.v1.ListCurationsResponse.verify|verify} messages.
+                     * @param message ListCurationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListCurationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCurationsResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListCurationsResponse.verify|verify} messages.
+                     * @param message ListCurationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListCurationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCurationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCurationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListCurationsResponse;
+
+                    /**
+                     * Decodes a ListCurationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCurationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListCurationsResponse;
+
+                    /**
+                     * Verifies a ListCurationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCurationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCurationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListCurationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListCurationsResponse message. Also converts values to other types if specified.
+                     * @param message ListCurationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListCurationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCurationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCurationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Curation. */
+                interface ICuration {
+
+                    /** Curation name */
+                    name?: (string|null);
+
+                    /** Curation displayName */
+                    displayName?: (string|null);
+
+                    /** Curation description */
+                    description?: (string|null);
+
+                    /** Curation endpoint */
+                    endpoint?: (google.cloud.apihub.v1.IEndpoint|null);
+
+                    /** Curation pluginInstanceActions */
+                    pluginInstanceActions?: (google.cloud.apihub.v1.Curation.IPluginInstanceActionID[]|null);
+
+                    /** Curation lastExecutionState */
+                    lastExecutionState?: (google.cloud.apihub.v1.Curation.LastExecutionState|keyof typeof google.cloud.apihub.v1.Curation.LastExecutionState|null);
+
+                    /** Curation lastExecutionErrorCode */
+                    lastExecutionErrorCode?: (google.cloud.apihub.v1.Curation.ErrorCode|keyof typeof google.cloud.apihub.v1.Curation.ErrorCode|null);
+
+                    /** Curation lastExecutionErrorMessage */
+                    lastExecutionErrorMessage?: (string|null);
+
+                    /** Curation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Curation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Curation. */
+                class Curation implements ICuration {
+
+                    /**
+                     * Constructs a new Curation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICuration);
+
+                    /** Curation name. */
+                    public name: string;
+
+                    /** Curation displayName. */
+                    public displayName: string;
+
+                    /** Curation description. */
+                    public description: string;
+
+                    /** Curation endpoint. */
+                    public endpoint?: (google.cloud.apihub.v1.IEndpoint|null);
+
+                    /** Curation pluginInstanceActions. */
+                    public pluginInstanceActions: google.cloud.apihub.v1.Curation.IPluginInstanceActionID[];
+
+                    /** Curation lastExecutionState. */
+                    public lastExecutionState: (google.cloud.apihub.v1.Curation.LastExecutionState|keyof typeof google.cloud.apihub.v1.Curation.LastExecutionState);
+
+                    /** Curation lastExecutionErrorCode. */
+                    public lastExecutionErrorCode: (google.cloud.apihub.v1.Curation.ErrorCode|keyof typeof google.cloud.apihub.v1.Curation.ErrorCode);
+
+                    /** Curation lastExecutionErrorMessage. */
+                    public lastExecutionErrorMessage: string;
+
+                    /** Curation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Curation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Curation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Curation instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICuration): google.cloud.apihub.v1.Curation;
+
+                    /**
+                     * Encodes the specified Curation message. Does not implicitly {@link google.cloud.apihub.v1.Curation.verify|verify} messages.
+                     * @param message Curation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Curation message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.Curation.verify|verify} messages.
+                     * @param message Curation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Curation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Curation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.Curation;
+
+                    /**
+                     * Decodes a Curation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Curation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.Curation;
+
+                    /**
+                     * Verifies a Curation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Curation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Curation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.Curation;
+
+                    /**
+                     * Creates a plain object from a Curation message. Also converts values to other types if specified.
+                     * @param message Curation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.Curation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Curation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Curation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Curation {
+
+                    /** Properties of a PluginInstanceActionID. */
+                    interface IPluginInstanceActionID {
+
+                        /** PluginInstanceActionID pluginInstance */
+                        pluginInstance?: (string|null);
+
+                        /** PluginInstanceActionID actionId */
+                        actionId?: (string|null);
+                    }
+
+                    /** Represents a PluginInstanceActionID. */
+                    class PluginInstanceActionID implements IPluginInstanceActionID {
+
+                        /**
+                         * Constructs a new PluginInstanceActionID.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.Curation.IPluginInstanceActionID);
+
+                        /** PluginInstanceActionID pluginInstance. */
+                        public pluginInstance: string;
+
+                        /** PluginInstanceActionID actionId. */
+                        public actionId: string;
+
+                        /**
+                         * Creates a new PluginInstanceActionID instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PluginInstanceActionID instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.Curation.IPluginInstanceActionID): google.cloud.apihub.v1.Curation.PluginInstanceActionID;
+
+                        /**
+                         * Encodes the specified PluginInstanceActionID message. Does not implicitly {@link google.cloud.apihub.v1.Curation.PluginInstanceActionID.verify|verify} messages.
+                         * @param message PluginInstanceActionID message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.Curation.IPluginInstanceActionID, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PluginInstanceActionID message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.Curation.PluginInstanceActionID.verify|verify} messages.
+                         * @param message PluginInstanceActionID message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.Curation.IPluginInstanceActionID, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PluginInstanceActionID message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PluginInstanceActionID
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.Curation.PluginInstanceActionID;
+
+                        /**
+                         * Decodes a PluginInstanceActionID message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PluginInstanceActionID
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.Curation.PluginInstanceActionID;
+
+                        /**
+                         * Verifies a PluginInstanceActionID message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PluginInstanceActionID message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PluginInstanceActionID
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.Curation.PluginInstanceActionID;
+
+                        /**
+                         * Creates a plain object from a PluginInstanceActionID message. Also converts values to other types if specified.
+                         * @param message PluginInstanceActionID
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.Curation.PluginInstanceActionID, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PluginInstanceActionID to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PluginInstanceActionID
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** LastExecutionState enum. */
+                    enum LastExecutionState {
+                        LAST_EXECUTION_STATE_UNSPECIFIED = 0,
+                        SUCCEEDED = 1,
+                        FAILED = 2
+                    }
+
+                    /** ErrorCode enum. */
+                    enum ErrorCode {
+                        ERROR_CODE_UNSPECIFIED = 0,
+                        INTERNAL_ERROR = 1,
+                        UNAUTHORIZED = 2
+                    }
+                }
+
+                /** Properties of an Endpoint. */
+                interface IEndpoint {
+
+                    /** Endpoint applicationIntegrationEndpointDetails */
+                    applicationIntegrationEndpointDetails?: (google.cloud.apihub.v1.IApplicationIntegrationEndpointDetails|null);
+                }
+
+                /** Represents an Endpoint. */
+                class Endpoint implements IEndpoint {
+
+                    /**
+                     * Constructs a new Endpoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IEndpoint);
+
+                    /** Endpoint applicationIntegrationEndpointDetails. */
+                    public applicationIntegrationEndpointDetails?: (google.cloud.apihub.v1.IApplicationIntegrationEndpointDetails|null);
+
+                    /** Endpoint endpointDetails. */
+                    public endpointDetails?: "applicationIntegrationEndpointDetails";
+
+                    /**
+                     * Creates a new Endpoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Endpoint instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IEndpoint): google.cloud.apihub.v1.Endpoint;
+
+                    /**
+                     * Encodes the specified Endpoint message. Does not implicitly {@link google.cloud.apihub.v1.Endpoint.verify|verify} messages.
+                     * @param message Endpoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Endpoint message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.Endpoint.verify|verify} messages.
+                     * @param message Endpoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Endpoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Endpoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.Endpoint;
+
+                    /**
+                     * Decodes an Endpoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Endpoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.Endpoint;
+
+                    /**
+                     * Verifies an Endpoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Endpoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Endpoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.Endpoint;
+
+                    /**
+                     * Creates a plain object from an Endpoint message. Also converts values to other types if specified.
+                     * @param message Endpoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.Endpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Endpoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Endpoint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ApplicationIntegrationEndpointDetails. */
+                interface IApplicationIntegrationEndpointDetails {
+
+                    /** ApplicationIntegrationEndpointDetails uri */
+                    uri?: (string|null);
+
+                    /** ApplicationIntegrationEndpointDetails triggerId */
+                    triggerId?: (string|null);
+                }
+
+                /** Represents an ApplicationIntegrationEndpointDetails. */
+                class ApplicationIntegrationEndpointDetails implements IApplicationIntegrationEndpointDetails {
+
+                    /**
+                     * Constructs a new ApplicationIntegrationEndpointDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IApplicationIntegrationEndpointDetails);
+
+                    /** ApplicationIntegrationEndpointDetails uri. */
+                    public uri: string;
+
+                    /** ApplicationIntegrationEndpointDetails triggerId. */
+                    public triggerId: string;
+
+                    /**
+                     * Creates a new ApplicationIntegrationEndpointDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApplicationIntegrationEndpointDetails instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IApplicationIntegrationEndpointDetails): google.cloud.apihub.v1.ApplicationIntegrationEndpointDetails;
+
+                    /**
+                     * Encodes the specified ApplicationIntegrationEndpointDetails message. Does not implicitly {@link google.cloud.apihub.v1.ApplicationIntegrationEndpointDetails.verify|verify} messages.
+                     * @param message ApplicationIntegrationEndpointDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IApplicationIntegrationEndpointDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApplicationIntegrationEndpointDetails message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ApplicationIntegrationEndpointDetails.verify|verify} messages.
+                     * @param message ApplicationIntegrationEndpointDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IApplicationIntegrationEndpointDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApplicationIntegrationEndpointDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApplicationIntegrationEndpointDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ApplicationIntegrationEndpointDetails;
+
+                    /**
+                     * Decodes an ApplicationIntegrationEndpointDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApplicationIntegrationEndpointDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ApplicationIntegrationEndpointDetails;
+
+                    /**
+                     * Verifies an ApplicationIntegrationEndpointDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApplicationIntegrationEndpointDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApplicationIntegrationEndpointDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ApplicationIntegrationEndpointDetails;
+
+                    /**
+                     * Creates a plain object from an ApplicationIntegrationEndpointDetails message. Also converts values to other types if specified.
+                     * @param message ApplicationIntegrationEndpointDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ApplicationIntegrationEndpointDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApplicationIntegrationEndpointDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApplicationIntegrationEndpointDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents an ApiHubDiscovery */
+                class ApiHubDiscovery extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ApiHubDiscovery service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ApiHubDiscovery service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ApiHubDiscovery;
+
+                    /**
+                     * Calls ListDiscoveredApiObservations.
+                     * @param request ListDiscoveredApiObservationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDiscoveredApiObservationsResponse
+                     */
+                    public listDiscoveredApiObservations(request: google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest, callback: google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiObservationsCallback): void;
+
+                    /**
+                     * Calls ListDiscoveredApiObservations.
+                     * @param request ListDiscoveredApiObservationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDiscoveredApiObservations(request: google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest): Promise<google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse>;
+
+                    /**
+                     * Calls GetDiscoveredApiObservation.
+                     * @param request GetDiscoveredApiObservationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DiscoveredApiObservation
+                     */
+                    public getDiscoveredApiObservation(request: google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest, callback: google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiObservationCallback): void;
+
+                    /**
+                     * Calls GetDiscoveredApiObservation.
+                     * @param request GetDiscoveredApiObservationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDiscoveredApiObservation(request: google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest): Promise<google.cloud.apihub.v1.DiscoveredApiObservation>;
+
+                    /**
+                     * Calls ListDiscoveredApiOperations.
+                     * @param request ListDiscoveredApiOperationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDiscoveredApiOperationsResponse
+                     */
+                    public listDiscoveredApiOperations(request: google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest, callback: google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiOperationsCallback): void;
+
+                    /**
+                     * Calls ListDiscoveredApiOperations.
+                     * @param request ListDiscoveredApiOperationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDiscoveredApiOperations(request: google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest): Promise<google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse>;
+
+                    /**
+                     * Calls GetDiscoveredApiOperation.
+                     * @param request GetDiscoveredApiOperationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DiscoveredApiOperation
+                     */
+                    public getDiscoveredApiOperation(request: google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest, callback: google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiOperationCallback): void;
+
+                    /**
+                     * Calls GetDiscoveredApiOperation.
+                     * @param request GetDiscoveredApiOperationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDiscoveredApiOperation(request: google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest): Promise<google.cloud.apihub.v1.DiscoveredApiOperation>;
+                }
+
+                namespace ApiHubDiscovery {
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubDiscovery|listDiscoveredApiObservations}.
+                     * @param error Error, if any
+                     * @param [response] ListDiscoveredApiObservationsResponse
+                     */
+                    type ListDiscoveredApiObservationsCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubDiscovery|getDiscoveredApiObservation}.
+                     * @param error Error, if any
+                     * @param [response] DiscoveredApiObservation
+                     */
+                    type GetDiscoveredApiObservationCallback = (error: (Error|null), response?: google.cloud.apihub.v1.DiscoveredApiObservation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubDiscovery|listDiscoveredApiOperations}.
+                     * @param error Error, if any
+                     * @param [response] ListDiscoveredApiOperationsResponse
+                     */
+                    type ListDiscoveredApiOperationsCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubDiscovery|getDiscoveredApiOperation}.
+                     * @param error Error, if any
+                     * @param [response] DiscoveredApiOperation
+                     */
+                    type GetDiscoveredApiOperationCallback = (error: (Error|null), response?: google.cloud.apihub.v1.DiscoveredApiOperation) => void;
+                }
+
+                /** Properties of a ListDiscoveredApiObservationsRequest. */
+                interface IListDiscoveredApiObservationsRequest {
+
+                    /** ListDiscoveredApiObservationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDiscoveredApiObservationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDiscoveredApiObservationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDiscoveredApiObservationsRequest. */
+                class ListDiscoveredApiObservationsRequest implements IListDiscoveredApiObservationsRequest {
+
+                    /**
+                     * Constructs a new ListDiscoveredApiObservationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest);
+
+                    /** ListDiscoveredApiObservationsRequest parent. */
+                    public parent: string;
+
+                    /** ListDiscoveredApiObservationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDiscoveredApiObservationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDiscoveredApiObservationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDiscoveredApiObservationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest): google.cloud.apihub.v1.ListDiscoveredApiObservationsRequest;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiObservationsRequest message. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiObservationsRequest.verify|verify} messages.
+                     * @param message ListDiscoveredApiObservationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiObservationsRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiObservationsRequest.verify|verify} messages.
+                     * @param message ListDiscoveredApiObservationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDiscoveredApiObservationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDiscoveredApiObservationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListDiscoveredApiObservationsRequest;
+
+                    /**
+                     * Decodes a ListDiscoveredApiObservationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDiscoveredApiObservationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListDiscoveredApiObservationsRequest;
+
+                    /**
+                     * Verifies a ListDiscoveredApiObservationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDiscoveredApiObservationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDiscoveredApiObservationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListDiscoveredApiObservationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDiscoveredApiObservationsRequest message. Also converts values to other types if specified.
+                     * @param message ListDiscoveredApiObservationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListDiscoveredApiObservationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDiscoveredApiObservationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDiscoveredApiObservationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDiscoveredApiObservationsResponse. */
+                interface IListDiscoveredApiObservationsResponse {
+
+                    /** ListDiscoveredApiObservationsResponse discoveredApiObservations */
+                    discoveredApiObservations?: (google.cloud.apihub.v1.IDiscoveredApiObservation[]|null);
+
+                    /** ListDiscoveredApiObservationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDiscoveredApiObservationsResponse. */
+                class ListDiscoveredApiObservationsResponse implements IListDiscoveredApiObservationsResponse {
+
+                    /**
+                     * Constructs a new ListDiscoveredApiObservationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse);
+
+                    /** ListDiscoveredApiObservationsResponse discoveredApiObservations. */
+                    public discoveredApiObservations: google.cloud.apihub.v1.IDiscoveredApiObservation[];
+
+                    /** ListDiscoveredApiObservationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDiscoveredApiObservationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDiscoveredApiObservationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse): google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiObservationsResponse message. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse.verify|verify} messages.
+                     * @param message ListDiscoveredApiObservationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiObservationsResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse.verify|verify} messages.
+                     * @param message ListDiscoveredApiObservationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDiscoveredApiObservationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDiscoveredApiObservationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse;
+
+                    /**
+                     * Decodes a ListDiscoveredApiObservationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDiscoveredApiObservationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse;
+
+                    /**
+                     * Verifies a ListDiscoveredApiObservationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDiscoveredApiObservationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDiscoveredApiObservationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDiscoveredApiObservationsResponse message. Also converts values to other types if specified.
+                     * @param message ListDiscoveredApiObservationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDiscoveredApiObservationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDiscoveredApiObservationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDiscoveredApiOperationsRequest. */
+                interface IListDiscoveredApiOperationsRequest {
+
+                    /** ListDiscoveredApiOperationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDiscoveredApiOperationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDiscoveredApiOperationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDiscoveredApiOperationsRequest. */
+                class ListDiscoveredApiOperationsRequest implements IListDiscoveredApiOperationsRequest {
+
+                    /**
+                     * Constructs a new ListDiscoveredApiOperationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest);
+
+                    /** ListDiscoveredApiOperationsRequest parent. */
+                    public parent: string;
+
+                    /** ListDiscoveredApiOperationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDiscoveredApiOperationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDiscoveredApiOperationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDiscoveredApiOperationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest): google.cloud.apihub.v1.ListDiscoveredApiOperationsRequest;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiOperationsRequest message. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiOperationsRequest.verify|verify} messages.
+                     * @param message ListDiscoveredApiOperationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiOperationsRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiOperationsRequest.verify|verify} messages.
+                     * @param message ListDiscoveredApiOperationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDiscoveredApiOperationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDiscoveredApiOperationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListDiscoveredApiOperationsRequest;
+
+                    /**
+                     * Decodes a ListDiscoveredApiOperationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDiscoveredApiOperationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListDiscoveredApiOperationsRequest;
+
+                    /**
+                     * Verifies a ListDiscoveredApiOperationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDiscoveredApiOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDiscoveredApiOperationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListDiscoveredApiOperationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDiscoveredApiOperationsRequest message. Also converts values to other types if specified.
+                     * @param message ListDiscoveredApiOperationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListDiscoveredApiOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDiscoveredApiOperationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDiscoveredApiOperationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDiscoveredApiOperationsResponse. */
+                interface IListDiscoveredApiOperationsResponse {
+
+                    /** ListDiscoveredApiOperationsResponse discoveredApiOperations */
+                    discoveredApiOperations?: (google.cloud.apihub.v1.IDiscoveredApiOperation[]|null);
+
+                    /** ListDiscoveredApiOperationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDiscoveredApiOperationsResponse. */
+                class ListDiscoveredApiOperationsResponse implements IListDiscoveredApiOperationsResponse {
+
+                    /**
+                     * Constructs a new ListDiscoveredApiOperationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse);
+
+                    /** ListDiscoveredApiOperationsResponse discoveredApiOperations. */
+                    public discoveredApiOperations: google.cloud.apihub.v1.IDiscoveredApiOperation[];
+
+                    /** ListDiscoveredApiOperationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDiscoveredApiOperationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDiscoveredApiOperationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse): google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiOperationsResponse message. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse.verify|verify} messages.
+                     * @param message ListDiscoveredApiOperationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDiscoveredApiOperationsResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse.verify|verify} messages.
+                     * @param message ListDiscoveredApiOperationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDiscoveredApiOperationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDiscoveredApiOperationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse;
+
+                    /**
+                     * Decodes a ListDiscoveredApiOperationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDiscoveredApiOperationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse;
+
+                    /**
+                     * Verifies a ListDiscoveredApiOperationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDiscoveredApiOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDiscoveredApiOperationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDiscoveredApiOperationsResponse message. Also converts values to other types if specified.
+                     * @param message ListDiscoveredApiOperationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDiscoveredApiOperationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDiscoveredApiOperationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDiscoveredApiObservationRequest. */
+                interface IGetDiscoveredApiObservationRequest {
+
+                    /** GetDiscoveredApiObservationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDiscoveredApiObservationRequest. */
+                class GetDiscoveredApiObservationRequest implements IGetDiscoveredApiObservationRequest {
+
+                    /**
+                     * Constructs a new GetDiscoveredApiObservationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest);
+
+                    /** GetDiscoveredApiObservationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDiscoveredApiObservationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDiscoveredApiObservationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest): google.cloud.apihub.v1.GetDiscoveredApiObservationRequest;
+
+                    /**
+                     * Encodes the specified GetDiscoveredApiObservationRequest message. Does not implicitly {@link google.cloud.apihub.v1.GetDiscoveredApiObservationRequest.verify|verify} messages.
+                     * @param message GetDiscoveredApiObservationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDiscoveredApiObservationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.GetDiscoveredApiObservationRequest.verify|verify} messages.
+                     * @param message GetDiscoveredApiObservationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IGetDiscoveredApiObservationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDiscoveredApiObservationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDiscoveredApiObservationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.GetDiscoveredApiObservationRequest;
+
+                    /**
+                     * Decodes a GetDiscoveredApiObservationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDiscoveredApiObservationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.GetDiscoveredApiObservationRequest;
+
+                    /**
+                     * Verifies a GetDiscoveredApiObservationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDiscoveredApiObservationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDiscoveredApiObservationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.GetDiscoveredApiObservationRequest;
+
+                    /**
+                     * Creates a plain object from a GetDiscoveredApiObservationRequest message. Also converts values to other types if specified.
+                     * @param message GetDiscoveredApiObservationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.GetDiscoveredApiObservationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDiscoveredApiObservationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDiscoveredApiObservationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDiscoveredApiOperationRequest. */
+                interface IGetDiscoveredApiOperationRequest {
+
+                    /** GetDiscoveredApiOperationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDiscoveredApiOperationRequest. */
+                class GetDiscoveredApiOperationRequest implements IGetDiscoveredApiOperationRequest {
+
+                    /**
+                     * Constructs a new GetDiscoveredApiOperationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest);
+
+                    /** GetDiscoveredApiOperationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDiscoveredApiOperationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDiscoveredApiOperationRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest): google.cloud.apihub.v1.GetDiscoveredApiOperationRequest;
+
+                    /**
+                     * Encodes the specified GetDiscoveredApiOperationRequest message. Does not implicitly {@link google.cloud.apihub.v1.GetDiscoveredApiOperationRequest.verify|verify} messages.
+                     * @param message GetDiscoveredApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDiscoveredApiOperationRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.GetDiscoveredApiOperationRequest.verify|verify} messages.
+                     * @param message GetDiscoveredApiOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IGetDiscoveredApiOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDiscoveredApiOperationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDiscoveredApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.GetDiscoveredApiOperationRequest;
+
+                    /**
+                     * Decodes a GetDiscoveredApiOperationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDiscoveredApiOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.GetDiscoveredApiOperationRequest;
+
+                    /**
+                     * Verifies a GetDiscoveredApiOperationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDiscoveredApiOperationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDiscoveredApiOperationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.GetDiscoveredApiOperationRequest;
+
+                    /**
+                     * Creates a plain object from a GetDiscoveredApiOperationRequest message. Also converts values to other types if specified.
+                     * @param message GetDiscoveredApiOperationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.GetDiscoveredApiOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDiscoveredApiOperationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDiscoveredApiOperationRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11719,6 +17807,160 @@ export namespace google {
                      * @returns Promise
                      */
                     public disablePlugin(request: google.cloud.apihub.v1.IDisablePluginRequest): Promise<google.cloud.apihub.v1.Plugin>;
+
+                    /**
+                     * Calls CreatePlugin.
+                     * @param request CreatePluginRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Plugin
+                     */
+                    public createPlugin(request: google.cloud.apihub.v1.ICreatePluginRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.CreatePluginCallback): void;
+
+                    /**
+                     * Calls CreatePlugin.
+                     * @param request CreatePluginRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPlugin(request: google.cloud.apihub.v1.ICreatePluginRequest): Promise<google.cloud.apihub.v1.Plugin>;
+
+                    /**
+                     * Calls ListPlugins.
+                     * @param request ListPluginsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPluginsResponse
+                     */
+                    public listPlugins(request: google.cloud.apihub.v1.IListPluginsRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.ListPluginsCallback): void;
+
+                    /**
+                     * Calls ListPlugins.
+                     * @param request ListPluginsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPlugins(request: google.cloud.apihub.v1.IListPluginsRequest): Promise<google.cloud.apihub.v1.ListPluginsResponse>;
+
+                    /**
+                     * Calls DeletePlugin.
+                     * @param request DeletePluginRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deletePlugin(request: google.cloud.apihub.v1.IDeletePluginRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.DeletePluginCallback): void;
+
+                    /**
+                     * Calls DeletePlugin.
+                     * @param request DeletePluginRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePlugin(request: google.cloud.apihub.v1.IDeletePluginRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreatePluginInstance.
+                     * @param request CreatePluginInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createPluginInstance(request: google.cloud.apihub.v1.ICreatePluginInstanceRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.CreatePluginInstanceCallback): void;
+
+                    /**
+                     * Calls CreatePluginInstance.
+                     * @param request CreatePluginInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPluginInstance(request: google.cloud.apihub.v1.ICreatePluginInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExecutePluginInstanceAction.
+                     * @param request ExecutePluginInstanceActionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public executePluginInstanceAction(request: google.cloud.apihub.v1.IExecutePluginInstanceActionRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.ExecutePluginInstanceActionCallback): void;
+
+                    /**
+                     * Calls ExecutePluginInstanceAction.
+                     * @param request ExecutePluginInstanceActionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public executePluginInstanceAction(request: google.cloud.apihub.v1.IExecutePluginInstanceActionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetPluginInstance.
+                     * @param request GetPluginInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PluginInstance
+                     */
+                    public getPluginInstance(request: google.cloud.apihub.v1.IGetPluginInstanceRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.GetPluginInstanceCallback): void;
+
+                    /**
+                     * Calls GetPluginInstance.
+                     * @param request GetPluginInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPluginInstance(request: google.cloud.apihub.v1.IGetPluginInstanceRequest): Promise<google.cloud.apihub.v1.PluginInstance>;
+
+                    /**
+                     * Calls ListPluginInstances.
+                     * @param request ListPluginInstancesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPluginInstancesResponse
+                     */
+                    public listPluginInstances(request: google.cloud.apihub.v1.IListPluginInstancesRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.ListPluginInstancesCallback): void;
+
+                    /**
+                     * Calls ListPluginInstances.
+                     * @param request ListPluginInstancesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPluginInstances(request: google.cloud.apihub.v1.IListPluginInstancesRequest): Promise<google.cloud.apihub.v1.ListPluginInstancesResponse>;
+
+                    /**
+                     * Calls EnablePluginInstanceAction.
+                     * @param request EnablePluginInstanceActionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public enablePluginInstanceAction(request: google.cloud.apihub.v1.IEnablePluginInstanceActionRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.EnablePluginInstanceActionCallback): void;
+
+                    /**
+                     * Calls EnablePluginInstanceAction.
+                     * @param request EnablePluginInstanceActionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public enablePluginInstanceAction(request: google.cloud.apihub.v1.IEnablePluginInstanceActionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DisablePluginInstanceAction.
+                     * @param request DisablePluginInstanceActionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public disablePluginInstanceAction(request: google.cloud.apihub.v1.IDisablePluginInstanceActionRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.DisablePluginInstanceActionCallback): void;
+
+                    /**
+                     * Calls DisablePluginInstanceAction.
+                     * @param request DisablePluginInstanceActionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public disablePluginInstanceAction(request: google.cloud.apihub.v1.IDisablePluginInstanceActionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdatePluginInstance.
+                     * @param request UpdatePluginInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PluginInstance
+                     */
+                    public updatePluginInstance(request: google.cloud.apihub.v1.IUpdatePluginInstanceRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.UpdatePluginInstanceCallback): void;
+
+                    /**
+                     * Calls UpdatePluginInstance.
+                     * @param request UpdatePluginInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePluginInstance(request: google.cloud.apihub.v1.IUpdatePluginInstanceRequest): Promise<google.cloud.apihub.v1.PluginInstance>;
+
+                    /**
+                     * Calls DeletePluginInstance.
+                     * @param request DeletePluginInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deletePluginInstance(request: google.cloud.apihub.v1.IDeletePluginInstanceRequest, callback: google.cloud.apihub.v1.ApiHubPlugin.DeletePluginInstanceCallback): void;
+
+                    /**
+                     * Calls DeletePluginInstance.
+                     * @param request DeletePluginInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePluginInstance(request: google.cloud.apihub.v1.IDeletePluginInstanceRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ApiHubPlugin {
@@ -11743,6 +17985,109 @@ export namespace google {
                      * @param [response] Plugin
                      */
                     type DisablePluginCallback = (error: (Error|null), response?: google.cloud.apihub.v1.Plugin) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|createPlugin}.
+                     * @param error Error, if any
+                     * @param [response] Plugin
+                     */
+                    type CreatePluginCallback = (error: (Error|null), response?: google.cloud.apihub.v1.Plugin) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|listPlugins}.
+                     * @param error Error, if any
+                     * @param [response] ListPluginsResponse
+                     */
+                    type ListPluginsCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ListPluginsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|deletePlugin}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeletePluginCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|createPluginInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreatePluginInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|executePluginInstanceAction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExecutePluginInstanceActionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|getPluginInstance}.
+                     * @param error Error, if any
+                     * @param [response] PluginInstance
+                     */
+                    type GetPluginInstanceCallback = (error: (Error|null), response?: google.cloud.apihub.v1.PluginInstance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|listPluginInstances}.
+                     * @param error Error, if any
+                     * @param [response] ListPluginInstancesResponse
+                     */
+                    type ListPluginInstancesCallback = (error: (Error|null), response?: google.cloud.apihub.v1.ListPluginInstancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|enablePluginInstanceAction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type EnablePluginInstanceActionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|disablePluginInstanceAction}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DisablePluginInstanceActionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|updatePluginInstance}.
+                     * @param error Error, if any
+                     * @param [response] PluginInstance
+                     */
+                    type UpdatePluginInstanceCallback = (error: (Error|null), response?: google.cloud.apihub.v1.PluginInstance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.ApiHubPlugin|deletePluginInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeletePluginInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** ActionType enum. */
+                enum ActionType {
+                    ACTION_TYPE_UNSPECIFIED = 0,
+                    SYNC_METADATA = 1,
+                    SYNC_RUNTIME_DATA = 2
+                }
+
+                /** GatewayType enum. */
+                enum GatewayType {
+                    GATEWAY_TYPE_UNSPECIFIED = 0,
+                    APIGEE_X_AND_HYBRID = 1,
+                    APIGEE_EDGE_PUBLIC_CLOUD = 2,
+                    APIGEE_EDGE_PRIVATE_CLOUD = 3,
+                    CLOUD_API_GATEWAY = 4,
+                    CLOUD_ENDPOINTS = 5,
+                    API_DISCOVERY = 6,
+                    OTHERS = 7
+                }
+
+                /** CurationType enum. */
+                enum CurationType {
+                    CURATION_TYPE_UNSPECIFIED = 0,
+                    DEFAULT_CURATION_FOR_API_METADATA = 1,
+                    CUSTOM_CURATION_FOR_API_METADATA = 2
                 }
 
                 /** Properties of a Plugin. */
@@ -11762,6 +18107,33 @@ export namespace google {
 
                     /** Plugin state */
                     state?: (google.cloud.apihub.v1.Plugin.State|keyof typeof google.cloud.apihub.v1.Plugin.State|null);
+
+                    /** Plugin ownershipType */
+                    ownershipType?: (google.cloud.apihub.v1.Plugin.OwnershipType|keyof typeof google.cloud.apihub.v1.Plugin.OwnershipType|null);
+
+                    /** Plugin hostingService */
+                    hostingService?: (google.cloud.apihub.v1.Plugin.IHostingService|null);
+
+                    /** Plugin actionsConfig */
+                    actionsConfig?: (google.cloud.apihub.v1.IPluginActionConfig[]|null);
+
+                    /** Plugin documentation */
+                    documentation?: (google.cloud.apihub.v1.IDocumentation|null);
+
+                    /** Plugin pluginCategory */
+                    pluginCategory?: (google.cloud.apihub.v1.PluginCategory|keyof typeof google.cloud.apihub.v1.PluginCategory|null);
+
+                    /** Plugin configTemplate */
+                    configTemplate?: (google.cloud.apihub.v1.Plugin.IConfigTemplate|null);
+
+                    /** Plugin createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Plugin updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Plugin gatewayType */
+                    gatewayType?: (google.cloud.apihub.v1.GatewayType|keyof typeof google.cloud.apihub.v1.GatewayType|null);
                 }
 
                 /** Represents a Plugin. */
@@ -11787,6 +18159,33 @@ export namespace google {
 
                     /** Plugin state. */
                     public state: (google.cloud.apihub.v1.Plugin.State|keyof typeof google.cloud.apihub.v1.Plugin.State);
+
+                    /** Plugin ownershipType. */
+                    public ownershipType: (google.cloud.apihub.v1.Plugin.OwnershipType|keyof typeof google.cloud.apihub.v1.Plugin.OwnershipType);
+
+                    /** Plugin hostingService. */
+                    public hostingService?: (google.cloud.apihub.v1.Plugin.IHostingService|null);
+
+                    /** Plugin actionsConfig. */
+                    public actionsConfig: google.cloud.apihub.v1.IPluginActionConfig[];
+
+                    /** Plugin documentation. */
+                    public documentation?: (google.cloud.apihub.v1.IDocumentation|null);
+
+                    /** Plugin pluginCategory. */
+                    public pluginCategory: (google.cloud.apihub.v1.PluginCategory|keyof typeof google.cloud.apihub.v1.PluginCategory);
+
+                    /** Plugin configTemplate. */
+                    public configTemplate?: (google.cloud.apihub.v1.Plugin.IConfigTemplate|null);
+
+                    /** Plugin createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Plugin updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Plugin gatewayType. */
+                    public gatewayType: (google.cloud.apihub.v1.GatewayType|keyof typeof google.cloud.apihub.v1.GatewayType);
 
                     /**
                      * Creates a new Plugin instance using the specified properties.
@@ -11868,11 +18267,450 @@ export namespace google {
 
                 namespace Plugin {
 
+                    /** Properties of a HostingService. */
+                    interface IHostingService {
+
+                        /** HostingService serviceUri */
+                        serviceUri?: (string|null);
+                    }
+
+                    /** Represents a HostingService. */
+                    class HostingService implements IHostingService {
+
+                        /**
+                         * Constructs a new HostingService.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.Plugin.IHostingService);
+
+                        /** HostingService serviceUri. */
+                        public serviceUri: string;
+
+                        /**
+                         * Creates a new HostingService instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HostingService instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.Plugin.IHostingService): google.cloud.apihub.v1.Plugin.HostingService;
+
+                        /**
+                         * Encodes the specified HostingService message. Does not implicitly {@link google.cloud.apihub.v1.Plugin.HostingService.verify|verify} messages.
+                         * @param message HostingService message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.Plugin.IHostingService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HostingService message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.Plugin.HostingService.verify|verify} messages.
+                         * @param message HostingService message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.Plugin.IHostingService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HostingService message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HostingService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.Plugin.HostingService;
+
+                        /**
+                         * Decodes a HostingService message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HostingService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.Plugin.HostingService;
+
+                        /**
+                         * Verifies a HostingService message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HostingService message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HostingService
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.Plugin.HostingService;
+
+                        /**
+                         * Creates a plain object from a HostingService message. Also converts values to other types if specified.
+                         * @param message HostingService
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.Plugin.HostingService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HostingService to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HostingService
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConfigTemplate. */
+                    interface IConfigTemplate {
+
+                        /** ConfigTemplate authConfigTemplate */
+                        authConfigTemplate?: (google.cloud.apihub.v1.Plugin.ConfigTemplate.IAuthConfigTemplate|null);
+
+                        /** ConfigTemplate additionalConfigTemplate */
+                        additionalConfigTemplate?: (google.cloud.apihub.v1.IConfigVariableTemplate[]|null);
+                    }
+
+                    /** Represents a ConfigTemplate. */
+                    class ConfigTemplate implements IConfigTemplate {
+
+                        /**
+                         * Constructs a new ConfigTemplate.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.Plugin.IConfigTemplate);
+
+                        /** ConfigTemplate authConfigTemplate. */
+                        public authConfigTemplate?: (google.cloud.apihub.v1.Plugin.ConfigTemplate.IAuthConfigTemplate|null);
+
+                        /** ConfigTemplate additionalConfigTemplate. */
+                        public additionalConfigTemplate: google.cloud.apihub.v1.IConfigVariableTemplate[];
+
+                        /**
+                         * Creates a new ConfigTemplate instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConfigTemplate instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.Plugin.IConfigTemplate): google.cloud.apihub.v1.Plugin.ConfigTemplate;
+
+                        /**
+                         * Encodes the specified ConfigTemplate message. Does not implicitly {@link google.cloud.apihub.v1.Plugin.ConfigTemplate.verify|verify} messages.
+                         * @param message ConfigTemplate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.Plugin.IConfigTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConfigTemplate message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.Plugin.ConfigTemplate.verify|verify} messages.
+                         * @param message ConfigTemplate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.Plugin.IConfigTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConfigTemplate message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConfigTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.Plugin.ConfigTemplate;
+
+                        /**
+                         * Decodes a ConfigTemplate message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConfigTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.Plugin.ConfigTemplate;
+
+                        /**
+                         * Verifies a ConfigTemplate message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConfigTemplate message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConfigTemplate
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.Plugin.ConfigTemplate;
+
+                        /**
+                         * Creates a plain object from a ConfigTemplate message. Also converts values to other types if specified.
+                         * @param message ConfigTemplate
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.Plugin.ConfigTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConfigTemplate to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConfigTemplate
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConfigTemplate {
+
+                        /** Properties of an AuthConfigTemplate. */
+                        interface IAuthConfigTemplate {
+
+                            /** AuthConfigTemplate supportedAuthTypes */
+                            supportedAuthTypes?: (google.cloud.apihub.v1.AuthType[]|null);
+
+                            /** AuthConfigTemplate serviceAccount */
+                            serviceAccount?: (google.cloud.apihub.v1.IGoogleServiceAccountConfig|null);
+                        }
+
+                        /** Represents an AuthConfigTemplate. */
+                        class AuthConfigTemplate implements IAuthConfigTemplate {
+
+                            /**
+                             * Constructs a new AuthConfigTemplate.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.apihub.v1.Plugin.ConfigTemplate.IAuthConfigTemplate);
+
+                            /** AuthConfigTemplate supportedAuthTypes. */
+                            public supportedAuthTypes: google.cloud.apihub.v1.AuthType[];
+
+                            /** AuthConfigTemplate serviceAccount. */
+                            public serviceAccount?: (google.cloud.apihub.v1.IGoogleServiceAccountConfig|null);
+
+                            /**
+                             * Creates a new AuthConfigTemplate instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AuthConfigTemplate instance
+                             */
+                            public static create(properties?: google.cloud.apihub.v1.Plugin.ConfigTemplate.IAuthConfigTemplate): google.cloud.apihub.v1.Plugin.ConfigTemplate.AuthConfigTemplate;
+
+                            /**
+                             * Encodes the specified AuthConfigTemplate message. Does not implicitly {@link google.cloud.apihub.v1.Plugin.ConfigTemplate.AuthConfigTemplate.verify|verify} messages.
+                             * @param message AuthConfigTemplate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.apihub.v1.Plugin.ConfigTemplate.IAuthConfigTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AuthConfigTemplate message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.Plugin.ConfigTemplate.AuthConfigTemplate.verify|verify} messages.
+                             * @param message AuthConfigTemplate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.apihub.v1.Plugin.ConfigTemplate.IAuthConfigTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AuthConfigTemplate message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AuthConfigTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.Plugin.ConfigTemplate.AuthConfigTemplate;
+
+                            /**
+                             * Decodes an AuthConfigTemplate message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AuthConfigTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.Plugin.ConfigTemplate.AuthConfigTemplate;
+
+                            /**
+                             * Verifies an AuthConfigTemplate message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AuthConfigTemplate message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AuthConfigTemplate
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.Plugin.ConfigTemplate.AuthConfigTemplate;
+
+                            /**
+                             * Creates a plain object from an AuthConfigTemplate message. Also converts values to other types if specified.
+                             * @param message AuthConfigTemplate
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.apihub.v1.Plugin.ConfigTemplate.AuthConfigTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AuthConfigTemplate to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AuthConfigTemplate
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
                         ENABLED = 1,
                         DISABLED = 2
+                    }
+
+                    /** OwnershipType enum. */
+                    enum OwnershipType {
+                        OWNERSHIP_TYPE_UNSPECIFIED = 0,
+                        SYSTEM_OWNED = 1,
+                        USER_OWNED = 2
+                    }
+                }
+
+                /** Properties of a PluginActionConfig. */
+                interface IPluginActionConfig {
+
+                    /** PluginActionConfig id */
+                    id?: (string|null);
+
+                    /** PluginActionConfig displayName */
+                    displayName?: (string|null);
+
+                    /** PluginActionConfig description */
+                    description?: (string|null);
+
+                    /** PluginActionConfig triggerMode */
+                    triggerMode?: (google.cloud.apihub.v1.PluginActionConfig.TriggerMode|keyof typeof google.cloud.apihub.v1.PluginActionConfig.TriggerMode|null);
+                }
+
+                /** Represents a PluginActionConfig. */
+                class PluginActionConfig implements IPluginActionConfig {
+
+                    /**
+                     * Constructs a new PluginActionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IPluginActionConfig);
+
+                    /** PluginActionConfig id. */
+                    public id: string;
+
+                    /** PluginActionConfig displayName. */
+                    public displayName: string;
+
+                    /** PluginActionConfig description. */
+                    public description: string;
+
+                    /** PluginActionConfig triggerMode. */
+                    public triggerMode: (google.cloud.apihub.v1.PluginActionConfig.TriggerMode|keyof typeof google.cloud.apihub.v1.PluginActionConfig.TriggerMode);
+
+                    /**
+                     * Creates a new PluginActionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PluginActionConfig instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IPluginActionConfig): google.cloud.apihub.v1.PluginActionConfig;
+
+                    /**
+                     * Encodes the specified PluginActionConfig message. Does not implicitly {@link google.cloud.apihub.v1.PluginActionConfig.verify|verify} messages.
+                     * @param message PluginActionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IPluginActionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PluginActionConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.PluginActionConfig.verify|verify} messages.
+                     * @param message PluginActionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IPluginActionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PluginActionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PluginActionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.PluginActionConfig;
+
+                    /**
+                     * Decodes a PluginActionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PluginActionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.PluginActionConfig;
+
+                    /**
+                     * Verifies a PluginActionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PluginActionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PluginActionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.PluginActionConfig;
+
+                    /**
+                     * Creates a plain object from a PluginActionConfig message. Also converts values to other types if specified.
+                     * @param message PluginActionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.PluginActionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PluginActionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PluginActionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PluginActionConfig {
+
+                    /** TriggerMode enum. */
+                    enum TriggerMode {
+                        TRIGGER_MODE_UNSPECIFIED = 0,
+                        API_HUB_ON_DEMAND_TRIGGER = 1,
+                        API_HUB_SCHEDULE_TRIGGER = 2,
+                        NON_API_HUB_MANAGED = 3
                     }
                 }
 
@@ -12167,6 +19005,2600 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PluginInstanceAction. */
+                interface IPluginInstanceAction {
+
+                    /** PluginInstanceAction hubInstanceAction */
+                    hubInstanceAction?: (google.cloud.apihub.v1.IExecutionStatus|null);
+
+                    /** PluginInstanceAction actionId */
+                    actionId?: (string|null);
+
+                    /** PluginInstanceAction state */
+                    state?: (google.cloud.apihub.v1.PluginInstanceAction.State|keyof typeof google.cloud.apihub.v1.PluginInstanceAction.State|null);
+
+                    /** PluginInstanceAction scheduleCronExpression */
+                    scheduleCronExpression?: (string|null);
+
+                    /** PluginInstanceAction curationConfig */
+                    curationConfig?: (google.cloud.apihub.v1.ICurationConfig|null);
+
+                    /** PluginInstanceAction scheduleTimeZone */
+                    scheduleTimeZone?: (string|null);
+
+                    /** PluginInstanceAction serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** PluginInstanceAction resourceConfig */
+                    resourceConfig?: (google.cloud.apihub.v1.PluginInstanceAction.IResourceConfig|null);
+                }
+
+                /** Represents a PluginInstanceAction. */
+                class PluginInstanceAction implements IPluginInstanceAction {
+
+                    /**
+                     * Constructs a new PluginInstanceAction.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IPluginInstanceAction);
+
+                    /** PluginInstanceAction hubInstanceAction. */
+                    public hubInstanceAction?: (google.cloud.apihub.v1.IExecutionStatus|null);
+
+                    /** PluginInstanceAction actionId. */
+                    public actionId: string;
+
+                    /** PluginInstanceAction state. */
+                    public state: (google.cloud.apihub.v1.PluginInstanceAction.State|keyof typeof google.cloud.apihub.v1.PluginInstanceAction.State);
+
+                    /** PluginInstanceAction scheduleCronExpression. */
+                    public scheduleCronExpression: string;
+
+                    /** PluginInstanceAction curationConfig. */
+                    public curationConfig?: (google.cloud.apihub.v1.ICurationConfig|null);
+
+                    /** PluginInstanceAction scheduleTimeZone. */
+                    public scheduleTimeZone: string;
+
+                    /** PluginInstanceAction serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** PluginInstanceAction resourceConfig. */
+                    public resourceConfig?: (google.cloud.apihub.v1.PluginInstanceAction.IResourceConfig|null);
+
+                    /** PluginInstanceAction actionStatus. */
+                    public actionStatus?: "hubInstanceAction";
+
+                    /**
+                     * Creates a new PluginInstanceAction instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PluginInstanceAction instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IPluginInstanceAction): google.cloud.apihub.v1.PluginInstanceAction;
+
+                    /**
+                     * Encodes the specified PluginInstanceAction message. Does not implicitly {@link google.cloud.apihub.v1.PluginInstanceAction.verify|verify} messages.
+                     * @param message PluginInstanceAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IPluginInstanceAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PluginInstanceAction message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.PluginInstanceAction.verify|verify} messages.
+                     * @param message PluginInstanceAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IPluginInstanceAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PluginInstanceAction message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PluginInstanceAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.PluginInstanceAction;
+
+                    /**
+                     * Decodes a PluginInstanceAction message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PluginInstanceAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.PluginInstanceAction;
+
+                    /**
+                     * Verifies a PluginInstanceAction message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PluginInstanceAction message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PluginInstanceAction
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.PluginInstanceAction;
+
+                    /**
+                     * Creates a plain object from a PluginInstanceAction message. Also converts values to other types if specified.
+                     * @param message PluginInstanceAction
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.PluginInstanceAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PluginInstanceAction to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PluginInstanceAction
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PluginInstanceAction {
+
+                    /** Properties of a ResourceConfig. */
+                    interface IResourceConfig {
+
+                        /** ResourceConfig actionType */
+                        actionType?: (google.cloud.apihub.v1.ActionType|keyof typeof google.cloud.apihub.v1.ActionType|null);
+
+                        /** ResourceConfig pubsubTopic */
+                        pubsubTopic?: (string|null);
+                    }
+
+                    /** Represents a ResourceConfig. */
+                    class ResourceConfig implements IResourceConfig {
+
+                        /**
+                         * Constructs a new ResourceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.PluginInstanceAction.IResourceConfig);
+
+                        /** ResourceConfig actionType. */
+                        public actionType: (google.cloud.apihub.v1.ActionType|keyof typeof google.cloud.apihub.v1.ActionType);
+
+                        /** ResourceConfig pubsubTopic. */
+                        public pubsubTopic: string;
+
+                        /**
+                         * Creates a new ResourceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceConfig instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.PluginInstanceAction.IResourceConfig): google.cloud.apihub.v1.PluginInstanceAction.ResourceConfig;
+
+                        /**
+                         * Encodes the specified ResourceConfig message. Does not implicitly {@link google.cloud.apihub.v1.PluginInstanceAction.ResourceConfig.verify|verify} messages.
+                         * @param message ResourceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.PluginInstanceAction.IResourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.PluginInstanceAction.ResourceConfig.verify|verify} messages.
+                         * @param message ResourceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.PluginInstanceAction.IResourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.PluginInstanceAction.ResourceConfig;
+
+                        /**
+                         * Decodes a ResourceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.PluginInstanceAction.ResourceConfig;
+
+                        /**
+                         * Verifies a ResourceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.PluginInstanceAction.ResourceConfig;
+
+                        /**
+                         * Creates a plain object from a ResourceConfig message. Also converts values to other types if specified.
+                         * @param message ResourceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.PluginInstanceAction.ResourceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResourceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2,
+                        ENABLING = 3,
+                        DISABLING = 4,
+                        ERROR = 5
+                    }
+                }
+
+                /** Properties of a PluginInstance. */
+                interface IPluginInstance {
+
+                    /** PluginInstance name */
+                    name?: (string|null);
+
+                    /** PluginInstance displayName */
+                    displayName?: (string|null);
+
+                    /** PluginInstance authConfig */
+                    authConfig?: (google.cloud.apihub.v1.IAuthConfig|null);
+
+                    /** PluginInstance additionalConfig */
+                    additionalConfig?: ({ [k: string]: google.cloud.apihub.v1.IConfigVariable }|null);
+
+                    /** PluginInstance state */
+                    state?: (google.cloud.apihub.v1.PluginInstance.State|keyof typeof google.cloud.apihub.v1.PluginInstance.State|null);
+
+                    /** PluginInstance errorMessage */
+                    errorMessage?: (string|null);
+
+                    /** PluginInstance actions */
+                    actions?: (google.cloud.apihub.v1.IPluginInstanceAction[]|null);
+
+                    /** PluginInstance createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PluginInstance updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PluginInstance sourceProjectId */
+                    sourceProjectId?: (string|null);
+                }
+
+                /** Represents a PluginInstance. */
+                class PluginInstance implements IPluginInstance {
+
+                    /**
+                     * Constructs a new PluginInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IPluginInstance);
+
+                    /** PluginInstance name. */
+                    public name: string;
+
+                    /** PluginInstance displayName. */
+                    public displayName: string;
+
+                    /** PluginInstance authConfig. */
+                    public authConfig?: (google.cloud.apihub.v1.IAuthConfig|null);
+
+                    /** PluginInstance additionalConfig. */
+                    public additionalConfig: { [k: string]: google.cloud.apihub.v1.IConfigVariable };
+
+                    /** PluginInstance state. */
+                    public state: (google.cloud.apihub.v1.PluginInstance.State|keyof typeof google.cloud.apihub.v1.PluginInstance.State);
+
+                    /** PluginInstance errorMessage. */
+                    public errorMessage: string;
+
+                    /** PluginInstance actions. */
+                    public actions: google.cloud.apihub.v1.IPluginInstanceAction[];
+
+                    /** PluginInstance createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PluginInstance updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PluginInstance sourceProjectId. */
+                    public sourceProjectId: string;
+
+                    /**
+                     * Creates a new PluginInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PluginInstance instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IPluginInstance): google.cloud.apihub.v1.PluginInstance;
+
+                    /**
+                     * Encodes the specified PluginInstance message. Does not implicitly {@link google.cloud.apihub.v1.PluginInstance.verify|verify} messages.
+                     * @param message PluginInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IPluginInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PluginInstance message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.PluginInstance.verify|verify} messages.
+                     * @param message PluginInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IPluginInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PluginInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PluginInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.PluginInstance;
+
+                    /**
+                     * Decodes a PluginInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PluginInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.PluginInstance;
+
+                    /**
+                     * Verifies a PluginInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PluginInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PluginInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.PluginInstance;
+
+                    /**
+                     * Creates a plain object from a PluginInstance message. Also converts values to other types if specified.
+                     * @param message PluginInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.PluginInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PluginInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PluginInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PluginInstance {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        APPLYING_CONFIG = 3,
+                        ERROR = 4,
+                        FAILED = 5,
+                        DELETING = 6
+                    }
+                }
+
+                /** Properties of a CurationConfig. */
+                interface ICurationConfig {
+
+                    /** CurationConfig customCuration */
+                    customCuration?: (google.cloud.apihub.v1.CurationConfig.ICustomCuration|null);
+
+                    /** CurationConfig curationType */
+                    curationType?: (google.cloud.apihub.v1.CurationType|keyof typeof google.cloud.apihub.v1.CurationType|null);
+                }
+
+                /** Represents a CurationConfig. */
+                class CurationConfig implements ICurationConfig {
+
+                    /**
+                     * Constructs a new CurationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICurationConfig);
+
+                    /** CurationConfig customCuration. */
+                    public customCuration?: (google.cloud.apihub.v1.CurationConfig.ICustomCuration|null);
+
+                    /** CurationConfig curationType. */
+                    public curationType: (google.cloud.apihub.v1.CurationType|keyof typeof google.cloud.apihub.v1.CurationType);
+
+                    /** CurationConfig curationConfig. */
+                    public curationConfig?: "customCuration";
+
+                    /**
+                     * Creates a new CurationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CurationConfig instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICurationConfig): google.cloud.apihub.v1.CurationConfig;
+
+                    /**
+                     * Encodes the specified CurationConfig message. Does not implicitly {@link google.cloud.apihub.v1.CurationConfig.verify|verify} messages.
+                     * @param message CurationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICurationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CurationConfig message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CurationConfig.verify|verify} messages.
+                     * @param message CurationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICurationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CurationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CurationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CurationConfig;
+
+                    /**
+                     * Decodes a CurationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CurationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CurationConfig;
+
+                    /**
+                     * Verifies a CurationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CurationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CurationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CurationConfig;
+
+                    /**
+                     * Creates a plain object from a CurationConfig message. Also converts values to other types if specified.
+                     * @param message CurationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.CurationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CurationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CurationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CurationConfig {
+
+                    /** Properties of a CustomCuration. */
+                    interface ICustomCuration {
+
+                        /** CustomCuration curation */
+                        curation?: (string|null);
+                    }
+
+                    /** Represents a CustomCuration. */
+                    class CustomCuration implements ICustomCuration {
+
+                        /**
+                         * Constructs a new CustomCuration.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.CurationConfig.ICustomCuration);
+
+                        /** CustomCuration curation. */
+                        public curation: string;
+
+                        /**
+                         * Creates a new CustomCuration instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomCuration instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.CurationConfig.ICustomCuration): google.cloud.apihub.v1.CurationConfig.CustomCuration;
+
+                        /**
+                         * Encodes the specified CustomCuration message. Does not implicitly {@link google.cloud.apihub.v1.CurationConfig.CustomCuration.verify|verify} messages.
+                         * @param message CustomCuration message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.CurationConfig.ICustomCuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomCuration message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CurationConfig.CustomCuration.verify|verify} messages.
+                         * @param message CustomCuration message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.CurationConfig.ICustomCuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomCuration message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomCuration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CurationConfig.CustomCuration;
+
+                        /**
+                         * Decodes a CustomCuration message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomCuration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CurationConfig.CustomCuration;
+
+                        /**
+                         * Verifies a CustomCuration message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomCuration message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomCuration
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CurationConfig.CustomCuration;
+
+                        /**
+                         * Creates a plain object from a CustomCuration message. Also converts values to other types if specified.
+                         * @param message CustomCuration
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.CurationConfig.CustomCuration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomCuration to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomCuration
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExecutionStatus. */
+                interface IExecutionStatus {
+
+                    /** ExecutionStatus currentExecutionState */
+                    currentExecutionState?: (google.cloud.apihub.v1.ExecutionStatus.CurrentExecutionState|keyof typeof google.cloud.apihub.v1.ExecutionStatus.CurrentExecutionState|null);
+
+                    /** ExecutionStatus lastExecution */
+                    lastExecution?: (google.cloud.apihub.v1.ExecutionStatus.ILastExecution|null);
+                }
+
+                /** Represents an ExecutionStatus. */
+                class ExecutionStatus implements IExecutionStatus {
+
+                    /**
+                     * Constructs a new ExecutionStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IExecutionStatus);
+
+                    /** ExecutionStatus currentExecutionState. */
+                    public currentExecutionState: (google.cloud.apihub.v1.ExecutionStatus.CurrentExecutionState|keyof typeof google.cloud.apihub.v1.ExecutionStatus.CurrentExecutionState);
+
+                    /** ExecutionStatus lastExecution. */
+                    public lastExecution?: (google.cloud.apihub.v1.ExecutionStatus.ILastExecution|null);
+
+                    /**
+                     * Creates a new ExecutionStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutionStatus instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IExecutionStatus): google.cloud.apihub.v1.ExecutionStatus;
+
+                    /**
+                     * Encodes the specified ExecutionStatus message. Does not implicitly {@link google.cloud.apihub.v1.ExecutionStatus.verify|verify} messages.
+                     * @param message ExecutionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IExecutionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutionStatus message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ExecutionStatus.verify|verify} messages.
+                     * @param message ExecutionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IExecutionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutionStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ExecutionStatus;
+
+                    /**
+                     * Decodes an ExecutionStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ExecutionStatus;
+
+                    /**
+                     * Verifies an ExecutionStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutionStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutionStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ExecutionStatus;
+
+                    /**
+                     * Creates a plain object from an ExecutionStatus message. Also converts values to other types if specified.
+                     * @param message ExecutionStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ExecutionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutionStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutionStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExecutionStatus {
+
+                    /** Properties of a LastExecution. */
+                    interface ILastExecution {
+
+                        /** LastExecution result */
+                        result?: (google.cloud.apihub.v1.ExecutionStatus.LastExecution.Result|keyof typeof google.cloud.apihub.v1.ExecutionStatus.LastExecution.Result|null);
+
+                        /** LastExecution errorMessage */
+                        errorMessage?: (string|null);
+
+                        /** LastExecution startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** LastExecution endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a LastExecution. */
+                    class LastExecution implements ILastExecution {
+
+                        /**
+                         * Constructs a new LastExecution.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.apihub.v1.ExecutionStatus.ILastExecution);
+
+                        /** LastExecution result. */
+                        public result: (google.cloud.apihub.v1.ExecutionStatus.LastExecution.Result|keyof typeof google.cloud.apihub.v1.ExecutionStatus.LastExecution.Result);
+
+                        /** LastExecution errorMessage. */
+                        public errorMessage: string;
+
+                        /** LastExecution startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** LastExecution endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new LastExecution instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LastExecution instance
+                         */
+                        public static create(properties?: google.cloud.apihub.v1.ExecutionStatus.ILastExecution): google.cloud.apihub.v1.ExecutionStatus.LastExecution;
+
+                        /**
+                         * Encodes the specified LastExecution message. Does not implicitly {@link google.cloud.apihub.v1.ExecutionStatus.LastExecution.verify|verify} messages.
+                         * @param message LastExecution message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.apihub.v1.ExecutionStatus.ILastExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LastExecution message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ExecutionStatus.LastExecution.verify|verify} messages.
+                         * @param message LastExecution message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.apihub.v1.ExecutionStatus.ILastExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LastExecution message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LastExecution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ExecutionStatus.LastExecution;
+
+                        /**
+                         * Decodes a LastExecution message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LastExecution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ExecutionStatus.LastExecution;
+
+                        /**
+                         * Verifies a LastExecution message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LastExecution message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LastExecution
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ExecutionStatus.LastExecution;
+
+                        /**
+                         * Creates a plain object from a LastExecution message. Also converts values to other types if specified.
+                         * @param message LastExecution
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.apihub.v1.ExecutionStatus.LastExecution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LastExecution to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LastExecution
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LastExecution {
+
+                        /** Result enum. */
+                        enum Result {
+                            RESULT_UNSPECIFIED = 0,
+                            SUCCEEDED = 1,
+                            FAILED = 2
+                        }
+                    }
+
+                    /** CurrentExecutionState enum. */
+                    enum CurrentExecutionState {
+                        CURRENT_EXECUTION_STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        NOT_RUNNING = 2
+                    }
+                }
+
+                /** Properties of a CreatePluginRequest. */
+                interface ICreatePluginRequest {
+
+                    /** CreatePluginRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePluginRequest pluginId */
+                    pluginId?: (string|null);
+
+                    /** CreatePluginRequest plugin */
+                    plugin?: (google.cloud.apihub.v1.IPlugin|null);
+                }
+
+                /** Represents a CreatePluginRequest. */
+                class CreatePluginRequest implements ICreatePluginRequest {
+
+                    /**
+                     * Constructs a new CreatePluginRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICreatePluginRequest);
+
+                    /** CreatePluginRequest parent. */
+                    public parent: string;
+
+                    /** CreatePluginRequest pluginId. */
+                    public pluginId: string;
+
+                    /** CreatePluginRequest plugin. */
+                    public plugin?: (google.cloud.apihub.v1.IPlugin|null);
+
+                    /**
+                     * Creates a new CreatePluginRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePluginRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICreatePluginRequest): google.cloud.apihub.v1.CreatePluginRequest;
+
+                    /**
+                     * Encodes the specified CreatePluginRequest message. Does not implicitly {@link google.cloud.apihub.v1.CreatePluginRequest.verify|verify} messages.
+                     * @param message CreatePluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICreatePluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePluginRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CreatePluginRequest.verify|verify} messages.
+                     * @param message CreatePluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICreatePluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePluginRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CreatePluginRequest;
+
+                    /**
+                     * Decodes a CreatePluginRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CreatePluginRequest;
+
+                    /**
+                     * Verifies a CreatePluginRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePluginRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePluginRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CreatePluginRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePluginRequest message. Also converts values to other types if specified.
+                     * @param message CreatePluginRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.CreatePluginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePluginRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePluginRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePluginRequest. */
+                interface IDeletePluginRequest {
+
+                    /** DeletePluginRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeletePluginRequest. */
+                class DeletePluginRequest implements IDeletePluginRequest {
+
+                    /**
+                     * Constructs a new DeletePluginRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDeletePluginRequest);
+
+                    /** DeletePluginRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeletePluginRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePluginRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDeletePluginRequest): google.cloud.apihub.v1.DeletePluginRequest;
+
+                    /**
+                     * Encodes the specified DeletePluginRequest message. Does not implicitly {@link google.cloud.apihub.v1.DeletePluginRequest.verify|verify} messages.
+                     * @param message DeletePluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDeletePluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePluginRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DeletePluginRequest.verify|verify} messages.
+                     * @param message DeletePluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDeletePluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePluginRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DeletePluginRequest;
+
+                    /**
+                     * Decodes a DeletePluginRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DeletePluginRequest;
+
+                    /**
+                     * Verifies a DeletePluginRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePluginRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePluginRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DeletePluginRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePluginRequest message. Also converts values to other types if specified.
+                     * @param message DeletePluginRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DeletePluginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePluginRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePluginRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPluginsRequest. */
+                interface IListPluginsRequest {
+
+                    /** ListPluginsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPluginsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListPluginsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPluginsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPluginsRequest. */
+                class ListPluginsRequest implements IListPluginsRequest {
+
+                    /**
+                     * Constructs a new ListPluginsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListPluginsRequest);
+
+                    /** ListPluginsRequest parent. */
+                    public parent: string;
+
+                    /** ListPluginsRequest filter. */
+                    public filter: string;
+
+                    /** ListPluginsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPluginsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPluginsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPluginsRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListPluginsRequest): google.cloud.apihub.v1.ListPluginsRequest;
+
+                    /**
+                     * Encodes the specified ListPluginsRequest message. Does not implicitly {@link google.cloud.apihub.v1.ListPluginsRequest.verify|verify} messages.
+                     * @param message ListPluginsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListPluginsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPluginsRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListPluginsRequest.verify|verify} messages.
+                     * @param message ListPluginsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListPluginsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPluginsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPluginsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListPluginsRequest;
+
+                    /**
+                     * Decodes a ListPluginsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPluginsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListPluginsRequest;
+
+                    /**
+                     * Verifies a ListPluginsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPluginsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPluginsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListPluginsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPluginsRequest message. Also converts values to other types if specified.
+                     * @param message ListPluginsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListPluginsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPluginsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPluginsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPluginsResponse. */
+                interface IListPluginsResponse {
+
+                    /** ListPluginsResponse plugins */
+                    plugins?: (google.cloud.apihub.v1.IPlugin[]|null);
+
+                    /** ListPluginsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPluginsResponse. */
+                class ListPluginsResponse implements IListPluginsResponse {
+
+                    /**
+                     * Constructs a new ListPluginsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListPluginsResponse);
+
+                    /** ListPluginsResponse plugins. */
+                    public plugins: google.cloud.apihub.v1.IPlugin[];
+
+                    /** ListPluginsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPluginsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPluginsResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListPluginsResponse): google.cloud.apihub.v1.ListPluginsResponse;
+
+                    /**
+                     * Encodes the specified ListPluginsResponse message. Does not implicitly {@link google.cloud.apihub.v1.ListPluginsResponse.verify|verify} messages.
+                     * @param message ListPluginsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListPluginsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPluginsResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListPluginsResponse.verify|verify} messages.
+                     * @param message ListPluginsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListPluginsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPluginsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPluginsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListPluginsResponse;
+
+                    /**
+                     * Decodes a ListPluginsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPluginsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListPluginsResponse;
+
+                    /**
+                     * Verifies a ListPluginsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPluginsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPluginsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListPluginsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPluginsResponse message. Also converts values to other types if specified.
+                     * @param message ListPluginsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListPluginsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPluginsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPluginsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatePluginInstanceRequest. */
+                interface ICreatePluginInstanceRequest {
+
+                    /** CreatePluginInstanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePluginInstanceRequest pluginInstanceId */
+                    pluginInstanceId?: (string|null);
+
+                    /** CreatePluginInstanceRequest pluginInstance */
+                    pluginInstance?: (google.cloud.apihub.v1.IPluginInstance|null);
+                }
+
+                /** Represents a CreatePluginInstanceRequest. */
+                class CreatePluginInstanceRequest implements ICreatePluginInstanceRequest {
+
+                    /**
+                     * Constructs a new CreatePluginInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.ICreatePluginInstanceRequest);
+
+                    /** CreatePluginInstanceRequest parent. */
+                    public parent: string;
+
+                    /** CreatePluginInstanceRequest pluginInstanceId. */
+                    public pluginInstanceId: string;
+
+                    /** CreatePluginInstanceRequest pluginInstance. */
+                    public pluginInstance?: (google.cloud.apihub.v1.IPluginInstance|null);
+
+                    /**
+                     * Creates a new CreatePluginInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePluginInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.ICreatePluginInstanceRequest): google.cloud.apihub.v1.CreatePluginInstanceRequest;
+
+                    /**
+                     * Encodes the specified CreatePluginInstanceRequest message. Does not implicitly {@link google.cloud.apihub.v1.CreatePluginInstanceRequest.verify|verify} messages.
+                     * @param message CreatePluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.ICreatePluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePluginInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.CreatePluginInstanceRequest.verify|verify} messages.
+                     * @param message CreatePluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.ICreatePluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePluginInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.CreatePluginInstanceRequest;
+
+                    /**
+                     * Decodes a CreatePluginInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.CreatePluginInstanceRequest;
+
+                    /**
+                     * Verifies a CreatePluginInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePluginInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePluginInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.CreatePluginInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePluginInstanceRequest message. Also converts values to other types if specified.
+                     * @param message CreatePluginInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.CreatePluginInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePluginInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePluginInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExecutePluginInstanceActionRequest. */
+                interface IExecutePluginInstanceActionRequest {
+
+                    /** ExecutePluginInstanceActionRequest name */
+                    name?: (string|null);
+
+                    /** ExecutePluginInstanceActionRequest actionExecutionDetail */
+                    actionExecutionDetail?: (google.cloud.apihub.v1.IActionExecutionDetail|null);
+                }
+
+                /** Represents an ExecutePluginInstanceActionRequest. */
+                class ExecutePluginInstanceActionRequest implements IExecutePluginInstanceActionRequest {
+
+                    /**
+                     * Constructs a new ExecutePluginInstanceActionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IExecutePluginInstanceActionRequest);
+
+                    /** ExecutePluginInstanceActionRequest name. */
+                    public name: string;
+
+                    /** ExecutePluginInstanceActionRequest actionExecutionDetail. */
+                    public actionExecutionDetail?: (google.cloud.apihub.v1.IActionExecutionDetail|null);
+
+                    /**
+                     * Creates a new ExecutePluginInstanceActionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutePluginInstanceActionRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IExecutePluginInstanceActionRequest): google.cloud.apihub.v1.ExecutePluginInstanceActionRequest;
+
+                    /**
+                     * Encodes the specified ExecutePluginInstanceActionRequest message. Does not implicitly {@link google.cloud.apihub.v1.ExecutePluginInstanceActionRequest.verify|verify} messages.
+                     * @param message ExecutePluginInstanceActionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IExecutePluginInstanceActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutePluginInstanceActionRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ExecutePluginInstanceActionRequest.verify|verify} messages.
+                     * @param message ExecutePluginInstanceActionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IExecutePluginInstanceActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutePluginInstanceActionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutePluginInstanceActionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ExecutePluginInstanceActionRequest;
+
+                    /**
+                     * Decodes an ExecutePluginInstanceActionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutePluginInstanceActionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ExecutePluginInstanceActionRequest;
+
+                    /**
+                     * Verifies an ExecutePluginInstanceActionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutePluginInstanceActionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutePluginInstanceActionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ExecutePluginInstanceActionRequest;
+
+                    /**
+                     * Creates a plain object from an ExecutePluginInstanceActionRequest message. Also converts values to other types if specified.
+                     * @param message ExecutePluginInstanceActionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ExecutePluginInstanceActionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutePluginInstanceActionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutePluginInstanceActionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ActionExecutionDetail. */
+                interface IActionExecutionDetail {
+
+                    /** ActionExecutionDetail actionId */
+                    actionId?: (string|null);
+                }
+
+                /** Represents an ActionExecutionDetail. */
+                class ActionExecutionDetail implements IActionExecutionDetail {
+
+                    /**
+                     * Constructs a new ActionExecutionDetail.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IActionExecutionDetail);
+
+                    /** ActionExecutionDetail actionId. */
+                    public actionId: string;
+
+                    /**
+                     * Creates a new ActionExecutionDetail instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ActionExecutionDetail instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IActionExecutionDetail): google.cloud.apihub.v1.ActionExecutionDetail;
+
+                    /**
+                     * Encodes the specified ActionExecutionDetail message. Does not implicitly {@link google.cloud.apihub.v1.ActionExecutionDetail.verify|verify} messages.
+                     * @param message ActionExecutionDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IActionExecutionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ActionExecutionDetail message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ActionExecutionDetail.verify|verify} messages.
+                     * @param message ActionExecutionDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IActionExecutionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ActionExecutionDetail message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ActionExecutionDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ActionExecutionDetail;
+
+                    /**
+                     * Decodes an ActionExecutionDetail message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ActionExecutionDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ActionExecutionDetail;
+
+                    /**
+                     * Verifies an ActionExecutionDetail message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ActionExecutionDetail message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ActionExecutionDetail
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ActionExecutionDetail;
+
+                    /**
+                     * Creates a plain object from an ActionExecutionDetail message. Also converts values to other types if specified.
+                     * @param message ActionExecutionDetail
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ActionExecutionDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ActionExecutionDetail to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ActionExecutionDetail
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExecutePluginInstanceActionResponse. */
+                interface IExecutePluginInstanceActionResponse {
+                }
+
+                /** Represents an ExecutePluginInstanceActionResponse. */
+                class ExecutePluginInstanceActionResponse implements IExecutePluginInstanceActionResponse {
+
+                    /**
+                     * Constructs a new ExecutePluginInstanceActionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IExecutePluginInstanceActionResponse);
+
+                    /**
+                     * Creates a new ExecutePluginInstanceActionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutePluginInstanceActionResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IExecutePluginInstanceActionResponse): google.cloud.apihub.v1.ExecutePluginInstanceActionResponse;
+
+                    /**
+                     * Encodes the specified ExecutePluginInstanceActionResponse message. Does not implicitly {@link google.cloud.apihub.v1.ExecutePluginInstanceActionResponse.verify|verify} messages.
+                     * @param message ExecutePluginInstanceActionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutePluginInstanceActionResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ExecutePluginInstanceActionResponse.verify|verify} messages.
+                     * @param message ExecutePluginInstanceActionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutePluginInstanceActionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutePluginInstanceActionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ExecutePluginInstanceActionResponse;
+
+                    /**
+                     * Decodes an ExecutePluginInstanceActionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutePluginInstanceActionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ExecutePluginInstanceActionResponse;
+
+                    /**
+                     * Verifies an ExecutePluginInstanceActionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutePluginInstanceActionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutePluginInstanceActionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ExecutePluginInstanceActionResponse;
+
+                    /**
+                     * Creates a plain object from an ExecutePluginInstanceActionResponse message. Also converts values to other types if specified.
+                     * @param message ExecutePluginInstanceActionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ExecutePluginInstanceActionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutePluginInstanceActionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutePluginInstanceActionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPluginInstanceRequest. */
+                interface IGetPluginInstanceRequest {
+
+                    /** GetPluginInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPluginInstanceRequest. */
+                class GetPluginInstanceRequest implements IGetPluginInstanceRequest {
+
+                    /**
+                     * Constructs a new GetPluginInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IGetPluginInstanceRequest);
+
+                    /** GetPluginInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPluginInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPluginInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IGetPluginInstanceRequest): google.cloud.apihub.v1.GetPluginInstanceRequest;
+
+                    /**
+                     * Encodes the specified GetPluginInstanceRequest message. Does not implicitly {@link google.cloud.apihub.v1.GetPluginInstanceRequest.verify|verify} messages.
+                     * @param message GetPluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IGetPluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPluginInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.GetPluginInstanceRequest.verify|verify} messages.
+                     * @param message GetPluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IGetPluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPluginInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.GetPluginInstanceRequest;
+
+                    /**
+                     * Decodes a GetPluginInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.GetPluginInstanceRequest;
+
+                    /**
+                     * Verifies a GetPluginInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPluginInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPluginInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.GetPluginInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a GetPluginInstanceRequest message. Also converts values to other types if specified.
+                     * @param message GetPluginInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.GetPluginInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPluginInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPluginInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPluginInstancesRequest. */
+                interface IListPluginInstancesRequest {
+
+                    /** ListPluginInstancesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPluginInstancesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListPluginInstancesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPluginInstancesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPluginInstancesRequest. */
+                class ListPluginInstancesRequest implements IListPluginInstancesRequest {
+
+                    /**
+                     * Constructs a new ListPluginInstancesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListPluginInstancesRequest);
+
+                    /** ListPluginInstancesRequest parent. */
+                    public parent: string;
+
+                    /** ListPluginInstancesRequest filter. */
+                    public filter: string;
+
+                    /** ListPluginInstancesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPluginInstancesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPluginInstancesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPluginInstancesRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListPluginInstancesRequest): google.cloud.apihub.v1.ListPluginInstancesRequest;
+
+                    /**
+                     * Encodes the specified ListPluginInstancesRequest message. Does not implicitly {@link google.cloud.apihub.v1.ListPluginInstancesRequest.verify|verify} messages.
+                     * @param message ListPluginInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListPluginInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPluginInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListPluginInstancesRequest.verify|verify} messages.
+                     * @param message ListPluginInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListPluginInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPluginInstancesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPluginInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListPluginInstancesRequest;
+
+                    /**
+                     * Decodes a ListPluginInstancesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPluginInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListPluginInstancesRequest;
+
+                    /**
+                     * Verifies a ListPluginInstancesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPluginInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPluginInstancesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListPluginInstancesRequest;
+
+                    /**
+                     * Creates a plain object from a ListPluginInstancesRequest message. Also converts values to other types if specified.
+                     * @param message ListPluginInstancesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListPluginInstancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPluginInstancesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPluginInstancesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPluginInstancesResponse. */
+                interface IListPluginInstancesResponse {
+
+                    /** ListPluginInstancesResponse pluginInstances */
+                    pluginInstances?: (google.cloud.apihub.v1.IPluginInstance[]|null);
+
+                    /** ListPluginInstancesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPluginInstancesResponse. */
+                class ListPluginInstancesResponse implements IListPluginInstancesResponse {
+
+                    /**
+                     * Constructs a new ListPluginInstancesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IListPluginInstancesResponse);
+
+                    /** ListPluginInstancesResponse pluginInstances. */
+                    public pluginInstances: google.cloud.apihub.v1.IPluginInstance[];
+
+                    /** ListPluginInstancesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPluginInstancesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPluginInstancesResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IListPluginInstancesResponse): google.cloud.apihub.v1.ListPluginInstancesResponse;
+
+                    /**
+                     * Encodes the specified ListPluginInstancesResponse message. Does not implicitly {@link google.cloud.apihub.v1.ListPluginInstancesResponse.verify|verify} messages.
+                     * @param message ListPluginInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IListPluginInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPluginInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.ListPluginInstancesResponse.verify|verify} messages.
+                     * @param message ListPluginInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IListPluginInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPluginInstancesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPluginInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.ListPluginInstancesResponse;
+
+                    /**
+                     * Decodes a ListPluginInstancesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPluginInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.ListPluginInstancesResponse;
+
+                    /**
+                     * Verifies a ListPluginInstancesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPluginInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPluginInstancesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.ListPluginInstancesResponse;
+
+                    /**
+                     * Creates a plain object from a ListPluginInstancesResponse message. Also converts values to other types if specified.
+                     * @param message ListPluginInstancesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.ListPluginInstancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPluginInstancesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPluginInstancesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnablePluginInstanceActionRequest. */
+                interface IEnablePluginInstanceActionRequest {
+
+                    /** EnablePluginInstanceActionRequest name */
+                    name?: (string|null);
+
+                    /** EnablePluginInstanceActionRequest actionId */
+                    actionId?: (string|null);
+                }
+
+                /** Represents an EnablePluginInstanceActionRequest. */
+                class EnablePluginInstanceActionRequest implements IEnablePluginInstanceActionRequest {
+
+                    /**
+                     * Constructs a new EnablePluginInstanceActionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IEnablePluginInstanceActionRequest);
+
+                    /** EnablePluginInstanceActionRequest name. */
+                    public name: string;
+
+                    /** EnablePluginInstanceActionRequest actionId. */
+                    public actionId: string;
+
+                    /**
+                     * Creates a new EnablePluginInstanceActionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnablePluginInstanceActionRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IEnablePluginInstanceActionRequest): google.cloud.apihub.v1.EnablePluginInstanceActionRequest;
+
+                    /**
+                     * Encodes the specified EnablePluginInstanceActionRequest message. Does not implicitly {@link google.cloud.apihub.v1.EnablePluginInstanceActionRequest.verify|verify} messages.
+                     * @param message EnablePluginInstanceActionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IEnablePluginInstanceActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnablePluginInstanceActionRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.EnablePluginInstanceActionRequest.verify|verify} messages.
+                     * @param message EnablePluginInstanceActionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IEnablePluginInstanceActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnablePluginInstanceActionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnablePluginInstanceActionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.EnablePluginInstanceActionRequest;
+
+                    /**
+                     * Decodes an EnablePluginInstanceActionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnablePluginInstanceActionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.EnablePluginInstanceActionRequest;
+
+                    /**
+                     * Verifies an EnablePluginInstanceActionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnablePluginInstanceActionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnablePluginInstanceActionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.EnablePluginInstanceActionRequest;
+
+                    /**
+                     * Creates a plain object from an EnablePluginInstanceActionRequest message. Also converts values to other types if specified.
+                     * @param message EnablePluginInstanceActionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.EnablePluginInstanceActionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnablePluginInstanceActionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnablePluginInstanceActionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnablePluginInstanceActionResponse. */
+                interface IEnablePluginInstanceActionResponse {
+                }
+
+                /** Represents an EnablePluginInstanceActionResponse. */
+                class EnablePluginInstanceActionResponse implements IEnablePluginInstanceActionResponse {
+
+                    /**
+                     * Constructs a new EnablePluginInstanceActionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IEnablePluginInstanceActionResponse);
+
+                    /**
+                     * Creates a new EnablePluginInstanceActionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnablePluginInstanceActionResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IEnablePluginInstanceActionResponse): google.cloud.apihub.v1.EnablePluginInstanceActionResponse;
+
+                    /**
+                     * Encodes the specified EnablePluginInstanceActionResponse message. Does not implicitly {@link google.cloud.apihub.v1.EnablePluginInstanceActionResponse.verify|verify} messages.
+                     * @param message EnablePluginInstanceActionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnablePluginInstanceActionResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.EnablePluginInstanceActionResponse.verify|verify} messages.
+                     * @param message EnablePluginInstanceActionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnablePluginInstanceActionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnablePluginInstanceActionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.EnablePluginInstanceActionResponse;
+
+                    /**
+                     * Decodes an EnablePluginInstanceActionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnablePluginInstanceActionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.EnablePluginInstanceActionResponse;
+
+                    /**
+                     * Verifies an EnablePluginInstanceActionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnablePluginInstanceActionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnablePluginInstanceActionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.EnablePluginInstanceActionResponse;
+
+                    /**
+                     * Creates a plain object from an EnablePluginInstanceActionResponse message. Also converts values to other types if specified.
+                     * @param message EnablePluginInstanceActionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.EnablePluginInstanceActionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnablePluginInstanceActionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnablePluginInstanceActionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisablePluginInstanceActionRequest. */
+                interface IDisablePluginInstanceActionRequest {
+
+                    /** DisablePluginInstanceActionRequest name */
+                    name?: (string|null);
+
+                    /** DisablePluginInstanceActionRequest actionId */
+                    actionId?: (string|null);
+                }
+
+                /** Represents a DisablePluginInstanceActionRequest. */
+                class DisablePluginInstanceActionRequest implements IDisablePluginInstanceActionRequest {
+
+                    /**
+                     * Constructs a new DisablePluginInstanceActionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDisablePluginInstanceActionRequest);
+
+                    /** DisablePluginInstanceActionRequest name. */
+                    public name: string;
+
+                    /** DisablePluginInstanceActionRequest actionId. */
+                    public actionId: string;
+
+                    /**
+                     * Creates a new DisablePluginInstanceActionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisablePluginInstanceActionRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDisablePluginInstanceActionRequest): google.cloud.apihub.v1.DisablePluginInstanceActionRequest;
+
+                    /**
+                     * Encodes the specified DisablePluginInstanceActionRequest message. Does not implicitly {@link google.cloud.apihub.v1.DisablePluginInstanceActionRequest.verify|verify} messages.
+                     * @param message DisablePluginInstanceActionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDisablePluginInstanceActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisablePluginInstanceActionRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DisablePluginInstanceActionRequest.verify|verify} messages.
+                     * @param message DisablePluginInstanceActionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDisablePluginInstanceActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisablePluginInstanceActionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisablePluginInstanceActionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DisablePluginInstanceActionRequest;
+
+                    /**
+                     * Decodes a DisablePluginInstanceActionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisablePluginInstanceActionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DisablePluginInstanceActionRequest;
+
+                    /**
+                     * Verifies a DisablePluginInstanceActionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisablePluginInstanceActionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisablePluginInstanceActionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DisablePluginInstanceActionRequest;
+
+                    /**
+                     * Creates a plain object from a DisablePluginInstanceActionRequest message. Also converts values to other types if specified.
+                     * @param message DisablePluginInstanceActionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DisablePluginInstanceActionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisablePluginInstanceActionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisablePluginInstanceActionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisablePluginInstanceActionResponse. */
+                interface IDisablePluginInstanceActionResponse {
+                }
+
+                /** Represents a DisablePluginInstanceActionResponse. */
+                class DisablePluginInstanceActionResponse implements IDisablePluginInstanceActionResponse {
+
+                    /**
+                     * Constructs a new DisablePluginInstanceActionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDisablePluginInstanceActionResponse);
+
+                    /**
+                     * Creates a new DisablePluginInstanceActionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisablePluginInstanceActionResponse instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDisablePluginInstanceActionResponse): google.cloud.apihub.v1.DisablePluginInstanceActionResponse;
+
+                    /**
+                     * Encodes the specified DisablePluginInstanceActionResponse message. Does not implicitly {@link google.cloud.apihub.v1.DisablePluginInstanceActionResponse.verify|verify} messages.
+                     * @param message DisablePluginInstanceActionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisablePluginInstanceActionResponse message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DisablePluginInstanceActionResponse.verify|verify} messages.
+                     * @param message DisablePluginInstanceActionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisablePluginInstanceActionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisablePluginInstanceActionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DisablePluginInstanceActionResponse;
+
+                    /**
+                     * Decodes a DisablePluginInstanceActionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisablePluginInstanceActionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DisablePluginInstanceActionResponse;
+
+                    /**
+                     * Verifies a DisablePluginInstanceActionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisablePluginInstanceActionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisablePluginInstanceActionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DisablePluginInstanceActionResponse;
+
+                    /**
+                     * Creates a plain object from a DisablePluginInstanceActionResponse message. Also converts values to other types if specified.
+                     * @param message DisablePluginInstanceActionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DisablePluginInstanceActionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisablePluginInstanceActionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisablePluginInstanceActionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePluginInstanceRequest. */
+                interface IUpdatePluginInstanceRequest {
+
+                    /** UpdatePluginInstanceRequest pluginInstance */
+                    pluginInstance?: (google.cloud.apihub.v1.IPluginInstance|null);
+
+                    /** UpdatePluginInstanceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePluginInstanceRequest. */
+                class UpdatePluginInstanceRequest implements IUpdatePluginInstanceRequest {
+
+                    /**
+                     * Constructs a new UpdatePluginInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IUpdatePluginInstanceRequest);
+
+                    /** UpdatePluginInstanceRequest pluginInstance. */
+                    public pluginInstance?: (google.cloud.apihub.v1.IPluginInstance|null);
+
+                    /** UpdatePluginInstanceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePluginInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePluginInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IUpdatePluginInstanceRequest): google.cloud.apihub.v1.UpdatePluginInstanceRequest;
+
+                    /**
+                     * Encodes the specified UpdatePluginInstanceRequest message. Does not implicitly {@link google.cloud.apihub.v1.UpdatePluginInstanceRequest.verify|verify} messages.
+                     * @param message UpdatePluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IUpdatePluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePluginInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.UpdatePluginInstanceRequest.verify|verify} messages.
+                     * @param message UpdatePluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IUpdatePluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePluginInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.UpdatePluginInstanceRequest;
+
+                    /**
+                     * Decodes an UpdatePluginInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.UpdatePluginInstanceRequest;
+
+                    /**
+                     * Verifies an UpdatePluginInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePluginInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePluginInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.UpdatePluginInstanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePluginInstanceRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePluginInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.UpdatePluginInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePluginInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePluginInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePluginInstanceRequest. */
+                interface IDeletePluginInstanceRequest {
+
+                    /** DeletePluginInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeletePluginInstanceRequest. */
+                class DeletePluginInstanceRequest implements IDeletePluginInstanceRequest {
+
+                    /**
+                     * Constructs a new DeletePluginInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDeletePluginInstanceRequest);
+
+                    /** DeletePluginInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeletePluginInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePluginInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDeletePluginInstanceRequest): google.cloud.apihub.v1.DeletePluginInstanceRequest;
+
+                    /**
+                     * Encodes the specified DeletePluginInstanceRequest message. Does not implicitly {@link google.cloud.apihub.v1.DeletePluginInstanceRequest.verify|verify} messages.
+                     * @param message DeletePluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDeletePluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePluginInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DeletePluginInstanceRequest.verify|verify} messages.
+                     * @param message DeletePluginInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDeletePluginInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePluginInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DeletePluginInstanceRequest;
+
+                    /**
+                     * Decodes a DeletePluginInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePluginInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DeletePluginInstanceRequest;
+
+                    /**
+                     * Verifies a DeletePluginInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePluginInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePluginInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DeletePluginInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePluginInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DeletePluginInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DeletePluginInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePluginInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePluginInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a Provisioning */
                 class Provisioning extends $protobuf.rpc.Service {
 
@@ -12200,6 +21632,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public createApiHubInstance(request: google.cloud.apihub.v1.ICreateApiHubInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteApiHubInstance.
+                     * @param request DeleteApiHubInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteApiHubInstance(request: google.cloud.apihub.v1.IDeleteApiHubInstanceRequest, callback: google.cloud.apihub.v1.Provisioning.DeleteApiHubInstanceCallback): void;
+
+                    /**
+                     * Calls DeleteApiHubInstance.
+                     * @param request DeleteApiHubInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteApiHubInstance(request: google.cloud.apihub.v1.IDeleteApiHubInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls GetApiHubInstance.
@@ -12238,6 +21684,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateApiHubInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apihub.v1.Provisioning|deleteApiHubInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteApiHubInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.apihub.v1.Provisioning|getApiHubInstance}.
@@ -12357,6 +21810,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateApiHubInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteApiHubInstanceRequest. */
+                interface IDeleteApiHubInstanceRequest {
+
+                    /** DeleteApiHubInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteApiHubInstanceRequest. */
+                class DeleteApiHubInstanceRequest implements IDeleteApiHubInstanceRequest {
+
+                    /**
+                     * Constructs a new DeleteApiHubInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apihub.v1.IDeleteApiHubInstanceRequest);
+
+                    /** DeleteApiHubInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteApiHubInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteApiHubInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.apihub.v1.IDeleteApiHubInstanceRequest): google.cloud.apihub.v1.DeleteApiHubInstanceRequest;
+
+                    /**
+                     * Encodes the specified DeleteApiHubInstanceRequest message. Does not implicitly {@link google.cloud.apihub.v1.DeleteApiHubInstanceRequest.verify|verify} messages.
+                     * @param message DeleteApiHubInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apihub.v1.IDeleteApiHubInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteApiHubInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.apihub.v1.DeleteApiHubInstanceRequest.verify|verify} messages.
+                     * @param message DeleteApiHubInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apihub.v1.IDeleteApiHubInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteApiHubInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteApiHubInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apihub.v1.DeleteApiHubInstanceRequest;
+
+                    /**
+                     * Decodes a DeleteApiHubInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteApiHubInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apihub.v1.DeleteApiHubInstanceRequest;
+
+                    /**
+                     * Verifies a DeleteApiHubInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteApiHubInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteApiHubInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apihub.v1.DeleteApiHubInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteApiHubInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteApiHubInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apihub.v1.DeleteApiHubInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteApiHubInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteApiHubInstanceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

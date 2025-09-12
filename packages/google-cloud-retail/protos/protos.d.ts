@@ -11504,6 +11504,4685 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents a ConversationalSearchService */
+                class ConversationalSearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ConversationalSearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ConversationalSearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ConversationalSearchService;
+
+                    /**
+                     * Calls ConversationalSearch.
+                     * @param request ConversationalSearchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConversationalSearchResponse
+                     */
+                    public conversationalSearch(request: google.cloud.retail.v2.IConversationalSearchRequest, callback: google.cloud.retail.v2.ConversationalSearchService.ConversationalSearchCallback): void;
+
+                    /**
+                     * Calls ConversationalSearch.
+                     * @param request ConversationalSearchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public conversationalSearch(request: google.cloud.retail.v2.IConversationalSearchRequest): Promise<google.cloud.retail.v2.ConversationalSearchResponse>;
+                }
+
+                namespace ConversationalSearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ConversationalSearchService|conversationalSearch}.
+                     * @param error Error, if any
+                     * @param [response] ConversationalSearchResponse
+                     */
+                    type ConversationalSearchCallback = (error: (Error|null), response?: google.cloud.retail.v2.ConversationalSearchResponse) => void;
+                }
+
+                /** Properties of a ConversationalSearchRequest. */
+                interface IConversationalSearchRequest {
+
+                    /** ConversationalSearchRequest placement */
+                    placement?: (string|null);
+
+                    /** ConversationalSearchRequest branch */
+                    branch?: (string|null);
+
+                    /** ConversationalSearchRequest query */
+                    query?: (string|null);
+
+                    /** ConversationalSearchRequest pageCategories */
+                    pageCategories?: (string[]|null);
+
+                    /** ConversationalSearchRequest conversationId */
+                    conversationId?: (string|null);
+
+                    /** ConversationalSearchRequest searchParams */
+                    searchParams?: (google.cloud.retail.v2.ConversationalSearchRequest.ISearchParams|null);
+
+                    /** ConversationalSearchRequest visitorId */
+                    visitorId?: (string|null);
+
+                    /** ConversationalSearchRequest userInfo */
+                    userInfo?: (google.cloud.retail.v2.IUserInfo|null);
+
+                    /** ConversationalSearchRequest conversationalFilteringSpec */
+                    conversationalFilteringSpec?: (google.cloud.retail.v2.ConversationalSearchRequest.IConversationalFilteringSpec|null);
+
+                    /** ConversationalSearchRequest userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
+
+                    /** ConversationalSearchRequest safetySettings */
+                    safetySettings?: (google.cloud.retail.v2.ISafetySetting[]|null);
+                }
+
+                /** Represents a ConversationalSearchRequest. */
+                class ConversationalSearchRequest implements IConversationalSearchRequest {
+
+                    /**
+                     * Constructs a new ConversationalSearchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IConversationalSearchRequest);
+
+                    /** ConversationalSearchRequest placement. */
+                    public placement: string;
+
+                    /** ConversationalSearchRequest branch. */
+                    public branch: string;
+
+                    /** ConversationalSearchRequest query. */
+                    public query: string;
+
+                    /** ConversationalSearchRequest pageCategories. */
+                    public pageCategories: string[];
+
+                    /** ConversationalSearchRequest conversationId. */
+                    public conversationId: string;
+
+                    /** ConversationalSearchRequest searchParams. */
+                    public searchParams?: (google.cloud.retail.v2.ConversationalSearchRequest.ISearchParams|null);
+
+                    /** ConversationalSearchRequest visitorId. */
+                    public visitorId: string;
+
+                    /** ConversationalSearchRequest userInfo. */
+                    public userInfo?: (google.cloud.retail.v2.IUserInfo|null);
+
+                    /** ConversationalSearchRequest conversationalFilteringSpec. */
+                    public conversationalFilteringSpec?: (google.cloud.retail.v2.ConversationalSearchRequest.IConversationalFilteringSpec|null);
+
+                    /** ConversationalSearchRequest userLabels. */
+                    public userLabels: { [k: string]: string };
+
+                    /** ConversationalSearchRequest safetySettings. */
+                    public safetySettings: google.cloud.retail.v2.ISafetySetting[];
+
+                    /**
+                     * Creates a new ConversationalSearchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationalSearchRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IConversationalSearchRequest): google.cloud.retail.v2.ConversationalSearchRequest;
+
+                    /**
+                     * Encodes the specified ConversationalSearchRequest message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.verify|verify} messages.
+                     * @param message ConversationalSearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IConversationalSearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationalSearchRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.verify|verify} messages.
+                     * @param message ConversationalSearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IConversationalSearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationalSearchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationalSearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchRequest;
+
+                    /**
+                     * Decodes a ConversationalSearchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationalSearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchRequest;
+
+                    /**
+                     * Verifies a ConversationalSearchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationalSearchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationalSearchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchRequest;
+
+                    /**
+                     * Creates a plain object from a ConversationalSearchRequest message. Also converts values to other types if specified.
+                     * @param message ConversationalSearchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ConversationalSearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationalSearchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationalSearchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversationalSearchRequest {
+
+                    /** Properties of a SearchParams. */
+                    interface ISearchParams {
+
+                        /** SearchParams filter */
+                        filter?: (string|null);
+
+                        /** SearchParams canonicalFilter */
+                        canonicalFilter?: (string|null);
+
+                        /** SearchParams sortBy */
+                        sortBy?: (string|null);
+
+                        /** SearchParams boostSpec */
+                        boostSpec?: (google.cloud.retail.v2.SearchRequest.IBoostSpec|null);
+                    }
+
+                    /** Represents a SearchParams. */
+                    class SearchParams implements ISearchParams {
+
+                        /**
+                         * Constructs a new SearchParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ConversationalSearchRequest.ISearchParams);
+
+                        /** SearchParams filter. */
+                        public filter: string;
+
+                        /** SearchParams canonicalFilter. */
+                        public canonicalFilter: string;
+
+                        /** SearchParams sortBy. */
+                        public sortBy: string;
+
+                        /** SearchParams boostSpec. */
+                        public boostSpec?: (google.cloud.retail.v2.SearchRequest.IBoostSpec|null);
+
+                        /**
+                         * Creates a new SearchParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchParams instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ConversationalSearchRequest.ISearchParams): google.cloud.retail.v2.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Encodes the specified SearchParams message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.SearchParams.verify|verify} messages.
+                         * @param message SearchParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ConversationalSearchRequest.ISearchParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchParams message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.SearchParams.verify|verify} messages.
+                         * @param message SearchParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchRequest.ISearchParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Decodes a SearchParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Verifies a SearchParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Creates a plain object from a SearchParams message. Also converts values to other types if specified.
+                         * @param message SearchParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ConversationalSearchRequest.SearchParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a UserAnswer. */
+                    interface IUserAnswer {
+
+                        /** UserAnswer textAnswer */
+                        textAnswer?: (string|null);
+
+                        /** UserAnswer selectedAnswer */
+                        selectedAnswer?: (google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.ISelectedAnswer|null);
+                    }
+
+                    /** Represents a UserAnswer. */
+                    class UserAnswer implements IUserAnswer {
+
+                        /**
+                         * Constructs a new UserAnswer.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ConversationalSearchRequest.IUserAnswer);
+
+                        /** UserAnswer textAnswer. */
+                        public textAnswer?: (string|null);
+
+                        /** UserAnswer selectedAnswer. */
+                        public selectedAnswer?: (google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.ISelectedAnswer|null);
+
+                        /** UserAnswer type. */
+                        public type?: ("textAnswer"|"selectedAnswer");
+
+                        /**
+                         * Creates a new UserAnswer instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserAnswer instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ConversationalSearchRequest.IUserAnswer): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Encodes the specified UserAnswer message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.verify|verify} messages.
+                         * @param message UserAnswer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ConversationalSearchRequest.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.verify|verify} messages.
+                         * @param message UserAnswer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchRequest.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserAnswer message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserAnswer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Decodes a UserAnswer message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserAnswer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Verifies a UserAnswer message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserAnswer message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserAnswer
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Creates a plain object from a UserAnswer message. Also converts values to other types if specified.
+                         * @param message UserAnswer
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserAnswer to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserAnswer
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace UserAnswer {
+
+                        /** Properties of a SelectedAnswer. */
+                        interface ISelectedAnswer {
+
+                            /** SelectedAnswer productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+                        }
+
+                        /** Represents a SelectedAnswer. */
+                        class SelectedAnswer implements ISelectedAnswer {
+
+                            /**
+                             * Constructs a new SelectedAnswer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.ISelectedAnswer);
+
+                            /** SelectedAnswer productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new SelectedAnswer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SelectedAnswer instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.ISelectedAnswer): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Encodes the specified SelectedAnswer message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer.verify|verify} messages.
+                             * @param message SelectedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SelectedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer.verify|verify} messages.
+                             * @param message SelectedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SelectedAnswer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SelectedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Decodes a SelectedAnswer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SelectedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Verifies a SelectedAnswer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SelectedAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SelectedAnswer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Creates a plain object from a SelectedAnswer message. Also converts values to other types if specified.
+                             * @param message SelectedAnswer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.ConversationalSearchRequest.UserAnswer.SelectedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SelectedAnswer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SelectedAnswer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ConversationalFilteringSpec. */
+                    interface IConversationalFilteringSpec {
+
+                        /** ConversationalFilteringSpec enableConversationalFiltering */
+                        enableConversationalFiltering?: (boolean|null);
+
+                        /** ConversationalFilteringSpec userAnswer */
+                        userAnswer?: (google.cloud.retail.v2.ConversationalSearchRequest.IUserAnswer|null);
+
+                        /** ConversationalFilteringSpec conversationalFilteringMode */
+                        conversationalFilteringMode?: (google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec.Mode|keyof typeof google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec.Mode|null);
+                    }
+
+                    /** Represents a ConversationalFilteringSpec. */
+                    class ConversationalFilteringSpec implements IConversationalFilteringSpec {
+
+                        /**
+                         * Constructs a new ConversationalFilteringSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ConversationalSearchRequest.IConversationalFilteringSpec);
+
+                        /** ConversationalFilteringSpec enableConversationalFiltering. */
+                        public enableConversationalFiltering: boolean;
+
+                        /** ConversationalFilteringSpec userAnswer. */
+                        public userAnswer?: (google.cloud.retail.v2.ConversationalSearchRequest.IUserAnswer|null);
+
+                        /** ConversationalFilteringSpec conversationalFilteringMode. */
+                        public conversationalFilteringMode: (google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec.Mode|keyof typeof google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec.Mode);
+
+                        /**
+                         * Creates a new ConversationalFilteringSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationalFilteringSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ConversationalSearchRequest.IConversationalFilteringSpec): google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringSpec message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec.verify|verify} messages.
+                         * @param message ConversationalFilteringSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ConversationalSearchRequest.IConversationalFilteringSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec.verify|verify} messages.
+                         * @param message ConversationalFilteringSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchRequest.IConversationalFilteringSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationalFilteringSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationalFilteringSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Decodes a ConversationalFilteringSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationalFilteringSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Verifies a ConversationalFilteringSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationalFilteringSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationalFilteringSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Creates a plain object from a ConversationalFilteringSpec message. Also converts values to other types if specified.
+                         * @param message ConversationalFilteringSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ConversationalSearchRequest.ConversationalFilteringSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationalFilteringSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversationalFilteringSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConversationalFilteringSpec {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            ENABLED = 2,
+                            CONVERSATIONAL_FILTER_ONLY = 3
+                        }
+                    }
+                }
+
+                /** Properties of a ConversationalSearchResponse. */
+                interface IConversationalSearchResponse {
+
+                    /** ConversationalSearchResponse userQueryTypes */
+                    userQueryTypes?: (string[]|null);
+
+                    /** ConversationalSearchResponse conversationalTextResponse */
+                    conversationalTextResponse?: (string|null);
+
+                    /** ConversationalSearchResponse followupQuestion */
+                    followupQuestion?: (google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                    /** ConversationalSearchResponse conversationId */
+                    conversationId?: (string|null);
+
+                    /** ConversationalSearchResponse refinedSearch */
+                    refinedSearch?: (google.cloud.retail.v2.ConversationalSearchResponse.IRefinedSearch[]|null);
+
+                    /** ConversationalSearchResponse conversationalFilteringResult */
+                    conversationalFilteringResult?: (google.cloud.retail.v2.ConversationalSearchResponse.IConversationalFilteringResult|null);
+
+                    /** ConversationalSearchResponse state */
+                    state?: (google.cloud.retail.v2.ConversationalSearchResponse.State|keyof typeof google.cloud.retail.v2.ConversationalSearchResponse.State|null);
+                }
+
+                /** Represents a ConversationalSearchResponse. */
+                class ConversationalSearchResponse implements IConversationalSearchResponse {
+
+                    /**
+                     * Constructs a new ConversationalSearchResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IConversationalSearchResponse);
+
+                    /** ConversationalSearchResponse userQueryTypes. */
+                    public userQueryTypes: string[];
+
+                    /** ConversationalSearchResponse conversationalTextResponse. */
+                    public conversationalTextResponse: string;
+
+                    /** ConversationalSearchResponse followupQuestion. */
+                    public followupQuestion?: (google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                    /** ConversationalSearchResponse conversationId. */
+                    public conversationId: string;
+
+                    /** ConversationalSearchResponse refinedSearch. */
+                    public refinedSearch: google.cloud.retail.v2.ConversationalSearchResponse.IRefinedSearch[];
+
+                    /** ConversationalSearchResponse conversationalFilteringResult. */
+                    public conversationalFilteringResult?: (google.cloud.retail.v2.ConversationalSearchResponse.IConversationalFilteringResult|null);
+
+                    /** ConversationalSearchResponse state. */
+                    public state: (google.cloud.retail.v2.ConversationalSearchResponse.State|keyof typeof google.cloud.retail.v2.ConversationalSearchResponse.State);
+
+                    /**
+                     * Creates a new ConversationalSearchResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationalSearchResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IConversationalSearchResponse): google.cloud.retail.v2.ConversationalSearchResponse;
+
+                    /**
+                     * Encodes the specified ConversationalSearchResponse message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.verify|verify} messages.
+                     * @param message ConversationalSearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IConversationalSearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationalSearchResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.verify|verify} messages.
+                     * @param message ConversationalSearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IConversationalSearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationalSearchResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationalSearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchResponse;
+
+                    /**
+                     * Decodes a ConversationalSearchResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationalSearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchResponse;
+
+                    /**
+                     * Verifies a ConversationalSearchResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationalSearchResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationalSearchResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchResponse;
+
+                    /**
+                     * Creates a plain object from a ConversationalSearchResponse message. Also converts values to other types if specified.
+                     * @param message ConversationalSearchResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ConversationalSearchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationalSearchResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationalSearchResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversationalSearchResponse {
+
+                    /** Properties of a FollowupQuestion. */
+                    interface IFollowupQuestion {
+
+                        /** FollowupQuestion followupQuestion */
+                        followupQuestion?: (string|null);
+
+                        /** FollowupQuestion suggestedAnswers */
+                        suggestedAnswers?: (google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer[]|null);
+                    }
+
+                    /** Represents a FollowupQuestion. */
+                    class FollowupQuestion implements IFollowupQuestion {
+
+                        /**
+                         * Constructs a new FollowupQuestion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion);
+
+                        /** FollowupQuestion followupQuestion. */
+                        public followupQuestion: string;
+
+                        /** FollowupQuestion suggestedAnswers. */
+                        public suggestedAnswers: google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer[];
+
+                        /**
+                         * Creates a new FollowupQuestion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FollowupQuestion instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Encodes the specified FollowupQuestion message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.verify|verify} messages.
+                         * @param message FollowupQuestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FollowupQuestion message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.verify|verify} messages.
+                         * @param message FollowupQuestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FollowupQuestion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FollowupQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Decodes a FollowupQuestion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FollowupQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Verifies a FollowupQuestion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FollowupQuestion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FollowupQuestion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Creates a plain object from a FollowupQuestion message. Also converts values to other types if specified.
+                         * @param message FollowupQuestion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FollowupQuestion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FollowupQuestion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FollowupQuestion {
+
+                        /** Properties of a SuggestedAnswer. */
+                        interface ISuggestedAnswer {
+
+                            /** SuggestedAnswer productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+                        }
+
+                        /** Represents a SuggestedAnswer. */
+                        class SuggestedAnswer implements ISuggestedAnswer {
+
+                            /**
+                             * Constructs a new SuggestedAnswer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer);
+
+                            /** SuggestedAnswer productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new SuggestedAnswer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SuggestedAnswer instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Encodes the specified SuggestedAnswer message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.verify|verify} messages.
+                             * @param message SuggestedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SuggestedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.verify|verify} messages.
+                             * @param message SuggestedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SuggestedAnswer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SuggestedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Decodes a SuggestedAnswer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SuggestedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Verifies a SuggestedAnswer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SuggestedAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SuggestedAnswer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Creates a plain object from a SuggestedAnswer message. Also converts values to other types if specified.
+                             * @param message SuggestedAnswer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SuggestedAnswer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SuggestedAnswer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a RefinedSearch. */
+                    interface IRefinedSearch {
+
+                        /** RefinedSearch query */
+                        query?: (string|null);
+                    }
+
+                    /** Represents a RefinedSearch. */
+                    class RefinedSearch implements IRefinedSearch {
+
+                        /**
+                         * Constructs a new RefinedSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ConversationalSearchResponse.IRefinedSearch);
+
+                        /** RefinedSearch query. */
+                        public query: string;
+
+                        /**
+                         * Creates a new RefinedSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RefinedSearch instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ConversationalSearchResponse.IRefinedSearch): google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Encodes the specified RefinedSearch message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch.verify|verify} messages.
+                         * @param message RefinedSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ConversationalSearchResponse.IRefinedSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RefinedSearch message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch.verify|verify} messages.
+                         * @param message RefinedSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchResponse.IRefinedSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RefinedSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RefinedSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Decodes a RefinedSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RefinedSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Verifies a RefinedSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RefinedSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RefinedSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Creates a plain object from a RefinedSearch message. Also converts values to other types if specified.
+                         * @param message RefinedSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RefinedSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RefinedSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConversationalFilteringResult. */
+                    interface IConversationalFilteringResult {
+
+                        /** ConversationalFilteringResult followupQuestion */
+                        followupQuestion?: (google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                        /** ConversationalFilteringResult additionalFilter */
+                        additionalFilter?: (google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter|null);
+                    }
+
+                    /** Represents a ConversationalFilteringResult. */
+                    class ConversationalFilteringResult implements IConversationalFilteringResult {
+
+                        /**
+                         * Constructs a new ConversationalFilteringResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ConversationalSearchResponse.IConversationalFilteringResult);
+
+                        /** ConversationalFilteringResult followupQuestion. */
+                        public followupQuestion?: (google.cloud.retail.v2.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                        /** ConversationalFilteringResult additionalFilter. */
+                        public additionalFilter?: (google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter|null);
+
+                        /**
+                         * Creates a new ConversationalFilteringResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationalFilteringResult instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ConversationalSearchResponse.IConversationalFilteringResult): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringResult message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.verify|verify} messages.
+                         * @param message ConversationalFilteringResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ConversationalSearchResponse.IConversationalFilteringResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.verify|verify} messages.
+                         * @param message ConversationalFilteringResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchResponse.IConversationalFilteringResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationalFilteringResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationalFilteringResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Decodes a ConversationalFilteringResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationalFilteringResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Verifies a ConversationalFilteringResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationalFilteringResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationalFilteringResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Creates a plain object from a ConversationalFilteringResult message. Also converts values to other types if specified.
+                         * @param message ConversationalFilteringResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationalFilteringResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversationalFilteringResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConversationalFilteringResult {
+
+                        /** Properties of an AdditionalFilter. */
+                        interface IAdditionalFilter {
+
+                            /** AdditionalFilter productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+                        }
+
+                        /** Represents an AdditionalFilter. */
+                        class AdditionalFilter implements IAdditionalFilter {
+
+                            /**
+                             * Constructs a new AdditionalFilter.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter);
+
+                            /** AdditionalFilter productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new AdditionalFilter instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AdditionalFilter instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Encodes the specified AdditionalFilter message. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.verify|verify} messages.
+                             * @param message AdditionalFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AdditionalFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.verify|verify} messages.
+                             * @param message AdditionalFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AdditionalFilter message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AdditionalFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Decodes an AdditionalFilter message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AdditionalFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Verifies an AdditionalFilter message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AdditionalFilter message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AdditionalFilter
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Creates a plain object from an AdditionalFilter message. Also converts values to other types if specified.
+                             * @param message AdditionalFilter
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AdditionalFilter to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AdditionalFilter
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STREAMING = 1,
+                        SUCCEEDED = 2
+                    }
+                }
+
+                /** HarmCategory enum. */
+                enum HarmCategory {
+                    HARM_CATEGORY_UNSPECIFIED = 0,
+                    HARM_CATEGORY_HATE_SPEECH = 1,
+                    HARM_CATEGORY_DANGEROUS_CONTENT = 2,
+                    HARM_CATEGORY_HARASSMENT = 3,
+                    HARM_CATEGORY_SEXUALLY_EXPLICIT = 4,
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 5
+                }
+
+                /** Properties of a SafetySetting. */
+                interface ISafetySetting {
+
+                    /** SafetySetting category */
+                    category?: (google.cloud.retail.v2.HarmCategory|keyof typeof google.cloud.retail.v2.HarmCategory|null);
+
+                    /** SafetySetting threshold */
+                    threshold?: (google.cloud.retail.v2.SafetySetting.HarmBlockThreshold|keyof typeof google.cloud.retail.v2.SafetySetting.HarmBlockThreshold|null);
+
+                    /** SafetySetting method */
+                    method?: (google.cloud.retail.v2.SafetySetting.HarmBlockMethod|keyof typeof google.cloud.retail.v2.SafetySetting.HarmBlockMethod|null);
+                }
+
+                /** Represents a SafetySetting. */
+                class SafetySetting implements ISafetySetting {
+
+                    /**
+                     * Constructs a new SafetySetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ISafetySetting);
+
+                    /** SafetySetting category. */
+                    public category: (google.cloud.retail.v2.HarmCategory|keyof typeof google.cloud.retail.v2.HarmCategory);
+
+                    /** SafetySetting threshold. */
+                    public threshold: (google.cloud.retail.v2.SafetySetting.HarmBlockThreshold|keyof typeof google.cloud.retail.v2.SafetySetting.HarmBlockThreshold);
+
+                    /** SafetySetting method. */
+                    public method: (google.cloud.retail.v2.SafetySetting.HarmBlockMethod|keyof typeof google.cloud.retail.v2.SafetySetting.HarmBlockMethod);
+
+                    /**
+                     * Creates a new SafetySetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SafetySetting instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ISafetySetting): google.cloud.retail.v2.SafetySetting;
+
+                    /**
+                     * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.retail.v2.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SafetySetting;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SafetySetting;
+
+                    /**
+                     * Verifies a SafetySetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SafetySetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SafetySetting;
+
+                    /**
+                     * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                     * @param message SafetySetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.SafetySetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SafetySetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SafetySetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SafetySetting {
+
+                    /** HarmBlockThreshold enum. */
+                    enum HarmBlockThreshold {
+                        HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0,
+                        BLOCK_LOW_AND_ABOVE = 1,
+                        BLOCK_MEDIUM_AND_ABOVE = 2,
+                        BLOCK_ONLY_HIGH = 3,
+                        BLOCK_NONE = 4,
+                        OFF = 5
+                    }
+
+                    /** HarmBlockMethod enum. */
+                    enum HarmBlockMethod {
+                        HARM_BLOCK_METHOD_UNSPECIFIED = 0,
+                        SEVERITY = 1,
+                        PROBABILITY = 2
+                    }
+                }
+
+                /** Represents a SearchService */
+                class SearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SearchService;
+
+                    /**
+                     * Calls Search.
+                     * @param request SearchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchResponse
+                     */
+                    public search(request: google.cloud.retail.v2.ISearchRequest, callback: google.cloud.retail.v2.SearchService.SearchCallback): void;
+
+                    /**
+                     * Calls Search.
+                     * @param request SearchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public search(request: google.cloud.retail.v2.ISearchRequest): Promise<google.cloud.retail.v2.SearchResponse>;
+                }
+
+                namespace SearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.SearchService|search}.
+                     * @param error Error, if any
+                     * @param [response] SearchResponse
+                     */
+                    type SearchCallback = (error: (Error|null), response?: google.cloud.retail.v2.SearchResponse) => void;
+                }
+
+                /** Properties of a ProductAttributeValue. */
+                interface IProductAttributeValue {
+
+                    /** ProductAttributeValue name */
+                    name?: (string|null);
+
+                    /** ProductAttributeValue value */
+                    value?: (string|null);
+                }
+
+                /** Represents a ProductAttributeValue. */
+                class ProductAttributeValue implements IProductAttributeValue {
+
+                    /**
+                     * Constructs a new ProductAttributeValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IProductAttributeValue);
+
+                    /** ProductAttributeValue name. */
+                    public name: string;
+
+                    /** ProductAttributeValue value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new ProductAttributeValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProductAttributeValue instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IProductAttributeValue): google.cloud.retail.v2.ProductAttributeValue;
+
+                    /**
+                     * Encodes the specified ProductAttributeValue message. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeValue.verify|verify} messages.
+                     * @param message ProductAttributeValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IProductAttributeValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProductAttributeValue message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeValue.verify|verify} messages.
+                     * @param message ProductAttributeValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IProductAttributeValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProductAttributeValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProductAttributeValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ProductAttributeValue;
+
+                    /**
+                     * Decodes a ProductAttributeValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProductAttributeValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ProductAttributeValue;
+
+                    /**
+                     * Verifies a ProductAttributeValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProductAttributeValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProductAttributeValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ProductAttributeValue;
+
+                    /**
+                     * Creates a plain object from a ProductAttributeValue message. Also converts values to other types if specified.
+                     * @param message ProductAttributeValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ProductAttributeValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProductAttributeValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProductAttributeValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProductAttributeInterval. */
+                interface IProductAttributeInterval {
+
+                    /** ProductAttributeInterval name */
+                    name?: (string|null);
+
+                    /** ProductAttributeInterval interval */
+                    interval?: (google.cloud.retail.v2.IInterval|null);
+                }
+
+                /** Represents a ProductAttributeInterval. */
+                class ProductAttributeInterval implements IProductAttributeInterval {
+
+                    /**
+                     * Constructs a new ProductAttributeInterval.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IProductAttributeInterval);
+
+                    /** ProductAttributeInterval name. */
+                    public name: string;
+
+                    /** ProductAttributeInterval interval. */
+                    public interval?: (google.cloud.retail.v2.IInterval|null);
+
+                    /**
+                     * Creates a new ProductAttributeInterval instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProductAttributeInterval instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IProductAttributeInterval): google.cloud.retail.v2.ProductAttributeInterval;
+
+                    /**
+                     * Encodes the specified ProductAttributeInterval message. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeInterval.verify|verify} messages.
+                     * @param message ProductAttributeInterval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IProductAttributeInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProductAttributeInterval message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeInterval.verify|verify} messages.
+                     * @param message ProductAttributeInterval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IProductAttributeInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProductAttributeInterval message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProductAttributeInterval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ProductAttributeInterval;
+
+                    /**
+                     * Decodes a ProductAttributeInterval message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProductAttributeInterval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ProductAttributeInterval;
+
+                    /**
+                     * Verifies a ProductAttributeInterval message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProductAttributeInterval message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProductAttributeInterval
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ProductAttributeInterval;
+
+                    /**
+                     * Creates a plain object from a ProductAttributeInterval message. Also converts values to other types if specified.
+                     * @param message ProductAttributeInterval
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ProductAttributeInterval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProductAttributeInterval to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProductAttributeInterval
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Tile. */
+                interface ITile {
+
+                    /** Tile productAttributeValue */
+                    productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                    /** Tile productAttributeInterval */
+                    productAttributeInterval?: (google.cloud.retail.v2.IProductAttributeInterval|null);
+
+                    /** Tile representativeProductId */
+                    representativeProductId?: (string|null);
+                }
+
+                /** Represents a Tile. */
+                class Tile implements ITile {
+
+                    /**
+                     * Constructs a new Tile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ITile);
+
+                    /** Tile productAttributeValue. */
+                    public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                    /** Tile productAttributeInterval. */
+                    public productAttributeInterval?: (google.cloud.retail.v2.IProductAttributeInterval|null);
+
+                    /** Tile representativeProductId. */
+                    public representativeProductId: string;
+
+                    /** Tile productAttribute. */
+                    public productAttribute?: ("productAttributeValue"|"productAttributeInterval");
+
+                    /**
+                     * Creates a new Tile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Tile instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ITile): google.cloud.retail.v2.Tile;
+
+                    /**
+                     * Encodes the specified Tile message. Does not implicitly {@link google.cloud.retail.v2.Tile.verify|verify} messages.
+                     * @param message Tile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Tile message, length delimited. Does not implicitly {@link google.cloud.retail.v2.Tile.verify|verify} messages.
+                     * @param message Tile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Tile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Tile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.Tile;
+
+                    /**
+                     * Decodes a Tile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Tile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.Tile;
+
+                    /**
+                     * Verifies a Tile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Tile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Tile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.Tile;
+
+                    /**
+                     * Creates a plain object from a Tile message. Also converts values to other types if specified.
+                     * @param message Tile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.Tile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Tile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Tile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchRequest. */
+                interface ISearchRequest {
+
+                    /** SearchRequest placement */
+                    placement?: (string|null);
+
+                    /** SearchRequest branch */
+                    branch?: (string|null);
+
+                    /** SearchRequest query */
+                    query?: (string|null);
+
+                    /** SearchRequest visitorId */
+                    visitorId?: (string|null);
+
+                    /** SearchRequest userInfo */
+                    userInfo?: (google.cloud.retail.v2.IUserInfo|null);
+
+                    /** SearchRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** SearchRequest offset */
+                    offset?: (number|null);
+
+                    /** SearchRequest filter */
+                    filter?: (string|null);
+
+                    /** SearchRequest canonicalFilter */
+                    canonicalFilter?: (string|null);
+
+                    /** SearchRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** SearchRequest facetSpecs */
+                    facetSpecs?: (google.cloud.retail.v2.SearchRequest.IFacetSpec[]|null);
+
+                    /** SearchRequest dynamicFacetSpec */
+                    dynamicFacetSpec?: (google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec|null);
+
+                    /** SearchRequest boostSpec */
+                    boostSpec?: (google.cloud.retail.v2.SearchRequest.IBoostSpec|null);
+
+                    /** SearchRequest queryExpansionSpec */
+                    queryExpansionSpec?: (google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec|null);
+
+                    /** SearchRequest variantRollupKeys */
+                    variantRollupKeys?: (string[]|null);
+
+                    /** SearchRequest pageCategories */
+                    pageCategories?: (string[]|null);
+
+                    /** SearchRequest searchMode */
+                    searchMode?: (google.cloud.retail.v2.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2.SearchRequest.SearchMode|null);
+
+                    /** SearchRequest personalizationSpec */
+                    personalizationSpec?: (google.cloud.retail.v2.SearchRequest.IPersonalizationSpec|null);
+
+                    /** SearchRequest labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** SearchRequest spellCorrectionSpec */
+                    spellCorrectionSpec?: (google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity */
+                    entity?: (string|null);
+
+                    /** SearchRequest conversationalSearchSpec */
+                    conversationalSearchSpec?: (google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec|null);
+
+                    /** SearchRequest tileNavigationSpec */
+                    tileNavigationSpec?: (google.cloud.retail.v2.SearchRequest.ITileNavigationSpec|null);
+
+                    /** SearchRequest languageCode */
+                    languageCode?: (string|null);
+
+                    /** SearchRequest regionCode */
+                    regionCode?: (string|null);
+
+                    /** SearchRequest placeId */
+                    placeId?: (string|null);
+
+                    /** SearchRequest userAttributes */
+                    userAttributes?: ({ [k: string]: google.cloud.retail.v2.IStringList }|null);
+                }
+
+                /** Represents a SearchRequest. */
+                class SearchRequest implements ISearchRequest {
+
+                    /**
+                     * Constructs a new SearchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ISearchRequest);
+
+                    /** SearchRequest placement. */
+                    public placement: string;
+
+                    /** SearchRequest branch. */
+                    public branch: string;
+
+                    /** SearchRequest query. */
+                    public query: string;
+
+                    /** SearchRequest visitorId. */
+                    public visitorId: string;
+
+                    /** SearchRequest userInfo. */
+                    public userInfo?: (google.cloud.retail.v2.IUserInfo|null);
+
+                    /** SearchRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchRequest pageToken. */
+                    public pageToken: string;
+
+                    /** SearchRequest offset. */
+                    public offset: number;
+
+                    /** SearchRequest filter. */
+                    public filter: string;
+
+                    /** SearchRequest canonicalFilter. */
+                    public canonicalFilter: string;
+
+                    /** SearchRequest orderBy. */
+                    public orderBy: string;
+
+                    /** SearchRequest facetSpecs. */
+                    public facetSpecs: google.cloud.retail.v2.SearchRequest.IFacetSpec[];
+
+                    /** SearchRequest dynamicFacetSpec. */
+                    public dynamicFacetSpec?: (google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec|null);
+
+                    /** SearchRequest boostSpec. */
+                    public boostSpec?: (google.cloud.retail.v2.SearchRequest.IBoostSpec|null);
+
+                    /** SearchRequest queryExpansionSpec. */
+                    public queryExpansionSpec?: (google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec|null);
+
+                    /** SearchRequest variantRollupKeys. */
+                    public variantRollupKeys: string[];
+
+                    /** SearchRequest pageCategories. */
+                    public pageCategories: string[];
+
+                    /** SearchRequest searchMode. */
+                    public searchMode: (google.cloud.retail.v2.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2.SearchRequest.SearchMode);
+
+                    /** SearchRequest personalizationSpec. */
+                    public personalizationSpec?: (google.cloud.retail.v2.SearchRequest.IPersonalizationSpec|null);
+
+                    /** SearchRequest labels. */
+                    public labels: { [k: string]: string };
+
+                    /** SearchRequest spellCorrectionSpec. */
+                    public spellCorrectionSpec?: (google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity. */
+                    public entity: string;
+
+                    /** SearchRequest conversationalSearchSpec. */
+                    public conversationalSearchSpec?: (google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec|null);
+
+                    /** SearchRequest tileNavigationSpec. */
+                    public tileNavigationSpec?: (google.cloud.retail.v2.SearchRequest.ITileNavigationSpec|null);
+
+                    /** SearchRequest languageCode. */
+                    public languageCode: string;
+
+                    /** SearchRequest regionCode. */
+                    public regionCode: string;
+
+                    /** SearchRequest placeId. */
+                    public placeId: string;
+
+                    /** SearchRequest userAttributes. */
+                    public userAttributes: { [k: string]: google.cloud.retail.v2.IStringList };
+
+                    /**
+                     * Creates a new SearchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ISearchRequest): google.cloud.retail.v2.SearchRequest;
+
+                    /**
+                     * Encodes the specified SearchRequest message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.verify|verify} messages.
+                     * @param message SearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.verify|verify} messages.
+                     * @param message SearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest;
+
+                    /**
+                     * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest;
+
+                    /**
+                     * Verifies a SearchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest;
+
+                    /**
+                     * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
+                     * @param message SearchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.SearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchRequest {
+
+                    /** Properties of a FacetSpec. */
+                    interface IFacetSpec {
+
+                        /** FacetSpec facetKey */
+                        facetKey?: (google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey|null);
+
+                        /** FacetSpec limit */
+                        limit?: (number|null);
+
+                        /** FacetSpec excludedFilterKeys */
+                        excludedFilterKeys?: (string[]|null);
+
+                        /** FacetSpec enableDynamicPosition */
+                        enableDynamicPosition?: (boolean|null);
+                    }
+
+                    /** Represents a FacetSpec. */
+                    class FacetSpec implements IFacetSpec {
+
+                        /**
+                         * Constructs a new FacetSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IFacetSpec);
+
+                        /** FacetSpec facetKey. */
+                        public facetKey?: (google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey|null);
+
+                        /** FacetSpec limit. */
+                        public limit: number;
+
+                        /** FacetSpec excludedFilterKeys. */
+                        public excludedFilterKeys: string[];
+
+                        /** FacetSpec enableDynamicPosition. */
+                        public enableDynamicPosition: boolean;
+
+                        /**
+                         * Creates a new FacetSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FacetSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IFacetSpec): google.cloud.retail.v2.SearchRequest.FacetSpec;
+
+                        /**
+                         * Encodes the specified FacetSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.verify|verify} messages.
+                         * @param message FacetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.IFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FacetSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.verify|verify} messages.
+                         * @param message FacetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FacetSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FacetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.FacetSpec;
+
+                        /**
+                         * Decodes a FacetSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FacetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.FacetSpec;
+
+                        /**
+                         * Verifies a FacetSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FacetSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FacetSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.FacetSpec;
+
+                        /**
+                         * Creates a plain object from a FacetSpec message. Also converts values to other types if specified.
+                         * @param message FacetSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.FacetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FacetSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FacetSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FacetSpec {
+
+                        /** Properties of a FacetKey. */
+                        interface IFacetKey {
+
+                            /** FacetKey key */
+                            key?: (string|null);
+
+                            /** FacetKey intervals */
+                            intervals?: (google.cloud.retail.v2.IInterval[]|null);
+
+                            /** FacetKey restrictedValues */
+                            restrictedValues?: (string[]|null);
+
+                            /** FacetKey prefixes */
+                            prefixes?: (string[]|null);
+
+                            /** FacetKey contains */
+                            contains?: (string[]|null);
+
+                            /** FacetKey caseInsensitive */
+                            caseInsensitive?: (boolean|null);
+
+                            /** FacetKey orderBy */
+                            orderBy?: (string|null);
+
+                            /** FacetKey query */
+                            query?: (string|null);
+
+                            /** FacetKey returnMinMax */
+                            returnMinMax?: (boolean|null);
+                        }
+
+                        /** Represents a FacetKey. */
+                        class FacetKey implements IFacetKey {
+
+                            /**
+                             * Constructs a new FacetKey.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey);
+
+                            /** FacetKey key. */
+                            public key: string;
+
+                            /** FacetKey intervals. */
+                            public intervals: google.cloud.retail.v2.IInterval[];
+
+                            /** FacetKey restrictedValues. */
+                            public restrictedValues: string[];
+
+                            /** FacetKey prefixes. */
+                            public prefixes: string[];
+
+                            /** FacetKey contains. */
+                            public contains: string[];
+
+                            /** FacetKey caseInsensitive. */
+                            public caseInsensitive: boolean;
+
+                            /** FacetKey orderBy. */
+                            public orderBy: string;
+
+                            /** FacetKey query. */
+                            public query: string;
+
+                            /** FacetKey returnMinMax. */
+                            public returnMinMax: boolean;
+
+                            /**
+                             * Creates a new FacetKey instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FacetKey instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Encodes the specified FacetKey message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
+                             * @param message FacetKey message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FacetKey message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
+                             * @param message FacetKey message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FacetKey message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FacetKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Decodes a FacetKey message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FacetKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Verifies a FacetKey message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FacetKey message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FacetKey
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Creates a plain object from a FacetKey message. Also converts values to other types if specified.
+                             * @param message FacetKey
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FacetKey to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FacetKey
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a DynamicFacetSpec. */
+                    interface IDynamicFacetSpec {
+
+                        /** DynamicFacetSpec mode */
+                        mode?: (google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode|null);
+                    }
+
+                    /** Represents a DynamicFacetSpec. */
+                    class DynamicFacetSpec implements IDynamicFacetSpec {
+
+                        /**
+                         * Constructs a new DynamicFacetSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec);
+
+                        /** DynamicFacetSpec mode. */
+                        public mode: (google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode);
+
+                        /**
+                         * Creates a new DynamicFacetSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DynamicFacetSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
+
+                        /**
+                         * Encodes the specified DynamicFacetSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.verify|verify} messages.
+                         * @param message DynamicFacetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DynamicFacetSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.verify|verify} messages.
+                         * @param message DynamicFacetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DynamicFacetSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DynamicFacetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
+
+                        /**
+                         * Decodes a DynamicFacetSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DynamicFacetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
+
+                        /**
+                         * Verifies a DynamicFacetSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DynamicFacetSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DynamicFacetSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
+
+                        /**
+                         * Creates a plain object from a DynamicFacetSpec message. Also converts values to other types if specified.
+                         * @param message DynamicFacetSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.DynamicFacetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DynamicFacetSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DynamicFacetSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DynamicFacetSpec {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            ENABLED = 2
+                        }
+                    }
+
+                    /** Properties of a BoostSpec. */
+                    interface IBoostSpec {
+
+                        /** BoostSpec conditionBoostSpecs */
+                        conditionBoostSpecs?: (google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+
+                        /** BoostSpec skipBoostSpecValidation */
+                        skipBoostSpecValidation?: (boolean|null);
+                    }
+
+                    /** Represents a BoostSpec. */
+                    class BoostSpec implements IBoostSpec {
+
+                        /**
+                         * Constructs a new BoostSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IBoostSpec);
+
+                        /** BoostSpec conditionBoostSpecs. */
+                        public conditionBoostSpecs: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                        /** BoostSpec skipBoostSpecValidation. */
+                        public skipBoostSpecValidation?: (boolean|null);
+
+                        /**
+                         * Creates a new BoostSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BoostSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IBoostSpec): google.cloud.retail.v2.SearchRequest.BoostSpec;
+
+                        /**
+                         * Encodes the specified BoostSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.verify|verify} messages.
+                         * @param message BoostSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.IBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BoostSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.verify|verify} messages.
+                         * @param message BoostSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BoostSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BoostSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.BoostSpec;
+
+                        /**
+                         * Decodes a BoostSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BoostSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.BoostSpec;
+
+                        /**
+                         * Verifies a BoostSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BoostSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BoostSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.BoostSpec;
+
+                        /**
+                         * Creates a plain object from a BoostSpec message. Also converts values to other types if specified.
+                         * @param message BoostSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.BoostSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BoostSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BoostSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace BoostSpec {
+
+                        /** Properties of a ConditionBoostSpec. */
+                        interface IConditionBoostSpec {
+
+                            /** ConditionBoostSpec condition */
+                            condition?: (string|null);
+
+                            /** ConditionBoostSpec boost */
+                            boost?: (number|null);
+                        }
+
+                        /** Represents a ConditionBoostSpec. */
+                        class ConditionBoostSpec implements IConditionBoostSpec {
+
+                            /**
+                             * Constructs a new ConditionBoostSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec);
+
+                            /** ConditionBoostSpec condition. */
+                            public condition: string;
+
+                            /** ConditionBoostSpec boost. */
+                            public boost: number;
+
+                            /**
+                             * Creates a new ConditionBoostSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ConditionBoostSpec instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Encodes the specified ConditionBoostSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
+                             * @param message ConditionBoostSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ConditionBoostSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
+                             * @param message ConditionBoostSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ConditionBoostSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ConditionBoostSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Decodes a ConditionBoostSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ConditionBoostSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Verifies a ConditionBoostSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ConditionBoostSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ConditionBoostSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Creates a plain object from a ConditionBoostSpec message. Also converts values to other types if specified.
+                             * @param message ConditionBoostSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ConditionBoostSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ConditionBoostSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a QueryExpansionSpec. */
+                    interface IQueryExpansionSpec {
+
+                        /** QueryExpansionSpec condition */
+                        condition?: (google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|null);
+
+                        /** QueryExpansionSpec pinUnexpandedResults */
+                        pinUnexpandedResults?: (boolean|null);
+                    }
+
+                    /** Represents a QueryExpansionSpec. */
+                    class QueryExpansionSpec implements IQueryExpansionSpec {
+
+                        /**
+                         * Constructs a new QueryExpansionSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec);
+
+                        /** QueryExpansionSpec condition. */
+                        public condition: (google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition);
+
+                        /** QueryExpansionSpec pinUnexpandedResults. */
+                        public pinUnexpandedResults: boolean;
+
+                        /**
+                         * Creates a new QueryExpansionSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryExpansionSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Encodes the specified QueryExpansionSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.verify|verify} messages.
+                         * @param message QueryExpansionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryExpansionSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.verify|verify} messages.
+                         * @param message QueryExpansionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryExpansionSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryExpansionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Decodes a QueryExpansionSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryExpansionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Verifies a QueryExpansionSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryExpansionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryExpansionSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Creates a plain object from a QueryExpansionSpec message. Also converts values to other types if specified.
+                         * @param message QueryExpansionSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.QueryExpansionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryExpansionSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryExpansionSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace QueryExpansionSpec {
+
+                        /** Condition enum. */
+                        enum Condition {
+                            CONDITION_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            AUTO = 3
+                        }
+                    }
+
+                    /** Properties of a PersonalizationSpec. */
+                    interface IPersonalizationSpec {
+
+                        /** PersonalizationSpec mode */
+                        mode?: (google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode|null);
+                    }
+
+                    /** Represents a PersonalizationSpec. */
+                    class PersonalizationSpec implements IPersonalizationSpec {
+
+                        /**
+                         * Constructs a new PersonalizationSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec);
+
+                        /** PersonalizationSpec mode. */
+                        public mode: (google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode);
+
+                        /**
+                         * Creates a new PersonalizationSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PersonalizationSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
+
+                        /**
+                         * Encodes the specified PersonalizationSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.PersonalizationSpec.verify|verify} messages.
+                         * @param message PersonalizationSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PersonalizationSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.PersonalizationSpec.verify|verify} messages.
+                         * @param message PersonalizationSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PersonalizationSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PersonalizationSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
+
+                        /**
+                         * Decodes a PersonalizationSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PersonalizationSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
+
+                        /**
+                         * Verifies a PersonalizationSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PersonalizationSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PersonalizationSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
+
+                        /**
+                         * Creates a plain object from a PersonalizationSpec message. Also converts values to other types if specified.
+                         * @param message PersonalizationSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.PersonalizationSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PersonalizationSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PersonalizationSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PersonalizationSpec {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            AUTO = 1,
+                            DISABLED = 2
+                        }
+                    }
+
+                    /** Properties of a SpellCorrectionSpec. */
+                    interface ISpellCorrectionSpec {
+
+                        /** SpellCorrectionSpec mode */
+                        mode?: (google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode|null);
+                    }
+
+                    /** Represents a SpellCorrectionSpec. */
+                    class SpellCorrectionSpec implements ISpellCorrectionSpec {
+
+                        /**
+                         * Constructs a new SpellCorrectionSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec);
+
+                        /** SpellCorrectionSpec mode. */
+                        public mode: (google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode);
+
+                        /**
+                         * Creates a new SpellCorrectionSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpellCorrectionSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Encodes the specified SpellCorrectionSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
+                         * @param message SpellCorrectionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpellCorrectionSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
+                         * @param message SpellCorrectionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpellCorrectionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpellCorrectionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Verifies a SpellCorrectionSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpellCorrectionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpellCorrectionSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Creates a plain object from a SpellCorrectionSpec message. Also converts values to other types if specified.
+                         * @param message SpellCorrectionSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpellCorrectionSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpellCorrectionSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SpellCorrectionSpec {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            SUGGESTION_ONLY = 1,
+                            AUTO = 2
+                        }
+                    }
+
+                    /** Properties of a ConversationalSearchSpec. */
+                    interface IConversationalSearchSpec {
+
+                        /** ConversationalSearchSpec followupConversationRequested */
+                        followupConversationRequested?: (boolean|null);
+
+                        /** ConversationalSearchSpec conversationId */
+                        conversationId?: (string|null);
+
+                        /** ConversationalSearchSpec userAnswer */
+                        userAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer|null);
+                    }
+
+                    /** Represents a ConversationalSearchSpec. */
+                    class ConversationalSearchSpec implements IConversationalSearchSpec {
+
+                        /**
+                         * Constructs a new ConversationalSearchSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec);
+
+                        /** ConversationalSearchSpec followupConversationRequested. */
+                        public followupConversationRequested: boolean;
+
+                        /** ConversationalSearchSpec conversationId. */
+                        public conversationId: string;
+
+                        /** ConversationalSearchSpec userAnswer. */
+                        public userAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer|null);
+
+                        /**
+                         * Creates a new ConversationalSearchSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationalSearchSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
+
+                        /**
+                         * Encodes the specified ConversationalSearchSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.verify|verify} messages.
+                         * @param message ConversationalSearchSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationalSearchSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.verify|verify} messages.
+                         * @param message ConversationalSearchSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationalSearchSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationalSearchSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
+
+                        /**
+                         * Decodes a ConversationalSearchSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationalSearchSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
+
+                        /**
+                         * Verifies a ConversationalSearchSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationalSearchSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationalSearchSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
+
+                        /**
+                         * Creates a plain object from a ConversationalSearchSpec message. Also converts values to other types if specified.
+                         * @param message ConversationalSearchSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationalSearchSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversationalSearchSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConversationalSearchSpec {
+
+                        /** Properties of a UserAnswer. */
+                        interface IUserAnswer {
+
+                            /** UserAnswer textAnswer */
+                            textAnswer?: (string|null);
+
+                            /** UserAnswer selectedAnswer */
+                            selectedAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer|null);
+                        }
+
+                        /** Represents a UserAnswer. */
+                        class UserAnswer implements IUserAnswer {
+
+                            /**
+                             * Constructs a new UserAnswer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer);
+
+                            /** UserAnswer textAnswer. */
+                            public textAnswer?: (string|null);
+
+                            /** UserAnswer selectedAnswer. */
+                            public selectedAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer|null);
+
+                            /** UserAnswer type. */
+                            public type?: ("textAnswer"|"selectedAnswer");
+
+                            /**
+                             * Creates a new UserAnswer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UserAnswer instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
+
+                            /**
+                             * Encodes the specified UserAnswer message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.verify|verify} messages.
+                             * @param message UserAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UserAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.verify|verify} messages.
+                             * @param message UserAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a UserAnswer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UserAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
+
+                            /**
+                             * Decodes a UserAnswer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UserAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
+
+                            /**
+                             * Verifies a UserAnswer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a UserAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UserAnswer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
+
+                            /**
+                             * Creates a plain object from a UserAnswer message. Also converts values to other types if specified.
+                             * @param message UserAnswer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UserAnswer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UserAnswer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace UserAnswer {
+
+                            /** Properties of a SelectedAnswer. */
+                            interface ISelectedAnswer {
+
+                                /** SelectedAnswer productAttributeValues */
+                                productAttributeValues?: (google.cloud.retail.v2.IProductAttributeValue[]|null);
+
+                                /** SelectedAnswer productAttributeValue */
+                                productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+                            }
+
+                            /** Represents a SelectedAnswer. */
+                            class SelectedAnswer implements ISelectedAnswer {
+
+                                /**
+                                 * Constructs a new SelectedAnswer.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer);
+
+                                /** SelectedAnswer productAttributeValues. */
+                                public productAttributeValues: google.cloud.retail.v2.IProductAttributeValue[];
+
+                                /** SelectedAnswer productAttributeValue. */
+                                public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                                /**
+                                 * Creates a new SelectedAnswer instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns SelectedAnswer instance
+                                 */
+                                public static create(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
+
+                                /**
+                                 * Encodes the specified SelectedAnswer message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer.verify|verify} messages.
+                                 * @param message SelectedAnswer message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified SelectedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer.verify|verify} messages.
+                                 * @param message SelectedAnswer message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a SelectedAnswer message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns SelectedAnswer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
+
+                                /**
+                                 * Decodes a SelectedAnswer message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns SelectedAnswer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
+
+                                /**
+                                 * Verifies a SelectedAnswer message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a SelectedAnswer message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns SelectedAnswer
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
+
+                                /**
+                                 * Creates a plain object from a SelectedAnswer message. Also converts values to other types if specified.
+                                 * @param message SelectedAnswer
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this SelectedAnswer to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for SelectedAnswer
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
+                    /** Properties of a TileNavigationSpec. */
+                    interface ITileNavigationSpec {
+
+                        /** TileNavigationSpec tileNavigationRequested */
+                        tileNavigationRequested?: (boolean|null);
+
+                        /** TileNavigationSpec appliedTiles */
+                        appliedTiles?: (google.cloud.retail.v2.ITile[]|null);
+                    }
+
+                    /** Represents a TileNavigationSpec. */
+                    class TileNavigationSpec implements ITileNavigationSpec {
+
+                        /**
+                         * Constructs a new TileNavigationSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec);
+
+                        /** TileNavigationSpec tileNavigationRequested. */
+                        public tileNavigationRequested: boolean;
+
+                        /** TileNavigationSpec appliedTiles. */
+                        public appliedTiles: google.cloud.retail.v2.ITile[];
+
+                        /**
+                         * Creates a new TileNavigationSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TileNavigationSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
+
+                        /**
+                         * Encodes the specified TileNavigationSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.TileNavigationSpec.verify|verify} messages.
+                         * @param message TileNavigationSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TileNavigationSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.TileNavigationSpec.verify|verify} messages.
+                         * @param message TileNavigationSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TileNavigationSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TileNavigationSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
+
+                        /**
+                         * Decodes a TileNavigationSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TileNavigationSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
+
+                        /**
+                         * Verifies a TileNavigationSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TileNavigationSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TileNavigationSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
+
+                        /**
+                         * Creates a plain object from a TileNavigationSpec message. Also converts values to other types if specified.
+                         * @param message TileNavigationSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchRequest.TileNavigationSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TileNavigationSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TileNavigationSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** SearchMode enum. */
+                    enum SearchMode {
+                        SEARCH_MODE_UNSPECIFIED = 0,
+                        PRODUCT_SEARCH_ONLY = 1,
+                        FACETED_SEARCH_ONLY = 2
+                    }
+                }
+
+                /** Properties of a SearchResponse. */
+                interface ISearchResponse {
+
+                    /** SearchResponse results */
+                    results?: (google.cloud.retail.v2.SearchResponse.ISearchResult[]|null);
+
+                    /** SearchResponse facets */
+                    facets?: (google.cloud.retail.v2.SearchResponse.IFacet[]|null);
+
+                    /** SearchResponse totalSize */
+                    totalSize?: (number|null);
+
+                    /** SearchResponse correctedQuery */
+                    correctedQuery?: (string|null);
+
+                    /** SearchResponse attributionToken */
+                    attributionToken?: (string|null);
+
+                    /** SearchResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** SearchResponse queryExpansionInfo */
+                    queryExpansionInfo?: (google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo|null);
+
+                    /** SearchResponse redirectUri */
+                    redirectUri?: (string|null);
+
+                    /** SearchResponse appliedControls */
+                    appliedControls?: (string[]|null);
+
+                    /** SearchResponse pinControlMetadata */
+                    pinControlMetadata?: (google.cloud.retail.v2.IPinControlMetadata|null);
+
+                    /** SearchResponse invalidConditionBoostSpecs */
+                    invalidConditionBoostSpecs?: (google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+
+                    /** SearchResponse experimentInfo */
+                    experimentInfo?: (google.cloud.retail.v2.IExperimentInfo[]|null);
+
+                    /** SearchResponse conversationalSearchResult */
+                    conversationalSearchResult?: (google.cloud.retail.v2.SearchResponse.IConversationalSearchResult|null);
+
+                    /** SearchResponse tileNavigationResult */
+                    tileNavigationResult?: (google.cloud.retail.v2.SearchResponse.ITileNavigationResult|null);
+                }
+
+                /** Represents a SearchResponse. */
+                class SearchResponse implements ISearchResponse {
+
+                    /**
+                     * Constructs a new SearchResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ISearchResponse);
+
+                    /** SearchResponse results. */
+                    public results: google.cloud.retail.v2.SearchResponse.ISearchResult[];
+
+                    /** SearchResponse facets. */
+                    public facets: google.cloud.retail.v2.SearchResponse.IFacet[];
+
+                    /** SearchResponse totalSize. */
+                    public totalSize: number;
+
+                    /** SearchResponse correctedQuery. */
+                    public correctedQuery: string;
+
+                    /** SearchResponse attributionToken. */
+                    public attributionToken: string;
+
+                    /** SearchResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** SearchResponse queryExpansionInfo. */
+                    public queryExpansionInfo?: (google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo|null);
+
+                    /** SearchResponse redirectUri. */
+                    public redirectUri: string;
+
+                    /** SearchResponse appliedControls. */
+                    public appliedControls: string[];
+
+                    /** SearchResponse pinControlMetadata. */
+                    public pinControlMetadata?: (google.cloud.retail.v2.IPinControlMetadata|null);
+
+                    /** SearchResponse invalidConditionBoostSpecs. */
+                    public invalidConditionBoostSpecs: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                    /** SearchResponse experimentInfo. */
+                    public experimentInfo: google.cloud.retail.v2.IExperimentInfo[];
+
+                    /** SearchResponse conversationalSearchResult. */
+                    public conversationalSearchResult?: (google.cloud.retail.v2.SearchResponse.IConversationalSearchResult|null);
+
+                    /** SearchResponse tileNavigationResult. */
+                    public tileNavigationResult?: (google.cloud.retail.v2.SearchResponse.ITileNavigationResult|null);
+
+                    /**
+                     * Creates a new SearchResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ISearchResponse): google.cloud.retail.v2.SearchResponse;
+
+                    /**
+                     * Encodes the specified SearchResponse message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.verify|verify} messages.
+                     * @param message SearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.verify|verify} messages.
+                     * @param message SearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse;
+
+                    /**
+                     * Decodes a SearchResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse;
+
+                    /**
+                     * Verifies a SearchResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse;
+
+                    /**
+                     * Creates a plain object from a SearchResponse message. Also converts values to other types if specified.
+                     * @param message SearchResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.SearchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchResponse {
+
+                    /** Properties of a SearchResult. */
+                    interface ISearchResult {
+
+                        /** SearchResult id */
+                        id?: (string|null);
+
+                        /** SearchResult product */
+                        product?: (google.cloud.retail.v2.IProduct|null);
+
+                        /** SearchResult matchingVariantCount */
+                        matchingVariantCount?: (number|null);
+
+                        /** SearchResult matchingVariantFields */
+                        matchingVariantFields?: ({ [k: string]: google.protobuf.IFieldMask }|null);
+
+                        /** SearchResult variantRollupValues */
+                        variantRollupValues?: ({ [k: string]: google.protobuf.IValue }|null);
+
+                        /** SearchResult personalLabels */
+                        personalLabels?: (string[]|null);
+
+                        /** SearchResult modelScores */
+                        modelScores?: ({ [k: string]: google.cloud.retail.v2.IDoubleList }|null);
+                    }
+
+                    /** Represents a SearchResult. */
+                    class SearchResult implements ISearchResult {
+
+                        /**
+                         * Constructs a new SearchResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchResponse.ISearchResult);
+
+                        /** SearchResult id. */
+                        public id: string;
+
+                        /** SearchResult product. */
+                        public product?: (google.cloud.retail.v2.IProduct|null);
+
+                        /** SearchResult matchingVariantCount. */
+                        public matchingVariantCount: number;
+
+                        /** SearchResult matchingVariantFields. */
+                        public matchingVariantFields: { [k: string]: google.protobuf.IFieldMask };
+
+                        /** SearchResult variantRollupValues. */
+                        public variantRollupValues: { [k: string]: google.protobuf.IValue };
+
+                        /** SearchResult personalLabels. */
+                        public personalLabels: string[];
+
+                        /** SearchResult modelScores. */
+                        public modelScores: { [k: string]: google.cloud.retail.v2.IDoubleList };
+
+                        /**
+                         * Creates a new SearchResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchResult instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchResponse.ISearchResult): google.cloud.retail.v2.SearchResponse.SearchResult;
+
+                        /**
+                         * Encodes the specified SearchResult message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.SearchResult.verify|verify} messages.
+                         * @param message SearchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.SearchResult.verify|verify} messages.
+                         * @param message SearchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.SearchResult;
+
+                        /**
+                         * Decodes a SearchResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.SearchResult;
+
+                        /**
+                         * Verifies a SearchResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.SearchResult;
+
+                        /**
+                         * Creates a plain object from a SearchResult message. Also converts values to other types if specified.
+                         * @param message SearchResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchResponse.SearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Facet. */
+                    interface IFacet {
+
+                        /** Facet key */
+                        key?: (string|null);
+
+                        /** Facet values */
+                        values?: (google.cloud.retail.v2.SearchResponse.Facet.IFacetValue[]|null);
+
+                        /** Facet dynamicFacet */
+                        dynamicFacet?: (boolean|null);
+                    }
+
+                    /** Represents a Facet. */
+                    class Facet implements IFacet {
+
+                        /**
+                         * Constructs a new Facet.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchResponse.IFacet);
+
+                        /** Facet key. */
+                        public key: string;
+
+                        /** Facet values. */
+                        public values: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue[];
+
+                        /** Facet dynamicFacet. */
+                        public dynamicFacet: boolean;
+
+                        /**
+                         * Creates a new Facet instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Facet instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchResponse.IFacet): google.cloud.retail.v2.SearchResponse.Facet;
+
+                        /**
+                         * Encodes the specified Facet message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.verify|verify} messages.
+                         * @param message Facet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchResponse.IFacet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Facet message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.verify|verify} messages.
+                         * @param message Facet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.IFacet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Facet message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Facet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.Facet;
+
+                        /**
+                         * Decodes a Facet message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Facet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.Facet;
+
+                        /**
+                         * Verifies a Facet message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Facet message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Facet
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.Facet;
+
+                        /**
+                         * Creates a plain object from a Facet message. Also converts values to other types if specified.
+                         * @param message Facet
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchResponse.Facet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Facet to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Facet
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Facet {
+
+                        /** Properties of a FacetValue. */
+                        interface IFacetValue {
+
+                            /** FacetValue value */
+                            value?: (string|null);
+
+                            /** FacetValue interval */
+                            interval?: (google.cloud.retail.v2.IInterval|null);
+
+                            /** FacetValue count */
+                            count?: (number|Long|string|null);
+
+                            /** FacetValue minValue */
+                            minValue?: (number|null);
+
+                            /** FacetValue maxValue */
+                            maxValue?: (number|null);
+                        }
+
+                        /** Represents a FacetValue. */
+                        class FacetValue implements IFacetValue {
+
+                            /**
+                             * Constructs a new FacetValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue);
+
+                            /** FacetValue value. */
+                            public value?: (string|null);
+
+                            /** FacetValue interval. */
+                            public interval?: (google.cloud.retail.v2.IInterval|null);
+
+                            /** FacetValue count. */
+                            public count: (number|Long|string);
+
+                            /** FacetValue minValue. */
+                            public minValue: number;
+
+                            /** FacetValue maxValue. */
+                            public maxValue: number;
+
+                            /** FacetValue facetValue. */
+                            public facetValue?: ("value"|"interval");
+
+                            /**
+                             * Creates a new FacetValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FacetValue instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Encodes the specified FacetValue message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.FacetValue.verify|verify} messages.
+                             * @param message FacetValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FacetValue message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.FacetValue.verify|verify} messages.
+                             * @param message FacetValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FacetValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FacetValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Decodes a FacetValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FacetValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Verifies a FacetValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FacetValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FacetValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Creates a plain object from a FacetValue message. Also converts values to other types if specified.
+                             * @param message FacetValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.SearchResponse.Facet.FacetValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FacetValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FacetValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a QueryExpansionInfo. */
+                    interface IQueryExpansionInfo {
+
+                        /** QueryExpansionInfo expandedQuery */
+                        expandedQuery?: (boolean|null);
+
+                        /** QueryExpansionInfo pinnedResultCount */
+                        pinnedResultCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a QueryExpansionInfo. */
+                    class QueryExpansionInfo implements IQueryExpansionInfo {
+
+                        /**
+                         * Constructs a new QueryExpansionInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo);
+
+                        /** QueryExpansionInfo expandedQuery. */
+                        public expandedQuery: boolean;
+
+                        /** QueryExpansionInfo pinnedResultCount. */
+                        public pinnedResultCount: (number|Long|string);
+
+                        /**
+                         * Creates a new QueryExpansionInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryExpansionInfo instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Encodes the specified QueryExpansionInfo message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.QueryExpansionInfo.verify|verify} messages.
+                         * @param message QueryExpansionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryExpansionInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.QueryExpansionInfo.verify|verify} messages.
+                         * @param message QueryExpansionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryExpansionInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryExpansionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Decodes a QueryExpansionInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryExpansionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Verifies a QueryExpansionInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryExpansionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryExpansionInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Creates a plain object from a QueryExpansionInfo message. Also converts values to other types if specified.
+                         * @param message QueryExpansionInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchResponse.QueryExpansionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryExpansionInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryExpansionInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConversationalSearchResult. */
+                    interface IConversationalSearchResult {
+
+                        /** ConversationalSearchResult conversationId */
+                        conversationId?: (string|null);
+
+                        /** ConversationalSearchResult refinedQuery */
+                        refinedQuery?: (string|null);
+
+                        /** ConversationalSearchResult additionalFilters */
+                        additionalFilters?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter[]|null);
+
+                        /** ConversationalSearchResult followupQuestion */
+                        followupQuestion?: (string|null);
+
+                        /** ConversationalSearchResult suggestedAnswers */
+                        suggestedAnswers?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer[]|null);
+
+                        /** ConversationalSearchResult additionalFilter */
+                        additionalFilter?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter|null);
+                    }
+
+                    /** Represents a ConversationalSearchResult. */
+                    class ConversationalSearchResult implements IConversationalSearchResult {
+
+                        /**
+                         * Constructs a new ConversationalSearchResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult);
+
+                        /** ConversationalSearchResult conversationId. */
+                        public conversationId: string;
+
+                        /** ConversationalSearchResult refinedQuery. */
+                        public refinedQuery: string;
+
+                        /** ConversationalSearchResult additionalFilters. */
+                        public additionalFilters: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter[];
+
+                        /** ConversationalSearchResult followupQuestion. */
+                        public followupQuestion: string;
+
+                        /** ConversationalSearchResult suggestedAnswers. */
+                        public suggestedAnswers: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer[];
+
+                        /** ConversationalSearchResult additionalFilter. */
+                        public additionalFilter?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter|null);
+
+                        /**
+                         * Creates a new ConversationalSearchResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationalSearchResult instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
+
+                        /**
+                         * Encodes the specified ConversationalSearchResult message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.verify|verify} messages.
+                         * @param message ConversationalSearchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationalSearchResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.verify|verify} messages.
+                         * @param message ConversationalSearchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationalSearchResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationalSearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
+
+                        /**
+                         * Decodes a ConversationalSearchResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationalSearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
+
+                        /**
+                         * Verifies a ConversationalSearchResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationalSearchResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationalSearchResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
+
+                        /**
+                         * Creates a plain object from a ConversationalSearchResult message. Also converts values to other types if specified.
+                         * @param message ConversationalSearchResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationalSearchResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversationalSearchResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConversationalSearchResult {
+
+                        /** Properties of a SuggestedAnswer. */
+                        interface ISuggestedAnswer {
+
+                            /** SuggestedAnswer productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+                        }
+
+                        /** Represents a SuggestedAnswer. */
+                        class SuggestedAnswer implements ISuggestedAnswer {
+
+                            /**
+                             * Constructs a new SuggestedAnswer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer);
+
+                            /** SuggestedAnswer productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new SuggestedAnswer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SuggestedAnswer instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
+
+                            /**
+                             * Encodes the specified SuggestedAnswer message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer.verify|verify} messages.
+                             * @param message SuggestedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SuggestedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer.verify|verify} messages.
+                             * @param message SuggestedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SuggestedAnswer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SuggestedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
+
+                            /**
+                             * Decodes a SuggestedAnswer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SuggestedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
+
+                            /**
+                             * Verifies a SuggestedAnswer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SuggestedAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SuggestedAnswer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
+
+                            /**
+                             * Creates a plain object from a SuggestedAnswer message. Also converts values to other types if specified.
+                             * @param message SuggestedAnswer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SuggestedAnswer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SuggestedAnswer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an AdditionalFilter. */
+                        interface IAdditionalFilter {
+
+                            /** AdditionalFilter productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+                        }
+
+                        /** Represents an AdditionalFilter. */
+                        class AdditionalFilter implements IAdditionalFilter {
+
+                            /**
+                             * Constructs a new AdditionalFilter.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter);
+
+                            /** AdditionalFilter productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new AdditionalFilter instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AdditionalFilter instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
+
+                            /**
+                             * Encodes the specified AdditionalFilter message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter.verify|verify} messages.
+                             * @param message AdditionalFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AdditionalFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter.verify|verify} messages.
+                             * @param message AdditionalFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AdditionalFilter message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AdditionalFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
+
+                            /**
+                             * Decodes an AdditionalFilter message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AdditionalFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
+
+                            /**
+                             * Verifies an AdditionalFilter message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AdditionalFilter message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AdditionalFilter
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
+
+                            /**
+                             * Creates a plain object from an AdditionalFilter message. Also converts values to other types if specified.
+                             * @param message AdditionalFilter
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AdditionalFilter to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AdditionalFilter
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a TileNavigationResult. */
+                    interface ITileNavigationResult {
+
+                        /** TileNavigationResult tiles */
+                        tiles?: (google.cloud.retail.v2.ITile[]|null);
+                    }
+
+                    /** Represents a TileNavigationResult. */
+                    class TileNavigationResult implements ITileNavigationResult {
+
+                        /**
+                         * Constructs a new TileNavigationResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.SearchResponse.ITileNavigationResult);
+
+                        /** TileNavigationResult tiles. */
+                        public tiles: google.cloud.retail.v2.ITile[];
+
+                        /**
+                         * Creates a new TileNavigationResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TileNavigationResult instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.SearchResponse.ITileNavigationResult): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
+
+                        /**
+                         * Encodes the specified TileNavigationResult message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.TileNavigationResult.verify|verify} messages.
+                         * @param message TileNavigationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.SearchResponse.ITileNavigationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TileNavigationResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.TileNavigationResult.verify|verify} messages.
+                         * @param message TileNavigationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ITileNavigationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TileNavigationResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TileNavigationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
+
+                        /**
+                         * Decodes a TileNavigationResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TileNavigationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
+
+                        /**
+                         * Verifies a TileNavigationResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TileNavigationResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TileNavigationResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
+
+                        /**
+                         * Creates a plain object from a TileNavigationResult message. Also converts values to other types if specified.
+                         * @param message TileNavigationResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.SearchResponse.TileNavigationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TileNavigationResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TileNavigationResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExperimentInfo. */
+                interface IExperimentInfo {
+
+                    /** ExperimentInfo servingConfigExperiment */
+                    servingConfigExperiment?: (google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment */
+                    experiment?: (string|null);
+                }
+
+                /** Represents an ExperimentInfo. */
+                class ExperimentInfo implements IExperimentInfo {
+
+                    /**
+                     * Constructs a new ExperimentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IExperimentInfo);
+
+                    /** ExperimentInfo servingConfigExperiment. */
+                    public servingConfigExperiment?: (google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment. */
+                    public experiment: string;
+
+                    /** ExperimentInfo experimentMetadata. */
+                    public experimentMetadata?: "servingConfigExperiment";
+
+                    /**
+                     * Creates a new ExperimentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExperimentInfo instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IExperimentInfo): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Verifies an ExperimentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Creates a plain object from an ExperimentInfo message. Also converts values to other types if specified.
+                     * @param message ExperimentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ExperimentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExperimentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExperimentInfo {
+
+                    /** Properties of a ServingConfigExperiment. */
+                    interface IServingConfigExperiment {
+
+                        /** ServingConfigExperiment originalServingConfig */
+                        originalServingConfig?: (string|null);
+
+                        /** ServingConfigExperiment experimentServingConfig */
+                        experimentServingConfig?: (string|null);
+                    }
+
+                    /** Represents a ServingConfigExperiment. */
+                    class ServingConfigExperiment implements IServingConfigExperiment {
+
+                        /**
+                         * Constructs a new ServingConfigExperiment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment);
+
+                        /** ServingConfigExperiment originalServingConfig. */
+                        public originalServingConfig: string;
+
+                        /** ServingConfigExperiment experimentServingConfig. */
+                        public experimentServingConfig: string;
+
+                        /**
+                         * Creates a new ServingConfigExperiment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServingConfigExperiment instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Verifies a ServingConfigExperiment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServingConfigExperiment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServingConfigExperiment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Creates a plain object from a ServingConfigExperiment message. Also converts values to other types if specified.
+                         * @param message ServingConfigExperiment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServingConfigExperiment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServingConfigExperiment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a GenerativeQuestionsFeatureConfig. */
                 interface IGenerativeQuestionsFeatureConfig {
 
@@ -17915,3254 +22594,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Represents a SearchService */
-                class SearchService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new SearchService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new SearchService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SearchService;
-
-                    /**
-                     * Calls Search.
-                     * @param request SearchRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and SearchResponse
-                     */
-                    public search(request: google.cloud.retail.v2.ISearchRequest, callback: google.cloud.retail.v2.SearchService.SearchCallback): void;
-
-                    /**
-                     * Calls Search.
-                     * @param request SearchRequest message or plain object
-                     * @returns Promise
-                     */
-                    public search(request: google.cloud.retail.v2.ISearchRequest): Promise<google.cloud.retail.v2.SearchResponse>;
-                }
-
-                namespace SearchService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.retail.v2.SearchService|search}.
-                     * @param error Error, if any
-                     * @param [response] SearchResponse
-                     */
-                    type SearchCallback = (error: (Error|null), response?: google.cloud.retail.v2.SearchResponse) => void;
-                }
-
-                /** Properties of a ProductAttributeValue. */
-                interface IProductAttributeValue {
-
-                    /** ProductAttributeValue name */
-                    name?: (string|null);
-
-                    /** ProductAttributeValue value */
-                    value?: (string|null);
-                }
-
-                /** Represents a ProductAttributeValue. */
-                class ProductAttributeValue implements IProductAttributeValue {
-
-                    /**
-                     * Constructs a new ProductAttributeValue.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2.IProductAttributeValue);
-
-                    /** ProductAttributeValue name. */
-                    public name: string;
-
-                    /** ProductAttributeValue value. */
-                    public value: string;
-
-                    /**
-                     * Creates a new ProductAttributeValue instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ProductAttributeValue instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2.IProductAttributeValue): google.cloud.retail.v2.ProductAttributeValue;
-
-                    /**
-                     * Encodes the specified ProductAttributeValue message. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeValue.verify|verify} messages.
-                     * @param message ProductAttributeValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2.IProductAttributeValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ProductAttributeValue message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeValue.verify|verify} messages.
-                     * @param message ProductAttributeValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2.IProductAttributeValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ProductAttributeValue message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ProductAttributeValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ProductAttributeValue;
-
-                    /**
-                     * Decodes a ProductAttributeValue message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ProductAttributeValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ProductAttributeValue;
-
-                    /**
-                     * Verifies a ProductAttributeValue message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ProductAttributeValue message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ProductAttributeValue
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ProductAttributeValue;
-
-                    /**
-                     * Creates a plain object from a ProductAttributeValue message. Also converts values to other types if specified.
-                     * @param message ProductAttributeValue
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2.ProductAttributeValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ProductAttributeValue to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ProductAttributeValue
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ProductAttributeInterval. */
-                interface IProductAttributeInterval {
-
-                    /** ProductAttributeInterval name */
-                    name?: (string|null);
-
-                    /** ProductAttributeInterval interval */
-                    interval?: (google.cloud.retail.v2.IInterval|null);
-                }
-
-                /** Represents a ProductAttributeInterval. */
-                class ProductAttributeInterval implements IProductAttributeInterval {
-
-                    /**
-                     * Constructs a new ProductAttributeInterval.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2.IProductAttributeInterval);
-
-                    /** ProductAttributeInterval name. */
-                    public name: string;
-
-                    /** ProductAttributeInterval interval. */
-                    public interval?: (google.cloud.retail.v2.IInterval|null);
-
-                    /**
-                     * Creates a new ProductAttributeInterval instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ProductAttributeInterval instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2.IProductAttributeInterval): google.cloud.retail.v2.ProductAttributeInterval;
-
-                    /**
-                     * Encodes the specified ProductAttributeInterval message. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeInterval.verify|verify} messages.
-                     * @param message ProductAttributeInterval message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2.IProductAttributeInterval, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ProductAttributeInterval message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ProductAttributeInterval.verify|verify} messages.
-                     * @param message ProductAttributeInterval message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2.IProductAttributeInterval, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ProductAttributeInterval message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ProductAttributeInterval
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ProductAttributeInterval;
-
-                    /**
-                     * Decodes a ProductAttributeInterval message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ProductAttributeInterval
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ProductAttributeInterval;
-
-                    /**
-                     * Verifies a ProductAttributeInterval message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ProductAttributeInterval message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ProductAttributeInterval
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ProductAttributeInterval;
-
-                    /**
-                     * Creates a plain object from a ProductAttributeInterval message. Also converts values to other types if specified.
-                     * @param message ProductAttributeInterval
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2.ProductAttributeInterval, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ProductAttributeInterval to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ProductAttributeInterval
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Tile. */
-                interface ITile {
-
-                    /** Tile productAttributeValue */
-                    productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-
-                    /** Tile productAttributeInterval */
-                    productAttributeInterval?: (google.cloud.retail.v2.IProductAttributeInterval|null);
-
-                    /** Tile representativeProductId */
-                    representativeProductId?: (string|null);
-                }
-
-                /** Represents a Tile. */
-                class Tile implements ITile {
-
-                    /**
-                     * Constructs a new Tile.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2.ITile);
-
-                    /** Tile productAttributeValue. */
-                    public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-
-                    /** Tile productAttributeInterval. */
-                    public productAttributeInterval?: (google.cloud.retail.v2.IProductAttributeInterval|null);
-
-                    /** Tile representativeProductId. */
-                    public representativeProductId: string;
-
-                    /** Tile productAttribute. */
-                    public productAttribute?: ("productAttributeValue"|"productAttributeInterval");
-
-                    /**
-                     * Creates a new Tile instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Tile instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2.ITile): google.cloud.retail.v2.Tile;
-
-                    /**
-                     * Encodes the specified Tile message. Does not implicitly {@link google.cloud.retail.v2.Tile.verify|verify} messages.
-                     * @param message Tile message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Tile message, length delimited. Does not implicitly {@link google.cloud.retail.v2.Tile.verify|verify} messages.
-                     * @param message Tile message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Tile message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Tile
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.Tile;
-
-                    /**
-                     * Decodes a Tile message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Tile
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.Tile;
-
-                    /**
-                     * Verifies a Tile message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Tile message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Tile
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.Tile;
-
-                    /**
-                     * Creates a plain object from a Tile message. Also converts values to other types if specified.
-                     * @param message Tile
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2.Tile, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Tile to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Tile
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a SearchRequest. */
-                interface ISearchRequest {
-
-                    /** SearchRequest placement */
-                    placement?: (string|null);
-
-                    /** SearchRequest branch */
-                    branch?: (string|null);
-
-                    /** SearchRequest query */
-                    query?: (string|null);
-
-                    /** SearchRequest visitorId */
-                    visitorId?: (string|null);
-
-                    /** SearchRequest userInfo */
-                    userInfo?: (google.cloud.retail.v2.IUserInfo|null);
-
-                    /** SearchRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** SearchRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** SearchRequest offset */
-                    offset?: (number|null);
-
-                    /** SearchRequest filter */
-                    filter?: (string|null);
-
-                    /** SearchRequest canonicalFilter */
-                    canonicalFilter?: (string|null);
-
-                    /** SearchRequest orderBy */
-                    orderBy?: (string|null);
-
-                    /** SearchRequest facetSpecs */
-                    facetSpecs?: (google.cloud.retail.v2.SearchRequest.IFacetSpec[]|null);
-
-                    /** SearchRequest dynamicFacetSpec */
-                    dynamicFacetSpec?: (google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec|null);
-
-                    /** SearchRequest boostSpec */
-                    boostSpec?: (google.cloud.retail.v2.SearchRequest.IBoostSpec|null);
-
-                    /** SearchRequest queryExpansionSpec */
-                    queryExpansionSpec?: (google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec|null);
-
-                    /** SearchRequest variantRollupKeys */
-                    variantRollupKeys?: (string[]|null);
-
-                    /** SearchRequest pageCategories */
-                    pageCategories?: (string[]|null);
-
-                    /** SearchRequest searchMode */
-                    searchMode?: (google.cloud.retail.v2.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2.SearchRequest.SearchMode|null);
-
-                    /** SearchRequest personalizationSpec */
-                    personalizationSpec?: (google.cloud.retail.v2.SearchRequest.IPersonalizationSpec|null);
-
-                    /** SearchRequest labels */
-                    labels?: ({ [k: string]: string }|null);
-
-                    /** SearchRequest spellCorrectionSpec */
-                    spellCorrectionSpec?: (google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec|null);
-
-                    /** SearchRequest entity */
-                    entity?: (string|null);
-
-                    /** SearchRequest conversationalSearchSpec */
-                    conversationalSearchSpec?: (google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec|null);
-
-                    /** SearchRequest tileNavigationSpec */
-                    tileNavigationSpec?: (google.cloud.retail.v2.SearchRequest.ITileNavigationSpec|null);
-
-                    /** SearchRequest languageCode */
-                    languageCode?: (string|null);
-
-                    /** SearchRequest regionCode */
-                    regionCode?: (string|null);
-
-                    /** SearchRequest placeId */
-                    placeId?: (string|null);
-
-                    /** SearchRequest userAttributes */
-                    userAttributes?: ({ [k: string]: google.cloud.retail.v2.IStringList }|null);
-                }
-
-                /** Represents a SearchRequest. */
-                class SearchRequest implements ISearchRequest {
-
-                    /**
-                     * Constructs a new SearchRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2.ISearchRequest);
-
-                    /** SearchRequest placement. */
-                    public placement: string;
-
-                    /** SearchRequest branch. */
-                    public branch: string;
-
-                    /** SearchRequest query. */
-                    public query: string;
-
-                    /** SearchRequest visitorId. */
-                    public visitorId: string;
-
-                    /** SearchRequest userInfo. */
-                    public userInfo?: (google.cloud.retail.v2.IUserInfo|null);
-
-                    /** SearchRequest pageSize. */
-                    public pageSize: number;
-
-                    /** SearchRequest pageToken. */
-                    public pageToken: string;
-
-                    /** SearchRequest offset. */
-                    public offset: number;
-
-                    /** SearchRequest filter. */
-                    public filter: string;
-
-                    /** SearchRequest canonicalFilter. */
-                    public canonicalFilter: string;
-
-                    /** SearchRequest orderBy. */
-                    public orderBy: string;
-
-                    /** SearchRequest facetSpecs. */
-                    public facetSpecs: google.cloud.retail.v2.SearchRequest.IFacetSpec[];
-
-                    /** SearchRequest dynamicFacetSpec. */
-                    public dynamicFacetSpec?: (google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec|null);
-
-                    /** SearchRequest boostSpec. */
-                    public boostSpec?: (google.cloud.retail.v2.SearchRequest.IBoostSpec|null);
-
-                    /** SearchRequest queryExpansionSpec. */
-                    public queryExpansionSpec?: (google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec|null);
-
-                    /** SearchRequest variantRollupKeys. */
-                    public variantRollupKeys: string[];
-
-                    /** SearchRequest pageCategories. */
-                    public pageCategories: string[];
-
-                    /** SearchRequest searchMode. */
-                    public searchMode: (google.cloud.retail.v2.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2.SearchRequest.SearchMode);
-
-                    /** SearchRequest personalizationSpec. */
-                    public personalizationSpec?: (google.cloud.retail.v2.SearchRequest.IPersonalizationSpec|null);
-
-                    /** SearchRequest labels. */
-                    public labels: { [k: string]: string };
-
-                    /** SearchRequest spellCorrectionSpec. */
-                    public spellCorrectionSpec?: (google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec|null);
-
-                    /** SearchRequest entity. */
-                    public entity: string;
-
-                    /** SearchRequest conversationalSearchSpec. */
-                    public conversationalSearchSpec?: (google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec|null);
-
-                    /** SearchRequest tileNavigationSpec. */
-                    public tileNavigationSpec?: (google.cloud.retail.v2.SearchRequest.ITileNavigationSpec|null);
-
-                    /** SearchRequest languageCode. */
-                    public languageCode: string;
-
-                    /** SearchRequest regionCode. */
-                    public regionCode: string;
-
-                    /** SearchRequest placeId. */
-                    public placeId: string;
-
-                    /** SearchRequest userAttributes. */
-                    public userAttributes: { [k: string]: google.cloud.retail.v2.IStringList };
-
-                    /**
-                     * Creates a new SearchRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SearchRequest instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2.ISearchRequest): google.cloud.retail.v2.SearchRequest;
-
-                    /**
-                     * Encodes the specified SearchRequest message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.verify|verify} messages.
-                     * @param message SearchRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.verify|verify} messages.
-                     * @param message SearchRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SearchRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SearchRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest;
-
-                    /**
-                     * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SearchRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest;
-
-                    /**
-                     * Verifies a SearchRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SearchRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest;
-
-                    /**
-                     * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
-                     * @param message SearchRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2.SearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SearchRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SearchRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SearchRequest {
-
-                    /** Properties of a FacetSpec. */
-                    interface IFacetSpec {
-
-                        /** FacetSpec facetKey */
-                        facetKey?: (google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey|null);
-
-                        /** FacetSpec limit */
-                        limit?: (number|null);
-
-                        /** FacetSpec excludedFilterKeys */
-                        excludedFilterKeys?: (string[]|null);
-
-                        /** FacetSpec enableDynamicPosition */
-                        enableDynamicPosition?: (boolean|null);
-                    }
-
-                    /** Represents a FacetSpec. */
-                    class FacetSpec implements IFacetSpec {
-
-                        /**
-                         * Constructs a new FacetSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IFacetSpec);
-
-                        /** FacetSpec facetKey. */
-                        public facetKey?: (google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey|null);
-
-                        /** FacetSpec limit. */
-                        public limit: number;
-
-                        /** FacetSpec excludedFilterKeys. */
-                        public excludedFilterKeys: string[];
-
-                        /** FacetSpec enableDynamicPosition. */
-                        public enableDynamicPosition: boolean;
-
-                        /**
-                         * Creates a new FacetSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns FacetSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IFacetSpec): google.cloud.retail.v2.SearchRequest.FacetSpec;
-
-                        /**
-                         * Encodes the specified FacetSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.verify|verify} messages.
-                         * @param message FacetSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.IFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified FacetSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.verify|verify} messages.
-                         * @param message FacetSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a FacetSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns FacetSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.FacetSpec;
-
-                        /**
-                         * Decodes a FacetSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns FacetSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.FacetSpec;
-
-                        /**
-                         * Verifies a FacetSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a FacetSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns FacetSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.FacetSpec;
-
-                        /**
-                         * Creates a plain object from a FacetSpec message. Also converts values to other types if specified.
-                         * @param message FacetSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.FacetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this FacetSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for FacetSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace FacetSpec {
-
-                        /** Properties of a FacetKey. */
-                        interface IFacetKey {
-
-                            /** FacetKey key */
-                            key?: (string|null);
-
-                            /** FacetKey intervals */
-                            intervals?: (google.cloud.retail.v2.IInterval[]|null);
-
-                            /** FacetKey restrictedValues */
-                            restrictedValues?: (string[]|null);
-
-                            /** FacetKey prefixes */
-                            prefixes?: (string[]|null);
-
-                            /** FacetKey contains */
-                            contains?: (string[]|null);
-
-                            /** FacetKey caseInsensitive */
-                            caseInsensitive?: (boolean|null);
-
-                            /** FacetKey orderBy */
-                            orderBy?: (string|null);
-
-                            /** FacetKey query */
-                            query?: (string|null);
-
-                            /** FacetKey returnMinMax */
-                            returnMinMax?: (boolean|null);
-                        }
-
-                        /** Represents a FacetKey. */
-                        class FacetKey implements IFacetKey {
-
-                            /**
-                             * Constructs a new FacetKey.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey);
-
-                            /** FacetKey key. */
-                            public key: string;
-
-                            /** FacetKey intervals. */
-                            public intervals: google.cloud.retail.v2.IInterval[];
-
-                            /** FacetKey restrictedValues. */
-                            public restrictedValues: string[];
-
-                            /** FacetKey prefixes. */
-                            public prefixes: string[];
-
-                            /** FacetKey contains. */
-                            public contains: string[];
-
-                            /** FacetKey caseInsensitive. */
-                            public caseInsensitive: boolean;
-
-                            /** FacetKey orderBy. */
-                            public orderBy: string;
-
-                            /** FacetKey query. */
-                            public query: string;
-
-                            /** FacetKey returnMinMax. */
-                            public returnMinMax: boolean;
-
-                            /**
-                             * Creates a new FacetKey instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns FacetKey instance
-                             */
-                            public static create(properties?: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
-
-                            /**
-                             * Encodes the specified FacetKey message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
-                             * @param message FacetKey message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified FacetKey message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
-                             * @param message FacetKey message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.FacetSpec.IFacetKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a FacetKey message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns FacetKey
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
-
-                            /**
-                             * Decodes a FacetKey message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns FacetKey
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
-
-                            /**
-                             * Verifies a FacetKey message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a FacetKey message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns FacetKey
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey;
-
-                            /**
-                             * Creates a plain object from a FacetKey message. Also converts values to other types if specified.
-                             * @param message FacetKey
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this FacetKey to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for FacetKey
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-                    }
-
-                    /** Properties of a DynamicFacetSpec. */
-                    interface IDynamicFacetSpec {
-
-                        /** DynamicFacetSpec mode */
-                        mode?: (google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode|null);
-                    }
-
-                    /** Represents a DynamicFacetSpec. */
-                    class DynamicFacetSpec implements IDynamicFacetSpec {
-
-                        /**
-                         * Constructs a new DynamicFacetSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec);
-
-                        /** DynamicFacetSpec mode. */
-                        public mode: (google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode);
-
-                        /**
-                         * Creates a new DynamicFacetSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns DynamicFacetSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
-
-                        /**
-                         * Encodes the specified DynamicFacetSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.verify|verify} messages.
-                         * @param message DynamicFacetSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified DynamicFacetSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.verify|verify} messages.
-                         * @param message DynamicFacetSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IDynamicFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a DynamicFacetSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns DynamicFacetSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
-
-                        /**
-                         * Decodes a DynamicFacetSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns DynamicFacetSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
-
-                        /**
-                         * Verifies a DynamicFacetSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a DynamicFacetSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns DynamicFacetSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.DynamicFacetSpec;
-
-                        /**
-                         * Creates a plain object from a DynamicFacetSpec message. Also converts values to other types if specified.
-                         * @param message DynamicFacetSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.DynamicFacetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this DynamicFacetSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for DynamicFacetSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace DynamicFacetSpec {
-
-                        /** Mode enum. */
-                        enum Mode {
-                            MODE_UNSPECIFIED = 0,
-                            DISABLED = 1,
-                            ENABLED = 2
-                        }
-                    }
-
-                    /** Properties of a BoostSpec. */
-                    interface IBoostSpec {
-
-                        /** BoostSpec conditionBoostSpecs */
-                        conditionBoostSpecs?: (google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
-
-                        /** BoostSpec skipBoostSpecValidation */
-                        skipBoostSpecValidation?: (boolean|null);
-                    }
-
-                    /** Represents a BoostSpec. */
-                    class BoostSpec implements IBoostSpec {
-
-                        /**
-                         * Constructs a new BoostSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IBoostSpec);
-
-                        /** BoostSpec conditionBoostSpecs. */
-                        public conditionBoostSpecs: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[];
-
-                        /** BoostSpec skipBoostSpecValidation. */
-                        public skipBoostSpecValidation?: (boolean|null);
-
-                        /**
-                         * Creates a new BoostSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns BoostSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IBoostSpec): google.cloud.retail.v2.SearchRequest.BoostSpec;
-
-                        /**
-                         * Encodes the specified BoostSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.verify|verify} messages.
-                         * @param message BoostSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.IBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified BoostSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.verify|verify} messages.
-                         * @param message BoostSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a BoostSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns BoostSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.BoostSpec;
-
-                        /**
-                         * Decodes a BoostSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns BoostSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.BoostSpec;
-
-                        /**
-                         * Verifies a BoostSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a BoostSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns BoostSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.BoostSpec;
-
-                        /**
-                         * Creates a plain object from a BoostSpec message. Also converts values to other types if specified.
-                         * @param message BoostSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.BoostSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this BoostSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for BoostSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace BoostSpec {
-
-                        /** Properties of a ConditionBoostSpec. */
-                        interface IConditionBoostSpec {
-
-                            /** ConditionBoostSpec condition */
-                            condition?: (string|null);
-
-                            /** ConditionBoostSpec boost */
-                            boost?: (number|null);
-                        }
-
-                        /** Represents a ConditionBoostSpec. */
-                        class ConditionBoostSpec implements IConditionBoostSpec {
-
-                            /**
-                             * Constructs a new ConditionBoostSpec.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec);
-
-                            /** ConditionBoostSpec condition. */
-                            public condition: string;
-
-                            /** ConditionBoostSpec boost. */
-                            public boost: number;
-
-                            /**
-                             * Creates a new ConditionBoostSpec instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns ConditionBoostSpec instance
-                             */
-                            public static create(properties?: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
-
-                            /**
-                             * Encodes the specified ConditionBoostSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
-                             * @param message ConditionBoostSpec message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified ConditionBoostSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
-                             * @param message ConditionBoostSpec message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a ConditionBoostSpec message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns ConditionBoostSpec
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
-
-                            /**
-                             * Decodes a ConditionBoostSpec message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns ConditionBoostSpec
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
-
-                            /**
-                             * Verifies a ConditionBoostSpec message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a ConditionBoostSpec message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns ConditionBoostSpec
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec;
-
-                            /**
-                             * Creates a plain object from a ConditionBoostSpec message. Also converts values to other types if specified.
-                             * @param message ConditionBoostSpec
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this ConditionBoostSpec to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for ConditionBoostSpec
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-                    }
-
-                    /** Properties of a QueryExpansionSpec. */
-                    interface IQueryExpansionSpec {
-
-                        /** QueryExpansionSpec condition */
-                        condition?: (google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|null);
-
-                        /** QueryExpansionSpec pinUnexpandedResults */
-                        pinUnexpandedResults?: (boolean|null);
-                    }
-
-                    /** Represents a QueryExpansionSpec. */
-                    class QueryExpansionSpec implements IQueryExpansionSpec {
-
-                        /**
-                         * Constructs a new QueryExpansionSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec);
-
-                        /** QueryExpansionSpec condition. */
-                        public condition: (google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition);
-
-                        /** QueryExpansionSpec pinUnexpandedResults. */
-                        public pinUnexpandedResults: boolean;
-
-                        /**
-                         * Creates a new QueryExpansionSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns QueryExpansionSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Encodes the specified QueryExpansionSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.verify|verify} messages.
-                         * @param message QueryExpansionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified QueryExpansionSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.verify|verify} messages.
-                         * @param message QueryExpansionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a QueryExpansionSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns QueryExpansionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Decodes a QueryExpansionSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns QueryExpansionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Verifies a QueryExpansionSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a QueryExpansionSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns QueryExpansionSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Creates a plain object from a QueryExpansionSpec message. Also converts values to other types if specified.
-                         * @param message QueryExpansionSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.QueryExpansionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this QueryExpansionSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for QueryExpansionSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace QueryExpansionSpec {
-
-                        /** Condition enum. */
-                        enum Condition {
-                            CONDITION_UNSPECIFIED = 0,
-                            DISABLED = 1,
-                            AUTO = 3
-                        }
-                    }
-
-                    /** Properties of a PersonalizationSpec. */
-                    interface IPersonalizationSpec {
-
-                        /** PersonalizationSpec mode */
-                        mode?: (google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode|null);
-                    }
-
-                    /** Represents a PersonalizationSpec. */
-                    class PersonalizationSpec implements IPersonalizationSpec {
-
-                        /**
-                         * Constructs a new PersonalizationSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec);
-
-                        /** PersonalizationSpec mode. */
-                        public mode: (google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode);
-
-                        /**
-                         * Creates a new PersonalizationSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns PersonalizationSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
-
-                        /**
-                         * Encodes the specified PersonalizationSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.PersonalizationSpec.verify|verify} messages.
-                         * @param message PersonalizationSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified PersonalizationSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.PersonalizationSpec.verify|verify} messages.
-                         * @param message PersonalizationSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IPersonalizationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a PersonalizationSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns PersonalizationSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
-
-                        /**
-                         * Decodes a PersonalizationSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns PersonalizationSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
-
-                        /**
-                         * Verifies a PersonalizationSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a PersonalizationSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns PersonalizationSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.PersonalizationSpec;
-
-                        /**
-                         * Creates a plain object from a PersonalizationSpec message. Also converts values to other types if specified.
-                         * @param message PersonalizationSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.PersonalizationSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this PersonalizationSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for PersonalizationSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace PersonalizationSpec {
-
-                        /** Mode enum. */
-                        enum Mode {
-                            MODE_UNSPECIFIED = 0,
-                            AUTO = 1,
-                            DISABLED = 2
-                        }
-                    }
-
-                    /** Properties of a SpellCorrectionSpec. */
-                    interface ISpellCorrectionSpec {
-
-                        /** SpellCorrectionSpec mode */
-                        mode?: (google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode|null);
-                    }
-
-                    /** Represents a SpellCorrectionSpec. */
-                    class SpellCorrectionSpec implements ISpellCorrectionSpec {
-
-                        /**
-                         * Constructs a new SpellCorrectionSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec);
-
-                        /** SpellCorrectionSpec mode. */
-                        public mode: (google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode);
-
-                        /**
-                         * Creates a new SpellCorrectionSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SpellCorrectionSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Encodes the specified SpellCorrectionSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
-                         * @param message SpellCorrectionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SpellCorrectionSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
-                         * @param message SpellCorrectionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SpellCorrectionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SpellCorrectionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Verifies a SpellCorrectionSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SpellCorrectionSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SpellCorrectionSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Creates a plain object from a SpellCorrectionSpec message. Also converts values to other types if specified.
-                         * @param message SpellCorrectionSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SpellCorrectionSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SpellCorrectionSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace SpellCorrectionSpec {
-
-                        /** Mode enum. */
-                        enum Mode {
-                            MODE_UNSPECIFIED = 0,
-                            SUGGESTION_ONLY = 1,
-                            AUTO = 2
-                        }
-                    }
-
-                    /** Properties of a ConversationalSearchSpec. */
-                    interface IConversationalSearchSpec {
-
-                        /** ConversationalSearchSpec followupConversationRequested */
-                        followupConversationRequested?: (boolean|null);
-
-                        /** ConversationalSearchSpec conversationId */
-                        conversationId?: (string|null);
-
-                        /** ConversationalSearchSpec userAnswer */
-                        userAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer|null);
-                    }
-
-                    /** Represents a ConversationalSearchSpec. */
-                    class ConversationalSearchSpec implements IConversationalSearchSpec {
-
-                        /**
-                         * Constructs a new ConversationalSearchSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec);
-
-                        /** ConversationalSearchSpec followupConversationRequested. */
-                        public followupConversationRequested: boolean;
-
-                        /** ConversationalSearchSpec conversationId. */
-                        public conversationId: string;
-
-                        /** ConversationalSearchSpec userAnswer. */
-                        public userAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer|null);
-
-                        /**
-                         * Creates a new ConversationalSearchSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ConversationalSearchSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
-
-                        /**
-                         * Encodes the specified ConversationalSearchSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.verify|verify} messages.
-                         * @param message ConversationalSearchSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ConversationalSearchSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.verify|verify} messages.
-                         * @param message ConversationalSearchSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.IConversationalSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ConversationalSearchSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ConversationalSearchSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
-
-                        /**
-                         * Decodes a ConversationalSearchSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ConversationalSearchSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
-
-                        /**
-                         * Verifies a ConversationalSearchSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ConversationalSearchSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ConversationalSearchSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec;
-
-                        /**
-                         * Creates a plain object from a ConversationalSearchSpec message. Also converts values to other types if specified.
-                         * @param message ConversationalSearchSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ConversationalSearchSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ConversationalSearchSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace ConversationalSearchSpec {
-
-                        /** Properties of a UserAnswer. */
-                        interface IUserAnswer {
-
-                            /** UserAnswer textAnswer */
-                            textAnswer?: (string|null);
-
-                            /** UserAnswer selectedAnswer */
-                            selectedAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer|null);
-                        }
-
-                        /** Represents a UserAnswer. */
-                        class UserAnswer implements IUserAnswer {
-
-                            /**
-                             * Constructs a new UserAnswer.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer);
-
-                            /** UserAnswer textAnswer. */
-                            public textAnswer?: (string|null);
-
-                            /** UserAnswer selectedAnswer. */
-                            public selectedAnswer?: (google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer|null);
-
-                            /** UserAnswer type. */
-                            public type?: ("textAnswer"|"selectedAnswer");
-
-                            /**
-                             * Creates a new UserAnswer instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns UserAnswer instance
-                             */
-                            public static create(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
-
-                            /**
-                             * Encodes the specified UserAnswer message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.verify|verify} messages.
-                             * @param message UserAnswer message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified UserAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.verify|verify} messages.
-                             * @param message UserAnswer message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a UserAnswer message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns UserAnswer
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
-
-                            /**
-                             * Decodes a UserAnswer message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns UserAnswer
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
-
-                            /**
-                             * Verifies a UserAnswer message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a UserAnswer message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns UserAnswer
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer;
-
-                            /**
-                             * Creates a plain object from a UserAnswer message. Also converts values to other types if specified.
-                             * @param message UserAnswer
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this UserAnswer to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for UserAnswer
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        namespace UserAnswer {
-
-                            /** Properties of a SelectedAnswer. */
-                            interface ISelectedAnswer {
-
-                                /** SelectedAnswer productAttributeValues */
-                                productAttributeValues?: (google.cloud.retail.v2.IProductAttributeValue[]|null);
-
-                                /** SelectedAnswer productAttributeValue */
-                                productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-                            }
-
-                            /** Represents a SelectedAnswer. */
-                            class SelectedAnswer implements ISelectedAnswer {
-
-                                /**
-                                 * Constructs a new SelectedAnswer.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer);
-
-                                /** SelectedAnswer productAttributeValues. */
-                                public productAttributeValues: google.cloud.retail.v2.IProductAttributeValue[];
-
-                                /** SelectedAnswer productAttributeValue. */
-                                public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-
-                                /**
-                                 * Creates a new SelectedAnswer instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns SelectedAnswer instance
-                                 */
-                                public static create(properties?: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
-
-                                /**
-                                 * Encodes the specified SelectedAnswer message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer.verify|verify} messages.
-                                 * @param message SelectedAnswer message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified SelectedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer.verify|verify} messages.
-                                 * @param message SelectedAnswer message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes a SelectedAnswer message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns SelectedAnswer
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
-
-                                /**
-                                 * Decodes a SelectedAnswer message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns SelectedAnswer
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
-
-                                /**
-                                 * Verifies a SelectedAnswer message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates a SelectedAnswer message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns SelectedAnswer
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer;
-
-                                /**
-                                 * Creates a plain object from a SelectedAnswer message. Also converts values to other types if specified.
-                                 * @param message SelectedAnswer
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.retail.v2.SearchRequest.ConversationalSearchSpec.UserAnswer.SelectedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this SelectedAnswer to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-
-                                /**
-                                 * Gets the default type url for SelectedAnswer
-                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                 * @returns The default type url
-                                 */
-                                public static getTypeUrl(typeUrlPrefix?: string): string;
-                            }
-                        }
-                    }
-
-                    /** Properties of a TileNavigationSpec. */
-                    interface ITileNavigationSpec {
-
-                        /** TileNavigationSpec tileNavigationRequested */
-                        tileNavigationRequested?: (boolean|null);
-
-                        /** TileNavigationSpec appliedTiles */
-                        appliedTiles?: (google.cloud.retail.v2.ITile[]|null);
-                    }
-
-                    /** Represents a TileNavigationSpec. */
-                    class TileNavigationSpec implements ITileNavigationSpec {
-
-                        /**
-                         * Constructs a new TileNavigationSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec);
-
-                        /** TileNavigationSpec tileNavigationRequested. */
-                        public tileNavigationRequested: boolean;
-
-                        /** TileNavigationSpec appliedTiles. */
-                        public appliedTiles: google.cloud.retail.v2.ITile[];
-
-                        /**
-                         * Creates a new TileNavigationSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TileNavigationSpec instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
-
-                        /**
-                         * Encodes the specified TileNavigationSpec message. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.TileNavigationSpec.verify|verify} messages.
-                         * @param message TileNavigationSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TileNavigationSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchRequest.TileNavigationSpec.verify|verify} messages.
-                         * @param message TileNavigationSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchRequest.ITileNavigationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TileNavigationSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TileNavigationSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
-
-                        /**
-                         * Decodes a TileNavigationSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TileNavigationSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
-
-                        /**
-                         * Verifies a TileNavigationSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TileNavigationSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TileNavigationSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchRequest.TileNavigationSpec;
-
-                        /**
-                         * Creates a plain object from a TileNavigationSpec message. Also converts values to other types if specified.
-                         * @param message TileNavigationSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchRequest.TileNavigationSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TileNavigationSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for TileNavigationSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** SearchMode enum. */
-                    enum SearchMode {
-                        SEARCH_MODE_UNSPECIFIED = 0,
-                        PRODUCT_SEARCH_ONLY = 1,
-                        FACETED_SEARCH_ONLY = 2
-                    }
-                }
-
-                /** Properties of a SearchResponse. */
-                interface ISearchResponse {
-
-                    /** SearchResponse results */
-                    results?: (google.cloud.retail.v2.SearchResponse.ISearchResult[]|null);
-
-                    /** SearchResponse facets */
-                    facets?: (google.cloud.retail.v2.SearchResponse.IFacet[]|null);
-
-                    /** SearchResponse totalSize */
-                    totalSize?: (number|null);
-
-                    /** SearchResponse correctedQuery */
-                    correctedQuery?: (string|null);
-
-                    /** SearchResponse attributionToken */
-                    attributionToken?: (string|null);
-
-                    /** SearchResponse nextPageToken */
-                    nextPageToken?: (string|null);
-
-                    /** SearchResponse queryExpansionInfo */
-                    queryExpansionInfo?: (google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo|null);
-
-                    /** SearchResponse redirectUri */
-                    redirectUri?: (string|null);
-
-                    /** SearchResponse appliedControls */
-                    appliedControls?: (string[]|null);
-
-                    /** SearchResponse pinControlMetadata */
-                    pinControlMetadata?: (google.cloud.retail.v2.IPinControlMetadata|null);
-
-                    /** SearchResponse invalidConditionBoostSpecs */
-                    invalidConditionBoostSpecs?: (google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
-
-                    /** SearchResponse experimentInfo */
-                    experimentInfo?: (google.cloud.retail.v2.IExperimentInfo[]|null);
-
-                    /** SearchResponse conversationalSearchResult */
-                    conversationalSearchResult?: (google.cloud.retail.v2.SearchResponse.IConversationalSearchResult|null);
-
-                    /** SearchResponse tileNavigationResult */
-                    tileNavigationResult?: (google.cloud.retail.v2.SearchResponse.ITileNavigationResult|null);
-                }
-
-                /** Represents a SearchResponse. */
-                class SearchResponse implements ISearchResponse {
-
-                    /**
-                     * Constructs a new SearchResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2.ISearchResponse);
-
-                    /** SearchResponse results. */
-                    public results: google.cloud.retail.v2.SearchResponse.ISearchResult[];
-
-                    /** SearchResponse facets. */
-                    public facets: google.cloud.retail.v2.SearchResponse.IFacet[];
-
-                    /** SearchResponse totalSize. */
-                    public totalSize: number;
-
-                    /** SearchResponse correctedQuery. */
-                    public correctedQuery: string;
-
-                    /** SearchResponse attributionToken. */
-                    public attributionToken: string;
-
-                    /** SearchResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /** SearchResponse queryExpansionInfo. */
-                    public queryExpansionInfo?: (google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo|null);
-
-                    /** SearchResponse redirectUri. */
-                    public redirectUri: string;
-
-                    /** SearchResponse appliedControls. */
-                    public appliedControls: string[];
-
-                    /** SearchResponse pinControlMetadata. */
-                    public pinControlMetadata?: (google.cloud.retail.v2.IPinControlMetadata|null);
-
-                    /** SearchResponse invalidConditionBoostSpecs. */
-                    public invalidConditionBoostSpecs: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[];
-
-                    /** SearchResponse experimentInfo. */
-                    public experimentInfo: google.cloud.retail.v2.IExperimentInfo[];
-
-                    /** SearchResponse conversationalSearchResult. */
-                    public conversationalSearchResult?: (google.cloud.retail.v2.SearchResponse.IConversationalSearchResult|null);
-
-                    /** SearchResponse tileNavigationResult. */
-                    public tileNavigationResult?: (google.cloud.retail.v2.SearchResponse.ITileNavigationResult|null);
-
-                    /**
-                     * Creates a new SearchResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SearchResponse instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2.ISearchResponse): google.cloud.retail.v2.SearchResponse;
-
-                    /**
-                     * Encodes the specified SearchResponse message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.verify|verify} messages.
-                     * @param message SearchResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SearchResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.verify|verify} messages.
-                     * @param message SearchResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SearchResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SearchResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse;
-
-                    /**
-                     * Decodes a SearchResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SearchResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse;
-
-                    /**
-                     * Verifies a SearchResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SearchResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SearchResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse;
-
-                    /**
-                     * Creates a plain object from a SearchResponse message. Also converts values to other types if specified.
-                     * @param message SearchResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2.SearchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SearchResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SearchResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SearchResponse {
-
-                    /** Properties of a SearchResult. */
-                    interface ISearchResult {
-
-                        /** SearchResult id */
-                        id?: (string|null);
-
-                        /** SearchResult product */
-                        product?: (google.cloud.retail.v2.IProduct|null);
-
-                        /** SearchResult matchingVariantCount */
-                        matchingVariantCount?: (number|null);
-
-                        /** SearchResult matchingVariantFields */
-                        matchingVariantFields?: ({ [k: string]: google.protobuf.IFieldMask }|null);
-
-                        /** SearchResult variantRollupValues */
-                        variantRollupValues?: ({ [k: string]: google.protobuf.IValue }|null);
-
-                        /** SearchResult personalLabels */
-                        personalLabels?: (string[]|null);
-
-                        /** SearchResult modelScores */
-                        modelScores?: ({ [k: string]: google.cloud.retail.v2.IDoubleList }|null);
-                    }
-
-                    /** Represents a SearchResult. */
-                    class SearchResult implements ISearchResult {
-
-                        /**
-                         * Constructs a new SearchResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchResponse.ISearchResult);
-
-                        /** SearchResult id. */
-                        public id: string;
-
-                        /** SearchResult product. */
-                        public product?: (google.cloud.retail.v2.IProduct|null);
-
-                        /** SearchResult matchingVariantCount. */
-                        public matchingVariantCount: number;
-
-                        /** SearchResult matchingVariantFields. */
-                        public matchingVariantFields: { [k: string]: google.protobuf.IFieldMask };
-
-                        /** SearchResult variantRollupValues. */
-                        public variantRollupValues: { [k: string]: google.protobuf.IValue };
-
-                        /** SearchResult personalLabels. */
-                        public personalLabels: string[];
-
-                        /** SearchResult modelScores. */
-                        public modelScores: { [k: string]: google.cloud.retail.v2.IDoubleList };
-
-                        /**
-                         * Creates a new SearchResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SearchResult instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchResponse.ISearchResult): google.cloud.retail.v2.SearchResponse.SearchResult;
-
-                        /**
-                         * Encodes the specified SearchResult message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.SearchResult.verify|verify} messages.
-                         * @param message SearchResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SearchResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.SearchResult.verify|verify} messages.
-                         * @param message SearchResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SearchResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SearchResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.SearchResult;
-
-                        /**
-                         * Decodes a SearchResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SearchResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.SearchResult;
-
-                        /**
-                         * Verifies a SearchResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SearchResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SearchResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.SearchResult;
-
-                        /**
-                         * Creates a plain object from a SearchResult message. Also converts values to other types if specified.
-                         * @param message SearchResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchResponse.SearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SearchResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SearchResult
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a Facet. */
-                    interface IFacet {
-
-                        /** Facet key */
-                        key?: (string|null);
-
-                        /** Facet values */
-                        values?: (google.cloud.retail.v2.SearchResponse.Facet.IFacetValue[]|null);
-
-                        /** Facet dynamicFacet */
-                        dynamicFacet?: (boolean|null);
-                    }
-
-                    /** Represents a Facet. */
-                    class Facet implements IFacet {
-
-                        /**
-                         * Constructs a new Facet.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchResponse.IFacet);
-
-                        /** Facet key. */
-                        public key: string;
-
-                        /** Facet values. */
-                        public values: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue[];
-
-                        /** Facet dynamicFacet. */
-                        public dynamicFacet: boolean;
-
-                        /**
-                         * Creates a new Facet instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Facet instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchResponse.IFacet): google.cloud.retail.v2.SearchResponse.Facet;
-
-                        /**
-                         * Encodes the specified Facet message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.verify|verify} messages.
-                         * @param message Facet message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchResponse.IFacet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Facet message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.verify|verify} messages.
-                         * @param message Facet message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.IFacet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Facet message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Facet
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.Facet;
-
-                        /**
-                         * Decodes a Facet message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Facet
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.Facet;
-
-                        /**
-                         * Verifies a Facet message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Facet message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Facet
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.Facet;
-
-                        /**
-                         * Creates a plain object from a Facet message. Also converts values to other types if specified.
-                         * @param message Facet
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchResponse.Facet, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Facet to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Facet
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace Facet {
-
-                        /** Properties of a FacetValue. */
-                        interface IFacetValue {
-
-                            /** FacetValue value */
-                            value?: (string|null);
-
-                            /** FacetValue interval */
-                            interval?: (google.cloud.retail.v2.IInterval|null);
-
-                            /** FacetValue count */
-                            count?: (number|Long|string|null);
-
-                            /** FacetValue minValue */
-                            minValue?: (number|null);
-
-                            /** FacetValue maxValue */
-                            maxValue?: (number|null);
-                        }
-
-                        /** Represents a FacetValue. */
-                        class FacetValue implements IFacetValue {
-
-                            /**
-                             * Constructs a new FacetValue.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue);
-
-                            /** FacetValue value. */
-                            public value?: (string|null);
-
-                            /** FacetValue interval. */
-                            public interval?: (google.cloud.retail.v2.IInterval|null);
-
-                            /** FacetValue count. */
-                            public count: (number|Long|string);
-
-                            /** FacetValue minValue. */
-                            public minValue: number;
-
-                            /** FacetValue maxValue. */
-                            public maxValue: number;
-
-                            /** FacetValue facetValue. */
-                            public facetValue?: ("value"|"interval");
-
-                            /**
-                             * Creates a new FacetValue instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns FacetValue instance
-                             */
-                            public static create(properties?: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
-
-                            /**
-                             * Encodes the specified FacetValue message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.FacetValue.verify|verify} messages.
-                             * @param message FacetValue message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified FacetValue message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.Facet.FacetValue.verify|verify} messages.
-                             * @param message FacetValue message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.Facet.IFacetValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a FacetValue message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns FacetValue
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
-
-                            /**
-                             * Decodes a FacetValue message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns FacetValue
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
-
-                            /**
-                             * Verifies a FacetValue message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a FacetValue message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns FacetValue
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.Facet.FacetValue;
-
-                            /**
-                             * Creates a plain object from a FacetValue message. Also converts values to other types if specified.
-                             * @param message FacetValue
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.retail.v2.SearchResponse.Facet.FacetValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this FacetValue to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for FacetValue
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-                    }
-
-                    /** Properties of a QueryExpansionInfo. */
-                    interface IQueryExpansionInfo {
-
-                        /** QueryExpansionInfo expandedQuery */
-                        expandedQuery?: (boolean|null);
-
-                        /** QueryExpansionInfo pinnedResultCount */
-                        pinnedResultCount?: (number|Long|string|null);
-                    }
-
-                    /** Represents a QueryExpansionInfo. */
-                    class QueryExpansionInfo implements IQueryExpansionInfo {
-
-                        /**
-                         * Constructs a new QueryExpansionInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo);
-
-                        /** QueryExpansionInfo expandedQuery. */
-                        public expandedQuery: boolean;
-
-                        /** QueryExpansionInfo pinnedResultCount. */
-                        public pinnedResultCount: (number|Long|string);
-
-                        /**
-                         * Creates a new QueryExpansionInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns QueryExpansionInfo instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
-
-                        /**
-                         * Encodes the specified QueryExpansionInfo message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.QueryExpansionInfo.verify|verify} messages.
-                         * @param message QueryExpansionInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified QueryExpansionInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.QueryExpansionInfo.verify|verify} messages.
-                         * @param message QueryExpansionInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.IQueryExpansionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a QueryExpansionInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns QueryExpansionInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
-
-                        /**
-                         * Decodes a QueryExpansionInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns QueryExpansionInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
-
-                        /**
-                         * Verifies a QueryExpansionInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a QueryExpansionInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns QueryExpansionInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.QueryExpansionInfo;
-
-                        /**
-                         * Creates a plain object from a QueryExpansionInfo message. Also converts values to other types if specified.
-                         * @param message QueryExpansionInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchResponse.QueryExpansionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this QueryExpansionInfo to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for QueryExpansionInfo
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a ConversationalSearchResult. */
-                    interface IConversationalSearchResult {
-
-                        /** ConversationalSearchResult conversationId */
-                        conversationId?: (string|null);
-
-                        /** ConversationalSearchResult refinedQuery */
-                        refinedQuery?: (string|null);
-
-                        /** ConversationalSearchResult additionalFilters */
-                        additionalFilters?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter[]|null);
-
-                        /** ConversationalSearchResult followupQuestion */
-                        followupQuestion?: (string|null);
-
-                        /** ConversationalSearchResult suggestedAnswers */
-                        suggestedAnswers?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer[]|null);
-
-                        /** ConversationalSearchResult additionalFilter */
-                        additionalFilter?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter|null);
-                    }
-
-                    /** Represents a ConversationalSearchResult. */
-                    class ConversationalSearchResult implements IConversationalSearchResult {
-
-                        /**
-                         * Constructs a new ConversationalSearchResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult);
-
-                        /** ConversationalSearchResult conversationId. */
-                        public conversationId: string;
-
-                        /** ConversationalSearchResult refinedQuery. */
-                        public refinedQuery: string;
-
-                        /** ConversationalSearchResult additionalFilters. */
-                        public additionalFilters: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter[];
-
-                        /** ConversationalSearchResult followupQuestion. */
-                        public followupQuestion: string;
-
-                        /** ConversationalSearchResult suggestedAnswers. */
-                        public suggestedAnswers: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer[];
-
-                        /** ConversationalSearchResult additionalFilter. */
-                        public additionalFilter?: (google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter|null);
-
-                        /**
-                         * Creates a new ConversationalSearchResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ConversationalSearchResult instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
-
-                        /**
-                         * Encodes the specified ConversationalSearchResult message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.verify|verify} messages.
-                         * @param message ConversationalSearchResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ConversationalSearchResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.verify|verify} messages.
-                         * @param message ConversationalSearchResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.IConversationalSearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ConversationalSearchResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ConversationalSearchResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
-
-                        /**
-                         * Decodes a ConversationalSearchResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ConversationalSearchResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
-
-                        /**
-                         * Verifies a ConversationalSearchResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ConversationalSearchResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ConversationalSearchResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult;
-
-                        /**
-                         * Creates a plain object from a ConversationalSearchResult message. Also converts values to other types if specified.
-                         * @param message ConversationalSearchResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ConversationalSearchResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ConversationalSearchResult
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace ConversationalSearchResult {
-
-                        /** Properties of a SuggestedAnswer. */
-                        interface ISuggestedAnswer {
-
-                            /** SuggestedAnswer productAttributeValue */
-                            productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-                        }
-
-                        /** Represents a SuggestedAnswer. */
-                        class SuggestedAnswer implements ISuggestedAnswer {
-
-                            /**
-                             * Constructs a new SuggestedAnswer.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer);
-
-                            /** SuggestedAnswer productAttributeValue. */
-                            public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-
-                            /**
-                             * Creates a new SuggestedAnswer instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns SuggestedAnswer instance
-                             */
-                            public static create(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
-
-                            /**
-                             * Encodes the specified SuggestedAnswer message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer.verify|verify} messages.
-                             * @param message SuggestedAnswer message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified SuggestedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer.verify|verify} messages.
-                             * @param message SuggestedAnswer message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a SuggestedAnswer message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns SuggestedAnswer
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
-
-                            /**
-                             * Decodes a SuggestedAnswer message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns SuggestedAnswer
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
-
-                            /**
-                             * Verifies a SuggestedAnswer message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a SuggestedAnswer message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns SuggestedAnswer
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer;
-
-                            /**
-                             * Creates a plain object from a SuggestedAnswer message. Also converts values to other types if specified.
-                             * @param message SuggestedAnswer
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.SuggestedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this SuggestedAnswer to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for SuggestedAnswer
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        /** Properties of an AdditionalFilter. */
-                        interface IAdditionalFilter {
-
-                            /** AdditionalFilter productAttributeValue */
-                            productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-                        }
-
-                        /** Represents an AdditionalFilter. */
-                        class AdditionalFilter implements IAdditionalFilter {
-
-                            /**
-                             * Constructs a new AdditionalFilter.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter);
-
-                            /** AdditionalFilter productAttributeValue. */
-                            public productAttributeValue?: (google.cloud.retail.v2.IProductAttributeValue|null);
-
-                            /**
-                             * Creates a new AdditionalFilter instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns AdditionalFilter instance
-                             */
-                            public static create(properties?: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
-
-                            /**
-                             * Encodes the specified AdditionalFilter message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter.verify|verify} messages.
-                             * @param message AdditionalFilter message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified AdditionalFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter.verify|verify} messages.
-                             * @param message AdditionalFilter message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an AdditionalFilter message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns AdditionalFilter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
-
-                            /**
-                             * Decodes an AdditionalFilter message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns AdditionalFilter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
-
-                            /**
-                             * Verifies an AdditionalFilter message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an AdditionalFilter message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns AdditionalFilter
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter;
-
-                            /**
-                             * Creates a plain object from an AdditionalFilter message. Also converts values to other types if specified.
-                             * @param message AdditionalFilter
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.retail.v2.SearchResponse.ConversationalSearchResult.AdditionalFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this AdditionalFilter to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for AdditionalFilter
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-                    }
-
-                    /** Properties of a TileNavigationResult. */
-                    interface ITileNavigationResult {
-
-                        /** TileNavigationResult tiles */
-                        tiles?: (google.cloud.retail.v2.ITile[]|null);
-                    }
-
-                    /** Represents a TileNavigationResult. */
-                    class TileNavigationResult implements ITileNavigationResult {
-
-                        /**
-                         * Constructs a new TileNavigationResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.SearchResponse.ITileNavigationResult);
-
-                        /** TileNavigationResult tiles. */
-                        public tiles: google.cloud.retail.v2.ITile[];
-
-                        /**
-                         * Creates a new TileNavigationResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TileNavigationResult instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.SearchResponse.ITileNavigationResult): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
-
-                        /**
-                         * Encodes the specified TileNavigationResult message. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.TileNavigationResult.verify|verify} messages.
-                         * @param message TileNavigationResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.SearchResponse.ITileNavigationResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TileNavigationResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2.SearchResponse.TileNavigationResult.verify|verify} messages.
-                         * @param message TileNavigationResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.SearchResponse.ITileNavigationResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TileNavigationResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TileNavigationResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
-
-                        /**
-                         * Decodes a TileNavigationResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TileNavigationResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
-
-                        /**
-                         * Verifies a TileNavigationResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TileNavigationResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TileNavigationResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.SearchResponse.TileNavigationResult;
-
-                        /**
-                         * Creates a plain object from a TileNavigationResult message. Also converts values to other types if specified.
-                         * @param message TileNavigationResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.SearchResponse.TileNavigationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TileNavigationResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for TileNavigationResult
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-                }
-
-                /** Properties of an ExperimentInfo. */
-                interface IExperimentInfo {
-
-                    /** ExperimentInfo servingConfigExperiment */
-                    servingConfigExperiment?: (google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment|null);
-
-                    /** ExperimentInfo experiment */
-                    experiment?: (string|null);
-                }
-
-                /** Represents an ExperimentInfo. */
-                class ExperimentInfo implements IExperimentInfo {
-
-                    /**
-                     * Constructs a new ExperimentInfo.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2.IExperimentInfo);
-
-                    /** ExperimentInfo servingConfigExperiment. */
-                    public servingConfigExperiment?: (google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment|null);
-
-                    /** ExperimentInfo experiment. */
-                    public experiment: string;
-
-                    /** ExperimentInfo experimentMetadata. */
-                    public experimentMetadata?: "servingConfigExperiment";
-
-                    /**
-                     * Creates a new ExperimentInfo instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExperimentInfo instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2.IExperimentInfo): google.cloud.retail.v2.ExperimentInfo;
-
-                    /**
-                     * Encodes the specified ExperimentInfo message. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.verify|verify} messages.
-                     * @param message ExperimentInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExperimentInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.verify|verify} messages.
-                     * @param message ExperimentInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExperimentInfo message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExperimentInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ExperimentInfo;
-
-                    /**
-                     * Decodes an ExperimentInfo message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExperimentInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ExperimentInfo;
-
-                    /**
-                     * Verifies an ExperimentInfo message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExperimentInfo message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExperimentInfo
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ExperimentInfo;
-
-                    /**
-                     * Creates a plain object from an ExperimentInfo message. Also converts values to other types if specified.
-                     * @param message ExperimentInfo
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2.ExperimentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExperimentInfo to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ExperimentInfo
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace ExperimentInfo {
-
-                    /** Properties of a ServingConfigExperiment. */
-                    interface IServingConfigExperiment {
-
-                        /** ServingConfigExperiment originalServingConfig */
-                        originalServingConfig?: (string|null);
-
-                        /** ServingConfigExperiment experimentServingConfig */
-                        experimentServingConfig?: (string|null);
-                    }
-
-                    /** Represents a ServingConfigExperiment. */
-                    class ServingConfigExperiment implements IServingConfigExperiment {
-
-                        /**
-                         * Constructs a new ServingConfigExperiment.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment);
-
-                        /** ServingConfigExperiment originalServingConfig. */
-                        public originalServingConfig: string;
-
-                        /** ServingConfigExperiment experimentServingConfig. */
-                        public experimentServingConfig: string;
-
-                        /**
-                         * Creates a new ServingConfigExperiment instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ServingConfigExperiment instance
-                         */
-                        public static create(properties?: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
-
-                        /**
-                         * Encodes the specified ServingConfigExperiment message. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
-                         * @param message ServingConfigExperiment message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ServingConfigExperiment message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
-                         * @param message ServingConfigExperiment message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ServingConfigExperiment message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ServingConfigExperiment
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
-
-                        /**
-                         * Decodes a ServingConfigExperiment message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ServingConfigExperiment
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
-
-                        /**
-                         * Verifies a ServingConfigExperiment message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ServingConfigExperiment message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ServingConfigExperiment
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
-
-                        /**
-                         * Creates a plain object from a ServingConfigExperiment message. Also converts values to other types if specified.
-                         * @param message ServingConfigExperiment
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ServingConfigExperiment to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ServingConfigExperiment
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
                 }
 
                 /** Properties of a ServingConfig. */
@@ -68236,6 +69667,1437 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a ConversationalSearchService */
+                class ConversationalSearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ConversationalSearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ConversationalSearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ConversationalSearchService;
+
+                    /**
+                     * Calls ConversationalSearch.
+                     * @param request ConversationalSearchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConversationalSearchResponse
+                     */
+                    public conversationalSearch(request: google.cloud.retail.v2beta.IConversationalSearchRequest, callback: google.cloud.retail.v2beta.ConversationalSearchService.ConversationalSearchCallback): void;
+
+                    /**
+                     * Calls ConversationalSearch.
+                     * @param request ConversationalSearchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public conversationalSearch(request: google.cloud.retail.v2beta.IConversationalSearchRequest): Promise<google.cloud.retail.v2beta.ConversationalSearchResponse>;
+                }
+
+                namespace ConversationalSearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2beta.ConversationalSearchService|conversationalSearch}.
+                     * @param error Error, if any
+                     * @param [response] ConversationalSearchResponse
+                     */
+                    type ConversationalSearchCallback = (error: (Error|null), response?: google.cloud.retail.v2beta.ConversationalSearchResponse) => void;
+                }
+
+                /** Properties of a ConversationalSearchRequest. */
+                interface IConversationalSearchRequest {
+
+                    /** ConversationalSearchRequest placement */
+                    placement?: (string|null);
+
+                    /** ConversationalSearchRequest branch */
+                    branch?: (string|null);
+
+                    /** ConversationalSearchRequest query */
+                    query?: (string|null);
+
+                    /** ConversationalSearchRequest pageCategories */
+                    pageCategories?: (string[]|null);
+
+                    /** ConversationalSearchRequest conversationId */
+                    conversationId?: (string|null);
+
+                    /** ConversationalSearchRequest searchParams */
+                    searchParams?: (google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams|null);
+
+                    /** ConversationalSearchRequest visitorId */
+                    visitorId?: (string|null);
+
+                    /** ConversationalSearchRequest userInfo */
+                    userInfo?: (google.cloud.retail.v2beta.IUserInfo|null);
+
+                    /** ConversationalSearchRequest conversationalFilteringSpec */
+                    conversationalFilteringSpec?: (google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec|null);
+
+                    /** ConversationalSearchRequest userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
+
+                    /** ConversationalSearchRequest safetySettings */
+                    safetySettings?: (google.cloud.retail.v2beta.ISafetySetting[]|null);
+                }
+
+                /** Represents a ConversationalSearchRequest. */
+                class ConversationalSearchRequest implements IConversationalSearchRequest {
+
+                    /**
+                     * Constructs a new ConversationalSearchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IConversationalSearchRequest);
+
+                    /** ConversationalSearchRequest placement. */
+                    public placement: string;
+
+                    /** ConversationalSearchRequest branch. */
+                    public branch: string;
+
+                    /** ConversationalSearchRequest query. */
+                    public query: string;
+
+                    /** ConversationalSearchRequest pageCategories. */
+                    public pageCategories: string[];
+
+                    /** ConversationalSearchRequest conversationId. */
+                    public conversationId: string;
+
+                    /** ConversationalSearchRequest searchParams. */
+                    public searchParams?: (google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams|null);
+
+                    /** ConversationalSearchRequest visitorId. */
+                    public visitorId: string;
+
+                    /** ConversationalSearchRequest userInfo. */
+                    public userInfo?: (google.cloud.retail.v2beta.IUserInfo|null);
+
+                    /** ConversationalSearchRequest conversationalFilteringSpec. */
+                    public conversationalFilteringSpec?: (google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec|null);
+
+                    /** ConversationalSearchRequest userLabels. */
+                    public userLabels: { [k: string]: string };
+
+                    /** ConversationalSearchRequest safetySettings. */
+                    public safetySettings: google.cloud.retail.v2beta.ISafetySetting[];
+
+                    /**
+                     * Creates a new ConversationalSearchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationalSearchRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IConversationalSearchRequest): google.cloud.retail.v2beta.ConversationalSearchRequest;
+
+                    /**
+                     * Encodes the specified ConversationalSearchRequest message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.verify|verify} messages.
+                     * @param message ConversationalSearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IConversationalSearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationalSearchRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.verify|verify} messages.
+                     * @param message ConversationalSearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IConversationalSearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationalSearchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationalSearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchRequest;
+
+                    /**
+                     * Decodes a ConversationalSearchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationalSearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchRequest;
+
+                    /**
+                     * Verifies a ConversationalSearchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationalSearchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationalSearchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchRequest;
+
+                    /**
+                     * Creates a plain object from a ConversationalSearchRequest message. Also converts values to other types if specified.
+                     * @param message ConversationalSearchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationalSearchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationalSearchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversationalSearchRequest {
+
+                    /** Properties of a SearchParams. */
+                    interface ISearchParams {
+
+                        /** SearchParams filter */
+                        filter?: (string|null);
+
+                        /** SearchParams canonicalFilter */
+                        canonicalFilter?: (string|null);
+
+                        /** SearchParams sortBy */
+                        sortBy?: (string|null);
+
+                        /** SearchParams boostSpec */
+                        boostSpec?: (google.cloud.retail.v2beta.SearchRequest.IBoostSpec|null);
+                    }
+
+                    /** Represents a SearchParams. */
+                    class SearchParams implements ISearchParams {
+
+                        /**
+                         * Constructs a new SearchParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams);
+
+                        /** SearchParams filter. */
+                        public filter: string;
+
+                        /** SearchParams canonicalFilter. */
+                        public canonicalFilter: string;
+
+                        /** SearchParams sortBy. */
+                        public sortBy: string;
+
+                        /** SearchParams boostSpec. */
+                        public boostSpec?: (google.cloud.retail.v2beta.SearchRequest.IBoostSpec|null);
+
+                        /**
+                         * Creates a new SearchParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchParams instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams): google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Encodes the specified SearchParams message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.verify|verify} messages.
+                         * @param message SearchParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchParams message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams.verify|verify} messages.
+                         * @param message SearchParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchRequest.ISearchParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Decodes a SearchParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Verifies a SearchParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams;
+
+                        /**
+                         * Creates a plain object from a SearchParams message. Also converts values to other types if specified.
+                         * @param message SearchParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a UserAnswer. */
+                    interface IUserAnswer {
+
+                        /** UserAnswer textAnswer */
+                        textAnswer?: (string|null);
+
+                        /** UserAnswer selectedAnswer */
+                        selectedAnswer?: (google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer|null);
+                    }
+
+                    /** Represents a UserAnswer. */
+                    class UserAnswer implements IUserAnswer {
+
+                        /**
+                         * Constructs a new UserAnswer.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer);
+
+                        /** UserAnswer textAnswer. */
+                        public textAnswer?: (string|null);
+
+                        /** UserAnswer selectedAnswer. */
+                        public selectedAnswer?: (google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer|null);
+
+                        /** UserAnswer type. */
+                        public type?: ("textAnswer"|"selectedAnswer");
+
+                        /**
+                         * Creates a new UserAnswer instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserAnswer instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Encodes the specified UserAnswer message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.verify|verify} messages.
+                         * @param message UserAnswer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.verify|verify} messages.
+                         * @param message UserAnswer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserAnswer message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserAnswer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Decodes a UserAnswer message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserAnswer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Verifies a UserAnswer message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserAnswer message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserAnswer
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer;
+
+                        /**
+                         * Creates a plain object from a UserAnswer message. Also converts values to other types if specified.
+                         * @param message UserAnswer
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserAnswer to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserAnswer
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace UserAnswer {
+
+                        /** Properties of a SelectedAnswer. */
+                        interface ISelectedAnswer {
+
+                            /** SelectedAnswer productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2beta.IProductAttributeValue|null);
+                        }
+
+                        /** Represents a SelectedAnswer. */
+                        class SelectedAnswer implements ISelectedAnswer {
+
+                            /**
+                             * Constructs a new SelectedAnswer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer);
+
+                            /** SelectedAnswer productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2beta.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new SelectedAnswer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SelectedAnswer instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Encodes the specified SelectedAnswer message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.verify|verify} messages.
+                             * @param message SelectedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SelectedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer.verify|verify} messages.
+                             * @param message SelectedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.ISelectedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SelectedAnswer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SelectedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Decodes a SelectedAnswer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SelectedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Verifies a SelectedAnswer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SelectedAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SelectedAnswer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer;
+
+                            /**
+                             * Creates a plain object from a SelectedAnswer message. Also converts values to other types if specified.
+                             * @param message SelectedAnswer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchRequest.UserAnswer.SelectedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SelectedAnswer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SelectedAnswer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ConversationalFilteringSpec. */
+                    interface IConversationalFilteringSpec {
+
+                        /** ConversationalFilteringSpec enableConversationalFiltering */
+                        enableConversationalFiltering?: (boolean|null);
+
+                        /** ConversationalFilteringSpec userAnswer */
+                        userAnswer?: (google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer|null);
+
+                        /** ConversationalFilteringSpec conversationalFilteringMode */
+                        conversationalFilteringMode?: (google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode|keyof typeof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode|null);
+                    }
+
+                    /** Represents a ConversationalFilteringSpec. */
+                    class ConversationalFilteringSpec implements IConversationalFilteringSpec {
+
+                        /**
+                         * Constructs a new ConversationalFilteringSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec);
+
+                        /** ConversationalFilteringSpec enableConversationalFiltering. */
+                        public enableConversationalFiltering: boolean;
+
+                        /** ConversationalFilteringSpec userAnswer. */
+                        public userAnswer?: (google.cloud.retail.v2beta.ConversationalSearchRequest.IUserAnswer|null);
+
+                        /** ConversationalFilteringSpec conversationalFilteringMode. */
+                        public conversationalFilteringMode: (google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode|keyof typeof google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.Mode);
+
+                        /**
+                         * Creates a new ConversationalFilteringSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationalFilteringSpec instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec): google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringSpec message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.verify|verify} messages.
+                         * @param message ConversationalFilteringSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringSpec message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec.verify|verify} messages.
+                         * @param message ConversationalFilteringSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchRequest.IConversationalFilteringSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationalFilteringSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationalFilteringSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Decodes a ConversationalFilteringSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationalFilteringSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Verifies a ConversationalFilteringSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationalFilteringSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationalFilteringSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec;
+
+                        /**
+                         * Creates a plain object from a ConversationalFilteringSpec message. Also converts values to other types if specified.
+                         * @param message ConversationalFilteringSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationalFilteringSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversationalFilteringSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConversationalFilteringSpec {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            ENABLED = 2,
+                            CONVERSATIONAL_FILTER_ONLY = 3
+                        }
+                    }
+                }
+
+                /** Properties of a ConversationalSearchResponse. */
+                interface IConversationalSearchResponse {
+
+                    /** ConversationalSearchResponse userQueryTypes */
+                    userQueryTypes?: (string[]|null);
+
+                    /** ConversationalSearchResponse conversationalTextResponse */
+                    conversationalTextResponse?: (string|null);
+
+                    /** ConversationalSearchResponse followupQuestion */
+                    followupQuestion?: (google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                    /** ConversationalSearchResponse conversationId */
+                    conversationId?: (string|null);
+
+                    /** ConversationalSearchResponse refinedSearch */
+                    refinedSearch?: (google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch[]|null);
+
+                    /** ConversationalSearchResponse conversationalFilteringResult */
+                    conversationalFilteringResult?: (google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult|null);
+
+                    /** ConversationalSearchResponse state */
+                    state?: (google.cloud.retail.v2beta.ConversationalSearchResponse.State|keyof typeof google.cloud.retail.v2beta.ConversationalSearchResponse.State|null);
+                }
+
+                /** Represents a ConversationalSearchResponse. */
+                class ConversationalSearchResponse implements IConversationalSearchResponse {
+
+                    /**
+                     * Constructs a new ConversationalSearchResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IConversationalSearchResponse);
+
+                    /** ConversationalSearchResponse userQueryTypes. */
+                    public userQueryTypes: string[];
+
+                    /** ConversationalSearchResponse conversationalTextResponse. */
+                    public conversationalTextResponse: string;
+
+                    /** ConversationalSearchResponse followupQuestion. */
+                    public followupQuestion?: (google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                    /** ConversationalSearchResponse conversationId. */
+                    public conversationId: string;
+
+                    /** ConversationalSearchResponse refinedSearch. */
+                    public refinedSearch: google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch[];
+
+                    /** ConversationalSearchResponse conversationalFilteringResult. */
+                    public conversationalFilteringResult?: (google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult|null);
+
+                    /** ConversationalSearchResponse state. */
+                    public state: (google.cloud.retail.v2beta.ConversationalSearchResponse.State|keyof typeof google.cloud.retail.v2beta.ConversationalSearchResponse.State);
+
+                    /**
+                     * Creates a new ConversationalSearchResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationalSearchResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IConversationalSearchResponse): google.cloud.retail.v2beta.ConversationalSearchResponse;
+
+                    /**
+                     * Encodes the specified ConversationalSearchResponse message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.verify|verify} messages.
+                     * @param message ConversationalSearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IConversationalSearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationalSearchResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.verify|verify} messages.
+                     * @param message ConversationalSearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IConversationalSearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationalSearchResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationalSearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchResponse;
+
+                    /**
+                     * Decodes a ConversationalSearchResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationalSearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchResponse;
+
+                    /**
+                     * Verifies a ConversationalSearchResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationalSearchResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationalSearchResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchResponse;
+
+                    /**
+                     * Creates a plain object from a ConversationalSearchResponse message. Also converts values to other types if specified.
+                     * @param message ConversationalSearchResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationalSearchResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationalSearchResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversationalSearchResponse {
+
+                    /** Properties of a FollowupQuestion. */
+                    interface IFollowupQuestion {
+
+                        /** FollowupQuestion followupQuestion */
+                        followupQuestion?: (string|null);
+
+                        /** FollowupQuestion suggestedAnswers */
+                        suggestedAnswers?: (google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer[]|null);
+                    }
+
+                    /** Represents a FollowupQuestion. */
+                    class FollowupQuestion implements IFollowupQuestion {
+
+                        /**
+                         * Constructs a new FollowupQuestion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion);
+
+                        /** FollowupQuestion followupQuestion. */
+                        public followupQuestion: string;
+
+                        /** FollowupQuestion suggestedAnswers. */
+                        public suggestedAnswers: google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer[];
+
+                        /**
+                         * Creates a new FollowupQuestion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FollowupQuestion instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Encodes the specified FollowupQuestion message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.verify|verify} messages.
+                         * @param message FollowupQuestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FollowupQuestion message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.verify|verify} messages.
+                         * @param message FollowupQuestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FollowupQuestion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FollowupQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Decodes a FollowupQuestion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FollowupQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Verifies a FollowupQuestion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FollowupQuestion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FollowupQuestion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion;
+
+                        /**
+                         * Creates a plain object from a FollowupQuestion message. Also converts values to other types if specified.
+                         * @param message FollowupQuestion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FollowupQuestion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FollowupQuestion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FollowupQuestion {
+
+                        /** Properties of a SuggestedAnswer. */
+                        interface ISuggestedAnswer {
+
+                            /** SuggestedAnswer productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2beta.IProductAttributeValue|null);
+                        }
+
+                        /** Represents a SuggestedAnswer. */
+                        class SuggestedAnswer implements ISuggestedAnswer {
+
+                            /**
+                             * Constructs a new SuggestedAnswer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer);
+
+                            /** SuggestedAnswer productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2beta.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new SuggestedAnswer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SuggestedAnswer instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Encodes the specified SuggestedAnswer message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.verify|verify} messages.
+                             * @param message SuggestedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SuggestedAnswer message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer.verify|verify} messages.
+                             * @param message SuggestedAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.ISuggestedAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SuggestedAnswer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SuggestedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Decodes a SuggestedAnswer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SuggestedAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Verifies a SuggestedAnswer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SuggestedAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SuggestedAnswer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer;
+
+                            /**
+                             * Creates a plain object from a SuggestedAnswer message. Also converts values to other types if specified.
+                             * @param message SuggestedAnswer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SuggestedAnswer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SuggestedAnswer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a RefinedSearch. */
+                    interface IRefinedSearch {
+
+                        /** RefinedSearch query */
+                        query?: (string|null);
+                    }
+
+                    /** Represents a RefinedSearch. */
+                    class RefinedSearch implements IRefinedSearch {
+
+                        /**
+                         * Constructs a new RefinedSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch);
+
+                        /** RefinedSearch query. */
+                        public query: string;
+
+                        /**
+                         * Creates a new RefinedSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RefinedSearch instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch): google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Encodes the specified RefinedSearch message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.verify|verify} messages.
+                         * @param message RefinedSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RefinedSearch message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch.verify|verify} messages.
+                         * @param message RefinedSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchResponse.IRefinedSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RefinedSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RefinedSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Decodes a RefinedSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RefinedSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Verifies a RefinedSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RefinedSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RefinedSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch;
+
+                        /**
+                         * Creates a plain object from a RefinedSearch message. Also converts values to other types if specified.
+                         * @param message RefinedSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchResponse.RefinedSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RefinedSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RefinedSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConversationalFilteringResult. */
+                    interface IConversationalFilteringResult {
+
+                        /** ConversationalFilteringResult followupQuestion */
+                        followupQuestion?: (google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                        /** ConversationalFilteringResult additionalFilter */
+                        additionalFilter?: (google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter|null);
+                    }
+
+                    /** Represents a ConversationalFilteringResult. */
+                    class ConversationalFilteringResult implements IConversationalFilteringResult {
+
+                        /**
+                         * Constructs a new ConversationalFilteringResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult);
+
+                        /** ConversationalFilteringResult followupQuestion. */
+                        public followupQuestion?: (google.cloud.retail.v2beta.ConversationalSearchResponse.IFollowupQuestion|null);
+
+                        /** ConversationalFilteringResult additionalFilter. */
+                        public additionalFilter?: (google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter|null);
+
+                        /**
+                         * Creates a new ConversationalFilteringResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationalFilteringResult instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringResult message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.verify|verify} messages.
+                         * @param message ConversationalFilteringResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationalFilteringResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.verify|verify} messages.
+                         * @param message ConversationalFilteringResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchResponse.IConversationalFilteringResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationalFilteringResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationalFilteringResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Decodes a ConversationalFilteringResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationalFilteringResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Verifies a ConversationalFilteringResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationalFilteringResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationalFilteringResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult;
+
+                        /**
+                         * Creates a plain object from a ConversationalFilteringResult message. Also converts values to other types if specified.
+                         * @param message ConversationalFilteringResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationalFilteringResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversationalFilteringResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConversationalFilteringResult {
+
+                        /** Properties of an AdditionalFilter. */
+                        interface IAdditionalFilter {
+
+                            /** AdditionalFilter productAttributeValue */
+                            productAttributeValue?: (google.cloud.retail.v2beta.IProductAttributeValue|null);
+                        }
+
+                        /** Represents an AdditionalFilter. */
+                        class AdditionalFilter implements IAdditionalFilter {
+
+                            /**
+                             * Constructs a new AdditionalFilter.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter);
+
+                            /** AdditionalFilter productAttributeValue. */
+                            public productAttributeValue?: (google.cloud.retail.v2beta.IProductAttributeValue|null);
+
+                            /**
+                             * Creates a new AdditionalFilter instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AdditionalFilter instance
+                             */
+                            public static create(properties?: google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Encodes the specified AdditionalFilter message. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.verify|verify} messages.
+                             * @param message AdditionalFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AdditionalFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter.verify|verify} messages.
+                             * @param message AdditionalFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.IAdditionalFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AdditionalFilter message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AdditionalFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Decodes an AdditionalFilter message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AdditionalFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Verifies an AdditionalFilter message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AdditionalFilter message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AdditionalFilter
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter;
+
+                            /**
+                             * Creates a plain object from an AdditionalFilter message. Also converts values to other types if specified.
+                             * @param message AdditionalFilter
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.retail.v2beta.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AdditionalFilter to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AdditionalFilter
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STREAMING = 1,
+                        SUCCEEDED = 2
+                    }
+                }
+
+                /** HarmCategory enum. */
+                enum HarmCategory {
+                    HARM_CATEGORY_UNSPECIFIED = 0,
+                    HARM_CATEGORY_HATE_SPEECH = 1,
+                    HARM_CATEGORY_DANGEROUS_CONTENT = 2,
+                    HARM_CATEGORY_HARASSMENT = 3,
+                    HARM_CATEGORY_SEXUALLY_EXPLICIT = 4,
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 5
+                }
+
+                /** Properties of a SafetySetting. */
+                interface ISafetySetting {
+
+                    /** SafetySetting category */
+                    category?: (google.cloud.retail.v2beta.HarmCategory|keyof typeof google.cloud.retail.v2beta.HarmCategory|null);
+
+                    /** SafetySetting threshold */
+                    threshold?: (google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold|keyof typeof google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold|null);
+
+                    /** SafetySetting method */
+                    method?: (google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod|keyof typeof google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod|null);
+                }
+
+                /** Represents a SafetySetting. */
+                class SafetySetting implements ISafetySetting {
+
+                    /**
+                     * Constructs a new SafetySetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.ISafetySetting);
+
+                    /** SafetySetting category. */
+                    public category: (google.cloud.retail.v2beta.HarmCategory|keyof typeof google.cloud.retail.v2beta.HarmCategory);
+
+                    /** SafetySetting threshold. */
+                    public threshold: (google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold|keyof typeof google.cloud.retail.v2beta.SafetySetting.HarmBlockThreshold);
+
+                    /** SafetySetting method. */
+                    public method: (google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod|keyof typeof google.cloud.retail.v2beta.SafetySetting.HarmBlockMethod);
+
+                    /**
+                     * Creates a new SafetySetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SafetySetting instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.ISafetySetting): google.cloud.retail.v2beta.SafetySetting;
+
+                    /**
+                     * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.retail.v2beta.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.SafetySetting;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.SafetySetting;
+
+                    /**
+                     * Verifies a SafetySetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SafetySetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.SafetySetting;
+
+                    /**
+                     * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                     * @param message SafetySetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.SafetySetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SafetySetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SafetySetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SafetySetting {
+
+                    /** HarmBlockThreshold enum. */
+                    enum HarmBlockThreshold {
+                        HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0,
+                        BLOCK_LOW_AND_ABOVE = 1,
+                        BLOCK_MEDIUM_AND_ABOVE = 2,
+                        BLOCK_ONLY_HIGH = 3,
+                        BLOCK_NONE = 4,
+                        OFF = 5
+                    }
+
+                    /** HarmBlockMethod enum. */
+                    enum HarmBlockMethod {
+                        HARM_BLOCK_METHOD_UNSPECIFIED = 0,
+                        SEVERITY = 1,
+                        PROBABILITY = 2
+                    }
                 }
 
                 /** Properties of a GenerativeQuestionsFeatureConfig. */

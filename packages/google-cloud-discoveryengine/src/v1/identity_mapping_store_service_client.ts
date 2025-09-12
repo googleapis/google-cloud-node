@@ -896,7 +896,7 @@ export class IdentityMappingStoreServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'identity_mapping_store': request.identityMappingStore ?? '',
+      'identity_mapping_store': request.identityMappingStore?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: Callback<
@@ -1032,7 +1032,7 @@ export class IdentityMappingStoreServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'identity_mapping_store': request.identityMappingStore ?? '',
+      'identity_mapping_store': request.identityMappingStore?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: Callback<
@@ -1155,7 +1155,7 @@ export class IdentityMappingStoreServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'identity_mapping_store': request.identityMappingStore ?? '',
+      'identity_mapping_store': request.identityMappingStore?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
@@ -1221,7 +1221,7 @@ export class IdentityMappingStoreServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'identity_mapping_store': request.identityMappingStore ?? '',
+      'identity_mapping_store': request.identityMappingStore?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listIdentityMappings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1278,7 +1278,7 @@ export class IdentityMappingStoreServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'identity_mapping_store': request.identityMappingStore ?? '',
+      'identity_mapping_store': request.identityMappingStore?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listIdentityMappings'];
     const callSettings = defaultCallSettings.merge(options);

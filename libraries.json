@@ -2991,6 +2991,24 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientconnectorservices"
   },
   {
+    "name": "capacityplanner",
+    "name_pretty": "Capacity Planner API",
+    "product_documentation": "https://cloud.google.com/capacity-planner/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/capacityplanner/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/capacityplanner",
+    "api_id": "capacityplanner.googleapis.com",
+    "default_version": "v1beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "capacityplanner",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-capacityplanner",
+    "support_documentation": "https://cloud.google.com/capacity-planner/docs/getting-support"
+  },
+  {
     "name": "chronicle",
     "name_pretty": "Chronicle API",
     "product_documentation": "https://cloud.google.com/chronicle/docs/secops/secops-overview",
@@ -3440,6 +3458,24 @@
     "api_shortname": "fleetengine",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-fleetengine",
     "support_documentation": "https://developers.google.com/maps/documentation/transportation-logistics/mobility/docs/getting-support"
+  },
+  {
+    "name": "locationfinder",
+    "name_pretty": "Location Finder API",
+    "product_documentation": "https://cloud.google.com/location-finder/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/locationfinder/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/locationfinder",
+    "api_id": "cloudlocationfinder.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "locationfinder",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-locationfinder",
+    "support_documentation": "https://cloud.google.com/location-finder/docs/getting-support"
   },
   {
     "name": "maintenance",
