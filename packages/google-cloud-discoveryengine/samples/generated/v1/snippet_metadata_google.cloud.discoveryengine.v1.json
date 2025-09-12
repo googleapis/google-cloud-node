@@ -3242,7 +3242,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 302,
+                    "end": 385,
                     "type": "FULL"
                 }
             ],
@@ -3366,6 +3366,14 @@
                     {
                         "name": "relevance_score_spec",
                         "type": ".google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec"
+                    },
+                    {
+                        "name": "ranking_expression",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ranking_expression_backend",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.SearchResponse",
@@ -3394,7 +3402,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 302,
+                    "end": 385,
                     "type": "FULL"
                 }
             ],
@@ -3518,6 +3526,14 @@
                     {
                         "name": "relevance_score_spec",
                         "type": ".google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec"
+                    },
+                    {
+                        "name": "ranking_expression",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ranking_expression_backend",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.SearchResponse",

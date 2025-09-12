@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 138,
+                    "end": 178,
                     "type": "FULL"
                 }
             ],
@@ -155,7 +155,7 @@
             "regionTag": "apihub_v1_generated_ApiHub_UpdateApi_async",
             "title": "ApiHub updateApi Sample",
             "origin": "API_DEFINITION",
-            "description": " Update an API resource in the API hub. The following fields in the [API][] can be updated: * [display_name][google.cloud.apihub.v1.Api.display_name] * [description][google.cloud.apihub.v1.Api.description] * [owner][google.cloud.apihub.v1.Api.owner] * [documentation][google.cloud.apihub.v1.Api.documentation] * [target_user][google.cloud.apihub.v1.Api.target_user] * [team][google.cloud.apihub.v1.Api.team] * [business_unit][google.cloud.apihub.v1.Api.business_unit] * [maturity_level][google.cloud.apihub.v1.Api.maturity_level] * [attributes][google.cloud.apihub.v1.Api.attributes] The [update_mask][google.cloud.apihub.v1.UpdateApiRequest.update_mask] should be used to specify the fields being updated. Updating the owner field requires complete owner message and updates both owner and email fields.",
+            "description": " Update an API resource in the API hub. The following fields in the [API][google.cloud.apihub.v1.Api] can be updated: * [display_name][google.cloud.apihub.v1.Api.display_name] * [description][google.cloud.apihub.v1.Api.description] * [owner][google.cloud.apihub.v1.Api.owner] * [documentation][google.cloud.apihub.v1.Api.documentation] * [target_user][google.cloud.apihub.v1.Api.target_user] * [team][google.cloud.apihub.v1.Api.team] * [business_unit][google.cloud.apihub.v1.Api.business_unit] * [maturity_level][google.cloud.apihub.v1.Api.maturity_level] * [api_style][google.cloud.apihub.v1.Api.api_style] * [attributes][google.cloud.apihub.v1.Api.attributes] The [update_mask][google.cloud.apihub.v1.UpdateApiRequest.update_mask] should be used to specify the fields being updated. Updating the owner field requires complete owner message and updates both owner and email fields.",
             "canonical": true,
             "file": "api_hub.update_api.js",
             "language": "JAVASCRIPT",
@@ -250,7 +250,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -338,7 +338,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 126,
+                    "end": 156,
                     "type": "FULL"
                 }
             ],
@@ -478,7 +478,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 74,
                     "type": "FULL"
                 }
             ],
@@ -606,7 +606,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 119,
+                    "end": 150,
                     "type": "FULL"
                 }
             ],
@@ -732,6 +732,54 @@
             }
         },
         {
+            "regionTag": "apihub_v1_generated_ApiHub_CreateApiOperation_async",
+            "title": "ApiHub createApiOperation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Create an apiOperation in an API version. An apiOperation can be created only if the version has no apiOperations which were created by parsing a spec.",
+            "canonical": true,
+            "file": "api_hub.create_api_operation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateApiOperation",
+                "fullName": "google.cloud.apihub.v1.ApiHub.CreateApiOperation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "api_operation_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "api_operation",
+                        "type": ".google.cloud.apihub.v1.ApiOperation"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.ApiOperation",
+                "client": {
+                    "shortName": "ApiHubClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubClient"
+                },
+                "method": {
+                    "shortName": "CreateApiOperation",
+                    "fullName": "google.cloud.apihub.v1.ApiHub.CreateApiOperation",
+                    "service": {
+                        "shortName": "ApiHub",
+                        "fullName": "google.cloud.apihub.v1.ApiHub"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "apihub_v1_generated_ApiHub_GetApiOperation_async",
             "title": "ApiHub getApiOperation Sample",
             "origin": "API_DEFINITION",
@@ -782,7 +830,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 109,
+                    "end": 138,
                     "type": "FULL"
                 }
             ],
@@ -816,6 +864,90 @@
                 "method": {
                     "shortName": "ListApiOperations",
                     "fullName": "google.cloud.apihub.v1.ApiHub.ListApiOperations",
+                    "service": {
+                        "shortName": "ApiHub",
+                        "fullName": "google.cloud.apihub.v1.ApiHub"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHub_UpdateApiOperation_async",
+            "title": "ApiHub updateApiOperation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update an operation in an API version. The following fields in the [ApiOperation resource][google.cloud.apihub.v1.ApiOperation] can be updated: * [details.description][ApiOperation.details.description] * [details.documentation][ApiOperation.details.documentation] * [details.http_operation.path][ApiOperation.details.http_operation.path.path] * [details.http_operation.method][ApiOperation.details.http_operation.method] * [details.deprecated][ApiOperation.details.deprecated] * [attributes][google.cloud.apihub.v1.ApiOperation.attributes] The [update_mask][google.cloud.apihub.v1.UpdateApiOperationRequest.update_mask] should be used to specify the fields being updated. An operation can be updated only if the operation was created via [CreateApiOperation][google.cloud.apihub.v1.ApiHub.CreateApiOperation] API. If the operation was created by parsing the spec, then it can be edited by updating the spec.",
+            "canonical": true,
+            "file": "api_hub.update_api_operation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateApiOperation",
+                "fullName": "google.cloud.apihub.v1.ApiHub.UpdateApiOperation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "api_operation",
+                        "type": ".google.cloud.apihub.v1.ApiOperation"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.ApiOperation",
+                "client": {
+                    "shortName": "ApiHubClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubClient"
+                },
+                "method": {
+                    "shortName": "UpdateApiOperation",
+                    "fullName": "google.cloud.apihub.v1.ApiHub.UpdateApiOperation",
+                    "service": {
+                        "shortName": "ApiHub",
+                        "fullName": "google.cloud.apihub.v1.ApiHub"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHub_DeleteApiOperation_async",
+            "title": "ApiHub deleteApiOperation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Delete an operation in an API version and we can delete only the operations created via create API. If the operation was created by parsing the spec, then it can be deleted by editing or deleting the spec.",
+            "canonical": true,
+            "file": "api_hub.delete_api_operation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteApiOperation",
+                "fullName": "google.cloud.apihub.v1.ApiHub.DeleteApiOperation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ApiHubClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubClient"
+                },
+                "method": {
+                    "shortName": "DeleteApiOperation",
+                    "fullName": "google.cloud.apihub.v1.ApiHub.DeleteApiOperation",
                     "service": {
                         "shortName": "ApiHub",
                         "fullName": "google.cloud.apihub.v1.ApiHub"
@@ -962,7 +1094,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 125,
+                    "end": 166,
                     "type": "FULL"
                 }
             ],
@@ -1007,7 +1139,7 @@
             "regionTag": "apihub_v1_generated_ApiHub_UpdateDeployment_async",
             "title": "ApiHub updateDeployment Sample",
             "origin": "API_DEFINITION",
-            "description": " Update a deployment resource in the API hub. The following fields in the [deployment resource][google.cloud.apihub.v1.Deployment] can be updated: * [display_name][google.cloud.apihub.v1.Deployment.display_name] * [description][google.cloud.apihub.v1.Deployment.description] * [documentation][google.cloud.apihub.v1.Deployment.documentation] * [deployment_type][google.cloud.apihub.v1.Deployment.deployment_type] * [resource_uri][google.cloud.apihub.v1.Deployment.resource_uri] * [endpoints][google.cloud.apihub.v1.Deployment.endpoints] * [slo][google.cloud.apihub.v1.Deployment.slo] * [environment][google.cloud.apihub.v1.Deployment.environment] * [attributes][google.cloud.apihub.v1.Deployment.attributes] The [update_mask][google.cloud.apihub.v1.UpdateDeploymentRequest.update_mask] should be used to specify the fields being updated.",
+            "description": " Update a deployment resource in the API hub. The following fields in the [deployment resource][google.cloud.apihub.v1.Deployment] can be updated: * [display_name][google.cloud.apihub.v1.Deployment.display_name] * [description][google.cloud.apihub.v1.Deployment.description] * [documentation][google.cloud.apihub.v1.Deployment.documentation] * [deployment_type][google.cloud.apihub.v1.Deployment.deployment_type] * [resource_uri][google.cloud.apihub.v1.Deployment.resource_uri] * [endpoints][google.cloud.apihub.v1.Deployment.endpoints] * [slo][google.cloud.apihub.v1.Deployment.slo] * [environment][google.cloud.apihub.v1.Deployment.environment] * [attributes][google.cloud.apihub.v1.Deployment.attributes] * [source_project] [google.cloud.apihub.v1.Deployment.source_project] * [source_environment] [google.cloud.apihub.v1.Deployment.source_environment] * [management_url][google.cloud.apihub.v1.Deployment.management_url] * [source_uri][google.cloud.apihub.v1.Deployment.source_uri] The [update_mask][google.cloud.apihub.v1.UpdateDeploymentRequest.update_mask] should be used to specify the fields being updated.",
             "canonical": true,
             "file": "api_hub.update_deployment.js",
             "language": "JAVASCRIPT",
@@ -1588,6 +1720,286 @@
             }
         },
         {
+            "regionTag": "apihub_v1_generated_ApiHubCollect_CollectApiData_async",
+            "title": "ApiHub collectApiData Sample",
+            "origin": "API_DEFINITION",
+            "description": " Collect API data from a source and push it to Hub's collect layer.",
+            "canonical": true,
+            "file": "api_hub_collect.collect_api_data.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CollectApiData",
+                "fullName": "google.cloud.apihub.v1.ApiHubCollect.CollectApiData",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "collection_type",
+                        "type": ".google.cloud.apihub.v1.CollectionType"
+                    },
+                    {
+                        "name": "plugin_instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "action_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "api_data",
+                        "type": ".google.cloud.apihub.v1.ApiData"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ApiHubCollectClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCollectClient"
+                },
+                "method": {
+                    "shortName": "CollectApiData",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCollect.CollectApiData",
+                    "service": {
+                        "shortName": "ApiHubCollect",
+                        "fullName": "google.cloud.apihub.v1.ApiHubCollect"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubCurate_CreateCuration_async",
+            "title": "ApiHub createCuration Sample",
+            "origin": "API_DEFINITION",
+            "description": " Create a curation resource in the API hub. Once a curation resource is created, plugin instances can start using it.",
+            "canonical": true,
+            "file": "api_hub_curate.create_curation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateCuration",
+                "fullName": "google.cloud.apihub.v1.ApiHubCurate.CreateCuration",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "curation_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "curation",
+                        "type": ".google.cloud.apihub.v1.Curation"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.Curation",
+                "client": {
+                    "shortName": "ApiHubCurateClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurateClient"
+                },
+                "method": {
+                    "shortName": "CreateCuration",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurate.CreateCuration",
+                    "service": {
+                        "shortName": "ApiHubCurate",
+                        "fullName": "google.cloud.apihub.v1.ApiHubCurate"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubCurate_GetCuration_async",
+            "title": "ApiHub getCuration Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get curation resource details.",
+            "canonical": true,
+            "file": "api_hub_curate.get_curation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetCuration",
+                "fullName": "google.cloud.apihub.v1.ApiHubCurate.GetCuration",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.Curation",
+                "client": {
+                    "shortName": "ApiHubCurateClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurateClient"
+                },
+                "method": {
+                    "shortName": "GetCuration",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurate.GetCuration",
+                    "service": {
+                        "shortName": "ApiHubCurate",
+                        "fullName": "google.cloud.apihub.v1.ApiHubCurate"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubCurate_ListCurations_async",
+            "title": "ApiHub listCurations Sample",
+            "origin": "API_DEFINITION",
+            "description": " List curation resources in the API hub.",
+            "canonical": true,
+            "file": "api_hub_curate.list_curations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 96,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListCurations",
+                "fullName": "google.cloud.apihub.v1.ApiHubCurate.ListCurations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.ListCurationsResponse",
+                "client": {
+                    "shortName": "ApiHubCurateClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurateClient"
+                },
+                "method": {
+                    "shortName": "ListCurations",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurate.ListCurations",
+                    "service": {
+                        "shortName": "ApiHubCurate",
+                        "fullName": "google.cloud.apihub.v1.ApiHubCurate"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubCurate_UpdateCuration_async",
+            "title": "ApiHub updateCuration Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update a curation resource in the API hub. The following fields in the [curation][google.cloud.apihub.v1.Curation] can be updated: * [display_name][google.cloud.apihub.v1.Curation.display_name] * [description][google.cloud.apihub.v1.Curation.description] The [update_mask][google.cloud.apihub.v1.UpdateApiRequest.update_mask] should be used to specify the fields being updated.",
+            "canonical": true,
+            "file": "api_hub_curate.update_curation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateCuration",
+                "fullName": "google.cloud.apihub.v1.ApiHubCurate.UpdateCuration",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "curation",
+                        "type": ".google.cloud.apihub.v1.Curation"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.Curation",
+                "client": {
+                    "shortName": "ApiHubCurateClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurateClient"
+                },
+                "method": {
+                    "shortName": "UpdateCuration",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurate.UpdateCuration",
+                    "service": {
+                        "shortName": "ApiHubCurate",
+                        "fullName": "google.cloud.apihub.v1.ApiHubCurate"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubCurate_DeleteCuration_async",
+            "title": "ApiHub deleteCuration Sample",
+            "origin": "API_DEFINITION",
+            "description": " Delete a curation resource in the API hub. A curation can only be deleted if it's not being used by any plugin instance.",
+            "canonical": true,
+            "file": "api_hub_curate.delete_curation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteCuration",
+                "fullName": "google.cloud.apihub.v1.ApiHubCurate.DeleteCuration",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ApiHubCurateClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurateClient"
+                },
+                "method": {
+                    "shortName": "DeleteCuration",
+                    "fullName": "google.cloud.apihub.v1.ApiHubCurate.DeleteCuration",
+                    "service": {
+                        "shortName": "ApiHubCurate",
+                        "fullName": "google.cloud.apihub.v1.ApiHubCurate"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "apihub_v1_generated_ApiHubDependencies_CreateDependency_async",
             "title": "ApiHub createDependency Sample",
             "origin": "API_DEFINITION",
@@ -1812,10 +2224,186 @@
             }
         },
         {
+            "regionTag": "apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiObservations_async",
+            "title": "ApiHub listDiscoveredApiObservations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all the DiscoveredAPIObservations in a given project and location.",
+            "canonical": true,
+            "file": "api_hub_discovery.list_discovered_api_observations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListDiscoveredApiObservations",
+                "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiObservations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.ListDiscoveredApiObservationsResponse",
+                "client": {
+                    "shortName": "ApiHubDiscoveryClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscoveryClient"
+                },
+                "method": {
+                    "shortName": "ListDiscoveredApiObservations",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiObservations",
+                    "service": {
+                        "shortName": "ApiHubDiscovery",
+                        "fullName": "google.cloud.apihub.v1.ApiHubDiscovery"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiObservation_async",
+            "title": "ApiHub getDiscoveredApiObservation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a DiscoveredAPIObservation in a given project, location and ApiObservation.",
+            "canonical": true,
+            "file": "api_hub_discovery.get_discovered_api_observation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetDiscoveredApiObservation",
+                "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiObservation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.DiscoveredApiObservation",
+                "client": {
+                    "shortName": "ApiHubDiscoveryClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscoveryClient"
+                },
+                "method": {
+                    "shortName": "GetDiscoveredApiObservation",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiObservation",
+                    "service": {
+                        "shortName": "ApiHubDiscovery",
+                        "fullName": "google.cloud.apihub.v1.ApiHubDiscovery"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiOperations_async",
+            "title": "ApiHub listDiscoveredApiOperations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all the DiscoveredAPIOperations in a given project, location and ApiObservation.",
+            "canonical": true,
+            "file": "api_hub_discovery.list_discovered_api_operations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListDiscoveredApiOperations",
+                "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiOperations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.ListDiscoveredApiOperationsResponse",
+                "client": {
+                    "shortName": "ApiHubDiscoveryClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscoveryClient"
+                },
+                "method": {
+                    "shortName": "ListDiscoveredApiOperations",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiOperations",
+                    "service": {
+                        "shortName": "ApiHubDiscovery",
+                        "fullName": "google.cloud.apihub.v1.ApiHubDiscovery"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiOperation_async",
+            "title": "ApiHub getDiscoveredApiOperation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a DiscoveredAPIOperation in a given project, location, ApiObservation and ApiOperation.",
+            "canonical": true,
+            "file": "api_hub_discovery.get_discovered_api_operation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetDiscoveredApiOperation",
+                "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiOperation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.DiscoveredApiOperation",
+                "client": {
+                    "shortName": "ApiHubDiscoveryClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscoveryClient"
+                },
+                "method": {
+                    "shortName": "GetDiscoveredApiOperation",
+                    "fullName": "google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiOperation",
+                    "service": {
+                        "shortName": "ApiHubDiscovery",
+                        "fullName": "google.cloud.apihub.v1.ApiHubDiscovery"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "apihub_v1_generated_ApiHubPlugin_GetPlugin_async",
             "title": "ApiHub getPlugin Sample",
             "origin": "API_DEFINITION",
-            "description": " Get details about an API Hub plugin.",
+            "description": " Get an API Hub plugin.",
             "canonical": true,
             "file": "api_hub_plugin.get_plugin.js",
             "language": "JAVASCRIPT",
@@ -1924,6 +2512,502 @@
                 "method": {
                     "shortName": "DisablePlugin",
                     "fullName": "google.cloud.apihub.v1.ApiHubPlugin.DisablePlugin",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_CreatePlugin_async",
+            "title": "ApiHub createPlugin Sample",
+            "origin": "API_DEFINITION",
+            "description": " Create an API Hub plugin resource in the API hub. Once a plugin is created, it can be used to create plugin instances.",
+            "canonical": true,
+            "file": "api_hub_plugin.create_plugin.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePlugin",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.CreatePlugin",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "plugin_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "plugin",
+                        "type": ".google.cloud.apihub.v1.Plugin"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.Plugin",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "CreatePlugin",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.CreatePlugin",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_ListPlugins_async",
+            "title": "ApiHub listPlugins Sample",
+            "origin": "API_DEFINITION",
+            "description": " List all the plugins in a given project and location.",
+            "canonical": true,
+            "file": "api_hub_plugin.list_plugins.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 91,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPlugins",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.ListPlugins",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.ListPluginsResponse",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "ListPlugins",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.ListPlugins",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_DeletePlugin_async",
+            "title": "ApiHub deletePlugin Sample",
+            "origin": "API_DEFINITION",
+            "description": " Delete a Plugin in API hub. Note, only user owned plugins can be deleted via this method.",
+            "canonical": true,
+            "file": "api_hub_plugin.delete_plugin.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeletePlugin",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.DeletePlugin",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "DeletePlugin",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.DeletePlugin",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_CreatePluginInstance_async",
+            "title": "ApiHub createPluginInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a Plugin instance in the API hub.",
+            "canonical": true,
+            "file": "api_hub_plugin.create_plugin_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePluginInstance",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.CreatePluginInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "plugin_instance_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "plugin_instance",
+                        "type": ".google.cloud.apihub.v1.PluginInstance"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "CreatePluginInstance",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.CreatePluginInstance",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_ExecutePluginInstanceAction_async",
+            "title": "ApiHub executePluginInstanceAction Sample",
+            "origin": "API_DEFINITION",
+            "description": " Executes a plugin instance in the API hub.",
+            "canonical": true,
+            "file": "api_hub_plugin.execute_plugin_instance_action.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExecutePluginInstanceAction",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.ExecutePluginInstanceAction",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "action_execution_detail",
+                        "type": ".google.cloud.apihub.v1.ActionExecutionDetail"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "ExecutePluginInstanceAction",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.ExecutePluginInstanceAction",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_GetPluginInstance_async",
+            "title": "ApiHub getPluginInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get an API Hub plugin instance.",
+            "canonical": true,
+            "file": "api_hub_plugin.get_plugin_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPluginInstance",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.GetPluginInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.PluginInstance",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "GetPluginInstance",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.GetPluginInstance",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_ListPluginInstances_async",
+            "title": "ApiHub listPluginInstances Sample",
+            "origin": "API_DEFINITION",
+            "description": " List all the plugins in a given project and location. `-` can be used as wildcard value for {plugin_id}",
+            "canonical": true,
+            "file": "api_hub_plugin.list_plugin_instances.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 99,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPluginInstances",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.ListPluginInstances",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.ListPluginInstancesResponse",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "ListPluginInstances",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.ListPluginInstances",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_EnablePluginInstanceAction_async",
+            "title": "ApiHub enablePluginInstanceAction Sample",
+            "origin": "API_DEFINITION",
+            "description": " Enables a plugin instance in the API hub.",
+            "canonical": true,
+            "file": "api_hub_plugin.enable_plugin_instance_action.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "EnablePluginInstanceAction",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.EnablePluginInstanceAction",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "action_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "EnablePluginInstanceAction",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.EnablePluginInstanceAction",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_DisablePluginInstanceAction_async",
+            "title": "ApiHub disablePluginInstanceAction Sample",
+            "origin": "API_DEFINITION",
+            "description": " Disables a plugin instance in the API hub.",
+            "canonical": true,
+            "file": "api_hub_plugin.disable_plugin_instance_action.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DisablePluginInstanceAction",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.DisablePluginInstanceAction",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "action_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "DisablePluginInstanceAction",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.DisablePluginInstanceAction",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_UpdatePluginInstance_async",
+            "title": "ApiHub updatePluginInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a plugin instance in the API hub. The following fields in the [plugin_instance][google.cloud.apihub.v1.PluginInstance] can be updated currently: * [display_name][google.cloud.apihub.v1.PluginInstance.display_name] * [schedule_cron_expression][PluginInstance.actions.schedule_cron_expression] The [update_mask][google.cloud.apihub.v1.UpdatePluginInstanceRequest.update_mask] should be used to specify the fields being updated. To update the [auth_config][google.cloud.apihub.v1.PluginInstance.auth_config] and [additional_config][google.cloud.apihub.v1.PluginInstance.additional_config] of the plugin instance, use the [ApplyPluginInstanceConfig][google.cloud.apihub.v1.ApiHubPlugin.ApplyPluginInstanceConfig] method.",
+            "canonical": true,
+            "file": "api_hub_plugin.update_plugin_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdatePluginInstance",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.UpdatePluginInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "plugin_instance",
+                        "type": ".google.cloud.apihub.v1.PluginInstance"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.apihub.v1.PluginInstance",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "UpdatePluginInstance",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.UpdatePluginInstance",
+                    "service": {
+                        "shortName": "ApiHubPlugin",
+                        "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_ApiHubPlugin_DeletePluginInstance_async",
+            "title": "ApiHub deletePluginInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a plugin instance in the API hub.",
+            "canonical": true,
+            "file": "api_hub_plugin.delete_plugin_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeletePluginInstance",
+                "fullName": "google.cloud.apihub.v1.ApiHubPlugin.DeletePluginInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ApiHubPluginClient",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPluginClient"
+                },
+                "method": {
+                    "shortName": "DeletePluginInstance",
+                    "fullName": "google.cloud.apihub.v1.ApiHubPlugin.DeletePluginInstance",
                     "service": {
                         "shortName": "ApiHubPlugin",
                         "fullName": "google.cloud.apihub.v1.ApiHubPlugin"
@@ -2280,6 +3364,46 @@
                 "method": {
                     "shortName": "CreateApiHubInstance",
                     "fullName": "google.cloud.apihub.v1.Provisioning.CreateApiHubInstance",
+                    "service": {
+                        "shortName": "Provisioning",
+                        "fullName": "google.cloud.apihub.v1.Provisioning"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "apihub_v1_generated_Provisioning_DeleteApiHubInstance_async",
+            "title": "ApiHub deleteApiHubInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the API hub instance.",
+            "canonical": true,
+            "file": "provisioning.delete_api_hub_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteApiHubInstance",
+                "fullName": "google.cloud.apihub.v1.Provisioning.DeleteApiHubInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ProvisioningClient",
+                    "fullName": "google.cloud.apihub.v1.ProvisioningClient"
+                },
+                "method": {
+                    "shortName": "DeleteApiHubInstance",
+                    "fullName": "google.cloud.apihub.v1.Provisioning.DeleteApiHubInstance",
                     "service": {
                         "shortName": "Provisioning",
                         "fullName": "google.cloud.apihub.v1.Provisioning"

@@ -16,13 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ApiHubClient, ApiHubDependenciesClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient} from '@google-cloud/apihub';
+import {ApiHubClient, ApiHubCollectClient, ApiHubCurateClient, ApiHubDependenciesClient, ApiHubDiscoveryClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient} from '@google-cloud/apihub';
 
 // check that the client class type name can be used
 function doStuffWithApiHubClient(client: ApiHubClient) {
   client.close();
 }
+function doStuffWithApiHubCollectClient(client: ApiHubCollectClient) {
+  client.close();
+}
+function doStuffWithApiHubCurateClient(client: ApiHubCurateClient) {
+  client.close();
+}
 function doStuffWithApiHubDependenciesClient(client: ApiHubDependenciesClient) {
+  client.close();
+}
+function doStuffWithApiHubDiscoveryClient(client: ApiHubDiscoveryClient) {
   client.close();
 }
 function doStuffWithApiHubPluginClient(client: ApiHubPluginClient) {
@@ -46,8 +55,17 @@ function main() {
   const apiHubClient = new ApiHubClient();
   doStuffWithApiHubClient(apiHubClient);
   // check that the client instance can be created
+  const apiHubCollectClient = new ApiHubCollectClient();
+  doStuffWithApiHubCollectClient(apiHubCollectClient);
+  // check that the client instance can be created
+  const apiHubCurateClient = new ApiHubCurateClient();
+  doStuffWithApiHubCurateClient(apiHubCurateClient);
+  // check that the client instance can be created
   const apiHubDependenciesClient = new ApiHubDependenciesClient();
   doStuffWithApiHubDependenciesClient(apiHubDependenciesClient);
+  // check that the client instance can be created
+  const apiHubDiscoveryClient = new ApiHubDiscoveryClient();
+  doStuffWithApiHubDiscoveryClient(apiHubDiscoveryClient);
   // check that the client instance can be created
   const apiHubPluginClient = new ApiHubPluginClient();
   doStuffWithApiHubPluginClient(apiHubPluginClient);

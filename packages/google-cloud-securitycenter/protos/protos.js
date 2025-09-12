@@ -85037,6 +85037,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
@@ -85085,6 +85087,14 @@
                             case "GKE":
                             case 2:
                                 message.deploymentPlatform = 2;
+                                break;
+                            case "GCE":
+                            case 3:
+                                message.deploymentPlatform = 3;
+                                break;
+                            case "FINE_TUNED_MODEL":
+                            case 4:
+                                message.deploymentPlatform = 4;
                                 break;
                             }
                             if (object.displayName != null)
@@ -85164,12 +85174,16 @@
                          * @property {number} DEPLOYMENT_PLATFORM_UNSPECIFIED=0 DEPLOYMENT_PLATFORM_UNSPECIFIED value
                          * @property {number} VERTEX_AI=1 VERTEX_AI value
                          * @property {number} GKE=2 GKE value
+                         * @property {number} GCE=3 GCE value
+                         * @property {number} FINE_TUNED_MODEL=4 FINE_TUNED_MODEL value
                          */
                         AiModel.DeploymentPlatform = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "DEPLOYMENT_PLATFORM_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "VERTEX_AI"] = 1;
                             values[valuesById[2] = "GKE"] = 2;
+                            values[valuesById[3] = "GCE"] = 3;
+                            values[valuesById[4] = "FINE_TUNED_MODEL"] = 4;
                             return values;
                         })();
     

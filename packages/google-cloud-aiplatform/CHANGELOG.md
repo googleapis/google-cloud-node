@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.6.0...aiplatform-v5.7.0) (2025-09-09)
+
+
+### Features
+
+* PSC support for custom weights deploy ([#6695](https://github.com/googleapis/google-cloud-node/issues/6695)) ([961ac1a](https://github.com/googleapis/google-cloud-node/commit/961ac1ae3d0144b2cc5e5ba95378e2c02d12b5c5))
+* Tuning PreTunedModel API field ([#6612](https://github.com/googleapis/google-cloud-node/issues/6612)) ([f48ce9b](https://github.com/googleapis/google-cloud-node/commit/f48ce9b66bbc17b0615fc22f08e07694f0e83135))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.5.0...aiplatform-v5.6.0) (2025-08-21)
 
 

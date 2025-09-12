@@ -1940,6 +1940,54 @@
             }
         },
         {
+            "regionTag": "cloudkms_v1_generated_KeyManagementService_Decapsulate_async",
+            "title": "Autokey decapsulate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Decapsulates data that was encapsulated with a public key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] KEY_ENCAPSULATION.",
+            "canonical": true,
+            "file": "key_management_service.decapsulate.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 84,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Decapsulate",
+                "fullName": "google.cloud.kms.v1.KeyManagementService.Decapsulate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ciphertext",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "ciphertext_crc32c",
+                        "type": ".google.protobuf.Int64Value"
+                    }
+                ],
+                "resultType": ".google.cloud.kms.v1.DecapsulateResponse",
+                "client": {
+                    "shortName": "KeyManagementServiceClient",
+                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+                },
+                "method": {
+                    "shortName": "Decapsulate",
+                    "fullName": "google.cloud.kms.v1.KeyManagementService.Decapsulate",
+                    "service": {
+                        "shortName": "KeyManagementService",
+                        "fullName": "google.cloud.kms.v1.KeyManagementService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_async",
             "title": "Autokey generateRandomBytes Sample",
             "origin": "API_DEFINITION",

@@ -2271,7 +2271,7 @@ export class RegistryClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'api_deployment.name': request.apiDeployment!.name ?? '',
+      'api_deployment.name': request.apiDeployment!.name?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateApiDeployment request %j', request);

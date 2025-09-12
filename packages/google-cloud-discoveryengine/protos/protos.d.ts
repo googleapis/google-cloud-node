@@ -5089,6 +5089,12 @@ export namespace google {
 
                     /** SearchRequest relevanceScoreSpec */
                     relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
+
+                    /** SearchRequest rankingExpression */
+                    rankingExpression?: (string|null);
+
+                    /** SearchRequest rankingExpressionBackend */
+                    rankingExpressionBackend?: (google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -5186,6 +5192,12 @@ export namespace google {
 
                     /** SearchRequest relevanceScoreSpec. */
                     public relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
+
+                    /** SearchRequest rankingExpression. */
+                    public rankingExpression: string;
+
+                    /** SearchRequest rankingExpressionBackend. */
+                    public rankingExpressionBackend: (google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend);
 
                     /**
                      * Creates a new SearchRequest instance using the specified properties.
@@ -7634,6 +7646,13 @@ export namespace google {
                         MEDIUM = 3,
                         HIGH = 4
                     }
+
+                    /** RankingExpressionBackend enum. */
+                    enum RankingExpressionBackend {
+                        RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0,
+                        RANK_BY_EMBEDDING = 3,
+                        RANK_BY_FORMULA = 4
+                    }
                 }
 
                 /** Properties of a SearchResponse. */
@@ -7809,6 +7828,9 @@ export namespace google {
 
                         /** SearchResult modelScores */
                         modelScores?: ({ [k: string]: google.cloud.discoveryengine.v1.IDoubleList }|null);
+
+                        /** SearchResult rankSignals */
+                        rankSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals|null);
                     }
 
                     /** Represents a SearchResult. */
@@ -7831,6 +7853,9 @@ export namespace google {
 
                         /** SearchResult modelScores. */
                         public modelScores: { [k: string]: google.cloud.discoveryengine.v1.IDoubleList };
+
+                        /** SearchResult rankSignals. */
+                        public rankSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals|null);
 
                         /**
                          * Creates a new SearchResult instance using the specified properties.
@@ -7908,6 +7933,260 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SearchResult {
+
+                        /** Properties of a RankSignals. */
+                        interface IRankSignals {
+
+                            /** RankSignals keywordSimilarityScore */
+                            keywordSimilarityScore?: (number|null);
+
+                            /** RankSignals relevanceScore */
+                            relevanceScore?: (number|null);
+
+                            /** RankSignals semanticSimilarityScore */
+                            semanticSimilarityScore?: (number|null);
+
+                            /** RankSignals pctrRank */
+                            pctrRank?: (number|null);
+
+                            /** RankSignals topicalityRank */
+                            topicalityRank?: (number|null);
+
+                            /** RankSignals documentAge */
+                            documentAge?: (number|null);
+
+                            /** RankSignals boostingFactor */
+                            boostingFactor?: (number|null);
+
+                            /** RankSignals defaultRank */
+                            defaultRank?: (number|null);
+
+                            /** RankSignals customSignals */
+                            customSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal[]|null);
+                        }
+
+                        /** Represents a RankSignals. */
+                        class RankSignals implements IRankSignals {
+
+                            /**
+                             * Constructs a new RankSignals.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals);
+
+                            /** RankSignals keywordSimilarityScore. */
+                            public keywordSimilarityScore?: (number|null);
+
+                            /** RankSignals relevanceScore. */
+                            public relevanceScore?: (number|null);
+
+                            /** RankSignals semanticSimilarityScore. */
+                            public semanticSimilarityScore?: (number|null);
+
+                            /** RankSignals pctrRank. */
+                            public pctrRank?: (number|null);
+
+                            /** RankSignals topicalityRank. */
+                            public topicalityRank?: (number|null);
+
+                            /** RankSignals documentAge. */
+                            public documentAge?: (number|null);
+
+                            /** RankSignals boostingFactor. */
+                            public boostingFactor?: (number|null);
+
+                            /** RankSignals defaultRank. */
+                            public defaultRank: number;
+
+                            /** RankSignals customSignals. */
+                            public customSignals: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal[];
+
+                            /**
+                             * Creates a new RankSignals instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RankSignals instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Encodes the specified RankSignals message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.verify|verify} messages.
+                             * @param message RankSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RankSignals message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.verify|verify} messages.
+                             * @param message RankSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RankSignals message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RankSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Decodes a RankSignals message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RankSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Verifies a RankSignals message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RankSignals message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RankSignals
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Creates a plain object from a RankSignals message. Also converts values to other types if specified.
+                             * @param message RankSignals
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RankSignals to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RankSignals
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RankSignals {
+
+                            /** Properties of a CustomSignal. */
+                            interface ICustomSignal {
+
+                                /** CustomSignal name */
+                                name?: (string|null);
+
+                                /** CustomSignal value */
+                                value?: (number|null);
+                            }
+
+                            /** Represents a CustomSignal. */
+                            class CustomSignal implements ICustomSignal {
+
+                                /**
+                                 * Constructs a new CustomSignal.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal);
+
+                                /** CustomSignal name. */
+                                public name: string;
+
+                                /** CustomSignal value. */
+                                public value: number;
+
+                                /**
+                                 * Creates a new CustomSignal instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CustomSignal instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Encodes the specified CustomSignal message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.CustomSignal.verify|verify} messages.
+                                 * @param message CustomSignal message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CustomSignal message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.CustomSignal.verify|verify} messages.
+                                 * @param message CustomSignal message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CustomSignal message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CustomSignal
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Decodes a CustomSignal message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CustomSignal
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Verifies a CustomSignal message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CustomSignal message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CustomSignal
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Creates a plain object from a CustomSignal message. Also converts values to other types if specified.
+                                 * @param message CustomSignal
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.CustomSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CustomSignal to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CustomSignal
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
 
                     /** Properties of a Facet. */
@@ -62886,6 +63165,9 @@ export namespace google {
                     /** SearchRequest rankingExpression */
                     rankingExpression?: (string|null);
 
+                    /** SearchRequest rankingExpressionBackend */
+                    rankingExpressionBackend?: (google.cloud.discoveryengine.v1alpha.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1alpha.SearchRequest.RankingExpressionBackend|null);
+
                     /** SearchRequest safeSearch */
                     safeSearch?: (boolean|null);
 
@@ -62988,6 +63270,9 @@ export namespace google {
 
                     /** SearchRequest rankingExpression. */
                     public rankingExpression: string;
+
+                    /** SearchRequest rankingExpressionBackend. */
+                    public rankingExpressionBackend: (google.cloud.discoveryengine.v1alpha.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1alpha.SearchRequest.RankingExpressionBackend);
 
                     /** SearchRequest safeSearch. */
                     public safeSearch: boolean;
@@ -65547,6 +65832,13 @@ export namespace google {
                         MEDIUM = 3,
                         HIGH = 4
                     }
+
+                    /** RankingExpressionBackend enum. */
+                    enum RankingExpressionBackend {
+                        RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0,
+                        RANK_BY_EMBEDDING = 3,
+                        RANK_BY_FORMULA = 4
+                    }
                 }
 
                 /** Properties of a SearchResponse. */
@@ -65746,6 +66038,9 @@ export namespace google {
 
                         /** SearchResult modelScores */
                         modelScores?: ({ [k: string]: google.cloud.discoveryengine.v1alpha.IDoubleList }|null);
+
+                        /** SearchResult rankSignals */
+                        rankSignals?: (google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.IRankSignals|null);
                     }
 
                     /** Represents a SearchResult. */
@@ -65768,6 +66063,9 @@ export namespace google {
 
                         /** SearchResult modelScores. */
                         public modelScores: { [k: string]: google.cloud.discoveryengine.v1alpha.IDoubleList };
+
+                        /** SearchResult rankSignals. */
+                        public rankSignals?: (google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.IRankSignals|null);
 
                         /**
                          * Creates a new SearchResult instance using the specified properties.
@@ -65845,6 +66143,260 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SearchResult {
+
+                        /** Properties of a RankSignals. */
+                        interface IRankSignals {
+
+                            /** RankSignals keywordSimilarityScore */
+                            keywordSimilarityScore?: (number|null);
+
+                            /** RankSignals relevanceScore */
+                            relevanceScore?: (number|null);
+
+                            /** RankSignals semanticSimilarityScore */
+                            semanticSimilarityScore?: (number|null);
+
+                            /** RankSignals pctrRank */
+                            pctrRank?: (number|null);
+
+                            /** RankSignals topicalityRank */
+                            topicalityRank?: (number|null);
+
+                            /** RankSignals documentAge */
+                            documentAge?: (number|null);
+
+                            /** RankSignals boostingFactor */
+                            boostingFactor?: (number|null);
+
+                            /** RankSignals defaultRank */
+                            defaultRank?: (number|null);
+
+                            /** RankSignals customSignals */
+                            customSignals?: (google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.ICustomSignal[]|null);
+                        }
+
+                        /** Represents a RankSignals. */
+                        class RankSignals implements IRankSignals {
+
+                            /**
+                             * Constructs a new RankSignals.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.IRankSignals);
+
+                            /** RankSignals keywordSimilarityScore. */
+                            public keywordSimilarityScore?: (number|null);
+
+                            /** RankSignals relevanceScore. */
+                            public relevanceScore?: (number|null);
+
+                            /** RankSignals semanticSimilarityScore. */
+                            public semanticSimilarityScore?: (number|null);
+
+                            /** RankSignals pctrRank. */
+                            public pctrRank?: (number|null);
+
+                            /** RankSignals topicalityRank. */
+                            public topicalityRank?: (number|null);
+
+                            /** RankSignals documentAge. */
+                            public documentAge?: (number|null);
+
+                            /** RankSignals boostingFactor. */
+                            public boostingFactor?: (number|null);
+
+                            /** RankSignals defaultRank. */
+                            public defaultRank: number;
+
+                            /** RankSignals customSignals. */
+                            public customSignals: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.ICustomSignal[];
+
+                            /**
+                             * Creates a new RankSignals instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RankSignals instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.IRankSignals): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Encodes the specified RankSignals message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.verify|verify} messages.
+                             * @param message RankSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.IRankSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RankSignals message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.verify|verify} messages.
+                             * @param message RankSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.IRankSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RankSignals message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RankSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Decodes a RankSignals message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RankSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Verifies a RankSignals message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RankSignals message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RankSignals
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Creates a plain object from a RankSignals message. Also converts values to other types if specified.
+                             * @param message RankSignals
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RankSignals to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RankSignals
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RankSignals {
+
+                            /** Properties of a CustomSignal. */
+                            interface ICustomSignal {
+
+                                /** CustomSignal name */
+                                name?: (string|null);
+
+                                /** CustomSignal value */
+                                value?: (number|null);
+                            }
+
+                            /** Represents a CustomSignal. */
+                            class CustomSignal implements ICustomSignal {
+
+                                /**
+                                 * Constructs a new CustomSignal.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.ICustomSignal);
+
+                                /** CustomSignal name. */
+                                public name: string;
+
+                                /** CustomSignal value. */
+                                public value: number;
+
+                                /**
+                                 * Creates a new CustomSignal instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CustomSignal instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.ICustomSignal): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Encodes the specified CustomSignal message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.CustomSignal.verify|verify} messages.
+                                 * @param message CustomSignal message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.ICustomSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CustomSignal message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.CustomSignal.verify|verify} messages.
+                                 * @param message CustomSignal message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.ICustomSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CustomSignal message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CustomSignal
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Decodes a CustomSignal message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CustomSignal
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Verifies a CustomSignal message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CustomSignal message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CustomSignal
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Creates a plain object from a CustomSignal message. Also converts values to other types if specified.
+                                 * @param message CustomSignal
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult.RankSignals.CustomSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CustomSignal to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CustomSignal
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
 
                     /** Properties of a Facet. */
@@ -108597,6 +109149,9 @@ export namespace google {
                     /** SearchRequest rankingExpression */
                     rankingExpression?: (string|null);
 
+                    /** SearchRequest rankingExpressionBackend */
+                    rankingExpressionBackend?: (google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend|null);
+
                     /** SearchRequest safeSearch */
                     safeSearch?: (boolean|null);
 
@@ -108702,6 +109257,9 @@ export namespace google {
 
                     /** SearchRequest rankingExpression. */
                     public rankingExpression: string;
+
+                    /** SearchRequest rankingExpressionBackend. */
+                    public rankingExpressionBackend: (google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend);
 
                     /** SearchRequest safeSearch. */
                     public safeSearch: boolean;
@@ -111380,6 +111938,13 @@ export namespace google {
                         MEDIUM = 3,
                         HIGH = 4
                     }
+
+                    /** RankingExpressionBackend enum. */
+                    enum RankingExpressionBackend {
+                        RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0,
+                        RANK_BY_EMBEDDING = 3,
+                        RANK_BY_FORMULA = 4
+                    }
                 }
 
                 /** Properties of a SearchResponse. */
@@ -111579,6 +112144,9 @@ export namespace google {
 
                         /** SearchResult modelScores */
                         modelScores?: ({ [k: string]: google.cloud.discoveryengine.v1beta.IDoubleList }|null);
+
+                        /** SearchResult rankSignals */
+                        rankSignals?: (google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.IRankSignals|null);
                     }
 
                     /** Represents a SearchResult. */
@@ -111601,6 +112169,9 @@ export namespace google {
 
                         /** SearchResult modelScores. */
                         public modelScores: { [k: string]: google.cloud.discoveryengine.v1beta.IDoubleList };
+
+                        /** SearchResult rankSignals. */
+                        public rankSignals?: (google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.IRankSignals|null);
 
                         /**
                          * Creates a new SearchResult instance using the specified properties.
@@ -111678,6 +112249,260 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SearchResult {
+
+                        /** Properties of a RankSignals. */
+                        interface IRankSignals {
+
+                            /** RankSignals keywordSimilarityScore */
+                            keywordSimilarityScore?: (number|null);
+
+                            /** RankSignals relevanceScore */
+                            relevanceScore?: (number|null);
+
+                            /** RankSignals semanticSimilarityScore */
+                            semanticSimilarityScore?: (number|null);
+
+                            /** RankSignals pctrRank */
+                            pctrRank?: (number|null);
+
+                            /** RankSignals topicalityRank */
+                            topicalityRank?: (number|null);
+
+                            /** RankSignals documentAge */
+                            documentAge?: (number|null);
+
+                            /** RankSignals boostingFactor */
+                            boostingFactor?: (number|null);
+
+                            /** RankSignals defaultRank */
+                            defaultRank?: (number|null);
+
+                            /** RankSignals customSignals */
+                            customSignals?: (google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.ICustomSignal[]|null);
+                        }
+
+                        /** Represents a RankSignals. */
+                        class RankSignals implements IRankSignals {
+
+                            /**
+                             * Constructs a new RankSignals.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.IRankSignals);
+
+                            /** RankSignals keywordSimilarityScore. */
+                            public keywordSimilarityScore?: (number|null);
+
+                            /** RankSignals relevanceScore. */
+                            public relevanceScore?: (number|null);
+
+                            /** RankSignals semanticSimilarityScore. */
+                            public semanticSimilarityScore?: (number|null);
+
+                            /** RankSignals pctrRank. */
+                            public pctrRank?: (number|null);
+
+                            /** RankSignals topicalityRank. */
+                            public topicalityRank?: (number|null);
+
+                            /** RankSignals documentAge. */
+                            public documentAge?: (number|null);
+
+                            /** RankSignals boostingFactor. */
+                            public boostingFactor?: (number|null);
+
+                            /** RankSignals defaultRank. */
+                            public defaultRank: number;
+
+                            /** RankSignals customSignals. */
+                            public customSignals: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.ICustomSignal[];
+
+                            /**
+                             * Creates a new RankSignals instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RankSignals instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.IRankSignals): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Encodes the specified RankSignals message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.verify|verify} messages.
+                             * @param message RankSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.IRankSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RankSignals message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.verify|verify} messages.
+                             * @param message RankSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.IRankSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RankSignals message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RankSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Decodes a RankSignals message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RankSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Verifies a RankSignals message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RankSignals message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RankSignals
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals;
+
+                            /**
+                             * Creates a plain object from a RankSignals message. Also converts values to other types if specified.
+                             * @param message RankSignals
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RankSignals to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RankSignals
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RankSignals {
+
+                            /** Properties of a CustomSignal. */
+                            interface ICustomSignal {
+
+                                /** CustomSignal name */
+                                name?: (string|null);
+
+                                /** CustomSignal value */
+                                value?: (number|null);
+                            }
+
+                            /** Represents a CustomSignal. */
+                            class CustomSignal implements ICustomSignal {
+
+                                /**
+                                 * Constructs a new CustomSignal.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.ICustomSignal);
+
+                                /** CustomSignal name. */
+                                public name: string;
+
+                                /** CustomSignal value. */
+                                public value: number;
+
+                                /**
+                                 * Creates a new CustomSignal instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CustomSignal instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.ICustomSignal): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Encodes the specified CustomSignal message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.CustomSignal.verify|verify} messages.
+                                 * @param message CustomSignal message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.ICustomSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CustomSignal message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.CustomSignal.verify|verify} messages.
+                                 * @param message CustomSignal message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.ICustomSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CustomSignal message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CustomSignal
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Decodes a CustomSignal message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CustomSignal
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Verifies a CustomSignal message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CustomSignal message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CustomSignal
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.CustomSignal;
+
+                                /**
+                                 * Creates a plain object from a CustomSignal message. Also converts values to other types if specified.
+                                 * @param message CustomSignal
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.RankSignals.CustomSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CustomSignal to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CustomSignal
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
 
                     /** Properties of a Facet. */

@@ -201,6 +201,9 @@ export class ApiHubClient {
       attributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/attributes/{attribute}'
       ),
+      curationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/curations/{curation}'
+      ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
       ),
@@ -209,6 +212,12 @@ export class ApiHubClient {
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}'
+      ),
+      discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+      ),
+      discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
       ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/externalApis/{external_api}'
@@ -221,6 +230,9 @@ export class ApiHubClient {
       ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/plugins/{plugin}'
+      ),
+      pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -304,7 +316,7 @@ export class ApiHubClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const apiHubStubMethods =
-        ['createApi', 'getApi', 'listApis', 'updateApi', 'deleteApi', 'createVersion', 'getVersion', 'listVersions', 'updateVersion', 'deleteVersion', 'createSpec', 'getSpec', 'getSpecContents', 'listSpecs', 'updateSpec', 'deleteSpec', 'getApiOperation', 'listApiOperations', 'getDefinition', 'createDeployment', 'getDeployment', 'listDeployments', 'updateDeployment', 'deleteDeployment', 'createAttribute', 'getAttribute', 'updateAttribute', 'deleteAttribute', 'listAttributes', 'searchResources', 'createExternalApi', 'getExternalApi', 'updateExternalApi', 'deleteExternalApi', 'listExternalApis'];
+        ['createApi', 'getApi', 'listApis', 'updateApi', 'deleteApi', 'createVersion', 'getVersion', 'listVersions', 'updateVersion', 'deleteVersion', 'createSpec', 'getSpec', 'getSpecContents', 'listSpecs', 'updateSpec', 'deleteSpec', 'createApiOperation', 'getApiOperation', 'listApiOperations', 'updateApiOperation', 'deleteApiOperation', 'getDefinition', 'createDeployment', 'getDeployment', 'listDeployments', 'updateDeployment', 'deleteDeployment', 'createAttribute', 'getAttribute', 'updateAttribute', 'deleteAttribute', 'listAttributes', 'searchResources', 'createExternalApi', 'getExternalApi', 'updateExternalApi', 'deleteExternalApi', 'listExternalApis'];
     for (const methodName of apiHubStubMethods) {
       const callPromise = this.apiHubStub.then(
         stub => (...args: Array<{}>) => {
@@ -612,7 +624,7 @@ export class ApiHubClient {
   }
 /**
  * Update an API resource in the API hub. The following fields in the
- * {@link protos.|API} can be updated:
+ * {@link protos.google.cloud.apihub.v1.Api|API} can be updated:
  *
  * * {@link protos.google.cloud.apihub.v1.Api.display_name|display_name}
  * * {@link protos.google.cloud.apihub.v1.Api.description|description}
@@ -622,6 +634,7 @@ export class ApiHubClient {
  * * {@link protos.google.cloud.apihub.v1.Api.team|team}
  * * {@link protos.google.cloud.apihub.v1.Api.business_unit|business_unit}
  * * {@link protos.google.cloud.apihub.v1.Api.maturity_level|maturity_level}
+ * * {@link protos.google.cloud.apihub.v1.Api.api_style|api_style}
  * * {@link protos.google.cloud.apihub.v1.Api.attributes|attributes}
  *
  * The
@@ -843,8 +856,11 @@ export class ApiHubClient {
  *   the specified id is already used by another version in the API resource.
  *   * If not provided, a system generated id will be used.
  *
- *   This value should be 4-500 characters, and valid characters
- *   are /{@link protos.A-Z|a-z}[0-9]-_/.
+ *   This value should be 4-500 characters, overall resource name which will be
+ *   of format
+ *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}`,
+ *   its length is limited to 700 characters and valid characters are
+ *   /{@link protos.A-Z|a-z}[0-9]-_/.
  * @param {google.cloud.apihub.v1.Version} request.version
  *   Required. The version to create.
  * @param {object} [options]
@@ -1284,8 +1300,11 @@ export class ApiHubClient {
  *   resource.
  *   * If not provided, a system generated id will be used.
  *
- *   This value should be 4-500 characters, and valid characters
- *   are /{@link protos.A-Z|a-z}[0-9]-_/.
+ *   This value should be 4-500 characters, overall resource name which will be
+ *   of format
+ *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}`,
+ *   its length is limited to 1000 characters and valid characters are
+ *   /{@link protos.A-Z|a-z}[0-9]-_/.
  * @param {google.cloud.apihub.v1.Spec} request.spec
  *   Required. The spec to create.
  * @param {object} [options]
@@ -1790,6 +1809,120 @@ export class ApiHubClient {
       });
   }
 /**
+ * Create an apiOperation in an API version.
+ * An apiOperation can be created only if the version has no apiOperations
+ * which were created by parsing a spec.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource for the operation resource.
+ *   Format:
+ *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}`
+ * @param {string} [request.apiOperationId]
+ *   Optional. The ID to use for the operation resource, which will become the
+ *   final component of the operation's resource name. This field is optional.
+ *
+ *   * If provided, the same will be used. The service will throw an error if
+ *   the specified id is already used by another operation resource in the API
+ *   hub.
+ *   * If not provided, a system generated id will be used.
+ *
+ *   This value should be 4-500 characters, overall resource name which
+ *   will be of format
+ *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`,
+ *   its length is limited to 700 characters, and valid characters are
+ *   /{@link protos.A-Z|a-z}[0-9]-_/.
+ * @param {google.cloud.apihub.v1.ApiOperation} request.apiOperation
+ *   Required. The operation resource to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.ApiOperation|ApiOperation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub.create_api_operation.js</caption>
+ * region_tag:apihub_v1_generated_ApiHub_CreateApiOperation_async
+ */
+  createApiOperation(
+      request?: protos.google.cloud.apihub.v1.ICreateApiOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.ICreateApiOperationRequest|undefined, {}|undefined
+      ]>;
+  createApiOperation(
+      request: protos.google.cloud.apihub.v1.ICreateApiOperationRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.ICreateApiOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createApiOperation(
+      request: protos.google.cloud.apihub.v1.ICreateApiOperationRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.ICreateApiOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createApiOperation(
+      request?: protos.google.cloud.apihub.v1.ICreateApiOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.ICreateApiOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.ICreateApiOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.ICreateApiOperationRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createApiOperation request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.ICreateApiOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createApiOperation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createApiOperation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.ICreateApiOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createApiOperation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Get details about a particular operation in API version.
  *
  * @param {Object} request
@@ -1876,6 +2009,223 @@ export class ApiHubClient {
         {}|undefined
       ]) => {
         this._log.info('getApiOperation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Update an operation in an API version. The following fields in the
+ * {@link protos.google.cloud.apihub.v1.ApiOperation|ApiOperation resource} can be
+ * updated:
+ *
+ * * {@link protos.ApiOperation.details.description|details.description}
+ * * {@link protos.ApiOperation.details.documentation|details.documentation}
+ * * {@link protos.ApiOperation.details.http_operation.path.path|details.http_operation.path}
+ * * {@link protos.ApiOperation.details.http_operation.method|details.http_operation.method}
+ * * {@link protos.ApiOperation.details.deprecated|details.deprecated}
+ * * {@link protos.google.cloud.apihub.v1.ApiOperation.attributes|attributes}
+ *
+ * The
+ * {@link protos.google.cloud.apihub.v1.UpdateApiOperationRequest.update_mask|update_mask}
+ * should be used to specify the fields being updated.
+ *
+ * An operation can be updated only if the operation was created via
+ * {@link protos.google.cloud.apihub.v1.ApiHub.CreateApiOperation|CreateApiOperation} API.
+ * If the operation was created by parsing the spec, then it can be edited by
+ * updating the spec.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.apihub.v1.ApiOperation} request.apiOperation
+ *   Required. The apiOperation resource to update.
+ *
+ *   The operation resource's `name` field is used to identify the operation
+ *   resource to update.
+ *   Format:
+ *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.ApiOperation|ApiOperation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub.update_api_operation.js</caption>
+ * region_tag:apihub_v1_generated_ApiHub_UpdateApiOperation_async
+ */
+  updateApiOperation(
+      request?: protos.google.cloud.apihub.v1.IUpdateApiOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|undefined, {}|undefined
+      ]>;
+  updateApiOperation(
+      request: protos.google.cloud.apihub.v1.IUpdateApiOperationRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateApiOperation(
+      request: protos.google.cloud.apihub.v1.IUpdateApiOperationRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateApiOperation(
+      request?: protos.google.cloud.apihub.v1.IUpdateApiOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'api_operation.name': request.apiOperation!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateApiOperation request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateApiOperation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateApiOperation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IApiOperation,
+        protos.google.cloud.apihub.v1.IUpdateApiOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateApiOperation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Delete an operation in an API version and we can delete only the
+ * operations created via create API. If the operation was created by parsing
+ * the spec, then it can be deleted by editing or deleting the spec.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the operation resource to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub.delete_api_operation.js</caption>
+ * region_tag:apihub_v1_generated_ApiHub_DeleteApiOperation_async
+ */
+  deleteApiOperation(
+      request?: protos.google.cloud.apihub.v1.IDeleteApiOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|undefined, {}|undefined
+      ]>;
+  deleteApiOperation(
+      request: protos.google.cloud.apihub.v1.IDeleteApiOperationRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteApiOperation(
+      request: protos.google.cloud.apihub.v1.IDeleteApiOperationRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteApiOperation(
+      request?: protos.google.cloud.apihub.v1.IDeleteApiOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteApiOperation request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApiOperation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteApiOperation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.IDeleteApiOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteApiOperation response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -2200,7 +2550,11 @@ export class ApiHubClient {
  * * {@link protos.google.cloud.apihub.v1.Deployment.slo|slo}
  * * {@link protos.google.cloud.apihub.v1.Deployment.environment|environment}
  * * {@link protos.google.cloud.apihub.v1.Deployment.attributes|attributes}
- *
+ * * [source_project] [google.cloud.apihub.v1.Deployment.source_project]
+ * * [source_environment]
+ * [google.cloud.apihub.v1.Deployment.source_environment]
+ * * {@link protos.google.cloud.apihub.v1.Deployment.management_url|management_url}
+ * * {@link protos.google.cloud.apihub.v1.Deployment.source_uri|source_uri}
  * The
  * {@link protos.google.cloud.apihub.v1.UpdateDeploymentRequest.update_mask|update_mask}
  * should be used to specify the fields being updated.
@@ -3297,6 +3651,37 @@ export class ApiHubClient {
  *     * `api_style.enum_values.values.display_name` - The allowed value display
  *     name of the api style attribute associated with the ApiResource. Allowed
  *     comparison operator is `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"api-1\"` is equivalent to
+ *   `name = \"projects/test-project-id/locations/test-location-id/apis/api-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id`.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -3322,6 +3707,16 @@ export class ApiHubClient {
  *     specifies the APIs where the owner team email is _apihub@google.com_ or
  *     the display name of the allowed value associated with the team attribute
  *     is `ApiHub Team`.
+ *     * `owner.email = \"apihub@google.com\" AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+ *     test_enum_id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/1765\0f90-4a29-5431-b3d0-d5532da3764c.string_values.values:
+ *     test_string_value`  - The filter string specifies the APIs where the
+ *     owner team email is _apihub@google.com_ and the id of the allowed value
+ *     associated with the user defined attribute of type enum is _test_enum_id_
+ *     and the value of the user defined attribute of type string is _test_..
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of API resources to return. The service may
  *   return fewer than this value. If unspecified, at most 50 Apis will be
@@ -3475,6 +3870,37 @@ export class ApiHubClient {
  *     * `api_style.enum_values.values.display_name` - The allowed value display
  *     name of the api style attribute associated with the ApiResource. Allowed
  *     comparison operator is `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"api-1\"` is equivalent to
+ *   `name = \"projects/test-project-id/locations/test-location-id/apis/api-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id`.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -3500,6 +3926,16 @@ export class ApiHubClient {
  *     specifies the APIs where the owner team email is _apihub@google.com_ or
  *     the display name of the allowed value associated with the team attribute
  *     is `ApiHub Team`.
+ *     * `owner.email = \"apihub@google.com\" AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+ *     test_enum_id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/1765\0f90-4a29-5431-b3d0-d5532da3764c.string_values.values:
+ *     test_string_value`  - The filter string specifies the APIs where the
+ *     owner team email is _apihub@google.com_ and the id of the allowed value
+ *     associated with the user defined attribute of type enum is _test_enum_id_
+ *     and the value of the user defined attribute of type string is _test_..
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of API resources to return. The service may
  *   return fewer than this value. If unspecified, at most 50 Apis will be
@@ -3602,6 +4038,37 @@ export class ApiHubClient {
  *     * `api_style.enum_values.values.display_name` - The allowed value display
  *     name of the api style attribute associated with the ApiResource. Allowed
  *     comparison operator is `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"api-1\"` is equivalent to
+ *   `name = \"projects/test-project-id/locations/test-location-id/apis/api-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id`.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -3627,6 +4094,16 @@ export class ApiHubClient {
  *     specifies the APIs where the owner team email is _apihub@google.com_ or
  *     the display name of the allowed value associated with the team attribute
  *     is `ApiHub Team`.
+ *     * `owner.email = \"apihub@google.com\" AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+ *     test_enum_id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/1765\0f90-4a29-5431-b3d0-d5532da3764c.string_values.values:
+ *     test_string_value`  - The filter string specifies the APIs where the
+ *     owner team email is _apihub@google.com_ and the id of the allowed value
+ *     associated with the user defined attribute of type enum is _test_enum_id_
+ *     and the value of the user defined attribute of type string is _test_..
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of API resources to return. The service may
  *   return fewer than this value. If unspecified, at most 50 Apis will be
@@ -3714,6 +4191,30 @@ export class ApiHubClient {
  *     * `accreditation.enum_values.values.display_name` - The allowed value
  *     display name of the accreditations attribute associated with the Version.
  *     Allowed comparison operators: `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -3741,6 +4242,12 @@ export class ApiHubClient {
  *     compliance.enum_values.values.id: pci-dss-id`
  *     - The id of the allowed value associated with the compliance attribute is
  *     _gdpr-id_ or _pci-dss-id_.
+ *     * `lifecycle.enum_values.values.id: preview-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the id of the allowed value
+ *     associated with the lifecycle attribute of the Version is _preview-id_
+ *     and the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of versions to return. The service may return
  *   fewer than this value. If unspecified, at most 50 versions will be
@@ -3880,6 +4387,30 @@ export class ApiHubClient {
  *     * `accreditation.enum_values.values.display_name` - The allowed value
  *     display name of the accreditations attribute associated with the Version.
  *     Allowed comparison operators: `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -3907,6 +4438,12 @@ export class ApiHubClient {
  *     compliance.enum_values.values.id: pci-dss-id`
  *     - The id of the allowed value associated with the compliance attribute is
  *     _gdpr-id_ or _pci-dss-id_.
+ *     * `lifecycle.enum_values.values.id: preview-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the id of the allowed value
+ *     associated with the lifecycle attribute of the Version is _preview-id_
+ *     and the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of versions to return. The service may return
  *   fewer than this value. If unspecified, at most 50 versions will be
@@ -3995,6 +4532,30 @@ export class ApiHubClient {
  *     * `accreditation.enum_values.values.display_name` - The allowed value
  *     display name of the accreditations attribute associated with the Version.
  *     Allowed comparison operators: `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4022,6 +4583,12 @@ export class ApiHubClient {
  *     compliance.enum_values.values.id: pci-dss-id`
  *     - The id of the allowed value associated with the compliance attribute is
  *     _gdpr-id_ or _pci-dss-id_.
+ *     * `lifecycle.enum_values.values.id: preview-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the id of the allowed value
+ *     associated with the lifecycle attribute of the Version is _preview-id_
+ *     and the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of versions to return. The service may return
  *   fewer than this value. If unspecified, at most 50 versions will be
@@ -4103,6 +4670,30 @@ export class ApiHubClient {
  *     operators: `:`.
  *     * `mime_type` - The MIME type of the Spec. Allowed comparison
  *     operators: `=`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4129,6 +4720,13 @@ export class ApiHubClient {
  *     spec_type.enum_values.values.id: grpc-id`
  *     - The id of the allowed value associated with the spec_type attribute is
  *     _rest-id_ or _grpc-id_.
+ *     * `spec_type.enum_values.values.id: rest-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+ *     test`  - The filter string specifies that the id of the allowed value
+ *     associated with the spec_type attribute is _rest-id_ and the id of the
+ *     allowed value associated with the user defined attribute of type enum is
+ *     _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of specs to return. The service may return
  *   fewer than this value. If unspecified, at most 50 specs will be
@@ -4262,6 +4860,30 @@ export class ApiHubClient {
  *     operators: `:`.
  *     * `mime_type` - The MIME type of the Spec. Allowed comparison
  *     operators: `=`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4288,6 +4910,13 @@ export class ApiHubClient {
  *     spec_type.enum_values.values.id: grpc-id`
  *     - The id of the allowed value associated with the spec_type attribute is
  *     _rest-id_ or _grpc-id_.
+ *     * `spec_type.enum_values.values.id: rest-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+ *     test`  - The filter string specifies that the id of the allowed value
+ *     associated with the spec_type attribute is _rest-id_ and the id of the
+ *     allowed value associated with the user defined attribute of type enum is
+ *     _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of specs to return. The service may return
  *   fewer than this value. If unspecified, at most 50 specs will be
@@ -4370,6 +4999,30 @@ export class ApiHubClient {
  *     operators: `:`.
  *     * `mime_type` - The MIME type of the Spec. Allowed comparison
  *     operators: `=`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4396,6 +5049,13 @@ export class ApiHubClient {
  *     spec_type.enum_values.values.id: grpc-id`
  *     - The id of the allowed value associated with the spec_type attribute is
  *     _rest-id_ or _grpc-id_.
+ *     * `spec_type.enum_values.values.id: rest-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+ *     test`  - The filter string specifies that the id of the allowed value
+ *     associated with the spec_type attribute is _rest-id_ and the id of the
+ *     allowed value associated with the user defined attribute of type enum is
+ *     _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of specs to return. The service may return
  *   fewer than this value. If unspecified, at most 50 specs will be
@@ -4473,6 +5133,30 @@ export class ApiHubClient {
  *     * `create_time` - The time at which the ApiOperation was created. The
  *     value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
  *     format. Allowed comparison operators: `>` and `<`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4492,6 +5176,11 @@ export class ApiHubClient {
  *     * `details.http_operation.method = GET OR details.http_operation.method =
  *     POST`. - The http operation of the method of ApiOperation is _GET_ or
  *     _POST_.
+ *     * `details.deprecated = True AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the ApiOperation is deprecated
+ *     and the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of operations to return. The service may
  *   return fewer than this value. If unspecified, at most 50 operations will be
@@ -4621,6 +5310,30 @@ export class ApiHubClient {
  *     * `create_time` - The time at which the ApiOperation was created. The
  *     value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
  *     format. Allowed comparison operators: `>` and `<`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4640,6 +5353,11 @@ export class ApiHubClient {
  *     * `details.http_operation.method = GET OR details.http_operation.method =
  *     POST`. - The http operation of the method of ApiOperation is _GET_ or
  *     _POST_.
+ *     * `details.deprecated = True AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the ApiOperation is deprecated
+ *     and the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of operations to return. The service may
  *   return fewer than this value. If unspecified, at most 50 operations will be
@@ -4718,6 +5436,30 @@ export class ApiHubClient {
  *     * `create_time` - The time at which the ApiOperation was created. The
  *     value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
  *     format. Allowed comparison operators: `>` and `<`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4737,6 +5479,11 @@ export class ApiHubClient {
  *     * `details.http_operation.method = GET OR details.http_operation.method =
  *     POST`. - The http operation of the method of ApiOperation is _GET_ or
  *     _POST_.
+ *     * `details.deprecated = True AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the ApiOperation is deprecated
+ *     and the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of operations to return. The service may
  *   return fewer than this value. If unspecified, at most 50 operations will be
@@ -4810,6 +5557,10 @@ export class ApiHubClient {
  *     comparison operators: `=`.
  *     * `api_versions` - The API versions linked to this deployment. Allowed
  *     comparison operators: `:`.
+ *     * `source_project` - The project/organization at source for the
+ *     deployment. Allowed comparison operators: `=`.
+ *     * `source_environment` - The environment at source for the
+ *     deployment. Allowed comparison operators: `=`.
  *     * `deployment_type.enum_values.values.id` - The allowed value id of the
  *     deployment_type attribute associated with the Deployment. Allowed
  *     comparison operators: `:`.
@@ -4825,6 +5576,38 @@ export class ApiHubClient {
  *     * `environment.enum_values.values.display_name` - The allowed value
  *     display name of the environment attribute associated with the deployment.
  *     Allowed comparison operators: `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"deployment-1\"` is equivalent to
+ *   `name =
+ *   \"projects/test-project-id/locations/test-location-id/deployments/deployment-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id`.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -4850,6 +5633,12 @@ export class ApiHubClient {
  *     slo.string_values.values: \"99.99%\"`
  *     - The allowed value id of the environment attribute Deployment is
  *     _production-id_ or string value of the slo attribute is _99.99%_.
+ *     * `environment.enum_values.values.id: staging-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the allowed value id of the
+ *     environment attribute associated with the Deployment is _staging-id_ and
+ *     the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of deployment resources to return. The service
  *   may return fewer than this value. If unspecified, at most 50 deployments
@@ -4975,6 +5764,10 @@ export class ApiHubClient {
  *     comparison operators: `=`.
  *     * `api_versions` - The API versions linked to this deployment. Allowed
  *     comparison operators: `:`.
+ *     * `source_project` - The project/organization at source for the
+ *     deployment. Allowed comparison operators: `=`.
+ *     * `source_environment` - The environment at source for the
+ *     deployment. Allowed comparison operators: `=`.
  *     * `deployment_type.enum_values.values.id` - The allowed value id of the
  *     deployment_type attribute associated with the Deployment. Allowed
  *     comparison operators: `:`.
@@ -4990,6 +5783,38 @@ export class ApiHubClient {
  *     * `environment.enum_values.values.display_name` - The allowed value
  *     display name of the environment attribute associated with the deployment.
  *     Allowed comparison operators: `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"deployment-1\"` is equivalent to
+ *   `name =
+ *   \"projects/test-project-id/locations/test-location-id/deployments/deployment-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id`.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -5015,6 +5840,12 @@ export class ApiHubClient {
  *     slo.string_values.values: \"99.99%\"`
  *     - The allowed value id of the environment attribute Deployment is
  *     _production-id_ or string value of the slo attribute is _99.99%_.
+ *     * `environment.enum_values.values.id: staging-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the allowed value id of the
+ *     environment attribute associated with the Deployment is _staging-id_ and
+ *     the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of deployment resources to return. The service
  *   may return fewer than this value. If unspecified, at most 50 deployments
@@ -5089,6 +5920,10 @@ export class ApiHubClient {
  *     comparison operators: `=`.
  *     * `api_versions` - The API versions linked to this deployment. Allowed
  *     comparison operators: `:`.
+ *     * `source_project` - The project/organization at source for the
+ *     deployment. Allowed comparison operators: `=`.
+ *     * `source_environment` - The environment at source for the
+ *     deployment. Allowed comparison operators: `=`.
  *     * `deployment_type.enum_values.values.id` - The allowed value id of the
  *     deployment_type attribute associated with the Deployment. Allowed
  *     comparison operators: `:`.
@@ -5104,6 +5939,38 @@ export class ApiHubClient {
  *     * `environment.enum_values.values.display_name` - The allowed value
  *     display name of the environment attribute associated with the deployment.
  *     Allowed comparison operators: `:`.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.id` - The
+ *     allowed value id of the user defined enum attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-id is a placeholder that can be replaced with
+ *     any user defined enum attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.enum_values.values.display_name`
+ *     - The allowed value display name of the user defined enum attribute
+ *     associated with the Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-enum-display-name is a placeholder that can be
+ *     replaced with any user defined enum attribute enum name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.string_values.values` - The
+ *     allowed value of the user defined string attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-string is a placeholder that can be replaced with
+ *     any user defined string attribute name.
+ *     * `attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/user-defined-attribute-id.json_values.values` - The
+ *     allowed value of the user defined JSON attribute associated with the
+ *     Resource. Allowed comparison operator is `:`. Here
+ *     user-defined-attribute-json is a placeholder that can be replaced with
+ *     any user defined JSON attribute name.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"deployment-1\"` is equivalent to
+ *   `name =
+ *   \"projects/test-project-id/locations/test-location-id/deployments/deployment-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id`.
  *
  *   Expressions are combined with either `AND` logic operator or `OR` logical
  *   operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -5129,6 +5996,12 @@ export class ApiHubClient {
  *     slo.string_values.values: \"99.99%\"`
  *     - The allowed value id of the environment attribute Deployment is
  *     _production-id_ or string value of the slo attribute is _99.99%_.
+ *     * `environment.enum_values.values.id: staging-id AND
+ *     attributes.projects/test-project-id/locations/test-location-id/
+ *     attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+ *     test`  - The filter string specifies that the allowed value id of the
+ *     environment attribute associated with the Deployment is _staging-id_ and
+ *     the value of the user defined attribute of type string is _test_.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of deployment resources to return. The service
  *   may return fewer than this value. If unspecified, at most 50 deployments
@@ -6344,6 +7217,55 @@ export class ApiHubClient {
   }
 
   /**
+   * Return a fully-qualified curation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} curation
+   * @returns {string} Resource name string.
+   */
+  curationPath(project:string,location:string,curation:string) {
+    return this.pathTemplates.curationPathTemplate.render({
+      project: project,
+      location: location,
+      curation: curation,
+    });
+  }
+
+  /**
+   * Parse the project from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).project;
+  }
+
+  /**
+   * Parse the location from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).location;
+  }
+
+  /**
+   * Parse the curation from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the curation.
+   */
+  matchCurationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).curation;
+  }
+
+  /**
    * Return a fully-qualified definition resource name string.
    *
    * @param {string} project
@@ -6514,6 +7436,117 @@ export class ApiHubClient {
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
     return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiObservation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiOperation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @param {string} discovered_api_operation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+      discovered_api_operation: discoveredApiOperation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  }
+
+  /**
+   * Parse the discovered_api_operation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_operation.
+   */
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
   }
 
   /**
@@ -6697,6 +7730,68 @@ export class ApiHubClient {
    */
   matchPluginFromPluginName(pluginName: string) {
     return this.pathTemplates.pluginPathTemplate.match(pluginName).plugin;
+  }
+
+  /**
+   * Return a fully-qualified pluginInstance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} plugin
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+    return this.pathTemplates.pluginInstancePathTemplate.render({
+      project: project,
+      location: location,
+      plugin: plugin,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+  }
+
+  /**
+   * Parse the location from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+  }
+
+  /**
+   * Parse the plugin from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the plugin.
+   */
+  matchPluginFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+  }
+
+  /**
+   * Parse the instance from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
   }
 
   /**

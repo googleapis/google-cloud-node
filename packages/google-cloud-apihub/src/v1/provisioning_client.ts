@@ -202,6 +202,9 @@ export class ProvisioningClient {
       attributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/attributes/{attribute}'
       ),
+      curationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/curations/{curation}'
+      ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
       ),
@@ -210,6 +213,12 @@ export class ProvisioningClient {
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}'
+      ),
+      discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+      ),
+      discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
       ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/externalApis/{external_api}'
@@ -222,6 +231,9 @@ export class ProvisioningClient {
       ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/plugins/{plugin}'
+      ),
+      pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -257,12 +269,20 @@ export class ProvisioningClient {
       '.google.cloud.apihub.v1.ApiHubInstance') as gax.protobuf.Type;
     const createApiHubInstanceMetadata = protoFilesRoot.lookup(
       '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteApiHubInstanceResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteApiHubInstanceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createApiHubInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createApiHubInstanceResponse.decode.bind(createApiHubInstanceResponse),
-        createApiHubInstanceMetadata.decode.bind(createApiHubInstanceMetadata))
+        createApiHubInstanceMetadata.decode.bind(createApiHubInstanceMetadata)),
+      deleteApiHubInstance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteApiHubInstanceResponse.decode.bind(deleteApiHubInstanceResponse),
+        deleteApiHubInstanceMetadata.decode.bind(deleteApiHubInstanceMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -308,7 +328,7 @@ export class ProvisioningClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const provisioningStubMethods =
-        ['createApiHubInstance', 'getApiHubInstance', 'lookupApiHubInstance'];
+        ['createApiHubInstance', 'deleteApiHubInstance', 'getApiHubInstance', 'lookupApiHubInstance'];
     for (const methodName of provisioningStubMethods) {
       const callPromise = this.provisioningStub.then(
         stub => (...args: Array<{}>) => {
@@ -722,6 +742,115 @@ export class ProvisioningClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createApiHubInstance, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.apihub.v1.ApiHubInstance, protos.google.cloud.apihub.v1.OperationMetadata>;
+  }
+/**
+ * Deletes the API hub instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Api Hub instance to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/apiHubInstances/{apiHubInstance}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/provisioning.delete_api_hub_instance.js</caption>
+ * region_tag:apihub_v1_generated_Provisioning_DeleteApiHubInstance_async
+ */
+  deleteApiHubInstance(
+      request?: protos.google.cloud.apihub.v1.IDeleteApiHubInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteApiHubInstance(
+      request: protos.google.cloud.apihub.v1.IDeleteApiHubInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteApiHubInstance(
+      request: protos.google.cloud.apihub.v1.IDeleteApiHubInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteApiHubInstance(
+      request?: protos.google.cloud.apihub.v1.IDeleteApiHubInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteApiHubInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteApiHubInstance request %j', request);
+    return this.innerApiCalls.deleteApiHubInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteApiHubInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteApiHubInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/provisioning.delete_api_hub_instance.js</caption>
+ * region_tag:apihub_v1_generated_Provisioning_DeleteApiHubInstance_async
+ */
+  async checkDeleteApiHubInstanceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apihub.v1.OperationMetadata>>{
+    this._log.info('deleteApiHubInstance long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteApiHubInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apihub.v1.OperationMetadata>;
   }
 /**
    * Gets information about a location.
@@ -1252,6 +1381,55 @@ export class ProvisioningClient {
   }
 
   /**
+   * Return a fully-qualified curation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} curation
+   * @returns {string} Resource name string.
+   */
+  curationPath(project:string,location:string,curation:string) {
+    return this.pathTemplates.curationPathTemplate.render({
+      project: project,
+      location: location,
+      curation: curation,
+    });
+  }
+
+  /**
+   * Parse the project from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).project;
+  }
+
+  /**
+   * Parse the location from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).location;
+  }
+
+  /**
+   * Parse the curation from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the curation.
+   */
+  matchCurationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).curation;
+  }
+
+  /**
    * Return a fully-qualified definition resource name string.
    *
    * @param {string} project
@@ -1422,6 +1600,117 @@ export class ProvisioningClient {
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
     return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiObservation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiOperation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @param {string} discovered_api_operation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+      discovered_api_operation: discoveredApiOperation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  }
+
+  /**
+   * Parse the discovered_api_operation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_operation.
+   */
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
   }
 
   /**
@@ -1605,6 +1894,68 @@ export class ProvisioningClient {
    */
   matchPluginFromPluginName(pluginName: string) {
     return this.pathTemplates.pluginPathTemplate.match(pluginName).plugin;
+  }
+
+  /**
+   * Return a fully-qualified pluginInstance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} plugin
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+    return this.pathTemplates.pluginInstancePathTemplate.render({
+      project: project,
+      location: location,
+      plugin: plugin,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+  }
+
+  /**
+   * Parse the location from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+  }
+
+  /**
+   * Parse the plugin from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the plugin.
+   */
+  matchPluginFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+  }
+
+  /**
+   * Parse the instance from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
   }
 
   /**

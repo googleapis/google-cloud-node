@@ -49,7 +49,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Datasources library
-  const {DataSourcesServiceClient} = require('@google-cloud/datasources').v1;
+  const {DataSourcesServiceClient} = require('@google-shopping/datasources').v1;
 
   // Instantiates a client
   const datasourcesClient = new DataSourcesServiceClient();

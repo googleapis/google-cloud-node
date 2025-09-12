@@ -628,6 +628,160 @@ describe('v1.ProvisioningClient', () => {
                 .getCall(0));
         });
     });
+
+    describe('deleteApiHubInstance', () => {
+        it('invokes deleteApiHubInstance without error', async () => {
+            const client = new provisioningModule.v1.ProvisioningClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeleteApiHubInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeleteApiHubInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteApiHubInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteApiHubInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteApiHubInstance without error using callback', async () => {
+            const client = new provisioningModule.v1.ProvisioningClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeleteApiHubInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeleteApiHubInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteApiHubInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteApiHubInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteApiHubInstance with call error', async () => {
+            const client = new provisioningModule.v1.ProvisioningClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeleteApiHubInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeleteApiHubInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteApiHubInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteApiHubInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteApiHubInstance with LRO error', async () => {
+            const client = new provisioningModule.v1.ProvisioningClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apihub.v1.DeleteApiHubInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.apihub.v1.DeleteApiHubInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteApiHubInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteApiHubInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteApiHubInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteApiHubInstanceProgress without error', async () => {
+            const client = new provisioningModule.v1.ProvisioningClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteApiHubInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteApiHubInstanceProgress with error', async () => {
+            const client = new provisioningModule.v1.ProvisioningClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteApiHubInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new provisioningModule.v1.ProvisioningClient({
@@ -1252,6 +1406,52 @@ describe('v1.ProvisioningClient', () => {
             });
         });
 
+        describe('curation', async () => {
+            const fakePath = "/rendered/path/curation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                curation: "curationValue",
+            };
+            const client = new provisioningModule.v1.ProvisioningClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.curationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.curationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('curationPath', () => {
+                const result = client.curationPath("projectValue", "locationValue", "curationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.curationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCurationName', () => {
+                const result = client.matchProjectFromCurationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCurationName', () => {
+                const result = client.matchLocationFromCurationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCurationFromCurationName', () => {
+                const result = client.matchCurationFromCurationName(fakePath);
+                assert.strictEqual(result, "curationValue");
+                assert((client.pathTemplates.curationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('definition', async () => {
             const fakePath = "/rendered/path/definition";
             const expectedParameters = {
@@ -1402,6 +1602,106 @@ describe('v1.ProvisioningClient', () => {
                 const result = client.matchDeploymentFromDeploymentName(fakePath);
                 assert.strictEqual(result, "deploymentValue");
                 assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('discoveredApiObservation', async () => {
+            const fakePath = "/rendered/path/discoveredApiObservation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                discovered_api_observation: "discoveredApiObservationValue",
+            };
+            const client = new provisioningModule.v1.ProvisioningClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.discoveredApiObservationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.discoveredApiObservationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('discoveredApiObservationPath', () => {
+                const result = client.discoveredApiObservationPath("projectValue", "locationValue", "discoveredApiObservationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDiscoveredApiObservationName', () => {
+                const result = client.matchProjectFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDiscoveredApiObservationName', () => {
+                const result = client.matchLocationFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiObservationFromDiscoveredApiObservationName', () => {
+                const result = client.matchDiscoveredApiObservationFromDiscoveredApiObservationName(fakePath);
+                assert.strictEqual(result, "discoveredApiObservationValue");
+                assert((client.pathTemplates.discoveredApiObservationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('discoveredApiOperation', async () => {
+            const fakePath = "/rendered/path/discoveredApiOperation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                discovered_api_observation: "discoveredApiObservationValue",
+                discovered_api_operation: "discoveredApiOperationValue",
+            };
+            const client = new provisioningModule.v1.ProvisioningClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.discoveredApiOperationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.discoveredApiOperationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('discoveredApiOperationPath', () => {
+                const result = client.discoveredApiOperationPath("projectValue", "locationValue", "discoveredApiObservationValue", "discoveredApiOperationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDiscoveredApiOperationName', () => {
+                const result = client.matchProjectFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDiscoveredApiOperationName', () => {
+                const result = client.matchLocationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiObservationFromDiscoveredApiOperationName', () => {
+                const result = client.matchDiscoveredApiObservationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "discoveredApiObservationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDiscoveredApiOperationFromDiscoveredApiOperationName', () => {
+                const result = client.matchDiscoveredApiOperationFromDiscoveredApiOperationName(fakePath);
+                assert.strictEqual(result, "discoveredApiOperationValue");
+                assert((client.pathTemplates.discoveredApiOperationPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1578,6 +1878,60 @@ describe('v1.ProvisioningClient', () => {
                 const result = client.matchPluginFromPluginName(fakePath);
                 assert.strictEqual(result, "pluginValue");
                 assert((client.pathTemplates.pluginPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('pluginInstance', async () => {
+            const fakePath = "/rendered/path/pluginInstance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                plugin: "pluginValue",
+                instance: "instanceValue",
+            };
+            const client = new provisioningModule.v1.ProvisioningClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.pluginInstancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.pluginInstancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('pluginInstancePath', () => {
+                const result = client.pluginInstancePath("projectValue", "locationValue", "pluginValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.pluginInstancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPluginInstanceName', () => {
+                const result = client.matchProjectFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPluginInstanceName', () => {
+                const result = client.matchLocationFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPluginFromPluginInstanceName', () => {
+                const result = client.matchPluginFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "pluginValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromPluginInstanceName', () => {
+                const result = client.matchInstanceFromPluginInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.pluginInstancePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

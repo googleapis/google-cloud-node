@@ -30,12 +30,12 @@ function main(name, query) {
    */
   /**
    *  Required. The project to which the request should be attributed in the
-   *  following form: `projects/{project}/locations/{location}`.
+   *  following form: `projects/{project}/locations/global`.
    */
   // const name = 'abc123'
   /**
    *  Required. The query against which entries in scope should be matched.
-   *  The query syntax is defined in Search syntax for Dataplex
+   *  The query syntax is defined in Search syntax for Dataplex Universal
    *  Catalog (https://cloud.google.com/dataplex/docs/search-syntax).
    */
   // const query = 'abc123'
@@ -53,7 +53,7 @@ function main(name, query) {
   /**
    *  Optional. Specifies the ordering of results.
    *  Supported values are:
-   *  * `relevance` (default)
+   *  * `relevance`
    *  * `last_modified_timestamp`
    *  * `last_modified_timestamp asc`
    */
