@@ -25,6 +25,8 @@ import {Entities, entity, Entity} from '../src/entity';
 import {Query, RunQueryInfo, ExecutionStats} from '../src/query';
 import KEY_SYMBOL = entity.KEY_SYMBOL;
 import {transactionExpiredError} from '../src/request';
+const testRequests = require('./transaction-spy').testRequests;
+import {MockedDatastore} from './transaction-spy';
 const sinon = require('sinon');
 const async = require('async');
 const SECOND_DATABASE_ID = 'multidb-test';
@@ -3183,6 +3185,1650 @@ async.each(
           const [entity] = await customDatastore.get(postKey);
           assert.strictEqual(entity, undefined);
         });
+      });
+      describe('Datastore mode data transforms', () => {
+        const key = datastore.key(['Post', 'post1']);
+        function getStandardTestCase() {
+          return {
+            name: 'should perform a basic data transform',
+            saveArg: {
+              key: key,
+              data: {
+                name: 'test',
+                p1: 3,
+                p2: 4,
+                p3: 5,
+                a1: [3, 4, 5],
+              },
+              transforms: [
+                {
+                  property: 'p1',
+                  setToServerValue: true,
+                },
+                {
+                  property: 'p2',
+                  increment: 4,
+                },
+                {
+                  property: 'p3',
+                  maximum: 9,
+                },
+                {
+                  property: 'p2',
+                  minimum: 6,
+                },
+                {
+                  property: 'a1',
+                  appendMissingElements: [5, 6],
+                },
+                {
+                  property: 'a1',
+                  removeAllFromArray: [3],
+                },
+              ],
+            },
+            saveResult: [
+              {
+                mutationResults: [
+                  {
+                    transformResults: [
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        valueType: 'timestampValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        integerValue: '8',
+                        valueType: 'integerValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        integerValue: '9',
+                        valueType: 'integerValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        integerValue: '6',
+                        valueType: 'integerValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        nullValue: 'NULL_VALUE',
+                        valueType: 'nullValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        nullValue: 'NULL_VALUE',
+                        valueType: 'nullValue',
+                      },
+                    ],
+                    key: null,
+                    conflictDetected: false,
+                  },
+                ],
+                commitTime: null,
+              },
+            ],
+            serverValue: {
+              name: 'test',
+              a1: [4, 5, 6],
+              p2: 6,
+              p3: 9,
+            },
+            gapicRequest: {
+              client: 'DatastoreClient',
+              method: 'commit',
+              reqOpts: {
+                mutations: [
+                  {
+                    upsert: {
+                      key: {
+                        path: [
+                          {
+                            kind: 'Post',
+                            name: 'post1',
+                          },
+                        ],
+                        partitionId: {},
+                      },
+                      properties: {
+                        name: {
+                          stringValue: 'test',
+                        },
+                        p1: {
+                          integerValue: '3',
+                        },
+                        p2: {
+                          integerValue: '4',
+                        },
+                        p3: {
+                          integerValue: '5',
+                        },
+                        a1: {
+                          arrayValue: {
+                            values: [
+                              {
+                                integerValue: '3',
+                              },
+                              {
+                                integerValue: '4',
+                              },
+                              {
+                                integerValue: '5',
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    },
+                    propertyTransforms: [
+                      {
+                        property: 'p1',
+                        setToServerValue: 1,
+                      },
+                      {
+                        property: 'p2',
+                        increment: {
+                          integerValue: '4',
+                        },
+                      },
+                      {
+                        property: 'p3',
+                        maximum: {
+                          integerValue: '9',
+                        },
+                      },
+                      {
+                        property: 'p2',
+                        minimum: {
+                          integerValue: '6',
+                        },
+                      },
+                      {
+                        property: 'a1',
+                        appendMissingElements: {
+                          values: [
+                            {
+                              integerValue: '5',
+                            },
+                            {
+                              integerValue: '6',
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        property: 'a1',
+                        removeAllFromArray: {
+                          values: [
+                            {
+                              integerValue: '3',
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              gaxOpts: {},
+            },
+          };
+        }
+        const standardTestCase = getStandardTestCase();
+        // Add test case 2: Setting the server value to false:
+        const standardTestCaseWithSetToServerFalse = getStandardTestCase();
+        standardTestCaseWithSetToServerFalse.name =
+          'should perform a transform with setToServerValue false';
+        standardTestCaseWithSetToServerFalse.saveArg.transforms.shift();
+        standardTestCaseWithSetToServerFalse.saveResult[0].mutationResults[0].transformResults.shift();
+        standardTestCaseWithSetToServerFalse.gapicRequest.reqOpts.mutations[0].propertyTransforms.shift();
+        // Add test case 3: User inputs string values for transforms
+        const standardTestCaseWithStringValues = getStandardTestCase();
+        standardTestCaseWithStringValues.name =
+          'should perform a transform with string values';
+        standardTestCaseWithStringValues.saveArg.transforms[1].increment =
+          '4' as any;
+        standardTestCaseWithStringValues.saveArg.transforms[2].maximum =
+          '9' as any;
+        standardTestCaseWithStringValues.saveArg.transforms[3].minimum =
+          '6' as any;
+        const setToServerValueBooleanTestCase = {
+          name: 'should perform a setToServerValue transform on a boolean property',
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              p1: false,
+            },
+            transforms: [
+              {
+                property: 'p1',
+                setToServerValue: true,
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      valueType: 'timestampValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                      partitionId: {},
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      p1: {
+                        booleanValue: false,
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'p1',
+                      setToServerValue: 1,
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const incrementFloatTestCase = {
+          name: 'should perform an increment transform on a float property',
+          assertP1: true,
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              p1: 3.5,
+            },
+            transforms: [
+              {
+                property: 'p1',
+                increment: 1.2,
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      doubleValue: 4.7,
+                      valueType: 'doubleValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            p1: 4.7,
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                      partitionId: {},
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      p1: {
+                        doubleValue: 3.5,
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'p1',
+                      increment: {
+                        doubleValue: 1.2,
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const appendMissingElementsComplexTestCase = {
+          name: 'should perform an appendMissingElements transform with complex objects',
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              a1: [{a: 1, b: 'two'}],
+            },
+            transforms: [
+              {
+                property: 'a1',
+                appendMissingElements: [{a: 1, b: 'two'}, {c: 3}],
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      nullValue: 'NULL_VALUE',
+                      valueType: 'nullValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            a1: [{a: 1, b: 'two'}, {c: 3}],
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                      partitionId: {},
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      a1: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  a: {
+                                    integerValue: '1',
+                                  },
+                                  b: {
+                                    stringValue: 'two',
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'a1',
+                      appendMissingElements: {
+                        values: [
+                          {
+                            entityValue: {
+                              properties: {
+                                a: {
+                                  integerValue: '1',
+                                },
+                                b: {
+                                  stringValue: 'two',
+                                },
+                              },
+                            },
+                          },
+                          {
+                            entityValue: {
+                              properties: {
+                                c: {
+                                  integerValue: '3',
+                                },
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const removeAllFromArrayComplexTestCase = {
+          name: 'should perform a removeAllFromArray transform with complex objects',
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              a1: [{a: 1, b: 'two'}, {c: 3}],
+            },
+            transforms: [
+              {
+                property: 'a1',
+                removeAllFromArray: [{a: 1, b: 'two'}],
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      nullValue: 'NULL_VALUE',
+                      valueType: 'nullValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            a1: [{c: 3}],
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                      partitionId: {},
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      a1: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  a: {
+                                    integerValue: '1',
+                                  },
+                                  b: {
+                                    stringValue: 'two',
+                                  },
+                                },
+                              },
+                            },
+                            {
+                              entityValue: {
+                                properties: {
+                                  c: {
+                                    integerValue: '3',
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'a1',
+                      removeAllFromArray: {
+                        values: [
+                          {
+                            entityValue: {
+                              properties: {
+                                a: {
+                                  integerValue: '1',
+                                },
+                                b: {
+                                  stringValue: 'two',
+                                },
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const orderOfOperationsTestCase = {
+          name: 'should respect the order of operations for transforms',
+          assertP1: true,
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              p1: 5,
+            },
+            transforms: [
+              {
+                property: 'p1',
+                increment: 5, // p1 is now 10
+              },
+              {
+                property: 'p1',
+                maximum: 8, // p1 is now 8
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      integerValue: '10',
+                      valueType: 'integerValue',
+                    },
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      integerValue: '10',
+                      valueType: 'integerValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            p1: 10,
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                      partitionId: {},
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      p1: {
+                        integerValue: '5',
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'p1',
+                      increment: {
+                        integerValue: '5',
+                      },
+                    },
+                    {
+                      property: 'p1',
+                      maximum: {
+                        integerValue: '8',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const nestedPropertyTransformTestCase = {
+          name: 'should perform a transform on a nested property',
+          assertP1: true,
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              nested: {
+                p1: 10,
+              },
+            },
+            transforms: [
+              {
+                property: 'nested.p1',
+                increment: 5,
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      integerValue: '15',
+                      valueType: 'integerValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            nested: {
+              p1: 15,
+            },
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                      partitionId: {},
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      nested: {
+                        entityValue: {
+                          properties: {
+                            p1: {
+                              integerValue: '10',
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'nested.p1',
+                      increment: {
+                        integerValue: '5',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        // Test each of the test cases:
+        async.each(
+          [
+            standardTestCase,
+            standardTestCaseWithSetToServerFalse,
+            standardTestCaseWithStringValues,
+            setToServerValueBooleanTestCase,
+            incrementFloatTestCase,
+            appendMissingElementsComplexTestCase,
+            removeAllFromArrayComplexTestCase,
+            orderOfOperationsTestCase,
+            nestedPropertyTransformTestCase,
+          ],
+          async (testParameters: any) => {
+            it(testParameters.name, async () => {
+              const requestSpy = sinon.spy(datastore.request_);
+              datastore.request_ = requestSpy;
+              const result = await datastore.save(testParameters.saveArg);
+              // Clean the data from the server first before comparing:
+              result.forEach(serverResult => {
+                delete serverResult['indexUpdates'];
+                serverResult.mutationResults?.forEach(mutationResult => {
+                  delete mutationResult['updateTime'];
+                  delete mutationResult['createTime'];
+                  delete mutationResult['version'];
+                  mutationResult.transformResults?.forEach(transformResult => {
+                    delete transformResult['timestampValue'];
+                  });
+                });
+              });
+              // Now the data should have fixed values.
+              // Do a comparison against the expected result.
+              assert.deepStrictEqual(result, testParameters.saveResult);
+              // Now check the value that was actually saved to the server:
+              const [entity] = await datastore.get(key);
+              const parsedResult = JSON.parse(JSON.stringify(entity));
+              if (!testParameters.assertP1) {
+                delete parsedResult['p1']; // This is a timestamp so we can't consistently test this.
+              }
+              assert.deepStrictEqual(parsedResult, testParameters.serverValue);
+              if (
+                requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
+                  .partitionId
+              ) {
+                delete requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
+                  .partitionId['namespaceId'];
+              }
+              assert.deepStrictEqual(
+                requestSpy.args[0][0],
+                testParameters.gapicRequest,
+              );
+            });
+          },
+        );
+      });
+      describe('Datastore mode data transforms in transactions', () => {
+        const mockedDatastore = new MockedDatastore();
+        const key = mockedDatastore.key(['Post', 'post1']);
+        function getStandardTestCase() {
+          return {
+            name: 'should perform a basic data transform',
+            saveArg: {
+              key: key,
+              data: {
+                name: 'test',
+                p1: 3,
+                p2: 4,
+                p3: 5,
+                a1: [3, 4, 5],
+              },
+              transforms: [
+                {
+                  property: 'p1',
+                  setToServerValue: true,
+                },
+                {
+                  property: 'p2',
+                  increment: 4,
+                },
+                {
+                  property: 'p3',
+                  maximum: 9,
+                },
+                {
+                  property: 'p2',
+                  minimum: 6,
+                },
+                {
+                  property: 'a1',
+                  appendMissingElements: [5, 6],
+                },
+                {
+                  property: 'a1',
+                  removeAllFromArray: [3],
+                },
+              ],
+            },
+            saveResult: [
+              {
+                mutationResults: [
+                  {
+                    transformResults: [
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        valueType: 'timestampValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        integerValue: '8',
+                        valueType: 'integerValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        integerValue: '9',
+                        valueType: 'integerValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        integerValue: '6',
+                        valueType: 'integerValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        nullValue: 'NULL_VALUE',
+                        valueType: 'nullValue',
+                      },
+                      {
+                        meaning: 0,
+                        excludeFromIndexes: false,
+                        nullValue: 'NULL_VALUE',
+                        valueType: 'nullValue',
+                      },
+                    ],
+                    key: null,
+                    conflictDetected: false,
+                  },
+                ],
+                commitTime: null,
+              },
+            ],
+            serverValue: {
+              name: 'test',
+              a1: [4, 5, 6],
+              p2: 6,
+              p3: 9,
+            },
+            gapicRequest: {
+              client: 'DatastoreClient',
+              method: 'commit',
+              reqOpts: {
+                mutations: [
+                  {
+                    upsert: {
+                      key: {
+                        path: [
+                          {
+                            kind: 'Post',
+                            name: 'post1',
+                          },
+                        ],
+                      },
+                      properties: {
+                        name: {
+                          stringValue: 'test',
+                        },
+                        p1: {
+                          integerValue: '3',
+                        },
+                        p2: {
+                          integerValue: '4',
+                        },
+                        p3: {
+                          integerValue: '5',
+                        },
+                        a1: {
+                          arrayValue: {
+                            values: [
+                              {
+                                integerValue: '3',
+                              },
+                              {
+                                integerValue: '4',
+                              },
+                              {
+                                integerValue: '5',
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    },
+                    propertyTransforms: [
+                      {
+                        property: 'p1',
+                        setToServerValue: 1,
+                      },
+                      {
+                        property: 'p2',
+                        increment: {
+                          integerValue: '4',
+                        },
+                      },
+                      {
+                        property: 'p3',
+                        maximum: {
+                          integerValue: '9',
+                        },
+                      },
+                      {
+                        property: 'p2',
+                        minimum: {
+                          integerValue: '6',
+                        },
+                      },
+                      {
+                        property: 'a1',
+                        appendMissingElements: {
+                          values: [
+                            {
+                              integerValue: '5',
+                            },
+                            {
+                              integerValue: '6',
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        property: 'a1',
+                        removeAllFromArray: {
+                          values: [
+                            {
+                              integerValue: '3',
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              gaxOpts: {},
+            },
+          };
+        }
+        const standardTestCase = getStandardTestCase();
+        // Add test case 2: Setting the server value to false:
+        const standardTestCaseWithSetToServerFalse = getStandardTestCase();
+        standardTestCaseWithSetToServerFalse.name =
+          'should perform a transform with setToServerValue false';
+        standardTestCaseWithSetToServerFalse.saveArg.transforms.shift();
+        standardTestCaseWithSetToServerFalse.saveResult[0].mutationResults[0].transformResults.shift();
+        standardTestCaseWithSetToServerFalse.gapicRequest.reqOpts.mutations[0].propertyTransforms.shift();
+        // Add test case 3: User inputs string values for transforms
+        const standardTestCaseWithStringValues = getStandardTestCase();
+        standardTestCaseWithStringValues.name =
+          'should perform a transform with string values';
+        standardTestCaseWithStringValues.saveArg.transforms[1].increment =
+          '4' as any;
+        standardTestCaseWithStringValues.saveArg.transforms[2].maximum =
+          '9' as any;
+        standardTestCaseWithStringValues.saveArg.transforms[3].minimum =
+          '6' as any;
+        const setToServerValueBooleanTestCase = {
+          name: 'should perform a setToServerValue transform on a boolean property',
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              p1: false,
+            },
+            transforms: [
+              {
+                property: 'p1',
+                setToServerValue: true,
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      valueType: 'timestampValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      p1: {
+                        booleanValue: false,
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'p1',
+                      setToServerValue: 1,
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const incrementFloatTestCase = {
+          name: 'should perform an increment transform on a float property',
+          assertP1: true,
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              p1: 3.5,
+            },
+            transforms: [
+              {
+                property: 'p1',
+                increment: 1.2,
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      doubleValue: 4.7,
+                      valueType: 'doubleValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            p1: 4.7,
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      p1: {
+                        doubleValue: 3.5,
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'p1',
+                      increment: {
+                        doubleValue: 1.2,
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const appendMissingElementsComplexTestCase = {
+          name: 'should perform an appendMissingElements transform with complex objects',
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              a1: [{a: 1, b: 'two'}],
+            },
+            transforms: [
+              {
+                property: 'a1',
+                appendMissingElements: [{a: 1, b: 'two'}, {c: 3}],
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      nullValue: 'NULL_VALUE',
+                      valueType: 'nullValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            a1: [{a: 1, b: 'two'}, {c: 3}],
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      a1: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  a: {
+                                    integerValue: '1',
+                                  },
+                                  b: {
+                                    stringValue: 'two',
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'a1',
+                      appendMissingElements: {
+                        values: [
+                          {
+                            entityValue: {
+                              properties: {
+                                a: {
+                                  integerValue: '1',
+                                },
+                                b: {
+                                  stringValue: 'two',
+                                },
+                              },
+                            },
+                          },
+                          {
+                            entityValue: {
+                              properties: {
+                                c: {
+                                  integerValue: '3',
+                                },
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const removeAllFromArrayComplexTestCase = {
+          name: 'should perform a removeAllFromArray transform with complex objects',
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              a1: [{a: 1, b: 'two'}, {c: 3}],
+            },
+            transforms: [
+              {
+                property: 'a1',
+                removeAllFromArray: [{a: 1, b: 'two'}],
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      nullValue: 'NULL_VALUE',
+                      valueType: 'nullValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            a1: [{c: 3}],
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      a1: {
+                        arrayValue: {
+                          values: [
+                            {
+                              entityValue: {
+                                properties: {
+                                  a: {
+                                    integerValue: '1',
+                                  },
+                                  b: {
+                                    stringValue: 'two',
+                                  },
+                                },
+                              },
+                            },
+                            {
+                              entityValue: {
+                                properties: {
+                                  c: {
+                                    integerValue: '3',
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'a1',
+                      removeAllFromArray: {
+                        values: [
+                          {
+                            entityValue: {
+                              properties: {
+                                a: {
+                                  integerValue: '1',
+                                },
+                                b: {
+                                  stringValue: 'two',
+                                },
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const orderOfOperationsTestCase = {
+          name: 'should respect the order of operations for transforms',
+          assertP1: true,
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              p1: 5,
+            },
+            transforms: [
+              {
+                property: 'p1',
+                increment: 5, // p1 is now 10
+              },
+              {
+                property: 'p1',
+                maximum: 8, // p1 is now 8
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      integerValue: '10',
+                      valueType: 'integerValue',
+                    },
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      integerValue: '10',
+                      valueType: 'integerValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            p1: 10,
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      p1: {
+                        integerValue: '5',
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'p1',
+                      increment: {
+                        integerValue: '5',
+                      },
+                    },
+                    {
+                      property: 'p1',
+                      maximum: {
+                        integerValue: '8',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        const nestedPropertyTransformTestCase = {
+          name: 'should perform a transform on a nested property',
+          assertP1: true,
+          saveArg: {
+            key: key,
+            data: {
+              name: 'test',
+              nested: {
+                p1: 10,
+              },
+            },
+            transforms: [
+              {
+                property: 'nested.p1',
+                increment: 5,
+              },
+            ],
+          },
+          saveResult: [
+            {
+              mutationResults: [
+                {
+                  transformResults: [
+                    {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      integerValue: '15',
+                      valueType: 'integerValue',
+                    },
+                  ],
+                  key: null,
+                  conflictDetected: false,
+                },
+              ],
+              commitTime: null,
+            },
+          ],
+          serverValue: {
+            name: 'test',
+            nested: {
+              p1: 15,
+            },
+          },
+          gapicRequest: {
+            client: 'DatastoreClient',
+            method: 'commit',
+            reqOpts: {
+              mutations: [
+                {
+                  upsert: {
+                    key: {
+                      path: [
+                        {
+                          kind: 'Post',
+                          name: 'post1',
+                        },
+                      ],
+                    },
+                    properties: {
+                      name: {
+                        stringValue: 'test',
+                      },
+                      nested: {
+                        entityValue: {
+                          properties: {
+                            p1: {
+                              integerValue: '10',
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                  propertyTransforms: [
+                    {
+                      property: 'nested.p1',
+                      increment: {
+                        integerValue: '5',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            gaxOpts: {},
+          },
+        };
+        // Test each of the test cases:
+        async.each(
+          [
+            standardTestCase,
+            standardTestCaseWithSetToServerFalse,
+            standardTestCaseWithStringValues,
+            setToServerValueBooleanTestCase,
+            incrementFloatTestCase,
+            appendMissingElementsComplexTestCase,
+            removeAllFromArrayComplexTestCase,
+            orderOfOperationsTestCase,
+            nestedPropertyTransformTestCase,
+          ],
+          async (testParameters: any) => {
+            it(testParameters.name, async () => {
+              testRequests.splice(0, testRequests.length);
+              const transaction = mockedDatastore.transaction();
+              await transaction.run();
+              transaction.save(testParameters.saveArg);
+              await transaction.commit();
+              // Now check the value that was actually saved to the server:
+              testRequests.shift(); // Remove the BeginTransaction request.
+              const [entity] = await mockedDatastore.get(key);
+              const parsedResult = JSON.parse(JSON.stringify(entity));
+              if (!testParameters.assertP1) {
+                delete parsedResult['p1']; // This is a timestamp so we can't consistently test this.
+              }
+              assert.deepStrictEqual(parsedResult, testParameters.serverValue);
+              assert(testRequests);
+              assert(testRequests[0]);
+              if (
+                testRequests[0] &&
+                testRequests[0].reqOpts?.mutations &&
+                testRequests[0].reqOpts?.mutations[0] &&
+                testRequests[0].reqOpts?.mutations[0].upsert?.key?.partitionId
+              ) {
+                delete testRequests[0].reqOpts.mutations[0].upsert.key
+                  .partitionId['namespaceId'];
+              }
+              assert.deepStrictEqual(
+                testRequests[0],
+                testParameters.gapicRequest,
+              );
+            });
+          },
+        );
       });
       describe('Datastore mode data transforms', () => {
         const key = datastore.key(['Post', 'post1']);
