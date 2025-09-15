@@ -1452,8 +1452,28 @@ export interface EntityProto {
   excludeFromIndexes?: boolean;
 }
 
+/*
+ * This is the interface the user would provide transform operations in before
+ * they are converted to the google.datastore.v1.IPropertyTransform
+ * interface.
+ *
+ */
+export type PropertyTransform = {
+  property: string;
+  setToServerValue: boolean;
+  increment: any;
+  maximum: any;
+  minimum: any;
+  appendMissingElements: any[];
+  removeAllFromArray: any[];
+};
+
+interface EntityWithTransforms {
+  transforms?: PropertyTransform[];
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Entity = any;
+export type Entity = any & EntityWithTransforms;
 export type Entities = Entity | Entity[];
 
 interface KeyProtoPathElement extends google.datastore.v1.Key.IPathElement {

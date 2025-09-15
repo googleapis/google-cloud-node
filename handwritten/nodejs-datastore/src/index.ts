@@ -37,9 +37,16 @@ import {
   ServiceError,
 } from 'google-gax';
 import * as is from 'is';
-import {Transform, pipeline} from 'stream';
+import {pipeline, Transform} from 'stream';
 
-import {entity, Entities, Entity, EntityProto, ValueProto} from './entity';
+import {
+  entity,
+  Entities,
+  Entity,
+  EntityProto,
+  ValueProto,
+  PropertyTransform,
+} from './entity';
 import {AggregateField} from './aggregate';
 import Key = entity.Key;
 export {Entity, Key, AggregateField};
@@ -70,6 +77,10 @@ import {AggregateQuery} from './aggregate';
 import {SaveEntity} from './interfaces/save';
 import {extendExcludeFromIndexes} from './utils/entity/extendExcludeFromIndexes';
 import {buildEntityProto} from './utils/entity/buildEntityProto';
+import IValue = google.datastore.v1.IValue;
+import IEntity = google.datastore.v1.IEntity;
+import ServerValue = google.datastore.v1.PropertyTransform.ServerValue;
+import {buildPropertyTransforms} from './utils/entity/buildPropertyTransforms';
 
 const {grpc} = new GrpcClient();
 
@@ -1098,7 +1109,8 @@ class Datastore extends DatastoreRequest {
     entities
       .map(DatastoreRequest.prepareEntityObject_)
       .forEach((entityObject: Entity, index: number) => {
-        const mutation: Mutation = {};
+        const mutation: google.datastore.v1.IMutation = {};
+
         let method = 'upsert';
 
         if (entityObject.method) {
@@ -1120,7 +1132,15 @@ class Datastore extends DatastoreRequest {
 
         entityProto.key = entity.keyToKeyProto(entityObject.key);
 
-        mutation[method] = entityProto;
+        mutation[method as 'upsert' | 'update' | 'insert' | 'delete'] =
+          entityProto as IEntity;
+
+        // We built the entityProto, now we should add the data transforms:
+        if (entityObject.transforms) {
+          mutation.propertyTransforms = buildPropertyTransforms(
+            entityObject.transforms,
+          );
+        }
         mutations.push(mutation);
       });
 
