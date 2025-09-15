@@ -48,7 +48,7 @@
     "extend": "^3.0.2",
     "google-gax": "^5.0.2-rc.1",
     "is": "^3.3.0",
-    "protobufjs": "7.0.0",
+    "protobufjs": "7.4.0",
     "split-array-stream": "^2.0.0",
     "stream-events": "^1.0.5"
   },
