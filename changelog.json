@@ -5,6 +5,142 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6bc75f673e44831fb2f73ba3ae29e8da23a8b50a",
+          "message": "[apihub] Introduce new services for data collection (ApiHubCollect) and curation (ApiHubCurate)",
+          "issues": [
+            "6715"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "57630d92-ce1a-40cb-9871-a59d70f2d05b",
+      "createTime": "2025-09-16T18:29:23.401Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "622b10208298f58876a1d7e25b316b2c6c9227d4",
+          "message": "[securitycenter] add GCE to DeploymentPlatform enum",
+          "issues": [
+            "6713"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "8ab8d7e1-9f90-4809-a74d-717d4577bfcb",
+      "createTime": "2025-09-16T18:29:23.382Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fd613dbb171c6d0e5c6fcface6f96ac05dd49a44",
+          "message": "[kmsinventory] Support KEY_ENCAPSULATION purpose and quantum-safe algorithms ML_KEM_768, ML_KEM_1024 and KEM_XWING",
+          "issues": [
+            "6712"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "777e0b3e-11de-40b3-a6c8-38b1de93c5cf",
+      "createTime": "2025-09-16T18:29:23.358Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e0da280bc94243d095799bd55cddd087a9c15cc0",
+          "message": "[kms] Support KEY_ENCAPSULATION purpose and quantum-safe algorithms ML_KEM_768, ML_KEM_1024 and KEM_XWING",
+          "issues": [
+            "6711"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "5a7f8bd5-f680-4502-b945-d69d19f6eddb",
+      "createTime": "2025-09-16T18:29:23.339Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c2976aaa1f6fc27af603f939e9d7dc48d716fcfd",
+          "message": "[gkehub] add `k8s_git_version` field",
+          "issues": [
+            "6721"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "791bb301-bf66-4caf-ad74-8bbe32c12645",
+      "createTime": "2025-09-16T18:29:23.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a9078c30ec0cd7409befbe4177e0d5e381dc50a0",
+          "message": "[discoveryengine] Added `ranking_expression_backed` and `rank_signals` fields related to the Custom Ranking feature",
+          "issues": [
+            "6708"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "e812cd42-23df-4987-abb7-86cd4c860d47",
+      "createTime": "2025-09-16T18:29:23.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cdb648d447d5bb2e25496e63da96affc1c3871c8",
+          "message": "[dataplex] A new service `BusinessGlossaryService` is added",
+          "issues": [
+            "6714"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "e3da861d-8f52-407f-a535-077afe0c519e",
+      "createTime": "2025-09-16T18:29:23.276Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8ff4b74271c1f85a94d9a098da3a98def34a38ff",
+          "message": "[batch] added new provisioning models",
+          "issues": [
+            "6723"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "4e5ff140-01c3-48f9-9ef2-dd4a4416e896",
+      "createTime": "2025-09-16T18:29:23.256Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "6f28d82717d79347864fb948caaab517b6fe7134",
           "message": "Add initial files for google.cloud.locationfinder.v1",
           "issues": [
@@ -62324,5 +62460,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-09-09T17:15:02.362Z"
+  "updateTime": "2025-09-16T18:29:23.401Z"
 }

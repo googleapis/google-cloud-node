@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.1.0...kms-v5.2.0) (2025-09-16)
+
+
+### Features
+
+* [kms] Support KEY_ENCAPSULATION purpose and quantum-safe algorithms ML_KEM_768, ML_KEM_1024 and KEM_XWING ([#6711](https://github.com/googleapis/google-cloud-node/issues/6711)) ([e0da280](https://github.com/googleapis/google-cloud-node/commit/e0da280bc94243d095799bd55cddd087a9c15cc0))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.0.1...kms-v5.1.0) (2025-07-09)
 
 

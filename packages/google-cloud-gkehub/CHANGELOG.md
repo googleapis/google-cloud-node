@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.2.0...gke-hub-v6.3.0) (2025-09-16)
+
+
+### Features
+
+* [gkehub] add `k8s_git_version` field ([#6721](https://github.com/googleapis/google-cloud-node/issues/6721)) ([c2976aa](https://github.com/googleapis/google-cloud-node/commit/c2976aaa1f6fc27af603f939e9d7dc48d716fcfd))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.1.0...gke-hub-v6.2.0) (2025-07-09)
 
 

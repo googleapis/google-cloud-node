@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gke-hub",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "Gkehub client for Node.js",
   "repository": {
     "type": "git",

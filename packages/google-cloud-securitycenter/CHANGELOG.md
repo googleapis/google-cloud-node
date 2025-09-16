@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.1.0...security-center-v9.2.0) (2025-09-16)
+
+
+### Features
+
+* [securitycenter] add GCE to DeploymentPlatform enum ([#6713](https://github.com/googleapis/google-cloud-node/issues/6713)) ([622b102](https://github.com/googleapis/google-cloud-node/commit/622b10208298f58876a1d7e25b316b2c6c9227d4))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.0.1...security-center-v9.1.0) (2025-07-09)
 
 
