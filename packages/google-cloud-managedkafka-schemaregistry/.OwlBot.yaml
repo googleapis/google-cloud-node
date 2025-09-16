@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/managedkafka/google-cloud-managedkafka-schemaregistry-nodejs
-      dest: /owl-bot-staging/google-cloud-managedkafka-schemaregistry
+  - source: /google/cloud/managedkafka/schemaregistry/google-cloud-managedkafka-schemaregistry-nodejs
+    dest: /owl-bot-staging/google-cloud-managedkafka-schemaregistry
 
 api-name: managedkafka

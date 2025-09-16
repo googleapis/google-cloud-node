@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-sql-nodejs
-      dest: /owl-bot-staging/google-cloud-sql
+  - source: /google/cloud/sql/google-cloud-sql-nodejs
+    dest: /owl-bot-staging/google-cloud-sql
 
 api-name: sql

@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/area120/google-area120-tables-nodejs
+  - source: /google/area120/tables/google-area120-tables-nodejs
     dest: /owl-bot-staging/google-area120-tables
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: tables

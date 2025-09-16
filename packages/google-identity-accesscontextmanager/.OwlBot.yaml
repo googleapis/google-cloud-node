@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/identity/google-identity-accesscontextmanager-nodejs
+  - source: /google/identity/accesscontextmanager/google-identity-accesscontextmanager-nodejs
     dest: /owl-bot-staging/google-identity-accesscontextmanager
 api-name: accesscontextmanager

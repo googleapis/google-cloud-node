@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-essentialcontacts-nodejs
+  - source: /google/cloud/essentialcontacts/google-cloud-essentialcontacts-nodejs
     dest: /owl-bot-staging/google-cloud-essentialcontacts
 api-name: essentialcontacts

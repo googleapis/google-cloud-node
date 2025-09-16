@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-notebooks-nodejs
+  - source: /google/cloud/notebooks/google-cloud-notebooks-nodejs
     dest: /owl-bot-staging/google-cloud-notebooks
 begin-after-commit-hash: 8102fcde8b94671eecebe7ba1fc34be2faeba7b4
 api-name: notebooks

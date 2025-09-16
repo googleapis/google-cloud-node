@@ -17,6 +17,6 @@ deep-remove-regex:
 deep-preserve-regex:
   - /owl-bot-staging/v1p7beta1
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-asset-nodejs
+  - source: /google/cloud/asset/google-cloud-asset-nodejs
     dest: /owl-bot-staging/google-cloud-asset
 api-name: asset

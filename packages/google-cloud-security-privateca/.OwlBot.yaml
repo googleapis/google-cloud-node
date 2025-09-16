@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/security/google-cloud-security-privateca-nodejs
+  - source: /google/cloud/security/privateca/google-cloud-security-privateca-nodejs
     dest: /owl-bot-staging/google-cloud-security-privateca
 api-name: security

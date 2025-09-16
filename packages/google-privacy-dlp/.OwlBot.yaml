@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/privacy/google-privacy-dlp-nodejs
+  - source: /google/privacy/dlp/google-privacy-dlp-nodejs
     dest: /owl-bot-staging/google-privacy-dlp
 api-name: dlp

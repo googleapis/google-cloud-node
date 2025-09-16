@@ -17,7 +17,7 @@ deep-remove-regex:
 deep-preserve-regex:
   - /owl-bot-staging/v1beta1
 deep-copy-regex:
-  - source: /google/cloud/bigquery/google-cloud-bigquery-connection-nodejs
+  - source: /google/cloud/bigquery/connection/google-cloud-bigquery-connection-nodejs
     dest: /owl-bot-staging/google-cloud-bigquery-connection
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: bigquery-connection

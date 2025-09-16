@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-networkconnectivity-nodejs
+  - source: /google/cloud/networkconnectivity/google-cloud-networkconnectivity-nodejs
     dest: /owl-bot-staging/google-cloud-networkconnectivity
 api-name: networkconnectivity

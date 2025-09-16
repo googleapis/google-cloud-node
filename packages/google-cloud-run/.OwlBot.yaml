@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-run-nodejs
+  - source: /google/cloud/run/google-cloud-run-nodejs
     dest: /owl-bot-staging/google-cloud-run
 api-name: run

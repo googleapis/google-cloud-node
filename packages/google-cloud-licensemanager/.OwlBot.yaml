@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-licensemanager-nodejs
-      dest: /owl-bot-staging/google-cloud-licensemanager
+  - source: /google/cloud/licensemanager/google-cloud-licensemanager-nodejs
+    dest: /owl-bot-staging/google-cloud-licensemanager
 
 api-name: licensemanager

@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/beyondcorp/google-cloud-beyondcorp-appconnectors-nodejs
+  - source: /google/cloud/beyondcorp/appconnectors/google-cloud-beyondcorp-appconnectors-nodejs
     dest: /owl-bot-staging/google-cloud-beyondcorp-appconnectors
 api-name: beyondcorp-appconnectors

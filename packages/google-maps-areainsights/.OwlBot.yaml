@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/maps/google-maps-areainsights-nodejs
-      dest: /owl-bot-staging/google-maps-areainsights
+  - source: /google/maps/areainsights/google-maps-areainsights-nodejs
+    dest: /owl-bot-staging/google-maps-areainsights
 
 api-name: area-insights

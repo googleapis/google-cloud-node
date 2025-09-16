@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-contentwarehouse-nodejs
+  - source: /google/cloud/contentwarehouse/google-cloud-contentwarehouse-nodejs
     dest: /owl-bot-staging/google-cloud-contentwarehouse
 api-name: contentwarehouse

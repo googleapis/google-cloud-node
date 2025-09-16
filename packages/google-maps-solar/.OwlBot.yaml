@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/maps/google-maps-solar-nodejs
-      dest: /owl-bot-staging/google-maps-solar
+  - source: /google/maps/solar/google-maps-solar-nodejs
+    dest: /owl-bot-staging/google-maps-solar
 
 api-name: solar

@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-clouddms-nodejs
+  - source: /google/cloud/clouddms/google-cloud-clouddms-nodejs
     dest: /owl-bot-staging/google-cloud-clouddms
 api-name: clouddms

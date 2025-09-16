@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-confidentialcomputing-nodejs
-      dest: /owl-bot-staging/google-cloud-confidentialcomputing
+  - source: /google/cloud/confidentialcomputing/google-cloud-confidentialcomputing-nodejs
+    dest: /owl-bot-staging/google-cloud-confidentialcomputing
 
 api-name: confidentialcomputing

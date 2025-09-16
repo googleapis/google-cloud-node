@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-parametermanager-nodejs
-      dest: /owl-bot-staging/google-cloud-parametermanager
+  - source: /google/cloud/parametermanager/google-cloud-parametermanager-nodejs
+    dest: /owl-bot-staging/google-cloud-parametermanager
 
 api-name: parametermanager

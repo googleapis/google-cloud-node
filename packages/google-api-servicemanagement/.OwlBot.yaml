@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/api/google-api-servicemanagement-nodejs
+  - source: /google/api/servicemanagement/google-api-servicemanagement-nodejs
     dest: /owl-bot-staging/google-api-servicemanagement
 begin-after-commit-hash: ea0f18027eafb4801813fa253f16ffeef904b4c6
 api-name: servicemanagement

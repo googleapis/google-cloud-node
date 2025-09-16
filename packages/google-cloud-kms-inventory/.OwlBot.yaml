@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/kms/google-cloud-kms-inventory-nodejs
-      dest: /owl-bot-staging/google-cloud-kms-inventory
+  - source: /google/cloud/kms/inventory/google-cloud-kms-inventory-nodejs
+    dest: /owl-bot-staging/google-cloud-kms-inventory
 
 api-name: kmsinventory

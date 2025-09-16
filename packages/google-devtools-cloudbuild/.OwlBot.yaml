@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/devtools/google-devtools-cloudbuild-nodejs
+  - source: /google/devtools/cloudbuild/google-devtools-cloudbuild-nodejs
     dest: /owl-bot-staging/google-devtools-cloudbuild
 begin-after-commit-hash: 0629d7a32eb96685272de698a1e5f31f030b60c1
 api-name: cloudbuild

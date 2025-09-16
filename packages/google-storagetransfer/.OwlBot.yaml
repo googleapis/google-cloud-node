@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/google-storagetransfer-nodejs
+  - source: /google/storagetransfer/google-storagetransfer-nodejs
     dest: /owl-bot-staging/google-storagetransfer
 api-name: storagetransfer

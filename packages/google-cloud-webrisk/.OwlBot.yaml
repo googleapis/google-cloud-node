@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-webrisk-nodejs
+  - source: /google/cloud/webrisk/google-cloud-webrisk-nodejs
     dest: /owl-bot-staging/google-cloud-webrisk
 begin-after-commit-hash: 674a41e0de2869f44f45eb7b1a605852a5394bba
 api-name: webrisk

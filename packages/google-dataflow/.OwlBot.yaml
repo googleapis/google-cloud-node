@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/google-dataflow-nodejs
+  - source: /google/dataflow/google-dataflow-nodejs
     dest: /owl-bot-staging/google-dataflow
 api-name: dataflow

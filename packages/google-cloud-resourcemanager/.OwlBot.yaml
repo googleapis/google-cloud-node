@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-resourcemanager-nodejs
+  - source: /google/cloud/resourcemanager/google-cloud-resourcemanager-nodejs
     dest: /owl-bot-staging/google-cloud-resourcemanager
 begin-after-commit-hash: 397c0bfd367a2427104f988d5329bc117caafd95
 api-name: resourcemanager

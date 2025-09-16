@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-vpcaccess-nodejs
+  - source: /google/cloud/vpcaccess/google-cloud-vpcaccess-nodejs
     dest: /owl-bot-staging/google-cloud-vpcaccess
 api-name: vpcaccess

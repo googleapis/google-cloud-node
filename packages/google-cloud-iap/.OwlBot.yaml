@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-iap-nodejs
+  - source: /google/cloud/iap/google-cloud-iap-nodejs
     dest: /owl-bot-staging/google-cloud-iap
 api-name: iap

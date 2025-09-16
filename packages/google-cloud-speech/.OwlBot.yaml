@@ -16,8 +16,7 @@ deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-speech-nodejs
+  - source: /google/cloud/speech/google-cloud-speech-nodejs
     dest: /owl-bot-staging/google-cloud-speech
 
 begin-after-commit-hash: f43939eac6a0bb5998c1fa0f79063194e699230e
-

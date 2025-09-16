@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-secretmanager-nodejs
+  - source: /google/cloud/secretmanager/google-cloud-secretmanager-nodejs
     dest: /owl-bot-staging/google-cloud-secretmanager
 api-name: secretmanager

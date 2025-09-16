@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-servicehealth-nodejs
-      dest: /owl-bot-staging/google-cloud-servicehealth
+  - source: /google/cloud/servicehealth/google-cloud-servicehealth-nodejs
+    dest: /owl-bot-staging/google-cloud-servicehealth
 
 api-name: servicehealth

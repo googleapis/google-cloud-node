@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-datacatalog-nodejs
+  - source: /google/cloud/datacatalog/google-cloud-datacatalog-nodejs
     dest: /owl-bot-staging/google-cloud-datacatalog
 begin-after-commit-hash: eebcfa346c9963da765cd71722c40e04dc3621dd
 api-name: datacatalog

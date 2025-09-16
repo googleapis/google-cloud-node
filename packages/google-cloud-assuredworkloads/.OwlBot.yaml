@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-assuredworkloads-nodejs
+  - source: /google/cloud/assuredworkloads/google-cloud-assuredworkloads-nodejs
     dest: /owl-bot-staging/google-cloud-assuredworkloads
 api-name: assuredworkloads

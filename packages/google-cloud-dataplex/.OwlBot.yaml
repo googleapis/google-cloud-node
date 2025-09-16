@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-dataplex-nodejs
+  - source: /google/cloud/dataplex/google-cloud-dataplex-nodejs
     dest: /owl-bot-staging/google-cloud-dataplex
 api-name: dataplex

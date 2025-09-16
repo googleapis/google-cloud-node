@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/api/google-api-serviceusage-nodejs
+  - source: /google/api/serviceusage/google-api-serviceusage-nodejs
     dest: /owl-bot-staging/google-api-serviceusage
 api-name: serviceusage

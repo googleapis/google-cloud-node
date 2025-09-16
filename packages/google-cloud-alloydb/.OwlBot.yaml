@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-alloydb-nodejs
-      dest: /owl-bot-staging/google-cloud-alloydb
+  - source: /google/cloud/alloydb/google-cloud-alloydb-nodejs
+    dest: /owl-bot-staging/google-cloud-alloydb
 
 api-name: alloydb

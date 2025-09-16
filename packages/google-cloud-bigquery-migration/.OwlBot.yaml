@@ -16,5 +16,5 @@ deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/bigquery/google-cloud-bigquery-migration-nodejs
+  - source: /google/cloud/bigquery/migration/google-cloud-bigquery-migration-nodejs
     dest: /owl-bot-staging/google-cloud-bigquery-migration

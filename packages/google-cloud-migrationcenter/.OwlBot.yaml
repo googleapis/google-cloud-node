@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-migrationcenter-nodejs
-      dest: /owl-bot-staging/google-cloud-migrationcenter
+  - source: /google/cloud/migrationcenter/google-cloud-migrationcenter-nodejs
+    dest: /owl-bot-staging/google-cloud-migrationcenter
 
 api-name: migrationcenter

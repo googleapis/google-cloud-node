@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/maps/google-maps-addressvalidation-nodejs
+  - source: /google/maps/addressvalidation/google-maps-addressvalidation-nodejs
     dest: /owl-bot-staging/google-maps-addressvalidation
 api-name: addressvalidation

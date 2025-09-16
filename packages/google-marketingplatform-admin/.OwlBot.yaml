@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/marketingplatform/google-marketingplatform-admin-nodejs
-      dest: /owl-bot-staging/google-marketingplatform-admin
+  - source: /google/marketingplatform/admin/google-marketingplatform-admin-nodejs
+    dest: /owl-bot-staging/google-marketingplatform-admin
 
 api-name: marketingplatformadminapi

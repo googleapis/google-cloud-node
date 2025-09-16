@@ -12,13 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-aiplatform-nodejs
+  - source: /google/cloud/aiplatform/google-cloud-aiplatform-nodejs
     dest: /owl-bot-staging/google-cloud-aiplatform
 
 begin-after-commit-hash: 674a41e0de2869f44f45eb7b1a605852a5394bba
-

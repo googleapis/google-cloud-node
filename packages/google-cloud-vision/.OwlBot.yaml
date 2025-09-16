@@ -12,13 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-vision-nodejs
+  - source: /google/cloud/vision/google-cloud-vision-nodejs
     dest: /owl-bot-staging/google-cloud-vision
 
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
-

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-securesourcemanager-nodejs
-      dest: /owl-bot-staging/google-cloud-securesourcemanager
+  - source: /google/cloud/securesourcemanager/google-cloud-securesourcemanager-nodejs
+    dest: /owl-bot-staging/google-cloud-securesourcemanager
 
 api-name: securesourcemanager

@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-compute-nodejs
+  - source: /google/cloud/compute/google-cloud-compute-nodejs
     dest: /owl-bot-staging/google-cloud-compute
 begin-after-commit-hash: efb563da184f479fabf98da24f969494944d059b
 api-name: compute

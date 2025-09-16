@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-videointelligence-nodejs
+  - source: /google/cloud/videointelligence/google-cloud-videointelligence-nodejs
     dest: /owl-bot-staging/google-cloud-videointelligence
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
 api-name: videointelligence

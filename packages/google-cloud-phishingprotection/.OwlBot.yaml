@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-phishingprotection-nodejs
+  - source: /google/cloud/phishingprotection/google-cloud-phishingprotection-nodejs
     dest: /owl-bot-staging/google-cloud-phishingprotection
 api-name: phishingprotection

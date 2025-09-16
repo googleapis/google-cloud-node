@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-networksecurity-nodejs
+  - source: /google/cloud/networksecurity/google-cloud-networksecurity-nodejs
     dest: /owl-bot-staging/google-cloud-networksecurity
 api-name: networksecurity

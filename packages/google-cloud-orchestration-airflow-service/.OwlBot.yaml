@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/orchestration/airflow/google-cloud-orchestration-airflow-service-nodejs
+  - source: /google/cloud/orchestration/airflow/service/google-cloud-orchestration-airflow-service-nodejs
     dest: /owl-bot-staging/google-cloud-orchestration-airflow-service
 api-name: orchestration

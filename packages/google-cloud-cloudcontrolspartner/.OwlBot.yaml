@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-cloudcontrolspartner-nodejs
-      dest: /owl-bot-staging/google-cloud-cloudcontrolspartner
+  - source: /google/cloud/cloudcontrolspartner/google-cloud-cloudcontrolspartner-nodejs
+    dest: /owl-bot-staging/google-cloud-cloudcontrolspartner
 
 api-name: cloudcontrolspartner

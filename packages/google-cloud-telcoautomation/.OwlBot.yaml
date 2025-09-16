@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-telcoautomation-nodejs
-      dest: /owl-bot-staging/google-cloud-telcoautomation
+  - source: /google/cloud/telcoautomation/google-cloud-telcoautomation-nodejs
+    dest: /owl-bot-staging/google-cloud-telcoautomation
 
 api-name: telcoautomation

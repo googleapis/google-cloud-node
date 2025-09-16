@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-oslogin-nodejs
+  - source: /google/cloud/oslogin/google-cloud-oslogin-nodejs
     dest: /owl-bot-staging/google-cloud-oslogin
 api-name: oslogin

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/shopping/google-shopping-css-nodejs
-      dest: /owl-bot-staging/google-shopping-css
+  - source: /google/shopping/css/google-shopping-css-nodejs
+    dest: /owl-bot-staging/google-shopping-css
 
 api-name: css

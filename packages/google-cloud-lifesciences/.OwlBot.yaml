@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-lifesciences-nodejs
+  - source: /google/cloud/lifesciences/google-cloud-lifesciences-nodejs
     dest: /owl-bot-staging/google-cloud-lifesciences
 api-name: lifesciences

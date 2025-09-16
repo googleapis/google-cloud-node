@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-apigateway-nodejs
+  - source: /google/cloud/apigateway/google-cloud-apigateway-nodejs
     dest: /owl-bot-staging/google-cloud-apigateway
 begin-after-commit-hash: f899f4fc473f95086eba7fb43b28794417e24aa0
 api-name: apigateway

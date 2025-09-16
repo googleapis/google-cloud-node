@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-securitycentermanagement-nodejs
-      dest: /owl-bot-staging/google-cloud-securitycentermanagement
+  - source: /google/cloud/securitycentermanagement/google-cloud-securitycentermanagement-nodejs
+    dest: /owl-bot-staging/google-cloud-securitycentermanagement
 
 api-name: securitycentermanagement

@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-privatecatalog-nodejs
+  - source: /google/cloud/privatecatalog/google-cloud-privatecatalog-nodejs
     dest: /owl-bot-staging/google-cloud-privatecatalog
 api-name: privatecatalog

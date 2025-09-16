@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/google-cloud-edgecontainer-nodejs
-      dest: /owl-bot-staging/google-cloud-edgecontainer
+  - source: /google/cloud/edgecontainer/google-cloud-edgecontainer-nodejs
+    dest: /owl-bot-staging/google-cloud-edgecontainer
 
 api-name: edgecontainer

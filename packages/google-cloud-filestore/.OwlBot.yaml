@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-filestore-nodejs
+  - source: /google/cloud/filestore/google-cloud-filestore-nodejs
     dest: /owl-bot-staging/google-cloud-filestore
 api-name: filestore

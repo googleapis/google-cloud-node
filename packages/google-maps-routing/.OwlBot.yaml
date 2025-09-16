@@ -13,6 +13,6 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/maps/google-maps-routing-nodejs
+  - source: /google/maps/routing/google-maps-routing-nodejs
     dest: /owl-bot-staging/google-maps-routing
 api-name: routing

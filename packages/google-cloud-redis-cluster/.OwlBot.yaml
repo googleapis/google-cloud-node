@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/redis/google-cloud-redis-cluster-nodejs
-      dest: /owl-bot-staging/google-cloud-redis-cluster
+  - source: /google/cloud/redis/cluster/google-cloud-redis-cluster-nodejs
+    dest: /owl-bot-staging/google-cloud-redis-cluster
 
 api-name: redis

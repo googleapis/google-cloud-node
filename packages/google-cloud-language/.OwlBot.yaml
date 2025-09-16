@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-language-nodejs
+  - source: /google/cloud/language/google-cloud-language-nodejs
     dest: /owl-bot-staging/google-cloud-language
 api-name: language

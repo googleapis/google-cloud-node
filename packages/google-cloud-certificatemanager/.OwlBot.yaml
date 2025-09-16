@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-certificatemanager-nodejs
+  - source: /google/cloud/certificatemanager/google-cloud-certificatemanager-nodejs
     dest: /owl-bot-staging/google-cloud-certificatemanager
 api-name: certificatemanager

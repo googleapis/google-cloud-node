@@ -16,5 +16,5 @@ deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-apigeeregistry-nodejs
+  - source: /google/cloud/apigeeregistry/google-cloud-apigeeregistry-nodejs
     dest: /owl-bot-staging/google-cloud-apigeeregistry

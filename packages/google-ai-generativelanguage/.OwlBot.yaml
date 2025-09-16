@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/ai/google-ai-generativelanguage-nodejs
-      dest: /owl-bot-staging/google-ai-generativelanguage
+  - source: /google/ai/generativelanguage/google-ai-generativelanguage-nodejs
+    dest: /owl-bot-staging/google-ai-generativelanguage
 
 api-name: generativelanguage

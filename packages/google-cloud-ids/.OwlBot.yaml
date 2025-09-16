@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/google-cloud-ids-nodejs
+  - source: /google/cloud/ids/google-cloud-ids-nodejs
     dest: /owl-bot-staging/google-cloud-ids
 api-name: ids

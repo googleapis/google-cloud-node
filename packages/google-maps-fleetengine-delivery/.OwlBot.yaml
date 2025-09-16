@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/maps/fleetengine/google-maps-fleetengine-delivery-nodejs
-      dest: /owl-bot-staging/google-maps-fleetengine-delivery
+  - source: /google/maps/fleetengine/delivery/google-maps-fleetengine-delivery-nodejs
+    dest: /owl-bot-staging/google-maps-fleetengine-delivery
 
 api-name: fleetengine-delivery
