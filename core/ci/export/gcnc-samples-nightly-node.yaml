@@ -6,7 +6,7 @@ gitFileSource:
   revision: refs/heads/main
   uri: https://github.com/googleapis/google-cloud-node-core
 id: 25a89188-0ae6-4faf-9131-9b1e3c8b9720
-name: samples-nightly-node18
+name: gcnc-samples-nightly-node
 resourceName: projects/long-door-651/locations/global/triggers/25a89188-0ae6-4faf-9131-9b1e3c8b9720
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 sourceToBuild:
