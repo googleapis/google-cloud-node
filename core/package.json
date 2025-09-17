@@ -19,6 +19,6 @@
     "test": "npm test --ws"
   },
   "workspaces": [
-    "dev_packages/pack-n-play"
+    "dev-packages/pack-n-play"
   ]
 }

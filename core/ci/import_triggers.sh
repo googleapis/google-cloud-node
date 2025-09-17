@@ -20,30 +20,23 @@
 # with a non-zero
 set -eo pipefail
 
-NODE_VERSIONS=(
-    "18"
-)
-
 echo "change directory to the project root"
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 pushd ${PROJECT_ROOT}
 pwd
 
 echo "importing Cloud Build triggers"
-
-for NODE_VERSION in ${NODE_VERSIONS[@]}; do
-    echo "importing presubmit build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/system-presubmit-node${NODE_VERSION}.yaml"
-    echo "importing continuous build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/system-continuous-node${NODE_VERSION}.yaml"
-    echo "importing nightly build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/system-nightly-node${NODE_VERSION}.yaml"
-    echo "importing presubmit build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/samples-presubmit-node${NODE_VERSION}.yaml"
-    echo "importing continuous build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/samples-continuous-node${NODE_VERSION}.yaml"
-    echo "importing nightly build for node${NODE_VERSION}"
-    gcloud beta builds triggers import --source "ci/export/samples-nightly-node${NODE_VERSION}.yaml"
-    echo "importing presubmit build for node${NODE_VERSION} with credentials"
-    gcloud beta builds triggers import --source "ci/export/samples-presubmit-node${NODE_VERSION}-with-credentials.yaml"
-done
+echo "importing presubmit build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-system-presubmit-node.yaml"
+echo "importing continuous build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-system-continuous-node.yaml"
+echo "importing nightly build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-system-nightly-node.yaml"
+echo "importing presubmit build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-presubmit-node.yaml"
+echo "importing continuous build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-continuous-node.yaml"
+echo "importing nightly build for node"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-nightly-node.yaml"
+echo "importing presubmit build for node with credentials"
+gcloud beta builds triggers import --source "ci/export/gcnc-samples-presubmit-node-with-credentials.yaml"
