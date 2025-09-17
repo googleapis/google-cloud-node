@@ -34,9 +34,11 @@ function main(parent, dvrSessionId, dvrSession) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Id of the requesting object in the following form:
-   *  1. 1 character minimum, 63 characters maximum
-   *  2. Only contains letters, digits, underscores, and hyphens
+   *  Required. The ID of the DVR session resource to be created.
+   *  This value must be 1-63 characters, begin and end with a lower-case letter
+   *  or a number, and consist of only lower-case letters, numbers, and hyphens.
+   *  In other words, it must match the following regex:
+   *  `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
    */
   // const dvrSessionId = 'abc123'
   /**
