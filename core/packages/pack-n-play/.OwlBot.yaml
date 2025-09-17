@@ -11,7 +11,5 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs:latest
 
 begin-after-commit-hash: 1c4941e9dc12d0c87c845996a51febd44d716c44

@@ -3,7 +3,7 @@
   "name_pretty": "Pack-N-Play",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/pack-n-play",
+  "repo": "googleapis/google-cloud-node-core",
   "distribution_name": "pack-n-play",
   "client_documentation": "https://github.com/googleapis/pack-n-play",
   "library_type": "OTHER"
