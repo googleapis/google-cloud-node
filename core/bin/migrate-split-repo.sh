@@ -36,7 +36,7 @@ export PACKAGE_PATH="packages/${ARTIFACT_NAME}"
 # keep the .github/.OwlBot.yaml config
 ${SCRIPT_DIR}/migrate-git-history.sh \
   "googleapis/${SPLIT_REPO}" \
-  "googleapis/google-cloud-node" \
+  "googleapis/google-cloud-node-core" \
   "" \
   "${PACKAGE_PATH}" \
   ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json,samples" \
