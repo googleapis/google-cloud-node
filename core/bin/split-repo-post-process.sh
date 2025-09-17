@@ -59,13 +59,13 @@ fi
  
 # update .repo and .issue_tracker in .repo-metadata.json
 echo "Update .repo-metadata.json"
-echo "updating .repo to googleapis/google-cloud-node"
-jq ".repo = \"googleapis/google-cloud-node\"" "${PACKAGE_PATH}/.repo-metadata.json" > "${PACKAGE_PATH}/.repo-metadata2.json"
+echo "updating .repo to googleapis/google-cloud-node-core"
+jq ".repo = \"googleapis/google-cloud-node-core\"" "${PACKAGE_PATH}/.repo-metadata.json" > "${PACKAGE_PATH}/.repo-metadata2.json"
 mv "${PACKAGE_PATH}/.repo-metadata2.json" "${PACKAGE_PATH}/.repo-metadata.json"
 if jq -r ".issue_tracker" "${PACKAGE_PATH}/.repo-metadata.json" | grep "github.com"
 then
-  echo "updating .issue_tracker to https://github.com/googleapis/google-cloud-node/issues"
-  jq ".issue_tracker = \"https://github.com/googleapis/google-cloud-node/issues\"" "${PACKAGE_PATH}/.repo-metadata.json" > "${PACKAGE_PATH}/.repo-metadata2.json"
+  echo "updating .issue_tracker to https://github.com/googleapis/google-cloud-node-core/issues"
+  jq ".issue_tracker = \"https://github.com/googleapis/google-cloud-node-core/issues\"" "${PACKAGE_PATH}/.repo-metadata.json" > "${PACKAGE_PATH}/.repo-metadata2.json"
   mv "${PACKAGE_PATH}/.repo-metadata2.json" "${PACKAGE_PATH}/.repo-metadata.json"
 fi
  
@@ -82,12 +82,12 @@ mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
 echo "updating repository object type"
 # using a temp file because jq doesn't like writing to the input file as it reads
-jq -r ".repository = {\"type\": \"git\", \"directory\": \"packages/${PACKAGE_NAME}\", \"url\": \"https://github.com/googleapis/google-cloud-node.git\"}" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+jq -r ".repository = {\"type\": \"git\", \"directory\": \"packages/${PACKAGE_NAME}\", \"url\": \"https://github.com/googleapis/google-cloud-node-core.git\"}" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
 echo "updating homepage"
 # using a temp file because jq doesn't like writing to the input file as it reads
-jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node/tree/main/packages/${PACKAGE_NAME}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node-core/tree/main/packages/${PACKAGE_NAME}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
 if !(test -f "${PACKAGE_PATH}/owlbot.py"); then
@@ -96,8 +96,8 @@ echo "Running post-processor: ${IMAGE}"
 docker pull "${IMAGE}"
 docker run --rm \
   --user $(id -u):$(id -g) \
-  -v $(pwd):/workspace/google-cloud-node \
-  -w /workspace/google-cloud-node \
+  -v $(pwd):/workspace/google-cloud-node-core \
+  -w /workspace/google-cloud-node-core \
   -e "DEFAULT_BRANCH=main" \
   "${IMAGE}"
 fi

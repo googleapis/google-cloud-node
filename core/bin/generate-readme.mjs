@@ -52,7 +52,7 @@ async function downloadRepoMetadata () {
   const repoMetadata = {};
   let urlsAndRepos = [];
   for (const repo of repos) {
-    if (repo === 'googleapis/google-cloud-node') {
+    if (repo === 'googleapis/google-cloud-node-core') {
       const googleCloudNodeUrl = `${baseUrl}/repos/${repo}/contents/packages`;
       const res = await github.request({ url: googleCloudNodeUrl });
       const monoRepos = res.data.map(x => x.name);
@@ -71,7 +71,7 @@ async function downloadRepoMetadata () {
       meta = JSON.parse(
         Buffer.from(res.data.content, 'base64').toString('utf8')
       );
-      meta.linkToRepoHomepage = (meta.repo === 'googleapis/google-cloud-node') ? `https://github.com/googleapis/google-cloud-node/tree/main/packages/${urlandRepo.repo}` : `https://github.com/${urlandRepo.repo}`
+      meta.linkToRepoHomepage = (meta.repo === 'googleapis/google-cloud-node-core') ? `https://github.com/googleapis/google-cloud-node-core/tree/main/packages/${urlandRepo.repo}` : `https://github.com/${urlandRepo.repo}`
     } catch (err) {
       if (!err.response || err.response.status !== 404) {
         throw err;

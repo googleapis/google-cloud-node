@@ -62,7 +62,7 @@ echo "$IGNORE_README_TXT" >> "$OWLBOT_PY"
 # Update the README
 README_MD="/tmp/${SPLIT_REPO}/README.md"
 README_CONTENT=$(cat $README_MD)
-echo -e "**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [MONOREPO-TEST](https://github.com/googleapis/google-cloud-node/tree/main/packages/${ARTIFACT_NAME})_**\n\n$README_CONTENT" > "$README_MD"
+echo -e "**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [MONOREPO-TEST](https://github.com/googleapis/google-cloud-node-core/tree/main/packages/${ARTIFACT_NAME})_**\n\n$README_CONTENT" > "$README_MD"
 
 git add .
 git commit -m 'build: update README for deprecation notice'
