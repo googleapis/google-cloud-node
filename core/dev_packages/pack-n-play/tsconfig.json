@@ -4,7 +4,21 @@
     "outDir": "build",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "composite": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ES2023"],
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "pretty": true,
+    "sourceMap": true,
+    "stripInternal": true,
+    "strict": true,
+    "target": "ES2022"
   },
   "include": [
     "src/*.ts",
@@ -16,6 +30,7 @@
   "exclude": [
     "test/fixtures",
     "test/fixtures/**/*.*",
-    "template/**/*.*"
+    "template/**/*.*",
+    "node_modules"
   ]
 }
