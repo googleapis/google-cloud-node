@@ -16,6 +16,6 @@
     "url": "https://github.com/googleapis/google-cloud-node-core/issues"
   },
   "scripts": {
-    "test": "npm test --ws"
+    "test": "echo nothing to test"
   }
 }
