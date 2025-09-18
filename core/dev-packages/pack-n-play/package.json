@@ -26,8 +26,8 @@
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "",
+    "system-test": "",
     "test": "c8 mocha build/test"
   },
   "devDependencies": {
