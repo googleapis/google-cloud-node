@@ -72,7 +72,6 @@ fi
 
 subdirs=(
     dev-packages
-    packages
     .github/scripts
 )
 
