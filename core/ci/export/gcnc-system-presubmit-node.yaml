@@ -1,4 +1,4 @@
-createTime: '2022-06-22T20:37:14.244765001Z'
+createTime: '2025-09-18T18:59:42.228485468Z'
 description: Presubmit build with node 18
 filename: ci/cloudbuild.yaml
 github:
@@ -7,10 +7,10 @@ github:
   pullRequest:
     branch: ^main$
     commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
-id: 28cdf776-546a-430e-b5ed-94cbbbcf493f
+id: fde91b53-a2f5-4b0b-b1ae-b8c193c8365e
 includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
 name: gcnc-system-presubmit-node
-resourceName: projects/long-door-651/locations/global/triggers/28cdf776-546a-430e-b5ed-94cbbbcf493f
+resourceName: projects/long-door-651/locations/global/triggers/fde91b53-a2f5-4b0b-b1ae-b8c193c8365e
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: presubmit
