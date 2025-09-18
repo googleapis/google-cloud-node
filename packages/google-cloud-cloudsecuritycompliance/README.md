@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Security Compliance API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudsecuritycompliance)
+# [Cloud Security Compliance API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/cloudsecuritycompliance.svg)](https://www.npmjs.org/package/@google-cloud/cloudsecuritycompliance)
-
-
-
 
 Cloud Security Compliance API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudsecuritycompliance/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Cloud Security Compliance API Node.js Client API Reference][client-docs]
-* [Cloud Security Compliance API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-cloudsecuritycompliance](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudsecuritycompliance)
+* [Cloud Security Compliance API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/cloudsecuritycompliance/latest)
+* [Cloud Security Compliance API Documentation](https://cloud.google.com/security-command-center/docs/compliance-manager-overview)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +27,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,43 +43,38 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Cloud Security Compliance API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/cloudsecuritycompliance
 ```
 
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudsecuritycompliance/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Config.create_cloud_control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_cloud_control.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_cloud_control.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.create_framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_framework.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_framework.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.delete_cloud_control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_cloud_control.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_cloud_control.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.delete_framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_framework.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_framework.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.get_cloud_control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_cloud_control.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_cloud_control.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.get_framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_framework.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_framework.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.list_cloud_controls | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_cloud_controls.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_cloud_controls.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.list_frameworks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_frameworks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_frameworks.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.update_cloud_control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_cloud_control.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_cloud_control.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Config.update_framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_framework.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_framework.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Deployment.create_framework_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.create_framework_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.create_framework_deployment.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Deployment.delete_framework_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.delete_framework_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.delete_framework_deployment.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Deployment.get_cloud_control_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_cloud_control_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_cloud_control_deployment.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Deployment.get_framework_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_framework_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_framework_deployment.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Deployment.list_cloud_control_deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_cloud_control_deployments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_cloud_control_deployments.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
-| Deployment.list_framework_deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_framework_deployments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_framework_deployments.js,packages/google-cloud-cloudsecuritycompliance/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_cloud_control.js) |
+| create framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_framework.js) |
+| delete cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_cloud_control.js) |
+| delete framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_framework.js) |
+| get cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_cloud_control.js) |
+| get framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_framework.js) |
+| list cloud controls | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_cloud_controls.js) |
+| list frameworks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_frameworks.js) |
+| update cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_cloud_control.js) |
+| update framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_framework.js) |
+| create framework deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.create_framework_deployment.js) |
+| delete framework deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.delete_framework_deployment.js) |
+| get cloud control deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_cloud_control_deployment.js) |
+| get framework deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_framework_deployment.js) |
+| list cloud control deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_cloud_control_deployments.js) |
+| list framework deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_framework_deployments.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/snippet_metadata_google.cloud.cloudsecuritycompliance.v1.json) |
 
-
-
-The [Cloud Security Compliance API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -109,44 +101,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/cloudsecuritycompliance/latest
-[product-docs]: https://cloud.google.com/security-command-center/docs/compliance-manager-overview
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudsecuritycompliance.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance

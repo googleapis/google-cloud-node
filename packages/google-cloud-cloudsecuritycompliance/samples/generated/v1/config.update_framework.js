@@ -42,7 +42,7 @@ function main(framework) {
    */
   // const framework = {}
   /**
-   *  Optional. The major revision ID of the framework to update.
+   *  Optional. The major version ID of the framework to update.
    */
   // const majorRevisionId = 1234
 
