@@ -1,111 +1,111 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-addressvalidation",
-        "version": "3.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.maps.addressvalidation.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "addressvalidation_v1_generated_AddressValidation_ValidateAddress_async",
-            "title": "AddressValidation validateAddress Sample",
-            "origin": "API_DEFINITION",
-            "description": " Validates an address.",
-            "canonical": true,
-            "file": "address_validation.validate_address.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 111,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ValidateAddress",
-                "fullName": "google.maps.addressvalidation.v1.AddressValidation.ValidateAddress",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "address",
-                        "type": ".google.type.PostalAddress"
-                    },
-                    {
-                        "name": "previous_response_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "enable_usps_cass",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "session_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.maps.addressvalidation.v1.ValidateAddressResponse",
-                "client": {
-                    "shortName": "AddressValidationClient",
-                    "fullName": "google.maps.addressvalidation.v1.AddressValidationClient"
-                },
-                "method": {
-                    "shortName": "ValidateAddress",
-                    "fullName": "google.maps.addressvalidation.v1.AddressValidation.ValidateAddress",
-                    "service": {
-                        "shortName": "AddressValidation",
-                        "fullName": "google.maps.addressvalidation.v1.AddressValidation"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "addressvalidation_v1_generated_AddressValidation_ProvideValidationFeedback_async",
-            "title": "AddressValidation provideValidationFeedback Sample",
-            "origin": "API_DEFINITION",
-            "description": " Feedback about the outcome of the sequence of validation attempts. This should be the last call made after a sequence of validation calls for the same address, and should be called once the transaction is concluded. This should only be sent once for the sequence of `ValidateAddress` requests needed to validate an address fully.",
-            "canonical": true,
-            "file": "address_validation.provide_validation_feedback.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ProvideValidationFeedback",
-                "fullName": "google.maps.addressvalidation.v1.AddressValidation.ProvideValidationFeedback",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "conclusion",
-                        "type": ".google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest.ValidationConclusion"
-                    },
-                    {
-                        "name": "response_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse",
-                "client": {
-                    "shortName": "AddressValidationClient",
-                    "fullName": "google.maps.addressvalidation.v1.AddressValidationClient"
-                },
-                "method": {
-                    "shortName": "ProvideValidationFeedback",
-                    "fullName": "google.maps.addressvalidation.v1.AddressValidation.ProvideValidationFeedback",
-                    "service": {
-                        "shortName": "AddressValidation",
-                        "fullName": "google.maps.addressvalidation.v1.AddressValidation"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-addressvalidation",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.maps.addressvalidation.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "addressvalidation_v1_generated_AddressValidation_ValidateAddress_async",
+      "title": "AddressValidation validateAddress Sample",
+      "origin": "API_DEFINITION",
+      "description": " Validates an address.",
+      "canonical": true,
+      "file": "address_validation.validate_address.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 111,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ValidateAddress",
+        "fullName": "google.maps.addressvalidation.v1.AddressValidation.ValidateAddress",
+        "async": true,
+        "parameters": [
+          {
+            "name": "address",
+            "type": ".google.type.PostalAddress"
+          },
+          {
+            "name": "previous_response_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "enable_usps_cass",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "session_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.maps.addressvalidation.v1.ValidateAddressResponse",
+        "client": {
+          "shortName": "AddressValidationClient",
+          "fullName": "google.maps.addressvalidation.v1.AddressValidationClient"
+        },
+        "method": {
+          "shortName": "ValidateAddress",
+          "fullName": "google.maps.addressvalidation.v1.AddressValidation.ValidateAddress",
+          "service": {
+            "shortName": "AddressValidation",
+            "fullName": "google.maps.addressvalidation.v1.AddressValidation"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "addressvalidation_v1_generated_AddressValidation_ProvideValidationFeedback_async",
+      "title": "AddressValidation provideValidationFeedback Sample",
+      "origin": "API_DEFINITION",
+      "description": " Feedback about the outcome of the sequence of validation attempts. This should be the last call made after a sequence of validation calls for the same address, and should be called once the transaction is concluded. This should only be sent once for the sequence of `ValidateAddress` requests needed to validate an address fully.",
+      "canonical": true,
+      "file": "address_validation.provide_validation_feedback.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ProvideValidationFeedback",
+        "fullName": "google.maps.addressvalidation.v1.AddressValidation.ProvideValidationFeedback",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conclusion",
+            "type": ".google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest.ValidationConclusion"
+          },
+          {
+            "name": "response_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse",
+        "client": {
+          "shortName": "AddressValidationClient",
+          "fullName": "google.maps.addressvalidation.v1.AddressValidationClient"
+        },
+        "method": {
+          "shortName": "ProvideValidationFeedback",
+          "fullName": "google.maps.addressvalidation.v1.AddressValidation.ProvideValidationFeedback",
+          "service": {
+            "shortName": "AddressValidation",
+            "fullName": "google.maps.addressvalidation.v1.AddressValidation"
+          }
+        }
+      }
+    }
+  ]
 }

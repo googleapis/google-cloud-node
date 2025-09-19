@@ -6791,4290 +6791,6 @@
                     return v1;
                 })();
     
-                webrisk.v1beta1 = (function() {
-    
-                    /**
-                     * Namespace v1beta1.
-                     * @memberof google.cloud.webrisk
-                     * @namespace
-                     */
-                    var v1beta1 = {};
-    
-                    v1beta1.WebRiskServiceV1Beta1 = (function() {
-    
-                        /**
-                         * Constructs a new WebRiskServiceV1Beta1 service.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a WebRiskServiceV1Beta1
-                         * @extends $protobuf.rpc.Service
-                         * @constructor
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        function WebRiskServiceV1Beta1(rpcImpl, requestDelimited, responseDelimited) {
-                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                        }
-    
-                        (WebRiskServiceV1Beta1.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = WebRiskServiceV1Beta1;
-    
-                        /**
-                         * Creates new WebRiskServiceV1Beta1 service using the specified rpc implementation.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @static
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         * @returns {WebRiskServiceV1Beta1} RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        WebRiskServiceV1Beta1.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                            return new this(rpcImpl, requestDelimited, responseDelimited);
-                        };
-    
-                        /**
-                         * Callback as used by {@link google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1|computeThreatListDiff}.
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @typedef ComputeThreatListDiffCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse} [response] ComputeThreatListDiffResponse
-                         */
-    
-                        /**
-                         * Calls ComputeThreatListDiff.
-                         * @function computeThreatListDiff
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @instance
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest} request ComputeThreatListDiffRequest message or plain object
-                         * @param {google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.ComputeThreatListDiffCallback} callback Node-style callback called with the error, if any, and ComputeThreatListDiffResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(WebRiskServiceV1Beta1.prototype.computeThreatListDiff = function computeThreatListDiff(request, callback) {
-                            return this.rpcCall(computeThreatListDiff, $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest, $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse, request, callback);
-                        }, "name", { value: "ComputeThreatListDiff" });
-    
-                        /**
-                         * Calls ComputeThreatListDiff.
-                         * @function computeThreatListDiff
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @instance
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest} request ComputeThreatListDiffRequest message or plain object
-                         * @returns {Promise<google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1|searchUris}.
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @typedef SearchUrisCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.webrisk.v1beta1.SearchUrisResponse} [response] SearchUrisResponse
-                         */
-    
-                        /**
-                         * Calls SearchUris.
-                         * @function searchUris
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @instance
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisRequest} request SearchUrisRequest message or plain object
-                         * @param {google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.SearchUrisCallback} callback Node-style callback called with the error, if any, and SearchUrisResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(WebRiskServiceV1Beta1.prototype.searchUris = function searchUris(request, callback) {
-                            return this.rpcCall(searchUris, $root.google.cloud.webrisk.v1beta1.SearchUrisRequest, $root.google.cloud.webrisk.v1beta1.SearchUrisResponse, request, callback);
-                        }, "name", { value: "SearchUris" });
-    
-                        /**
-                         * Calls SearchUris.
-                         * @function searchUris
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @instance
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisRequest} request SearchUrisRequest message or plain object
-                         * @returns {Promise<google.cloud.webrisk.v1beta1.SearchUrisResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1|searchHashes}.
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @typedef SearchHashesCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.webrisk.v1beta1.SearchHashesResponse} [response] SearchHashesResponse
-                         */
-    
-                        /**
-                         * Calls SearchHashes.
-                         * @function searchHashes
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @instance
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesRequest} request SearchHashesRequest message or plain object
-                         * @param {google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.SearchHashesCallback} callback Node-style callback called with the error, if any, and SearchHashesResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(WebRiskServiceV1Beta1.prototype.searchHashes = function searchHashes(request, callback) {
-                            return this.rpcCall(searchHashes, $root.google.cloud.webrisk.v1beta1.SearchHashesRequest, $root.google.cloud.webrisk.v1beta1.SearchHashesResponse, request, callback);
-                        }, "name", { value: "SearchHashes" });
-    
-                        /**
-                         * Calls SearchHashes.
-                         * @function searchHashes
-                         * @memberof google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1
-                         * @instance
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesRequest} request SearchHashesRequest message or plain object
-                         * @returns {Promise<google.cloud.webrisk.v1beta1.SearchHashesResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        return WebRiskServiceV1Beta1;
-                    })();
-    
-                    v1beta1.ComputeThreatListDiffRequest = (function() {
-    
-                        /**
-                         * Properties of a ComputeThreatListDiffRequest.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface IComputeThreatListDiffRequest
-                         * @property {google.cloud.webrisk.v1beta1.ThreatType|null} [threatType] ComputeThreatListDiffRequest threatType
-                         * @property {Uint8Array|null} [versionToken] ComputeThreatListDiffRequest versionToken
-                         * @property {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints|null} [constraints] ComputeThreatListDiffRequest constraints
-                         */
-    
-                        /**
-                         * Constructs a new ComputeThreatListDiffRequest.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a ComputeThreatListDiffRequest.
-                         * @implements IComputeThreatListDiffRequest
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest=} [properties] Properties to set
-                         */
-                        function ComputeThreatListDiffRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ComputeThreatListDiffRequest threatType.
-                         * @member {google.cloud.webrisk.v1beta1.ThreatType} threatType
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @instance
-                         */
-                        ComputeThreatListDiffRequest.prototype.threatType = 0;
-    
-                        /**
-                         * ComputeThreatListDiffRequest versionToken.
-                         * @member {Uint8Array} versionToken
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @instance
-                         */
-                        ComputeThreatListDiffRequest.prototype.versionToken = $util.newBuffer([]);
-    
-                        /**
-                         * ComputeThreatListDiffRequest constraints.
-                         * @member {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints|null|undefined} constraints
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @instance
-                         */
-                        ComputeThreatListDiffRequest.prototype.constraints = null;
-    
-                        /**
-                         * Creates a new ComputeThreatListDiffRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest instance
-                         */
-                        ComputeThreatListDiffRequest.create = function create(properties) {
-                            return new ComputeThreatListDiffRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ComputeThreatListDiffRequest message. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest} message ComputeThreatListDiffRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ComputeThreatListDiffRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.threatType != null && Object.hasOwnProperty.call(message, "threatType"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.threatType);
-                            if (message.versionToken != null && Object.hasOwnProperty.call(message, "versionToken"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.versionToken);
-                            if (message.constraints != null && Object.hasOwnProperty.call(message, "constraints"))
-                                $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.encode(message.constraints, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ComputeThreatListDiffRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest} message ComputeThreatListDiffRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ComputeThreatListDiffRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ComputeThreatListDiffRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ComputeThreatListDiffRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.threatType = reader.int32();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.versionToken = reader.bytes();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.constraints = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ComputeThreatListDiffRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ComputeThreatListDiffRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ComputeThreatListDiffRequest message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ComputeThreatListDiffRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.threatType != null && message.hasOwnProperty("threatType"))
-                                switch (message.threatType) {
-                                default:
-                                    return "threatType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            if (message.versionToken != null && message.hasOwnProperty("versionToken"))
-                                if (!(message.versionToken && typeof message.versionToken.length === "number" || $util.isString(message.versionToken)))
-                                    return "versionToken: buffer expected";
-                            if (message.constraints != null && message.hasOwnProperty("constraints")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.verify(message.constraints);
-                                if (error)
-                                    return "constraints." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ComputeThreatListDiffRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest} ComputeThreatListDiffRequest
-                         */
-                        ComputeThreatListDiffRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest();
-                            switch (object.threatType) {
-                            default:
-                                if (typeof object.threatType === "number") {
-                                    message.threatType = object.threatType;
-                                    break;
-                                }
-                                break;
-                            case "THREAT_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.threatType = 0;
-                                break;
-                            case "MALWARE":
-                            case 1:
-                                message.threatType = 1;
-                                break;
-                            case "SOCIAL_ENGINEERING":
-                            case 2:
-                                message.threatType = 2;
-                                break;
-                            case "UNWANTED_SOFTWARE":
-                            case 3:
-                                message.threatType = 3;
-                                break;
-                            }
-                            if (object.versionToken != null)
-                                if (typeof object.versionToken === "string")
-                                    $util.base64.decode(object.versionToken, message.versionToken = $util.newBuffer($util.base64.length(object.versionToken)), 0);
-                                else if (object.versionToken.length >= 0)
-                                    message.versionToken = object.versionToken;
-                            if (object.constraints != null) {
-                                if (typeof object.constraints !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.constraints: object expected");
-                                message.constraints = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.fromObject(object.constraints);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ComputeThreatListDiffRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest} message ComputeThreatListDiffRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ComputeThreatListDiffRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.threatType = options.enums === String ? "THREAT_TYPE_UNSPECIFIED" : 0;
-                                if (options.bytes === String)
-                                    object.versionToken = "";
-                                else {
-                                    object.versionToken = [];
-                                    if (options.bytes !== Array)
-                                        object.versionToken = $util.newBuffer(object.versionToken);
-                                }
-                                object.constraints = null;
-                            }
-                            if (message.threatType != null && message.hasOwnProperty("threatType"))
-                                object.threatType = options.enums === String ? $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatType] === undefined ? message.threatType : $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatType] : message.threatType;
-                            if (message.versionToken != null && message.hasOwnProperty("versionToken"))
-                                object.versionToken = options.bytes === String ? $util.base64.encode(message.versionToken, 0, message.versionToken.length) : options.bytes === Array ? Array.prototype.slice.call(message.versionToken) : message.versionToken;
-                            if (message.constraints != null && message.hasOwnProperty("constraints"))
-                                object.constraints = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.toObject(message.constraints, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ComputeThreatListDiffRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ComputeThreatListDiffRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ComputeThreatListDiffRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ComputeThreatListDiffRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest";
-                        };
-    
-                        ComputeThreatListDiffRequest.Constraints = (function() {
-    
-                            /**
-                             * Properties of a Constraints.
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                             * @interface IConstraints
-                             * @property {number|null} [maxDiffEntries] Constraints maxDiffEntries
-                             * @property {number|null} [maxDatabaseEntries] Constraints maxDatabaseEntries
-                             * @property {Array.<google.cloud.webrisk.v1beta1.CompressionType>|null} [supportedCompressions] Constraints supportedCompressions
-                             */
-    
-                            /**
-                             * Constructs a new Constraints.
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest
-                             * @classdesc Represents a Constraints.
-                             * @implements IConstraints
-                             * @constructor
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints=} [properties] Properties to set
-                             */
-                            function Constraints(properties) {
-                                this.supportedCompressions = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Constraints maxDiffEntries.
-                             * @member {number} maxDiffEntries
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @instance
-                             */
-                            Constraints.prototype.maxDiffEntries = 0;
-    
-                            /**
-                             * Constraints maxDatabaseEntries.
-                             * @member {number} maxDatabaseEntries
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @instance
-                             */
-                            Constraints.prototype.maxDatabaseEntries = 0;
-    
-                            /**
-                             * Constraints supportedCompressions.
-                             * @member {Array.<google.cloud.webrisk.v1beta1.CompressionType>} supportedCompressions
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @instance
-                             */
-                            Constraints.prototype.supportedCompressions = $util.emptyArray;
-    
-                            /**
-                             * Creates a new Constraints instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints=} [properties] Properties to set
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints} Constraints instance
-                             */
-                            Constraints.create = function create(properties) {
-                                return new Constraints(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Constraints message. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints} message Constraints message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Constraints.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.maxDiffEntries != null && Object.hasOwnProperty.call(message, "maxDiffEntries"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxDiffEntries);
-                                if (message.maxDatabaseEntries != null && Object.hasOwnProperty.call(message, "maxDatabaseEntries"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxDatabaseEntries);
-                                if (message.supportedCompressions != null && message.supportedCompressions.length) {
-                                    writer.uint32(/* id 3, wireType 2 =*/26).fork();
-                                    for (var i = 0; i < message.supportedCompressions.length; ++i)
-                                        writer.int32(message.supportedCompressions[i]);
-                                    writer.ldelim();
-                                }
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Constraints message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints} message Constraints message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Constraints.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Constraints message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints} Constraints
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Constraints.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.maxDiffEntries = reader.int32();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.maxDatabaseEntries = reader.int32();
-                                            break;
-                                        }
-                                    case 3: {
-                                            if (!(message.supportedCompressions && message.supportedCompressions.length))
-                                                message.supportedCompressions = [];
-                                            if ((tag & 7) === 2) {
-                                                var end2 = reader.uint32() + reader.pos;
-                                                while (reader.pos < end2)
-                                                    message.supportedCompressions.push(reader.int32());
-                                            } else
-                                                message.supportedCompressions.push(reader.int32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Constraints message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints} Constraints
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Constraints.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Constraints message.
-                             * @function verify
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Constraints.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.maxDiffEntries != null && message.hasOwnProperty("maxDiffEntries"))
-                                    if (!$util.isInteger(message.maxDiffEntries))
-                                        return "maxDiffEntries: integer expected";
-                                if (message.maxDatabaseEntries != null && message.hasOwnProperty("maxDatabaseEntries"))
-                                    if (!$util.isInteger(message.maxDatabaseEntries))
-                                        return "maxDatabaseEntries: integer expected";
-                                if (message.supportedCompressions != null && message.hasOwnProperty("supportedCompressions")) {
-                                    if (!Array.isArray(message.supportedCompressions))
-                                        return "supportedCompressions: array expected";
-                                    for (var i = 0; i < message.supportedCompressions.length; ++i)
-                                        switch (message.supportedCompressions[i]) {
-                                        default:
-                                            return "supportedCompressions: enum value[] expected";
-                                        case 0:
-                                        case 1:
-                                        case 2:
-                                            break;
-                                        }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Constraints message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints} Constraints
-                             */
-                            Constraints.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints)
-                                    return object;
-                                var message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints();
-                                if (object.maxDiffEntries != null)
-                                    message.maxDiffEntries = object.maxDiffEntries | 0;
-                                if (object.maxDatabaseEntries != null)
-                                    message.maxDatabaseEntries = object.maxDatabaseEntries | 0;
-                                if (object.supportedCompressions) {
-                                    if (!Array.isArray(object.supportedCompressions))
-                                        throw TypeError(".google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints.supportedCompressions: array expected");
-                                    message.supportedCompressions = [];
-                                    for (var i = 0; i < object.supportedCompressions.length; ++i)
-                                        switch (object.supportedCompressions[i]) {
-                                        default:
-                                            if (typeof object.supportedCompressions[i] === "number") {
-                                                message.supportedCompressions[i] = object.supportedCompressions[i];
-                                                break;
-                                            }
-                                        case "COMPRESSION_TYPE_UNSPECIFIED":
-                                        case 0:
-                                            message.supportedCompressions[i] = 0;
-                                            break;
-                                        case "RAW":
-                                        case 1:
-                                            message.supportedCompressions[i] = 1;
-                                            break;
-                                        case "RICE":
-                                        case 2:
-                                            message.supportedCompressions[i] = 2;
-                                            break;
-                                        }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Constraints message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints} message Constraints
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Constraints.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.supportedCompressions = [];
-                                if (options.defaults) {
-                                    object.maxDiffEntries = 0;
-                                    object.maxDatabaseEntries = 0;
-                                }
-                                if (message.maxDiffEntries != null && message.hasOwnProperty("maxDiffEntries"))
-                                    object.maxDiffEntries = message.maxDiffEntries;
-                                if (message.maxDatabaseEntries != null && message.hasOwnProperty("maxDatabaseEntries"))
-                                    object.maxDatabaseEntries = message.maxDatabaseEntries;
-                                if (message.supportedCompressions && message.supportedCompressions.length) {
-                                    object.supportedCompressions = [];
-                                    for (var j = 0; j < message.supportedCompressions.length; ++j)
-                                        object.supportedCompressions[j] = options.enums === String ? $root.google.cloud.webrisk.v1beta1.CompressionType[message.supportedCompressions[j]] === undefined ? message.supportedCompressions[j] : $root.google.cloud.webrisk.v1beta1.CompressionType[message.supportedCompressions[j]] : message.supportedCompressions[j];
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Constraints to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Constraints.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Constraints
-                             * @function getTypeUrl
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Constraints.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints";
-                            };
-    
-                            return Constraints;
-                        })();
-    
-                        return ComputeThreatListDiffRequest;
-                    })();
-    
-                    v1beta1.ComputeThreatListDiffResponse = (function() {
-    
-                        /**
-                         * Properties of a ComputeThreatListDiffResponse.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface IComputeThreatListDiffResponse
-                         * @property {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType|null} [responseType] ComputeThreatListDiffResponse responseType
-                         * @property {google.cloud.webrisk.v1beta1.IThreatEntryAdditions|null} [additions] ComputeThreatListDiffResponse additions
-                         * @property {google.cloud.webrisk.v1beta1.IThreatEntryRemovals|null} [removals] ComputeThreatListDiffResponse removals
-                         * @property {Uint8Array|null} [newVersionToken] ComputeThreatListDiffResponse newVersionToken
-                         * @property {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum|null} [checksum] ComputeThreatListDiffResponse checksum
-                         * @property {google.protobuf.ITimestamp|null} [recommendedNextDiff] ComputeThreatListDiffResponse recommendedNextDiff
-                         */
-    
-                        /**
-                         * Constructs a new ComputeThreatListDiffResponse.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a ComputeThreatListDiffResponse.
-                         * @implements IComputeThreatListDiffResponse
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse=} [properties] Properties to set
-                         */
-                        function ComputeThreatListDiffResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ComputeThreatListDiffResponse responseType.
-                         * @member {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType} responseType
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @instance
-                         */
-                        ComputeThreatListDiffResponse.prototype.responseType = 0;
-    
-                        /**
-                         * ComputeThreatListDiffResponse additions.
-                         * @member {google.cloud.webrisk.v1beta1.IThreatEntryAdditions|null|undefined} additions
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @instance
-                         */
-                        ComputeThreatListDiffResponse.prototype.additions = null;
-    
-                        /**
-                         * ComputeThreatListDiffResponse removals.
-                         * @member {google.cloud.webrisk.v1beta1.IThreatEntryRemovals|null|undefined} removals
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @instance
-                         */
-                        ComputeThreatListDiffResponse.prototype.removals = null;
-    
-                        /**
-                         * ComputeThreatListDiffResponse newVersionToken.
-                         * @member {Uint8Array} newVersionToken
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @instance
-                         */
-                        ComputeThreatListDiffResponse.prototype.newVersionToken = $util.newBuffer([]);
-    
-                        /**
-                         * ComputeThreatListDiffResponse checksum.
-                         * @member {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum|null|undefined} checksum
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @instance
-                         */
-                        ComputeThreatListDiffResponse.prototype.checksum = null;
-    
-                        /**
-                         * ComputeThreatListDiffResponse recommendedNextDiff.
-                         * @member {google.protobuf.ITimestamp|null|undefined} recommendedNextDiff
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @instance
-                         */
-                        ComputeThreatListDiffResponse.prototype.recommendedNextDiff = null;
-    
-                        /**
-                         * Creates a new ComputeThreatListDiffResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse instance
-                         */
-                        ComputeThreatListDiffResponse.create = function create(properties) {
-                            return new ComputeThreatListDiffResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ComputeThreatListDiffResponse message. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse} message ComputeThreatListDiffResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ComputeThreatListDiffResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.recommendedNextDiff != null && Object.hasOwnProperty.call(message, "recommendedNextDiff"))
-                                $root.google.protobuf.Timestamp.encode(message.recommendedNextDiff, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.responseType);
-                            if (message.additions != null && Object.hasOwnProperty.call(message, "additions"))
-                                $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions.encode(message.additions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.removals != null && Object.hasOwnProperty.call(message, "removals"))
-                                $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals.encode(message.removals, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            if (message.newVersionToken != null && Object.hasOwnProperty.call(message, "newVersionToken"))
-                                writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.newVersionToken);
-                            if (message.checksum != null && Object.hasOwnProperty.call(message, "checksum"))
-                                $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum.encode(message.checksum, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ComputeThreatListDiffResponse message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse} message ComputeThreatListDiffResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ComputeThreatListDiffResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ComputeThreatListDiffResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ComputeThreatListDiffResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 4: {
-                                        message.responseType = reader.int32();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.additions = $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 6: {
-                                        message.removals = $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 7: {
-                                        message.newVersionToken = reader.bytes();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.checksum = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.recommendedNextDiff = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ComputeThreatListDiffResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ComputeThreatListDiffResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ComputeThreatListDiffResponse message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ComputeThreatListDiffResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.responseType != null && message.hasOwnProperty("responseType"))
-                                switch (message.responseType) {
-                                default:
-                                    return "responseType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            if (message.additions != null && message.hasOwnProperty("additions")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions.verify(message.additions);
-                                if (error)
-                                    return "additions." + error;
-                            }
-                            if (message.removals != null && message.hasOwnProperty("removals")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals.verify(message.removals);
-                                if (error)
-                                    return "removals." + error;
-                            }
-                            if (message.newVersionToken != null && message.hasOwnProperty("newVersionToken"))
-                                if (!(message.newVersionToken && typeof message.newVersionToken.length === "number" || $util.isString(message.newVersionToken)))
-                                    return "newVersionToken: buffer expected";
-                            if (message.checksum != null && message.hasOwnProperty("checksum")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum.verify(message.checksum);
-                                if (error)
-                                    return "checksum." + error;
-                            }
-                            if (message.recommendedNextDiff != null && message.hasOwnProperty("recommendedNextDiff")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.recommendedNextDiff);
-                                if (error)
-                                    return "recommendedNextDiff." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ComputeThreatListDiffResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse} ComputeThreatListDiffResponse
-                         */
-                        ComputeThreatListDiffResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse();
-                            switch (object.responseType) {
-                            default:
-                                if (typeof object.responseType === "number") {
-                                    message.responseType = object.responseType;
-                                    break;
-                                }
-                                break;
-                            case "RESPONSE_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.responseType = 0;
-                                break;
-                            case "DIFF":
-                            case 1:
-                                message.responseType = 1;
-                                break;
-                            case "RESET":
-                            case 2:
-                                message.responseType = 2;
-                                break;
-                            }
-                            if (object.additions != null) {
-                                if (typeof object.additions !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.additions: object expected");
-                                message.additions = $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions.fromObject(object.additions);
-                            }
-                            if (object.removals != null) {
-                                if (typeof object.removals !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.removals: object expected");
-                                message.removals = $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals.fromObject(object.removals);
-                            }
-                            if (object.newVersionToken != null)
-                                if (typeof object.newVersionToken === "string")
-                                    $util.base64.decode(object.newVersionToken, message.newVersionToken = $util.newBuffer($util.base64.length(object.newVersionToken)), 0);
-                                else if (object.newVersionToken.length >= 0)
-                                    message.newVersionToken = object.newVersionToken;
-                            if (object.checksum != null) {
-                                if (typeof object.checksum !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.checksum: object expected");
-                                message.checksum = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum.fromObject(object.checksum);
-                            }
-                            if (object.recommendedNextDiff != null) {
-                                if (typeof object.recommendedNextDiff !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.recommendedNextDiff: object expected");
-                                message.recommendedNextDiff = $root.google.protobuf.Timestamp.fromObject(object.recommendedNextDiff);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ComputeThreatListDiffResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse} message ComputeThreatListDiffResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ComputeThreatListDiffResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.recommendedNextDiff = null;
-                                object.responseType = options.enums === String ? "RESPONSE_TYPE_UNSPECIFIED" : 0;
-                                object.additions = null;
-                                object.removals = null;
-                                if (options.bytes === String)
-                                    object.newVersionToken = "";
-                                else {
-                                    object.newVersionToken = [];
-                                    if (options.bytes !== Array)
-                                        object.newVersionToken = $util.newBuffer(object.newVersionToken);
-                                }
-                                object.checksum = null;
-                            }
-                            if (message.recommendedNextDiff != null && message.hasOwnProperty("recommendedNextDiff"))
-                                object.recommendedNextDiff = $root.google.protobuf.Timestamp.toObject(message.recommendedNextDiff, options);
-                            if (message.responseType != null && message.hasOwnProperty("responseType"))
-                                object.responseType = options.enums === String ? $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType[message.responseType] === undefined ? message.responseType : $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType[message.responseType] : message.responseType;
-                            if (message.additions != null && message.hasOwnProperty("additions"))
-                                object.additions = $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions.toObject(message.additions, options);
-                            if (message.removals != null && message.hasOwnProperty("removals"))
-                                object.removals = $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals.toObject(message.removals, options);
-                            if (message.newVersionToken != null && message.hasOwnProperty("newVersionToken"))
-                                object.newVersionToken = options.bytes === String ? $util.base64.encode(message.newVersionToken, 0, message.newVersionToken.length) : options.bytes === Array ? Array.prototype.slice.call(message.newVersionToken) : message.newVersionToken;
-                            if (message.checksum != null && message.hasOwnProperty("checksum"))
-                                object.checksum = $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum.toObject(message.checksum, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ComputeThreatListDiffResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ComputeThreatListDiffResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ComputeThreatListDiffResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ComputeThreatListDiffResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse";
-                        };
-    
-                        ComputeThreatListDiffResponse.Checksum = (function() {
-    
-                            /**
-                             * Properties of a Checksum.
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                             * @interface IChecksum
-                             * @property {Uint8Array|null} [sha256] Checksum sha256
-                             */
-    
-                            /**
-                             * Constructs a new Checksum.
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse
-                             * @classdesc Represents a Checksum.
-                             * @implements IChecksum
-                             * @constructor
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum=} [properties] Properties to set
-                             */
-                            function Checksum(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Checksum sha256.
-                             * @member {Uint8Array} sha256
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @instance
-                             */
-                            Checksum.prototype.sha256 = $util.newBuffer([]);
-    
-                            /**
-                             * Creates a new Checksum instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum=} [properties] Properties to set
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum} Checksum instance
-                             */
-                            Checksum.create = function create(properties) {
-                                return new Checksum(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Checksum message. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum} message Checksum message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Checksum.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.sha256 != null && Object.hasOwnProperty.call(message, "sha256"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.sha256);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Checksum message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum} message Checksum message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Checksum.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Checksum message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum} Checksum
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Checksum.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.sha256 = reader.bytes();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Checksum message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum} Checksum
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Checksum.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Checksum message.
-                             * @function verify
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Checksum.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.sha256 != null && message.hasOwnProperty("sha256"))
-                                    if (!(message.sha256 && typeof message.sha256.length === "number" || $util.isString(message.sha256)))
-                                        return "sha256: buffer expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Checksum message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum} Checksum
-                             */
-                            Checksum.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum)
-                                    return object;
-                                var message = new $root.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum();
-                                if (object.sha256 != null)
-                                    if (typeof object.sha256 === "string")
-                                        $util.base64.decode(object.sha256, message.sha256 = $util.newBuffer($util.base64.length(object.sha256)), 0);
-                                    else if (object.sha256.length >= 0)
-                                        message.sha256 = object.sha256;
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Checksum message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum} message Checksum
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Checksum.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    if (options.bytes === String)
-                                        object.sha256 = "";
-                                    else {
-                                        object.sha256 = [];
-                                        if (options.bytes !== Array)
-                                            object.sha256 = $util.newBuffer(object.sha256);
-                                    }
-                                if (message.sha256 != null && message.hasOwnProperty("sha256"))
-                                    object.sha256 = options.bytes === String ? $util.base64.encode(message.sha256, 0, message.sha256.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha256) : message.sha256;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Checksum to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Checksum.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Checksum
-                             * @function getTypeUrl
-                             * @memberof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Checksum.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum";
-                            };
-    
-                            return Checksum;
-                        })();
-    
-                        /**
-                         * ResponseType enum.
-                         * @name google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType
-                         * @enum {number}
-                         * @property {number} RESPONSE_TYPE_UNSPECIFIED=0 RESPONSE_TYPE_UNSPECIFIED value
-                         * @property {number} DIFF=1 DIFF value
-                         * @property {number} RESET=2 RESET value
-                         */
-                        ComputeThreatListDiffResponse.ResponseType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "RESPONSE_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "DIFF"] = 1;
-                            values[valuesById[2] = "RESET"] = 2;
-                            return values;
-                        })();
-    
-                        return ComputeThreatListDiffResponse;
-                    })();
-    
-                    v1beta1.SearchUrisRequest = (function() {
-    
-                        /**
-                         * Properties of a SearchUrisRequest.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface ISearchUrisRequest
-                         * @property {string|null} [uri] SearchUrisRequest uri
-                         * @property {Array.<google.cloud.webrisk.v1beta1.ThreatType>|null} [threatTypes] SearchUrisRequest threatTypes
-                         */
-    
-                        /**
-                         * Constructs a new SearchUrisRequest.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a SearchUrisRequest.
-                         * @implements ISearchUrisRequest
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisRequest=} [properties] Properties to set
-                         */
-                        function SearchUrisRequest(properties) {
-                            this.threatTypes = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SearchUrisRequest uri.
-                         * @member {string} uri
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @instance
-                         */
-                        SearchUrisRequest.prototype.uri = "";
-    
-                        /**
-                         * SearchUrisRequest threatTypes.
-                         * @member {Array.<google.cloud.webrisk.v1beta1.ThreatType>} threatTypes
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @instance
-                         */
-                        SearchUrisRequest.prototype.threatTypes = $util.emptyArray;
-    
-                        /**
-                         * Creates a new SearchUrisRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisRequest=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisRequest} SearchUrisRequest instance
-                         */
-                        SearchUrisRequest.create = function create(properties) {
-                            return new SearchUrisRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SearchUrisRequest message. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchUrisRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisRequest} message SearchUrisRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchUrisRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
-                            if (message.threatTypes != null && message.threatTypes.length) {
-                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
-                                for (var i = 0; i < message.threatTypes.length; ++i)
-                                    writer.int32(message.threatTypes[i]);
-                                writer.ldelim();
-                            }
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SearchUrisRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchUrisRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisRequest} message SearchUrisRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchUrisRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SearchUrisRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisRequest} SearchUrisRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchUrisRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.SearchUrisRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.uri = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.threatTypes && message.threatTypes.length))
-                                            message.threatTypes = [];
-                                        if ((tag & 7) === 2) {
-                                            var end2 = reader.uint32() + reader.pos;
-                                            while (reader.pos < end2)
-                                                message.threatTypes.push(reader.int32());
-                                        } else
-                                            message.threatTypes.push(reader.int32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SearchUrisRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisRequest} SearchUrisRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchUrisRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SearchUrisRequest message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SearchUrisRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.uri != null && message.hasOwnProperty("uri"))
-                                if (!$util.isString(message.uri))
-                                    return "uri: string expected";
-                            if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
-                                if (!Array.isArray(message.threatTypes))
-                                    return "threatTypes: array expected";
-                                for (var i = 0; i < message.threatTypes.length; ++i)
-                                    switch (message.threatTypes[i]) {
-                                    default:
-                                        return "threatTypes: enum value[] expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        break;
-                                    }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SearchUrisRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisRequest} SearchUrisRequest
-                         */
-                        SearchUrisRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.SearchUrisRequest)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.SearchUrisRequest();
-                            if (object.uri != null)
-                                message.uri = String(object.uri);
-                            if (object.threatTypes) {
-                                if (!Array.isArray(object.threatTypes))
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.SearchUrisRequest.threatTypes: array expected");
-                                message.threatTypes = [];
-                                for (var i = 0; i < object.threatTypes.length; ++i)
-                                    switch (object.threatTypes[i]) {
-                                    default:
-                                        if (typeof object.threatTypes[i] === "number") {
-                                            message.threatTypes[i] = object.threatTypes[i];
-                                            break;
-                                        }
-                                    case "THREAT_TYPE_UNSPECIFIED":
-                                    case 0:
-                                        message.threatTypes[i] = 0;
-                                        break;
-                                    case "MALWARE":
-                                    case 1:
-                                        message.threatTypes[i] = 1;
-                                        break;
-                                    case "SOCIAL_ENGINEERING":
-                                    case 2:
-                                        message.threatTypes[i] = 2;
-                                        break;
-                                    case "UNWANTED_SOFTWARE":
-                                    case 3:
-                                        message.threatTypes[i] = 3;
-                                        break;
-                                    }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SearchUrisRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.SearchUrisRequest} message SearchUrisRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SearchUrisRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.threatTypes = [];
-                            if (options.defaults)
-                                object.uri = "";
-                            if (message.uri != null && message.hasOwnProperty("uri"))
-                                object.uri = message.uri;
-                            if (message.threatTypes && message.threatTypes.length) {
-                                object.threatTypes = [];
-                                for (var j = 0; j < message.threatTypes.length; ++j)
-                                    object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] === undefined ? message.threatTypes[j] : $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SearchUrisRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SearchUrisRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SearchUrisRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SearchUrisRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.SearchUrisRequest";
-                        };
-    
-                        return SearchUrisRequest;
-                    })();
-    
-                    v1beta1.SearchUrisResponse = (function() {
-    
-                        /**
-                         * Properties of a SearchUrisResponse.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface ISearchUrisResponse
-                         * @property {google.cloud.webrisk.v1beta1.SearchUrisResponse.IThreatUri|null} [threat] SearchUrisResponse threat
-                         */
-    
-                        /**
-                         * Constructs a new SearchUrisResponse.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a SearchUrisResponse.
-                         * @implements ISearchUrisResponse
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisResponse=} [properties] Properties to set
-                         */
-                        function SearchUrisResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SearchUrisResponse threat.
-                         * @member {google.cloud.webrisk.v1beta1.SearchUrisResponse.IThreatUri|null|undefined} threat
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @instance
-                         */
-                        SearchUrisResponse.prototype.threat = null;
-    
-                        /**
-                         * Creates a new SearchUrisResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisResponse=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse} SearchUrisResponse instance
-                         */
-                        SearchUrisResponse.create = function create(properties) {
-                            return new SearchUrisResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SearchUrisResponse message. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchUrisResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisResponse} message SearchUrisResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchUrisResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.threat != null && Object.hasOwnProperty.call(message, "threat"))
-                                $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.encode(message.threat, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SearchUrisResponse message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchUrisResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchUrisResponse} message SearchUrisResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchUrisResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SearchUrisResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse} SearchUrisResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchUrisResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.SearchUrisResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.threat = $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SearchUrisResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse} SearchUrisResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchUrisResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SearchUrisResponse message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SearchUrisResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.threat != null && message.hasOwnProperty("threat")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.verify(message.threat);
-                                if (error)
-                                    return "threat." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SearchUrisResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse} SearchUrisResponse
-                         */
-                        SearchUrisResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.SearchUrisResponse)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.SearchUrisResponse();
-                            if (object.threat != null) {
-                                if (typeof object.threat !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.SearchUrisResponse.threat: object expected");
-                                message.threat = $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.fromObject(object.threat);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SearchUrisResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.SearchUrisResponse} message SearchUrisResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SearchUrisResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.threat = null;
-                            if (message.threat != null && message.hasOwnProperty("threat"))
-                                object.threat = $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.toObject(message.threat, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SearchUrisResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SearchUrisResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SearchUrisResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SearchUrisResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.SearchUrisResponse";
-                        };
-    
-                        SearchUrisResponse.ThreatUri = (function() {
-    
-                            /**
-                             * Properties of a ThreatUri.
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                             * @interface IThreatUri
-                             * @property {Array.<google.cloud.webrisk.v1beta1.ThreatType>|null} [threatTypes] ThreatUri threatTypes
-                             * @property {google.protobuf.ITimestamp|null} [expireTime] ThreatUri expireTime
-                             */
-    
-                            /**
-                             * Constructs a new ThreatUri.
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse
-                             * @classdesc Represents a ThreatUri.
-                             * @implements IThreatUri
-                             * @constructor
-                             * @param {google.cloud.webrisk.v1beta1.SearchUrisResponse.IThreatUri=} [properties] Properties to set
-                             */
-                            function ThreatUri(properties) {
-                                this.threatTypes = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ThreatUri threatTypes.
-                             * @member {Array.<google.cloud.webrisk.v1beta1.ThreatType>} threatTypes
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @instance
-                             */
-                            ThreatUri.prototype.threatTypes = $util.emptyArray;
-    
-                            /**
-                             * ThreatUri expireTime.
-                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @instance
-                             */
-                            ThreatUri.prototype.expireTime = null;
-    
-                            /**
-                             * Creates a new ThreatUri instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchUrisResponse.IThreatUri=} [properties] Properties to set
-                             * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri} ThreatUri instance
-                             */
-                            ThreatUri.create = function create(properties) {
-                                return new ThreatUri(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ThreatUri message. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchUrisResponse.IThreatUri} message ThreatUri message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ThreatUri.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.threatTypes != null && message.threatTypes.length) {
-                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
-                                    for (var i = 0; i < message.threatTypes.length; ++i)
-                                        writer.int32(message.threatTypes[i]);
-                                    writer.ldelim();
-                                }
-                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ThreatUri message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchUrisResponse.IThreatUri} message ThreatUri message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ThreatUri.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ThreatUri message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri} ThreatUri
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ThreatUri.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.threatTypes && message.threatTypes.length))
-                                                message.threatTypes = [];
-                                            if ((tag & 7) === 2) {
-                                                var end2 = reader.uint32() + reader.pos;
-                                                while (reader.pos < end2)
-                                                    message.threatTypes.push(reader.int32());
-                                            } else
-                                                message.threatTypes.push(reader.int32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ThreatUri message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri} ThreatUri
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ThreatUri.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ThreatUri message.
-                             * @function verify
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ThreatUri.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
-                                    if (!Array.isArray(message.threatTypes))
-                                        return "threatTypes: array expected";
-                                    for (var i = 0; i < message.threatTypes.length; ++i)
-                                        switch (message.threatTypes[i]) {
-                                        default:
-                                            return "threatTypes: enum value[] expected";
-                                        case 0:
-                                        case 1:
-                                        case 2:
-                                        case 3:
-                                            break;
-                                        }
-                                }
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                    if (error)
-                                        return "expireTime." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ThreatUri message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri} ThreatUri
-                             */
-                            ThreatUri.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri)
-                                    return object;
-                                var message = new $root.google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri();
-                                if (object.threatTypes) {
-                                    if (!Array.isArray(object.threatTypes))
-                                        throw TypeError(".google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.threatTypes: array expected");
-                                    message.threatTypes = [];
-                                    for (var i = 0; i < object.threatTypes.length; ++i)
-                                        switch (object.threatTypes[i]) {
-                                        default:
-                                            if (typeof object.threatTypes[i] === "number") {
-                                                message.threatTypes[i] = object.threatTypes[i];
-                                                break;
-                                            }
-                                        case "THREAT_TYPE_UNSPECIFIED":
-                                        case 0:
-                                            message.threatTypes[i] = 0;
-                                            break;
-                                        case "MALWARE":
-                                        case 1:
-                                            message.threatTypes[i] = 1;
-                                            break;
-                                        case "SOCIAL_ENGINEERING":
-                                        case 2:
-                                            message.threatTypes[i] = 2;
-                                            break;
-                                        case "UNWANTED_SOFTWARE":
-                                        case 3:
-                                            message.threatTypes[i] = 3;
-                                            break;
-                                        }
-                                }
-                                if (object.expireTime != null) {
-                                    if (typeof object.expireTime !== "object")
-                                        throw TypeError(".google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri.expireTime: object expected");
-                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ThreatUri message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri} message ThreatUri
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ThreatUri.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.threatTypes = [];
-                                if (options.defaults)
-                                    object.expireTime = null;
-                                if (message.threatTypes && message.threatTypes.length) {
-                                    object.threatTypes = [];
-                                    for (var j = 0; j < message.threatTypes.length; ++j)
-                                        object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] === undefined ? message.threatTypes[j] : $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
-                                }
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ThreatUri to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ThreatUri.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ThreatUri
-                             * @function getTypeUrl
-                             * @memberof google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ThreatUri.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri";
-                            };
-    
-                            return ThreatUri;
-                        })();
-    
-                        return SearchUrisResponse;
-                    })();
-    
-                    v1beta1.SearchHashesRequest = (function() {
-    
-                        /**
-                         * Properties of a SearchHashesRequest.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface ISearchHashesRequest
-                         * @property {Uint8Array|null} [hashPrefix] SearchHashesRequest hashPrefix
-                         * @property {Array.<google.cloud.webrisk.v1beta1.ThreatType>|null} [threatTypes] SearchHashesRequest threatTypes
-                         */
-    
-                        /**
-                         * Constructs a new SearchHashesRequest.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a SearchHashesRequest.
-                         * @implements ISearchHashesRequest
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesRequest=} [properties] Properties to set
-                         */
-                        function SearchHashesRequest(properties) {
-                            this.threatTypes = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SearchHashesRequest hashPrefix.
-                         * @member {Uint8Array} hashPrefix
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @instance
-                         */
-                        SearchHashesRequest.prototype.hashPrefix = $util.newBuffer([]);
-    
-                        /**
-                         * SearchHashesRequest threatTypes.
-                         * @member {Array.<google.cloud.webrisk.v1beta1.ThreatType>} threatTypes
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @instance
-                         */
-                        SearchHashesRequest.prototype.threatTypes = $util.emptyArray;
-    
-                        /**
-                         * Creates a new SearchHashesRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesRequest=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesRequest} SearchHashesRequest instance
-                         */
-                        SearchHashesRequest.create = function create(properties) {
-                            return new SearchHashesRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SearchHashesRequest message. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchHashesRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesRequest} message SearchHashesRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchHashesRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.hashPrefix != null && Object.hasOwnProperty.call(message, "hashPrefix"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.hashPrefix);
-                            if (message.threatTypes != null && message.threatTypes.length) {
-                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
-                                for (var i = 0; i < message.threatTypes.length; ++i)
-                                    writer.int32(message.threatTypes[i]);
-                                writer.ldelim();
-                            }
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SearchHashesRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchHashesRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesRequest} message SearchHashesRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchHashesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SearchHashesRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesRequest} SearchHashesRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchHashesRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.SearchHashesRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.hashPrefix = reader.bytes();
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.threatTypes && message.threatTypes.length))
-                                            message.threatTypes = [];
-                                        if ((tag & 7) === 2) {
-                                            var end2 = reader.uint32() + reader.pos;
-                                            while (reader.pos < end2)
-                                                message.threatTypes.push(reader.int32());
-                                        } else
-                                            message.threatTypes.push(reader.int32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SearchHashesRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesRequest} SearchHashesRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchHashesRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SearchHashesRequest message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SearchHashesRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.hashPrefix != null && message.hasOwnProperty("hashPrefix"))
-                                if (!(message.hashPrefix && typeof message.hashPrefix.length === "number" || $util.isString(message.hashPrefix)))
-                                    return "hashPrefix: buffer expected";
-                            if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
-                                if (!Array.isArray(message.threatTypes))
-                                    return "threatTypes: array expected";
-                                for (var i = 0; i < message.threatTypes.length; ++i)
-                                    switch (message.threatTypes[i]) {
-                                    default:
-                                        return "threatTypes: enum value[] expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        break;
-                                    }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SearchHashesRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesRequest} SearchHashesRequest
-                         */
-                        SearchHashesRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.SearchHashesRequest)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.SearchHashesRequest();
-                            if (object.hashPrefix != null)
-                                if (typeof object.hashPrefix === "string")
-                                    $util.base64.decode(object.hashPrefix, message.hashPrefix = $util.newBuffer($util.base64.length(object.hashPrefix)), 0);
-                                else if (object.hashPrefix.length >= 0)
-                                    message.hashPrefix = object.hashPrefix;
-                            if (object.threatTypes) {
-                                if (!Array.isArray(object.threatTypes))
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.SearchHashesRequest.threatTypes: array expected");
-                                message.threatTypes = [];
-                                for (var i = 0; i < object.threatTypes.length; ++i)
-                                    switch (object.threatTypes[i]) {
-                                    default:
-                                        if (typeof object.threatTypes[i] === "number") {
-                                            message.threatTypes[i] = object.threatTypes[i];
-                                            break;
-                                        }
-                                    case "THREAT_TYPE_UNSPECIFIED":
-                                    case 0:
-                                        message.threatTypes[i] = 0;
-                                        break;
-                                    case "MALWARE":
-                                    case 1:
-                                        message.threatTypes[i] = 1;
-                                        break;
-                                    case "SOCIAL_ENGINEERING":
-                                    case 2:
-                                        message.threatTypes[i] = 2;
-                                        break;
-                                    case "UNWANTED_SOFTWARE":
-                                    case 3:
-                                        message.threatTypes[i] = 3;
-                                        break;
-                                    }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SearchHashesRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.SearchHashesRequest} message SearchHashesRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SearchHashesRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.threatTypes = [];
-                            if (options.defaults)
-                                if (options.bytes === String)
-                                    object.hashPrefix = "";
-                                else {
-                                    object.hashPrefix = [];
-                                    if (options.bytes !== Array)
-                                        object.hashPrefix = $util.newBuffer(object.hashPrefix);
-                                }
-                            if (message.hashPrefix != null && message.hasOwnProperty("hashPrefix"))
-                                object.hashPrefix = options.bytes === String ? $util.base64.encode(message.hashPrefix, 0, message.hashPrefix.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashPrefix) : message.hashPrefix;
-                            if (message.threatTypes && message.threatTypes.length) {
-                                object.threatTypes = [];
-                                for (var j = 0; j < message.threatTypes.length; ++j)
-                                    object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] === undefined ? message.threatTypes[j] : $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SearchHashesRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SearchHashesRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SearchHashesRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SearchHashesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.SearchHashesRequest";
-                        };
-    
-                        return SearchHashesRequest;
-                    })();
-    
-                    v1beta1.SearchHashesResponse = (function() {
-    
-                        /**
-                         * Properties of a SearchHashesResponse.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface ISearchHashesResponse
-                         * @property {Array.<google.cloud.webrisk.v1beta1.SearchHashesResponse.IThreatHash>|null} [threats] SearchHashesResponse threats
-                         * @property {google.protobuf.ITimestamp|null} [negativeExpireTime] SearchHashesResponse negativeExpireTime
-                         */
-    
-                        /**
-                         * Constructs a new SearchHashesResponse.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a SearchHashesResponse.
-                         * @implements ISearchHashesResponse
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesResponse=} [properties] Properties to set
-                         */
-                        function SearchHashesResponse(properties) {
-                            this.threats = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SearchHashesResponse threats.
-                         * @member {Array.<google.cloud.webrisk.v1beta1.SearchHashesResponse.IThreatHash>} threats
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @instance
-                         */
-                        SearchHashesResponse.prototype.threats = $util.emptyArray;
-    
-                        /**
-                         * SearchHashesResponse negativeExpireTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} negativeExpireTime
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @instance
-                         */
-                        SearchHashesResponse.prototype.negativeExpireTime = null;
-    
-                        /**
-                         * Creates a new SearchHashesResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesResponse=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse} SearchHashesResponse instance
-                         */
-                        SearchHashesResponse.create = function create(properties) {
-                            return new SearchHashesResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SearchHashesResponse message. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchHashesResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesResponse} message SearchHashesResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchHashesResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.threats != null && message.threats.length)
-                                for (var i = 0; i < message.threats.length; ++i)
-                                    $root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.encode(message.threats[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.negativeExpireTime != null && Object.hasOwnProperty.call(message, "negativeExpireTime"))
-                                $root.google.protobuf.Timestamp.encode(message.negativeExpireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SearchHashesResponse message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchHashesResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ISearchHashesResponse} message SearchHashesResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchHashesResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SearchHashesResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse} SearchHashesResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchHashesResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.SearchHashesResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.threats && message.threats.length))
-                                            message.threats = [];
-                                        message.threats.push($root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 2: {
-                                        message.negativeExpireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SearchHashesResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse} SearchHashesResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchHashesResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SearchHashesResponse message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SearchHashesResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.threats != null && message.hasOwnProperty("threats")) {
-                                if (!Array.isArray(message.threats))
-                                    return "threats: array expected";
-                                for (var i = 0; i < message.threats.length; ++i) {
-                                    var error = $root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.verify(message.threats[i]);
-                                    if (error)
-                                        return "threats." + error;
-                                }
-                            }
-                            if (message.negativeExpireTime != null && message.hasOwnProperty("negativeExpireTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.negativeExpireTime);
-                                if (error)
-                                    return "negativeExpireTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SearchHashesResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse} SearchHashesResponse
-                         */
-                        SearchHashesResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.SearchHashesResponse)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.SearchHashesResponse();
-                            if (object.threats) {
-                                if (!Array.isArray(object.threats))
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.SearchHashesResponse.threats: array expected");
-                                message.threats = [];
-                                for (var i = 0; i < object.threats.length; ++i) {
-                                    if (typeof object.threats[i] !== "object")
-                                        throw TypeError(".google.cloud.webrisk.v1beta1.SearchHashesResponse.threats: object expected");
-                                    message.threats[i] = $root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.fromObject(object.threats[i]);
-                                }
-                            }
-                            if (object.negativeExpireTime != null) {
-                                if (typeof object.negativeExpireTime !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.SearchHashesResponse.negativeExpireTime: object expected");
-                                message.negativeExpireTime = $root.google.protobuf.Timestamp.fromObject(object.negativeExpireTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SearchHashesResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.SearchHashesResponse} message SearchHashesResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SearchHashesResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.threats = [];
-                            if (options.defaults)
-                                object.negativeExpireTime = null;
-                            if (message.threats && message.threats.length) {
-                                object.threats = [];
-                                for (var j = 0; j < message.threats.length; ++j)
-                                    object.threats[j] = $root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.toObject(message.threats[j], options);
-                            }
-                            if (message.negativeExpireTime != null && message.hasOwnProperty("negativeExpireTime"))
-                                object.negativeExpireTime = $root.google.protobuf.Timestamp.toObject(message.negativeExpireTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SearchHashesResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SearchHashesResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SearchHashesResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SearchHashesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.SearchHashesResponse";
-                        };
-    
-                        SearchHashesResponse.ThreatHash = (function() {
-    
-                            /**
-                             * Properties of a ThreatHash.
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                             * @interface IThreatHash
-                             * @property {Array.<google.cloud.webrisk.v1beta1.ThreatType>|null} [threatTypes] ThreatHash threatTypes
-                             * @property {Uint8Array|null} [hash] ThreatHash hash
-                             * @property {google.protobuf.ITimestamp|null} [expireTime] ThreatHash expireTime
-                             */
-    
-                            /**
-                             * Constructs a new ThreatHash.
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse
-                             * @classdesc Represents a ThreatHash.
-                             * @implements IThreatHash
-                             * @constructor
-                             * @param {google.cloud.webrisk.v1beta1.SearchHashesResponse.IThreatHash=} [properties] Properties to set
-                             */
-                            function ThreatHash(properties) {
-                                this.threatTypes = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ThreatHash threatTypes.
-                             * @member {Array.<google.cloud.webrisk.v1beta1.ThreatType>} threatTypes
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @instance
-                             */
-                            ThreatHash.prototype.threatTypes = $util.emptyArray;
-    
-                            /**
-                             * ThreatHash hash.
-                             * @member {Uint8Array} hash
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @instance
-                             */
-                            ThreatHash.prototype.hash = $util.newBuffer([]);
-    
-                            /**
-                             * ThreatHash expireTime.
-                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @instance
-                             */
-                            ThreatHash.prototype.expireTime = null;
-    
-                            /**
-                             * Creates a new ThreatHash instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchHashesResponse.IThreatHash=} [properties] Properties to set
-                             * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash} ThreatHash instance
-                             */
-                            ThreatHash.create = function create(properties) {
-                                return new ThreatHash(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ThreatHash message. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchHashesResponse.IThreatHash} message ThreatHash message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ThreatHash.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.threatTypes != null && message.threatTypes.length) {
-                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
-                                    for (var i = 0; i < message.threatTypes.length; ++i)
-                                        writer.int32(message.threatTypes[i]);
-                                    writer.ldelim();
-                                }
-                                if (message.hash != null && Object.hasOwnProperty.call(message, "hash"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.hash);
-                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ThreatHash message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchHashesResponse.IThreatHash} message ThreatHash message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ThreatHash.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ThreatHash message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash} ThreatHash
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ThreatHash.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.threatTypes && message.threatTypes.length))
-                                                message.threatTypes = [];
-                                            if ((tag & 7) === 2) {
-                                                var end2 = reader.uint32() + reader.pos;
-                                                while (reader.pos < end2)
-                                                    message.threatTypes.push(reader.int32());
-                                            } else
-                                                message.threatTypes.push(reader.int32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.hash = reader.bytes();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ThreatHash message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash} ThreatHash
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ThreatHash.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ThreatHash message.
-                             * @function verify
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ThreatHash.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
-                                    if (!Array.isArray(message.threatTypes))
-                                        return "threatTypes: array expected";
-                                    for (var i = 0; i < message.threatTypes.length; ++i)
-                                        switch (message.threatTypes[i]) {
-                                        default:
-                                            return "threatTypes: enum value[] expected";
-                                        case 0:
-                                        case 1:
-                                        case 2:
-                                        case 3:
-                                            break;
-                                        }
-                                }
-                                if (message.hash != null && message.hasOwnProperty("hash"))
-                                    if (!(message.hash && typeof message.hash.length === "number" || $util.isString(message.hash)))
-                                        return "hash: buffer expected";
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                    if (error)
-                                        return "expireTime." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ThreatHash message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash} ThreatHash
-                             */
-                            ThreatHash.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash)
-                                    return object;
-                                var message = new $root.google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash();
-                                if (object.threatTypes) {
-                                    if (!Array.isArray(object.threatTypes))
-                                        throw TypeError(".google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.threatTypes: array expected");
-                                    message.threatTypes = [];
-                                    for (var i = 0; i < object.threatTypes.length; ++i)
-                                        switch (object.threatTypes[i]) {
-                                        default:
-                                            if (typeof object.threatTypes[i] === "number") {
-                                                message.threatTypes[i] = object.threatTypes[i];
-                                                break;
-                                            }
-                                        case "THREAT_TYPE_UNSPECIFIED":
-                                        case 0:
-                                            message.threatTypes[i] = 0;
-                                            break;
-                                        case "MALWARE":
-                                        case 1:
-                                            message.threatTypes[i] = 1;
-                                            break;
-                                        case "SOCIAL_ENGINEERING":
-                                        case 2:
-                                            message.threatTypes[i] = 2;
-                                            break;
-                                        case "UNWANTED_SOFTWARE":
-                                        case 3:
-                                            message.threatTypes[i] = 3;
-                                            break;
-                                        }
-                                }
-                                if (object.hash != null)
-                                    if (typeof object.hash === "string")
-                                        $util.base64.decode(object.hash, message.hash = $util.newBuffer($util.base64.length(object.hash)), 0);
-                                    else if (object.hash.length >= 0)
-                                        message.hash = object.hash;
-                                if (object.expireTime != null) {
-                                    if (typeof object.expireTime !== "object")
-                                        throw TypeError(".google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash.expireTime: object expected");
-                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ThreatHash message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash} message ThreatHash
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ThreatHash.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.threatTypes = [];
-                                if (options.defaults) {
-                                    if (options.bytes === String)
-                                        object.hash = "";
-                                    else {
-                                        object.hash = [];
-                                        if (options.bytes !== Array)
-                                            object.hash = $util.newBuffer(object.hash);
-                                    }
-                                    object.expireTime = null;
-                                }
-                                if (message.threatTypes && message.threatTypes.length) {
-                                    object.threatTypes = [];
-                                    for (var j = 0; j < message.threatTypes.length; ++j)
-                                        object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] === undefined ? message.threatTypes[j] : $root.google.cloud.webrisk.v1beta1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
-                                }
-                                if (message.hash != null && message.hasOwnProperty("hash"))
-                                    object.hash = options.bytes === String ? $util.base64.encode(message.hash, 0, message.hash.length) : options.bytes === Array ? Array.prototype.slice.call(message.hash) : message.hash;
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ThreatHash to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ThreatHash.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ThreatHash
-                             * @function getTypeUrl
-                             * @memberof google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ThreatHash.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash";
-                            };
-    
-                            return ThreatHash;
-                        })();
-    
-                        return SearchHashesResponse;
-                    })();
-    
-                    v1beta1.ThreatEntryAdditions = (function() {
-    
-                        /**
-                         * Properties of a ThreatEntryAdditions.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface IThreatEntryAdditions
-                         * @property {Array.<google.cloud.webrisk.v1beta1.IRawHashes>|null} [rawHashes] ThreatEntryAdditions rawHashes
-                         * @property {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding|null} [riceHashes] ThreatEntryAdditions riceHashes
-                         */
-    
-                        /**
-                         * Constructs a new ThreatEntryAdditions.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a ThreatEntryAdditions.
-                         * @implements IThreatEntryAdditions
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryAdditions=} [properties] Properties to set
-                         */
-                        function ThreatEntryAdditions(properties) {
-                            this.rawHashes = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ThreatEntryAdditions rawHashes.
-                         * @member {Array.<google.cloud.webrisk.v1beta1.IRawHashes>} rawHashes
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @instance
-                         */
-                        ThreatEntryAdditions.prototype.rawHashes = $util.emptyArray;
-    
-                        /**
-                         * ThreatEntryAdditions riceHashes.
-                         * @member {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding|null|undefined} riceHashes
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @instance
-                         */
-                        ThreatEntryAdditions.prototype.riceHashes = null;
-    
-                        /**
-                         * Creates a new ThreatEntryAdditions instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryAdditions=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryAdditions} ThreatEntryAdditions instance
-                         */
-                        ThreatEntryAdditions.create = function create(properties) {
-                            return new ThreatEntryAdditions(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ThreatEntryAdditions message. Does not implicitly {@link google.cloud.webrisk.v1beta1.ThreatEntryAdditions.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryAdditions} message ThreatEntryAdditions message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ThreatEntryAdditions.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.rawHashes != null && message.rawHashes.length)
-                                for (var i = 0; i < message.rawHashes.length; ++i)
-                                    $root.google.cloud.webrisk.v1beta1.RawHashes.encode(message.rawHashes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.riceHashes != null && Object.hasOwnProperty.call(message, "riceHashes"))
-                                $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.encode(message.riceHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ThreatEntryAdditions message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.ThreatEntryAdditions.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryAdditions} message ThreatEntryAdditions message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ThreatEntryAdditions.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ThreatEntryAdditions message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryAdditions} ThreatEntryAdditions
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ThreatEntryAdditions.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.rawHashes && message.rawHashes.length))
-                                            message.rawHashes = [];
-                                        message.rawHashes.push($root.google.cloud.webrisk.v1beta1.RawHashes.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 2: {
-                                        message.riceHashes = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ThreatEntryAdditions message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryAdditions} ThreatEntryAdditions
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ThreatEntryAdditions.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ThreatEntryAdditions message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ThreatEntryAdditions.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.rawHashes != null && message.hasOwnProperty("rawHashes")) {
-                                if (!Array.isArray(message.rawHashes))
-                                    return "rawHashes: array expected";
-                                for (var i = 0; i < message.rawHashes.length; ++i) {
-                                    var error = $root.google.cloud.webrisk.v1beta1.RawHashes.verify(message.rawHashes[i]);
-                                    if (error)
-                                        return "rawHashes." + error;
-                                }
-                            }
-                            if (message.riceHashes != null && message.hasOwnProperty("riceHashes")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.verify(message.riceHashes);
-                                if (error)
-                                    return "riceHashes." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ThreatEntryAdditions message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryAdditions} ThreatEntryAdditions
-                         */
-                        ThreatEntryAdditions.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.ThreatEntryAdditions();
-                            if (object.rawHashes) {
-                                if (!Array.isArray(object.rawHashes))
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ThreatEntryAdditions.rawHashes: array expected");
-                                message.rawHashes = [];
-                                for (var i = 0; i < object.rawHashes.length; ++i) {
-                                    if (typeof object.rawHashes[i] !== "object")
-                                        throw TypeError(".google.cloud.webrisk.v1beta1.ThreatEntryAdditions.rawHashes: object expected");
-                                    message.rawHashes[i] = $root.google.cloud.webrisk.v1beta1.RawHashes.fromObject(object.rawHashes[i]);
-                                }
-                            }
-                            if (object.riceHashes != null) {
-                                if (typeof object.riceHashes !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ThreatEntryAdditions.riceHashes: object expected");
-                                message.riceHashes = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.fromObject(object.riceHashes);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ThreatEntryAdditions message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ThreatEntryAdditions} message ThreatEntryAdditions
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ThreatEntryAdditions.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.rawHashes = [];
-                            if (options.defaults)
-                                object.riceHashes = null;
-                            if (message.rawHashes && message.rawHashes.length) {
-                                object.rawHashes = [];
-                                for (var j = 0; j < message.rawHashes.length; ++j)
-                                    object.rawHashes[j] = $root.google.cloud.webrisk.v1beta1.RawHashes.toObject(message.rawHashes[j], options);
-                            }
-                            if (message.riceHashes != null && message.hasOwnProperty("riceHashes"))
-                                object.riceHashes = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.toObject(message.riceHashes, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ThreatEntryAdditions to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ThreatEntryAdditions.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ThreatEntryAdditions
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryAdditions
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ThreatEntryAdditions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.ThreatEntryAdditions";
-                        };
-    
-                        return ThreatEntryAdditions;
-                    })();
-    
-                    v1beta1.ThreatEntryRemovals = (function() {
-    
-                        /**
-                         * Properties of a ThreatEntryRemovals.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface IThreatEntryRemovals
-                         * @property {google.cloud.webrisk.v1beta1.IRawIndices|null} [rawIndices] ThreatEntryRemovals rawIndices
-                         * @property {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding|null} [riceIndices] ThreatEntryRemovals riceIndices
-                         */
-    
-                        /**
-                         * Constructs a new ThreatEntryRemovals.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a ThreatEntryRemovals.
-                         * @implements IThreatEntryRemovals
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryRemovals=} [properties] Properties to set
-                         */
-                        function ThreatEntryRemovals(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ThreatEntryRemovals rawIndices.
-                         * @member {google.cloud.webrisk.v1beta1.IRawIndices|null|undefined} rawIndices
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @instance
-                         */
-                        ThreatEntryRemovals.prototype.rawIndices = null;
-    
-                        /**
-                         * ThreatEntryRemovals riceIndices.
-                         * @member {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding|null|undefined} riceIndices
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @instance
-                         */
-                        ThreatEntryRemovals.prototype.riceIndices = null;
-    
-                        /**
-                         * Creates a new ThreatEntryRemovals instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryRemovals=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryRemovals} ThreatEntryRemovals instance
-                         */
-                        ThreatEntryRemovals.create = function create(properties) {
-                            return new ThreatEntryRemovals(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ThreatEntryRemovals message. Does not implicitly {@link google.cloud.webrisk.v1beta1.ThreatEntryRemovals.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryRemovals} message ThreatEntryRemovals message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ThreatEntryRemovals.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.rawIndices != null && Object.hasOwnProperty.call(message, "rawIndices"))
-                                $root.google.cloud.webrisk.v1beta1.RawIndices.encode(message.rawIndices, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.riceIndices != null && Object.hasOwnProperty.call(message, "riceIndices"))
-                                $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.encode(message.riceIndices, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ThreatEntryRemovals message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.ThreatEntryRemovals.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IThreatEntryRemovals} message ThreatEntryRemovals message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ThreatEntryRemovals.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ThreatEntryRemovals message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryRemovals} ThreatEntryRemovals
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ThreatEntryRemovals.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.rawIndices = $root.google.cloud.webrisk.v1beta1.RawIndices.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.riceIndices = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ThreatEntryRemovals message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryRemovals} ThreatEntryRemovals
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ThreatEntryRemovals.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ThreatEntryRemovals message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ThreatEntryRemovals.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.rawIndices != null && message.hasOwnProperty("rawIndices")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.RawIndices.verify(message.rawIndices);
-                                if (error)
-                                    return "rawIndices." + error;
-                            }
-                            if (message.riceIndices != null && message.hasOwnProperty("riceIndices")) {
-                                var error = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.verify(message.riceIndices);
-                                if (error)
-                                    return "riceIndices." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ThreatEntryRemovals message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.ThreatEntryRemovals} ThreatEntryRemovals
-                         */
-                        ThreatEntryRemovals.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.ThreatEntryRemovals();
-                            if (object.rawIndices != null) {
-                                if (typeof object.rawIndices !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ThreatEntryRemovals.rawIndices: object expected");
-                                message.rawIndices = $root.google.cloud.webrisk.v1beta1.RawIndices.fromObject(object.rawIndices);
-                            }
-                            if (object.riceIndices != null) {
-                                if (typeof object.riceIndices !== "object")
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.ThreatEntryRemovals.riceIndices: object expected");
-                                message.riceIndices = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.fromObject(object.riceIndices);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ThreatEntryRemovals message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.ThreatEntryRemovals} message ThreatEntryRemovals
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ThreatEntryRemovals.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.rawIndices = null;
-                                object.riceIndices = null;
-                            }
-                            if (message.rawIndices != null && message.hasOwnProperty("rawIndices"))
-                                object.rawIndices = $root.google.cloud.webrisk.v1beta1.RawIndices.toObject(message.rawIndices, options);
-                            if (message.riceIndices != null && message.hasOwnProperty("riceIndices"))
-                                object.riceIndices = $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding.toObject(message.riceIndices, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ThreatEntryRemovals to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ThreatEntryRemovals.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ThreatEntryRemovals
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.ThreatEntryRemovals
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ThreatEntryRemovals.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.ThreatEntryRemovals";
-                        };
-    
-                        return ThreatEntryRemovals;
-                    })();
-    
-                    /**
-                     * ThreatType enum.
-                     * @name google.cloud.webrisk.v1beta1.ThreatType
-                     * @enum {number}
-                     * @property {number} THREAT_TYPE_UNSPECIFIED=0 THREAT_TYPE_UNSPECIFIED value
-                     * @property {number} MALWARE=1 MALWARE value
-                     * @property {number} SOCIAL_ENGINEERING=2 SOCIAL_ENGINEERING value
-                     * @property {number} UNWANTED_SOFTWARE=3 UNWANTED_SOFTWARE value
-                     */
-                    v1beta1.ThreatType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "THREAT_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MALWARE"] = 1;
-                        values[valuesById[2] = "SOCIAL_ENGINEERING"] = 2;
-                        values[valuesById[3] = "UNWANTED_SOFTWARE"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * CompressionType enum.
-                     * @name google.cloud.webrisk.v1beta1.CompressionType
-                     * @enum {number}
-                     * @property {number} COMPRESSION_TYPE_UNSPECIFIED=0 COMPRESSION_TYPE_UNSPECIFIED value
-                     * @property {number} RAW=1 RAW value
-                     * @property {number} RICE=2 RICE value
-                     */
-                    v1beta1.CompressionType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "COMPRESSION_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "RAW"] = 1;
-                        values[valuesById[2] = "RICE"] = 2;
-                        return values;
-                    })();
-    
-                    v1beta1.RawIndices = (function() {
-    
-                        /**
-                         * Properties of a RawIndices.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface IRawIndices
-                         * @property {Array.<number>|null} [indices] RawIndices indices
-                         */
-    
-                        /**
-                         * Constructs a new RawIndices.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a RawIndices.
-                         * @implements IRawIndices
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.IRawIndices=} [properties] Properties to set
-                         */
-                        function RawIndices(properties) {
-                            this.indices = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * RawIndices indices.
-                         * @member {Array.<number>} indices
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @instance
-                         */
-                        RawIndices.prototype.indices = $util.emptyArray;
-    
-                        /**
-                         * Creates a new RawIndices instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRawIndices=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.RawIndices} RawIndices instance
-                         */
-                        RawIndices.create = function create(properties) {
-                            return new RawIndices(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified RawIndices message. Does not implicitly {@link google.cloud.webrisk.v1beta1.RawIndices.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRawIndices} message RawIndices message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RawIndices.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.indices != null && message.indices.length) {
-                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
-                                for (var i = 0; i < message.indices.length; ++i)
-                                    writer.int32(message.indices[i]);
-                                writer.ldelim();
-                            }
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified RawIndices message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.RawIndices.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRawIndices} message RawIndices message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RawIndices.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a RawIndices message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.RawIndices} RawIndices
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RawIndices.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.RawIndices();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.indices && message.indices.length))
-                                            message.indices = [];
-                                        if ((tag & 7) === 2) {
-                                            var end2 = reader.uint32() + reader.pos;
-                                            while (reader.pos < end2)
-                                                message.indices.push(reader.int32());
-                                        } else
-                                            message.indices.push(reader.int32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a RawIndices message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.RawIndices} RawIndices
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RawIndices.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a RawIndices message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        RawIndices.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.indices != null && message.hasOwnProperty("indices")) {
-                                if (!Array.isArray(message.indices))
-                                    return "indices: array expected";
-                                for (var i = 0; i < message.indices.length; ++i)
-                                    if (!$util.isInteger(message.indices[i]))
-                                        return "indices: integer[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a RawIndices message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.RawIndices} RawIndices
-                         */
-                        RawIndices.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.RawIndices)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.RawIndices();
-                            if (object.indices) {
-                                if (!Array.isArray(object.indices))
-                                    throw TypeError(".google.cloud.webrisk.v1beta1.RawIndices.indices: array expected");
-                                message.indices = [];
-                                for (var i = 0; i < object.indices.length; ++i)
-                                    message.indices[i] = object.indices[i] | 0;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a RawIndices message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.RawIndices} message RawIndices
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        RawIndices.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.indices = [];
-                            if (message.indices && message.indices.length) {
-                                object.indices = [];
-                                for (var j = 0; j < message.indices.length; ++j)
-                                    object.indices[j] = message.indices[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this RawIndices to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        RawIndices.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for RawIndices
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.RawIndices
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        RawIndices.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.RawIndices";
-                        };
-    
-                        return RawIndices;
-                    })();
-    
-                    v1beta1.RawHashes = (function() {
-    
-                        /**
-                         * Properties of a RawHashes.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface IRawHashes
-                         * @property {number|null} [prefixSize] RawHashes prefixSize
-                         * @property {Uint8Array|null} [rawHashes] RawHashes rawHashes
-                         */
-    
-                        /**
-                         * Constructs a new RawHashes.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a RawHashes.
-                         * @implements IRawHashes
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.IRawHashes=} [properties] Properties to set
-                         */
-                        function RawHashes(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * RawHashes prefixSize.
-                         * @member {number} prefixSize
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @instance
-                         */
-                        RawHashes.prototype.prefixSize = 0;
-    
-                        /**
-                         * RawHashes rawHashes.
-                         * @member {Uint8Array} rawHashes
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @instance
-                         */
-                        RawHashes.prototype.rawHashes = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new RawHashes instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRawHashes=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.RawHashes} RawHashes instance
-                         */
-                        RawHashes.create = function create(properties) {
-                            return new RawHashes(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified RawHashes message. Does not implicitly {@link google.cloud.webrisk.v1beta1.RawHashes.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRawHashes} message RawHashes message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RawHashes.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.prefixSize != null && Object.hasOwnProperty.call(message, "prefixSize"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.prefixSize);
-                            if (message.rawHashes != null && Object.hasOwnProperty.call(message, "rawHashes"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.rawHashes);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified RawHashes message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.RawHashes.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRawHashes} message RawHashes message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RawHashes.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a RawHashes message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.RawHashes} RawHashes
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RawHashes.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.RawHashes();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.prefixSize = reader.int32();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.rawHashes = reader.bytes();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a RawHashes message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.RawHashes} RawHashes
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RawHashes.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a RawHashes message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        RawHashes.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.prefixSize != null && message.hasOwnProperty("prefixSize"))
-                                if (!$util.isInteger(message.prefixSize))
-                                    return "prefixSize: integer expected";
-                            if (message.rawHashes != null && message.hasOwnProperty("rawHashes"))
-                                if (!(message.rawHashes && typeof message.rawHashes.length === "number" || $util.isString(message.rawHashes)))
-                                    return "rawHashes: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a RawHashes message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.RawHashes} RawHashes
-                         */
-                        RawHashes.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.RawHashes)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.RawHashes();
-                            if (object.prefixSize != null)
-                                message.prefixSize = object.prefixSize | 0;
-                            if (object.rawHashes != null)
-                                if (typeof object.rawHashes === "string")
-                                    $util.base64.decode(object.rawHashes, message.rawHashes = $util.newBuffer($util.base64.length(object.rawHashes)), 0);
-                                else if (object.rawHashes.length >= 0)
-                                    message.rawHashes = object.rawHashes;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a RawHashes message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.RawHashes} message RawHashes
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        RawHashes.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.prefixSize = 0;
-                                if (options.bytes === String)
-                                    object.rawHashes = "";
-                                else {
-                                    object.rawHashes = [];
-                                    if (options.bytes !== Array)
-                                        object.rawHashes = $util.newBuffer(object.rawHashes);
-                                }
-                            }
-                            if (message.prefixSize != null && message.hasOwnProperty("prefixSize"))
-                                object.prefixSize = message.prefixSize;
-                            if (message.rawHashes != null && message.hasOwnProperty("rawHashes"))
-                                object.rawHashes = options.bytes === String ? $util.base64.encode(message.rawHashes, 0, message.rawHashes.length) : options.bytes === Array ? Array.prototype.slice.call(message.rawHashes) : message.rawHashes;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this RawHashes to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        RawHashes.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for RawHashes
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.RawHashes
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        RawHashes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.RawHashes";
-                        };
-    
-                        return RawHashes;
-                    })();
-    
-                    v1beta1.RiceDeltaEncoding = (function() {
-    
-                        /**
-                         * Properties of a RiceDeltaEncoding.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @interface IRiceDeltaEncoding
-                         * @property {number|Long|null} [firstValue] RiceDeltaEncoding firstValue
-                         * @property {number|null} [riceParameter] RiceDeltaEncoding riceParameter
-                         * @property {number|null} [entryCount] RiceDeltaEncoding entryCount
-                         * @property {Uint8Array|null} [encodedData] RiceDeltaEncoding encodedData
-                         */
-    
-                        /**
-                         * Constructs a new RiceDeltaEncoding.
-                         * @memberof google.cloud.webrisk.v1beta1
-                         * @classdesc Represents a RiceDeltaEncoding.
-                         * @implements IRiceDeltaEncoding
-                         * @constructor
-                         * @param {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding=} [properties] Properties to set
-                         */
-                        function RiceDeltaEncoding(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * RiceDeltaEncoding firstValue.
-                         * @member {number|Long} firstValue
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @instance
-                         */
-                        RiceDeltaEncoding.prototype.firstValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * RiceDeltaEncoding riceParameter.
-                         * @member {number} riceParameter
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @instance
-                         */
-                        RiceDeltaEncoding.prototype.riceParameter = 0;
-    
-                        /**
-                         * RiceDeltaEncoding entryCount.
-                         * @member {number} entryCount
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @instance
-                         */
-                        RiceDeltaEncoding.prototype.entryCount = 0;
-    
-                        /**
-                         * RiceDeltaEncoding encodedData.
-                         * @member {Uint8Array} encodedData
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @instance
-                         */
-                        RiceDeltaEncoding.prototype.encodedData = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new RiceDeltaEncoding instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding=} [properties] Properties to set
-                         * @returns {google.cloud.webrisk.v1beta1.RiceDeltaEncoding} RiceDeltaEncoding instance
-                         */
-                        RiceDeltaEncoding.create = function create(properties) {
-                            return new RiceDeltaEncoding(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified RiceDeltaEncoding message. Does not implicitly {@link google.cloud.webrisk.v1beta1.RiceDeltaEncoding.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding} message RiceDeltaEncoding message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RiceDeltaEncoding.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.firstValue != null && Object.hasOwnProperty.call(message, "firstValue"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.firstValue);
-                            if (message.riceParameter != null && Object.hasOwnProperty.call(message, "riceParameter"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.riceParameter);
-                            if (message.entryCount != null && Object.hasOwnProperty.call(message, "entryCount"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.entryCount);
-                            if (message.encodedData != null && Object.hasOwnProperty.call(message, "encodedData"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.encodedData);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified RiceDeltaEncoding message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1beta1.RiceDeltaEncoding.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.IRiceDeltaEncoding} message RiceDeltaEncoding message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RiceDeltaEncoding.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a RiceDeltaEncoding message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.webrisk.v1beta1.RiceDeltaEncoding} RiceDeltaEncoding
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RiceDeltaEncoding.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.firstValue = reader.int64();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.riceParameter = reader.int32();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.entryCount = reader.int32();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.encodedData = reader.bytes();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a RiceDeltaEncoding message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.webrisk.v1beta1.RiceDeltaEncoding} RiceDeltaEncoding
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RiceDeltaEncoding.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a RiceDeltaEncoding message.
-                         * @function verify
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        RiceDeltaEncoding.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.firstValue != null && message.hasOwnProperty("firstValue"))
-                                if (!$util.isInteger(message.firstValue) && !(message.firstValue && $util.isInteger(message.firstValue.low) && $util.isInteger(message.firstValue.high)))
-                                    return "firstValue: integer|Long expected";
-                            if (message.riceParameter != null && message.hasOwnProperty("riceParameter"))
-                                if (!$util.isInteger(message.riceParameter))
-                                    return "riceParameter: integer expected";
-                            if (message.entryCount != null && message.hasOwnProperty("entryCount"))
-                                if (!$util.isInteger(message.entryCount))
-                                    return "entryCount: integer expected";
-                            if (message.encodedData != null && message.hasOwnProperty("encodedData"))
-                                if (!(message.encodedData && typeof message.encodedData.length === "number" || $util.isString(message.encodedData)))
-                                    return "encodedData: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a RiceDeltaEncoding message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.webrisk.v1beta1.RiceDeltaEncoding} RiceDeltaEncoding
-                         */
-                        RiceDeltaEncoding.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding)
-                                return object;
-                            var message = new $root.google.cloud.webrisk.v1beta1.RiceDeltaEncoding();
-                            if (object.firstValue != null)
-                                if ($util.Long)
-                                    (message.firstValue = $util.Long.fromValue(object.firstValue)).unsigned = false;
-                                else if (typeof object.firstValue === "string")
-                                    message.firstValue = parseInt(object.firstValue, 10);
-                                else if (typeof object.firstValue === "number")
-                                    message.firstValue = object.firstValue;
-                                else if (typeof object.firstValue === "object")
-                                    message.firstValue = new $util.LongBits(object.firstValue.low >>> 0, object.firstValue.high >>> 0).toNumber();
-                            if (object.riceParameter != null)
-                                message.riceParameter = object.riceParameter | 0;
-                            if (object.entryCount != null)
-                                message.entryCount = object.entryCount | 0;
-                            if (object.encodedData != null)
-                                if (typeof object.encodedData === "string")
-                                    $util.base64.decode(object.encodedData, message.encodedData = $util.newBuffer($util.base64.length(object.encodedData)), 0);
-                                else if (object.encodedData.length >= 0)
-                                    message.encodedData = object.encodedData;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a RiceDeltaEncoding message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {google.cloud.webrisk.v1beta1.RiceDeltaEncoding} message RiceDeltaEncoding
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        RiceDeltaEncoding.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.firstValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.firstValue = options.longs === String ? "0" : 0;
-                                object.riceParameter = 0;
-                                object.entryCount = 0;
-                                if (options.bytes === String)
-                                    object.encodedData = "";
-                                else {
-                                    object.encodedData = [];
-                                    if (options.bytes !== Array)
-                                        object.encodedData = $util.newBuffer(object.encodedData);
-                                }
-                            }
-                            if (message.firstValue != null && message.hasOwnProperty("firstValue"))
-                                if (typeof message.firstValue === "number")
-                                    object.firstValue = options.longs === String ? String(message.firstValue) : message.firstValue;
-                                else
-                                    object.firstValue = options.longs === String ? $util.Long.prototype.toString.call(message.firstValue) : options.longs === Number ? new $util.LongBits(message.firstValue.low >>> 0, message.firstValue.high >>> 0).toNumber() : message.firstValue;
-                            if (message.riceParameter != null && message.hasOwnProperty("riceParameter"))
-                                object.riceParameter = message.riceParameter;
-                            if (message.entryCount != null && message.hasOwnProperty("entryCount"))
-                                object.entryCount = message.entryCount;
-                            if (message.encodedData != null && message.hasOwnProperty("encodedData"))
-                                object.encodedData = options.bytes === String ? $util.base64.encode(message.encodedData, 0, message.encodedData.length) : options.bytes === Array ? Array.prototype.slice.call(message.encodedData) : message.encodedData;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this RiceDeltaEncoding to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        RiceDeltaEncoding.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for RiceDeltaEncoding
-                         * @function getTypeUrl
-                         * @memberof google.cloud.webrisk.v1beta1.RiceDeltaEncoding
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        RiceDeltaEncoding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.webrisk.v1beta1.RiceDeltaEncoding";
-                        };
-    
-                        return RiceDeltaEncoding;
-                    })();
-    
-                    return v1beta1;
-                })();
-    
                 return webrisk;
             })();
     
@@ -12067,7 +7783,6 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
-                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -12103,14 +7818,6 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
-                 * CommonLanguageSettings selectiveGapicGeneration.
-                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
-                 * @memberof google.api.CommonLanguageSettings
-                 * @instance
-                 */
-                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
-    
-                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -12142,8 +7849,6 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
-                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -12193,10 +7898,6 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
-                                break;
-                            }
-                        case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -12250,11 +7951,6 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
-                        if (error)
-                            return "selectiveGapicGeneration." + error;
-                    }
                     return null;
                 };
     
@@ -12297,11 +7993,6 @@
                                 break;
                             }
                     }
-                    if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
-                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
-                    }
                     return message;
                 };
     
@@ -12320,10 +8011,8 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.referenceDocsUri = "";
-                        object.selectiveGapicGeneration = null;
-                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -12331,8 +8020,6 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -14155,7 +9842,6 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
-                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -14180,14 +9866,6 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
-    
-                /**
-                 * PythonSettings experimentalFeatures.
-                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
-                 * @memberof google.api.PythonSettings
-                 * @instance
-                 */
-                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -14215,8 +9893,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -14255,10 +9931,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -14301,11 +9973,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
-                        if (error)
-                            return "experimentalFeatures." + error;
-                    }
                     return null;
                 };
     
@@ -14326,11 +9993,6 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
-                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
-                    }
                     return message;
                 };
     
@@ -14347,14 +10009,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.common = null;
-                        object.experimentalFeatures = null;
-                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -14383,258 +10041,6 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
-    
-                PythonSettings.ExperimentalFeatures = (function() {
-    
-                    /**
-                     * Properties of an ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @interface IExperimentalFeatures
-                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
-                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
-                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
-                     */
-    
-                    /**
-                     * Constructs a new ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @classdesc Represents an ExperimentalFeatures.
-                     * @implements IExperimentalFeatures
-                     * @constructor
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     */
-                    function ExperimentalFeatures(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ExperimentalFeatures restAsyncIoEnabled.
-                     * @member {boolean} restAsyncIoEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures protobufPythonicTypesEnabled.
-                     * @member {boolean} protobufPythonicTypesEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures unversionedPackageDisabled.
-                     * @member {boolean} unversionedPackageDisabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
-    
-                    /**
-                     * Creates a new ExperimentalFeatures instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
-                     */
-                    ExperimentalFeatures.create = function create(properties) {
-                        return new ExperimentalFeatures(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
-                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
-                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.restAsyncIoEnabled = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.protobufPythonicTypesEnabled = reader.bool();
-                                    break;
-                                }
-                            case 3: {
-                                    message.unversionedPackageDisabled = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ExperimentalFeatures message.
-                     * @function verify
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ExperimentalFeatures.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            if (typeof message.restAsyncIoEnabled !== "boolean")
-                                return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
-                                return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            if (typeof message.unversionedPackageDisabled !== "boolean")
-                                return "unversionedPackageDisabled: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
-                            return object;
-                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        if (object.restAsyncIoEnabled != null)
-                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
-                        if (object.protobufPythonicTypesEnabled != null)
-                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
-                        if (object.unversionedPackageDisabled != null)
-                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.restAsyncIoEnabled = false;
-                            object.protobufPythonicTypesEnabled = false;
-                            object.unversionedPackageDisabled = false;
-                        }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ExperimentalFeatures to JSON.
-                     * @function toJSON
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ExperimentalFeatures
-                     * @function getTypeUrl
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
-                    };
-    
-                    return ExperimentalFeatures;
-                })();
     
                 return PythonSettings;
             })();
@@ -15512,7 +10918,6 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -15524,7 +10929,6 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
-                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -15538,14 +10942,6 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
-    
-                /**
-                 * GoSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.GoSettings
-                 * @instance
-                 */
-                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -15573,9 +10969,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -15606,7 +10999,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -15614,29 +11007,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -15679,14 +11049,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
                     return null;
                 };
     
@@ -15707,13 +11069,6 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
                     return message;
                 };
     
@@ -15730,18 +11085,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.objects || options.defaults)
-                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
                     return object;
                 };
     
@@ -16378,251 +11725,6 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
-            })();
-    
-            api.SelectiveGapicGeneration = (function() {
-    
-                /**
-                 * Properties of a SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @interface ISelectiveGapicGeneration
-                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
-                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
-                 */
-    
-                /**
-                 * Constructs a new SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @classdesc Represents a SelectiveGapicGeneration.
-                 * @implements ISelectiveGapicGeneration
-                 * @constructor
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 */
-                function SelectiveGapicGeneration(properties) {
-                    this.methods = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * SelectiveGapicGeneration methods.
-                 * @member {Array.<string>} methods
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
-    
-                /**
-                 * SelectiveGapicGeneration generateOmittedAsInternal.
-                 * @member {boolean} generateOmittedAsInternal
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
-    
-                /**
-                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
-                 */
-                SelectiveGapicGeneration.create = function create(properties) {
-                    return new SelectiveGapicGeneration(properties);
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.methods != null && message.methods.length)
-                        for (var i = 0; i < message.methods.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
-                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.methods && message.methods.length))
-                                    message.methods = [];
-                                message.methods.push(reader.string());
-                                break;
-                            }
-                        case 2: {
-                                message.generateOmittedAsInternal = reader.bool();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a SelectiveGapicGeneration message.
-                 * @function verify
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                SelectiveGapicGeneration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
-                        if (!Array.isArray(message.methods))
-                            return "methods: array expected";
-                        for (var i = 0; i < message.methods.length; ++i)
-                            if (!$util.isString(message.methods[i]))
-                                return "methods: string[] expected";
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        if (typeof message.generateOmittedAsInternal !== "boolean")
-                            return "generateOmittedAsInternal: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
-                        return object;
-                    var message = new $root.google.api.SelectiveGapicGeneration();
-                    if (object.methods) {
-                        if (!Array.isArray(object.methods))
-                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
-                        message.methods = [];
-                        for (var i = 0; i < object.methods.length; ++i)
-                            message.methods[i] = String(object.methods[i]);
-                    }
-                    if (object.generateOmittedAsInternal != null)
-                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.methods = [];
-                    if (options.defaults)
-                        object.generateOmittedAsInternal = false;
-                    if (message.methods && message.methods.length) {
-                        object.methods = [];
-                        for (var j = 0; j < message.methods.length; ++j)
-                            object.methods[j] = message.methods[j];
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
-                    return object;
-                };
-    
-                /**
-                 * Converts this SelectiveGapicGeneration to JSON.
-                 * @function toJSON
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for SelectiveGapicGeneration
-                 * @function getTypeUrl
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
-                };
-    
-                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -17610,7 +12712,6 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
-             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -17625,7 +12726,6 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
-                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -17650,7 +12750,6 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
-                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -17673,7 +12772,6 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
-                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -17723,14 +12821,6 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
-    
-                /**
-                 * FileDescriptorProto optionDependency.
-                 * @member {Array.<string>} optionDependency
-                 * @memberof google.protobuf.FileDescriptorProto
-                 * @instance
-                 */
-                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -17853,9 +12943,6 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
-                    if (message.optionDependency != null && message.optionDependency.length)
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -17926,12 +13013,6 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
-                                break;
-                            }
-                        case 15: {
-                                if (!(message.optionDependency && message.optionDependency.length))
-                                    message.optionDependency = [];
-                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -18036,13 +13117,6 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
-                        if (!Array.isArray(message.optionDependency))
-                            return "optionDependency: array expected";
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            if (!$util.isString(message.optionDependency[i]))
-                                return "optionDependency: string[] expected";
-                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -18097,7 +13171,6 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -18149,13 +13222,6 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
-                    }
-                    if (object.optionDependency) {
-                        if (!Array.isArray(object.optionDependency))
-                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
-                        message.optionDependency = [];
-                        for (var i = 0; i < object.optionDependency.length; ++i)
-                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -18219,10 +13285,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -18289,7 +13351,6 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
-                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -18346,11 +13407,6 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                    if (message.optionDependency && message.optionDependency.length) {
-                        object.optionDependency = [];
-                        for (var j = 0; j < message.optionDependency.length; ++j)
-                            object.optionDependency[j] = message.optionDependency[j];
-                    }
                     return object;
                 };
     
@@ -18399,7 +13455,6 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -18506,14 +13561,6 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * DescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.DescriptorProto
-                 * @instance
-                 */
-                DescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -18565,8 +13612,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -18657,10 +13702,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 11: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -18776,15 +13817,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -18884,26 +13916,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -18933,7 +13945,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -18979,8 +13990,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -21025,7 +16034,6 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -21087,14 +16095,6 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * EnumDescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.EnumDescriptorProto
-                 * @instance
-                 */
-                EnumDescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -21131,8 +16131,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -21193,10 +16191,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -21267,15 +16261,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -21325,26 +16310,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -21369,7 +16334,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -21390,8 +16354,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -23710,7 +18672,6 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -23832,14 +18793,6 @@
                 FieldOptions.prototype.features = null;
     
                 /**
-                 * FieldOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.featureSupport = null;
-    
-                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -23913,8 +18866,6 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -24014,10 +18965,6 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -24154,11 +19101,6 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
-                    }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -24348,11 +19290,6 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -24450,7 +19387,6 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
-                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -24483,8 +19419,6 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24757,7 +19691,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -24798,10 +19731,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -24900,488 +19829,6 @@
                     };
     
                     return EditionDefault;
-                })();
-    
-                FieldOptions.FeatureSupport = (function() {
-    
-                    /**
-                     * Properties of a FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IFeatureSupport
-                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
-                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
-                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
-                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
-                     */
-    
-                    /**
-                     * Constructs a new FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents a FeatureSupport.
-                     * @implements IFeatureSupport
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     */
-                    function FeatureSupport(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * FeatureSupport editionIntroduced.
-                     * @member {google.protobuf.Edition} editionIntroduced
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionIntroduced = 0;
-    
-                    /**
-                     * FeatureSupport editionDeprecated.
-                     * @member {google.protobuf.Edition} editionDeprecated
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionDeprecated = 0;
-    
-                    /**
-                     * FeatureSupport deprecationWarning.
-                     * @member {string} deprecationWarning
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.deprecationWarning = "";
-    
-                    /**
-                     * FeatureSupport editionRemoved.
-                     * @member {google.protobuf.Edition} editionRemoved
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionRemoved = 0;
-    
-                    /**
-                     * Creates a new FeatureSupport instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
-                     */
-                    FeatureSupport.create = function create(properties) {
-                        return new FeatureSupport(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
-                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
-                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
-                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.editionIntroduced = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.editionDeprecated = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.deprecationWarning = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.editionRemoved = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a FeatureSupport message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    FeatureSupport.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            switch (message.editionIntroduced) {
-                            default:
-                                return "editionIntroduced: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            switch (message.editionDeprecated) {
-                            default:
-                                return "editionDeprecated: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            if (!$util.isString(message.deprecationWarning))
-                                return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            switch (message.editionRemoved) {
-                            default:
-                                return "editionRemoved: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     */
-                    FeatureSupport.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        switch (object.editionIntroduced) {
-                        default:
-                            if (typeof object.editionIntroduced === "number") {
-                                message.editionIntroduced = object.editionIntroduced;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionIntroduced = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionIntroduced = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionIntroduced = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionIntroduced = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionIntroduced = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionIntroduced = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionIntroduced = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionIntroduced = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionIntroduced = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionIntroduced = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionIntroduced = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionIntroduced = 2147483647;
-                            break;
-                        }
-                        switch (object.editionDeprecated) {
-                        default:
-                            if (typeof object.editionDeprecated === "number") {
-                                message.editionDeprecated = object.editionDeprecated;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionDeprecated = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionDeprecated = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionDeprecated = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionDeprecated = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionDeprecated = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionDeprecated = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionDeprecated = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionDeprecated = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionDeprecated = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionDeprecated = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionDeprecated = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionDeprecated = 2147483647;
-                            break;
-                        }
-                        if (object.deprecationWarning != null)
-                            message.deprecationWarning = String(object.deprecationWarning);
-                        switch (object.editionRemoved) {
-                        default:
-                            if (typeof object.editionRemoved === "number") {
-                                message.editionRemoved = object.editionRemoved;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionRemoved = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionRemoved = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionRemoved = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionRemoved = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionRemoved = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionRemoved = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionRemoved = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionRemoved = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionRemoved = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionRemoved = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionRemoved = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionRemoved = 2147483647;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    FeatureSupport.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.deprecationWarning = "";
-                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                        }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this FeatureSupport to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    FeatureSupport.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for FeatureSupport
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
-                    };
-    
-                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -25976,7 +20423,6 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -26021,14 +20467,6 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
-                 * EnumValueOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.featureSupport = null;
-    
-                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -26066,8 +20504,6 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -26117,10 +20553,6 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -26175,11 +20607,6 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -26213,11 +20640,6 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -26250,7 +20672,6 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
-                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -26258,8 +20679,6 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -27727,8 +22146,6 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
-                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -27795,22 +22212,6 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
-                 * FeatureSet enforceNamingStyle.
-                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enforceNamingStyle = 0;
-    
-                /**
-                 * FeatureSet defaultSymbolVisibility.
-                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.defaultSymbolVisibility = 0;
-    
-                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -27846,10 +22247,6 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
-                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -27908,14 +22305,6 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 7: {
-                                message.enforceNamingStyle = reader.int32();
-                                break;
-                            }
-                        case 8: {
-                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -28006,26 +22395,6 @@
                         case 0:
                         case 1:
                         case 2:
-                            break;
-                        }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        switch (message.enforceNamingStyle) {
-                        default:
-                            return "enforceNamingStyle: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        switch (message.defaultSymbolVisibility) {
-                        default:
-                            return "defaultSymbolVisibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
                             break;
                         }
                     return null;
@@ -28167,54 +22536,6 @@
                         message.jsonFormat = 2;
                         break;
                     }
-                    switch (object.enforceNamingStyle) {
-                    default:
-                        if (typeof object.enforceNamingStyle === "number") {
-                            message.enforceNamingStyle = object.enforceNamingStyle;
-                            break;
-                        }
-                        break;
-                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-                    case 0:
-                        message.enforceNamingStyle = 0;
-                        break;
-                    case "STYLE2024":
-                    case 1:
-                        message.enforceNamingStyle = 1;
-                        break;
-                    case "STYLE_LEGACY":
-                    case 2:
-                        message.enforceNamingStyle = 2;
-                        break;
-                    }
-                    switch (object.defaultSymbolVisibility) {
-                    default:
-                        if (typeof object.defaultSymbolVisibility === "number") {
-                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
-                            break;
-                        }
-                        break;
-                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-                    case 0:
-                        message.defaultSymbolVisibility = 0;
-                        break;
-                    case "EXPORT_ALL":
-                    case 1:
-                        message.defaultSymbolVisibility = 1;
-                        break;
-                    case "EXPORT_TOP_LEVEL":
-                    case 2:
-                        message.defaultSymbolVisibility = 2;
-                        break;
-                    case "LOCAL_ALL":
-                    case 3:
-                        message.defaultSymbolVisibility = 3;
-                        break;
-                    case "STRICT":
-                    case 4:
-                        message.defaultSymbolVisibility = 4;
-                        break;
-                    }
                     return message;
                 };
     
@@ -28238,8 +22559,6 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
-                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -28253,10 +22572,6 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -28382,219 +22697,6 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
-                })();
-    
-                /**
-                 * EnforceNamingStyle enum.
-                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
-                 * @enum {number}
-                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
-                 * @property {number} STYLE2024=1 STYLE2024 value
-                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
-                 */
-                FeatureSet.EnforceNamingStyle = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "STYLE2024"] = 1;
-                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
-                    return values;
-                })();
-    
-                FeatureSet.VisibilityFeature = (function() {
-    
-                    /**
-                     * Properties of a VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @interface IVisibilityFeature
-                     */
-    
-                    /**
-                     * Constructs a new VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @classdesc Represents a VisibilityFeature.
-                     * @implements IVisibilityFeature
-                     * @constructor
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     */
-                    function VisibilityFeature(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Creates a new VisibilityFeature instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
-                     */
-                    VisibilityFeature.create = function create(properties) {
-                        return new VisibilityFeature(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a VisibilityFeature message.
-                     * @function verify
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    VisibilityFeature.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     */
-                    VisibilityFeature.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
-                            return object;
-                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                    };
-    
-                    /**
-                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    VisibilityFeature.toObject = function toObject() {
-                        return {};
-                    };
-    
-                    /**
-                     * Converts this VisibilityFeature to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    VisibilityFeature.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for VisibilityFeature
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
-                    };
-    
-                    /**
-                     * DefaultSymbolVisibility enum.
-                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
-                     * @enum {number}
-                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
-                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
-                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
-                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
-                     * @property {number} STRICT=4 STRICT value
-                     */
-                    VisibilityFeature.DefaultSymbolVisibility = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
-                        values[valuesById[1] = "EXPORT_ALL"] = 1;
-                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
-                        values[valuesById[3] = "LOCAL_ALL"] = 3;
-                        values[valuesById[4] = "STRICT"] = 4;
-                        return values;
-                    })();
-    
-                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -28781,7 +22883,6 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -28799,7 +22900,6 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -28847,10 +22947,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -28903,10 +22999,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -29016,8 +23108,7 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
-                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
                      */
     
                     /**
@@ -29044,20 +23135,12 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault overridableFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
-    
-                    /**
-                     * FeatureSetEditionDefault fixedFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
-                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
-                     * @instance
-                     */
-                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
+                    FeatureSetEditionDefault.prototype.features = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -29083,12 +23166,10 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
-                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -29129,12 +23210,8 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -29177,7 +23254,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -29190,15 +23266,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
                             if (error)
-                                return "overridableFeatures." + error;
-                        }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
-                            if (error)
-                                return "fixedFeatures." + error;
+                                return "features." + error;
                         }
                         return null;
                     };
@@ -29225,10 +23296,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -29271,15 +23338,10 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
-                        }
-                        if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                         }
                         return message;
                     };
@@ -29298,16 +23360,13 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
+                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.overridableFeatures = null;
-                            object.fixedFeatures = null;
                         }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -30520,22 +24579,6 @@
                 })();
     
                 return GeneratedCodeInfo;
-            })();
-    
-            /**
-             * SymbolVisibility enum.
-             * @name google.protobuf.SymbolVisibility
-             * @enum {number}
-             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
-             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
-             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
-             */
-            protobuf.SymbolVisibility = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
-                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
-                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
-                return values;
             })();
     
             protobuf.Duration = (function() {

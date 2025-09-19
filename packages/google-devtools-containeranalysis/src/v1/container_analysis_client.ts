@@ -995,4 +995,3 @@ export class ContainerAnalysisClient {
         return new GrafeasClient(this._opts as {});
     }
     }
-    

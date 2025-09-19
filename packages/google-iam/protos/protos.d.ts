@@ -20,135 +20,14 @@ export namespace google {
     /** Namespace iam. */
     namespace iam {
 
-        /** Namespace v2. */
-        namespace v2 {
+        /** Namespace v1beta. */
+        namespace v1beta {
 
-            /** Properties of a DenyRule. */
-            interface IDenyRule {
-
-                /** DenyRule deniedPrincipals */
-                deniedPrincipals?: (string[]|null);
-
-                /** DenyRule exceptionPrincipals */
-                exceptionPrincipals?: (string[]|null);
-
-                /** DenyRule deniedPermissions */
-                deniedPermissions?: (string[]|null);
-
-                /** DenyRule exceptionPermissions */
-                exceptionPermissions?: (string[]|null);
-
-                /** DenyRule denialCondition */
-                denialCondition?: (google.type.IExpr|null);
-            }
-
-            /** Represents a DenyRule. */
-            class DenyRule implements IDenyRule {
+            /** Represents a WorkloadIdentityPools */
+            class WorkloadIdentityPools extends $protobuf.rpc.Service {
 
                 /**
-                 * Constructs a new DenyRule.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IDenyRule);
-
-                /** DenyRule deniedPrincipals. */
-                public deniedPrincipals: string[];
-
-                /** DenyRule exceptionPrincipals. */
-                public exceptionPrincipals: string[];
-
-                /** DenyRule deniedPermissions. */
-                public deniedPermissions: string[];
-
-                /** DenyRule exceptionPermissions. */
-                public exceptionPermissions: string[];
-
-                /** DenyRule denialCondition. */
-                public denialCondition?: (google.type.IExpr|null);
-
-                /**
-                 * Creates a new DenyRule instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DenyRule instance
-                 */
-                public static create(properties?: google.iam.v2.IDenyRule): google.iam.v2.DenyRule;
-
-                /**
-                 * Encodes the specified DenyRule message. Does not implicitly {@link google.iam.v2.DenyRule.verify|verify} messages.
-                 * @param message DenyRule message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IDenyRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DenyRule message, length delimited. Does not implicitly {@link google.iam.v2.DenyRule.verify|verify} messages.
-                 * @param message DenyRule message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IDenyRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DenyRule message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DenyRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.DenyRule;
-
-                /**
-                 * Decodes a DenyRule message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DenyRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.DenyRule;
-
-                /**
-                 * Verifies a DenyRule message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DenyRule message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DenyRule
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.DenyRule;
-
-                /**
-                 * Creates a plain object from a DenyRule message. Also converts values to other types if specified.
-                 * @param message DenyRule
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.DenyRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DenyRule to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DenyRule
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Represents a Policies */
-            class Policies extends $protobuf.rpc.Service {
-
-                /**
-                 * Constructs a new Policies service.
+                 * Constructs a new WorkloadIdentityPools service.
                  * @param rpcImpl RPC implementation
                  * @param [requestDelimited=false] Whether requests are length-delimited
                  * @param [responseDelimited=false] Whether responses are length-delimited
@@ -156,4014 +35,2382 @@ export namespace google {
                 constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
 
                 /**
-                 * Creates new Policies service using the specified rpc implementation.
+                 * Creates new WorkloadIdentityPools service using the specified rpc implementation.
                  * @param rpcImpl RPC implementation
                  * @param [requestDelimited=false] Whether requests are length-delimited
                  * @param [responseDelimited=false] Whether responses are length-delimited
                  * @returns RPC service. Useful where requests and/or responses are streamed.
                  */
-                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Policies;
+                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): WorkloadIdentityPools;
 
                 /**
-                 * Calls ListPolicies.
-                 * @param request ListPoliciesRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and ListPoliciesResponse
+                 * Calls ListWorkloadIdentityPools.
+                 * @param request ListWorkloadIdentityPoolsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListWorkloadIdentityPoolsResponse
                  */
-                public listPolicies(request: google.iam.v2.IListPoliciesRequest, callback: google.iam.v2.Policies.ListPoliciesCallback): void;
+                public listWorkloadIdentityPools(request: google.iam.v1beta.IListWorkloadIdentityPoolsRequest, callback: google.iam.v1beta.WorkloadIdentityPools.ListWorkloadIdentityPoolsCallback): void;
 
                 /**
-                 * Calls ListPolicies.
-                 * @param request ListPoliciesRequest message or plain object
+                 * Calls ListWorkloadIdentityPools.
+                 * @param request ListWorkloadIdentityPoolsRequest message or plain object
                  * @returns Promise
                  */
-                public listPolicies(request: google.iam.v2.IListPoliciesRequest): Promise<google.iam.v2.ListPoliciesResponse>;
+                public listWorkloadIdentityPools(request: google.iam.v1beta.IListWorkloadIdentityPoolsRequest): Promise<google.iam.v1beta.ListWorkloadIdentityPoolsResponse>;
 
                 /**
-                 * Calls GetPolicy.
-                 * @param request GetPolicyRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Policy
+                 * Calls GetWorkloadIdentityPool.
+                 * @param request GetWorkloadIdentityPoolRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and WorkloadIdentityPool
                  */
-                public getPolicy(request: google.iam.v2.IGetPolicyRequest, callback: google.iam.v2.Policies.GetPolicyCallback): void;
+                public getWorkloadIdentityPool(request: google.iam.v1beta.IGetWorkloadIdentityPoolRequest, callback: google.iam.v1beta.WorkloadIdentityPools.GetWorkloadIdentityPoolCallback): void;
 
                 /**
-                 * Calls GetPolicy.
-                 * @param request GetPolicyRequest message or plain object
+                 * Calls GetWorkloadIdentityPool.
+                 * @param request GetWorkloadIdentityPoolRequest message or plain object
                  * @returns Promise
                  */
-                public getPolicy(request: google.iam.v2.IGetPolicyRequest): Promise<google.iam.v2.Policy>;
+                public getWorkloadIdentityPool(request: google.iam.v1beta.IGetWorkloadIdentityPoolRequest): Promise<google.iam.v1beta.WorkloadIdentityPool>;
 
                 /**
-                 * Calls CreatePolicy.
-                 * @param request CreatePolicyRequest message or plain object
+                 * Calls CreateWorkloadIdentityPool.
+                 * @param request CreateWorkloadIdentityPoolRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Operation
                  */
-                public createPolicy(request: google.iam.v2.ICreatePolicyRequest, callback: google.iam.v2.Policies.CreatePolicyCallback): void;
+                public createWorkloadIdentityPool(request: google.iam.v1beta.ICreateWorkloadIdentityPoolRequest, callback: google.iam.v1beta.WorkloadIdentityPools.CreateWorkloadIdentityPoolCallback): void;
 
                 /**
-                 * Calls CreatePolicy.
-                 * @param request CreatePolicyRequest message or plain object
+                 * Calls CreateWorkloadIdentityPool.
+                 * @param request CreateWorkloadIdentityPoolRequest message or plain object
                  * @returns Promise
                  */
-                public createPolicy(request: google.iam.v2.ICreatePolicyRequest): Promise<google.longrunning.Operation>;
+                public createWorkloadIdentityPool(request: google.iam.v1beta.ICreateWorkloadIdentityPoolRequest): Promise<google.longrunning.Operation>;
 
                 /**
-                 * Calls UpdatePolicy.
-                 * @param request UpdatePolicyRequest message or plain object
+                 * Calls UpdateWorkloadIdentityPool.
+                 * @param request UpdateWorkloadIdentityPoolRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Operation
                  */
-                public updatePolicy(request: google.iam.v2.IUpdatePolicyRequest, callback: google.iam.v2.Policies.UpdatePolicyCallback): void;
+                public updateWorkloadIdentityPool(request: google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest, callback: google.iam.v1beta.WorkloadIdentityPools.UpdateWorkloadIdentityPoolCallback): void;
 
                 /**
-                 * Calls UpdatePolicy.
-                 * @param request UpdatePolicyRequest message or plain object
+                 * Calls UpdateWorkloadIdentityPool.
+                 * @param request UpdateWorkloadIdentityPoolRequest message or plain object
                  * @returns Promise
                  */
-                public updatePolicy(request: google.iam.v2.IUpdatePolicyRequest): Promise<google.longrunning.Operation>;
+                public updateWorkloadIdentityPool(request: google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest): Promise<google.longrunning.Operation>;
 
                 /**
-                 * Calls DeletePolicy.
-                 * @param request DeletePolicyRequest message or plain object
+                 * Calls DeleteWorkloadIdentityPool.
+                 * @param request DeleteWorkloadIdentityPoolRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Operation
                  */
-                public deletePolicy(request: google.iam.v2.IDeletePolicyRequest, callback: google.iam.v2.Policies.DeletePolicyCallback): void;
+                public deleteWorkloadIdentityPool(request: google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest, callback: google.iam.v1beta.WorkloadIdentityPools.DeleteWorkloadIdentityPoolCallback): void;
 
                 /**
-                 * Calls DeletePolicy.
-                 * @param request DeletePolicyRequest message or plain object
+                 * Calls DeleteWorkloadIdentityPool.
+                 * @param request DeleteWorkloadIdentityPoolRequest message or plain object
                  * @returns Promise
                  */
-                public deletePolicy(request: google.iam.v2.IDeletePolicyRequest): Promise<google.longrunning.Operation>;
+                public deleteWorkloadIdentityPool(request: google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls UndeleteWorkloadIdentityPool.
+                 * @param request UndeleteWorkloadIdentityPoolRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public undeleteWorkloadIdentityPool(request: google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest, callback: google.iam.v1beta.WorkloadIdentityPools.UndeleteWorkloadIdentityPoolCallback): void;
+
+                /**
+                 * Calls UndeleteWorkloadIdentityPool.
+                 * @param request UndeleteWorkloadIdentityPoolRequest message or plain object
+                 * @returns Promise
+                 */
+                public undeleteWorkloadIdentityPool(request: google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls ListWorkloadIdentityPoolProviders.
+                 * @param request ListWorkloadIdentityPoolProvidersRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListWorkloadIdentityPoolProvidersResponse
+                 */
+                public listWorkloadIdentityPoolProviders(request: google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest, callback: google.iam.v1beta.WorkloadIdentityPools.ListWorkloadIdentityPoolProvidersCallback): void;
+
+                /**
+                 * Calls ListWorkloadIdentityPoolProviders.
+                 * @param request ListWorkloadIdentityPoolProvidersRequest message or plain object
+                 * @returns Promise
+                 */
+                public listWorkloadIdentityPoolProviders(request: google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest): Promise<google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse>;
+
+                /**
+                 * Calls GetWorkloadIdentityPoolProvider.
+                 * @param request GetWorkloadIdentityPoolProviderRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and WorkloadIdentityPoolProvider
+                 */
+                public getWorkloadIdentityPoolProvider(request: google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest, callback: google.iam.v1beta.WorkloadIdentityPools.GetWorkloadIdentityPoolProviderCallback): void;
+
+                /**
+                 * Calls GetWorkloadIdentityPoolProvider.
+                 * @param request GetWorkloadIdentityPoolProviderRequest message or plain object
+                 * @returns Promise
+                 */
+                public getWorkloadIdentityPoolProvider(request: google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest): Promise<google.iam.v1beta.WorkloadIdentityPoolProvider>;
+
+                /**
+                 * Calls CreateWorkloadIdentityPoolProvider.
+                 * @param request CreateWorkloadIdentityPoolProviderRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public createWorkloadIdentityPoolProvider(request: google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest, callback: google.iam.v1beta.WorkloadIdentityPools.CreateWorkloadIdentityPoolProviderCallback): void;
+
+                /**
+                 * Calls CreateWorkloadIdentityPoolProvider.
+                 * @param request CreateWorkloadIdentityPoolProviderRequest message or plain object
+                 * @returns Promise
+                 */
+                public createWorkloadIdentityPoolProvider(request: google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls UpdateWorkloadIdentityPoolProvider.
+                 * @param request UpdateWorkloadIdentityPoolProviderRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public updateWorkloadIdentityPoolProvider(request: google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest, callback: google.iam.v1beta.WorkloadIdentityPools.UpdateWorkloadIdentityPoolProviderCallback): void;
+
+                /**
+                 * Calls UpdateWorkloadIdentityPoolProvider.
+                 * @param request UpdateWorkloadIdentityPoolProviderRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateWorkloadIdentityPoolProvider(request: google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls DeleteWorkloadIdentityPoolProvider.
+                 * @param request DeleteWorkloadIdentityPoolProviderRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public deleteWorkloadIdentityPoolProvider(request: google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest, callback: google.iam.v1beta.WorkloadIdentityPools.DeleteWorkloadIdentityPoolProviderCallback): void;
+
+                /**
+                 * Calls DeleteWorkloadIdentityPoolProvider.
+                 * @param request DeleteWorkloadIdentityPoolProviderRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteWorkloadIdentityPoolProvider(request: google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest): Promise<google.longrunning.Operation>;
+
+                /**
+                 * Calls UndeleteWorkloadIdentityPoolProvider.
+                 * @param request UndeleteWorkloadIdentityPoolProviderRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public undeleteWorkloadIdentityPoolProvider(request: google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest, callback: google.iam.v1beta.WorkloadIdentityPools.UndeleteWorkloadIdentityPoolProviderCallback): void;
+
+                /**
+                 * Calls UndeleteWorkloadIdentityPoolProvider.
+                 * @param request UndeleteWorkloadIdentityPoolProviderRequest message or plain object
+                 * @returns Promise
+                 */
+                public undeleteWorkloadIdentityPoolProvider(request: google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest): Promise<google.longrunning.Operation>;
             }
 
-            namespace Policies {
+            namespace WorkloadIdentityPools {
 
                 /**
-                 * Callback as used by {@link google.iam.v2.Policies|listPolicies}.
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|listWorkloadIdentityPools}.
                  * @param error Error, if any
-                 * @param [response] ListPoliciesResponse
+                 * @param [response] ListWorkloadIdentityPoolsResponse
                  */
-                type ListPoliciesCallback = (error: (Error|null), response?: google.iam.v2.ListPoliciesResponse) => void;
+                type ListWorkloadIdentityPoolsCallback = (error: (Error|null), response?: google.iam.v1beta.ListWorkloadIdentityPoolsResponse) => void;
 
                 /**
-                 * Callback as used by {@link google.iam.v2.Policies|getPolicy}.
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|getWorkloadIdentityPool}.
                  * @param error Error, if any
-                 * @param [response] Policy
+                 * @param [response] WorkloadIdentityPool
                  */
-                type GetPolicyCallback = (error: (Error|null), response?: google.iam.v2.Policy) => void;
+                type GetWorkloadIdentityPoolCallback = (error: (Error|null), response?: google.iam.v1beta.WorkloadIdentityPool) => void;
 
                 /**
-                 * Callback as used by {@link google.iam.v2.Policies|createPolicy}.
-                 * @param error Error, if any
-                 * @param [response] Operation
-                 */
-                type CreatePolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v2.Policies|updatePolicy}.
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|createWorkloadIdentityPool}.
                  * @param error Error, if any
                  * @param [response] Operation
                  */
-                type UpdatePolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                type CreateWorkloadIdentityPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                 /**
-                 * Callback as used by {@link google.iam.v2.Policies|deletePolicy}.
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|updateWorkloadIdentityPool}.
                  * @param error Error, if any
                  * @param [response] Operation
                  */
-                type DeletePolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                type UpdateWorkloadIdentityPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|deleteWorkloadIdentityPool}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type DeleteWorkloadIdentityPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|undeleteWorkloadIdentityPool}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type UndeleteWorkloadIdentityPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|listWorkloadIdentityPoolProviders}.
+                 * @param error Error, if any
+                 * @param [response] ListWorkloadIdentityPoolProvidersResponse
+                 */
+                type ListWorkloadIdentityPoolProvidersCallback = (error: (Error|null), response?: google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|getWorkloadIdentityPoolProvider}.
+                 * @param error Error, if any
+                 * @param [response] WorkloadIdentityPoolProvider
+                 */
+                type GetWorkloadIdentityPoolProviderCallback = (error: (Error|null), response?: google.iam.v1beta.WorkloadIdentityPoolProvider) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|createWorkloadIdentityPoolProvider}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type CreateWorkloadIdentityPoolProviderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|updateWorkloadIdentityPoolProvider}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type UpdateWorkloadIdentityPoolProviderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|deleteWorkloadIdentityPoolProvider}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type DeleteWorkloadIdentityPoolProviderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1beta.WorkloadIdentityPools|undeleteWorkloadIdentityPoolProvider}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type UndeleteWorkloadIdentityPoolProviderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
             }
 
-            /** Properties of a Policy. */
-            interface IPolicy {
+            /** Properties of a WorkloadIdentityPool. */
+            interface IWorkloadIdentityPool {
 
-                /** Policy name */
+                /** WorkloadIdentityPool name */
                 name?: (string|null);
 
-                /** Policy uid */
-                uid?: (string|null);
-
-                /** Policy kind */
-                kind?: (string|null);
-
-                /** Policy displayName */
+                /** WorkloadIdentityPool displayName */
                 displayName?: (string|null);
 
-                /** Policy annotations */
-                annotations?: ({ [k: string]: string }|null);
+                /** WorkloadIdentityPool description */
+                description?: (string|null);
 
-                /** Policy etag */
-                etag?: (string|null);
+                /** WorkloadIdentityPool state */
+                state?: (google.iam.v1beta.WorkloadIdentityPool.State|keyof typeof google.iam.v1beta.WorkloadIdentityPool.State|null);
 
-                /** Policy createTime */
-                createTime?: (google.protobuf.ITimestamp|null);
-
-                /** Policy updateTime */
-                updateTime?: (google.protobuf.ITimestamp|null);
-
-                /** Policy deleteTime */
-                deleteTime?: (google.protobuf.ITimestamp|null);
-
-                /** Policy rules */
-                rules?: (google.iam.v2.IPolicyRule[]|null);
-
-                /** Policy managingAuthority */
-                managingAuthority?: (string|null);
+                /** WorkloadIdentityPool disabled */
+                disabled?: (boolean|null);
             }
 
-            /** Represents a Policy. */
-            class Policy implements IPolicy {
+            /** Represents a WorkloadIdentityPool. */
+            class WorkloadIdentityPool implements IWorkloadIdentityPool {
 
                 /**
-                 * Constructs a new Policy.
+                 * Constructs a new WorkloadIdentityPool.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v2.IPolicy);
+                constructor(properties?: google.iam.v1beta.IWorkloadIdentityPool);
 
-                /** Policy name. */
+                /** WorkloadIdentityPool name. */
                 public name: string;
 
-                /** Policy uid. */
-                public uid: string;
-
-                /** Policy kind. */
-                public kind: string;
-
-                /** Policy displayName. */
+                /** WorkloadIdentityPool displayName. */
                 public displayName: string;
 
-                /** Policy annotations. */
-                public annotations: { [k: string]: string };
-
-                /** Policy etag. */
-                public etag: string;
-
-                /** Policy createTime. */
-                public createTime?: (google.protobuf.ITimestamp|null);
-
-                /** Policy updateTime. */
-                public updateTime?: (google.protobuf.ITimestamp|null);
-
-                /** Policy deleteTime. */
-                public deleteTime?: (google.protobuf.ITimestamp|null);
-
-                /** Policy rules. */
-                public rules: google.iam.v2.IPolicyRule[];
-
-                /** Policy managingAuthority. */
-                public managingAuthority: string;
-
-                /**
-                 * Creates a new Policy instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Policy instance
-                 */
-                public static create(properties?: google.iam.v2.IPolicy): google.iam.v2.Policy;
-
-                /**
-                 * Encodes the specified Policy message. Does not implicitly {@link google.iam.v2.Policy.verify|verify} messages.
-                 * @param message Policy message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.iam.v2.Policy.verify|verify} messages.
-                 * @param message Policy message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Policy message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Policy
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.Policy;
-
-                /**
-                 * Decodes a Policy message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Policy
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.Policy;
-
-                /**
-                 * Verifies a Policy message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Policy message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Policy
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.Policy;
-
-                /**
-                 * Creates a plain object from a Policy message. Also converts values to other types if specified.
-                 * @param message Policy
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.Policy, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Policy to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Policy
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a PolicyRule. */
-            interface IPolicyRule {
-
-                /** PolicyRule denyRule */
-                denyRule?: (google.iam.v2.IDenyRule|null);
-
-                /** PolicyRule description */
-                description?: (string|null);
-            }
-
-            /** Represents a PolicyRule. */
-            class PolicyRule implements IPolicyRule {
-
-                /**
-                 * Constructs a new PolicyRule.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IPolicyRule);
-
-                /** PolicyRule denyRule. */
-                public denyRule?: (google.iam.v2.IDenyRule|null);
-
-                /** PolicyRule description. */
+                /** WorkloadIdentityPool description. */
                 public description: string;
 
-                /** PolicyRule kind. */
-                public kind?: "denyRule";
+                /** WorkloadIdentityPool state. */
+                public state: (google.iam.v1beta.WorkloadIdentityPool.State|keyof typeof google.iam.v1beta.WorkloadIdentityPool.State);
+
+                /** WorkloadIdentityPool disabled. */
+                public disabled: boolean;
 
                 /**
-                 * Creates a new PolicyRule instance using the specified properties.
+                 * Creates a new WorkloadIdentityPool instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns PolicyRule instance
+                 * @returns WorkloadIdentityPool instance
                  */
-                public static create(properties?: google.iam.v2.IPolicyRule): google.iam.v2.PolicyRule;
+                public static create(properties?: google.iam.v1beta.IWorkloadIdentityPool): google.iam.v1beta.WorkloadIdentityPool;
 
                 /**
-                 * Encodes the specified PolicyRule message. Does not implicitly {@link google.iam.v2.PolicyRule.verify|verify} messages.
-                 * @param message PolicyRule message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPool message. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPool.verify|verify} messages.
+                 * @param message WorkloadIdentityPool message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v2.IPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IWorkloadIdentityPool, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified PolicyRule message, length delimited. Does not implicitly {@link google.iam.v2.PolicyRule.verify|verify} messages.
-                 * @param message PolicyRule message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPool message, length delimited. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPool.verify|verify} messages.
+                 * @param message WorkloadIdentityPool message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v2.IPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IWorkloadIdentityPool, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a PolicyRule message from the specified reader or buffer.
+                 * Decodes a WorkloadIdentityPool message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns PolicyRule
+                 * @returns WorkloadIdentityPool
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.PolicyRule;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.WorkloadIdentityPool;
 
                 /**
-                 * Decodes a PolicyRule message from the specified reader or buffer, length delimited.
+                 * Decodes a WorkloadIdentityPool message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns PolicyRule
+                 * @returns WorkloadIdentityPool
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.PolicyRule;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.WorkloadIdentityPool;
 
                 /**
-                 * Verifies a PolicyRule message.
+                 * Verifies a WorkloadIdentityPool message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a PolicyRule message from a plain object. Also converts values to their respective internal types.
+                 * Creates a WorkloadIdentityPool message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns PolicyRule
+                 * @returns WorkloadIdentityPool
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.PolicyRule;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.WorkloadIdentityPool;
 
                 /**
-                 * Creates a plain object from a PolicyRule message. Also converts values to other types if specified.
-                 * @param message PolicyRule
+                 * Creates a plain object from a WorkloadIdentityPool message. Also converts values to other types if specified.
+                 * @param message WorkloadIdentityPool
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v2.PolicyRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.WorkloadIdentityPool, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this PolicyRule to JSON.
+                 * Converts this WorkloadIdentityPool to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for PolicyRule
+                 * Gets the default type url for WorkloadIdentityPool
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a ListPoliciesRequest. */
-            interface IListPoliciesRequest {
+            namespace WorkloadIdentityPool {
 
-                /** ListPoliciesRequest parent */
-                parent?: (string|null);
-
-                /** ListPoliciesRequest pageSize */
-                pageSize?: (number|null);
-
-                /** ListPoliciesRequest pageToken */
-                pageToken?: (string|null);
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    DELETED = 2
+                }
             }
 
-            /** Represents a ListPoliciesRequest. */
-            class ListPoliciesRequest implements IListPoliciesRequest {
+            /** Properties of a WorkloadIdentityPoolProvider. */
+            interface IWorkloadIdentityPoolProvider {
 
-                /**
-                 * Constructs a new ListPoliciesRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IListPoliciesRequest);
-
-                /** ListPoliciesRequest parent. */
-                public parent: string;
-
-                /** ListPoliciesRequest pageSize. */
-                public pageSize: number;
-
-                /** ListPoliciesRequest pageToken. */
-                public pageToken: string;
-
-                /**
-                 * Creates a new ListPoliciesRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListPoliciesRequest instance
-                 */
-                public static create(properties?: google.iam.v2.IListPoliciesRequest): google.iam.v2.ListPoliciesRequest;
-
-                /**
-                 * Encodes the specified ListPoliciesRequest message. Does not implicitly {@link google.iam.v2.ListPoliciesRequest.verify|verify} messages.
-                 * @param message ListPoliciesRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IListPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListPoliciesRequest message, length delimited. Does not implicitly {@link google.iam.v2.ListPoliciesRequest.verify|verify} messages.
-                 * @param message ListPoliciesRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IListPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListPoliciesRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListPoliciesRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.ListPoliciesRequest;
-
-                /**
-                 * Decodes a ListPoliciesRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListPoliciesRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.ListPoliciesRequest;
-
-                /**
-                 * Verifies a ListPoliciesRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListPoliciesRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListPoliciesRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.ListPoliciesRequest;
-
-                /**
-                 * Creates a plain object from a ListPoliciesRequest message. Also converts values to other types if specified.
-                 * @param message ListPoliciesRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.ListPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListPoliciesRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListPoliciesRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListPoliciesResponse. */
-            interface IListPoliciesResponse {
-
-                /** ListPoliciesResponse policies */
-                policies?: (google.iam.v2.IPolicy[]|null);
-
-                /** ListPoliciesResponse nextPageToken */
-                nextPageToken?: (string|null);
-            }
-
-            /** Represents a ListPoliciesResponse. */
-            class ListPoliciesResponse implements IListPoliciesResponse {
-
-                /**
-                 * Constructs a new ListPoliciesResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IListPoliciesResponse);
-
-                /** ListPoliciesResponse policies. */
-                public policies: google.iam.v2.IPolicy[];
-
-                /** ListPoliciesResponse nextPageToken. */
-                public nextPageToken: string;
-
-                /**
-                 * Creates a new ListPoliciesResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListPoliciesResponse instance
-                 */
-                public static create(properties?: google.iam.v2.IListPoliciesResponse): google.iam.v2.ListPoliciesResponse;
-
-                /**
-                 * Encodes the specified ListPoliciesResponse message. Does not implicitly {@link google.iam.v2.ListPoliciesResponse.verify|verify} messages.
-                 * @param message ListPoliciesResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IListPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListPoliciesResponse message, length delimited. Does not implicitly {@link google.iam.v2.ListPoliciesResponse.verify|verify} messages.
-                 * @param message ListPoliciesResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IListPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListPoliciesResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListPoliciesResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.ListPoliciesResponse;
-
-                /**
-                 * Decodes a ListPoliciesResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListPoliciesResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.ListPoliciesResponse;
-
-                /**
-                 * Verifies a ListPoliciesResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListPoliciesResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListPoliciesResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.ListPoliciesResponse;
-
-                /**
-                 * Creates a plain object from a ListPoliciesResponse message. Also converts values to other types if specified.
-                 * @param message ListPoliciesResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.ListPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListPoliciesResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListPoliciesResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a GetPolicyRequest. */
-            interface IGetPolicyRequest {
-
-                /** GetPolicyRequest name */
-                name?: (string|null);
-            }
-
-            /** Represents a GetPolicyRequest. */
-            class GetPolicyRequest implements IGetPolicyRequest {
-
-                /**
-                 * Constructs a new GetPolicyRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IGetPolicyRequest);
-
-                /** GetPolicyRequest name. */
-                public name: string;
-
-                /**
-                 * Creates a new GetPolicyRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns GetPolicyRequest instance
-                 */
-                public static create(properties?: google.iam.v2.IGetPolicyRequest): google.iam.v2.GetPolicyRequest;
-
-                /**
-                 * Encodes the specified GetPolicyRequest message. Does not implicitly {@link google.iam.v2.GetPolicyRequest.verify|verify} messages.
-                 * @param message GetPolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IGetPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified GetPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v2.GetPolicyRequest.verify|verify} messages.
-                 * @param message GetPolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IGetPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a GetPolicyRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns GetPolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.GetPolicyRequest;
-
-                /**
-                 * Decodes a GetPolicyRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns GetPolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.GetPolicyRequest;
-
-                /**
-                 * Verifies a GetPolicyRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a GetPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns GetPolicyRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.GetPolicyRequest;
-
-                /**
-                 * Creates a plain object from a GetPolicyRequest message. Also converts values to other types if specified.
-                 * @param message GetPolicyRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.GetPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this GetPolicyRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for GetPolicyRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a CreatePolicyRequest. */
-            interface ICreatePolicyRequest {
-
-                /** CreatePolicyRequest parent */
-                parent?: (string|null);
-
-                /** CreatePolicyRequest policy */
-                policy?: (google.iam.v2.IPolicy|null);
-
-                /** CreatePolicyRequest policyId */
-                policyId?: (string|null);
-            }
-
-            /** Represents a CreatePolicyRequest. */
-            class CreatePolicyRequest implements ICreatePolicyRequest {
-
-                /**
-                 * Constructs a new CreatePolicyRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.ICreatePolicyRequest);
-
-                /** CreatePolicyRequest parent. */
-                public parent: string;
-
-                /** CreatePolicyRequest policy. */
-                public policy?: (google.iam.v2.IPolicy|null);
-
-                /** CreatePolicyRequest policyId. */
-                public policyId: string;
-
-                /**
-                 * Creates a new CreatePolicyRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns CreatePolicyRequest instance
-                 */
-                public static create(properties?: google.iam.v2.ICreatePolicyRequest): google.iam.v2.CreatePolicyRequest;
-
-                /**
-                 * Encodes the specified CreatePolicyRequest message. Does not implicitly {@link google.iam.v2.CreatePolicyRequest.verify|verify} messages.
-                 * @param message CreatePolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.ICreatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified CreatePolicyRequest message, length delimited. Does not implicitly {@link google.iam.v2.CreatePolicyRequest.verify|verify} messages.
-                 * @param message CreatePolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.ICreatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a CreatePolicyRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns CreatePolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.CreatePolicyRequest;
-
-                /**
-                 * Decodes a CreatePolicyRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns CreatePolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.CreatePolicyRequest;
-
-                /**
-                 * Verifies a CreatePolicyRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a CreatePolicyRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns CreatePolicyRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.CreatePolicyRequest;
-
-                /**
-                 * Creates a plain object from a CreatePolicyRequest message. Also converts values to other types if specified.
-                 * @param message CreatePolicyRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.CreatePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this CreatePolicyRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for CreatePolicyRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of an UpdatePolicyRequest. */
-            interface IUpdatePolicyRequest {
-
-                /** UpdatePolicyRequest policy */
-                policy?: (google.iam.v2.IPolicy|null);
-            }
-
-            /** Represents an UpdatePolicyRequest. */
-            class UpdatePolicyRequest implements IUpdatePolicyRequest {
-
-                /**
-                 * Constructs a new UpdatePolicyRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IUpdatePolicyRequest);
-
-                /** UpdatePolicyRequest policy. */
-                public policy?: (google.iam.v2.IPolicy|null);
-
-                /**
-                 * Creates a new UpdatePolicyRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns UpdatePolicyRequest instance
-                 */
-                public static create(properties?: google.iam.v2.IUpdatePolicyRequest): google.iam.v2.UpdatePolicyRequest;
-
-                /**
-                 * Encodes the specified UpdatePolicyRequest message. Does not implicitly {@link google.iam.v2.UpdatePolicyRequest.verify|verify} messages.
-                 * @param message UpdatePolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IUpdatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified UpdatePolicyRequest message, length delimited. Does not implicitly {@link google.iam.v2.UpdatePolicyRequest.verify|verify} messages.
-                 * @param message UpdatePolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IUpdatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an UpdatePolicyRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns UpdatePolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.UpdatePolicyRequest;
-
-                /**
-                 * Decodes an UpdatePolicyRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns UpdatePolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.UpdatePolicyRequest;
-
-                /**
-                 * Verifies an UpdatePolicyRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an UpdatePolicyRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns UpdatePolicyRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.UpdatePolicyRequest;
-
-                /**
-                 * Creates a plain object from an UpdatePolicyRequest message. Also converts values to other types if specified.
-                 * @param message UpdatePolicyRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.UpdatePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this UpdatePolicyRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for UpdatePolicyRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a DeletePolicyRequest. */
-            interface IDeletePolicyRequest {
-
-                /** DeletePolicyRequest name */
+                /** WorkloadIdentityPoolProvider name */
                 name?: (string|null);
 
-                /** DeletePolicyRequest etag */
-                etag?: (string|null);
-            }
-
-            /** Represents a DeletePolicyRequest. */
-            class DeletePolicyRequest implements IDeletePolicyRequest {
-
-                /**
-                 * Constructs a new DeletePolicyRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IDeletePolicyRequest);
-
-                /** DeletePolicyRequest name. */
-                public name: string;
-
-                /** DeletePolicyRequest etag. */
-                public etag: string;
-
-                /**
-                 * Creates a new DeletePolicyRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DeletePolicyRequest instance
-                 */
-                public static create(properties?: google.iam.v2.IDeletePolicyRequest): google.iam.v2.DeletePolicyRequest;
-
-                /**
-                 * Encodes the specified DeletePolicyRequest message. Does not implicitly {@link google.iam.v2.DeletePolicyRequest.verify|verify} messages.
-                 * @param message DeletePolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IDeletePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DeletePolicyRequest message, length delimited. Does not implicitly {@link google.iam.v2.DeletePolicyRequest.verify|verify} messages.
-                 * @param message DeletePolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IDeletePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DeletePolicyRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DeletePolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.DeletePolicyRequest;
-
-                /**
-                 * Decodes a DeletePolicyRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DeletePolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.DeletePolicyRequest;
-
-                /**
-                 * Verifies a DeletePolicyRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DeletePolicyRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DeletePolicyRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.DeletePolicyRequest;
-
-                /**
-                 * Creates a plain object from a DeletePolicyRequest message. Also converts values to other types if specified.
-                 * @param message DeletePolicyRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.DeletePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DeletePolicyRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DeletePolicyRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a PolicyOperationMetadata. */
-            interface IPolicyOperationMetadata {
-
-                /** PolicyOperationMetadata createTime */
-                createTime?: (google.protobuf.ITimestamp|null);
-            }
-
-            /** Represents a PolicyOperationMetadata. */
-            class PolicyOperationMetadata implements IPolicyOperationMetadata {
-
-                /**
-                 * Constructs a new PolicyOperationMetadata.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v2.IPolicyOperationMetadata);
-
-                /** PolicyOperationMetadata createTime. */
-                public createTime?: (google.protobuf.ITimestamp|null);
-
-                /**
-                 * Creates a new PolicyOperationMetadata instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns PolicyOperationMetadata instance
-                 */
-                public static create(properties?: google.iam.v2.IPolicyOperationMetadata): google.iam.v2.PolicyOperationMetadata;
-
-                /**
-                 * Encodes the specified PolicyOperationMetadata message. Does not implicitly {@link google.iam.v2.PolicyOperationMetadata.verify|verify} messages.
-                 * @param message PolicyOperationMetadata message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v2.IPolicyOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified PolicyOperationMetadata message, length delimited. Does not implicitly {@link google.iam.v2.PolicyOperationMetadata.verify|verify} messages.
-                 * @param message PolicyOperationMetadata message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v2.IPolicyOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a PolicyOperationMetadata message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns PolicyOperationMetadata
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v2.PolicyOperationMetadata;
-
-                /**
-                 * Decodes a PolicyOperationMetadata message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns PolicyOperationMetadata
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v2.PolicyOperationMetadata;
-
-                /**
-                 * Verifies a PolicyOperationMetadata message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a PolicyOperationMetadata message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns PolicyOperationMetadata
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v2.PolicyOperationMetadata;
-
-                /**
-                 * Creates a plain object from a PolicyOperationMetadata message. Also converts values to other types if specified.
-                 * @param message PolicyOperationMetadata
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v2.PolicyOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this PolicyOperationMetadata to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for PolicyOperationMetadata
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-        }
-
-        /** Namespace v3. */
-        namespace v3 {
-
-            /** Properties of an OperationMetadata. */
-            interface IOperationMetadata {
-
-                /** OperationMetadata createTime */
-                createTime?: (google.protobuf.ITimestamp|null);
-
-                /** OperationMetadata endTime */
-                endTime?: (google.protobuf.ITimestamp|null);
-
-                /** OperationMetadata target */
-                target?: (string|null);
-
-                /** OperationMetadata verb */
-                verb?: (string|null);
-
-                /** OperationMetadata statusMessage */
-                statusMessage?: (string|null);
-
-                /** OperationMetadata requestedCancellation */
-                requestedCancellation?: (boolean|null);
-
-                /** OperationMetadata apiVersion */
-                apiVersion?: (string|null);
-            }
-
-            /** Represents an OperationMetadata. */
-            class OperationMetadata implements IOperationMetadata {
-
-                /**
-                 * Constructs a new OperationMetadata.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IOperationMetadata);
-
-                /** OperationMetadata createTime. */
-                public createTime?: (google.protobuf.ITimestamp|null);
-
-                /** OperationMetadata endTime. */
-                public endTime?: (google.protobuf.ITimestamp|null);
-
-                /** OperationMetadata target. */
-                public target: string;
-
-                /** OperationMetadata verb. */
-                public verb: string;
-
-                /** OperationMetadata statusMessage. */
-                public statusMessage: string;
-
-                /** OperationMetadata requestedCancellation. */
-                public requestedCancellation: boolean;
-
-                /** OperationMetadata apiVersion. */
-                public apiVersion: string;
-
-                /**
-                 * Creates a new OperationMetadata instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns OperationMetadata instance
-                 */
-                public static create(properties?: google.iam.v3.IOperationMetadata): google.iam.v3.OperationMetadata;
-
-                /**
-                 * Encodes the specified OperationMetadata message. Does not implicitly {@link google.iam.v3.OperationMetadata.verify|verify} messages.
-                 * @param message OperationMetadata message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.iam.v3.OperationMetadata.verify|verify} messages.
-                 * @param message OperationMetadata message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an OperationMetadata message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns OperationMetadata
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.OperationMetadata;
-
-                /**
-                 * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns OperationMetadata
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.OperationMetadata;
-
-                /**
-                 * Verifies an OperationMetadata message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns OperationMetadata
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.OperationMetadata;
-
-                /**
-                 * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                 * @param message OperationMetadata
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this OperationMetadata to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for OperationMetadata
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a PolicyBinding. */
-            interface IPolicyBinding {
-
-                /** PolicyBinding name */
-                name?: (string|null);
-
-                /** PolicyBinding uid */
-                uid?: (string|null);
-
-                /** PolicyBinding etag */
-                etag?: (string|null);
-
-                /** PolicyBinding displayName */
+                /** WorkloadIdentityPoolProvider displayName */
                 displayName?: (string|null);
 
-                /** PolicyBinding annotations */
-                annotations?: ({ [k: string]: string }|null);
+                /** WorkloadIdentityPoolProvider description */
+                description?: (string|null);
 
-                /** PolicyBinding target */
-                target?: (google.iam.v3.PolicyBinding.ITarget|null);
+                /** WorkloadIdentityPoolProvider state */
+                state?: (google.iam.v1beta.WorkloadIdentityPoolProvider.State|keyof typeof google.iam.v1beta.WorkloadIdentityPoolProvider.State|null);
 
-                /** PolicyBinding policyKind */
-                policyKind?: (google.iam.v3.PolicyBinding.PolicyKind|keyof typeof google.iam.v3.PolicyBinding.PolicyKind|null);
+                /** WorkloadIdentityPoolProvider disabled */
+                disabled?: (boolean|null);
 
-                /** PolicyBinding policy */
-                policy?: (string|null);
+                /** WorkloadIdentityPoolProvider attributeMapping */
+                attributeMapping?: ({ [k: string]: string }|null);
 
-                /** PolicyBinding policyUid */
-                policyUid?: (string|null);
+                /** WorkloadIdentityPoolProvider attributeCondition */
+                attributeCondition?: (string|null);
 
-                /** PolicyBinding condition */
-                condition?: (google.type.IExpr|null);
+                /** WorkloadIdentityPoolProvider aws */
+                aws?: (google.iam.v1beta.WorkloadIdentityPoolProvider.IAws|null);
 
-                /** PolicyBinding createTime */
-                createTime?: (google.protobuf.ITimestamp|null);
-
-                /** PolicyBinding updateTime */
-                updateTime?: (google.protobuf.ITimestamp|null);
+                /** WorkloadIdentityPoolProvider oidc */
+                oidc?: (google.iam.v1beta.WorkloadIdentityPoolProvider.IOidc|null);
             }
 
-            /** Represents a PolicyBinding. */
-            class PolicyBinding implements IPolicyBinding {
+            /** Represents a WorkloadIdentityPoolProvider. */
+            class WorkloadIdentityPoolProvider implements IWorkloadIdentityPoolProvider {
 
                 /**
-                 * Constructs a new PolicyBinding.
+                 * Constructs a new WorkloadIdentityPoolProvider.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.IPolicyBinding);
+                constructor(properties?: google.iam.v1beta.IWorkloadIdentityPoolProvider);
 
-                /** PolicyBinding name. */
+                /** WorkloadIdentityPoolProvider name. */
                 public name: string;
 
-                /** PolicyBinding uid. */
-                public uid: string;
-
-                /** PolicyBinding etag. */
-                public etag: string;
-
-                /** PolicyBinding displayName. */
+                /** WorkloadIdentityPoolProvider displayName. */
                 public displayName: string;
 
-                /** PolicyBinding annotations. */
-                public annotations: { [k: string]: string };
+                /** WorkloadIdentityPoolProvider description. */
+                public description: string;
 
-                /** PolicyBinding target. */
-                public target?: (google.iam.v3.PolicyBinding.ITarget|null);
+                /** WorkloadIdentityPoolProvider state. */
+                public state: (google.iam.v1beta.WorkloadIdentityPoolProvider.State|keyof typeof google.iam.v1beta.WorkloadIdentityPoolProvider.State);
 
-                /** PolicyBinding policyKind. */
-                public policyKind: (google.iam.v3.PolicyBinding.PolicyKind|keyof typeof google.iam.v3.PolicyBinding.PolicyKind);
+                /** WorkloadIdentityPoolProvider disabled. */
+                public disabled: boolean;
 
-                /** PolicyBinding policy. */
-                public policy: string;
+                /** WorkloadIdentityPoolProvider attributeMapping. */
+                public attributeMapping: { [k: string]: string };
 
-                /** PolicyBinding policyUid. */
-                public policyUid: string;
+                /** WorkloadIdentityPoolProvider attributeCondition. */
+                public attributeCondition: string;
 
-                /** PolicyBinding condition. */
-                public condition?: (google.type.IExpr|null);
+                /** WorkloadIdentityPoolProvider aws. */
+                public aws?: (google.iam.v1beta.WorkloadIdentityPoolProvider.IAws|null);
 
-                /** PolicyBinding createTime. */
-                public createTime?: (google.protobuf.ITimestamp|null);
+                /** WorkloadIdentityPoolProvider oidc. */
+                public oidc?: (google.iam.v1beta.WorkloadIdentityPoolProvider.IOidc|null);
 
-                /** PolicyBinding updateTime. */
-                public updateTime?: (google.protobuf.ITimestamp|null);
+                /** WorkloadIdentityPoolProvider providerConfig. */
+                public providerConfig?: ("aws"|"oidc");
 
                 /**
-                 * Creates a new PolicyBinding instance using the specified properties.
+                 * Creates a new WorkloadIdentityPoolProvider instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns PolicyBinding instance
+                 * @returns WorkloadIdentityPoolProvider instance
                  */
-                public static create(properties?: google.iam.v3.IPolicyBinding): google.iam.v3.PolicyBinding;
+                public static create(properties?: google.iam.v1beta.IWorkloadIdentityPoolProvider): google.iam.v1beta.WorkloadIdentityPoolProvider;
 
                 /**
-                 * Encodes the specified PolicyBinding message. Does not implicitly {@link google.iam.v3.PolicyBinding.verify|verify} messages.
-                 * @param message PolicyBinding message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPoolProvider message. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProvider.verify|verify} messages.
+                 * @param message WorkloadIdentityPoolProvider message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.IPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IWorkloadIdentityPoolProvider, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified PolicyBinding message, length delimited. Does not implicitly {@link google.iam.v3.PolicyBinding.verify|verify} messages.
-                 * @param message PolicyBinding message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPoolProvider message, length delimited. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProvider.verify|verify} messages.
+                 * @param message WorkloadIdentityPoolProvider message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.IPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IWorkloadIdentityPoolProvider, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a PolicyBinding message from the specified reader or buffer.
+                 * Decodes a WorkloadIdentityPoolProvider message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns PolicyBinding
+                 * @returns WorkloadIdentityPoolProvider
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.PolicyBinding;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.WorkloadIdentityPoolProvider;
 
                 /**
-                 * Decodes a PolicyBinding message from the specified reader or buffer, length delimited.
+                 * Decodes a WorkloadIdentityPoolProvider message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns PolicyBinding
+                 * @returns WorkloadIdentityPoolProvider
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.PolicyBinding;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.WorkloadIdentityPoolProvider;
 
                 /**
-                 * Verifies a PolicyBinding message.
+                 * Verifies a WorkloadIdentityPoolProvider message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a PolicyBinding message from a plain object. Also converts values to their respective internal types.
+                 * Creates a WorkloadIdentityPoolProvider message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns PolicyBinding
+                 * @returns WorkloadIdentityPoolProvider
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.PolicyBinding;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.WorkloadIdentityPoolProvider;
 
                 /**
-                 * Creates a plain object from a PolicyBinding message. Also converts values to other types if specified.
-                 * @param message PolicyBinding
+                 * Creates a plain object from a WorkloadIdentityPoolProvider message. Also converts values to other types if specified.
+                 * @param message WorkloadIdentityPoolProvider
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.PolicyBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.WorkloadIdentityPoolProvider, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this PolicyBinding to JSON.
+                 * Converts this WorkloadIdentityPoolProvider to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for PolicyBinding
+                 * Gets the default type url for WorkloadIdentityPoolProvider
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            namespace PolicyBinding {
+            namespace WorkloadIdentityPoolProvider {
 
-                /** Properties of a Target. */
-                interface ITarget {
+                /** Properties of an Aws. */
+                interface IAws {
 
-                    /** Target principalSet */
-                    principalSet?: (string|null);
+                    /** Aws accountId */
+                    accountId?: (string|null);
                 }
 
-                /** Represents a Target. */
-                class Target implements ITarget {
+                /** Represents an Aws. */
+                class Aws implements IAws {
 
                     /**
-                     * Constructs a new Target.
+                     * Constructs a new Aws.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.iam.v3.PolicyBinding.ITarget);
+                    constructor(properties?: google.iam.v1beta.WorkloadIdentityPoolProvider.IAws);
 
-                    /** Target principalSet. */
-                    public principalSet?: (string|null);
-
-                    /** Target target. */
-                    public target?: "principalSet";
+                    /** Aws accountId. */
+                    public accountId: string;
 
                     /**
-                     * Creates a new Target instance using the specified properties.
+                     * Creates a new Aws instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns Target instance
+                     * @returns Aws instance
                      */
-                    public static create(properties?: google.iam.v3.PolicyBinding.ITarget): google.iam.v3.PolicyBinding.Target;
+                    public static create(properties?: google.iam.v1beta.WorkloadIdentityPoolProvider.IAws): google.iam.v1beta.WorkloadIdentityPoolProvider.Aws;
 
                     /**
-                     * Encodes the specified Target message. Does not implicitly {@link google.iam.v3.PolicyBinding.Target.verify|verify} messages.
-                     * @param message Target message or plain object to encode
+                     * Encodes the specified Aws message. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProvider.Aws.verify|verify} messages.
+                     * @param message Aws message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.iam.v3.PolicyBinding.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.iam.v1beta.WorkloadIdentityPoolProvider.IAws, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Target message, length delimited. Does not implicitly {@link google.iam.v3.PolicyBinding.Target.verify|verify} messages.
-                     * @param message Target message or plain object to encode
+                     * Encodes the specified Aws message, length delimited. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProvider.Aws.verify|verify} messages.
+                     * @param message Aws message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.iam.v3.PolicyBinding.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.iam.v1beta.WorkloadIdentityPoolProvider.IAws, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a Target message from the specified reader or buffer.
+                     * Decodes an Aws message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns Target
+                     * @returns Aws
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.PolicyBinding.Target;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.WorkloadIdentityPoolProvider.Aws;
 
                     /**
-                     * Decodes a Target message from the specified reader or buffer, length delimited.
+                     * Decodes an Aws message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns Target
+                     * @returns Aws
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.PolicyBinding.Target;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.WorkloadIdentityPoolProvider.Aws;
 
                     /**
-                     * Verifies a Target message.
+                     * Verifies an Aws message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a Target message from a plain object. Also converts values to their respective internal types.
+                     * Creates an Aws message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns Target
+                     * @returns Aws
                      */
-                    public static fromObject(object: { [k: string]: any }): google.iam.v3.PolicyBinding.Target;
+                    public static fromObject(object: { [k: string]: any }): google.iam.v1beta.WorkloadIdentityPoolProvider.Aws;
 
                     /**
-                     * Creates a plain object from a Target message. Also converts values to other types if specified.
-                     * @param message Target
+                     * Creates a plain object from an Aws message. Also converts values to other types if specified.
+                     * @param message Aws
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.iam.v3.PolicyBinding.Target, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.iam.v1beta.WorkloadIdentityPoolProvider.Aws, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this Target to JSON.
+                     * Converts this Aws to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for Target
+                     * Gets the default type url for Aws
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** PolicyKind enum. */
-                enum PolicyKind {
-                    POLICY_KIND_UNSPECIFIED = 0,
-                    PRINCIPAL_ACCESS_BOUNDARY = 1
+                /** Properties of an Oidc. */
+                interface IOidc {
+
+                    /** Oidc issuerUri */
+                    issuerUri?: (string|null);
+
+                    /** Oidc allowedAudiences */
+                    allowedAudiences?: (string[]|null);
+                }
+
+                /** Represents an Oidc. */
+                class Oidc implements IOidc {
+
+                    /**
+                     * Constructs a new Oidc.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.iam.v1beta.WorkloadIdentityPoolProvider.IOidc);
+
+                    /** Oidc issuerUri. */
+                    public issuerUri: string;
+
+                    /** Oidc allowedAudiences. */
+                    public allowedAudiences: string[];
+
+                    /**
+                     * Creates a new Oidc instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Oidc instance
+                     */
+                    public static create(properties?: google.iam.v1beta.WorkloadIdentityPoolProvider.IOidc): google.iam.v1beta.WorkloadIdentityPoolProvider.Oidc;
+
+                    /**
+                     * Encodes the specified Oidc message. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProvider.Oidc.verify|verify} messages.
+                     * @param message Oidc message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.iam.v1beta.WorkloadIdentityPoolProvider.IOidc, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Oidc message, length delimited. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProvider.Oidc.verify|verify} messages.
+                     * @param message Oidc message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.iam.v1beta.WorkloadIdentityPoolProvider.IOidc, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Oidc message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Oidc
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.WorkloadIdentityPoolProvider.Oidc;
+
+                    /**
+                     * Decodes an Oidc message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Oidc
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.WorkloadIdentityPoolProvider.Oidc;
+
+                    /**
+                     * Verifies an Oidc message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Oidc message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Oidc
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.iam.v1beta.WorkloadIdentityPoolProvider.Oidc;
+
+                    /**
+                     * Creates a plain object from an Oidc message. Also converts values to other types if specified.
+                     * @param message Oidc
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.iam.v1beta.WorkloadIdentityPoolProvider.Oidc, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Oidc to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Oidc
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    DELETED = 2
                 }
             }
 
-            /** Represents a PolicyBindings */
-            class PolicyBindings extends $protobuf.rpc.Service {
+            /** Properties of a ListWorkloadIdentityPoolsRequest. */
+            interface IListWorkloadIdentityPoolsRequest {
 
-                /**
-                 * Constructs a new PolicyBindings service.
-                 * @param rpcImpl RPC implementation
-                 * @param [requestDelimited=false] Whether requests are length-delimited
-                 * @param [responseDelimited=false] Whether responses are length-delimited
-                 */
-                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                /**
-                 * Creates new PolicyBindings service using the specified rpc implementation.
-                 * @param rpcImpl RPC implementation
-                 * @param [requestDelimited=false] Whether requests are length-delimited
-                 * @param [responseDelimited=false] Whether responses are length-delimited
-                 * @returns RPC service. Useful where requests and/or responses are streamed.
-                 */
-                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyBindings;
-
-                /**
-                 * Calls CreatePolicyBinding.
-                 * @param request CreatePolicyBindingRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Operation
-                 */
-                public createPolicyBinding(request: google.iam.v3.ICreatePolicyBindingRequest, callback: google.iam.v3.PolicyBindings.CreatePolicyBindingCallback): void;
-
-                /**
-                 * Calls CreatePolicyBinding.
-                 * @param request CreatePolicyBindingRequest message or plain object
-                 * @returns Promise
-                 */
-                public createPolicyBinding(request: google.iam.v3.ICreatePolicyBindingRequest): Promise<google.longrunning.Operation>;
-
-                /**
-                 * Calls GetPolicyBinding.
-                 * @param request GetPolicyBindingRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and PolicyBinding
-                 */
-                public getPolicyBinding(request: google.iam.v3.IGetPolicyBindingRequest, callback: google.iam.v3.PolicyBindings.GetPolicyBindingCallback): void;
-
-                /**
-                 * Calls GetPolicyBinding.
-                 * @param request GetPolicyBindingRequest message or plain object
-                 * @returns Promise
-                 */
-                public getPolicyBinding(request: google.iam.v3.IGetPolicyBindingRequest): Promise<google.iam.v3.PolicyBinding>;
-
-                /**
-                 * Calls UpdatePolicyBinding.
-                 * @param request UpdatePolicyBindingRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Operation
-                 */
-                public updatePolicyBinding(request: google.iam.v3.IUpdatePolicyBindingRequest, callback: google.iam.v3.PolicyBindings.UpdatePolicyBindingCallback): void;
-
-                /**
-                 * Calls UpdatePolicyBinding.
-                 * @param request UpdatePolicyBindingRequest message or plain object
-                 * @returns Promise
-                 */
-                public updatePolicyBinding(request: google.iam.v3.IUpdatePolicyBindingRequest): Promise<google.longrunning.Operation>;
-
-                /**
-                 * Calls DeletePolicyBinding.
-                 * @param request DeletePolicyBindingRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Operation
-                 */
-                public deletePolicyBinding(request: google.iam.v3.IDeletePolicyBindingRequest, callback: google.iam.v3.PolicyBindings.DeletePolicyBindingCallback): void;
-
-                /**
-                 * Calls DeletePolicyBinding.
-                 * @param request DeletePolicyBindingRequest message or plain object
-                 * @returns Promise
-                 */
-                public deletePolicyBinding(request: google.iam.v3.IDeletePolicyBindingRequest): Promise<google.longrunning.Operation>;
-
-                /**
-                 * Calls ListPolicyBindings.
-                 * @param request ListPolicyBindingsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and ListPolicyBindingsResponse
-                 */
-                public listPolicyBindings(request: google.iam.v3.IListPolicyBindingsRequest, callback: google.iam.v3.PolicyBindings.ListPolicyBindingsCallback): void;
-
-                /**
-                 * Calls ListPolicyBindings.
-                 * @param request ListPolicyBindingsRequest message or plain object
-                 * @returns Promise
-                 */
-                public listPolicyBindings(request: google.iam.v3.IListPolicyBindingsRequest): Promise<google.iam.v3.ListPolicyBindingsResponse>;
-
-                /**
-                 * Calls SearchTargetPolicyBindings.
-                 * @param request SearchTargetPolicyBindingsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and SearchTargetPolicyBindingsResponse
-                 */
-                public searchTargetPolicyBindings(request: google.iam.v3.ISearchTargetPolicyBindingsRequest, callback: google.iam.v3.PolicyBindings.SearchTargetPolicyBindingsCallback): void;
-
-                /**
-                 * Calls SearchTargetPolicyBindings.
-                 * @param request SearchTargetPolicyBindingsRequest message or plain object
-                 * @returns Promise
-                 */
-                public searchTargetPolicyBindings(request: google.iam.v3.ISearchTargetPolicyBindingsRequest): Promise<google.iam.v3.SearchTargetPolicyBindingsResponse>;
-            }
-
-            namespace PolicyBindings {
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PolicyBindings|createPolicyBinding}.
-                 * @param error Error, if any
-                 * @param [response] Operation
-                 */
-                type CreatePolicyBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PolicyBindings|getPolicyBinding}.
-                 * @param error Error, if any
-                 * @param [response] PolicyBinding
-                 */
-                type GetPolicyBindingCallback = (error: (Error|null), response?: google.iam.v3.PolicyBinding) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PolicyBindings|updatePolicyBinding}.
-                 * @param error Error, if any
-                 * @param [response] Operation
-                 */
-                type UpdatePolicyBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PolicyBindings|deletePolicyBinding}.
-                 * @param error Error, if any
-                 * @param [response] Operation
-                 */
-                type DeletePolicyBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PolicyBindings|listPolicyBindings}.
-                 * @param error Error, if any
-                 * @param [response] ListPolicyBindingsResponse
-                 */
-                type ListPolicyBindingsCallback = (error: (Error|null), response?: google.iam.v3.ListPolicyBindingsResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PolicyBindings|searchTargetPolicyBindings}.
-                 * @param error Error, if any
-                 * @param [response] SearchTargetPolicyBindingsResponse
-                 */
-                type SearchTargetPolicyBindingsCallback = (error: (Error|null), response?: google.iam.v3.SearchTargetPolicyBindingsResponse) => void;
-            }
-
-            /** Properties of a CreatePolicyBindingRequest. */
-            interface ICreatePolicyBindingRequest {
-
-                /** CreatePolicyBindingRequest parent */
+                /** ListWorkloadIdentityPoolsRequest parent */
                 parent?: (string|null);
 
-                /** CreatePolicyBindingRequest policyBindingId */
-                policyBindingId?: (string|null);
+                /** ListWorkloadIdentityPoolsRequest pageSize */
+                pageSize?: (number|null);
 
-                /** CreatePolicyBindingRequest policyBinding */
-                policyBinding?: (google.iam.v3.IPolicyBinding|null);
+                /** ListWorkloadIdentityPoolsRequest pageToken */
+                pageToken?: (string|null);
 
-                /** CreatePolicyBindingRequest validateOnly */
-                validateOnly?: (boolean|null);
+                /** ListWorkloadIdentityPoolsRequest showDeleted */
+                showDeleted?: (boolean|null);
             }
 
-            /** Represents a CreatePolicyBindingRequest. */
-            class CreatePolicyBindingRequest implements ICreatePolicyBindingRequest {
+            /** Represents a ListWorkloadIdentityPoolsRequest. */
+            class ListWorkloadIdentityPoolsRequest implements IListWorkloadIdentityPoolsRequest {
 
                 /**
-                 * Constructs a new CreatePolicyBindingRequest.
+                 * Constructs a new ListWorkloadIdentityPoolsRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.ICreatePolicyBindingRequest);
+                constructor(properties?: google.iam.v1beta.IListWorkloadIdentityPoolsRequest);
 
-                /** CreatePolicyBindingRequest parent. */
+                /** ListWorkloadIdentityPoolsRequest parent. */
                 public parent: string;
 
-                /** CreatePolicyBindingRequest policyBindingId. */
-                public policyBindingId: string;
+                /** ListWorkloadIdentityPoolsRequest pageSize. */
+                public pageSize: number;
 
-                /** CreatePolicyBindingRequest policyBinding. */
-                public policyBinding?: (google.iam.v3.IPolicyBinding|null);
+                /** ListWorkloadIdentityPoolsRequest pageToken. */
+                public pageToken: string;
 
-                /** CreatePolicyBindingRequest validateOnly. */
-                public validateOnly: boolean;
+                /** ListWorkloadIdentityPoolsRequest showDeleted. */
+                public showDeleted: boolean;
 
                 /**
-                 * Creates a new CreatePolicyBindingRequest instance using the specified properties.
+                 * Creates a new ListWorkloadIdentityPoolsRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns CreatePolicyBindingRequest instance
+                 * @returns ListWorkloadIdentityPoolsRequest instance
                  */
-                public static create(properties?: google.iam.v3.ICreatePolicyBindingRequest): google.iam.v3.CreatePolicyBindingRequest;
+                public static create(properties?: google.iam.v1beta.IListWorkloadIdentityPoolsRequest): google.iam.v1beta.ListWorkloadIdentityPoolsRequest;
 
                 /**
-                 * Encodes the specified CreatePolicyBindingRequest message. Does not implicitly {@link google.iam.v3.CreatePolicyBindingRequest.verify|verify} messages.
-                 * @param message CreatePolicyBindingRequest message or plain object to encode
+                 * Encodes the specified ListWorkloadIdentityPoolsRequest message. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolsRequest.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolsRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.ICreatePolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IListWorkloadIdentityPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified CreatePolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.CreatePolicyBindingRequest.verify|verify} messages.
-                 * @param message CreatePolicyBindingRequest message or plain object to encode
+                 * Encodes the specified ListWorkloadIdentityPoolsRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolsRequest.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolsRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.ICreatePolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IListWorkloadIdentityPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a CreatePolicyBindingRequest message from the specified reader or buffer.
+                 * Decodes a ListWorkloadIdentityPoolsRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns CreatePolicyBindingRequest
+                 * @returns ListWorkloadIdentityPoolsRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.CreatePolicyBindingRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.ListWorkloadIdentityPoolsRequest;
 
                 /**
-                 * Decodes a CreatePolicyBindingRequest message from the specified reader or buffer, length delimited.
+                 * Decodes a ListWorkloadIdentityPoolsRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns CreatePolicyBindingRequest
+                 * @returns ListWorkloadIdentityPoolsRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.CreatePolicyBindingRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.ListWorkloadIdentityPoolsRequest;
 
                 /**
-                 * Verifies a CreatePolicyBindingRequest message.
+                 * Verifies a ListWorkloadIdentityPoolsRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a CreatePolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates a ListWorkloadIdentityPoolsRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns CreatePolicyBindingRequest
+                 * @returns ListWorkloadIdentityPoolsRequest
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.CreatePolicyBindingRequest;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.ListWorkloadIdentityPoolsRequest;
 
                 /**
-                 * Creates a plain object from a CreatePolicyBindingRequest message. Also converts values to other types if specified.
-                 * @param message CreatePolicyBindingRequest
+                 * Creates a plain object from a ListWorkloadIdentityPoolsRequest message. Also converts values to other types if specified.
+                 * @param message ListWorkloadIdentityPoolsRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.CreatePolicyBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.ListWorkloadIdentityPoolsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this CreatePolicyBindingRequest to JSON.
+                 * Converts this ListWorkloadIdentityPoolsRequest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for CreatePolicyBindingRequest
+                 * Gets the default type url for ListWorkloadIdentityPoolsRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a GetPolicyBindingRequest. */
-            interface IGetPolicyBindingRequest {
+            /** Properties of a ListWorkloadIdentityPoolsResponse. */
+            interface IListWorkloadIdentityPoolsResponse {
 
-                /** GetPolicyBindingRequest name */
+                /** ListWorkloadIdentityPoolsResponse workloadIdentityPools */
+                workloadIdentityPools?: (google.iam.v1beta.IWorkloadIdentityPool[]|null);
+
+                /** ListWorkloadIdentityPoolsResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListWorkloadIdentityPoolsResponse. */
+            class ListWorkloadIdentityPoolsResponse implements IListWorkloadIdentityPoolsResponse {
+
+                /**
+                 * Constructs a new ListWorkloadIdentityPoolsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1beta.IListWorkloadIdentityPoolsResponse);
+
+                /** ListWorkloadIdentityPoolsResponse workloadIdentityPools. */
+                public workloadIdentityPools: google.iam.v1beta.IWorkloadIdentityPool[];
+
+                /** ListWorkloadIdentityPoolsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListWorkloadIdentityPoolsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListWorkloadIdentityPoolsResponse instance
+                 */
+                public static create(properties?: google.iam.v1beta.IListWorkloadIdentityPoolsResponse): google.iam.v1beta.ListWorkloadIdentityPoolsResponse;
+
+                /**
+                 * Encodes the specified ListWorkloadIdentityPoolsResponse message. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolsResponse.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1beta.IListWorkloadIdentityPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListWorkloadIdentityPoolsResponse message, length delimited. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolsResponse.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1beta.IListWorkloadIdentityPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListWorkloadIdentityPoolsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListWorkloadIdentityPoolsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.ListWorkloadIdentityPoolsResponse;
+
+                /**
+                 * Decodes a ListWorkloadIdentityPoolsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListWorkloadIdentityPoolsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.ListWorkloadIdentityPoolsResponse;
+
+                /**
+                 * Verifies a ListWorkloadIdentityPoolsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListWorkloadIdentityPoolsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListWorkloadIdentityPoolsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.ListWorkloadIdentityPoolsResponse;
+
+                /**
+                 * Creates a plain object from a ListWorkloadIdentityPoolsResponse message. Also converts values to other types if specified.
+                 * @param message ListWorkloadIdentityPoolsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1beta.ListWorkloadIdentityPoolsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListWorkloadIdentityPoolsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListWorkloadIdentityPoolsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetWorkloadIdentityPoolRequest. */
+            interface IGetWorkloadIdentityPoolRequest {
+
+                /** GetWorkloadIdentityPoolRequest name */
                 name?: (string|null);
             }
 
-            /** Represents a GetPolicyBindingRequest. */
-            class GetPolicyBindingRequest implements IGetPolicyBindingRequest {
+            /** Represents a GetWorkloadIdentityPoolRequest. */
+            class GetWorkloadIdentityPoolRequest implements IGetWorkloadIdentityPoolRequest {
 
                 /**
-                 * Constructs a new GetPolicyBindingRequest.
+                 * Constructs a new GetWorkloadIdentityPoolRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.IGetPolicyBindingRequest);
+                constructor(properties?: google.iam.v1beta.IGetWorkloadIdentityPoolRequest);
 
-                /** GetPolicyBindingRequest name. */
+                /** GetWorkloadIdentityPoolRequest name. */
                 public name: string;
 
                 /**
-                 * Creates a new GetPolicyBindingRequest instance using the specified properties.
+                 * Creates a new GetWorkloadIdentityPoolRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns GetPolicyBindingRequest instance
+                 * @returns GetWorkloadIdentityPoolRequest instance
                  */
-                public static create(properties?: google.iam.v3.IGetPolicyBindingRequest): google.iam.v3.GetPolicyBindingRequest;
+                public static create(properties?: google.iam.v1beta.IGetWorkloadIdentityPoolRequest): google.iam.v1beta.GetWorkloadIdentityPoolRequest;
 
                 /**
-                 * Encodes the specified GetPolicyBindingRequest message. Does not implicitly {@link google.iam.v3.GetPolicyBindingRequest.verify|verify} messages.
-                 * @param message GetPolicyBindingRequest message or plain object to encode
+                 * Encodes the specified GetWorkloadIdentityPoolRequest message. Does not implicitly {@link google.iam.v1beta.GetWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message GetWorkloadIdentityPoolRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.IGetPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IGetWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified GetPolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.GetPolicyBindingRequest.verify|verify} messages.
-                 * @param message GetPolicyBindingRequest message or plain object to encode
+                 * Encodes the specified GetWorkloadIdentityPoolRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.GetWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message GetWorkloadIdentityPoolRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.IGetPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IGetWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a GetPolicyBindingRequest message from the specified reader or buffer.
+                 * Decodes a GetWorkloadIdentityPoolRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns GetPolicyBindingRequest
+                 * @returns GetWorkloadIdentityPoolRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.GetPolicyBindingRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.GetWorkloadIdentityPoolRequest;
 
                 /**
-                 * Decodes a GetPolicyBindingRequest message from the specified reader or buffer, length delimited.
+                 * Decodes a GetWorkloadIdentityPoolRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns GetPolicyBindingRequest
+                 * @returns GetWorkloadIdentityPoolRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.GetPolicyBindingRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.GetWorkloadIdentityPoolRequest;
 
                 /**
-                 * Verifies a GetPolicyBindingRequest message.
+                 * Verifies a GetWorkloadIdentityPoolRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a GetPolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates a GetWorkloadIdentityPoolRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns GetPolicyBindingRequest
+                 * @returns GetWorkloadIdentityPoolRequest
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.GetPolicyBindingRequest;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.GetWorkloadIdentityPoolRequest;
 
                 /**
-                 * Creates a plain object from a GetPolicyBindingRequest message. Also converts values to other types if specified.
-                 * @param message GetPolicyBindingRequest
+                 * Creates a plain object from a GetWorkloadIdentityPoolRequest message. Also converts values to other types if specified.
+                 * @param message GetWorkloadIdentityPoolRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.GetPolicyBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.GetWorkloadIdentityPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this GetPolicyBindingRequest to JSON.
+                 * Converts this GetWorkloadIdentityPoolRequest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for GetPolicyBindingRequest
+                 * Gets the default type url for GetWorkloadIdentityPoolRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of an UpdatePolicyBindingRequest. */
-            interface IUpdatePolicyBindingRequest {
+            /** Properties of a CreateWorkloadIdentityPoolRequest. */
+            interface ICreateWorkloadIdentityPoolRequest {
 
-                /** UpdatePolicyBindingRequest policyBinding */
-                policyBinding?: (google.iam.v3.IPolicyBinding|null);
+                /** CreateWorkloadIdentityPoolRequest parent */
+                parent?: (string|null);
 
-                /** UpdatePolicyBindingRequest validateOnly */
-                validateOnly?: (boolean|null);
+                /** CreateWorkloadIdentityPoolRequest workloadIdentityPool */
+                workloadIdentityPool?: (google.iam.v1beta.IWorkloadIdentityPool|null);
 
-                /** UpdatePolicyBindingRequest updateMask */
+                /** CreateWorkloadIdentityPoolRequest workloadIdentityPoolId */
+                workloadIdentityPoolId?: (string|null);
+            }
+
+            /** Represents a CreateWorkloadIdentityPoolRequest. */
+            class CreateWorkloadIdentityPoolRequest implements ICreateWorkloadIdentityPoolRequest {
+
+                /**
+                 * Constructs a new CreateWorkloadIdentityPoolRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1beta.ICreateWorkloadIdentityPoolRequest);
+
+                /** CreateWorkloadIdentityPoolRequest parent. */
+                public parent: string;
+
+                /** CreateWorkloadIdentityPoolRequest workloadIdentityPool. */
+                public workloadIdentityPool?: (google.iam.v1beta.IWorkloadIdentityPool|null);
+
+                /** CreateWorkloadIdentityPoolRequest workloadIdentityPoolId. */
+                public workloadIdentityPoolId: string;
+
+                /**
+                 * Creates a new CreateWorkloadIdentityPoolRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateWorkloadIdentityPoolRequest instance
+                 */
+                public static create(properties?: google.iam.v1beta.ICreateWorkloadIdentityPoolRequest): google.iam.v1beta.CreateWorkloadIdentityPoolRequest;
+
+                /**
+                 * Encodes the specified CreateWorkloadIdentityPoolRequest message. Does not implicitly {@link google.iam.v1beta.CreateWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message CreateWorkloadIdentityPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1beta.ICreateWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateWorkloadIdentityPoolRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.CreateWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message CreateWorkloadIdentityPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1beta.ICreateWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateWorkloadIdentityPoolRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateWorkloadIdentityPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.CreateWorkloadIdentityPoolRequest;
+
+                /**
+                 * Decodes a CreateWorkloadIdentityPoolRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateWorkloadIdentityPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.CreateWorkloadIdentityPoolRequest;
+
+                /**
+                 * Verifies a CreateWorkloadIdentityPoolRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateWorkloadIdentityPoolRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateWorkloadIdentityPoolRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.CreateWorkloadIdentityPoolRequest;
+
+                /**
+                 * Creates a plain object from a CreateWorkloadIdentityPoolRequest message. Also converts values to other types if specified.
+                 * @param message CreateWorkloadIdentityPoolRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1beta.CreateWorkloadIdentityPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateWorkloadIdentityPoolRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CreateWorkloadIdentityPoolRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateWorkloadIdentityPoolRequest. */
+            interface IUpdateWorkloadIdentityPoolRequest {
+
+                /** UpdateWorkloadIdentityPoolRequest workloadIdentityPool */
+                workloadIdentityPool?: (google.iam.v1beta.IWorkloadIdentityPool|null);
+
+                /** UpdateWorkloadIdentityPoolRequest updateMask */
                 updateMask?: (google.protobuf.IFieldMask|null);
             }
 
-            /** Represents an UpdatePolicyBindingRequest. */
-            class UpdatePolicyBindingRequest implements IUpdatePolicyBindingRequest {
+            /** Represents an UpdateWorkloadIdentityPoolRequest. */
+            class UpdateWorkloadIdentityPoolRequest implements IUpdateWorkloadIdentityPoolRequest {
 
                 /**
-                 * Constructs a new UpdatePolicyBindingRequest.
+                 * Constructs a new UpdateWorkloadIdentityPoolRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.IUpdatePolicyBindingRequest);
+                constructor(properties?: google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest);
 
-                /** UpdatePolicyBindingRequest policyBinding. */
-                public policyBinding?: (google.iam.v3.IPolicyBinding|null);
+                /** UpdateWorkloadIdentityPoolRequest workloadIdentityPool. */
+                public workloadIdentityPool?: (google.iam.v1beta.IWorkloadIdentityPool|null);
 
-                /** UpdatePolicyBindingRequest validateOnly. */
-                public validateOnly: boolean;
-
-                /** UpdatePolicyBindingRequest updateMask. */
+                /** UpdateWorkloadIdentityPoolRequest updateMask. */
                 public updateMask?: (google.protobuf.IFieldMask|null);
 
                 /**
-                 * Creates a new UpdatePolicyBindingRequest instance using the specified properties.
+                 * Creates a new UpdateWorkloadIdentityPoolRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns UpdatePolicyBindingRequest instance
+                 * @returns UpdateWorkloadIdentityPoolRequest instance
                  */
-                public static create(properties?: google.iam.v3.IUpdatePolicyBindingRequest): google.iam.v3.UpdatePolicyBindingRequest;
+                public static create(properties?: google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest): google.iam.v1beta.UpdateWorkloadIdentityPoolRequest;
 
                 /**
-                 * Encodes the specified UpdatePolicyBindingRequest message. Does not implicitly {@link google.iam.v3.UpdatePolicyBindingRequest.verify|verify} messages.
-                 * @param message UpdatePolicyBindingRequest message or plain object to encode
+                 * Encodes the specified UpdateWorkloadIdentityPoolRequest message. Does not implicitly {@link google.iam.v1beta.UpdateWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message UpdateWorkloadIdentityPoolRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.IUpdatePolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified UpdatePolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.UpdatePolicyBindingRequest.verify|verify} messages.
-                 * @param message UpdatePolicyBindingRequest message or plain object to encode
+                 * Encodes the specified UpdateWorkloadIdentityPoolRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.UpdateWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message UpdateWorkloadIdentityPoolRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.IUpdatePolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes an UpdatePolicyBindingRequest message from the specified reader or buffer.
+                 * Decodes an UpdateWorkloadIdentityPoolRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns UpdatePolicyBindingRequest
+                 * @returns UpdateWorkloadIdentityPoolRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.UpdatePolicyBindingRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.UpdateWorkloadIdentityPoolRequest;
 
                 /**
-                 * Decodes an UpdatePolicyBindingRequest message from the specified reader or buffer, length delimited.
+                 * Decodes an UpdateWorkloadIdentityPoolRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns UpdatePolicyBindingRequest
+                 * @returns UpdateWorkloadIdentityPoolRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.UpdatePolicyBindingRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.UpdateWorkloadIdentityPoolRequest;
 
                 /**
-                 * Verifies an UpdatePolicyBindingRequest message.
+                 * Verifies an UpdateWorkloadIdentityPoolRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates an UpdatePolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates an UpdateWorkloadIdentityPoolRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns UpdatePolicyBindingRequest
+                 * @returns UpdateWorkloadIdentityPoolRequest
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.UpdatePolicyBindingRequest;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.UpdateWorkloadIdentityPoolRequest;
 
                 /**
-                 * Creates a plain object from an UpdatePolicyBindingRequest message. Also converts values to other types if specified.
-                 * @param message UpdatePolicyBindingRequest
+                 * Creates a plain object from an UpdateWorkloadIdentityPoolRequest message. Also converts values to other types if specified.
+                 * @param message UpdateWorkloadIdentityPoolRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.UpdatePolicyBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.UpdateWorkloadIdentityPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this UpdatePolicyBindingRequest to JSON.
+                 * Converts this UpdateWorkloadIdentityPoolRequest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for UpdatePolicyBindingRequest
+                 * Gets the default type url for UpdateWorkloadIdentityPoolRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a DeletePolicyBindingRequest. */
-            interface IDeletePolicyBindingRequest {
+            /** Properties of a DeleteWorkloadIdentityPoolRequest. */
+            interface IDeleteWorkloadIdentityPoolRequest {
 
-                /** DeletePolicyBindingRequest name */
-                name?: (string|null);
-
-                /** DeletePolicyBindingRequest etag */
-                etag?: (string|null);
-
-                /** DeletePolicyBindingRequest validateOnly */
-                validateOnly?: (boolean|null);
-            }
-
-            /** Represents a DeletePolicyBindingRequest. */
-            class DeletePolicyBindingRequest implements IDeletePolicyBindingRequest {
-
-                /**
-                 * Constructs a new DeletePolicyBindingRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IDeletePolicyBindingRequest);
-
-                /** DeletePolicyBindingRequest name. */
-                public name: string;
-
-                /** DeletePolicyBindingRequest etag. */
-                public etag: string;
-
-                /** DeletePolicyBindingRequest validateOnly. */
-                public validateOnly: boolean;
-
-                /**
-                 * Creates a new DeletePolicyBindingRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns DeletePolicyBindingRequest instance
-                 */
-                public static create(properties?: google.iam.v3.IDeletePolicyBindingRequest): google.iam.v3.DeletePolicyBindingRequest;
-
-                /**
-                 * Encodes the specified DeletePolicyBindingRequest message. Does not implicitly {@link google.iam.v3.DeletePolicyBindingRequest.verify|verify} messages.
-                 * @param message DeletePolicyBindingRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IDeletePolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified DeletePolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.DeletePolicyBindingRequest.verify|verify} messages.
-                 * @param message DeletePolicyBindingRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IDeletePolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a DeletePolicyBindingRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns DeletePolicyBindingRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.DeletePolicyBindingRequest;
-
-                /**
-                 * Decodes a DeletePolicyBindingRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns DeletePolicyBindingRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.DeletePolicyBindingRequest;
-
-                /**
-                 * Verifies a DeletePolicyBindingRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a DeletePolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns DeletePolicyBindingRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.DeletePolicyBindingRequest;
-
-                /**
-                 * Creates a plain object from a DeletePolicyBindingRequest message. Also converts values to other types if specified.
-                 * @param message DeletePolicyBindingRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.DeletePolicyBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this DeletePolicyBindingRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for DeletePolicyBindingRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListPolicyBindingsRequest. */
-            interface IListPolicyBindingsRequest {
-
-                /** ListPolicyBindingsRequest parent */
-                parent?: (string|null);
-
-                /** ListPolicyBindingsRequest pageSize */
-                pageSize?: (number|null);
-
-                /** ListPolicyBindingsRequest pageToken */
-                pageToken?: (string|null);
-
-                /** ListPolicyBindingsRequest filter */
-                filter?: (string|null);
-            }
-
-            /** Represents a ListPolicyBindingsRequest. */
-            class ListPolicyBindingsRequest implements IListPolicyBindingsRequest {
-
-                /**
-                 * Constructs a new ListPolicyBindingsRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IListPolicyBindingsRequest);
-
-                /** ListPolicyBindingsRequest parent. */
-                public parent: string;
-
-                /** ListPolicyBindingsRequest pageSize. */
-                public pageSize: number;
-
-                /** ListPolicyBindingsRequest pageToken. */
-                public pageToken: string;
-
-                /** ListPolicyBindingsRequest filter. */
-                public filter: string;
-
-                /**
-                 * Creates a new ListPolicyBindingsRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListPolicyBindingsRequest instance
-                 */
-                public static create(properties?: google.iam.v3.IListPolicyBindingsRequest): google.iam.v3.ListPolicyBindingsRequest;
-
-                /**
-                 * Encodes the specified ListPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3.ListPolicyBindingsRequest.verify|verify} messages.
-                 * @param message ListPolicyBindingsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IListPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3.ListPolicyBindingsRequest.verify|verify} messages.
-                 * @param message ListPolicyBindingsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IListPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListPolicyBindingsRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListPolicyBindingsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.ListPolicyBindingsRequest;
-
-                /**
-                 * Decodes a ListPolicyBindingsRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListPolicyBindingsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.ListPolicyBindingsRequest;
-
-                /**
-                 * Verifies a ListPolicyBindingsRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListPolicyBindingsRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.ListPolicyBindingsRequest;
-
-                /**
-                 * Creates a plain object from a ListPolicyBindingsRequest message. Also converts values to other types if specified.
-                 * @param message ListPolicyBindingsRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.ListPolicyBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListPolicyBindingsRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListPolicyBindingsRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListPolicyBindingsResponse. */
-            interface IListPolicyBindingsResponse {
-
-                /** ListPolicyBindingsResponse policyBindings */
-                policyBindings?: (google.iam.v3.IPolicyBinding[]|null);
-
-                /** ListPolicyBindingsResponse nextPageToken */
-                nextPageToken?: (string|null);
-            }
-
-            /** Represents a ListPolicyBindingsResponse. */
-            class ListPolicyBindingsResponse implements IListPolicyBindingsResponse {
-
-                /**
-                 * Constructs a new ListPolicyBindingsResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IListPolicyBindingsResponse);
-
-                /** ListPolicyBindingsResponse policyBindings. */
-                public policyBindings: google.iam.v3.IPolicyBinding[];
-
-                /** ListPolicyBindingsResponse nextPageToken. */
-                public nextPageToken: string;
-
-                /**
-                 * Creates a new ListPolicyBindingsResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListPolicyBindingsResponse instance
-                 */
-                public static create(properties?: google.iam.v3.IListPolicyBindingsResponse): google.iam.v3.ListPolicyBindingsResponse;
-
-                /**
-                 * Encodes the specified ListPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3.ListPolicyBindingsResponse.verify|verify} messages.
-                 * @param message ListPolicyBindingsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IListPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3.ListPolicyBindingsResponse.verify|verify} messages.
-                 * @param message ListPolicyBindingsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IListPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListPolicyBindingsResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListPolicyBindingsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.ListPolicyBindingsResponse;
-
-                /**
-                 * Decodes a ListPolicyBindingsResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListPolicyBindingsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.ListPolicyBindingsResponse;
-
-                /**
-                 * Verifies a ListPolicyBindingsResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListPolicyBindingsResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.ListPolicyBindingsResponse;
-
-                /**
-                 * Creates a plain object from a ListPolicyBindingsResponse message. Also converts values to other types if specified.
-                 * @param message ListPolicyBindingsResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.ListPolicyBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListPolicyBindingsResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListPolicyBindingsResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a SearchTargetPolicyBindingsRequest. */
-            interface ISearchTargetPolicyBindingsRequest {
-
-                /** SearchTargetPolicyBindingsRequest target */
-                target?: (string|null);
-
-                /** SearchTargetPolicyBindingsRequest pageSize */
-                pageSize?: (number|null);
-
-                /** SearchTargetPolicyBindingsRequest pageToken */
-                pageToken?: (string|null);
-
-                /** SearchTargetPolicyBindingsRequest parent */
-                parent?: (string|null);
-            }
-
-            /** Represents a SearchTargetPolicyBindingsRequest. */
-            class SearchTargetPolicyBindingsRequest implements ISearchTargetPolicyBindingsRequest {
-
-                /**
-                 * Constructs a new SearchTargetPolicyBindingsRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.ISearchTargetPolicyBindingsRequest);
-
-                /** SearchTargetPolicyBindingsRequest target. */
-                public target: string;
-
-                /** SearchTargetPolicyBindingsRequest pageSize. */
-                public pageSize: number;
-
-                /** SearchTargetPolicyBindingsRequest pageToken. */
-                public pageToken: string;
-
-                /** SearchTargetPolicyBindingsRequest parent. */
-                public parent: string;
-
-                /**
-                 * Creates a new SearchTargetPolicyBindingsRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns SearchTargetPolicyBindingsRequest instance
-                 */
-                public static create(properties?: google.iam.v3.ISearchTargetPolicyBindingsRequest): google.iam.v3.SearchTargetPolicyBindingsRequest;
-
-                /**
-                 * Encodes the specified SearchTargetPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsRequest.verify|verify} messages.
-                 * @param message SearchTargetPolicyBindingsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.ISearchTargetPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified SearchTargetPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsRequest.verify|verify} messages.
-                 * @param message SearchTargetPolicyBindingsRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.ISearchTargetPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a SearchTargetPolicyBindingsRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns SearchTargetPolicyBindingsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.SearchTargetPolicyBindingsRequest;
-
-                /**
-                 * Decodes a SearchTargetPolicyBindingsRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns SearchTargetPolicyBindingsRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.SearchTargetPolicyBindingsRequest;
-
-                /**
-                 * Verifies a SearchTargetPolicyBindingsRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a SearchTargetPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns SearchTargetPolicyBindingsRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.SearchTargetPolicyBindingsRequest;
-
-                /**
-                 * Creates a plain object from a SearchTargetPolicyBindingsRequest message. Also converts values to other types if specified.
-                 * @param message SearchTargetPolicyBindingsRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.SearchTargetPolicyBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this SearchTargetPolicyBindingsRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for SearchTargetPolicyBindingsRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a SearchTargetPolicyBindingsResponse. */
-            interface ISearchTargetPolicyBindingsResponse {
-
-                /** SearchTargetPolicyBindingsResponse policyBindings */
-                policyBindings?: (google.iam.v3.IPolicyBinding[]|null);
-
-                /** SearchTargetPolicyBindingsResponse nextPageToken */
-                nextPageToken?: (string|null);
-            }
-
-            /** Represents a SearchTargetPolicyBindingsResponse. */
-            class SearchTargetPolicyBindingsResponse implements ISearchTargetPolicyBindingsResponse {
-
-                /**
-                 * Constructs a new SearchTargetPolicyBindingsResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.ISearchTargetPolicyBindingsResponse);
-
-                /** SearchTargetPolicyBindingsResponse policyBindings. */
-                public policyBindings: google.iam.v3.IPolicyBinding[];
-
-                /** SearchTargetPolicyBindingsResponse nextPageToken. */
-                public nextPageToken: string;
-
-                /**
-                 * Creates a new SearchTargetPolicyBindingsResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns SearchTargetPolicyBindingsResponse instance
-                 */
-                public static create(properties?: google.iam.v3.ISearchTargetPolicyBindingsResponse): google.iam.v3.SearchTargetPolicyBindingsResponse;
-
-                /**
-                 * Encodes the specified SearchTargetPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsResponse.verify|verify} messages.
-                 * @param message SearchTargetPolicyBindingsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.ISearchTargetPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified SearchTargetPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsResponse.verify|verify} messages.
-                 * @param message SearchTargetPolicyBindingsResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.ISearchTargetPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a SearchTargetPolicyBindingsResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns SearchTargetPolicyBindingsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.SearchTargetPolicyBindingsResponse;
-
-                /**
-                 * Decodes a SearchTargetPolicyBindingsResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns SearchTargetPolicyBindingsResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.SearchTargetPolicyBindingsResponse;
-
-                /**
-                 * Verifies a SearchTargetPolicyBindingsResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a SearchTargetPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns SearchTargetPolicyBindingsResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.SearchTargetPolicyBindingsResponse;
-
-                /**
-                 * Creates a plain object from a SearchTargetPolicyBindingsResponse message. Also converts values to other types if specified.
-                 * @param message SearchTargetPolicyBindingsResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.SearchTargetPolicyBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this SearchTargetPolicyBindingsResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for SearchTargetPolicyBindingsResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Represents a PrincipalAccessBoundaryPolicies */
-            class PrincipalAccessBoundaryPolicies extends $protobuf.rpc.Service {
-
-                /**
-                 * Constructs a new PrincipalAccessBoundaryPolicies service.
-                 * @param rpcImpl RPC implementation
-                 * @param [requestDelimited=false] Whether requests are length-delimited
-                 * @param [responseDelimited=false] Whether responses are length-delimited
-                 */
-                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                /**
-                 * Creates new PrincipalAccessBoundaryPolicies service using the specified rpc implementation.
-                 * @param rpcImpl RPC implementation
-                 * @param [requestDelimited=false] Whether requests are length-delimited
-                 * @param [responseDelimited=false] Whether responses are length-delimited
-                 * @returns RPC service. Useful where requests and/or responses are streamed.
-                 */
-                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PrincipalAccessBoundaryPolicies;
-
-                /**
-                 * Calls CreatePrincipalAccessBoundaryPolicy.
-                 * @param request CreatePrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Operation
-                 */
-                public createPrincipalAccessBoundaryPolicy(request: google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest, callback: google.iam.v3.PrincipalAccessBoundaryPolicies.CreatePrincipalAccessBoundaryPolicyCallback): void;
-
-                /**
-                 * Calls CreatePrincipalAccessBoundaryPolicy.
-                 * @param request CreatePrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @returns Promise
-                 */
-                public createPrincipalAccessBoundaryPolicy(request: google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest): Promise<google.longrunning.Operation>;
-
-                /**
-                 * Calls GetPrincipalAccessBoundaryPolicy.
-                 * @param request GetPrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and PrincipalAccessBoundaryPolicy
-                 */
-                public getPrincipalAccessBoundaryPolicy(request: google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest, callback: google.iam.v3.PrincipalAccessBoundaryPolicies.GetPrincipalAccessBoundaryPolicyCallback): void;
-
-                /**
-                 * Calls GetPrincipalAccessBoundaryPolicy.
-                 * @param request GetPrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @returns Promise
-                 */
-                public getPrincipalAccessBoundaryPolicy(request: google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest): Promise<google.iam.v3.PrincipalAccessBoundaryPolicy>;
-
-                /**
-                 * Calls UpdatePrincipalAccessBoundaryPolicy.
-                 * @param request UpdatePrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Operation
-                 */
-                public updatePrincipalAccessBoundaryPolicy(request: google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest, callback: google.iam.v3.PrincipalAccessBoundaryPolicies.UpdatePrincipalAccessBoundaryPolicyCallback): void;
-
-                /**
-                 * Calls UpdatePrincipalAccessBoundaryPolicy.
-                 * @param request UpdatePrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @returns Promise
-                 */
-                public updatePrincipalAccessBoundaryPolicy(request: google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest): Promise<google.longrunning.Operation>;
-
-                /**
-                 * Calls DeletePrincipalAccessBoundaryPolicy.
-                 * @param request DeletePrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Operation
-                 */
-                public deletePrincipalAccessBoundaryPolicy(request: google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest, callback: google.iam.v3.PrincipalAccessBoundaryPolicies.DeletePrincipalAccessBoundaryPolicyCallback): void;
-
-                /**
-                 * Calls DeletePrincipalAccessBoundaryPolicy.
-                 * @param request DeletePrincipalAccessBoundaryPolicyRequest message or plain object
-                 * @returns Promise
-                 */
-                public deletePrincipalAccessBoundaryPolicy(request: google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest): Promise<google.longrunning.Operation>;
-
-                /**
-                 * Calls ListPrincipalAccessBoundaryPolicies.
-                 * @param request ListPrincipalAccessBoundaryPoliciesRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and ListPrincipalAccessBoundaryPoliciesResponse
-                 */
-                public listPrincipalAccessBoundaryPolicies(request: google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest, callback: google.iam.v3.PrincipalAccessBoundaryPolicies.ListPrincipalAccessBoundaryPoliciesCallback): void;
-
-                /**
-                 * Calls ListPrincipalAccessBoundaryPolicies.
-                 * @param request ListPrincipalAccessBoundaryPoliciesRequest message or plain object
-                 * @returns Promise
-                 */
-                public listPrincipalAccessBoundaryPolicies(request: google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest): Promise<google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse>;
-
-                /**
-                 * Calls SearchPrincipalAccessBoundaryPolicyBindings.
-                 * @param request SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and SearchPrincipalAccessBoundaryPolicyBindingsResponse
-                 */
-                public searchPrincipalAccessBoundaryPolicyBindings(request: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest, callback: google.iam.v3.PrincipalAccessBoundaryPolicies.SearchPrincipalAccessBoundaryPolicyBindingsCallback): void;
-
-                /**
-                 * Calls SearchPrincipalAccessBoundaryPolicyBindings.
-                 * @param request SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object
-                 * @returns Promise
-                 */
-                public searchPrincipalAccessBoundaryPolicyBindings(request: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest): Promise<google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse>;
-            }
-
-            namespace PrincipalAccessBoundaryPolicies {
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|createPrincipalAccessBoundaryPolicy}.
-                 * @param error Error, if any
-                 * @param [response] Operation
-                 */
-                type CreatePrincipalAccessBoundaryPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|getPrincipalAccessBoundaryPolicy}.
-                 * @param error Error, if any
-                 * @param [response] PrincipalAccessBoundaryPolicy
-                 */
-                type GetPrincipalAccessBoundaryPolicyCallback = (error: (Error|null), response?: google.iam.v3.PrincipalAccessBoundaryPolicy) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|updatePrincipalAccessBoundaryPolicy}.
-                 * @param error Error, if any
-                 * @param [response] Operation
-                 */
-                type UpdatePrincipalAccessBoundaryPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|deletePrincipalAccessBoundaryPolicy}.
-                 * @param error Error, if any
-                 * @param [response] Operation
-                 */
-                type DeletePrincipalAccessBoundaryPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|listPrincipalAccessBoundaryPolicies}.
-                 * @param error Error, if any
-                 * @param [response] ListPrincipalAccessBoundaryPoliciesResponse
-                 */
-                type ListPrincipalAccessBoundaryPoliciesCallback = (error: (Error|null), response?: google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse) => void;
-
-                /**
-                 * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|searchPrincipalAccessBoundaryPolicyBindings}.
-                 * @param error Error, if any
-                 * @param [response] SearchPrincipalAccessBoundaryPolicyBindingsResponse
-                 */
-                type SearchPrincipalAccessBoundaryPolicyBindingsCallback = (error: (Error|null), response?: google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse) => void;
-            }
-
-            /** Properties of a CreatePrincipalAccessBoundaryPolicyRequest. */
-            interface ICreatePrincipalAccessBoundaryPolicyRequest {
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest parent */
-                parent?: (string|null);
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicyId */
-                principalAccessBoundaryPolicyId?: (string|null);
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy */
-                principalAccessBoundaryPolicy?: (google.iam.v3.IPrincipalAccessBoundaryPolicy|null);
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest validateOnly */
-                validateOnly?: (boolean|null);
-            }
-
-            /** Represents a CreatePrincipalAccessBoundaryPolicyRequest. */
-            class CreatePrincipalAccessBoundaryPolicyRequest implements ICreatePrincipalAccessBoundaryPolicyRequest {
-
-                /**
-                 * Constructs a new CreatePrincipalAccessBoundaryPolicyRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest);
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest parent. */
-                public parent: string;
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicyId. */
-                public principalAccessBoundaryPolicyId: string;
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy. */
-                public principalAccessBoundaryPolicy?: (google.iam.v3.IPrincipalAccessBoundaryPolicy|null);
-
-                /** CreatePrincipalAccessBoundaryPolicyRequest validateOnly. */
-                public validateOnly: boolean;
-
-                /**
-                 * Creates a new CreatePrincipalAccessBoundaryPolicyRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns CreatePrincipalAccessBoundaryPolicyRequest instance
-                 */
-                public static create(properties?: google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest): google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest;
-
-                /**
-                 * Encodes the specified CreatePrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message CreatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified CreatePrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message CreatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a CreatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns CreatePrincipalAccessBoundaryPolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest;
-
-                /**
-                 * Decodes a CreatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns CreatePrincipalAccessBoundaryPolicyRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest;
-
-                /**
-                 * Verifies a CreatePrincipalAccessBoundaryPolicyRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a CreatePrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns CreatePrincipalAccessBoundaryPolicyRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest;
-
-                /**
-                 * Creates a plain object from a CreatePrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
-                 * @param message CreatePrincipalAccessBoundaryPolicyRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this CreatePrincipalAccessBoundaryPolicyRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for CreatePrincipalAccessBoundaryPolicyRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a GetPrincipalAccessBoundaryPolicyRequest. */
-            interface IGetPrincipalAccessBoundaryPolicyRequest {
-
-                /** GetPrincipalAccessBoundaryPolicyRequest name */
+                /** DeleteWorkloadIdentityPoolRequest name */
                 name?: (string|null);
             }
 
-            /** Represents a GetPrincipalAccessBoundaryPolicyRequest. */
-            class GetPrincipalAccessBoundaryPolicyRequest implements IGetPrincipalAccessBoundaryPolicyRequest {
+            /** Represents a DeleteWorkloadIdentityPoolRequest. */
+            class DeleteWorkloadIdentityPoolRequest implements IDeleteWorkloadIdentityPoolRequest {
 
                 /**
-                 * Constructs a new GetPrincipalAccessBoundaryPolicyRequest.
+                 * Constructs a new DeleteWorkloadIdentityPoolRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest);
+                constructor(properties?: google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest);
 
-                /** GetPrincipalAccessBoundaryPolicyRequest name. */
+                /** DeleteWorkloadIdentityPoolRequest name. */
                 public name: string;
 
                 /**
-                 * Creates a new GetPrincipalAccessBoundaryPolicyRequest instance using the specified properties.
+                 * Creates a new DeleteWorkloadIdentityPoolRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns GetPrincipalAccessBoundaryPolicyRequest instance
+                 * @returns DeleteWorkloadIdentityPoolRequest instance
                  */
-                public static create(properties?: google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest): google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest;
+                public static create(properties?: google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest): google.iam.v1beta.DeleteWorkloadIdentityPoolRequest;
 
                 /**
-                 * Encodes the specified GetPrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message GetPrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                 * Encodes the specified DeleteWorkloadIdentityPoolRequest message. Does not implicitly {@link google.iam.v1beta.DeleteWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message DeleteWorkloadIdentityPoolRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified GetPrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message GetPrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                 * Encodes the specified DeleteWorkloadIdentityPoolRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.DeleteWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message DeleteWorkloadIdentityPoolRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a GetPrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
+                 * Decodes a DeleteWorkloadIdentityPoolRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns GetPrincipalAccessBoundaryPolicyRequest
+                 * @returns DeleteWorkloadIdentityPoolRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.DeleteWorkloadIdentityPoolRequest;
 
                 /**
-                 * Decodes a GetPrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
+                 * Decodes a DeleteWorkloadIdentityPoolRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns GetPrincipalAccessBoundaryPolicyRequest
+                 * @returns DeleteWorkloadIdentityPoolRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.DeleteWorkloadIdentityPoolRequest;
 
                 /**
-                 * Verifies a GetPrincipalAccessBoundaryPolicyRequest message.
+                 * Verifies a DeleteWorkloadIdentityPoolRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a GetPrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates a DeleteWorkloadIdentityPoolRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns GetPrincipalAccessBoundaryPolicyRequest
+                 * @returns DeleteWorkloadIdentityPoolRequest
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.DeleteWorkloadIdentityPoolRequest;
 
                 /**
-                 * Creates a plain object from a GetPrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
-                 * @param message GetPrincipalAccessBoundaryPolicyRequest
+                 * Creates a plain object from a DeleteWorkloadIdentityPoolRequest message. Also converts values to other types if specified.
+                 * @param message DeleteWorkloadIdentityPoolRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.DeleteWorkloadIdentityPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this GetPrincipalAccessBoundaryPolicyRequest to JSON.
+                 * Converts this DeleteWorkloadIdentityPoolRequest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for GetPrincipalAccessBoundaryPolicyRequest
+                 * Gets the default type url for DeleteWorkloadIdentityPoolRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of an UpdatePrincipalAccessBoundaryPolicyRequest. */
-            interface IUpdatePrincipalAccessBoundaryPolicyRequest {
+            /** Properties of an UndeleteWorkloadIdentityPoolRequest. */
+            interface IUndeleteWorkloadIdentityPoolRequest {
 
-                /** UpdatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy */
-                principalAccessBoundaryPolicy?: (google.iam.v3.IPrincipalAccessBoundaryPolicy|null);
+                /** UndeleteWorkloadIdentityPoolRequest name */
+                name?: (string|null);
+            }
 
-                /** UpdatePrincipalAccessBoundaryPolicyRequest validateOnly */
-                validateOnly?: (boolean|null);
+            /** Represents an UndeleteWorkloadIdentityPoolRequest. */
+            class UndeleteWorkloadIdentityPoolRequest implements IUndeleteWorkloadIdentityPoolRequest {
 
-                /** UpdatePrincipalAccessBoundaryPolicyRequest updateMask */
+                /**
+                 * Constructs a new UndeleteWorkloadIdentityPoolRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest);
+
+                /** UndeleteWorkloadIdentityPoolRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new UndeleteWorkloadIdentityPoolRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UndeleteWorkloadIdentityPoolRequest instance
+                 */
+                public static create(properties?: google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest): google.iam.v1beta.UndeleteWorkloadIdentityPoolRequest;
+
+                /**
+                 * Encodes the specified UndeleteWorkloadIdentityPoolRequest message. Does not implicitly {@link google.iam.v1beta.UndeleteWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message UndeleteWorkloadIdentityPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UndeleteWorkloadIdentityPoolRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.UndeleteWorkloadIdentityPoolRequest.verify|verify} messages.
+                 * @param message UndeleteWorkloadIdentityPoolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UndeleteWorkloadIdentityPoolRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UndeleteWorkloadIdentityPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.UndeleteWorkloadIdentityPoolRequest;
+
+                /**
+                 * Decodes an UndeleteWorkloadIdentityPoolRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UndeleteWorkloadIdentityPoolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.UndeleteWorkloadIdentityPoolRequest;
+
+                /**
+                 * Verifies an UndeleteWorkloadIdentityPoolRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UndeleteWorkloadIdentityPoolRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UndeleteWorkloadIdentityPoolRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.UndeleteWorkloadIdentityPoolRequest;
+
+                /**
+                 * Creates a plain object from an UndeleteWorkloadIdentityPoolRequest message. Also converts values to other types if specified.
+                 * @param message UndeleteWorkloadIdentityPoolRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1beta.UndeleteWorkloadIdentityPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UndeleteWorkloadIdentityPoolRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UndeleteWorkloadIdentityPoolRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListWorkloadIdentityPoolProvidersRequest. */
+            interface IListWorkloadIdentityPoolProvidersRequest {
+
+                /** ListWorkloadIdentityPoolProvidersRequest parent */
+                parent?: (string|null);
+
+                /** ListWorkloadIdentityPoolProvidersRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListWorkloadIdentityPoolProvidersRequest pageToken */
+                pageToken?: (string|null);
+
+                /** ListWorkloadIdentityPoolProvidersRequest showDeleted */
+                showDeleted?: (boolean|null);
+            }
+
+            /** Represents a ListWorkloadIdentityPoolProvidersRequest. */
+            class ListWorkloadIdentityPoolProvidersRequest implements IListWorkloadIdentityPoolProvidersRequest {
+
+                /**
+                 * Constructs a new ListWorkloadIdentityPoolProvidersRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest);
+
+                /** ListWorkloadIdentityPoolProvidersRequest parent. */
+                public parent: string;
+
+                /** ListWorkloadIdentityPoolProvidersRequest pageSize. */
+                public pageSize: number;
+
+                /** ListWorkloadIdentityPoolProvidersRequest pageToken. */
+                public pageToken: string;
+
+                /** ListWorkloadIdentityPoolProvidersRequest showDeleted. */
+                public showDeleted: boolean;
+
+                /**
+                 * Creates a new ListWorkloadIdentityPoolProvidersRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListWorkloadIdentityPoolProvidersRequest instance
+                 */
+                public static create(properties?: google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest): google.iam.v1beta.ListWorkloadIdentityPoolProvidersRequest;
+
+                /**
+                 * Encodes the specified ListWorkloadIdentityPoolProvidersRequest message. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolProvidersRequest.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolProvidersRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListWorkloadIdentityPoolProvidersRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolProvidersRequest.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolProvidersRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListWorkloadIdentityPoolProvidersRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListWorkloadIdentityPoolProvidersRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.ListWorkloadIdentityPoolProvidersRequest;
+
+                /**
+                 * Decodes a ListWorkloadIdentityPoolProvidersRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListWorkloadIdentityPoolProvidersRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.ListWorkloadIdentityPoolProvidersRequest;
+
+                /**
+                 * Verifies a ListWorkloadIdentityPoolProvidersRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListWorkloadIdentityPoolProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListWorkloadIdentityPoolProvidersRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.ListWorkloadIdentityPoolProvidersRequest;
+
+                /**
+                 * Creates a plain object from a ListWorkloadIdentityPoolProvidersRequest message. Also converts values to other types if specified.
+                 * @param message ListWorkloadIdentityPoolProvidersRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1beta.ListWorkloadIdentityPoolProvidersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListWorkloadIdentityPoolProvidersRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListWorkloadIdentityPoolProvidersRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListWorkloadIdentityPoolProvidersResponse. */
+            interface IListWorkloadIdentityPoolProvidersResponse {
+
+                /** ListWorkloadIdentityPoolProvidersResponse workloadIdentityPoolProviders */
+                workloadIdentityPoolProviders?: (google.iam.v1beta.IWorkloadIdentityPoolProvider[]|null);
+
+                /** ListWorkloadIdentityPoolProvidersResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListWorkloadIdentityPoolProvidersResponse. */
+            class ListWorkloadIdentityPoolProvidersResponse implements IListWorkloadIdentityPoolProvidersResponse {
+
+                /**
+                 * Constructs a new ListWorkloadIdentityPoolProvidersResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse);
+
+                /** ListWorkloadIdentityPoolProvidersResponse workloadIdentityPoolProviders. */
+                public workloadIdentityPoolProviders: google.iam.v1beta.IWorkloadIdentityPoolProvider[];
+
+                /** ListWorkloadIdentityPoolProvidersResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListWorkloadIdentityPoolProvidersResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListWorkloadIdentityPoolProvidersResponse instance
+                 */
+                public static create(properties?: google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse): google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse;
+
+                /**
+                 * Encodes the specified ListWorkloadIdentityPoolProvidersResponse message. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolProvidersResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListWorkloadIdentityPoolProvidersResponse message, length delimited. Does not implicitly {@link google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse.verify|verify} messages.
+                 * @param message ListWorkloadIdentityPoolProvidersResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListWorkloadIdentityPoolProvidersResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListWorkloadIdentityPoolProvidersResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse;
+
+                /**
+                 * Decodes a ListWorkloadIdentityPoolProvidersResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListWorkloadIdentityPoolProvidersResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse;
+
+                /**
+                 * Verifies a ListWorkloadIdentityPoolProvidersResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListWorkloadIdentityPoolProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListWorkloadIdentityPoolProvidersResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse;
+
+                /**
+                 * Creates a plain object from a ListWorkloadIdentityPoolProvidersResponse message. Also converts values to other types if specified.
+                 * @param message ListWorkloadIdentityPoolProvidersResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1beta.ListWorkloadIdentityPoolProvidersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListWorkloadIdentityPoolProvidersResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListWorkloadIdentityPoolProvidersResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetWorkloadIdentityPoolProviderRequest. */
+            interface IGetWorkloadIdentityPoolProviderRequest {
+
+                /** GetWorkloadIdentityPoolProviderRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetWorkloadIdentityPoolProviderRequest. */
+            class GetWorkloadIdentityPoolProviderRequest implements IGetWorkloadIdentityPoolProviderRequest {
+
+                /**
+                 * Constructs a new GetWorkloadIdentityPoolProviderRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest);
+
+                /** GetWorkloadIdentityPoolProviderRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetWorkloadIdentityPoolProviderRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetWorkloadIdentityPoolProviderRequest instance
+                 */
+                public static create(properties?: google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest): google.iam.v1beta.GetWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Encodes the specified GetWorkloadIdentityPoolProviderRequest message. Does not implicitly {@link google.iam.v1beta.GetWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message GetWorkloadIdentityPoolProviderRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetWorkloadIdentityPoolProviderRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.GetWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message GetWorkloadIdentityPoolProviderRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetWorkloadIdentityPoolProviderRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetWorkloadIdentityPoolProviderRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.GetWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Decodes a GetWorkloadIdentityPoolProviderRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetWorkloadIdentityPoolProviderRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.GetWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Verifies a GetWorkloadIdentityPoolProviderRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetWorkloadIdentityPoolProviderRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetWorkloadIdentityPoolProviderRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.GetWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Creates a plain object from a GetWorkloadIdentityPoolProviderRequest message. Also converts values to other types if specified.
+                 * @param message GetWorkloadIdentityPoolProviderRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1beta.GetWorkloadIdentityPoolProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetWorkloadIdentityPoolProviderRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetWorkloadIdentityPoolProviderRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CreateWorkloadIdentityPoolProviderRequest. */
+            interface ICreateWorkloadIdentityPoolProviderRequest {
+
+                /** CreateWorkloadIdentityPoolProviderRequest parent */
+                parent?: (string|null);
+
+                /** CreateWorkloadIdentityPoolProviderRequest workloadIdentityPoolProvider */
+                workloadIdentityPoolProvider?: (google.iam.v1beta.IWorkloadIdentityPoolProvider|null);
+
+                /** CreateWorkloadIdentityPoolProviderRequest workloadIdentityPoolProviderId */
+                workloadIdentityPoolProviderId?: (string|null);
+            }
+
+            /** Represents a CreateWorkloadIdentityPoolProviderRequest. */
+            class CreateWorkloadIdentityPoolProviderRequest implements ICreateWorkloadIdentityPoolProviderRequest {
+
+                /**
+                 * Constructs a new CreateWorkloadIdentityPoolProviderRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest);
+
+                /** CreateWorkloadIdentityPoolProviderRequest parent. */
+                public parent: string;
+
+                /** CreateWorkloadIdentityPoolProviderRequest workloadIdentityPoolProvider. */
+                public workloadIdentityPoolProvider?: (google.iam.v1beta.IWorkloadIdentityPoolProvider|null);
+
+                /** CreateWorkloadIdentityPoolProviderRequest workloadIdentityPoolProviderId. */
+                public workloadIdentityPoolProviderId: string;
+
+                /**
+                 * Creates a new CreateWorkloadIdentityPoolProviderRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateWorkloadIdentityPoolProviderRequest instance
+                 */
+                public static create(properties?: google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest): google.iam.v1beta.CreateWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Encodes the specified CreateWorkloadIdentityPoolProviderRequest message. Does not implicitly {@link google.iam.v1beta.CreateWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message CreateWorkloadIdentityPoolProviderRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateWorkloadIdentityPoolProviderRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.CreateWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message CreateWorkloadIdentityPoolProviderRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateWorkloadIdentityPoolProviderRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateWorkloadIdentityPoolProviderRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.CreateWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Decodes a CreateWorkloadIdentityPoolProviderRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateWorkloadIdentityPoolProviderRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.CreateWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Verifies a CreateWorkloadIdentityPoolProviderRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateWorkloadIdentityPoolProviderRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateWorkloadIdentityPoolProviderRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.CreateWorkloadIdentityPoolProviderRequest;
+
+                /**
+                 * Creates a plain object from a CreateWorkloadIdentityPoolProviderRequest message. Also converts values to other types if specified.
+                 * @param message CreateWorkloadIdentityPoolProviderRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1beta.CreateWorkloadIdentityPoolProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateWorkloadIdentityPoolProviderRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CreateWorkloadIdentityPoolProviderRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateWorkloadIdentityPoolProviderRequest. */
+            interface IUpdateWorkloadIdentityPoolProviderRequest {
+
+                /** UpdateWorkloadIdentityPoolProviderRequest workloadIdentityPoolProvider */
+                workloadIdentityPoolProvider?: (google.iam.v1beta.IWorkloadIdentityPoolProvider|null);
+
+                /** UpdateWorkloadIdentityPoolProviderRequest updateMask */
                 updateMask?: (google.protobuf.IFieldMask|null);
             }
 
-            /** Represents an UpdatePrincipalAccessBoundaryPolicyRequest. */
-            class UpdatePrincipalAccessBoundaryPolicyRequest implements IUpdatePrincipalAccessBoundaryPolicyRequest {
+            /** Represents an UpdateWorkloadIdentityPoolProviderRequest. */
+            class UpdateWorkloadIdentityPoolProviderRequest implements IUpdateWorkloadIdentityPoolProviderRequest {
 
                 /**
-                 * Constructs a new UpdatePrincipalAccessBoundaryPolicyRequest.
+                 * Constructs a new UpdateWorkloadIdentityPoolProviderRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest);
+                constructor(properties?: google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest);
 
-                /** UpdatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy. */
-                public principalAccessBoundaryPolicy?: (google.iam.v3.IPrincipalAccessBoundaryPolicy|null);
+                /** UpdateWorkloadIdentityPoolProviderRequest workloadIdentityPoolProvider. */
+                public workloadIdentityPoolProvider?: (google.iam.v1beta.IWorkloadIdentityPoolProvider|null);
 
-                /** UpdatePrincipalAccessBoundaryPolicyRequest validateOnly. */
-                public validateOnly: boolean;
-
-                /** UpdatePrincipalAccessBoundaryPolicyRequest updateMask. */
+                /** UpdateWorkloadIdentityPoolProviderRequest updateMask. */
                 public updateMask?: (google.protobuf.IFieldMask|null);
 
                 /**
-                 * Creates a new UpdatePrincipalAccessBoundaryPolicyRequest instance using the specified properties.
+                 * Creates a new UpdateWorkloadIdentityPoolProviderRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns UpdatePrincipalAccessBoundaryPolicyRequest instance
+                 * @returns UpdateWorkloadIdentityPoolProviderRequest instance
                  */
-                public static create(properties?: google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest): google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest;
+                public static create(properties?: google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest): google.iam.v1beta.UpdateWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Encodes the specified UpdatePrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message UpdatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                 * Encodes the specified UpdateWorkloadIdentityPoolProviderRequest message. Does not implicitly {@link google.iam.v1beta.UpdateWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message UpdateWorkloadIdentityPoolProviderRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified UpdatePrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message UpdatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                 * Encodes the specified UpdateWorkloadIdentityPoolProviderRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.UpdateWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message UpdateWorkloadIdentityPoolProviderRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes an UpdatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
+                 * Decodes an UpdateWorkloadIdentityPoolProviderRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns UpdatePrincipalAccessBoundaryPolicyRequest
+                 * @returns UpdateWorkloadIdentityPoolProviderRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.UpdateWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Decodes an UpdatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
+                 * Decodes an UpdateWorkloadIdentityPoolProviderRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns UpdatePrincipalAccessBoundaryPolicyRequest
+                 * @returns UpdateWorkloadIdentityPoolProviderRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.UpdateWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Verifies an UpdatePrincipalAccessBoundaryPolicyRequest message.
+                 * Verifies an UpdateWorkloadIdentityPoolProviderRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates an UpdatePrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates an UpdateWorkloadIdentityPoolProviderRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns UpdatePrincipalAccessBoundaryPolicyRequest
+                 * @returns UpdateWorkloadIdentityPoolProviderRequest
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.UpdateWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Creates a plain object from an UpdatePrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
-                 * @param message UpdatePrincipalAccessBoundaryPolicyRequest
+                 * Creates a plain object from an UpdateWorkloadIdentityPoolProviderRequest message. Also converts values to other types if specified.
+                 * @param message UpdateWorkloadIdentityPoolProviderRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.UpdateWorkloadIdentityPoolProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this UpdatePrincipalAccessBoundaryPolicyRequest to JSON.
+                 * Converts this UpdateWorkloadIdentityPoolProviderRequest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for UpdatePrincipalAccessBoundaryPolicyRequest
+                 * Gets the default type url for UpdateWorkloadIdentityPoolProviderRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a DeletePrincipalAccessBoundaryPolicyRequest. */
-            interface IDeletePrincipalAccessBoundaryPolicyRequest {
+            /** Properties of a DeleteWorkloadIdentityPoolProviderRequest. */
+            interface IDeleteWorkloadIdentityPoolProviderRequest {
 
-                /** DeletePrincipalAccessBoundaryPolicyRequest name */
+                /** DeleteWorkloadIdentityPoolProviderRequest name */
                 name?: (string|null);
-
-                /** DeletePrincipalAccessBoundaryPolicyRequest etag */
-                etag?: (string|null);
-
-                /** DeletePrincipalAccessBoundaryPolicyRequest validateOnly */
-                validateOnly?: (boolean|null);
-
-                /** DeletePrincipalAccessBoundaryPolicyRequest force */
-                force?: (boolean|null);
             }
 
-            /** Represents a DeletePrincipalAccessBoundaryPolicyRequest. */
-            class DeletePrincipalAccessBoundaryPolicyRequest implements IDeletePrincipalAccessBoundaryPolicyRequest {
+            /** Represents a DeleteWorkloadIdentityPoolProviderRequest. */
+            class DeleteWorkloadIdentityPoolProviderRequest implements IDeleteWorkloadIdentityPoolProviderRequest {
 
                 /**
-                 * Constructs a new DeletePrincipalAccessBoundaryPolicyRequest.
+                 * Constructs a new DeleteWorkloadIdentityPoolProviderRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest);
+                constructor(properties?: google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest);
 
-                /** DeletePrincipalAccessBoundaryPolicyRequest name. */
+                /** DeleteWorkloadIdentityPoolProviderRequest name. */
                 public name: string;
 
-                /** DeletePrincipalAccessBoundaryPolicyRequest etag. */
-                public etag: string;
-
-                /** DeletePrincipalAccessBoundaryPolicyRequest validateOnly. */
-                public validateOnly: boolean;
-
-                /** DeletePrincipalAccessBoundaryPolicyRequest force. */
-                public force: boolean;
-
                 /**
-                 * Creates a new DeletePrincipalAccessBoundaryPolicyRequest instance using the specified properties.
+                 * Creates a new DeleteWorkloadIdentityPoolProviderRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns DeletePrincipalAccessBoundaryPolicyRequest instance
+                 * @returns DeleteWorkloadIdentityPoolProviderRequest instance
                  */
-                public static create(properties?: google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest): google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest;
+                public static create(properties?: google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest): google.iam.v1beta.DeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Encodes the specified DeletePrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message DeletePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                 * Encodes the specified DeleteWorkloadIdentityPoolProviderRequest message. Does not implicitly {@link google.iam.v1beta.DeleteWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message DeleteWorkloadIdentityPoolProviderRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified DeletePrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
-                 * @param message DeletePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                 * Encodes the specified DeleteWorkloadIdentityPoolProviderRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.DeleteWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message DeleteWorkloadIdentityPoolProviderRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a DeletePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
+                 * Decodes a DeleteWorkloadIdentityPoolProviderRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns DeletePrincipalAccessBoundaryPolicyRequest
+                 * @returns DeleteWorkloadIdentityPoolProviderRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.DeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Decodes a DeletePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
+                 * Decodes a DeleteWorkloadIdentityPoolProviderRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns DeletePrincipalAccessBoundaryPolicyRequest
+                 * @returns DeleteWorkloadIdentityPoolProviderRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.DeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Verifies a DeletePrincipalAccessBoundaryPolicyRequest message.
+                 * Verifies a DeleteWorkloadIdentityPoolProviderRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a DeletePrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates a DeleteWorkloadIdentityPoolProviderRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns DeletePrincipalAccessBoundaryPolicyRequest
+                 * @returns DeleteWorkloadIdentityPoolProviderRequest
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.DeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Creates a plain object from a DeletePrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
-                 * @param message DeletePrincipalAccessBoundaryPolicyRequest
+                 * Creates a plain object from a DeleteWorkloadIdentityPoolProviderRequest message. Also converts values to other types if specified.
+                 * @param message DeleteWorkloadIdentityPoolProviderRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.DeleteWorkloadIdentityPoolProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this DeletePrincipalAccessBoundaryPolicyRequest to JSON.
+                 * Converts this DeleteWorkloadIdentityPoolProviderRequest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for DeletePrincipalAccessBoundaryPolicyRequest
+                 * Gets the default type url for DeleteWorkloadIdentityPoolProviderRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a ListPrincipalAccessBoundaryPoliciesRequest. */
-            interface IListPrincipalAccessBoundaryPoliciesRequest {
+            /** Properties of an UndeleteWorkloadIdentityPoolProviderRequest. */
+            interface IUndeleteWorkloadIdentityPoolProviderRequest {
 
-                /** ListPrincipalAccessBoundaryPoliciesRequest parent */
-                parent?: (string|null);
-
-                /** ListPrincipalAccessBoundaryPoliciesRequest pageSize */
-                pageSize?: (number|null);
-
-                /** ListPrincipalAccessBoundaryPoliciesRequest pageToken */
-                pageToken?: (string|null);
-            }
-
-            /** Represents a ListPrincipalAccessBoundaryPoliciesRequest. */
-            class ListPrincipalAccessBoundaryPoliciesRequest implements IListPrincipalAccessBoundaryPoliciesRequest {
-
-                /**
-                 * Constructs a new ListPrincipalAccessBoundaryPoliciesRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest);
-
-                /** ListPrincipalAccessBoundaryPoliciesRequest parent. */
-                public parent: string;
-
-                /** ListPrincipalAccessBoundaryPoliciesRequest pageSize. */
-                public pageSize: number;
-
-                /** ListPrincipalAccessBoundaryPoliciesRequest pageToken. */
-                public pageToken: string;
-
-                /**
-                 * Creates a new ListPrincipalAccessBoundaryPoliciesRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListPrincipalAccessBoundaryPoliciesRequest instance
-                 */
-                public static create(properties?: google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest): google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest;
-
-                /**
-                 * Encodes the specified ListPrincipalAccessBoundaryPoliciesRequest message. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest.verify|verify} messages.
-                 * @param message ListPrincipalAccessBoundaryPoliciesRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListPrincipalAccessBoundaryPoliciesRequest message, length delimited. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest.verify|verify} messages.
-                 * @param message ListPrincipalAccessBoundaryPoliciesRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListPrincipalAccessBoundaryPoliciesRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListPrincipalAccessBoundaryPoliciesRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest;
-
-                /**
-                 * Decodes a ListPrincipalAccessBoundaryPoliciesRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListPrincipalAccessBoundaryPoliciesRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest;
-
-                /**
-                 * Verifies a ListPrincipalAccessBoundaryPoliciesRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListPrincipalAccessBoundaryPoliciesRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListPrincipalAccessBoundaryPoliciesRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest;
-
-                /**
-                 * Creates a plain object from a ListPrincipalAccessBoundaryPoliciesRequest message. Also converts values to other types if specified.
-                 * @param message ListPrincipalAccessBoundaryPoliciesRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListPrincipalAccessBoundaryPoliciesRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListPrincipalAccessBoundaryPoliciesRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ListPrincipalAccessBoundaryPoliciesResponse. */
-            interface IListPrincipalAccessBoundaryPoliciesResponse {
-
-                /** ListPrincipalAccessBoundaryPoliciesResponse principalAccessBoundaryPolicies */
-                principalAccessBoundaryPolicies?: (google.iam.v3.IPrincipalAccessBoundaryPolicy[]|null);
-
-                /** ListPrincipalAccessBoundaryPoliciesResponse nextPageToken */
-                nextPageToken?: (string|null);
-            }
-
-            /** Represents a ListPrincipalAccessBoundaryPoliciesResponse. */
-            class ListPrincipalAccessBoundaryPoliciesResponse implements IListPrincipalAccessBoundaryPoliciesResponse {
-
-                /**
-                 * Constructs a new ListPrincipalAccessBoundaryPoliciesResponse.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse);
-
-                /** ListPrincipalAccessBoundaryPoliciesResponse principalAccessBoundaryPolicies. */
-                public principalAccessBoundaryPolicies: google.iam.v3.IPrincipalAccessBoundaryPolicy[];
-
-                /** ListPrincipalAccessBoundaryPoliciesResponse nextPageToken. */
-                public nextPageToken: string;
-
-                /**
-                 * Creates a new ListPrincipalAccessBoundaryPoliciesResponse instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ListPrincipalAccessBoundaryPoliciesResponse instance
-                 */
-                public static create(properties?: google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse): google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse;
-
-                /**
-                 * Encodes the specified ListPrincipalAccessBoundaryPoliciesResponse message. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse.verify|verify} messages.
-                 * @param message ListPrincipalAccessBoundaryPoliciesResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ListPrincipalAccessBoundaryPoliciesResponse message, length delimited. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse.verify|verify} messages.
-                 * @param message ListPrincipalAccessBoundaryPoliciesResponse message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ListPrincipalAccessBoundaryPoliciesResponse message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ListPrincipalAccessBoundaryPoliciesResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse;
-
-                /**
-                 * Decodes a ListPrincipalAccessBoundaryPoliciesResponse message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ListPrincipalAccessBoundaryPoliciesResponse
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse;
-
-                /**
-                 * Verifies a ListPrincipalAccessBoundaryPoliciesResponse message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ListPrincipalAccessBoundaryPoliciesResponse message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ListPrincipalAccessBoundaryPoliciesResponse
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse;
-
-                /**
-                 * Creates a plain object from a ListPrincipalAccessBoundaryPoliciesResponse message. Also converts values to other types if specified.
-                 * @param message ListPrincipalAccessBoundaryPoliciesResponse
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ListPrincipalAccessBoundaryPoliciesResponse to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ListPrincipalAccessBoundaryPoliciesResponse
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a SearchPrincipalAccessBoundaryPolicyBindingsRequest. */
-            interface ISearchPrincipalAccessBoundaryPolicyBindingsRequest {
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsRequest name */
+                /** UndeleteWorkloadIdentityPoolProviderRequest name */
                 name?: (string|null);
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsRequest pageSize */
-                pageSize?: (number|null);
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsRequest pageToken */
-                pageToken?: (string|null);
             }
 
-            /** Represents a SearchPrincipalAccessBoundaryPolicyBindingsRequest. */
-            class SearchPrincipalAccessBoundaryPolicyBindingsRequest implements ISearchPrincipalAccessBoundaryPolicyBindingsRequest {
+            /** Represents an UndeleteWorkloadIdentityPoolProviderRequest. */
+            class UndeleteWorkloadIdentityPoolProviderRequest implements IUndeleteWorkloadIdentityPoolProviderRequest {
 
                 /**
-                 * Constructs a new SearchPrincipalAccessBoundaryPolicyBindingsRequest.
+                 * Constructs a new UndeleteWorkloadIdentityPoolProviderRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest);
+                constructor(properties?: google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest);
 
-                /** SearchPrincipalAccessBoundaryPolicyBindingsRequest name. */
+                /** UndeleteWorkloadIdentityPoolProviderRequest name. */
                 public name: string;
 
-                /** SearchPrincipalAccessBoundaryPolicyBindingsRequest pageSize. */
-                public pageSize: number;
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsRequest pageToken. */
-                public pageToken: string;
-
                 /**
-                 * Creates a new SearchPrincipalAccessBoundaryPolicyBindingsRequest instance using the specified properties.
+                 * Creates a new UndeleteWorkloadIdentityPoolProviderRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsRequest instance
+                 * @returns UndeleteWorkloadIdentityPoolProviderRequest instance
                  */
-                public static create(properties?: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest;
+                public static create(properties?: google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest): google.iam.v1beta.UndeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest.verify|verify} messages.
-                 * @param message SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object to encode
+                 * Encodes the specified UndeleteWorkloadIdentityPoolProviderRequest message. Does not implicitly {@link google.iam.v1beta.UndeleteWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message UndeleteWorkloadIdentityPoolProviderRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest.verify|verify} messages.
-                 * @param message SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object to encode
+                 * Encodes the specified UndeleteWorkloadIdentityPoolProviderRequest message, length delimited. Does not implicitly {@link google.iam.v1beta.UndeleteWorkloadIdentityPoolProviderRequest.verify|verify} messages.
+                 * @param message UndeleteWorkloadIdentityPoolProviderRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsRequest message from the specified reader or buffer.
+                 * Decodes an UndeleteWorkloadIdentityPoolProviderRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                 * @returns UndeleteWorkloadIdentityPoolProviderRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.UndeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsRequest message from the specified reader or buffer, length delimited.
+                 * Decodes an UndeleteWorkloadIdentityPoolProviderRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                 * @returns UndeleteWorkloadIdentityPoolProviderRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.UndeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Verifies a SearchPrincipalAccessBoundaryPolicyBindingsRequest message.
+                 * Verifies an UndeleteWorkloadIdentityPoolProviderRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a SearchPrincipalAccessBoundaryPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates an UndeleteWorkloadIdentityPoolProviderRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                 * @returns UndeleteWorkloadIdentityPoolProviderRequest
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.UndeleteWorkloadIdentityPoolProviderRequest;
 
                 /**
-                 * Creates a plain object from a SearchPrincipalAccessBoundaryPolicyBindingsRequest message. Also converts values to other types if specified.
-                 * @param message SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                 * Creates a plain object from an UndeleteWorkloadIdentityPoolProviderRequest message. Also converts values to other types if specified.
+                 * @param message UndeleteWorkloadIdentityPoolProviderRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.UndeleteWorkloadIdentityPoolProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this SearchPrincipalAccessBoundaryPolicyBindingsRequest to JSON.
+                 * Converts this UndeleteWorkloadIdentityPoolProviderRequest to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                 * Gets the default type url for UndeleteWorkloadIdentityPoolProviderRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a SearchPrincipalAccessBoundaryPolicyBindingsResponse. */
-            interface ISearchPrincipalAccessBoundaryPolicyBindingsResponse {
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsResponse policyBindings */
-                policyBindings?: (google.iam.v3.IPolicyBinding[]|null);
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsResponse nextPageToken */
-                nextPageToken?: (string|null);
+            /** Properties of a WorkloadIdentityPoolOperationMetadata. */
+            interface IWorkloadIdentityPoolOperationMetadata {
             }
 
-            /** Represents a SearchPrincipalAccessBoundaryPolicyBindingsResponse. */
-            class SearchPrincipalAccessBoundaryPolicyBindingsResponse implements ISearchPrincipalAccessBoundaryPolicyBindingsResponse {
+            /** Represents a WorkloadIdentityPoolOperationMetadata. */
+            class WorkloadIdentityPoolOperationMetadata implements IWorkloadIdentityPoolOperationMetadata {
 
                 /**
-                 * Constructs a new SearchPrincipalAccessBoundaryPolicyBindingsResponse.
+                 * Constructs a new WorkloadIdentityPoolOperationMetadata.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse);
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsResponse policyBindings. */
-                public policyBindings: google.iam.v3.IPolicyBinding[];
-
-                /** SearchPrincipalAccessBoundaryPolicyBindingsResponse nextPageToken. */
-                public nextPageToken: string;
+                constructor(properties?: google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata);
 
                 /**
-                 * Creates a new SearchPrincipalAccessBoundaryPolicyBindingsResponse instance using the specified properties.
+                 * Creates a new WorkloadIdentityPoolOperationMetadata instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsResponse instance
+                 * @returns WorkloadIdentityPoolOperationMetadata instance
                  */
-                public static create(properties?: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse;
+                public static create(properties?: google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata): google.iam.v1beta.WorkloadIdentityPoolOperationMetadata;
 
                 /**
-                 * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse.verify|verify} messages.
-                 * @param message SearchPrincipalAccessBoundaryPolicyBindingsResponse message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPoolOperationMetadata message. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolOperationMetadata.verify|verify} messages.
+                 * @param message WorkloadIdentityPoolOperationMetadata message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse.verify|verify} messages.
-                 * @param message SearchPrincipalAccessBoundaryPolicyBindingsResponse message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPoolOperationMetadata message, length delimited. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolOperationMetadata.verify|verify} messages.
+                 * @param message WorkloadIdentityPoolOperationMetadata message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsResponse message from the specified reader or buffer.
+                 * Decodes a WorkloadIdentityPoolOperationMetadata message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                 * @returns WorkloadIdentityPoolOperationMetadata
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.WorkloadIdentityPoolOperationMetadata;
 
                 /**
-                 * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsResponse message from the specified reader or buffer, length delimited.
+                 * Decodes a WorkloadIdentityPoolOperationMetadata message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                 * @returns WorkloadIdentityPoolOperationMetadata
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.WorkloadIdentityPoolOperationMetadata;
 
                 /**
-                 * Verifies a SearchPrincipalAccessBoundaryPolicyBindingsResponse message.
+                 * Verifies a WorkloadIdentityPoolOperationMetadata message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a SearchPrincipalAccessBoundaryPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                 * Creates a WorkloadIdentityPoolOperationMetadata message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                 * @returns WorkloadIdentityPoolOperationMetadata
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.WorkloadIdentityPoolOperationMetadata;
 
                 /**
-                 * Creates a plain object from a SearchPrincipalAccessBoundaryPolicyBindingsResponse message. Also converts values to other types if specified.
-                 * @param message SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                 * Creates a plain object from a WorkloadIdentityPoolOperationMetadata message. Also converts values to other types if specified.
+                 * @param message WorkloadIdentityPoolOperationMetadata
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.WorkloadIdentityPoolOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this SearchPrincipalAccessBoundaryPolicyBindingsResponse to JSON.
+                 * Converts this WorkloadIdentityPoolOperationMetadata to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                 * Gets the default type url for WorkloadIdentityPoolOperationMetadata
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of a PrincipalAccessBoundaryPolicy. */
-            interface IPrincipalAccessBoundaryPolicy {
-
-                /** PrincipalAccessBoundaryPolicy name */
-                name?: (string|null);
-
-                /** PrincipalAccessBoundaryPolicy uid */
-                uid?: (string|null);
-
-                /** PrincipalAccessBoundaryPolicy etag */
-                etag?: (string|null);
-
-                /** PrincipalAccessBoundaryPolicy displayName */
-                displayName?: (string|null);
-
-                /** PrincipalAccessBoundaryPolicy annotations */
-                annotations?: ({ [k: string]: string }|null);
-
-                /** PrincipalAccessBoundaryPolicy createTime */
-                createTime?: (google.protobuf.ITimestamp|null);
-
-                /** PrincipalAccessBoundaryPolicy updateTime */
-                updateTime?: (google.protobuf.ITimestamp|null);
-
-                /** PrincipalAccessBoundaryPolicy details */
-                details?: (google.iam.v3.IPrincipalAccessBoundaryPolicyDetails|null);
+            /** Properties of a WorkloadIdentityPoolProviderOperationMetadata. */
+            interface IWorkloadIdentityPoolProviderOperationMetadata {
             }
 
-            /** Represents a PrincipalAccessBoundaryPolicy. */
-            class PrincipalAccessBoundaryPolicy implements IPrincipalAccessBoundaryPolicy {
+            /** Represents a WorkloadIdentityPoolProviderOperationMetadata. */
+            class WorkloadIdentityPoolProviderOperationMetadata implements IWorkloadIdentityPoolProviderOperationMetadata {
 
                 /**
-                 * Constructs a new PrincipalAccessBoundaryPolicy.
+                 * Constructs a new WorkloadIdentityPoolProviderOperationMetadata.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.iam.v3.IPrincipalAccessBoundaryPolicy);
-
-                /** PrincipalAccessBoundaryPolicy name. */
-                public name: string;
-
-                /** PrincipalAccessBoundaryPolicy uid. */
-                public uid: string;
-
-                /** PrincipalAccessBoundaryPolicy etag. */
-                public etag: string;
-
-                /** PrincipalAccessBoundaryPolicy displayName. */
-                public displayName: string;
-
-                /** PrincipalAccessBoundaryPolicy annotations. */
-                public annotations: { [k: string]: string };
-
-                /** PrincipalAccessBoundaryPolicy createTime. */
-                public createTime?: (google.protobuf.ITimestamp|null);
-
-                /** PrincipalAccessBoundaryPolicy updateTime. */
-                public updateTime?: (google.protobuf.ITimestamp|null);
-
-                /** PrincipalAccessBoundaryPolicy details. */
-                public details?: (google.iam.v3.IPrincipalAccessBoundaryPolicyDetails|null);
+                constructor(properties?: google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata);
 
                 /**
-                 * Creates a new PrincipalAccessBoundaryPolicy instance using the specified properties.
+                 * Creates a new WorkloadIdentityPoolProviderOperationMetadata instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns PrincipalAccessBoundaryPolicy instance
+                 * @returns WorkloadIdentityPoolProviderOperationMetadata instance
                  */
-                public static create(properties?: google.iam.v3.IPrincipalAccessBoundaryPolicy): google.iam.v3.PrincipalAccessBoundaryPolicy;
+                public static create(properties?: google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata): google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata;
 
                 /**
-                 * Encodes the specified PrincipalAccessBoundaryPolicy message. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicy.verify|verify} messages.
-                 * @param message PrincipalAccessBoundaryPolicy message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPoolProviderOperationMetadata message. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata.verify|verify} messages.
+                 * @param message WorkloadIdentityPoolProviderOperationMetadata message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.iam.v3.IPrincipalAccessBoundaryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified PrincipalAccessBoundaryPolicy message, length delimited. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicy.verify|verify} messages.
-                 * @param message PrincipalAccessBoundaryPolicy message or plain object to encode
+                 * Encodes the specified WorkloadIdentityPoolProviderOperationMetadata message, length delimited. Does not implicitly {@link google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata.verify|verify} messages.
+                 * @param message WorkloadIdentityPoolProviderOperationMetadata message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.iam.v3.IPrincipalAccessBoundaryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a PrincipalAccessBoundaryPolicy message from the specified reader or buffer.
+                 * Decodes a WorkloadIdentityPoolProviderOperationMetadata message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns PrincipalAccessBoundaryPolicy
+                 * @returns WorkloadIdentityPoolProviderOperationMetadata
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.PrincipalAccessBoundaryPolicy;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata;
 
                 /**
-                 * Decodes a PrincipalAccessBoundaryPolicy message from the specified reader or buffer, length delimited.
+                 * Decodes a WorkloadIdentityPoolProviderOperationMetadata message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns PrincipalAccessBoundaryPolicy
+                 * @returns WorkloadIdentityPoolProviderOperationMetadata
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.PrincipalAccessBoundaryPolicy;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata;
 
                 /**
-                 * Verifies a PrincipalAccessBoundaryPolicy message.
+                 * Verifies a WorkloadIdentityPoolProviderOperationMetadata message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a PrincipalAccessBoundaryPolicy message from a plain object. Also converts values to their respective internal types.
+                 * Creates a WorkloadIdentityPoolProviderOperationMetadata message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns PrincipalAccessBoundaryPolicy
+                 * @returns WorkloadIdentityPoolProviderOperationMetadata
                  */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.PrincipalAccessBoundaryPolicy;
+                public static fromObject(object: { [k: string]: any }): google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata;
 
                 /**
-                 * Creates a plain object from a PrincipalAccessBoundaryPolicy message. Also converts values to other types if specified.
-                 * @param message PrincipalAccessBoundaryPolicy
+                 * Creates a plain object from a WorkloadIdentityPoolProviderOperationMetadata message. Also converts values to other types if specified.
+                 * @param message WorkloadIdentityPoolProviderOperationMetadata
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.iam.v3.PrincipalAccessBoundaryPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this PrincipalAccessBoundaryPolicy to JSON.
+                 * Converts this WorkloadIdentityPoolProviderOperationMetadata to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for PrincipalAccessBoundaryPolicy
+                 * Gets the default type url for WorkloadIdentityPoolProviderOperationMetadata
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
-
-            /** Properties of a PrincipalAccessBoundaryPolicyDetails. */
-            interface IPrincipalAccessBoundaryPolicyDetails {
-
-                /** PrincipalAccessBoundaryPolicyDetails rules */
-                rules?: (google.iam.v3.IPrincipalAccessBoundaryPolicyRule[]|null);
-
-                /** PrincipalAccessBoundaryPolicyDetails enforcementVersion */
-                enforcementVersion?: (string|null);
-            }
-
-            /** Represents a PrincipalAccessBoundaryPolicyDetails. */
-            class PrincipalAccessBoundaryPolicyDetails implements IPrincipalAccessBoundaryPolicyDetails {
-
-                /**
-                 * Constructs a new PrincipalAccessBoundaryPolicyDetails.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IPrincipalAccessBoundaryPolicyDetails);
-
-                /** PrincipalAccessBoundaryPolicyDetails rules. */
-                public rules: google.iam.v3.IPrincipalAccessBoundaryPolicyRule[];
-
-                /** PrincipalAccessBoundaryPolicyDetails enforcementVersion. */
-                public enforcementVersion: string;
-
-                /**
-                 * Creates a new PrincipalAccessBoundaryPolicyDetails instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns PrincipalAccessBoundaryPolicyDetails instance
-                 */
-                public static create(properties?: google.iam.v3.IPrincipalAccessBoundaryPolicyDetails): google.iam.v3.PrincipalAccessBoundaryPolicyDetails;
-
-                /**
-                 * Encodes the specified PrincipalAccessBoundaryPolicyDetails message. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyDetails.verify|verify} messages.
-                 * @param message PrincipalAccessBoundaryPolicyDetails message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IPrincipalAccessBoundaryPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified PrincipalAccessBoundaryPolicyDetails message, length delimited. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyDetails.verify|verify} messages.
-                 * @param message PrincipalAccessBoundaryPolicyDetails message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IPrincipalAccessBoundaryPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a PrincipalAccessBoundaryPolicyDetails message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns PrincipalAccessBoundaryPolicyDetails
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.PrincipalAccessBoundaryPolicyDetails;
-
-                /**
-                 * Decodes a PrincipalAccessBoundaryPolicyDetails message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns PrincipalAccessBoundaryPolicyDetails
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.PrincipalAccessBoundaryPolicyDetails;
-
-                /**
-                 * Verifies a PrincipalAccessBoundaryPolicyDetails message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a PrincipalAccessBoundaryPolicyDetails message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns PrincipalAccessBoundaryPolicyDetails
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.PrincipalAccessBoundaryPolicyDetails;
-
-                /**
-                 * Creates a plain object from a PrincipalAccessBoundaryPolicyDetails message. Also converts values to other types if specified.
-                 * @param message PrincipalAccessBoundaryPolicyDetails
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.PrincipalAccessBoundaryPolicyDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this PrincipalAccessBoundaryPolicyDetails to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for PrincipalAccessBoundaryPolicyDetails
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a PrincipalAccessBoundaryPolicyRule. */
-            interface IPrincipalAccessBoundaryPolicyRule {
-
-                /** PrincipalAccessBoundaryPolicyRule description */
-                description?: (string|null);
-
-                /** PrincipalAccessBoundaryPolicyRule resources */
-                resources?: (string[]|null);
-
-                /** PrincipalAccessBoundaryPolicyRule effect */
-                effect?: (google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect|keyof typeof google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect|null);
-            }
-
-            /** Represents a PrincipalAccessBoundaryPolicyRule. */
-            class PrincipalAccessBoundaryPolicyRule implements IPrincipalAccessBoundaryPolicyRule {
-
-                /**
-                 * Constructs a new PrincipalAccessBoundaryPolicyRule.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.iam.v3.IPrincipalAccessBoundaryPolicyRule);
-
-                /** PrincipalAccessBoundaryPolicyRule description. */
-                public description: string;
-
-                /** PrincipalAccessBoundaryPolicyRule resources. */
-                public resources: string[];
-
-                /** PrincipalAccessBoundaryPolicyRule effect. */
-                public effect: (google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect|keyof typeof google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect);
-
-                /**
-                 * Creates a new PrincipalAccessBoundaryPolicyRule instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns PrincipalAccessBoundaryPolicyRule instance
-                 */
-                public static create(properties?: google.iam.v3.IPrincipalAccessBoundaryPolicyRule): google.iam.v3.PrincipalAccessBoundaryPolicyRule;
-
-                /**
-                 * Encodes the specified PrincipalAccessBoundaryPolicyRule message. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyRule.verify|verify} messages.
-                 * @param message PrincipalAccessBoundaryPolicyRule message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.iam.v3.IPrincipalAccessBoundaryPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified PrincipalAccessBoundaryPolicyRule message, length delimited. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyRule.verify|verify} messages.
-                 * @param message PrincipalAccessBoundaryPolicyRule message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.iam.v3.IPrincipalAccessBoundaryPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a PrincipalAccessBoundaryPolicyRule message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns PrincipalAccessBoundaryPolicyRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v3.PrincipalAccessBoundaryPolicyRule;
-
-                /**
-                 * Decodes a PrincipalAccessBoundaryPolicyRule message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns PrincipalAccessBoundaryPolicyRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v3.PrincipalAccessBoundaryPolicyRule;
-
-                /**
-                 * Verifies a PrincipalAccessBoundaryPolicyRule message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a PrincipalAccessBoundaryPolicyRule message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns PrincipalAccessBoundaryPolicyRule
-                 */
-                public static fromObject(object: { [k: string]: any }): google.iam.v3.PrincipalAccessBoundaryPolicyRule;
-
-                /**
-                 * Creates a plain object from a PrincipalAccessBoundaryPolicyRule message. Also converts values to other types if specified.
-                 * @param message PrincipalAccessBoundaryPolicyRule
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.iam.v3.PrincipalAccessBoundaryPolicyRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this PrincipalAccessBoundaryPolicyRule to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for PrincipalAccessBoundaryPolicyRule
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace PrincipalAccessBoundaryPolicyRule {
-
-                /** Effect enum. */
-                enum Effect {
-                    EFFECT_UNSPECIFIED = 0,
-                    ALLOW = 1
-                }
-            }
-        }
-    }
-
-    /** Namespace type. */
-    namespace type {
-
-        /** Properties of an Expr. */
-        interface IExpr {
-
-            /** Expr expression */
-            expression?: (string|null);
-
-            /** Expr title */
-            title?: (string|null);
-
-            /** Expr description */
-            description?: (string|null);
-
-            /** Expr location */
-            location?: (string|null);
-        }
-
-        /** Represents an Expr. */
-        class Expr implements IExpr {
-
-            /**
-             * Constructs a new Expr.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.IExpr);
-
-            /** Expr expression. */
-            public expression: string;
-
-            /** Expr title. */
-            public title: string;
-
-            /** Expr description. */
-            public description: string;
-
-            /** Expr location. */
-            public location: string;
-
-            /**
-             * Creates a new Expr instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Expr instance
-             */
-            public static create(properties?: google.type.IExpr): google.type.Expr;
-
-            /**
-             * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
-             * @param message Expr message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
-             * @param message Expr message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Expr message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Expr
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Expr;
-
-            /**
-             * Decodes an Expr message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Expr
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Expr;
-
-            /**
-             * Verifies an Expr message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Expr message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Expr
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.Expr;
-
-            /**
-             * Creates a plain object from an Expr message. Also converts values to other types if specified.
-             * @param message Expr
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.Expr, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Expr to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Expr
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -4538,9 +2785,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
-
-            /** CommonLanguageSettings selectiveGapicGeneration */
-            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -4557,9 +2801,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
-
-            /** CommonLanguageSettings selectiveGapicGeneration. */
-            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -5261,9 +3502,6 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures */
-            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -5277,9 +3515,6 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures. */
-            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -5357,118 +3592,6 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace PythonSettings {
-
-            /** Properties of an ExperimentalFeatures. */
-            interface IExperimentalFeatures {
-
-                /** ExperimentalFeatures restAsyncIoEnabled */
-                restAsyncIoEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled */
-                protobufPythonicTypesEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures unversionedPackageDisabled */
-                unversionedPackageDisabled?: (boolean|null);
-            }
-
-            /** Represents an ExperimentalFeatures. */
-            class ExperimentalFeatures implements IExperimentalFeatures {
-
-                /**
-                 * Constructs a new ExperimentalFeatures.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
-
-                /** ExperimentalFeatures restAsyncIoEnabled. */
-                public restAsyncIoEnabled: boolean;
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
-                public protobufPythonicTypesEnabled: boolean;
-
-                /** ExperimentalFeatures unversionedPackageDisabled. */
-                public unversionedPackageDisabled: boolean;
-
-                /**
-                 * Creates a new ExperimentalFeatures instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ExperimentalFeatures instance
-                 */
-                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Verifies an ExperimentalFeatures message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ExperimentalFeatures
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                 * @param message ExperimentalFeatures
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ExperimentalFeatures to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ExperimentalFeatures
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
         }
 
         /** Properties of a NodeSettings. */
@@ -5797,9 +3920,6 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices */
-            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -5813,9 +3933,6 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices. */
-            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -6141,109 +4258,6 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
-        /** Properties of a SelectiveGapicGeneration. */
-        interface ISelectiveGapicGeneration {
-
-            /** SelectiveGapicGeneration methods */
-            methods?: (string[]|null);
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal */
-            generateOmittedAsInternal?: (boolean|null);
-        }
-
-        /** Represents a SelectiveGapicGeneration. */
-        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
-
-            /**
-             * Constructs a new SelectiveGapicGeneration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ISelectiveGapicGeneration);
-
-            /** SelectiveGapicGeneration methods. */
-            public methods: string[];
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal. */
-            public generateOmittedAsInternal: boolean;
-
-            /**
-             * Creates a new SelectiveGapicGeneration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns SelectiveGapicGeneration instance
-             */
-            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Verifies a SelectiveGapicGeneration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns SelectiveGapicGeneration
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-             * @param message SelectiveGapicGeneration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this SelectiveGapicGeneration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for SelectiveGapicGeneration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -6267,218 +4281,6 @@ export namespace google {
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7,
             IDENTIFIER = 8
-        }
-
-        /** Properties of a FieldInfo. */
-        interface IFieldInfo {
-
-            /** FieldInfo format */
-            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
-
-            /** FieldInfo referencedTypes */
-            referencedTypes?: (google.api.ITypeReference[]|null);
-        }
-
-        /** Represents a FieldInfo. */
-        class FieldInfo implements IFieldInfo {
-
-            /**
-             * Constructs a new FieldInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IFieldInfo);
-
-            /** FieldInfo format. */
-            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
-
-            /** FieldInfo referencedTypes. */
-            public referencedTypes: google.api.ITypeReference[];
-
-            /**
-             * Creates a new FieldInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldInfo instance
-             */
-            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
-
-            /**
-             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
-
-            /**
-             * Verifies a FieldInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
-
-            /**
-             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-             * @param message FieldInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldInfo {
-
-            /** Format enum. */
-            enum Format {
-                FORMAT_UNSPECIFIED = 0,
-                UUID4 = 1,
-                IPV4 = 2,
-                IPV6 = 3,
-                IPV4_OR_IPV6 = 4
-            }
-        }
-
-        /** Properties of a TypeReference. */
-        interface ITypeReference {
-
-            /** TypeReference typeName */
-            typeName?: (string|null);
-        }
-
-        /** Represents a TypeReference. */
-        class TypeReference implements ITypeReference {
-
-            /**
-             * Constructs a new TypeReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ITypeReference);
-
-            /** TypeReference typeName. */
-            public typeName: string;
-
-            /**
-             * Creates a new TypeReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns TypeReference instance
-             */
-            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
-
-            /**
-             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
-
-            /**
-             * Verifies a TypeReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns TypeReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
-
-            /**
-             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
-             * @param message TypeReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this TypeReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for TypeReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -6837,7 +4639,6 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
-            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -6867,9 +4668,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
-
-            /** FileDescriptorProto optionDependency */
-            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -6919,9 +4717,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
-
-            /** FileDescriptorProto optionDependency. */
-            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -7057,9 +4852,6 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** DescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -7100,9 +4892,6 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** DescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -7951,9 +5740,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** EnumDescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -7979,9 +5765,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** EnumDescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -8917,17 +6700,11 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
-            /** FieldOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
-
-            /** FieldOptions .google.api.fieldInfo */
-            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
@@ -8977,9 +6754,6 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
-
-            /** FieldOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9196,121 +6970,6 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a FeatureSupport. */
-            interface IFeatureSupport {
-
-                /** FeatureSupport editionIntroduced */
-                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport editionDeprecated */
-                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport deprecationWarning */
-                deprecationWarning?: (string|null);
-
-                /** FeatureSupport editionRemoved */
-                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-            }
-
-            /** Represents a FeatureSupport. */
-            class FeatureSupport implements IFeatureSupport {
-
-                /**
-                 * Constructs a new FeatureSupport.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
-
-                /** FeatureSupport editionIntroduced. */
-                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport editionDeprecated. */
-                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport deprecationWarning. */
-                public deprecationWarning: string;
-
-                /** FeatureSupport editionRemoved. */
-                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /**
-                 * Creates a new FeatureSupport instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns FeatureSupport instance
-                 */
-                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Verifies a FeatureSupport message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns FeatureSupport
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                 * @param message FeatureSupport
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this FeatureSupport to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -9554,9 +7213,6 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
-            /** EnumValueOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -9578,9 +7234,6 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
-
-            /** EnumValueOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10174,12 +7827,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
-
-            /** FeatureSet enforceNamingStyle */
-            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
-
-            /** FeatureSet defaultSymbolVisibility */
-            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -10208,12 +7855,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
-
-            /** FeatureSet enforceNamingStyle. */
-            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
-
-            /** FeatureSet defaultSymbolVisibility. */
-            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -10337,116 +7978,6 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
-
-            /** EnforceNamingStyle enum. */
-            enum EnforceNamingStyle {
-                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
-                STYLE2024 = 1,
-                STYLE_LEGACY = 2
-            }
-
-            /** Properties of a VisibilityFeature. */
-            interface IVisibilityFeature {
-            }
-
-            /** Represents a VisibilityFeature. */
-            class VisibilityFeature implements IVisibilityFeature {
-
-                /**
-                 * Constructs a new VisibilityFeature.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
-
-                /**
-                 * Creates a new VisibilityFeature instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns VisibilityFeature instance
-                 */
-                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Verifies a VisibilityFeature message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns VisibilityFeature
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                 * @param message VisibilityFeature
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this VisibilityFeature to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for VisibilityFeature
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace VisibilityFeature {
-
-                /** DefaultSymbolVisibility enum. */
-                enum DefaultSymbolVisibility {
-                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
-                    EXPORT_ALL = 1,
-                    EXPORT_TOP_LEVEL = 2,
-                    LOCAL_ALL = 3,
-                    STRICT = 4
-                }
-            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -10566,11 +8097,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault overridableFeatures */
-                overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures */
-                fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -10585,11 +8113,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault overridableFeatures. */
-                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures. */
-                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -11122,13 +8647,6 @@ export namespace google {
             }
         }
 
-        /** SymbolVisibility enum. */
-        enum SymbolVisibility {
-            VISIBILITY_UNSET = 0,
-            VISIBILITY_LOCAL = 1,
-            VISIBILITY_EXPORT = 2
-        }
-
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -11420,109 +8938,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
