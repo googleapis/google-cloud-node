@@ -215,7 +215,6 @@ export class SecretManagerServiceClient {
       ),
     };
 
-
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.

@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const iam = require('@google-cloud/policy-troubleshooter-iam');
+const iam = require('@google-cloud/iam');
 
 function main() {
   const policyTroubleshooterClient = new iam.PolicyTroubleshooterClient();
