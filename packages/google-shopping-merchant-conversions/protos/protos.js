@@ -3503,3443 +3503,6 @@
                         return v1;
                     })();
     
-                    conversions.v1beta = (function() {
-    
-                        /**
-                         * Namespace v1beta.
-                         * @memberof google.shopping.merchant.conversions
-                         * @namespace
-                         */
-                        var v1beta = {};
-    
-                        v1beta.ConversionSourcesService = (function() {
-    
-                            /**
-                             * Constructs a new ConversionSourcesService service.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a ConversionSourcesService
-                             * @extends $protobuf.rpc.Service
-                             * @constructor
-                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                             */
-                            function ConversionSourcesService(rpcImpl, requestDelimited, responseDelimited) {
-                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                            }
-    
-                            (ConversionSourcesService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ConversionSourcesService;
-    
-                            /**
-                             * Creates new ConversionSourcesService service using the specified rpc implementation.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @static
-                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                             * @returns {ConversionSourcesService} RPC service. Useful where requests and/or responses are streamed.
-                             */
-                            ConversionSourcesService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                                return new this(rpcImpl, requestDelimited, responseDelimited);
-                            };
-    
-                            /**
-                             * Callback as used by {@link google.shopping.merchant.conversions.v1beta.ConversionSourcesService|createConversionSource}.
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @typedef CreateConversionSourceCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} [response] ConversionSource
-                             */
-    
-                            /**
-                             * Calls CreateConversionSource.
-                             * @function createConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest} request CreateConversionSourceRequest message or plain object
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSourcesService.CreateConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(ConversionSourcesService.prototype.createConversionSource = function createConversionSource(request, callback) {
-                                return this.rpcCall(createConversionSource, $root.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest, $root.google.shopping.merchant.conversions.v1beta.ConversionSource, request, callback);
-                            }, "name", { value: "CreateConversionSource" });
-    
-                            /**
-                             * Calls CreateConversionSource.
-                             * @function createConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest} request CreateConversionSourceRequest message or plain object
-                             * @returns {Promise<google.shopping.merchant.conversions.v1beta.ConversionSource>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.shopping.merchant.conversions.v1beta.ConversionSourcesService|updateConversionSource}.
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @typedef UpdateConversionSourceCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} [response] ConversionSource
-                             */
-    
-                            /**
-                             * Calls UpdateConversionSource.
-                             * @function updateConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest} request UpdateConversionSourceRequest message or plain object
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSourcesService.UpdateConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(ConversionSourcesService.prototype.updateConversionSource = function updateConversionSource(request, callback) {
-                                return this.rpcCall(updateConversionSource, $root.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest, $root.google.shopping.merchant.conversions.v1beta.ConversionSource, request, callback);
-                            }, "name", { value: "UpdateConversionSource" });
-    
-                            /**
-                             * Calls UpdateConversionSource.
-                             * @function updateConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest} request UpdateConversionSourceRequest message or plain object
-                             * @returns {Promise<google.shopping.merchant.conversions.v1beta.ConversionSource>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.shopping.merchant.conversions.v1beta.ConversionSourcesService|deleteConversionSource}.
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @typedef DeleteConversionSourceCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.protobuf.Empty} [response] Empty
-                             */
-    
-                            /**
-                             * Calls DeleteConversionSource.
-                             * @function deleteConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest} request DeleteConversionSourceRequest message or plain object
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSourcesService.DeleteConversionSourceCallback} callback Node-style callback called with the error, if any, and Empty
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(ConversionSourcesService.prototype.deleteConversionSource = function deleteConversionSource(request, callback) {
-                                return this.rpcCall(deleteConversionSource, $root.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest, $root.google.protobuf.Empty, request, callback);
-                            }, "name", { value: "DeleteConversionSource" });
-    
-                            /**
-                             * Calls DeleteConversionSource.
-                             * @function deleteConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest} request DeleteConversionSourceRequest message or plain object
-                             * @returns {Promise<google.protobuf.Empty>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.shopping.merchant.conversions.v1beta.ConversionSourcesService|undeleteConversionSource}.
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @typedef UndeleteConversionSourceCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} [response] ConversionSource
-                             */
-    
-                            /**
-                             * Calls UndeleteConversionSource.
-                             * @function undeleteConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest} request UndeleteConversionSourceRequest message or plain object
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSourcesService.UndeleteConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(ConversionSourcesService.prototype.undeleteConversionSource = function undeleteConversionSource(request, callback) {
-                                return this.rpcCall(undeleteConversionSource, $root.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest, $root.google.shopping.merchant.conversions.v1beta.ConversionSource, request, callback);
-                            }, "name", { value: "UndeleteConversionSource" });
-    
-                            /**
-                             * Calls UndeleteConversionSource.
-                             * @function undeleteConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest} request UndeleteConversionSourceRequest message or plain object
-                             * @returns {Promise<google.shopping.merchant.conversions.v1beta.ConversionSource>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.shopping.merchant.conversions.v1beta.ConversionSourcesService|getConversionSource}.
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @typedef GetConversionSourceCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} [response] ConversionSource
-                             */
-    
-                            /**
-                             * Calls GetConversionSource.
-                             * @function getConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest} request GetConversionSourceRequest message or plain object
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSourcesService.GetConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(ConversionSourcesService.prototype.getConversionSource = function getConversionSource(request, callback) {
-                                return this.rpcCall(getConversionSource, $root.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest, $root.google.shopping.merchant.conversions.v1beta.ConversionSource, request, callback);
-                            }, "name", { value: "GetConversionSource" });
-    
-                            /**
-                             * Calls GetConversionSource.
-                             * @function getConversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest} request GetConversionSourceRequest message or plain object
-                             * @returns {Promise<google.shopping.merchant.conversions.v1beta.ConversionSource>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.shopping.merchant.conversions.v1beta.ConversionSourcesService|listConversionSources}.
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @typedef ListConversionSourcesCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse} [response] ListConversionSourcesResponse
-                             */
-    
-                            /**
-                             * Calls ListConversionSources.
-                             * @function listConversionSources
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest} request ListConversionSourcesRequest message or plain object
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSourcesService.ListConversionSourcesCallback} callback Node-style callback called with the error, if any, and ListConversionSourcesResponse
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(ConversionSourcesService.prototype.listConversionSources = function listConversionSources(request, callback) {
-                                return this.rpcCall(listConversionSources, $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest, $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse, request, callback);
-                            }, "name", { value: "ListConversionSources" });
-    
-                            /**
-                             * Calls ListConversionSources.
-                             * @function listConversionSources
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSourcesService
-                             * @instance
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest} request ListConversionSourcesRequest message or plain object
-                             * @returns {Promise<google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse>} Promise
-                             * @variation 2
-                             */
-    
-                            return ConversionSourcesService;
-                        })();
-    
-                        v1beta.ConversionSource = (function() {
-    
-                            /**
-                             * Properties of a ConversionSource.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IConversionSource
-                             * @property {google.shopping.merchant.conversions.v1beta.IGoogleAnalyticsLink|null} [googleAnalyticsLink] ConversionSource googleAnalyticsLink
-                             * @property {google.shopping.merchant.conversions.v1beta.IMerchantCenterDestination|null} [merchantCenterDestination] ConversionSource merchantCenterDestination
-                             * @property {string|null} [name] ConversionSource name
-                             * @property {google.shopping.merchant.conversions.v1beta.ConversionSource.State|null} [state] ConversionSource state
-                             * @property {google.protobuf.ITimestamp|null} [expireTime] ConversionSource expireTime
-                             * @property {google.shopping.merchant.conversions.v1beta.ConversionSource.Controller|null} [controller] ConversionSource controller
-                             */
-    
-                            /**
-                             * Constructs a new ConversionSource.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a ConversionSource.
-                             * @implements IConversionSource
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IConversionSource=} [properties] Properties to set
-                             */
-                            function ConversionSource(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ConversionSource googleAnalyticsLink.
-                             * @member {google.shopping.merchant.conversions.v1beta.IGoogleAnalyticsLink|null|undefined} googleAnalyticsLink
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             */
-                            ConversionSource.prototype.googleAnalyticsLink = null;
-    
-                            /**
-                             * ConversionSource merchantCenterDestination.
-                             * @member {google.shopping.merchant.conversions.v1beta.IMerchantCenterDestination|null|undefined} merchantCenterDestination
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             */
-                            ConversionSource.prototype.merchantCenterDestination = null;
-    
-                            /**
-                             * ConversionSource name.
-                             * @member {string} name
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             */
-                            ConversionSource.prototype.name = "";
-    
-                            /**
-                             * ConversionSource state.
-                             * @member {google.shopping.merchant.conversions.v1beta.ConversionSource.State} state
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             */
-                            ConversionSource.prototype.state = 0;
-    
-                            /**
-                             * ConversionSource expireTime.
-                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             */
-                            ConversionSource.prototype.expireTime = null;
-    
-                            /**
-                             * ConversionSource controller.
-                             * @member {google.shopping.merchant.conversions.v1beta.ConversionSource.Controller} controller
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             */
-                            ConversionSource.prototype.controller = 0;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * ConversionSource sourceData.
-                             * @member {"googleAnalyticsLink"|"merchantCenterDestination"|undefined} sourceData
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             */
-                            Object.defineProperty(ConversionSource.prototype, "sourceData", {
-                                get: $util.oneOfGetter($oneOfFields = ["googleAnalyticsLink", "merchantCenterDestination"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new ConversionSource instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IConversionSource=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.ConversionSource} ConversionSource instance
-                             */
-                            ConversionSource.create = function create(properties) {
-                                return new ConversionSource(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ConversionSource message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.ConversionSource.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IConversionSource} message ConversionSource message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ConversionSource.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.googleAnalyticsLink != null && Object.hasOwnProperty.call(message, "googleAnalyticsLink"))
-                                    $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.encode(message.googleAnalyticsLink, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                if (message.merchantCenterDestination != null && Object.hasOwnProperty.call(message, "merchantCenterDestination"))
-                                    $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.encode(message.merchantCenterDestination, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
-                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                                if (message.controller != null && Object.hasOwnProperty.call(message, "controller"))
-                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.controller);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ConversionSource message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.ConversionSource.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IConversionSource} message ConversionSource message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ConversionSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ConversionSource message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.ConversionSource} ConversionSource
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ConversionSource.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.ConversionSource();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 3: {
-                                            message.googleAnalyticsLink = $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.merchantCenterDestination = $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.state = reader.int32();
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.controller = reader.int32();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ConversionSource message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.ConversionSource} ConversionSource
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ConversionSource.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ConversionSource message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ConversionSource.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.googleAnalyticsLink != null && message.hasOwnProperty("googleAnalyticsLink")) {
-                                    properties.sourceData = 1;
-                                    {
-                                        var error = $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.verify(message.googleAnalyticsLink);
-                                        if (error)
-                                            return "googleAnalyticsLink." + error;
-                                    }
-                                }
-                                if (message.merchantCenterDestination != null && message.hasOwnProperty("merchantCenterDestination")) {
-                                    if (properties.sourceData === 1)
-                                        return "sourceData: multiple values";
-                                    properties.sourceData = 1;
-                                    {
-                                        var error = $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.verify(message.merchantCenterDestination);
-                                        if (error)
-                                            return "merchantCenterDestination." + error;
-                                    }
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                if (message.state != null && message.hasOwnProperty("state"))
-                                    switch (message.state) {
-                                    default:
-                                        return "state: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        break;
-                                    }
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                    if (error)
-                                        return "expireTime." + error;
-                                }
-                                if (message.controller != null && message.hasOwnProperty("controller"))
-                                    switch (message.controller) {
-                                    default:
-                                        return "controller: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                        break;
-                                    }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ConversionSource message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.ConversionSource} ConversionSource
-                             */
-                            ConversionSource.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.ConversionSource)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.ConversionSource();
-                                if (object.googleAnalyticsLink != null) {
-                                    if (typeof object.googleAnalyticsLink !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.ConversionSource.googleAnalyticsLink: object expected");
-                                    message.googleAnalyticsLink = $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.fromObject(object.googleAnalyticsLink);
-                                }
-                                if (object.merchantCenterDestination != null) {
-                                    if (typeof object.merchantCenterDestination !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.ConversionSource.merchantCenterDestination: object expected");
-                                    message.merchantCenterDestination = $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.fromObject(object.merchantCenterDestination);
-                                }
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                switch (object.state) {
-                                default:
-                                    if (typeof object.state === "number") {
-                                        message.state = object.state;
-                                        break;
-                                    }
-                                    break;
-                                case "STATE_UNSPECIFIED":
-                                case 0:
-                                    message.state = 0;
-                                    break;
-                                case "ACTIVE":
-                                case 1:
-                                    message.state = 1;
-                                    break;
-                                case "ARCHIVED":
-                                case 2:
-                                    message.state = 2;
-                                    break;
-                                case "PENDING":
-                                case 3:
-                                    message.state = 3;
-                                    break;
-                                }
-                                if (object.expireTime != null) {
-                                    if (typeof object.expireTime !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.ConversionSource.expireTime: object expected");
-                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                                }
-                                switch (object.controller) {
-                                default:
-                                    if (typeof object.controller === "number") {
-                                        message.controller = object.controller;
-                                        break;
-                                    }
-                                    break;
-                                case "CONTROLLER_UNSPECIFIED":
-                                case 0:
-                                    message.controller = 0;
-                                    break;
-                                case "MERCHANT":
-                                case 1:
-                                    message.controller = 1;
-                                    break;
-                                case "YOUTUBE_AFFILIATES":
-                                case 2:
-                                    message.controller = 2;
-                                    break;
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ConversionSource message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} message ConversionSource
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ConversionSource.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.name = "";
-                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                                    object.expireTime = null;
-                                    object.controller = options.enums === String ? "CONTROLLER_UNSPECIFIED" : 0;
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                if (message.googleAnalyticsLink != null && message.hasOwnProperty("googleAnalyticsLink")) {
-                                    object.googleAnalyticsLink = $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.toObject(message.googleAnalyticsLink, options);
-                                    if (options.oneofs)
-                                        object.sourceData = "googleAnalyticsLink";
-                                }
-                                if (message.merchantCenterDestination != null && message.hasOwnProperty("merchantCenterDestination")) {
-                                    object.merchantCenterDestination = $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.toObject(message.merchantCenterDestination, options);
-                                    if (options.oneofs)
-                                        object.sourceData = "merchantCenterDestination";
-                                }
-                                if (message.state != null && message.hasOwnProperty("state"))
-                                    object.state = options.enums === String ? $root.google.shopping.merchant.conversions.v1beta.ConversionSource.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.conversions.v1beta.ConversionSource.State[message.state] : message.state;
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                                if (message.controller != null && message.hasOwnProperty("controller"))
-                                    object.controller = options.enums === String ? $root.google.shopping.merchant.conversions.v1beta.ConversionSource.Controller[message.controller] === undefined ? message.controller : $root.google.shopping.merchant.conversions.v1beta.ConversionSource.Controller[message.controller] : message.controller;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ConversionSource to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ConversionSource.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ConversionSource
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.ConversionSource
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ConversionSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.ConversionSource";
-                            };
-    
-                            /**
-                             * State enum.
-                             * @name google.shopping.merchant.conversions.v1beta.ConversionSource.State
-                             * @enum {number}
-                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                             * @property {number} ACTIVE=1 ACTIVE value
-                             * @property {number} ARCHIVED=2 ARCHIVED value
-                             * @property {number} PENDING=3 PENDING value
-                             */
-                            ConversionSource.State = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "ACTIVE"] = 1;
-                                values[valuesById[2] = "ARCHIVED"] = 2;
-                                values[valuesById[3] = "PENDING"] = 3;
-                                return values;
-                            })();
-    
-                            /**
-                             * Controller enum.
-                             * @name google.shopping.merchant.conversions.v1beta.ConversionSource.Controller
-                             * @enum {number}
-                             * @property {number} CONTROLLER_UNSPECIFIED=0 CONTROLLER_UNSPECIFIED value
-                             * @property {number} MERCHANT=1 MERCHANT value
-                             * @property {number} YOUTUBE_AFFILIATES=2 YOUTUBE_AFFILIATES value
-                             */
-                            ConversionSource.Controller = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "CONTROLLER_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "MERCHANT"] = 1;
-                                values[valuesById[2] = "YOUTUBE_AFFILIATES"] = 2;
-                                return values;
-                            })();
-    
-                            return ConversionSource;
-                        })();
-    
-                        v1beta.AttributionSettings = (function() {
-    
-                            /**
-                             * Properties of an AttributionSettings.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IAttributionSettings
-                             * @property {number|null} [attributionLookbackWindowDays] AttributionSettings attributionLookbackWindowDays
-                             * @property {google.shopping.merchant.conversions.v1beta.AttributionSettings.AttributionModel|null} [attributionModel] AttributionSettings attributionModel
-                             * @property {Array.<google.shopping.merchant.conversions.v1beta.AttributionSettings.IConversionType>|null} [conversionType] AttributionSettings conversionType
-                             */
-    
-                            /**
-                             * Constructs a new AttributionSettings.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents an AttributionSettings.
-                             * @implements IAttributionSettings
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IAttributionSettings=} [properties] Properties to set
-                             */
-                            function AttributionSettings(properties) {
-                                this.conversionType = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * AttributionSettings attributionLookbackWindowDays.
-                             * @member {number} attributionLookbackWindowDays
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @instance
-                             */
-                            AttributionSettings.prototype.attributionLookbackWindowDays = 0;
-    
-                            /**
-                             * AttributionSettings attributionModel.
-                             * @member {google.shopping.merchant.conversions.v1beta.AttributionSettings.AttributionModel} attributionModel
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @instance
-                             */
-                            AttributionSettings.prototype.attributionModel = 0;
-    
-                            /**
-                             * AttributionSettings conversionType.
-                             * @member {Array.<google.shopping.merchant.conversions.v1beta.AttributionSettings.IConversionType>} conversionType
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @instance
-                             */
-                            AttributionSettings.prototype.conversionType = $util.emptyArray;
-    
-                            /**
-                             * Creates a new AttributionSettings instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IAttributionSettings=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings} AttributionSettings instance
-                             */
-                            AttributionSettings.create = function create(properties) {
-                                return new AttributionSettings(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified AttributionSettings message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.AttributionSettings.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IAttributionSettings} message AttributionSettings message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AttributionSettings.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.attributionLookbackWindowDays != null && Object.hasOwnProperty.call(message, "attributionLookbackWindowDays"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.attributionLookbackWindowDays);
-                                if (message.attributionModel != null && Object.hasOwnProperty.call(message, "attributionModel"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.attributionModel);
-                                if (message.conversionType != null && message.conversionType.length)
-                                    for (var i = 0; i < message.conversionType.length; ++i)
-                                        $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType.encode(message.conversionType[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified AttributionSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.AttributionSettings.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IAttributionSettings} message AttributionSettings message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AttributionSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an AttributionSettings message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings} AttributionSettings
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AttributionSettings.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.AttributionSettings();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.attributionLookbackWindowDays = reader.int32();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.attributionModel = reader.int32();
-                                            break;
-                                        }
-                                    case 3: {
-                                            if (!(message.conversionType && message.conversionType.length))
-                                                message.conversionType = [];
-                                            message.conversionType.push($root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an AttributionSettings message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings} AttributionSettings
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AttributionSettings.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an AttributionSettings message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            AttributionSettings.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.attributionLookbackWindowDays != null && message.hasOwnProperty("attributionLookbackWindowDays"))
-                                    if (!$util.isInteger(message.attributionLookbackWindowDays))
-                                        return "attributionLookbackWindowDays: integer expected";
-                                if (message.attributionModel != null && message.hasOwnProperty("attributionModel"))
-                                    switch (message.attributionModel) {
-                                    default:
-                                        return "attributionModel: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 5:
-                                    case 6:
-                                    case 7:
-                                    case 8:
-                                    case 9:
-                                        break;
-                                    }
-                                if (message.conversionType != null && message.hasOwnProperty("conversionType")) {
-                                    if (!Array.isArray(message.conversionType))
-                                        return "conversionType: array expected";
-                                    for (var i = 0; i < message.conversionType.length; ++i) {
-                                        var error = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType.verify(message.conversionType[i]);
-                                        if (error)
-                                            return "conversionType." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an AttributionSettings message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings} AttributionSettings
-                             */
-                            AttributionSettings.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.AttributionSettings)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.AttributionSettings();
-                                if (object.attributionLookbackWindowDays != null)
-                                    message.attributionLookbackWindowDays = object.attributionLookbackWindowDays | 0;
-                                switch (object.attributionModel) {
-                                default:
-                                    if (typeof object.attributionModel === "number") {
-                                        message.attributionModel = object.attributionModel;
-                                        break;
-                                    }
-                                    break;
-                                case "ATTRIBUTION_MODEL_UNSPECIFIED":
-                                case 0:
-                                    message.attributionModel = 0;
-                                    break;
-                                case "CROSS_CHANNEL_LAST_CLICK":
-                                case 1:
-                                    message.attributionModel = 1;
-                                    break;
-                                case "ADS_PREFERRED_LAST_CLICK":
-                                case 2:
-                                    message.attributionModel = 2;
-                                    break;
-                                case "CROSS_CHANNEL_DATA_DRIVEN":
-                                case 5:
-                                    message.attributionModel = 5;
-                                    break;
-                                case "CROSS_CHANNEL_FIRST_CLICK":
-                                case 6:
-                                    message.attributionModel = 6;
-                                    break;
-                                case "CROSS_CHANNEL_LINEAR":
-                                case 7:
-                                    message.attributionModel = 7;
-                                    break;
-                                case "CROSS_CHANNEL_POSITION_BASED":
-                                case 8:
-                                    message.attributionModel = 8;
-                                    break;
-                                case "CROSS_CHANNEL_TIME_DECAY":
-                                case 9:
-                                    message.attributionModel = 9;
-                                    break;
-                                }
-                                if (object.conversionType) {
-                                    if (!Array.isArray(object.conversionType))
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.AttributionSettings.conversionType: array expected");
-                                    message.conversionType = [];
-                                    for (var i = 0; i < object.conversionType.length; ++i) {
-                                        if (typeof object.conversionType[i] !== "object")
-                                            throw TypeError(".google.shopping.merchant.conversions.v1beta.AttributionSettings.conversionType: object expected");
-                                        message.conversionType[i] = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType.fromObject(object.conversionType[i]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an AttributionSettings message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.AttributionSettings} message AttributionSettings
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            AttributionSettings.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.conversionType = [];
-                                if (options.defaults) {
-                                    object.attributionLookbackWindowDays = 0;
-                                    object.attributionModel = options.enums === String ? "ATTRIBUTION_MODEL_UNSPECIFIED" : 0;
-                                }
-                                if (message.attributionLookbackWindowDays != null && message.hasOwnProperty("attributionLookbackWindowDays"))
-                                    object.attributionLookbackWindowDays = message.attributionLookbackWindowDays;
-                                if (message.attributionModel != null && message.hasOwnProperty("attributionModel"))
-                                    object.attributionModel = options.enums === String ? $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.AttributionModel[message.attributionModel] === undefined ? message.attributionModel : $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.AttributionModel[message.attributionModel] : message.attributionModel;
-                                if (message.conversionType && message.conversionType.length) {
-                                    object.conversionType = [];
-                                    for (var j = 0; j < message.conversionType.length; ++j)
-                                        object.conversionType[j] = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType.toObject(message.conversionType[j], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this AttributionSettings to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            AttributionSettings.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for AttributionSettings
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            AttributionSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.AttributionSettings";
-                            };
-    
-                            AttributionSettings.ConversionType = (function() {
-    
-                                /**
-                                 * Properties of a ConversionType.
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                                 * @interface IConversionType
-                                 * @property {string|null} [name] ConversionType name
-                                 * @property {boolean|null} [report] ConversionType report
-                                 */
-    
-                                /**
-                                 * Constructs a new ConversionType.
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings
-                                 * @classdesc Represents a ConversionType.
-                                 * @implements IConversionType
-                                 * @constructor
-                                 * @param {google.shopping.merchant.conversions.v1beta.AttributionSettings.IConversionType=} [properties] Properties to set
-                                 */
-                                function ConversionType(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * ConversionType name.
-                                 * @member {string} name
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @instance
-                                 */
-                                ConversionType.prototype.name = "";
-    
-                                /**
-                                 * ConversionType report.
-                                 * @member {boolean} report
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @instance
-                                 */
-                                ConversionType.prototype.report = false;
-    
-                                /**
-                                 * Creates a new ConversionType instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {google.shopping.merchant.conversions.v1beta.AttributionSettings.IConversionType=} [properties] Properties to set
-                                 * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType} ConversionType instance
-                                 */
-                                ConversionType.create = function create(properties) {
-                                    return new ConversionType(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified ConversionType message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {google.shopping.merchant.conversions.v1beta.AttributionSettings.IConversionType} message ConversionType message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                ConversionType.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                    if (message.report != null && Object.hasOwnProperty.call(message, "report"))
-                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.report);
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified ConversionType message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {google.shopping.merchant.conversions.v1beta.AttributionSettings.IConversionType} message ConversionType message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                ConversionType.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes a ConversionType message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType} ConversionType
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                ConversionType.decode = function decode(reader, length, error) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
-                                        switch (tag >>> 3) {
-                                        case 1: {
-                                                message.name = reader.string();
-                                                break;
-                                            }
-                                        case 2: {
-                                                message.report = reader.bool();
-                                                break;
-                                            }
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes a ConversionType message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType} ConversionType
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                ConversionType.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies a ConversionType message.
-                                 * @function verify
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                ConversionType.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.name != null && message.hasOwnProperty("name"))
-                                        if (!$util.isString(message.name))
-                                            return "name: string expected";
-                                    if (message.report != null && message.hasOwnProperty("report"))
-                                        if (typeof message.report !== "boolean")
-                                            return "report: boolean expected";
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates a ConversionType message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType} ConversionType
-                                 */
-                                ConversionType.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType)
-                                        return object;
-                                    var message = new $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType();
-                                    if (object.name != null)
-                                        message.name = String(object.name);
-                                    if (object.report != null)
-                                        message.report = Boolean(object.report);
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from a ConversionType message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType} message ConversionType
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                ConversionType.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults) {
-                                        object.name = "";
-                                        object.report = false;
-                                    }
-                                    if (message.name != null && message.hasOwnProperty("name"))
-                                        object.name = message.name;
-                                    if (message.report != null && message.hasOwnProperty("report"))
-                                        object.report = message.report;
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this ConversionType to JSON.
-                                 * @function toJSON
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                ConversionType.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                /**
-                                 * Gets the default type url for ConversionType
-                                 * @function getTypeUrl
-                                 * @memberof google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType
-                                 * @static
-                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                 * @returns {string} The default type url
-                                 */
-                                ConversionType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                    if (typeUrlPrefix === undefined) {
-                                        typeUrlPrefix = "type.googleapis.com";
-                                    }
-                                    return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.AttributionSettings.ConversionType";
-                                };
-    
-                                return ConversionType;
-                            })();
-    
-                            /**
-                             * AttributionModel enum.
-                             * @name google.shopping.merchant.conversions.v1beta.AttributionSettings.AttributionModel
-                             * @enum {number}
-                             * @property {number} ATTRIBUTION_MODEL_UNSPECIFIED=0 ATTRIBUTION_MODEL_UNSPECIFIED value
-                             * @property {number} CROSS_CHANNEL_LAST_CLICK=1 CROSS_CHANNEL_LAST_CLICK value
-                             * @property {number} ADS_PREFERRED_LAST_CLICK=2 ADS_PREFERRED_LAST_CLICK value
-                             * @property {number} CROSS_CHANNEL_DATA_DRIVEN=5 CROSS_CHANNEL_DATA_DRIVEN value
-                             * @property {number} CROSS_CHANNEL_FIRST_CLICK=6 CROSS_CHANNEL_FIRST_CLICK value
-                             * @property {number} CROSS_CHANNEL_LINEAR=7 CROSS_CHANNEL_LINEAR value
-                             * @property {number} CROSS_CHANNEL_POSITION_BASED=8 CROSS_CHANNEL_POSITION_BASED value
-                             * @property {number} CROSS_CHANNEL_TIME_DECAY=9 CROSS_CHANNEL_TIME_DECAY value
-                             */
-                            AttributionSettings.AttributionModel = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "ATTRIBUTION_MODEL_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "CROSS_CHANNEL_LAST_CLICK"] = 1;
-                                values[valuesById[2] = "ADS_PREFERRED_LAST_CLICK"] = 2;
-                                values[valuesById[5] = "CROSS_CHANNEL_DATA_DRIVEN"] = 5;
-                                values[valuesById[6] = "CROSS_CHANNEL_FIRST_CLICK"] = 6;
-                                values[valuesById[7] = "CROSS_CHANNEL_LINEAR"] = 7;
-                                values[valuesById[8] = "CROSS_CHANNEL_POSITION_BASED"] = 8;
-                                values[valuesById[9] = "CROSS_CHANNEL_TIME_DECAY"] = 9;
-                                return values;
-                            })();
-    
-                            return AttributionSettings;
-                        })();
-    
-                        v1beta.GoogleAnalyticsLink = (function() {
-    
-                            /**
-                             * Properties of a GoogleAnalyticsLink.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IGoogleAnalyticsLink
-                             * @property {number|Long|null} [propertyId] GoogleAnalyticsLink propertyId
-                             * @property {google.shopping.merchant.conversions.v1beta.IAttributionSettings|null} [attributionSettings] GoogleAnalyticsLink attributionSettings
-                             * @property {string|null} [property] GoogleAnalyticsLink property
-                             */
-    
-                            /**
-                             * Constructs a new GoogleAnalyticsLink.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a GoogleAnalyticsLink.
-                             * @implements IGoogleAnalyticsLink
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IGoogleAnalyticsLink=} [properties] Properties to set
-                             */
-                            function GoogleAnalyticsLink(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * GoogleAnalyticsLink propertyId.
-                             * @member {number|Long} propertyId
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @instance
-                             */
-                            GoogleAnalyticsLink.prototype.propertyId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                            /**
-                             * GoogleAnalyticsLink attributionSettings.
-                             * @member {google.shopping.merchant.conversions.v1beta.IAttributionSettings|null|undefined} attributionSettings
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @instance
-                             */
-                            GoogleAnalyticsLink.prototype.attributionSettings = null;
-    
-                            /**
-                             * GoogleAnalyticsLink property.
-                             * @member {string} property
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @instance
-                             */
-                            GoogleAnalyticsLink.prototype.property = "";
-    
-                            /**
-                             * Creates a new GoogleAnalyticsLink instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IGoogleAnalyticsLink=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink} GoogleAnalyticsLink instance
-                             */
-                            GoogleAnalyticsLink.create = function create(properties) {
-                                return new GoogleAnalyticsLink(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified GoogleAnalyticsLink message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IGoogleAnalyticsLink} message GoogleAnalyticsLink message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GoogleAnalyticsLink.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.propertyId != null && Object.hasOwnProperty.call(message, "propertyId"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.propertyId);
-                                if (message.attributionSettings != null && Object.hasOwnProperty.call(message, "attributionSettings"))
-                                    $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.encode(message.attributionSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.property);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified GoogleAnalyticsLink message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IGoogleAnalyticsLink} message GoogleAnalyticsLink message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GoogleAnalyticsLink.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a GoogleAnalyticsLink message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink} GoogleAnalyticsLink
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GoogleAnalyticsLink.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.propertyId = reader.int64();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.attributionSettings = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.property = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a GoogleAnalyticsLink message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink} GoogleAnalyticsLink
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GoogleAnalyticsLink.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a GoogleAnalyticsLink message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            GoogleAnalyticsLink.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.propertyId != null && message.hasOwnProperty("propertyId"))
-                                    if (!$util.isInteger(message.propertyId) && !(message.propertyId && $util.isInteger(message.propertyId.low) && $util.isInteger(message.propertyId.high)))
-                                        return "propertyId: integer|Long expected";
-                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings")) {
-                                    var error = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.verify(message.attributionSettings);
-                                    if (error)
-                                        return "attributionSettings." + error;
-                                }
-                                if (message.property != null && message.hasOwnProperty("property"))
-                                    if (!$util.isString(message.property))
-                                        return "property: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a GoogleAnalyticsLink message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink} GoogleAnalyticsLink
-                             */
-                            GoogleAnalyticsLink.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink();
-                                if (object.propertyId != null)
-                                    if ($util.Long)
-                                        (message.propertyId = $util.Long.fromValue(object.propertyId)).unsigned = false;
-                                    else if (typeof object.propertyId === "string")
-                                        message.propertyId = parseInt(object.propertyId, 10);
-                                    else if (typeof object.propertyId === "number")
-                                        message.propertyId = object.propertyId;
-                                    else if (typeof object.propertyId === "object")
-                                        message.propertyId = new $util.LongBits(object.propertyId.low >>> 0, object.propertyId.high >>> 0).toNumber();
-                                if (object.attributionSettings != null) {
-                                    if (typeof object.attributionSettings !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink.attributionSettings: object expected");
-                                    message.attributionSettings = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.fromObject(object.attributionSettings);
-                                }
-                                if (object.property != null)
-                                    message.property = String(object.property);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a GoogleAnalyticsLink message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink} message GoogleAnalyticsLink
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            GoogleAnalyticsLink.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.propertyId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.propertyId = options.longs === String ? "0" : 0;
-                                    object.attributionSettings = null;
-                                    object.property = "";
-                                }
-                                if (message.propertyId != null && message.hasOwnProperty("propertyId"))
-                                    if (typeof message.propertyId === "number")
-                                        object.propertyId = options.longs === String ? String(message.propertyId) : message.propertyId;
-                                    else
-                                        object.propertyId = options.longs === String ? $util.Long.prototype.toString.call(message.propertyId) : options.longs === Number ? new $util.LongBits(message.propertyId.low >>> 0, message.propertyId.high >>> 0).toNumber() : message.propertyId;
-                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings"))
-                                    object.attributionSettings = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.toObject(message.attributionSettings, options);
-                                if (message.property != null && message.hasOwnProperty("property"))
-                                    object.property = message.property;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this GoogleAnalyticsLink to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            GoogleAnalyticsLink.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for GoogleAnalyticsLink
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            GoogleAnalyticsLink.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.GoogleAnalyticsLink";
-                            };
-    
-                            return GoogleAnalyticsLink;
-                        })();
-    
-                        v1beta.MerchantCenterDestination = (function() {
-    
-                            /**
-                             * Properties of a MerchantCenterDestination.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IMerchantCenterDestination
-                             * @property {string|null} [destination] MerchantCenterDestination destination
-                             * @property {google.shopping.merchant.conversions.v1beta.IAttributionSettings|null} [attributionSettings] MerchantCenterDestination attributionSettings
-                             * @property {string|null} [displayName] MerchantCenterDestination displayName
-                             * @property {string|null} [currencyCode] MerchantCenterDestination currencyCode
-                             */
-    
-                            /**
-                             * Constructs a new MerchantCenterDestination.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a MerchantCenterDestination.
-                             * @implements IMerchantCenterDestination
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IMerchantCenterDestination=} [properties] Properties to set
-                             */
-                            function MerchantCenterDestination(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * MerchantCenterDestination destination.
-                             * @member {string} destination
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @instance
-                             */
-                            MerchantCenterDestination.prototype.destination = "";
-    
-                            /**
-                             * MerchantCenterDestination attributionSettings.
-                             * @member {google.shopping.merchant.conversions.v1beta.IAttributionSettings|null|undefined} attributionSettings
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @instance
-                             */
-                            MerchantCenterDestination.prototype.attributionSettings = null;
-    
-                            /**
-                             * MerchantCenterDestination displayName.
-                             * @member {string} displayName
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @instance
-                             */
-                            MerchantCenterDestination.prototype.displayName = "";
-    
-                            /**
-                             * MerchantCenterDestination currencyCode.
-                             * @member {string} currencyCode
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @instance
-                             */
-                            MerchantCenterDestination.prototype.currencyCode = "";
-    
-                            /**
-                             * Creates a new MerchantCenterDestination instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IMerchantCenterDestination=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.MerchantCenterDestination} MerchantCenterDestination instance
-                             */
-                            MerchantCenterDestination.create = function create(properties) {
-                                return new MerchantCenterDestination(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified MerchantCenterDestination message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IMerchantCenterDestination} message MerchantCenterDestination message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            MerchantCenterDestination.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.destination);
-                                if (message.attributionSettings != null && Object.hasOwnProperty.call(message, "attributionSettings"))
-                                    $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.encode(message.attributionSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
-                                if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
-                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.currencyCode);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified MerchantCenterDestination message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IMerchantCenterDestination} message MerchantCenterDestination message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            MerchantCenterDestination.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a MerchantCenterDestination message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.MerchantCenterDestination} MerchantCenterDestination
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            MerchantCenterDestination.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.destination = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.attributionSettings = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.displayName = reader.string();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.currencyCode = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a MerchantCenterDestination message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.MerchantCenterDestination} MerchantCenterDestination
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            MerchantCenterDestination.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a MerchantCenterDestination message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            MerchantCenterDestination.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.destination != null && message.hasOwnProperty("destination"))
-                                    if (!$util.isString(message.destination))
-                                        return "destination: string expected";
-                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings")) {
-                                    var error = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.verify(message.attributionSettings);
-                                    if (error)
-                                        return "attributionSettings." + error;
-                                }
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
-                                    if (!$util.isString(message.currencyCode))
-                                        return "currencyCode: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a MerchantCenterDestination message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.MerchantCenterDestination} MerchantCenterDestination
-                             */
-                            MerchantCenterDestination.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.MerchantCenterDestination();
-                                if (object.destination != null)
-                                    message.destination = String(object.destination);
-                                if (object.attributionSettings != null) {
-                                    if (typeof object.attributionSettings !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.MerchantCenterDestination.attributionSettings: object expected");
-                                    message.attributionSettings = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.fromObject(object.attributionSettings);
-                                }
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                if (object.currencyCode != null)
-                                    message.currencyCode = String(object.currencyCode);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a MerchantCenterDestination message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.MerchantCenterDestination} message MerchantCenterDestination
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            MerchantCenterDestination.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.destination = "";
-                                    object.attributionSettings = null;
-                                    object.displayName = "";
-                                    object.currencyCode = "";
-                                }
-                                if (message.destination != null && message.hasOwnProperty("destination"))
-                                    object.destination = message.destination;
-                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings"))
-                                    object.attributionSettings = $root.google.shopping.merchant.conversions.v1beta.AttributionSettings.toObject(message.attributionSettings, options);
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
-                                    object.currencyCode = message.currencyCode;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this MerchantCenterDestination to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            MerchantCenterDestination.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for MerchantCenterDestination
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.MerchantCenterDestination
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            MerchantCenterDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.MerchantCenterDestination";
-                            };
-    
-                            return MerchantCenterDestination;
-                        })();
-    
-                        v1beta.CreateConversionSourceRequest = (function() {
-    
-                            /**
-                             * Properties of a CreateConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface ICreateConversionSourceRequest
-                             * @property {string|null} [parent] CreateConversionSourceRequest parent
-                             * @property {google.shopping.merchant.conversions.v1beta.IConversionSource|null} [conversionSource] CreateConversionSourceRequest conversionSource
-                             */
-    
-                            /**
-                             * Constructs a new CreateConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a CreateConversionSourceRequest.
-                             * @implements ICreateConversionSourceRequest
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest=} [properties] Properties to set
-                             */
-                            function CreateConversionSourceRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * CreateConversionSourceRequest parent.
-                             * @member {string} parent
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @instance
-                             */
-                            CreateConversionSourceRequest.prototype.parent = "";
-    
-                            /**
-                             * CreateConversionSourceRequest conversionSource.
-                             * @member {google.shopping.merchant.conversions.v1beta.IConversionSource|null|undefined} conversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @instance
-                             */
-                            CreateConversionSourceRequest.prototype.conversionSource = null;
-    
-                            /**
-                             * Creates a new CreateConversionSourceRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest} CreateConversionSourceRequest instance
-                             */
-                            CreateConversionSourceRequest.create = function create(properties) {
-                                return new CreateConversionSourceRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified CreateConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest} message CreateConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateConversionSourceRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                                if (message.conversionSource != null && Object.hasOwnProperty.call(message, "conversionSource"))
-                                    $root.google.shopping.merchant.conversions.v1beta.ConversionSource.encode(message.conversionSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified CreateConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest} message CreateConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a CreateConversionSourceRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest} CreateConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateConversionSourceRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.parent = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.conversionSource = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a CreateConversionSourceRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest} CreateConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a CreateConversionSourceRequest message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            CreateConversionSourceRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    if (!$util.isString(message.parent))
-                                        return "parent: string expected";
-                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource")) {
-                                    var error = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.verify(message.conversionSource);
-                                    if (error)
-                                        return "conversionSource." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a CreateConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest} CreateConversionSourceRequest
-                             */
-                            CreateConversionSourceRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest();
-                                if (object.parent != null)
-                                    message.parent = String(object.parent);
-                                if (object.conversionSource != null) {
-                                    if (typeof object.conversionSource !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest.conversionSource: object expected");
-                                    message.conversionSource = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.fromObject(object.conversionSource);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a CreateConversionSourceRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest} message CreateConversionSourceRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            CreateConversionSourceRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.parent = "";
-                                    object.conversionSource = null;
-                                }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    object.parent = message.parent;
-                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource"))
-                                    object.conversionSource = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.toObject(message.conversionSource, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this CreateConversionSourceRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            CreateConversionSourceRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for CreateConversionSourceRequest
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            CreateConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest";
-                            };
-    
-                            return CreateConversionSourceRequest;
-                        })();
-    
-                        v1beta.UpdateConversionSourceRequest = (function() {
-    
-                            /**
-                             * Properties of an UpdateConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IUpdateConversionSourceRequest
-                             * @property {google.shopping.merchant.conversions.v1beta.IConversionSource|null} [conversionSource] UpdateConversionSourceRequest conversionSource
-                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateConversionSourceRequest updateMask
-                             */
-    
-                            /**
-                             * Constructs a new UpdateConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents an UpdateConversionSourceRequest.
-                             * @implements IUpdateConversionSourceRequest
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest=} [properties] Properties to set
-                             */
-                            function UpdateConversionSourceRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * UpdateConversionSourceRequest conversionSource.
-                             * @member {google.shopping.merchant.conversions.v1beta.IConversionSource|null|undefined} conversionSource
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @instance
-                             */
-                            UpdateConversionSourceRequest.prototype.conversionSource = null;
-    
-                            /**
-                             * UpdateConversionSourceRequest updateMask.
-                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @instance
-                             */
-                            UpdateConversionSourceRequest.prototype.updateMask = null;
-    
-                            /**
-                             * Creates a new UpdateConversionSourceRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest} UpdateConversionSourceRequest instance
-                             */
-                            UpdateConversionSourceRequest.create = function create(properties) {
-                                return new UpdateConversionSourceRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest} message UpdateConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateConversionSourceRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.conversionSource != null && Object.hasOwnProperty.call(message, "conversionSource"))
-                                    $root.google.shopping.merchant.conversions.v1beta.ConversionSource.encode(message.conversionSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest} message UpdateConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an UpdateConversionSourceRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest} UpdateConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateConversionSourceRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.conversionSource = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an UpdateConversionSourceRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest} UpdateConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an UpdateConversionSourceRequest message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            UpdateConversionSourceRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource")) {
-                                    var error = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.verify(message.conversionSource);
-                                    if (error)
-                                        return "conversionSource." + error;
-                                }
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
-                                    if (error)
-                                        return "updateMask." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an UpdateConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest} UpdateConversionSourceRequest
-                             */
-                            UpdateConversionSourceRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest();
-                                if (object.conversionSource != null) {
-                                    if (typeof object.conversionSource !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest.conversionSource: object expected");
-                                    message.conversionSource = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.fromObject(object.conversionSource);
-                                }
-                                if (object.updateMask != null) {
-                                    if (typeof object.updateMask !== "object")
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest.updateMask: object expected");
-                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an UpdateConversionSourceRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest} message UpdateConversionSourceRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            UpdateConversionSourceRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.conversionSource = null;
-                                    object.updateMask = null;
-                                }
-                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource"))
-                                    object.conversionSource = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.toObject(message.conversionSource, options);
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this UpdateConversionSourceRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            UpdateConversionSourceRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for UpdateConversionSourceRequest
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            UpdateConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest";
-                            };
-    
-                            return UpdateConversionSourceRequest;
-                        })();
-    
-                        v1beta.DeleteConversionSourceRequest = (function() {
-    
-                            /**
-                             * Properties of a DeleteConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IDeleteConversionSourceRequest
-                             * @property {string|null} [name] DeleteConversionSourceRequest name
-                             */
-    
-                            /**
-                             * Constructs a new DeleteConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a DeleteConversionSourceRequest.
-                             * @implements IDeleteConversionSourceRequest
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest=} [properties] Properties to set
-                             */
-                            function DeleteConversionSourceRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * DeleteConversionSourceRequest name.
-                             * @member {string} name
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @instance
-                             */
-                            DeleteConversionSourceRequest.prototype.name = "";
-    
-                            /**
-                             * Creates a new DeleteConversionSourceRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest} DeleteConversionSourceRequest instance
-                             */
-                            DeleteConversionSourceRequest.create = function create(properties) {
-                                return new DeleteConversionSourceRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest} message DeleteConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteConversionSourceRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest} message DeleteConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a DeleteConversionSourceRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest} DeleteConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteConversionSourceRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a DeleteConversionSourceRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest} DeleteConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a DeleteConversionSourceRequest message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            DeleteConversionSourceRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a DeleteConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest} DeleteConversionSourceRequest
-                             */
-                            DeleteConversionSourceRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a DeleteConversionSourceRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest} message DeleteConversionSourceRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            DeleteConversionSourceRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this DeleteConversionSourceRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            DeleteConversionSourceRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for DeleteConversionSourceRequest
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            DeleteConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest";
-                            };
-    
-                            return DeleteConversionSourceRequest;
-                        })();
-    
-                        v1beta.UndeleteConversionSourceRequest = (function() {
-    
-                            /**
-                             * Properties of an UndeleteConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IUndeleteConversionSourceRequest
-                             * @property {string|null} [name] UndeleteConversionSourceRequest name
-                             */
-    
-                            /**
-                             * Constructs a new UndeleteConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents an UndeleteConversionSourceRequest.
-                             * @implements IUndeleteConversionSourceRequest
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest=} [properties] Properties to set
-                             */
-                            function UndeleteConversionSourceRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * UndeleteConversionSourceRequest name.
-                             * @member {string} name
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @instance
-                             */
-                            UndeleteConversionSourceRequest.prototype.name = "";
-    
-                            /**
-                             * Creates a new UndeleteConversionSourceRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest instance
-                             */
-                            UndeleteConversionSourceRequest.create = function create(properties) {
-                                return new UndeleteConversionSourceRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified UndeleteConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest} message UndeleteConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UndeleteConversionSourceRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified UndeleteConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest} message UndeleteConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UndeleteConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an UndeleteConversionSourceRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UndeleteConversionSourceRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an UndeleteConversionSourceRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UndeleteConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an UndeleteConversionSourceRequest message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            UndeleteConversionSourceRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an UndeleteConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest
-                             */
-                            UndeleteConversionSourceRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an UndeleteConversionSourceRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest} message UndeleteConversionSourceRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            UndeleteConversionSourceRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this UndeleteConversionSourceRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            UndeleteConversionSourceRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for UndeleteConversionSourceRequest
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            UndeleteConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest";
-                            };
-    
-                            return UndeleteConversionSourceRequest;
-                        })();
-    
-                        v1beta.GetConversionSourceRequest = (function() {
-    
-                            /**
-                             * Properties of a GetConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IGetConversionSourceRequest
-                             * @property {string|null} [name] GetConversionSourceRequest name
-                             */
-    
-                            /**
-                             * Constructs a new GetConversionSourceRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a GetConversionSourceRequest.
-                             * @implements IGetConversionSourceRequest
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest=} [properties] Properties to set
-                             */
-                            function GetConversionSourceRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * GetConversionSourceRequest name.
-                             * @member {string} name
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @instance
-                             */
-                            GetConversionSourceRequest.prototype.name = "";
-    
-                            /**
-                             * Creates a new GetConversionSourceRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest} GetConversionSourceRequest instance
-                             */
-                            GetConversionSourceRequest.create = function create(properties) {
-                                return new GetConversionSourceRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified GetConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest} message GetConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GetConversionSourceRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified GetConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest} message GetConversionSourceRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GetConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a GetConversionSourceRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest} GetConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GetConversionSourceRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a GetConversionSourceRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest} GetConversionSourceRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GetConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a GetConversionSourceRequest message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            GetConversionSourceRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a GetConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest} GetConversionSourceRequest
-                             */
-                            GetConversionSourceRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a GetConversionSourceRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest} message GetConversionSourceRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            GetConversionSourceRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this GetConversionSourceRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            GetConversionSourceRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for GetConversionSourceRequest
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            GetConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest";
-                            };
-    
-                            return GetConversionSourceRequest;
-                        })();
-    
-                        v1beta.ListConversionSourcesRequest = (function() {
-    
-                            /**
-                             * Properties of a ListConversionSourcesRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IListConversionSourcesRequest
-                             * @property {string|null} [parent] ListConversionSourcesRequest parent
-                             * @property {number|null} [pageSize] ListConversionSourcesRequest pageSize
-                             * @property {string|null} [pageToken] ListConversionSourcesRequest pageToken
-                             * @property {boolean|null} [showDeleted] ListConversionSourcesRequest showDeleted
-                             */
-    
-                            /**
-                             * Constructs a new ListConversionSourcesRequest.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a ListConversionSourcesRequest.
-                             * @implements IListConversionSourcesRequest
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest=} [properties] Properties to set
-                             */
-                            function ListConversionSourcesRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ListConversionSourcesRequest parent.
-                             * @member {string} parent
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @instance
-                             */
-                            ListConversionSourcesRequest.prototype.parent = "";
-    
-                            /**
-                             * ListConversionSourcesRequest pageSize.
-                             * @member {number} pageSize
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @instance
-                             */
-                            ListConversionSourcesRequest.prototype.pageSize = 0;
-    
-                            /**
-                             * ListConversionSourcesRequest pageToken.
-                             * @member {string} pageToken
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @instance
-                             */
-                            ListConversionSourcesRequest.prototype.pageToken = "";
-    
-                            /**
-                             * ListConversionSourcesRequest showDeleted.
-                             * @member {boolean} showDeleted
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @instance
-                             */
-                            ListConversionSourcesRequest.prototype.showDeleted = false;
-    
-                            /**
-                             * Creates a new ListConversionSourcesRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest} ListConversionSourcesRequest instance
-                             */
-                            ListConversionSourcesRequest.create = function create(properties) {
-                                return new ListConversionSourcesRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ListConversionSourcesRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest} message ListConversionSourcesRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListConversionSourcesRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
-                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                                if (message.showDeleted != null && Object.hasOwnProperty.call(message, "showDeleted"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.showDeleted);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ListConversionSourcesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest} message ListConversionSourcesRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListConversionSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ListConversionSourcesRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest} ListConversionSourcesRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListConversionSourcesRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.parent = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.pageSize = reader.int32();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.pageToken = reader.string();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.showDeleted = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ListConversionSourcesRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest} ListConversionSourcesRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListConversionSourcesRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ListConversionSourcesRequest message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ListConversionSourcesRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    if (!$util.isString(message.parent))
-                                        return "parent: string expected";
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    if (!$util.isInteger(message.pageSize))
-                                        return "pageSize: integer expected";
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    if (!$util.isString(message.pageToken))
-                                        return "pageToken: string expected";
-                                if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
-                                    if (typeof message.showDeleted !== "boolean")
-                                        return "showDeleted: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ListConversionSourcesRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest} ListConversionSourcesRequest
-                             */
-                            ListConversionSourcesRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest();
-                                if (object.parent != null)
-                                    message.parent = String(object.parent);
-                                if (object.pageSize != null)
-                                    message.pageSize = object.pageSize | 0;
-                                if (object.pageToken != null)
-                                    message.pageToken = String(object.pageToken);
-                                if (object.showDeleted != null)
-                                    message.showDeleted = Boolean(object.showDeleted);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ListConversionSourcesRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest} message ListConversionSourcesRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ListConversionSourcesRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.parent = "";
-                                    object.pageSize = 0;
-                                    object.pageToken = "";
-                                    object.showDeleted = false;
-                                }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    object.parent = message.parent;
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    object.pageSize = message.pageSize;
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    object.pageToken = message.pageToken;
-                                if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
-                                    object.showDeleted = message.showDeleted;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ListConversionSourcesRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ListConversionSourcesRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ListConversionSourcesRequest
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ListConversionSourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest";
-                            };
-    
-                            return ListConversionSourcesRequest;
-                        })();
-    
-                        v1beta.ListConversionSourcesResponse = (function() {
-    
-                            /**
-                             * Properties of a ListConversionSourcesResponse.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @interface IListConversionSourcesResponse
-                             * @property {Array.<google.shopping.merchant.conversions.v1beta.IConversionSource>|null} [conversionSources] ListConversionSourcesResponse conversionSources
-                             * @property {string|null} [nextPageToken] ListConversionSourcesResponse nextPageToken
-                             */
-    
-                            /**
-                             * Constructs a new ListConversionSourcesResponse.
-                             * @memberof google.shopping.merchant.conversions.v1beta
-                             * @classdesc Represents a ListConversionSourcesResponse.
-                             * @implements IListConversionSourcesResponse
-                             * @constructor
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse=} [properties] Properties to set
-                             */
-                            function ListConversionSourcesResponse(properties) {
-                                this.conversionSources = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ListConversionSourcesResponse conversionSources.
-                             * @member {Array.<google.shopping.merchant.conversions.v1beta.IConversionSource>} conversionSources
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @instance
-                             */
-                            ListConversionSourcesResponse.prototype.conversionSources = $util.emptyArray;
-    
-                            /**
-                             * ListConversionSourcesResponse nextPageToken.
-                             * @member {string} nextPageToken
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @instance
-                             */
-                            ListConversionSourcesResponse.prototype.nextPageToken = "";
-    
-                            /**
-                             * Creates a new ListConversionSourcesResponse instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse} ListConversionSourcesResponse instance
-                             */
-                            ListConversionSourcesResponse.create = function create(properties) {
-                                return new ListConversionSourcesResponse(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ListConversionSourcesResponse message. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse} message ListConversionSourcesResponse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListConversionSourcesResponse.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.conversionSources != null && message.conversionSources.length)
-                                    for (var i = 0; i < message.conversionSources.length; ++i)
-                                        $root.google.shopping.merchant.conversions.v1beta.ConversionSource.encode(message.conversionSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ListConversionSourcesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse} message ListConversionSourcesResponse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListConversionSourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ListConversionSourcesResponse message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse} ListConversionSourcesResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListConversionSourcesResponse.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.conversionSources && message.conversionSources.length))
-                                                message.conversionSources = [];
-                                            message.conversionSources.push($root.google.shopping.merchant.conversions.v1beta.ConversionSource.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.nextPageToken = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ListConversionSourcesResponse message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse} ListConversionSourcesResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListConversionSourcesResponse.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ListConversionSourcesResponse message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ListConversionSourcesResponse.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.conversionSources != null && message.hasOwnProperty("conversionSources")) {
-                                    if (!Array.isArray(message.conversionSources))
-                                        return "conversionSources: array expected";
-                                    for (var i = 0; i < message.conversionSources.length; ++i) {
-                                        var error = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.verify(message.conversionSources[i]);
-                                        if (error)
-                                            return "conversionSources." + error;
-                                    }
-                                }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                    if (!$util.isString(message.nextPageToken))
-                                        return "nextPageToken: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ListConversionSourcesResponse message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse} ListConversionSourcesResponse
-                             */
-                            ListConversionSourcesResponse.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse();
-                                if (object.conversionSources) {
-                                    if (!Array.isArray(object.conversionSources))
-                                        throw TypeError(".google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse.conversionSources: array expected");
-                                    message.conversionSources = [];
-                                    for (var i = 0; i < object.conversionSources.length; ++i) {
-                                        if (typeof object.conversionSources[i] !== "object")
-                                            throw TypeError(".google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse.conversionSources: object expected");
-                                        message.conversionSources[i] = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.fromObject(object.conversionSources[i]);
-                                    }
-                                }
-                                if (object.nextPageToken != null)
-                                    message.nextPageToken = String(object.nextPageToken);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ListConversionSourcesResponse message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse} message ListConversionSourcesResponse
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ListConversionSourcesResponse.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.conversionSources = [];
-                                if (options.defaults)
-                                    object.nextPageToken = "";
-                                if (message.conversionSources && message.conversionSources.length) {
-                                    object.conversionSources = [];
-                                    for (var j = 0; j < message.conversionSources.length; ++j)
-                                        object.conversionSources[j] = $root.google.shopping.merchant.conversions.v1beta.ConversionSource.toObject(message.conversionSources[j], options);
-                                }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                    object.nextPageToken = message.nextPageToken;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ListConversionSourcesResponse to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ListConversionSourcesResponse.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ListConversionSourcesResponse
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ListConversionSourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1beta.ListConversionSourcesResponse";
-                            };
-    
-                            return ListConversionSourcesResponse;
-                        })();
-    
-                        return v1beta;
-                    })();
-    
                     return conversions;
                 })();
     
@@ -7935,7 +4498,6 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
-                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -7971,14 +4533,6 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
-                 * CommonLanguageSettings selectiveGapicGeneration.
-                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
-                 * @memberof google.api.CommonLanguageSettings
-                 * @instance
-                 */
-                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
-    
-                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -8010,8 +4564,6 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
-                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -8061,10 +4613,6 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
-                                break;
-                            }
-                        case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -8118,11 +4666,6 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
-                        if (error)
-                            return "selectiveGapicGeneration." + error;
-                    }
                     return null;
                 };
     
@@ -8165,11 +4708,6 @@
                                 break;
                             }
                     }
-                    if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
-                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
-                    }
                     return message;
                 };
     
@@ -8188,10 +4726,8 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.referenceDocsUri = "";
-                        object.selectiveGapicGeneration = null;
-                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -8199,8 +4735,6 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -10023,7 +6557,6 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
-                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -10048,14 +6581,6 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
-    
-                /**
-                 * PythonSettings experimentalFeatures.
-                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
-                 * @memberof google.api.PythonSettings
-                 * @instance
-                 */
-                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -10083,8 +6608,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -10123,10 +6646,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -10169,11 +6688,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
-                        if (error)
-                            return "experimentalFeatures." + error;
-                    }
                     return null;
                 };
     
@@ -10194,11 +6708,6 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
-                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
-                    }
                     return message;
                 };
     
@@ -10215,14 +6724,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.common = null;
-                        object.experimentalFeatures = null;
-                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -10251,258 +6756,6 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
-    
-                PythonSettings.ExperimentalFeatures = (function() {
-    
-                    /**
-                     * Properties of an ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @interface IExperimentalFeatures
-                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
-                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
-                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
-                     */
-    
-                    /**
-                     * Constructs a new ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @classdesc Represents an ExperimentalFeatures.
-                     * @implements IExperimentalFeatures
-                     * @constructor
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     */
-                    function ExperimentalFeatures(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ExperimentalFeatures restAsyncIoEnabled.
-                     * @member {boolean} restAsyncIoEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures protobufPythonicTypesEnabled.
-                     * @member {boolean} protobufPythonicTypesEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures unversionedPackageDisabled.
-                     * @member {boolean} unversionedPackageDisabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
-    
-                    /**
-                     * Creates a new ExperimentalFeatures instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
-                     */
-                    ExperimentalFeatures.create = function create(properties) {
-                        return new ExperimentalFeatures(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
-                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
-                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.restAsyncIoEnabled = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.protobufPythonicTypesEnabled = reader.bool();
-                                    break;
-                                }
-                            case 3: {
-                                    message.unversionedPackageDisabled = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ExperimentalFeatures message.
-                     * @function verify
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ExperimentalFeatures.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            if (typeof message.restAsyncIoEnabled !== "boolean")
-                                return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
-                                return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            if (typeof message.unversionedPackageDisabled !== "boolean")
-                                return "unversionedPackageDisabled: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
-                            return object;
-                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        if (object.restAsyncIoEnabled != null)
-                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
-                        if (object.protobufPythonicTypesEnabled != null)
-                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
-                        if (object.unversionedPackageDisabled != null)
-                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.restAsyncIoEnabled = false;
-                            object.protobufPythonicTypesEnabled = false;
-                            object.unversionedPackageDisabled = false;
-                        }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ExperimentalFeatures to JSON.
-                     * @function toJSON
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ExperimentalFeatures
-                     * @function getTypeUrl
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
-                    };
-    
-                    return ExperimentalFeatures;
-                })();
     
                 return PythonSettings;
             })();
@@ -11380,7 +7633,6 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -11392,7 +7644,6 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
-                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -11406,14 +7657,6 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
-    
-                /**
-                 * GoSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.GoSettings
-                 * @instance
-                 */
-                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -11441,9 +7684,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -11474,7 +7714,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -11482,29 +7722,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -11547,14 +7764,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
                     return null;
                 };
     
@@ -11575,13 +7784,6 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
                     return message;
                 };
     
@@ -11598,18 +7800,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.objects || options.defaults)
-                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
                     return object;
                 };
     
@@ -12246,251 +8440,6 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
-            })();
-    
-            api.SelectiveGapicGeneration = (function() {
-    
-                /**
-                 * Properties of a SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @interface ISelectiveGapicGeneration
-                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
-                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
-                 */
-    
-                /**
-                 * Constructs a new SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @classdesc Represents a SelectiveGapicGeneration.
-                 * @implements ISelectiveGapicGeneration
-                 * @constructor
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 */
-                function SelectiveGapicGeneration(properties) {
-                    this.methods = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * SelectiveGapicGeneration methods.
-                 * @member {Array.<string>} methods
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
-    
-                /**
-                 * SelectiveGapicGeneration generateOmittedAsInternal.
-                 * @member {boolean} generateOmittedAsInternal
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
-    
-                /**
-                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
-                 */
-                SelectiveGapicGeneration.create = function create(properties) {
-                    return new SelectiveGapicGeneration(properties);
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.methods != null && message.methods.length)
-                        for (var i = 0; i < message.methods.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
-                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.methods && message.methods.length))
-                                    message.methods = [];
-                                message.methods.push(reader.string());
-                                break;
-                            }
-                        case 2: {
-                                message.generateOmittedAsInternal = reader.bool();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a SelectiveGapicGeneration message.
-                 * @function verify
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                SelectiveGapicGeneration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
-                        if (!Array.isArray(message.methods))
-                            return "methods: array expected";
-                        for (var i = 0; i < message.methods.length; ++i)
-                            if (!$util.isString(message.methods[i]))
-                                return "methods: string[] expected";
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        if (typeof message.generateOmittedAsInternal !== "boolean")
-                            return "generateOmittedAsInternal: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
-                        return object;
-                    var message = new $root.google.api.SelectiveGapicGeneration();
-                    if (object.methods) {
-                        if (!Array.isArray(object.methods))
-                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
-                        message.methods = [];
-                        for (var i = 0; i < object.methods.length; ++i)
-                            message.methods[i] = String(object.methods[i]);
-                    }
-                    if (object.generateOmittedAsInternal != null)
-                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.methods = [];
-                    if (options.defaults)
-                        object.generateOmittedAsInternal = false;
-                    if (message.methods && message.methods.length) {
-                        object.methods = [];
-                        for (var j = 0; j < message.methods.length; ++j)
-                            object.methods[j] = message.methods[j];
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
-                    return object;
-                };
-    
-                /**
-                 * Converts this SelectiveGapicGeneration to JSON.
-                 * @function toJSON
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for SelectiveGapicGeneration
-                 * @function getTypeUrl
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
-                };
-    
-                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -13478,7 +9427,6 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
-             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -13493,7 +9441,6 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
-                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -13518,7 +9465,6 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
-                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -13541,7 +9487,6 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
-                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -13591,14 +9536,6 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
-    
-                /**
-                 * FileDescriptorProto optionDependency.
-                 * @member {Array.<string>} optionDependency
-                 * @memberof google.protobuf.FileDescriptorProto
-                 * @instance
-                 */
-                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -13721,9 +9658,6 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
-                    if (message.optionDependency != null && message.optionDependency.length)
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -13794,12 +9728,6 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
-                                break;
-                            }
-                        case 15: {
-                                if (!(message.optionDependency && message.optionDependency.length))
-                                    message.optionDependency = [];
-                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -13904,13 +9832,6 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
-                        if (!Array.isArray(message.optionDependency))
-                            return "optionDependency: array expected";
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            if (!$util.isString(message.optionDependency[i]))
-                                return "optionDependency: string[] expected";
-                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -13965,7 +9886,6 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -14017,13 +9937,6 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
-                    }
-                    if (object.optionDependency) {
-                        if (!Array.isArray(object.optionDependency))
-                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
-                        message.optionDependency = [];
-                        for (var i = 0; i < object.optionDependency.length; ++i)
-                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -14087,10 +10000,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -14157,7 +10066,6 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
-                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -14214,11 +10122,6 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                    if (message.optionDependency && message.optionDependency.length) {
-                        object.optionDependency = [];
-                        for (var j = 0; j < message.optionDependency.length; ++j)
-                            object.optionDependency[j] = message.optionDependency[j];
-                    }
                     return object;
                 };
     
@@ -14267,7 +10170,6 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -14374,14 +10276,6 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * DescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.DescriptorProto
-                 * @instance
-                 */
-                DescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -14433,8 +10327,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -14525,10 +10417,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 11: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -14644,15 +10532,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -14752,26 +10631,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -14801,7 +10660,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -14847,8 +10705,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -16893,7 +12749,6 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -16955,14 +12810,6 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * EnumDescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.EnumDescriptorProto
-                 * @instance
-                 */
-                EnumDescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -16999,8 +12846,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -17061,10 +12906,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -17135,15 +12976,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -17193,26 +13025,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -17237,7 +13049,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -17258,8 +13069,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -19578,7 +15387,6 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -19700,14 +15508,6 @@
                 FieldOptions.prototype.features = null;
     
                 /**
-                 * FieldOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.featureSupport = null;
-    
-                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -19781,8 +15581,6 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -19882,10 +15680,6 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -20022,11 +15816,6 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
-                    }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -20216,11 +16005,6 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -20318,7 +16102,6 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
-                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -20351,8 +16134,6 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -20625,7 +16406,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -20666,10 +16446,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -20768,488 +16544,6 @@
                     };
     
                     return EditionDefault;
-                })();
-    
-                FieldOptions.FeatureSupport = (function() {
-    
-                    /**
-                     * Properties of a FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IFeatureSupport
-                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
-                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
-                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
-                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
-                     */
-    
-                    /**
-                     * Constructs a new FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents a FeatureSupport.
-                     * @implements IFeatureSupport
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     */
-                    function FeatureSupport(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * FeatureSupport editionIntroduced.
-                     * @member {google.protobuf.Edition} editionIntroduced
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionIntroduced = 0;
-    
-                    /**
-                     * FeatureSupport editionDeprecated.
-                     * @member {google.protobuf.Edition} editionDeprecated
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionDeprecated = 0;
-    
-                    /**
-                     * FeatureSupport deprecationWarning.
-                     * @member {string} deprecationWarning
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.deprecationWarning = "";
-    
-                    /**
-                     * FeatureSupport editionRemoved.
-                     * @member {google.protobuf.Edition} editionRemoved
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionRemoved = 0;
-    
-                    /**
-                     * Creates a new FeatureSupport instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
-                     */
-                    FeatureSupport.create = function create(properties) {
-                        return new FeatureSupport(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
-                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
-                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
-                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.editionIntroduced = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.editionDeprecated = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.deprecationWarning = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.editionRemoved = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a FeatureSupport message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    FeatureSupport.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            switch (message.editionIntroduced) {
-                            default:
-                                return "editionIntroduced: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            switch (message.editionDeprecated) {
-                            default:
-                                return "editionDeprecated: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            if (!$util.isString(message.deprecationWarning))
-                                return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            switch (message.editionRemoved) {
-                            default:
-                                return "editionRemoved: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     */
-                    FeatureSupport.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        switch (object.editionIntroduced) {
-                        default:
-                            if (typeof object.editionIntroduced === "number") {
-                                message.editionIntroduced = object.editionIntroduced;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionIntroduced = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionIntroduced = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionIntroduced = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionIntroduced = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionIntroduced = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionIntroduced = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionIntroduced = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionIntroduced = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionIntroduced = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionIntroduced = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionIntroduced = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionIntroduced = 2147483647;
-                            break;
-                        }
-                        switch (object.editionDeprecated) {
-                        default:
-                            if (typeof object.editionDeprecated === "number") {
-                                message.editionDeprecated = object.editionDeprecated;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionDeprecated = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionDeprecated = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionDeprecated = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionDeprecated = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionDeprecated = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionDeprecated = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionDeprecated = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionDeprecated = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionDeprecated = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionDeprecated = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionDeprecated = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionDeprecated = 2147483647;
-                            break;
-                        }
-                        if (object.deprecationWarning != null)
-                            message.deprecationWarning = String(object.deprecationWarning);
-                        switch (object.editionRemoved) {
-                        default:
-                            if (typeof object.editionRemoved === "number") {
-                                message.editionRemoved = object.editionRemoved;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionRemoved = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionRemoved = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionRemoved = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionRemoved = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionRemoved = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionRemoved = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionRemoved = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionRemoved = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionRemoved = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionRemoved = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionRemoved = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionRemoved = 2147483647;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    FeatureSupport.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.deprecationWarning = "";
-                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                        }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this FeatureSupport to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    FeatureSupport.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for FeatureSupport
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
-                    };
-    
-                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -21844,7 +17138,6 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -21889,14 +17182,6 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
-                 * EnumValueOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.featureSupport = null;
-    
-                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -21934,8 +17219,6 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -21985,10 +17268,6 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -22043,11 +17322,6 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -22081,11 +17355,6 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -22118,7 +17387,6 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
-                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -22126,8 +17394,6 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -23567,8 +18833,6 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
-                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -23635,22 +18899,6 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
-                 * FeatureSet enforceNamingStyle.
-                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enforceNamingStyle = 0;
-    
-                /**
-                 * FeatureSet defaultSymbolVisibility.
-                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.defaultSymbolVisibility = 0;
-    
-                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -23686,10 +18934,6 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
-                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -23748,14 +18992,6 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 7: {
-                                message.enforceNamingStyle = reader.int32();
-                                break;
-                            }
-                        case 8: {
-                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -23846,26 +19082,6 @@
                         case 0:
                         case 1:
                         case 2:
-                            break;
-                        }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        switch (message.enforceNamingStyle) {
-                        default:
-                            return "enforceNamingStyle: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        switch (message.defaultSymbolVisibility) {
-                        default:
-                            return "defaultSymbolVisibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
                             break;
                         }
                     return null;
@@ -24007,54 +19223,6 @@
                         message.jsonFormat = 2;
                         break;
                     }
-                    switch (object.enforceNamingStyle) {
-                    default:
-                        if (typeof object.enforceNamingStyle === "number") {
-                            message.enforceNamingStyle = object.enforceNamingStyle;
-                            break;
-                        }
-                        break;
-                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-                    case 0:
-                        message.enforceNamingStyle = 0;
-                        break;
-                    case "STYLE2024":
-                    case 1:
-                        message.enforceNamingStyle = 1;
-                        break;
-                    case "STYLE_LEGACY":
-                    case 2:
-                        message.enforceNamingStyle = 2;
-                        break;
-                    }
-                    switch (object.defaultSymbolVisibility) {
-                    default:
-                        if (typeof object.defaultSymbolVisibility === "number") {
-                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
-                            break;
-                        }
-                        break;
-                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-                    case 0:
-                        message.defaultSymbolVisibility = 0;
-                        break;
-                    case "EXPORT_ALL":
-                    case 1:
-                        message.defaultSymbolVisibility = 1;
-                        break;
-                    case "EXPORT_TOP_LEVEL":
-                    case 2:
-                        message.defaultSymbolVisibility = 2;
-                        break;
-                    case "LOCAL_ALL":
-                    case 3:
-                        message.defaultSymbolVisibility = 3;
-                        break;
-                    case "STRICT":
-                    case 4:
-                        message.defaultSymbolVisibility = 4;
-                        break;
-                    }
                     return message;
                 };
     
@@ -24078,8 +19246,6 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
-                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -24093,10 +19259,6 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -24222,219 +19384,6 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
-                })();
-    
-                /**
-                 * EnforceNamingStyle enum.
-                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
-                 * @enum {number}
-                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
-                 * @property {number} STYLE2024=1 STYLE2024 value
-                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
-                 */
-                FeatureSet.EnforceNamingStyle = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "STYLE2024"] = 1;
-                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
-                    return values;
-                })();
-    
-                FeatureSet.VisibilityFeature = (function() {
-    
-                    /**
-                     * Properties of a VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @interface IVisibilityFeature
-                     */
-    
-                    /**
-                     * Constructs a new VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @classdesc Represents a VisibilityFeature.
-                     * @implements IVisibilityFeature
-                     * @constructor
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     */
-                    function VisibilityFeature(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Creates a new VisibilityFeature instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
-                     */
-                    VisibilityFeature.create = function create(properties) {
-                        return new VisibilityFeature(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a VisibilityFeature message.
-                     * @function verify
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    VisibilityFeature.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     */
-                    VisibilityFeature.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
-                            return object;
-                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                    };
-    
-                    /**
-                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    VisibilityFeature.toObject = function toObject() {
-                        return {};
-                    };
-    
-                    /**
-                     * Converts this VisibilityFeature to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    VisibilityFeature.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for VisibilityFeature
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
-                    };
-    
-                    /**
-                     * DefaultSymbolVisibility enum.
-                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
-                     * @enum {number}
-                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
-                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
-                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
-                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
-                     * @property {number} STRICT=4 STRICT value
-                     */
-                    VisibilityFeature.DefaultSymbolVisibility = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
-                        values[valuesById[1] = "EXPORT_ALL"] = 1;
-                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
-                        values[valuesById[3] = "LOCAL_ALL"] = 3;
-                        values[valuesById[4] = "STRICT"] = 4;
-                        return values;
-                    })();
-    
-                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -24621,7 +19570,6 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -24639,7 +19587,6 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -24687,10 +19634,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -24743,10 +19686,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -24856,8 +19795,7 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
-                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
                      */
     
                     /**
@@ -24884,20 +19822,12 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault overridableFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
-    
-                    /**
-                     * FeatureSetEditionDefault fixedFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
-                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
-                     * @instance
-                     */
-                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
+                    FeatureSetEditionDefault.prototype.features = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -24923,12 +19853,10 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
-                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -24969,12 +19897,8 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -25017,7 +19941,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -25030,15 +19953,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
                             if (error)
-                                return "overridableFeatures." + error;
-                        }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
-                            if (error)
-                                return "fixedFeatures." + error;
+                                return "features." + error;
                         }
                         return null;
                     };
@@ -25065,10 +19983,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -25111,15 +20025,10 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
-                        }
-                        if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                         }
                         return message;
                     };
@@ -25138,16 +20047,13 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
+                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.overridableFeatures = null;
-                            object.fixedFeatures = null;
                         }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -26360,22 +21266,6 @@
                 })();
     
                 return GeneratedCodeInfo;
-            })();
-    
-            /**
-             * SymbolVisibility enum.
-             * @name google.protobuf.SymbolVisibility
-             * @enum {number}
-             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
-             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
-             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
-             */
-            protobuf.SymbolVisibility = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
-                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
-                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
-                return values;
             })();
     
             protobuf.Duration = (function() {
