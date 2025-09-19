@@ -1,0 +1,213 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.cloudsecuritycompliance.v1",
+  "libraryPackage": "@google-cloud/cloudsecuritycompliance",
+  "services": {
+    "Config": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConfigClient",
+          "rpcs": {
+            "GetFramework": {
+              "methods": [
+                "getFramework"
+              ]
+            },
+            "CreateFramework": {
+              "methods": [
+                "createFramework"
+              ]
+            },
+            "UpdateFramework": {
+              "methods": [
+                "updateFramework"
+              ]
+            },
+            "DeleteFramework": {
+              "methods": [
+                "deleteFramework"
+              ]
+            },
+            "GetCloudControl": {
+              "methods": [
+                "getCloudControl"
+              ]
+            },
+            "CreateCloudControl": {
+              "methods": [
+                "createCloudControl"
+              ]
+            },
+            "UpdateCloudControl": {
+              "methods": [
+                "updateCloudControl"
+              ]
+            },
+            "DeleteCloudControl": {
+              "methods": [
+                "deleteCloudControl"
+              ]
+            },
+            "ListFrameworks": {
+              "methods": [
+                "listFrameworks",
+                "listFrameworksStream",
+                "listFrameworksAsync"
+              ]
+            },
+            "ListCloudControls": {
+              "methods": [
+                "listCloudControls",
+                "listCloudControlsStream",
+                "listCloudControlsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConfigClient",
+          "rpcs": {
+            "GetFramework": {
+              "methods": [
+                "getFramework"
+              ]
+            },
+            "CreateFramework": {
+              "methods": [
+                "createFramework"
+              ]
+            },
+            "UpdateFramework": {
+              "methods": [
+                "updateFramework"
+              ]
+            },
+            "DeleteFramework": {
+              "methods": [
+                "deleteFramework"
+              ]
+            },
+            "GetCloudControl": {
+              "methods": [
+                "getCloudControl"
+              ]
+            },
+            "CreateCloudControl": {
+              "methods": [
+                "createCloudControl"
+              ]
+            },
+            "UpdateCloudControl": {
+              "methods": [
+                "updateCloudControl"
+              ]
+            },
+            "DeleteCloudControl": {
+              "methods": [
+                "deleteCloudControl"
+              ]
+            },
+            "ListFrameworks": {
+              "methods": [
+                "listFrameworks",
+                "listFrameworksStream",
+                "listFrameworksAsync"
+              ]
+            },
+            "ListCloudControls": {
+              "methods": [
+                "listCloudControls",
+                "listCloudControlsStream",
+                "listCloudControlsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Deployment": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeploymentClient",
+          "rpcs": {
+            "GetFrameworkDeployment": {
+              "methods": [
+                "getFrameworkDeployment"
+              ]
+            },
+            "GetCloudControlDeployment": {
+              "methods": [
+                "getCloudControlDeployment"
+              ]
+            },
+            "CreateFrameworkDeployment": {
+              "methods": [
+                "createFrameworkDeployment"
+              ]
+            },
+            "DeleteFrameworkDeployment": {
+              "methods": [
+                "deleteFrameworkDeployment"
+              ]
+            },
+            "ListFrameworkDeployments": {
+              "methods": [
+                "listFrameworkDeployments",
+                "listFrameworkDeploymentsStream",
+                "listFrameworkDeploymentsAsync"
+              ]
+            },
+            "ListCloudControlDeployments": {
+              "methods": [
+                "listCloudControlDeployments",
+                "listCloudControlDeploymentsStream",
+                "listCloudControlDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeploymentClient",
+          "rpcs": {
+            "GetFrameworkDeployment": {
+              "methods": [
+                "getFrameworkDeployment"
+              ]
+            },
+            "GetCloudControlDeployment": {
+              "methods": [
+                "getCloudControlDeployment"
+              ]
+            },
+            "CreateFrameworkDeployment": {
+              "methods": [
+                "createFrameworkDeployment"
+              ]
+            },
+            "DeleteFrameworkDeployment": {
+              "methods": [
+                "deleteFrameworkDeployment"
+              ]
+            },
+            "ListFrameworkDeployments": {
+              "methods": [
+                "listFrameworkDeployments",
+                "listFrameworkDeploymentsStream",
+                "listFrameworkDeploymentsAsync"
+              ]
+            },
+            "ListCloudControlDeployments": {
+              "methods": [
+                "listCloudControlDeployments",
+                "listCloudControlDeploymentsStream",
+                "listCloudControlDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
