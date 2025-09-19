@@ -1,787 +1,787 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-connectors",
-        "version": "0.5.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.connectors.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "connectors_v1_generated_Connectors_ListConnections_async",
-            "title": "Connectors listConnections Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Connections in a given project and location.",
-            "canonical": true,
-            "file": "connectors.list_connections.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnections",
-                "fullName": "google.cloud.connectors.v1.Connectors.ListConnections",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.connectors.v1.ConnectionView"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ListConnectionsResponse",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "ListConnections",
-                    "fullName": "google.cloud.connectors.v1.Connectors.ListConnections",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_GetConnection_async",
-            "title": "Connectors getConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Connection.",
-            "canonical": true,
-            "file": "connectors.get_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnection",
-                "fullName": "google.cloud.connectors.v1.Connectors.GetConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.connectors.v1.ConnectionView"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.Connection",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "GetConnection",
-                    "fullName": "google.cloud.connectors.v1.Connectors.GetConnection",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_CreateConnection_async",
-            "title": "Connectors createConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Connection in a given project and location.",
-            "canonical": true,
-            "file": "connectors.create_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnection",
-                "fullName": "google.cloud.connectors.v1.Connectors.CreateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection",
-                        "type": ".google.cloud.connectors.v1.Connection"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "CreateConnection",
-                    "fullName": "google.cloud.connectors.v1.Connectors.CreateConnection",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_UpdateConnection_async",
-            "title": "Connectors updateConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single Connection.",
-            "canonical": true,
-            "file": "connectors.update_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConnection",
-                "fullName": "google.cloud.connectors.v1.Connectors.UpdateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "connection",
-                        "type": ".google.cloud.connectors.v1.Connection"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "UpdateConnection",
-                    "fullName": "google.cloud.connectors.v1.Connectors.UpdateConnection",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_DeleteConnection_async",
-            "title": "Connectors deleteConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Connection.",
-            "canonical": true,
-            "file": "connectors.delete_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnection",
-                "fullName": "google.cloud.connectors.v1.Connectors.DeleteConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnection",
-                    "fullName": "google.cloud.connectors.v1.Connectors.DeleteConnection",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_ListProviders_async",
-            "title": "Connectors listProviders Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Providers in a given project and location.",
-            "canonical": true,
-            "file": "connectors.list_providers.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProviders",
-                "fullName": "google.cloud.connectors.v1.Connectors.ListProviders",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ListProvidersResponse",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "ListProviders",
-                    "fullName": "google.cloud.connectors.v1.Connectors.ListProviders",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_GetProvider_async",
-            "title": "Connectors getProvider Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a provider.",
-            "canonical": true,
-            "file": "connectors.get_provider.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProvider",
-                "fullName": "google.cloud.connectors.v1.Connectors.GetProvider",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.Provider",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "GetProvider",
-                    "fullName": "google.cloud.connectors.v1.Connectors.GetProvider",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_ListConnectors_async",
-            "title": "Connectors listConnectors Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Connectors in a given project and location.",
-            "canonical": true,
-            "file": "connectors.list_connectors.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnectors",
-                "fullName": "google.cloud.connectors.v1.Connectors.ListConnectors",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ListConnectorsResponse",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "ListConnectors",
-                    "fullName": "google.cloud.connectors.v1.Connectors.ListConnectors",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_GetConnector_async",
-            "title": "Connectors getConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Connector.",
-            "canonical": true,
-            "file": "connectors.get_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnector",
-                "fullName": "google.cloud.connectors.v1.Connectors.GetConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.Connector",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "GetConnector",
-                    "fullName": "google.cloud.connectors.v1.Connectors.GetConnector",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_ListConnectorVersions_async",
-            "title": "Connectors listConnectorVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Connector Versions in a given project and location.",
-            "canonical": true,
-            "file": "connectors.list_connector_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnectorVersions",
-                "fullName": "google.cloud.connectors.v1.Connectors.ListConnectorVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.connectors.v1.ConnectorVersionView"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ListConnectorVersionsResponse",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "ListConnectorVersions",
-                    "fullName": "google.cloud.connectors.v1.Connectors.ListConnectorVersions",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_GetConnectorVersion_async",
-            "title": "Connectors getConnectorVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single connector version.",
-            "canonical": true,
-            "file": "connectors.get_connector_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnectorVersion",
-                "fullName": "google.cloud.connectors.v1.Connectors.GetConnectorVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.connectors.v1.ConnectorVersionView"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ConnectorVersion",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "GetConnectorVersion",
-                    "fullName": "google.cloud.connectors.v1.Connectors.GetConnectorVersion",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_GetConnectionSchemaMetadata_async",
-            "title": "Connectors getConnectionSchemaMetadata Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets schema metadata of a connection. SchemaMetadata is a singleton resource for each connection.",
-            "canonical": true,
-            "file": "connectors.get_connection_schema_metadata.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnectionSchemaMetadata",
-                "fullName": "google.cloud.connectors.v1.Connectors.GetConnectionSchemaMetadata",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ConnectionSchemaMetadata",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "GetConnectionSchemaMetadata",
-                    "fullName": "google.cloud.connectors.v1.Connectors.GetConnectionSchemaMetadata",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_RefreshConnectionSchemaMetadata_async",
-            "title": "Connectors refreshConnectionSchemaMetadata Sample",
-            "origin": "API_DEFINITION",
-            "description": " Refresh runtime schema of a connection.",
-            "canonical": true,
-            "file": "connectors.refresh_connection_schema_metadata.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RefreshConnectionSchemaMetadata",
-                "fullName": "google.cloud.connectors.v1.Connectors.RefreshConnectionSchemaMetadata",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "RefreshConnectionSchemaMetadata",
-                    "fullName": "google.cloud.connectors.v1.Connectors.RefreshConnectionSchemaMetadata",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_ListRuntimeEntitySchemas_async",
-            "title": "Connectors listRuntimeEntitySchemas Sample",
-            "origin": "API_DEFINITION",
-            "description": " List schema of a runtime entities filtered by entity name.",
-            "canonical": true,
-            "file": "connectors.list_runtime_entity_schemas.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRuntimeEntitySchemas",
-                "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeEntitySchemas",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ListRuntimeEntitySchemasResponse",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "ListRuntimeEntitySchemas",
-                    "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeEntitySchemas",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_ListRuntimeActionSchemas_async",
-            "title": "Connectors listRuntimeActionSchemas Sample",
-            "origin": "API_DEFINITION",
-            "description": " List schema of a runtime actions filtered by action name.",
-            "canonical": true,
-            "file": "connectors.list_runtime_action_schemas.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRuntimeActionSchemas",
-                "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeActionSchemas",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.ListRuntimeActionSchemasResponse",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "ListRuntimeActionSchemas",
-                    "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeActionSchemas",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_GetRuntimeConfig_async",
-            "title": "Connectors getRuntimeConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the runtimeConfig of a location. RuntimeConfig is a singleton resource for each location.",
-            "canonical": true,
-            "file": "connectors.get_runtime_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRuntimeConfig",
-                "fullName": "google.cloud.connectors.v1.Connectors.GetRuntimeConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.RuntimeConfig",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "GetRuntimeConfig",
-                    "fullName": "google.cloud.connectors.v1.Connectors.GetRuntimeConfig",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "connectors_v1_generated_Connectors_GetGlobalSettings_async",
-            "title": "Connectors getGlobalSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " GetGlobalSettings gets settings of a project. GlobalSettings is a singleton resource.",
-            "canonical": true,
-            "file": "connectors.get_global_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetGlobalSettings",
-                "fullName": "google.cloud.connectors.v1.Connectors.GetGlobalSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.connectors.v1.Settings",
-                "client": {
-                    "shortName": "ConnectorsClient",
-                    "fullName": "google.cloud.connectors.v1.ConnectorsClient"
-                },
-                "method": {
-                    "shortName": "GetGlobalSettings",
-                    "fullName": "google.cloud.connectors.v1.Connectors.GetGlobalSettings",
-                    "service": {
-                        "shortName": "Connectors",
-                        "fullName": "google.cloud.connectors.v1.Connectors"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-connectors",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.connectors.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "connectors_v1_generated_Connectors_ListConnections_async",
+      "title": "Connectors listConnections Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Connections in a given project and location.",
+      "canonical": true,
+      "file": "connectors.list_connections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnections",
+        "fullName": "google.cloud.connectors.v1.Connectors.ListConnections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.connectors.v1.ConnectionView"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ListConnectionsResponse",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "ListConnections",
+          "fullName": "google.cloud.connectors.v1.Connectors.ListConnections",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_GetConnection_async",
+      "title": "Connectors getConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Connection.",
+      "canonical": true,
+      "file": "connectors.get_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnection",
+        "fullName": "google.cloud.connectors.v1.Connectors.GetConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.connectors.v1.ConnectionView"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.Connection",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "GetConnection",
+          "fullName": "google.cloud.connectors.v1.Connectors.GetConnection",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_CreateConnection_async",
+      "title": "Connectors createConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Connection in a given project and location.",
+      "canonical": true,
+      "file": "connectors.create_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConnection",
+        "fullName": "google.cloud.connectors.v1.Connectors.CreateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection",
+            "type": ".google.cloud.connectors.v1.Connection"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "CreateConnection",
+          "fullName": "google.cloud.connectors.v1.Connectors.CreateConnection",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_UpdateConnection_async",
+      "title": "Connectors updateConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Connection.",
+      "canonical": true,
+      "file": "connectors.update_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConnection",
+        "fullName": "google.cloud.connectors.v1.Connectors.UpdateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "connection",
+            "type": ".google.cloud.connectors.v1.Connection"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "UpdateConnection",
+          "fullName": "google.cloud.connectors.v1.Connectors.UpdateConnection",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_DeleteConnection_async",
+      "title": "Connectors deleteConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Connection.",
+      "canonical": true,
+      "file": "connectors.delete_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConnection",
+        "fullName": "google.cloud.connectors.v1.Connectors.DeleteConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "DeleteConnection",
+          "fullName": "google.cloud.connectors.v1.Connectors.DeleteConnection",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_ListProviders_async",
+      "title": "Connectors listProviders Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Providers in a given project and location.",
+      "canonical": true,
+      "file": "connectors.list_providers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProviders",
+        "fullName": "google.cloud.connectors.v1.Connectors.ListProviders",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ListProvidersResponse",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "ListProviders",
+          "fullName": "google.cloud.connectors.v1.Connectors.ListProviders",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_GetProvider_async",
+      "title": "Connectors getProvider Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a provider.",
+      "canonical": true,
+      "file": "connectors.get_provider.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProvider",
+        "fullName": "google.cloud.connectors.v1.Connectors.GetProvider",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.Provider",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "GetProvider",
+          "fullName": "google.cloud.connectors.v1.Connectors.GetProvider",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_ListConnectors_async",
+      "title": "Connectors listConnectors Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Connectors in a given project and location.",
+      "canonical": true,
+      "file": "connectors.list_connectors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnectors",
+        "fullName": "google.cloud.connectors.v1.Connectors.ListConnectors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ListConnectorsResponse",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "ListConnectors",
+          "fullName": "google.cloud.connectors.v1.Connectors.ListConnectors",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_GetConnector_async",
+      "title": "Connectors getConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Connector.",
+      "canonical": true,
+      "file": "connectors.get_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnector",
+        "fullName": "google.cloud.connectors.v1.Connectors.GetConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.Connector",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "GetConnector",
+          "fullName": "google.cloud.connectors.v1.Connectors.GetConnector",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_ListConnectorVersions_async",
+      "title": "Connectors listConnectorVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Connector Versions in a given project and location.",
+      "canonical": true,
+      "file": "connectors.list_connector_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnectorVersions",
+        "fullName": "google.cloud.connectors.v1.Connectors.ListConnectorVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.connectors.v1.ConnectorVersionView"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ListConnectorVersionsResponse",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "ListConnectorVersions",
+          "fullName": "google.cloud.connectors.v1.Connectors.ListConnectorVersions",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_GetConnectorVersion_async",
+      "title": "Connectors getConnectorVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single connector version.",
+      "canonical": true,
+      "file": "connectors.get_connector_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnectorVersion",
+        "fullName": "google.cloud.connectors.v1.Connectors.GetConnectorVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.connectors.v1.ConnectorVersionView"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ConnectorVersion",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "GetConnectorVersion",
+          "fullName": "google.cloud.connectors.v1.Connectors.GetConnectorVersion",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_GetConnectionSchemaMetadata_async",
+      "title": "Connectors getConnectionSchemaMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets schema metadata of a connection. SchemaMetadata is a singleton resource for each connection.",
+      "canonical": true,
+      "file": "connectors.get_connection_schema_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnectionSchemaMetadata",
+        "fullName": "google.cloud.connectors.v1.Connectors.GetConnectionSchemaMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ConnectionSchemaMetadata",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "GetConnectionSchemaMetadata",
+          "fullName": "google.cloud.connectors.v1.Connectors.GetConnectionSchemaMetadata",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_RefreshConnectionSchemaMetadata_async",
+      "title": "Connectors refreshConnectionSchemaMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Refresh runtime schema of a connection.",
+      "canonical": true,
+      "file": "connectors.refresh_connection_schema_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RefreshConnectionSchemaMetadata",
+        "fullName": "google.cloud.connectors.v1.Connectors.RefreshConnectionSchemaMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "RefreshConnectionSchemaMetadata",
+          "fullName": "google.cloud.connectors.v1.Connectors.RefreshConnectionSchemaMetadata",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_ListRuntimeEntitySchemas_async",
+      "title": "Connectors listRuntimeEntitySchemas Sample",
+      "origin": "API_DEFINITION",
+      "description": " List schema of a runtime entities filtered by entity name.",
+      "canonical": true,
+      "file": "connectors.list_runtime_entity_schemas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRuntimeEntitySchemas",
+        "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeEntitySchemas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ListRuntimeEntitySchemasResponse",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "ListRuntimeEntitySchemas",
+          "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeEntitySchemas",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_ListRuntimeActionSchemas_async",
+      "title": "Connectors listRuntimeActionSchemas Sample",
+      "origin": "API_DEFINITION",
+      "description": " List schema of a runtime actions filtered by action name.",
+      "canonical": true,
+      "file": "connectors.list_runtime_action_schemas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRuntimeActionSchemas",
+        "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeActionSchemas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.ListRuntimeActionSchemasResponse",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "ListRuntimeActionSchemas",
+          "fullName": "google.cloud.connectors.v1.Connectors.ListRuntimeActionSchemas",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_GetRuntimeConfig_async",
+      "title": "Connectors getRuntimeConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the runtimeConfig of a location. RuntimeConfig is a singleton resource for each location.",
+      "canonical": true,
+      "file": "connectors.get_runtime_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRuntimeConfig",
+        "fullName": "google.cloud.connectors.v1.Connectors.GetRuntimeConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.RuntimeConfig",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "GetRuntimeConfig",
+          "fullName": "google.cloud.connectors.v1.Connectors.GetRuntimeConfig",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "connectors_v1_generated_Connectors_GetGlobalSettings_async",
+      "title": "Connectors getGlobalSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " GetGlobalSettings gets settings of a project. GlobalSettings is a singleton resource.",
+      "canonical": true,
+      "file": "connectors.get_global_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGlobalSettings",
+        "fullName": "google.cloud.connectors.v1.Connectors.GetGlobalSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.connectors.v1.Settings",
+        "client": {
+          "shortName": "ConnectorsClient",
+          "fullName": "google.cloud.connectors.v1.ConnectorsClient"
+        },
+        "method": {
+          "shortName": "GetGlobalSettings",
+          "fullName": "google.cloud.connectors.v1.Connectors.GetGlobalSettings",
+          "service": {
+            "shortName": "Connectors",
+            "fullName": "google.cloud.connectors.v1.Connectors"
+          }
+        }
+      }
+    }
+  ]
 }

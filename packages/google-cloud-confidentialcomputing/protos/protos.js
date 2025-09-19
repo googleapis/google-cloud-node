@@ -6549,2072 +6549,6 @@
                     return v1;
                 })();
     
-                confidentialcomputing.v1alpha1 = (function() {
-    
-                    /**
-                     * Namespace v1alpha1.
-                     * @memberof google.cloud.confidentialcomputing
-                     * @namespace
-                     */
-                    var v1alpha1 = {};
-    
-                    v1alpha1.ConfidentialComputing = (function() {
-    
-                        /**
-                         * Constructs a new ConfidentialComputing service.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @classdesc Represents a ConfidentialComputing
-                         * @extends $protobuf.rpc.Service
-                         * @constructor
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        function ConfidentialComputing(rpcImpl, requestDelimited, responseDelimited) {
-                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                        }
-    
-                        (ConfidentialComputing.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ConfidentialComputing;
-    
-                        /**
-                         * Creates new ConfidentialComputing service using the specified rpc implementation.
-                         * @function create
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing
-                         * @static
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         * @returns {ConfidentialComputing} RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        ConfidentialComputing.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                            return new this(rpcImpl, requestDelimited, responseDelimited);
-                        };
-    
-                        /**
-                         * Callback as used by {@link google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing|createChallenge}.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing
-                         * @typedef CreateChallengeCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.Challenge} [response] Challenge
-                         */
-    
-                        /**
-                         * Calls CreateChallenge.
-                         * @function createChallenge
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing
-                         * @instance
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest} request CreateChallengeRequest message or plain object
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing.CreateChallengeCallback} callback Node-style callback called with the error, if any, and Challenge
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(ConfidentialComputing.prototype.createChallenge = function createChallenge(request, callback) {
-                            return this.rpcCall(createChallenge, $root.google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest, $root.google.cloud.confidentialcomputing.v1alpha1.Challenge, request, callback);
-                        }, "name", { value: "CreateChallenge" });
-    
-                        /**
-                         * Calls CreateChallenge.
-                         * @function createChallenge
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing
-                         * @instance
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest} request CreateChallengeRequest message or plain object
-                         * @returns {Promise<google.cloud.confidentialcomputing.v1alpha1.Challenge>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing|verifyAttestation}.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing
-                         * @typedef VerifyAttestationCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse} [response] VerifyAttestationResponse
-                         */
-    
-                        /**
-                         * Calls VerifyAttestation.
-                         * @function verifyAttestation
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing
-                         * @instance
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest} request VerifyAttestationRequest message or plain object
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing.VerifyAttestationCallback} callback Node-style callback called with the error, if any, and VerifyAttestationResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(ConfidentialComputing.prototype.verifyAttestation = function verifyAttestation(request, callback) {
-                            return this.rpcCall(verifyAttestation, $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest, $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse, request, callback);
-                        }, "name", { value: "VerifyAttestation" });
-    
-                        /**
-                         * Calls VerifyAttestation.
-                         * @function verifyAttestation
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing
-                         * @instance
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest} request VerifyAttestationRequest message or plain object
-                         * @returns {Promise<google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        return ConfidentialComputing;
-                    })();
-    
-                    v1alpha1.Challenge = (function() {
-    
-                        /**
-                         * Properties of a Challenge.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @interface IChallenge
-                         * @property {string|null} [name] Challenge name
-                         * @property {google.protobuf.ITimestamp|null} [createTime] Challenge createTime
-                         * @property {google.protobuf.ITimestamp|null} [expireTime] Challenge expireTime
-                         * @property {boolean|null} [used] Challenge used
-                         * @property {Uint8Array|null} [nonce] Challenge nonce
-                         */
-    
-                        /**
-                         * Constructs a new Challenge.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @classdesc Represents a Challenge.
-                         * @implements IChallenge
-                         * @constructor
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IChallenge=} [properties] Properties to set
-                         */
-                        function Challenge(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Challenge name.
-                         * @member {string} name
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @instance
-                         */
-                        Challenge.prototype.name = "";
-    
-                        /**
-                         * Challenge createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @instance
-                         */
-                        Challenge.prototype.createTime = null;
-    
-                        /**
-                         * Challenge expireTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @instance
-                         */
-                        Challenge.prototype.expireTime = null;
-    
-                        /**
-                         * Challenge used.
-                         * @member {boolean} used
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @instance
-                         */
-                        Challenge.prototype.used = false;
-    
-                        /**
-                         * Challenge nonce.
-                         * @member {Uint8Array} nonce
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @instance
-                         */
-                        Challenge.prototype.nonce = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new Challenge instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IChallenge=} [properties] Properties to set
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.Challenge} Challenge instance
-                         */
-                        Challenge.create = function create(properties) {
-                            return new Challenge(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Challenge message. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.Challenge.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IChallenge} message Challenge message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Challenge.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
-                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.used != null && Object.hasOwnProperty.call(message, "used"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.used);
-                            if (message.nonce != null && Object.hasOwnProperty.call(message, "nonce"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.nonce);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Challenge message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.Challenge.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IChallenge} message Challenge message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Challenge.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Challenge message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.Challenge} Challenge
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Challenge.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1alpha1.Challenge();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.used = reader.bool();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.nonce = reader.bytes();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Challenge message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.Challenge} Challenge
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Challenge.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Challenge message.
-                         * @function verify
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Challenge.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
-                            }
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                if (error)
-                                    return "expireTime." + error;
-                            }
-                            if (message.used != null && message.hasOwnProperty("used"))
-                                if (typeof message.used !== "boolean")
-                                    return "used: boolean expected";
-                            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                                if (!(message.nonce && typeof message.nonce.length === "number" || $util.isString(message.nonce)))
-                                    return "nonce: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Challenge message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.Challenge} Challenge
-                         */
-                        Challenge.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.confidentialcomputing.v1alpha1.Challenge)
-                                return object;
-                            var message = new $root.google.cloud.confidentialcomputing.v1alpha1.Challenge();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.Challenge.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                            }
-                            if (object.expireTime != null) {
-                                if (typeof object.expireTime !== "object")
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.Challenge.expireTime: object expected");
-                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                            }
-                            if (object.used != null)
-                                message.used = Boolean(object.used);
-                            if (object.nonce != null)
-                                if (typeof object.nonce === "string")
-                                    $util.base64.decode(object.nonce, message.nonce = $util.newBuffer($util.base64.length(object.nonce)), 0);
-                                else if (object.nonce.length >= 0)
-                                    message.nonce = object.nonce;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Challenge message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.Challenge} message Challenge
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Challenge.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.createTime = null;
-                                object.expireTime = null;
-                                object.used = false;
-                                if (options.bytes === String)
-                                    object.nonce = "";
-                                else {
-                                    object.nonce = [];
-                                    if (options.bytes !== Array)
-                                        object.nonce = $util.newBuffer(object.nonce);
-                                }
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                            if (message.used != null && message.hasOwnProperty("used"))
-                                object.used = message.used;
-                            if (message.nonce != null && message.hasOwnProperty("nonce"))
-                                object.nonce = options.bytes === String ? $util.base64.encode(message.nonce, 0, message.nonce.length) : options.bytes === Array ? Array.prototype.slice.call(message.nonce) : message.nonce;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Challenge to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Challenge.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for Challenge
-                         * @function getTypeUrl
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.Challenge
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        Challenge.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1alpha1.Challenge";
-                        };
-    
-                        return Challenge;
-                    })();
-    
-                    v1alpha1.CreateChallengeRequest = (function() {
-    
-                        /**
-                         * Properties of a CreateChallengeRequest.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @interface ICreateChallengeRequest
-                         * @property {string|null} [parent] CreateChallengeRequest parent
-                         * @property {google.cloud.confidentialcomputing.v1alpha1.IChallenge|null} [challenge] CreateChallengeRequest challenge
-                         */
-    
-                        /**
-                         * Constructs a new CreateChallengeRequest.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @classdesc Represents a CreateChallengeRequest.
-                         * @implements ICreateChallengeRequest
-                         * @constructor
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest=} [properties] Properties to set
-                         */
-                        function CreateChallengeRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * CreateChallengeRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @instance
-                         */
-                        CreateChallengeRequest.prototype.parent = "";
-    
-                        /**
-                         * CreateChallengeRequest challenge.
-                         * @member {google.cloud.confidentialcomputing.v1alpha1.IChallenge|null|undefined} challenge
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @instance
-                         */
-                        CreateChallengeRequest.prototype.challenge = null;
-    
-                        /**
-                         * Creates a new CreateChallengeRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest=} [properties] Properties to set
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest} CreateChallengeRequest instance
-                         */
-                        CreateChallengeRequest.create = function create(properties) {
-                            return new CreateChallengeRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CreateChallengeRequest message. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest} message CreateChallengeRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateChallengeRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
-                                $root.google.cloud.confidentialcomputing.v1alpha1.Challenge.encode(message.challenge, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CreateChallengeRequest message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest} message CreateChallengeRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateChallengeRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CreateChallengeRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest} CreateChallengeRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateChallengeRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.challenge = $root.google.cloud.confidentialcomputing.v1alpha1.Challenge.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CreateChallengeRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest} CreateChallengeRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateChallengeRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CreateChallengeRequest message.
-                         * @function verify
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CreateChallengeRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.challenge != null && message.hasOwnProperty("challenge")) {
-                                var error = $root.google.cloud.confidentialcomputing.v1alpha1.Challenge.verify(message.challenge);
-                                if (error)
-                                    return "challenge." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CreateChallengeRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest} CreateChallengeRequest
-                         */
-                        CreateChallengeRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest)
-                                return object;
-                            var message = new $root.google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.challenge != null) {
-                                if (typeof object.challenge !== "object")
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest.challenge: object expected");
-                                message.challenge = $root.google.cloud.confidentialcomputing.v1alpha1.Challenge.fromObject(object.challenge);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a CreateChallengeRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest} message CreateChallengeRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CreateChallengeRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.challenge = null;
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.challenge != null && message.hasOwnProperty("challenge"))
-                                object.challenge = $root.google.cloud.confidentialcomputing.v1alpha1.Challenge.toObject(message.challenge, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this CreateChallengeRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CreateChallengeRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CreateChallengeRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CreateChallengeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1alpha1.CreateChallengeRequest";
-                        };
-    
-                        return CreateChallengeRequest;
-                    })();
-    
-                    v1alpha1.VerifyAttestationRequest = (function() {
-    
-                        /**
-                         * Properties of a VerifyAttestationRequest.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @interface IVerifyAttestationRequest
-                         * @property {string|null} [challenge] VerifyAttestationRequest challenge
-                         * @property {google.cloud.confidentialcomputing.v1alpha1.IGcpCredentials|null} [gcpCredentials] VerifyAttestationRequest gcpCredentials
-                         * @property {google.cloud.confidentialcomputing.v1alpha1.ITpmAttestation|null} [tpmAttestation] VerifyAttestationRequest tpmAttestation
-                         */
-    
-                        /**
-                         * Constructs a new VerifyAttestationRequest.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @classdesc Represents a VerifyAttestationRequest.
-                         * @implements IVerifyAttestationRequest
-                         * @constructor
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest=} [properties] Properties to set
-                         */
-                        function VerifyAttestationRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VerifyAttestationRequest challenge.
-                         * @member {string} challenge
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @instance
-                         */
-                        VerifyAttestationRequest.prototype.challenge = "";
-    
-                        /**
-                         * VerifyAttestationRequest gcpCredentials.
-                         * @member {google.cloud.confidentialcomputing.v1alpha1.IGcpCredentials|null|undefined} gcpCredentials
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @instance
-                         */
-                        VerifyAttestationRequest.prototype.gcpCredentials = null;
-    
-                        /**
-                         * VerifyAttestationRequest tpmAttestation.
-                         * @member {google.cloud.confidentialcomputing.v1alpha1.ITpmAttestation|null|undefined} tpmAttestation
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @instance
-                         */
-                        VerifyAttestationRequest.prototype.tpmAttestation = null;
-    
-                        /**
-                         * Creates a new VerifyAttestationRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest=} [properties] Properties to set
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest} VerifyAttestationRequest instance
-                         */
-                        VerifyAttestationRequest.create = function create(properties) {
-                            return new VerifyAttestationRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VerifyAttestationRequest message. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest} message VerifyAttestationRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VerifyAttestationRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.challenge);
-                            if (message.gcpCredentials != null && Object.hasOwnProperty.call(message, "gcpCredentials"))
-                                $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.encode(message.gcpCredentials, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.tpmAttestation != null && Object.hasOwnProperty.call(message, "tpmAttestation"))
-                                $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.encode(message.tpmAttestation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VerifyAttestationRequest message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest} message VerifyAttestationRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VerifyAttestationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VerifyAttestationRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest} VerifyAttestationRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VerifyAttestationRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.challenge = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.gcpCredentials = $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.tpmAttestation = $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VerifyAttestationRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest} VerifyAttestationRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VerifyAttestationRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VerifyAttestationRequest message.
-                         * @function verify
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VerifyAttestationRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.challenge != null && message.hasOwnProperty("challenge"))
-                                if (!$util.isString(message.challenge))
-                                    return "challenge: string expected";
-                            if (message.gcpCredentials != null && message.hasOwnProperty("gcpCredentials")) {
-                                var error = $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.verify(message.gcpCredentials);
-                                if (error)
-                                    return "gcpCredentials." + error;
-                            }
-                            if (message.tpmAttestation != null && message.hasOwnProperty("tpmAttestation")) {
-                                var error = $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.verify(message.tpmAttestation);
-                                if (error)
-                                    return "tpmAttestation." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VerifyAttestationRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest} VerifyAttestationRequest
-                         */
-                        VerifyAttestationRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest)
-                                return object;
-                            var message = new $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest();
-                            if (object.challenge != null)
-                                message.challenge = String(object.challenge);
-                            if (object.gcpCredentials != null) {
-                                if (typeof object.gcpCredentials !== "object")
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest.gcpCredentials: object expected");
-                                message.gcpCredentials = $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.fromObject(object.gcpCredentials);
-                            }
-                            if (object.tpmAttestation != null) {
-                                if (typeof object.tpmAttestation !== "object")
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest.tpmAttestation: object expected");
-                                message.tpmAttestation = $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.fromObject(object.tpmAttestation);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VerifyAttestationRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest} message VerifyAttestationRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VerifyAttestationRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.challenge = "";
-                                object.gcpCredentials = null;
-                                object.tpmAttestation = null;
-                            }
-                            if (message.challenge != null && message.hasOwnProperty("challenge"))
-                                object.challenge = message.challenge;
-                            if (message.gcpCredentials != null && message.hasOwnProperty("gcpCredentials"))
-                                object.gcpCredentials = $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.toObject(message.gcpCredentials, options);
-                            if (message.tpmAttestation != null && message.hasOwnProperty("tpmAttestation"))
-                                object.tpmAttestation = $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.toObject(message.tpmAttestation, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VerifyAttestationRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VerifyAttestationRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for VerifyAttestationRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        VerifyAttestationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationRequest";
-                        };
-    
-                        return VerifyAttestationRequest;
-                    })();
-    
-                    v1alpha1.VerifyAttestationResponse = (function() {
-    
-                        /**
-                         * Properties of a VerifyAttestationResponse.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @interface IVerifyAttestationResponse
-                         * @property {Uint8Array|null} [claimsToken] VerifyAttestationResponse claimsToken
-                         */
-    
-                        /**
-                         * Constructs a new VerifyAttestationResponse.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @classdesc Represents a VerifyAttestationResponse.
-                         * @implements IVerifyAttestationResponse
-                         * @constructor
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationResponse=} [properties] Properties to set
-                         */
-                        function VerifyAttestationResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VerifyAttestationResponse claimsToken.
-                         * @member {Uint8Array} claimsToken
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @instance
-                         */
-                        VerifyAttestationResponse.prototype.claimsToken = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new VerifyAttestationResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationResponse=} [properties] Properties to set
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse} VerifyAttestationResponse instance
-                         */
-                        VerifyAttestationResponse.create = function create(properties) {
-                            return new VerifyAttestationResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VerifyAttestationResponse message. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationResponse} message VerifyAttestationResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VerifyAttestationResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.claimsToken != null && Object.hasOwnProperty.call(message, "claimsToken"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.claimsToken);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VerifyAttestationResponse message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationResponse} message VerifyAttestationResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VerifyAttestationResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VerifyAttestationResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse} VerifyAttestationResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VerifyAttestationResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.claimsToken = reader.bytes();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VerifyAttestationResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse} VerifyAttestationResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VerifyAttestationResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VerifyAttestationResponse message.
-                         * @function verify
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VerifyAttestationResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.claimsToken != null && message.hasOwnProperty("claimsToken"))
-                                if (!(message.claimsToken && typeof message.claimsToken.length === "number" || $util.isString(message.claimsToken)))
-                                    return "claimsToken: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VerifyAttestationResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse} VerifyAttestationResponse
-                         */
-                        VerifyAttestationResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse)
-                                return object;
-                            var message = new $root.google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse();
-                            if (object.claimsToken != null)
-                                if (typeof object.claimsToken === "string")
-                                    $util.base64.decode(object.claimsToken, message.claimsToken = $util.newBuffer($util.base64.length(object.claimsToken)), 0);
-                                else if (object.claimsToken.length >= 0)
-                                    message.claimsToken = object.claimsToken;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VerifyAttestationResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse} message VerifyAttestationResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VerifyAttestationResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                if (options.bytes === String)
-                                    object.claimsToken = "";
-                                else {
-                                    object.claimsToken = [];
-                                    if (options.bytes !== Array)
-                                        object.claimsToken = $util.newBuffer(object.claimsToken);
-                                }
-                            if (message.claimsToken != null && message.hasOwnProperty("claimsToken"))
-                                object.claimsToken = options.bytes === String ? $util.base64.encode(message.claimsToken, 0, message.claimsToken.length) : options.bytes === Array ? Array.prototype.slice.call(message.claimsToken) : message.claimsToken;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VerifyAttestationResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VerifyAttestationResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for VerifyAttestationResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        VerifyAttestationResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse";
-                        };
-    
-                        return VerifyAttestationResponse;
-                    })();
-    
-                    v1alpha1.GcpCredentials = (function() {
-    
-                        /**
-                         * Properties of a GcpCredentials.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @interface IGcpCredentials
-                         * @property {Array.<Uint8Array>|null} [idTokens] GcpCredentials idTokens
-                         */
-    
-                        /**
-                         * Constructs a new GcpCredentials.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @classdesc Represents a GcpCredentials.
-                         * @implements IGcpCredentials
-                         * @constructor
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IGcpCredentials=} [properties] Properties to set
-                         */
-                        function GcpCredentials(properties) {
-                            this.idTokens = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * GcpCredentials idTokens.
-                         * @member {Array.<Uint8Array>} idTokens
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @instance
-                         */
-                        GcpCredentials.prototype.idTokens = $util.emptyArray;
-    
-                        /**
-                         * Creates a new GcpCredentials instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IGcpCredentials=} [properties] Properties to set
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.GcpCredentials} GcpCredentials instance
-                         */
-                        GcpCredentials.create = function create(properties) {
-                            return new GcpCredentials(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GcpCredentials message. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IGcpCredentials} message GcpCredentials message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GcpCredentials.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.idTokens != null && message.idTokens.length)
-                                for (var i = 0; i < message.idTokens.length; ++i)
-                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.idTokens[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GcpCredentials message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.IGcpCredentials} message GcpCredentials message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GcpCredentials.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GcpCredentials message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.GcpCredentials} GcpCredentials
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GcpCredentials.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.idTokens && message.idTokens.length))
-                                            message.idTokens = [];
-                                        message.idTokens.push(reader.bytes());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GcpCredentials message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.GcpCredentials} GcpCredentials
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GcpCredentials.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GcpCredentials message.
-                         * @function verify
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GcpCredentials.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.idTokens != null && message.hasOwnProperty("idTokens")) {
-                                if (!Array.isArray(message.idTokens))
-                                    return "idTokens: array expected";
-                                for (var i = 0; i < message.idTokens.length; ++i)
-                                    if (!(message.idTokens[i] && typeof message.idTokens[i].length === "number" || $util.isString(message.idTokens[i])))
-                                        return "idTokens: buffer[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GcpCredentials message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.GcpCredentials} GcpCredentials
-                         */
-                        GcpCredentials.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials)
-                                return object;
-                            var message = new $root.google.cloud.confidentialcomputing.v1alpha1.GcpCredentials();
-                            if (object.idTokens) {
-                                if (!Array.isArray(object.idTokens))
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.GcpCredentials.idTokens: array expected");
-                                message.idTokens = [];
-                                for (var i = 0; i < object.idTokens.length; ++i)
-                                    if (typeof object.idTokens[i] === "string")
-                                        $util.base64.decode(object.idTokens[i], message.idTokens[i] = $util.newBuffer($util.base64.length(object.idTokens[i])), 0);
-                                    else if (object.idTokens[i].length >= 0)
-                                        message.idTokens[i] = object.idTokens[i];
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GcpCredentials message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.GcpCredentials} message GcpCredentials
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GcpCredentials.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.idTokens = [];
-                            if (message.idTokens && message.idTokens.length) {
-                                object.idTokens = [];
-                                for (var j = 0; j < message.idTokens.length; ++j)
-                                    object.idTokens[j] = options.bytes === String ? $util.base64.encode(message.idTokens[j], 0, message.idTokens[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.idTokens[j]) : message.idTokens[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GcpCredentials to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GcpCredentials.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for GcpCredentials
-                         * @function getTypeUrl
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.GcpCredentials
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        GcpCredentials.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1alpha1.GcpCredentials";
-                        };
-    
-                        return GcpCredentials;
-                    })();
-    
-                    v1alpha1.TpmAttestation = (function() {
-    
-                        /**
-                         * Properties of a TpmAttestation.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @interface ITpmAttestation
-                         * @property {Array.<google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.IQuote>|null} [quotes] TpmAttestation quotes
-                         * @property {Uint8Array|null} [tcgEventLog] TpmAttestation tcgEventLog
-                         * @property {Uint8Array|null} [canonicalEventLog] TpmAttestation canonicalEventLog
-                         * @property {Uint8Array|null} [akCert] TpmAttestation akCert
-                         * @property {Array.<Uint8Array>|null} [certChain] TpmAttestation certChain
-                         */
-    
-                        /**
-                         * Constructs a new TpmAttestation.
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1
-                         * @classdesc Represents a TpmAttestation.
-                         * @implements ITpmAttestation
-                         * @constructor
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ITpmAttestation=} [properties] Properties to set
-                         */
-                        function TpmAttestation(properties) {
-                            this.quotes = [];
-                            this.certChain = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * TpmAttestation quotes.
-                         * @member {Array.<google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.IQuote>} quotes
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @instance
-                         */
-                        TpmAttestation.prototype.quotes = $util.emptyArray;
-    
-                        /**
-                         * TpmAttestation tcgEventLog.
-                         * @member {Uint8Array} tcgEventLog
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @instance
-                         */
-                        TpmAttestation.prototype.tcgEventLog = $util.newBuffer([]);
-    
-                        /**
-                         * TpmAttestation canonicalEventLog.
-                         * @member {Uint8Array} canonicalEventLog
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @instance
-                         */
-                        TpmAttestation.prototype.canonicalEventLog = $util.newBuffer([]);
-    
-                        /**
-                         * TpmAttestation akCert.
-                         * @member {Uint8Array} akCert
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @instance
-                         */
-                        TpmAttestation.prototype.akCert = $util.newBuffer([]);
-    
-                        /**
-                         * TpmAttestation certChain.
-                         * @member {Array.<Uint8Array>} certChain
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @instance
-                         */
-                        TpmAttestation.prototype.certChain = $util.emptyArray;
-    
-                        /**
-                         * Creates a new TpmAttestation instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ITpmAttestation=} [properties] Properties to set
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation} TpmAttestation instance
-                         */
-                        TpmAttestation.create = function create(properties) {
-                            return new TpmAttestation(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified TpmAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ITpmAttestation} message TpmAttestation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TpmAttestation.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.quotes != null && message.quotes.length)
-                                for (var i = 0; i < message.quotes.length; ++i)
-                                    $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.encode(message.quotes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.tcgEventLog != null && Object.hasOwnProperty.call(message, "tcgEventLog"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.tcgEventLog);
-                            if (message.canonicalEventLog != null && Object.hasOwnProperty.call(message, "canonicalEventLog"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.canonicalEventLog);
-                            if (message.akCert != null && Object.hasOwnProperty.call(message, "akCert"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.akCert);
-                            if (message.certChain != null && message.certChain.length)
-                                for (var i = 0; i < message.certChain.length; ++i)
-                                    writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.certChain[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified TpmAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.ITpmAttestation} message TpmAttestation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TpmAttestation.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a TpmAttestation message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation} TpmAttestation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TpmAttestation.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.quotes && message.quotes.length))
-                                            message.quotes = [];
-                                        message.quotes.push($root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 2: {
-                                        message.tcgEventLog = reader.bytes();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.canonicalEventLog = reader.bytes();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.akCert = reader.bytes();
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.certChain && message.certChain.length))
-                                            message.certChain = [];
-                                        message.certChain.push(reader.bytes());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a TpmAttestation message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation} TpmAttestation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TpmAttestation.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a TpmAttestation message.
-                         * @function verify
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        TpmAttestation.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.quotes != null && message.hasOwnProperty("quotes")) {
-                                if (!Array.isArray(message.quotes))
-                                    return "quotes: array expected";
-                                for (var i = 0; i < message.quotes.length; ++i) {
-                                    var error = $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.verify(message.quotes[i]);
-                                    if (error)
-                                        return "quotes." + error;
-                                }
-                            }
-                            if (message.tcgEventLog != null && message.hasOwnProperty("tcgEventLog"))
-                                if (!(message.tcgEventLog && typeof message.tcgEventLog.length === "number" || $util.isString(message.tcgEventLog)))
-                                    return "tcgEventLog: buffer expected";
-                            if (message.canonicalEventLog != null && message.hasOwnProperty("canonicalEventLog"))
-                                if (!(message.canonicalEventLog && typeof message.canonicalEventLog.length === "number" || $util.isString(message.canonicalEventLog)))
-                                    return "canonicalEventLog: buffer expected";
-                            if (message.akCert != null && message.hasOwnProperty("akCert"))
-                                if (!(message.akCert && typeof message.akCert.length === "number" || $util.isString(message.akCert)))
-                                    return "akCert: buffer expected";
-                            if (message.certChain != null && message.hasOwnProperty("certChain")) {
-                                if (!Array.isArray(message.certChain))
-                                    return "certChain: array expected";
-                                for (var i = 0; i < message.certChain.length; ++i)
-                                    if (!(message.certChain[i] && typeof message.certChain[i].length === "number" || $util.isString(message.certChain[i])))
-                                        return "certChain: buffer[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a TpmAttestation message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation} TpmAttestation
-                         */
-                        TpmAttestation.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation)
-                                return object;
-                            var message = new $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation();
-                            if (object.quotes) {
-                                if (!Array.isArray(object.quotes))
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.quotes: array expected");
-                                message.quotes = [];
-                                for (var i = 0; i < object.quotes.length; ++i) {
-                                    if (typeof object.quotes[i] !== "object")
-                                        throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.quotes: object expected");
-                                    message.quotes[i] = $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.fromObject(object.quotes[i]);
-                                }
-                            }
-                            if (object.tcgEventLog != null)
-                                if (typeof object.tcgEventLog === "string")
-                                    $util.base64.decode(object.tcgEventLog, message.tcgEventLog = $util.newBuffer($util.base64.length(object.tcgEventLog)), 0);
-                                else if (object.tcgEventLog.length >= 0)
-                                    message.tcgEventLog = object.tcgEventLog;
-                            if (object.canonicalEventLog != null)
-                                if (typeof object.canonicalEventLog === "string")
-                                    $util.base64.decode(object.canonicalEventLog, message.canonicalEventLog = $util.newBuffer($util.base64.length(object.canonicalEventLog)), 0);
-                                else if (object.canonicalEventLog.length >= 0)
-                                    message.canonicalEventLog = object.canonicalEventLog;
-                            if (object.akCert != null)
-                                if (typeof object.akCert === "string")
-                                    $util.base64.decode(object.akCert, message.akCert = $util.newBuffer($util.base64.length(object.akCert)), 0);
-                                else if (object.akCert.length >= 0)
-                                    message.akCert = object.akCert;
-                            if (object.certChain) {
-                                if (!Array.isArray(object.certChain))
-                                    throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.certChain: array expected");
-                                message.certChain = [];
-                                for (var i = 0; i < object.certChain.length; ++i)
-                                    if (typeof object.certChain[i] === "string")
-                                        $util.base64.decode(object.certChain[i], message.certChain[i] = $util.newBuffer($util.base64.length(object.certChain[i])), 0);
-                                    else if (object.certChain[i].length >= 0)
-                                        message.certChain[i] = object.certChain[i];
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a TpmAttestation message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation} message TpmAttestation
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        TpmAttestation.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.quotes = [];
-                                object.certChain = [];
-                            }
-                            if (options.defaults) {
-                                if (options.bytes === String)
-                                    object.tcgEventLog = "";
-                                else {
-                                    object.tcgEventLog = [];
-                                    if (options.bytes !== Array)
-                                        object.tcgEventLog = $util.newBuffer(object.tcgEventLog);
-                                }
-                                if (options.bytes === String)
-                                    object.canonicalEventLog = "";
-                                else {
-                                    object.canonicalEventLog = [];
-                                    if (options.bytes !== Array)
-                                        object.canonicalEventLog = $util.newBuffer(object.canonicalEventLog);
-                                }
-                                if (options.bytes === String)
-                                    object.akCert = "";
-                                else {
-                                    object.akCert = [];
-                                    if (options.bytes !== Array)
-                                        object.akCert = $util.newBuffer(object.akCert);
-                                }
-                            }
-                            if (message.quotes && message.quotes.length) {
-                                object.quotes = [];
-                                for (var j = 0; j < message.quotes.length; ++j)
-                                    object.quotes[j] = $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.toObject(message.quotes[j], options);
-                            }
-                            if (message.tcgEventLog != null && message.hasOwnProperty("tcgEventLog"))
-                                object.tcgEventLog = options.bytes === String ? $util.base64.encode(message.tcgEventLog, 0, message.tcgEventLog.length) : options.bytes === Array ? Array.prototype.slice.call(message.tcgEventLog) : message.tcgEventLog;
-                            if (message.canonicalEventLog != null && message.hasOwnProperty("canonicalEventLog"))
-                                object.canonicalEventLog = options.bytes === String ? $util.base64.encode(message.canonicalEventLog, 0, message.canonicalEventLog.length) : options.bytes === Array ? Array.prototype.slice.call(message.canonicalEventLog) : message.canonicalEventLog;
-                            if (message.akCert != null && message.hasOwnProperty("akCert"))
-                                object.akCert = options.bytes === String ? $util.base64.encode(message.akCert, 0, message.akCert.length) : options.bytes === Array ? Array.prototype.slice.call(message.akCert) : message.akCert;
-                            if (message.certChain && message.certChain.length) {
-                                object.certChain = [];
-                                for (var j = 0; j < message.certChain.length; ++j)
-                                    object.certChain[j] = options.bytes === String ? $util.base64.encode(message.certChain[j], 0, message.certChain[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.certChain[j]) : message.certChain[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this TpmAttestation to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        TpmAttestation.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for TpmAttestation
-                         * @function getTypeUrl
-                         * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        TpmAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1alpha1.TpmAttestation";
-                        };
-    
-                        TpmAttestation.Quote = (function() {
-    
-                            /**
-                             * Properties of a Quote.
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                             * @interface IQuote
-                             * @property {number|null} [hashAlgo] Quote hashAlgo
-                             * @property {Object.<string,Uint8Array>|null} [pcrValues] Quote pcrValues
-                             * @property {Uint8Array|null} [rawQuote] Quote rawQuote
-                             * @property {Uint8Array|null} [rawSignature] Quote rawSignature
-                             */
-    
-                            /**
-                             * Constructs a new Quote.
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation
-                             * @classdesc Represents a Quote.
-                             * @implements IQuote
-                             * @constructor
-                             * @param {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.IQuote=} [properties] Properties to set
-                             */
-                            function Quote(properties) {
-                                this.pcrValues = {};
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Quote hashAlgo.
-                             * @member {number} hashAlgo
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @instance
-                             */
-                            Quote.prototype.hashAlgo = 0;
-    
-                            /**
-                             * Quote pcrValues.
-                             * @member {Object.<string,Uint8Array>} pcrValues
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @instance
-                             */
-                            Quote.prototype.pcrValues = $util.emptyObject;
-    
-                            /**
-                             * Quote rawQuote.
-                             * @member {Uint8Array} rawQuote
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @instance
-                             */
-                            Quote.prototype.rawQuote = $util.newBuffer([]);
-    
-                            /**
-                             * Quote rawSignature.
-                             * @member {Uint8Array} rawSignature
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @instance
-                             */
-                            Quote.prototype.rawSignature = $util.newBuffer([]);
-    
-                            /**
-                             * Creates a new Quote instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.IQuote=} [properties] Properties to set
-                             * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote} Quote instance
-                             */
-                            Quote.create = function create(properties) {
-                                return new Quote(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Quote message. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.IQuote} message Quote message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Quote.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.hashAlgo != null && Object.hasOwnProperty.call(message, "hashAlgo"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hashAlgo);
-                                if (message.pcrValues != null && Object.hasOwnProperty.call(message, "pcrValues"))
-                                    for (var keys = Object.keys(message.pcrValues), i = 0; i < keys.length; ++i)
-                                        writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 0 =*/8).int32(keys[i]).uint32(/* id 2, wireType 2 =*/18).bytes(message.pcrValues[keys[i]]).ldelim();
-                                if (message.rawQuote != null && Object.hasOwnProperty.call(message, "rawQuote"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.rawQuote);
-                                if (message.rawSignature != null && Object.hasOwnProperty.call(message, "rawSignature"))
-                                    writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.rawSignature);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Quote message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.IQuote} message Quote message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Quote.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Quote message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote} Quote
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Quote.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote(), key, value;
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.hashAlgo = reader.int32();
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (message.pcrValues === $util.emptyObject)
-                                                message.pcrValues = {};
-                                            var end2 = reader.uint32() + reader.pos;
-                                            key = 0;
-                                            value = [];
-                                            while (reader.pos < end2) {
-                                                var tag2 = reader.uint32();
-                                                switch (tag2 >>> 3) {
-                                                case 1:
-                                                    key = reader.int32();
-                                                    break;
-                                                case 2:
-                                                    value = reader.bytes();
-                                                    break;
-                                                default:
-                                                    reader.skipType(tag2 & 7);
-                                                    break;
-                                                }
-                                            }
-                                            message.pcrValues[key] = value;
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.rawQuote = reader.bytes();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.rawSignature = reader.bytes();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Quote message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote} Quote
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Quote.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Quote message.
-                             * @function verify
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Quote.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.hashAlgo != null && message.hasOwnProperty("hashAlgo"))
-                                    if (!$util.isInteger(message.hashAlgo))
-                                        return "hashAlgo: integer expected";
-                                if (message.pcrValues != null && message.hasOwnProperty("pcrValues")) {
-                                    if (!$util.isObject(message.pcrValues))
-                                        return "pcrValues: object expected";
-                                    var key = Object.keys(message.pcrValues);
-                                    for (var i = 0; i < key.length; ++i) {
-                                        if (!$util.key32Re.test(key[i]))
-                                            return "pcrValues: integer key{k:int32} expected";
-                                        if (!(message.pcrValues[key[i]] && typeof message.pcrValues[key[i]].length === "number" || $util.isString(message.pcrValues[key[i]])))
-                                            return "pcrValues: buffer{k:int32} expected";
-                                    }
-                                }
-                                if (message.rawQuote != null && message.hasOwnProperty("rawQuote"))
-                                    if (!(message.rawQuote && typeof message.rawQuote.length === "number" || $util.isString(message.rawQuote)))
-                                        return "rawQuote: buffer expected";
-                                if (message.rawSignature != null && message.hasOwnProperty("rawSignature"))
-                                    if (!(message.rawSignature && typeof message.rawSignature.length === "number" || $util.isString(message.rawSignature)))
-                                        return "rawSignature: buffer expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Quote message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote} Quote
-                             */
-                            Quote.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote)
-                                    return object;
-                                var message = new $root.google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote();
-                                if (object.hashAlgo != null)
-                                    message.hashAlgo = object.hashAlgo | 0;
-                                if (object.pcrValues) {
-                                    if (typeof object.pcrValues !== "object")
-                                        throw TypeError(".google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote.pcrValues: object expected");
-                                    message.pcrValues = {};
-                                    for (var keys = Object.keys(object.pcrValues), i = 0; i < keys.length; ++i)
-                                        if (typeof object.pcrValues[keys[i]] === "string")
-                                            $util.base64.decode(object.pcrValues[keys[i]], message.pcrValues[keys[i]] = $util.newBuffer($util.base64.length(object.pcrValues[keys[i]])), 0);
-                                        else if (object.pcrValues[keys[i]].length >= 0)
-                                            message.pcrValues[keys[i]] = object.pcrValues[keys[i]];
-                                }
-                                if (object.rawQuote != null)
-                                    if (typeof object.rawQuote === "string")
-                                        $util.base64.decode(object.rawQuote, message.rawQuote = $util.newBuffer($util.base64.length(object.rawQuote)), 0);
-                                    else if (object.rawQuote.length >= 0)
-                                        message.rawQuote = object.rawQuote;
-                                if (object.rawSignature != null)
-                                    if (typeof object.rawSignature === "string")
-                                        $util.base64.decode(object.rawSignature, message.rawSignature = $util.newBuffer($util.base64.length(object.rawSignature)), 0);
-                                    else if (object.rawSignature.length >= 0)
-                                        message.rawSignature = object.rawSignature;
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Quote message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote} message Quote
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Quote.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.objects || options.defaults)
-                                    object.pcrValues = {};
-                                if (options.defaults) {
-                                    object.hashAlgo = 0;
-                                    if (options.bytes === String)
-                                        object.rawQuote = "";
-                                    else {
-                                        object.rawQuote = [];
-                                        if (options.bytes !== Array)
-                                            object.rawQuote = $util.newBuffer(object.rawQuote);
-                                    }
-                                    if (options.bytes === String)
-                                        object.rawSignature = "";
-                                    else {
-                                        object.rawSignature = [];
-                                        if (options.bytes !== Array)
-                                            object.rawSignature = $util.newBuffer(object.rawSignature);
-                                    }
-                                }
-                                if (message.hashAlgo != null && message.hasOwnProperty("hashAlgo"))
-                                    object.hashAlgo = message.hashAlgo;
-                                var keys2;
-                                if (message.pcrValues && (keys2 = Object.keys(message.pcrValues)).length) {
-                                    object.pcrValues = {};
-                                    for (var j = 0; j < keys2.length; ++j)
-                                        object.pcrValues[keys2[j]] = options.bytes === String ? $util.base64.encode(message.pcrValues[keys2[j]], 0, message.pcrValues[keys2[j]].length) : options.bytes === Array ? Array.prototype.slice.call(message.pcrValues[keys2[j]]) : message.pcrValues[keys2[j]];
-                                }
-                                if (message.rawQuote != null && message.hasOwnProperty("rawQuote"))
-                                    object.rawQuote = options.bytes === String ? $util.base64.encode(message.rawQuote, 0, message.rawQuote.length) : options.bytes === Array ? Array.prototype.slice.call(message.rawQuote) : message.rawQuote;
-                                if (message.rawSignature != null && message.hasOwnProperty("rawSignature"))
-                                    object.rawSignature = options.bytes === String ? $util.base64.encode(message.rawSignature, 0, message.rawSignature.length) : options.bytes === Array ? Array.prototype.slice.call(message.rawSignature) : message.rawSignature;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Quote to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Quote.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Quote
-                             * @function getTypeUrl
-                             * @memberof google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Quote.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1alpha1.TpmAttestation.Quote";
-                            };
-    
-                            return Quote;
-                        })();
-    
-                        return TpmAttestation;
-                    })();
-    
-                    return v1alpha1;
-                })();
-    
                 return confidentialcomputing;
             })();
     
@@ -9607,7 +7541,6 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
-                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -9643,14 +7576,6 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
-                 * CommonLanguageSettings selectiveGapicGeneration.
-                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
-                 * @memberof google.api.CommonLanguageSettings
-                 * @instance
-                 */
-                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
-    
-                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -9682,8 +7607,6 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
-                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -9733,10 +7656,6 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
-                                break;
-                            }
-                        case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -9790,11 +7709,6 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
-                        if (error)
-                            return "selectiveGapicGeneration." + error;
-                    }
                     return null;
                 };
     
@@ -9837,11 +7751,6 @@
                                 break;
                             }
                     }
-                    if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
-                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
-                    }
                     return message;
                 };
     
@@ -9860,10 +7769,8 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.referenceDocsUri = "";
-                        object.selectiveGapicGeneration = null;
-                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -9871,8 +7778,6 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -11695,7 +9600,6 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
-                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -11720,14 +9624,6 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
-    
-                /**
-                 * PythonSettings experimentalFeatures.
-                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
-                 * @memberof google.api.PythonSettings
-                 * @instance
-                 */
-                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -11755,8 +9651,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -11795,10 +9689,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -11841,11 +9731,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
-                        if (error)
-                            return "experimentalFeatures." + error;
-                    }
                     return null;
                 };
     
@@ -11866,11 +9751,6 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
-                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
-                    }
                     return message;
                 };
     
@@ -11887,14 +9767,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.common = null;
-                        object.experimentalFeatures = null;
-                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -11923,258 +9799,6 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
-    
-                PythonSettings.ExperimentalFeatures = (function() {
-    
-                    /**
-                     * Properties of an ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @interface IExperimentalFeatures
-                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
-                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
-                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
-                     */
-    
-                    /**
-                     * Constructs a new ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @classdesc Represents an ExperimentalFeatures.
-                     * @implements IExperimentalFeatures
-                     * @constructor
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     */
-                    function ExperimentalFeatures(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ExperimentalFeatures restAsyncIoEnabled.
-                     * @member {boolean} restAsyncIoEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures protobufPythonicTypesEnabled.
-                     * @member {boolean} protobufPythonicTypesEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures unversionedPackageDisabled.
-                     * @member {boolean} unversionedPackageDisabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
-    
-                    /**
-                     * Creates a new ExperimentalFeatures instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
-                     */
-                    ExperimentalFeatures.create = function create(properties) {
-                        return new ExperimentalFeatures(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
-                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
-                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.restAsyncIoEnabled = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.protobufPythonicTypesEnabled = reader.bool();
-                                    break;
-                                }
-                            case 3: {
-                                    message.unversionedPackageDisabled = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ExperimentalFeatures message.
-                     * @function verify
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ExperimentalFeatures.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            if (typeof message.restAsyncIoEnabled !== "boolean")
-                                return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
-                                return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            if (typeof message.unversionedPackageDisabled !== "boolean")
-                                return "unversionedPackageDisabled: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
-                            return object;
-                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        if (object.restAsyncIoEnabled != null)
-                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
-                        if (object.protobufPythonicTypesEnabled != null)
-                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
-                        if (object.unversionedPackageDisabled != null)
-                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.restAsyncIoEnabled = false;
-                            object.protobufPythonicTypesEnabled = false;
-                            object.unversionedPackageDisabled = false;
-                        }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ExperimentalFeatures to JSON.
-                     * @function toJSON
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ExperimentalFeatures
-                     * @function getTypeUrl
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
-                    };
-    
-                    return ExperimentalFeatures;
-                })();
     
                 return PythonSettings;
             })();
@@ -13052,7 +10676,6 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -13064,7 +10687,6 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
-                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -13078,14 +10700,6 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
-    
-                /**
-                 * GoSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.GoSettings
-                 * @instance
-                 */
-                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -13113,9 +10727,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -13146,7 +10757,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -13154,29 +10765,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -13219,14 +10807,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
                     return null;
                 };
     
@@ -13247,13 +10827,6 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
                     return message;
                 };
     
@@ -13270,18 +10843,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.objects || options.defaults)
-                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
                     return object;
                 };
     
@@ -13918,251 +11483,6 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
-            })();
-    
-            api.SelectiveGapicGeneration = (function() {
-    
-                /**
-                 * Properties of a SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @interface ISelectiveGapicGeneration
-                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
-                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
-                 */
-    
-                /**
-                 * Constructs a new SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @classdesc Represents a SelectiveGapicGeneration.
-                 * @implements ISelectiveGapicGeneration
-                 * @constructor
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 */
-                function SelectiveGapicGeneration(properties) {
-                    this.methods = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * SelectiveGapicGeneration methods.
-                 * @member {Array.<string>} methods
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
-    
-                /**
-                 * SelectiveGapicGeneration generateOmittedAsInternal.
-                 * @member {boolean} generateOmittedAsInternal
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
-    
-                /**
-                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
-                 */
-                SelectiveGapicGeneration.create = function create(properties) {
-                    return new SelectiveGapicGeneration(properties);
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.methods != null && message.methods.length)
-                        for (var i = 0; i < message.methods.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
-                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.methods && message.methods.length))
-                                    message.methods = [];
-                                message.methods.push(reader.string());
-                                break;
-                            }
-                        case 2: {
-                                message.generateOmittedAsInternal = reader.bool();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a SelectiveGapicGeneration message.
-                 * @function verify
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                SelectiveGapicGeneration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
-                        if (!Array.isArray(message.methods))
-                            return "methods: array expected";
-                        for (var i = 0; i < message.methods.length; ++i)
-                            if (!$util.isString(message.methods[i]))
-                                return "methods: string[] expected";
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        if (typeof message.generateOmittedAsInternal !== "boolean")
-                            return "generateOmittedAsInternal: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
-                        return object;
-                    var message = new $root.google.api.SelectiveGapicGeneration();
-                    if (object.methods) {
-                        if (!Array.isArray(object.methods))
-                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
-                        message.methods = [];
-                        for (var i = 0; i < object.methods.length; ++i)
-                            message.methods[i] = String(object.methods[i]);
-                    }
-                    if (object.generateOmittedAsInternal != null)
-                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.methods = [];
-                    if (options.defaults)
-                        object.generateOmittedAsInternal = false;
-                    if (message.methods && message.methods.length) {
-                        object.methods = [];
-                        for (var j = 0; j < message.methods.length; ++j)
-                            object.methods[j] = message.methods[j];
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
-                    return object;
-                };
-    
-                /**
-                 * Converts this SelectiveGapicGeneration to JSON.
-                 * @function toJSON
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for SelectiveGapicGeneration
-                 * @function getTypeUrl
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
-                };
-    
-                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -15150,7 +12470,6 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
-             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -15165,7 +12484,6 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
-                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -15190,7 +12508,6 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
-                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -15213,7 +12530,6 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
-                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -15263,14 +12579,6 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
-    
-                /**
-                 * FileDescriptorProto optionDependency.
-                 * @member {Array.<string>} optionDependency
-                 * @memberof google.protobuf.FileDescriptorProto
-                 * @instance
-                 */
-                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -15393,9 +12701,6 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
-                    if (message.optionDependency != null && message.optionDependency.length)
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -15466,12 +12771,6 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
-                                break;
-                            }
-                        case 15: {
-                                if (!(message.optionDependency && message.optionDependency.length))
-                                    message.optionDependency = [];
-                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -15576,13 +12875,6 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
-                        if (!Array.isArray(message.optionDependency))
-                            return "optionDependency: array expected";
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            if (!$util.isString(message.optionDependency[i]))
-                                return "optionDependency: string[] expected";
-                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -15637,7 +12929,6 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -15689,13 +12980,6 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
-                    }
-                    if (object.optionDependency) {
-                        if (!Array.isArray(object.optionDependency))
-                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
-                        message.optionDependency = [];
-                        for (var i = 0; i < object.optionDependency.length; ++i)
-                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -15759,10 +13043,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -15829,7 +13109,6 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
-                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -15886,11 +13165,6 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                    if (message.optionDependency && message.optionDependency.length) {
-                        object.optionDependency = [];
-                        for (var j = 0; j < message.optionDependency.length; ++j)
-                            object.optionDependency[j] = message.optionDependency[j];
-                    }
                     return object;
                 };
     
@@ -15939,7 +13213,6 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -16046,14 +13319,6 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * DescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.DescriptorProto
-                 * @instance
-                 */
-                DescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -16105,8 +13370,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -16197,10 +13460,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 11: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -16316,15 +13575,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -16424,26 +13674,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -16473,7 +13703,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -16519,8 +13748,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -18565,7 +15792,6 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -18627,14 +15853,6 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * EnumDescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.EnumDescriptorProto
-                 * @instance
-                 */
-                EnumDescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -18671,8 +15889,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -18733,10 +15949,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -18807,15 +16019,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -18865,26 +16068,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -18909,7 +16092,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -18930,8 +16112,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -21250,7 +18430,6 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -21372,14 +18551,6 @@
                 FieldOptions.prototype.features = null;
     
                 /**
-                 * FieldOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.featureSupport = null;
-    
-                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -21453,8 +18624,6 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -21554,10 +18723,6 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -21694,11 +18859,6 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
-                    }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -21888,11 +19048,6 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -21990,7 +19145,6 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
-                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -22023,8 +19177,6 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -22297,7 +19449,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -22338,10 +19489,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -22440,488 +19587,6 @@
                     };
     
                     return EditionDefault;
-                })();
-    
-                FieldOptions.FeatureSupport = (function() {
-    
-                    /**
-                     * Properties of a FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IFeatureSupport
-                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
-                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
-                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
-                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
-                     */
-    
-                    /**
-                     * Constructs a new FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents a FeatureSupport.
-                     * @implements IFeatureSupport
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     */
-                    function FeatureSupport(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * FeatureSupport editionIntroduced.
-                     * @member {google.protobuf.Edition} editionIntroduced
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionIntroduced = 0;
-    
-                    /**
-                     * FeatureSupport editionDeprecated.
-                     * @member {google.protobuf.Edition} editionDeprecated
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionDeprecated = 0;
-    
-                    /**
-                     * FeatureSupport deprecationWarning.
-                     * @member {string} deprecationWarning
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.deprecationWarning = "";
-    
-                    /**
-                     * FeatureSupport editionRemoved.
-                     * @member {google.protobuf.Edition} editionRemoved
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionRemoved = 0;
-    
-                    /**
-                     * Creates a new FeatureSupport instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
-                     */
-                    FeatureSupport.create = function create(properties) {
-                        return new FeatureSupport(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
-                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
-                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
-                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.editionIntroduced = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.editionDeprecated = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.deprecationWarning = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.editionRemoved = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a FeatureSupport message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    FeatureSupport.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            switch (message.editionIntroduced) {
-                            default:
-                                return "editionIntroduced: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            switch (message.editionDeprecated) {
-                            default:
-                                return "editionDeprecated: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            if (!$util.isString(message.deprecationWarning))
-                                return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            switch (message.editionRemoved) {
-                            default:
-                                return "editionRemoved: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     */
-                    FeatureSupport.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        switch (object.editionIntroduced) {
-                        default:
-                            if (typeof object.editionIntroduced === "number") {
-                                message.editionIntroduced = object.editionIntroduced;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionIntroduced = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionIntroduced = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionIntroduced = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionIntroduced = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionIntroduced = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionIntroduced = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionIntroduced = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionIntroduced = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionIntroduced = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionIntroduced = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionIntroduced = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionIntroduced = 2147483647;
-                            break;
-                        }
-                        switch (object.editionDeprecated) {
-                        default:
-                            if (typeof object.editionDeprecated === "number") {
-                                message.editionDeprecated = object.editionDeprecated;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionDeprecated = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionDeprecated = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionDeprecated = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionDeprecated = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionDeprecated = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionDeprecated = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionDeprecated = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionDeprecated = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionDeprecated = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionDeprecated = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionDeprecated = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionDeprecated = 2147483647;
-                            break;
-                        }
-                        if (object.deprecationWarning != null)
-                            message.deprecationWarning = String(object.deprecationWarning);
-                        switch (object.editionRemoved) {
-                        default:
-                            if (typeof object.editionRemoved === "number") {
-                                message.editionRemoved = object.editionRemoved;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionRemoved = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionRemoved = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionRemoved = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionRemoved = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionRemoved = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionRemoved = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionRemoved = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionRemoved = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionRemoved = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionRemoved = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionRemoved = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionRemoved = 2147483647;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    FeatureSupport.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.deprecationWarning = "";
-                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                        }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this FeatureSupport to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    FeatureSupport.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for FeatureSupport
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
-                    };
-    
-                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -23516,7 +20181,6 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -23561,14 +20225,6 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
-                 * EnumValueOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.featureSupport = null;
-    
-                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -23606,8 +20262,6 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -23657,10 +20311,6 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -23715,11 +20365,6 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -23753,11 +20398,6 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -23790,7 +20430,6 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
-                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -23798,8 +20437,6 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -25239,8 +21876,6 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
-                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -25307,22 +21942,6 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
-                 * FeatureSet enforceNamingStyle.
-                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enforceNamingStyle = 0;
-    
-                /**
-                 * FeatureSet defaultSymbolVisibility.
-                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.defaultSymbolVisibility = 0;
-    
-                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -25358,10 +21977,6 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
-                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -25420,14 +22035,6 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 7: {
-                                message.enforceNamingStyle = reader.int32();
-                                break;
-                            }
-                        case 8: {
-                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -25518,26 +22125,6 @@
                         case 0:
                         case 1:
                         case 2:
-                            break;
-                        }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        switch (message.enforceNamingStyle) {
-                        default:
-                            return "enforceNamingStyle: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        switch (message.defaultSymbolVisibility) {
-                        default:
-                            return "defaultSymbolVisibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
                             break;
                         }
                     return null;
@@ -25679,54 +22266,6 @@
                         message.jsonFormat = 2;
                         break;
                     }
-                    switch (object.enforceNamingStyle) {
-                    default:
-                        if (typeof object.enforceNamingStyle === "number") {
-                            message.enforceNamingStyle = object.enforceNamingStyle;
-                            break;
-                        }
-                        break;
-                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-                    case 0:
-                        message.enforceNamingStyle = 0;
-                        break;
-                    case "STYLE2024":
-                    case 1:
-                        message.enforceNamingStyle = 1;
-                        break;
-                    case "STYLE_LEGACY":
-                    case 2:
-                        message.enforceNamingStyle = 2;
-                        break;
-                    }
-                    switch (object.defaultSymbolVisibility) {
-                    default:
-                        if (typeof object.defaultSymbolVisibility === "number") {
-                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
-                            break;
-                        }
-                        break;
-                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-                    case 0:
-                        message.defaultSymbolVisibility = 0;
-                        break;
-                    case "EXPORT_ALL":
-                    case 1:
-                        message.defaultSymbolVisibility = 1;
-                        break;
-                    case "EXPORT_TOP_LEVEL":
-                    case 2:
-                        message.defaultSymbolVisibility = 2;
-                        break;
-                    case "LOCAL_ALL":
-                    case 3:
-                        message.defaultSymbolVisibility = 3;
-                        break;
-                    case "STRICT":
-                    case 4:
-                        message.defaultSymbolVisibility = 4;
-                        break;
-                    }
                     return message;
                 };
     
@@ -25750,8 +22289,6 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
-                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -25765,10 +22302,6 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -25894,219 +22427,6 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
-                })();
-    
-                /**
-                 * EnforceNamingStyle enum.
-                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
-                 * @enum {number}
-                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
-                 * @property {number} STYLE2024=1 STYLE2024 value
-                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
-                 */
-                FeatureSet.EnforceNamingStyle = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "STYLE2024"] = 1;
-                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
-                    return values;
-                })();
-    
-                FeatureSet.VisibilityFeature = (function() {
-    
-                    /**
-                     * Properties of a VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @interface IVisibilityFeature
-                     */
-    
-                    /**
-                     * Constructs a new VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @classdesc Represents a VisibilityFeature.
-                     * @implements IVisibilityFeature
-                     * @constructor
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     */
-                    function VisibilityFeature(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Creates a new VisibilityFeature instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
-                     */
-                    VisibilityFeature.create = function create(properties) {
-                        return new VisibilityFeature(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a VisibilityFeature message.
-                     * @function verify
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    VisibilityFeature.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     */
-                    VisibilityFeature.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
-                            return object;
-                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                    };
-    
-                    /**
-                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    VisibilityFeature.toObject = function toObject() {
-                        return {};
-                    };
-    
-                    /**
-                     * Converts this VisibilityFeature to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    VisibilityFeature.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for VisibilityFeature
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
-                    };
-    
-                    /**
-                     * DefaultSymbolVisibility enum.
-                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
-                     * @enum {number}
-                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
-                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
-                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
-                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
-                     * @property {number} STRICT=4 STRICT value
-                     */
-                    VisibilityFeature.DefaultSymbolVisibility = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
-                        values[valuesById[1] = "EXPORT_ALL"] = 1;
-                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
-                        values[valuesById[3] = "LOCAL_ALL"] = 3;
-                        values[valuesById[4] = "STRICT"] = 4;
-                        return values;
-                    })();
-    
-                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -26293,7 +22613,6 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -26311,7 +22630,6 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -26359,10 +22677,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -26415,10 +22729,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -26528,8 +22838,7 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
-                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
                      */
     
                     /**
@@ -26556,20 +22865,12 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault overridableFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
-    
-                    /**
-                     * FeatureSetEditionDefault fixedFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
-                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
-                     * @instance
-                     */
-                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
+                    FeatureSetEditionDefault.prototype.features = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -26595,12 +22896,10 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
-                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -26641,12 +22940,8 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -26689,7 +22984,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -26702,15 +22996,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
                             if (error)
-                                return "overridableFeatures." + error;
-                        }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
-                            if (error)
-                                return "fixedFeatures." + error;
+                                return "features." + error;
                         }
                         return null;
                     };
@@ -26737,10 +23026,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -26783,15 +23068,10 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
-                        }
-                        if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                         }
                         return message;
                     };
@@ -26810,16 +23090,13 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
+                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.overridableFeatures = null;
-                            object.fixedFeatures = null;
                         }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -28032,22 +24309,6 @@
                 })();
     
                 return GeneratedCodeInfo;
-            })();
-    
-            /**
-             * SymbolVisibility enum.
-             * @name google.protobuf.SymbolVisibility
-             * @enum {number}
-             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
-             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
-             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
-             */
-            protobuf.SymbolVisibility = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
-                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
-                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
-                return values;
             })();
     
             protobuf.Duration = (function() {

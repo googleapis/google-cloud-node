@@ -919,439 +919,6 @@
                               "fields": {}
                             }
                           }
-                        },
-                        "v1alpha1": {
-                          "options": {
-                            "go_package": "cloud.google.com/go/commerce/consumer/procurement/apiv1alpha1/procurementpb;procurementpb",
-                            "java_multiple_files": true,
-                            "java_package": "com.google.cloud.commerce.consumer.procurement.v1alpha1",
-                            "(google.api.resource_definition).type": "commerceoffercatalog.googleapis.com/Offer",
-                            "(google.api.resource_definition).pattern": "billingAccounts/{consumer_billing_account}/offers/{offer}"
-                          },
-                          "nested": {
-                            "LineItemChangeType": {
-                              "values": {
-                                "LINE_ITEM_CHANGE_TYPE_UNSPECIFIED": 0,
-                                "LINE_ITEM_CHANGE_TYPE_CREATE": 1,
-                                "LINE_ITEM_CHANGE_TYPE_UPDATE": 2,
-                                "LINE_ITEM_CHANGE_TYPE_CANCEL": 3,
-                                "LINE_ITEM_CHANGE_TYPE_REVERT_CANCELLATION": 4
-                              }
-                            },
-                            "LineItemChangeState": {
-                              "values": {
-                                "LINE_ITEM_CHANGE_STATE_UNSPECIFIED": 0,
-                                "LINE_ITEM_CHANGE_STATE_PENDING_APPROVAL": 1,
-                                "LINE_ITEM_CHANGE_STATE_APPROVED": 2,
-                                "LINE_ITEM_CHANGE_STATE_COMPLETED": 3,
-                                "LINE_ITEM_CHANGE_STATE_REJECTED": 4,
-                                "LINE_ITEM_CHANGE_STATE_ABANDONED": 5,
-                                "LINE_ITEM_CHANGE_STATE_ACTIVATING": 6
-                              }
-                            },
-                            "LineItemChangeStateReasonType": {
-                              "values": {
-                                "LINE_ITEM_CHANGE_STATE_REASON_TYPE_UNSPECIFIED": 0,
-                                "LINE_ITEM_CHANGE_STATE_REASON_TYPE_EXPIRED": 1,
-                                "LINE_ITEM_CHANGE_STATE_REASON_TYPE_USER_CANCELLED": 2,
-                                "LINE_ITEM_CHANGE_STATE_REASON_TYPE_SYSTEM_CANCELLED": 3
-                              }
-                            },
-                            "Order": {
-                              "options": {
-                                "(google.api.resource).type": "cloudcommerceconsumerprocurement.googleapis.com/Order",
-                                "(google.api.resource).pattern": "billingAccounts/{billing_account}/orders/{order}"
-                              },
-                              "fields": {
-                                "name": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "displayName": {
-                                  "type": "string",
-                                  "id": 10,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "lineItems": {
-                                  "rule": "repeated",
-                                  "type": "LineItem",
-                                  "id": 6,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "cancelledLineItems": {
-                                  "rule": "repeated",
-                                  "type": "LineItem",
-                                  "id": 7,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "createTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 8,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "updateTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 9,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "etag": {
-                                  "type": "string",
-                                  "id": 11
-                                }
-                              }
-                            },
-                            "LineItem": {
-                              "fields": {
-                                "lineItemId": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "lineItemInfo": {
-                                  "type": "LineItemInfo",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "pendingChange": {
-                                  "type": "LineItemChange",
-                                  "id": 3,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "changeHistory": {
-                                  "rule": "repeated",
-                                  "type": "LineItemChange",
-                                  "id": 4,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                }
-                              }
-                            },
-                            "LineItemChange": {
-                              "fields": {
-                                "changeId": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "changeType": {
-                                  "type": "LineItemChangeType",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "oldLineItemInfo": {
-                                  "type": "LineItemInfo",
-                                  "id": 3,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "newLineItemInfo": {
-                                  "type": "LineItemInfo",
-                                  "id": 4
-                                },
-                                "changeState": {
-                                  "type": "LineItemChangeState",
-                                  "id": 5,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "stateReason": {
-                                  "type": "string",
-                                  "id": 6,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "changeStateReasonType": {
-                                  "type": "LineItemChangeStateReasonType",
-                                  "id": 10,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "changeEffectiveTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 7,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "createTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 8,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "updateTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 9,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                }
-                              }
-                            },
-                            "LineItemInfo": {
-                              "fields": {
-                                "offer": {
-                                  "type": "string",
-                                  "id": 13,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL",
-                                    "(google.api.resource_reference).type": "commerceoffercatalog.googleapis.com/Offer"
-                                  }
-                                },
-                                "parameters": {
-                                  "rule": "repeated",
-                                  "type": "Parameter",
-                                  "id": 9,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                },
-                                "subscription": {
-                                  "type": "Subscription",
-                                  "id": 10,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                }
-                              }
-                            },
-                            "Parameter": {
-                              "fields": {
-                                "name": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "value": {
-                                  "type": "Value",
-                                  "id": 2
-                                }
-                              },
-                              "nested": {
-                                "Value": {
-                                  "oneofs": {
-                                    "kind": {
-                                      "oneof": [
-                                        "int64Value",
-                                        "stringValue",
-                                        "doubleValue"
-                                      ]
-                                    }
-                                  },
-                                  "fields": {
-                                    "int64Value": {
-                                      "type": "int64",
-                                      "id": 3
-                                    },
-                                    "stringValue": {
-                                      "type": "string",
-                                      "id": 4
-                                    },
-                                    "doubleValue": {
-                                      "type": "double",
-                                      "id": 5
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "Subscription": {
-                              "fields": {
-                                "startTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 3
-                                },
-                                "endTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 1
-                                },
-                                "autoRenewalEnabled": {
-                                  "type": "bool",
-                                  "id": 2
-                                }
-                              }
-                            },
-                            "ConsumerProcurementService": {
-                              "options": {
-                                "(google.api.default_host)": "cloudcommerceconsumerprocurement.googleapis.com",
-                                "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                              },
-                              "methods": {
-                                "PlaceOrder": {
-                                  "requestType": "PlaceOrderRequest",
-                                  "responseType": "google.longrunning.Operation",
-                                  "options": {
-                                    "(google.api.http).post": "/v1alpha1/{parent=billingAccounts/*}/orders:place",
-                                    "(google.api.http).body": "*",
-                                    "(google.longrunning.operation_info).response_type": "Order",
-                                    "(google.longrunning.operation_info).metadata_type": "PlaceOrderMetadata"
-                                  },
-                                  "parsedOptions": [
-                                    {
-                                      "(google.api.http)": {
-                                        "post": "/v1alpha1/{parent=billingAccounts/*}/orders:place",
-                                        "body": "*"
-                                      }
-                                    },
-                                    {
-                                      "(google.longrunning.operation_info)": {
-                                        "response_type": "Order",
-                                        "metadata_type": "PlaceOrderMetadata"
-                                      }
-                                    }
-                                  ]
-                                },
-                                "GetOrder": {
-                                  "requestType": "GetOrderRequest",
-                                  "responseType": "Order",
-                                  "options": {
-                                    "(google.api.http).get": "/v1alpha1/{name=billingAccounts/*/orders/*}",
-                                    "(google.api.method_signature)": "name"
-                                  },
-                                  "parsedOptions": [
-                                    {
-                                      "(google.api.http)": {
-                                        "get": "/v1alpha1/{name=billingAccounts/*/orders/*}"
-                                      }
-                                    },
-                                    {
-                                      "(google.api.method_signature)": "name"
-                                    }
-                                  ]
-                                },
-                                "ListOrders": {
-                                  "requestType": "ListOrdersRequest",
-                                  "responseType": "ListOrdersResponse",
-                                  "options": {
-                                    "(google.api.http).get": "/v1alpha1/{parent=billingAccounts/*}/orders",
-                                    "(google.api.method_signature)": "parent"
-                                  },
-                                  "parsedOptions": [
-                                    {
-                                      "(google.api.http)": {
-                                        "get": "/v1alpha1/{parent=billingAccounts/*}/orders"
-                                      }
-                                    },
-                                    {
-                                      "(google.api.method_signature)": "parent"
-                                    }
-                                  ]
-                                }
-                              }
-                            },
-                            "PlaceOrderRequest": {
-                              "fields": {
-                                "parent": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED",
-                                    "(google.api.resource_reference).type": "cloudbilling.googleapis.com/BillingAccount"
-                                  }
-                                },
-                                "displayName": {
-                                  "type": "string",
-                                  "id": 6,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "lineItemInfo": {
-                                  "rule": "repeated",
-                                  "type": "LineItemInfo",
-                                  "id": 10,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                },
-                                "requestId": {
-                                  "type": "string",
-                                  "id": 7,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
-                              }
-                            },
-                            "PlaceOrderMetadata": {
-                              "fields": {}
-                            },
-                            "GetOrderRequest": {
-                              "fields": {
-                                "name": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                }
-                              }
-                            },
-                            "ListOrdersRequest": {
-                              "fields": {
-                                "parent": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "pageSize": {
-                                  "type": "int32",
-                                  "id": 2
-                                },
-                                "pageToken": {
-                                  "type": "string",
-                                  "id": 3
-                                },
-                                "filter": {
-                                  "type": "string",
-                                  "id": 4
-                                }
-                              }
-                            },
-                            "ListOrdersResponse": {
-                              "fields": {
-                                "orders": {
-                                  "rule": "repeated",
-                                  "type": "Order",
-                                  "id": 1
-                                },
-                                "nextPageToken": {
-                                  "type": "string",
-                                  "id": 2
-                                }
-                              }
-                            }
-                          }
                         }
                       }
                     }
@@ -1367,7 +934,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -1491,10 +1059,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -1635,28 +1199,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -1714,11 +1256,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -1778,19 +1315,6 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
-              }
-            },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
               }
             },
             "LaunchStage": {
@@ -1925,19 +1449,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -1975,11 +1492,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -2069,10 +1581,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -2298,10 +1806,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -2516,7 +2020,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -2652,8 +2155,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -2680,10 +2182,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -2752,26 +2250,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -2861,10 +2339,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3008,7 +2482,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -3019,7 +2492,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -3030,7 +2502,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -3041,7 +2512,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -3052,8 +2522,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -3063,38 +2532,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -3139,13 +2597,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -3159,33 +2611,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -3214,26 +2639,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -3246,12 +2656,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -3337,14 +2741,6 @@
                 }
               }
             },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -3403,7 +2799,6 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
-            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {
