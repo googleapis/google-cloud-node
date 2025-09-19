@@ -1,0 +1,229 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.support.v2beta",
+  "libraryPackage": "@google-cloud/support",
+  "services": {
+    "CaseAttachmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CaseAttachmentServiceClient",
+          "rpcs": {
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
+            "ListAttachments": {
+              "methods": [
+                "listAttachments",
+                "listAttachmentsStream",
+                "listAttachmentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CaseAttachmentServiceClient",
+          "rpcs": {
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
+            "ListAttachments": {
+              "methods": [
+                "listAttachments",
+                "listAttachmentsStream",
+                "listAttachmentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CaseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CaseServiceClient",
+          "rpcs": {
+            "GetCase": {
+              "methods": [
+                "getCase"
+              ]
+            },
+            "CreateCase": {
+              "methods": [
+                "createCase"
+              ]
+            },
+            "UpdateCase": {
+              "methods": [
+                "updateCase"
+              ]
+            },
+            "EscalateCase": {
+              "methods": [
+                "escalateCase"
+              ]
+            },
+            "CloseCase": {
+              "methods": [
+                "closeCase"
+              ]
+            },
+            "ListCases": {
+              "methods": [
+                "listCases",
+                "listCasesStream",
+                "listCasesAsync"
+              ]
+            },
+            "SearchCases": {
+              "methods": [
+                "searchCases",
+                "searchCasesStream",
+                "searchCasesAsync"
+              ]
+            },
+            "SearchCaseClassifications": {
+              "methods": [
+                "searchCaseClassifications",
+                "searchCaseClassificationsStream",
+                "searchCaseClassificationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CaseServiceClient",
+          "rpcs": {
+            "GetCase": {
+              "methods": [
+                "getCase"
+              ]
+            },
+            "CreateCase": {
+              "methods": [
+                "createCase"
+              ]
+            },
+            "UpdateCase": {
+              "methods": [
+                "updateCase"
+              ]
+            },
+            "EscalateCase": {
+              "methods": [
+                "escalateCase"
+              ]
+            },
+            "CloseCase": {
+              "methods": [
+                "closeCase"
+              ]
+            },
+            "ListCases": {
+              "methods": [
+                "listCases",
+                "listCasesStream",
+                "listCasesAsync"
+              ]
+            },
+            "SearchCases": {
+              "methods": [
+                "searchCases",
+                "searchCasesStream",
+                "searchCasesAsync"
+              ]
+            },
+            "SearchCaseClassifications": {
+              "methods": [
+                "searchCaseClassifications",
+                "searchCaseClassificationsStream",
+                "searchCaseClassificationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CommentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CommentServiceClient",
+          "rpcs": {
+            "CreateComment": {
+              "methods": [
+                "createComment"
+              ]
+            },
+            "GetComment": {
+              "methods": [
+                "getComment"
+              ]
+            },
+            "ListComments": {
+              "methods": [
+                "listComments",
+                "listCommentsStream",
+                "listCommentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CommentServiceClient",
+          "rpcs": {
+            "CreateComment": {
+              "methods": [
+                "createComment"
+              ]
+            },
+            "GetComment": {
+              "methods": [
+                "getComment"
+              ]
+            },
+            "ListComments": {
+              "methods": [
+                "listComments",
+                "listCommentsStream",
+                "listCommentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeedService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeedServiceClient",
+          "rpcs": {
+            "ShowFeed": {
+              "methods": [
+                "showFeed",
+                "showFeedStream",
+                "showFeedAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeedServiceClient",
+          "rpcs": {
+            "ShowFeed": {
+              "methods": [
+                "showFeed",
+                "showFeedStream",
+                "showFeedAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
