@@ -40,6 +40,10 @@ function main(project, region, serviceAttachment) {
    *  Name of the ServiceAttachment resource to return.
    */
   // const serviceAttachment = 'abc123'
+  /**
+   *  Indicates whether NAT IPs should be included in the response.
+   */
+  // const showNatIps = true
 
   // Imports the Compute library
   const {ServiceAttachmentsClient} = require('@google-cloud/compute').v1;

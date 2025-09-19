@@ -227,7 +227,7 @@ export class InstancesClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const instancesStubMethods =
-        ['addAccessConfig', 'addResourcePolicies', 'aggregatedList', 'attachDisk', 'bulkInsert', 'delete', 'deleteAccessConfig', 'detachDisk', 'get', 'getEffectiveFirewalls', 'getGuestAttributes', 'getIamPolicy', 'getScreenshot', 'getSerialPortOutput', 'getShieldedInstanceIdentity', 'insert', 'list', 'listReferrers', 'performMaintenance', 'removeResourcePolicies', 'reportHostAsFaulty', 'reset', 'resume', 'sendDiagnosticInterrupt', 'setDeletionProtection', 'setDiskAutoDelete', 'setIamPolicy', 'setLabels', 'setMachineResources', 'setMachineType', 'setMetadata', 'setMinCpuPlatform', 'setName', 'setScheduling', 'setSecurityPolicy', 'setServiceAccount', 'setShieldedInstanceIntegrityPolicy', 'setTags', 'simulateMaintenanceEvent', 'start', 'startWithEncryptionKey', 'stop', 'suspend', 'testIamPermissions', 'update', 'updateAccessConfig', 'updateDisplayDevice', 'updateNetworkInterface', 'updateShieldedInstanceConfig'];
+        ['addAccessConfig', 'addNetworkInterface', 'addResourcePolicies', 'aggregatedList', 'attachDisk', 'bulkInsert', 'delete', 'deleteAccessConfig', 'deleteNetworkInterface', 'detachDisk', 'get', 'getEffectiveFirewalls', 'getGuestAttributes', 'getIamPolicy', 'getScreenshot', 'getSerialPortOutput', 'getShieldedInstanceIdentity', 'insert', 'list', 'listReferrers', 'performMaintenance', 'removeResourcePolicies', 'reportHostAsFaulty', 'reset', 'resume', 'sendDiagnosticInterrupt', 'setDeletionProtection', 'setDiskAutoDelete', 'setIamPolicy', 'setLabels', 'setMachineResources', 'setMachineType', 'setMetadata', 'setMinCpuPlatform', 'setName', 'setScheduling', 'setSecurityPolicy', 'setServiceAccount', 'setShieldedInstanceIntegrityPolicy', 'setTags', 'simulateMaintenanceEvent', 'start', 'startWithEncryptionKey', 'stop', 'suspend', 'testIamPermissions', 'update', 'updateAccessConfig', 'updateDisplayDevice', 'updateNetworkInterface', 'updateShieldedInstanceConfig'];
     for (const methodName of instancesStubMethods) {
       const callPromise = this.instancesStub.then(
         stub => (...args: Array<{}>) => {
@@ -427,6 +427,114 @@ export class InstancesClient {
         }
       : undefined;
     return this.innerApiCalls.addAccessConfig(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Adds one dynamic network interface to an active instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The instance name for this request stored as resource_id. Name should conform to RFC1035 or be an unsigned long integer.
+ * @param {google.cloud.compute.v1.NetworkInterface} request.networkInterfaceResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.add_network_interface.js</caption>
+ * region_tag:compute_v1_generated_Instances_AddNetworkInterface_async
+ */
+  addNetworkInterface(
+      request?: protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
+  addNetworkInterface(
+      request: protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  addNetworkInterface(
+      request: protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  addNetworkInterface(
+      request?: protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('addNetworkInterface request %j', request);
+    const wrappedCallback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAddNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('addNetworkInterface response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls.addNetworkInterface(request, options, wrappedCallback)
       ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
         return [
           { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
@@ -966,6 +1074,114 @@ export class InstancesClient {
         }
       : undefined;
     return this.innerApiCalls.deleteAccessConfig(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes one dynamic network interface from an active instance. InstancesDeleteNetworkInterfaceRequest indicates: - instance from which to delete, using project+zone+resource_id fields; - dynamic network interface to be deleted, using network_interface_name field;
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The instance name for this request stored as resource_id. Name should conform to RFC1035 or be an unsigned long integer.
+ * @param {string} request.networkInterfaceName
+ *   The name of the dynamic network interface to be deleted from the instance.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/instances.delete_network_interface.js</caption>
+ * region_tag:compute_v1_generated_Instances_DeleteNetworkInterface_async
+ */
+  deleteNetworkInterface(
+      request?: protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
+  deleteNetworkInterface(
+      request: protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNetworkInterface(
+      request: protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNetworkInterface(
+      request?: protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteNetworkInterface request %j', request);
+    const wrappedCallback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteNetworkInterfaceInstanceRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('deleteNetworkInterface response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteNetworkInterface(request, options, wrappedCallback)
       ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
         return [
           { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},

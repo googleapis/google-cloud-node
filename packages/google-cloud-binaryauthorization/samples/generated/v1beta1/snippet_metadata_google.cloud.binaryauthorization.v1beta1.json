@@ -1,351 +1,351 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-binaryauthorization",
-        "version": "4.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.binaryauthorization.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_GetPolicy_async",
-            "title": "BinauthzManagementServiceV1Beta1 getPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " A [policy][google.cloud.binaryauthorization.v1beta1.Policy] specifies the [attestors][google.cloud.binaryauthorization.v1beta1.Attestor] that must attest to a container image, before the project is allowed to deploy that image. There is at most one policy per project. All image admission requests are permitted if a project has no policy. Gets the [policy][google.cloud.binaryauthorization.v1beta1.Policy] for this project. Returns a default [policy][google.cloud.binaryauthorization.v1beta1.Policy] if the project does not have one.",
-            "canonical": true,
-            "file": "binauthz_management_service_v1_beta1.get_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPolicy",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.binaryauthorization.v1beta1.Policy",
-                "client": {
-                    "shortName": "BinauthzManagementServiceV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "GetPolicy",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetPolicy",
-                    "service": {
-                        "shortName": "BinauthzManagementServiceV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_UpdatePolicy_async",
-            "title": "BinauthzManagementServiceV1Beta1 updatePolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates or updates a project's [policy][google.cloud.binaryauthorization.v1beta1.Policy], and returns a copy of the new [policy][google.cloud.binaryauthorization.v1beta1.Policy]. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is malformed.",
-            "canonical": true,
-            "file": "binauthz_management_service_v1_beta1.update_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePolicy",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdatePolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "policy",
-                        "type": ".google.cloud.binaryauthorization.v1beta1.Policy"
-                    }
-                ],
-                "resultType": ".google.cloud.binaryauthorization.v1beta1.Policy",
-                "client": {
-                    "shortName": "BinauthzManagementServiceV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "UpdatePolicy",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdatePolicy",
-                    "service": {
-                        "shortName": "BinauthzManagementServiceV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_CreateAttestor_async",
-            "title": "BinauthzManagementServiceV1Beta1 createAttestor Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor], and returns a copy of the new [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] already exists.",
-            "canonical": true,
-            "file": "binauthz_management_service_v1_beta1.create_attestor.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAttestor",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.CreateAttestor",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "attestor_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "attestor",
-                        "type": ".google.cloud.binaryauthorization.v1beta1.Attestor"
-                    }
-                ],
-                "resultType": ".google.cloud.binaryauthorization.v1beta1.Attestor",
-                "client": {
-                    "shortName": "BinauthzManagementServiceV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "CreateAttestor",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.CreateAttestor",
-                    "service": {
-                        "shortName": "BinauthzManagementServiceV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_GetAttestor_async",
-            "title": "BinauthzManagementServiceV1Beta1 getAttestor Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] does not exist.",
-            "canonical": true,
-            "file": "binauthz_management_service_v1_beta1.get_attestor.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAttestor",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetAttestor",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.binaryauthorization.v1beta1.Attestor",
-                "client": {
-                    "shortName": "BinauthzManagementServiceV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "GetAttestor",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetAttestor",
-                    "service": {
-                        "shortName": "BinauthzManagementServiceV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_UpdateAttestor_async",
-            "title": "BinauthzManagementServiceV1Beta1 updateAttestor Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] does not exist.",
-            "canonical": true,
-            "file": "binauthz_management_service_v1_beta1.update_attestor.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAttestor",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdateAttestor",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "attestor",
-                        "type": ".google.cloud.binaryauthorization.v1beta1.Attestor"
-                    }
-                ],
-                "resultType": ".google.cloud.binaryauthorization.v1beta1.Attestor",
-                "client": {
-                    "shortName": "BinauthzManagementServiceV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "UpdateAttestor",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdateAttestor",
-                    "service": {
-                        "shortName": "BinauthzManagementServiceV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_ListAttestors_async",
-            "title": "BinauthzManagementServiceV1Beta1 listAttestors Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists [attestors][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns INVALID_ARGUMENT if the project does not exist.",
-            "canonical": true,
-            "file": "binauthz_management_service_v1_beta1.list_attestors.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAttestors",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.ListAttestors",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse",
-                "client": {
-                    "shortName": "BinauthzManagementServiceV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "ListAttestors",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.ListAttestors",
-                    "service": {
-                        "shortName": "BinauthzManagementServiceV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_DeleteAttestor_async",
-            "title": "BinauthzManagementServiceV1Beta1 deleteAttestor Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] does not exist.",
-            "canonical": true,
-            "file": "binauthz_management_service_v1_beta1.delete_attestor.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAttestor",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.DeleteAttestor",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "BinauthzManagementServiceV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "DeleteAttestor",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.DeleteAttestor",
-                    "service": {
-                        "shortName": "BinauthzManagementServiceV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "binaryauthorization_v1beta1_generated_SystemPolicyV1Beta1_GetSystemPolicy_async",
-            "title": "BinauthzManagementServiceV1Beta1 getSystemPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the current system policy in the specified location.",
-            "canonical": true,
-            "file": "system_policy_v1_beta1.get_system_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSystemPolicy",
-                "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.binaryauthorization.v1beta1.Policy",
-                "client": {
-                    "shortName": "SystemPolicyV1Beta1Client",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "GetSystemPolicy",
-                    "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicy",
-                    "service": {
-                        "shortName": "SystemPolicyV1Beta1",
-                        "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-binaryauthorization",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.binaryauthorization.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_GetPolicy_async",
+      "title": "BinauthzManagementServiceV1Beta1 getPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " A [policy][google.cloud.binaryauthorization.v1beta1.Policy] specifies the [attestors][google.cloud.binaryauthorization.v1beta1.Attestor] that must attest to a container image, before the project is allowed to deploy that image. There is at most one policy per project. All image admission requests are permitted if a project has no policy. Gets the [policy][google.cloud.binaryauthorization.v1beta1.Policy] for this project. Returns a default [policy][google.cloud.binaryauthorization.v1beta1.Policy] if the project does not have one.",
+      "canonical": true,
+      "file": "binauthz_management_service_v1_beta1.get_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPolicy",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.binaryauthorization.v1beta1.Policy",
+        "client": {
+          "shortName": "BinauthzManagementServiceV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "GetPolicy",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetPolicy",
+          "service": {
+            "shortName": "BinauthzManagementServiceV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_UpdatePolicy_async",
+      "title": "BinauthzManagementServiceV1Beta1 updatePolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates or updates a project's [policy][google.cloud.binaryauthorization.v1beta1.Policy], and returns a copy of the new [policy][google.cloud.binaryauthorization.v1beta1.Policy]. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is malformed.",
+      "canonical": true,
+      "file": "binauthz_management_service_v1_beta1.update_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePolicy",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdatePolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "policy",
+            "type": ".google.cloud.binaryauthorization.v1beta1.Policy"
+          }
+        ],
+        "resultType": ".google.cloud.binaryauthorization.v1beta1.Policy",
+        "client": {
+          "shortName": "BinauthzManagementServiceV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "UpdatePolicy",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdatePolicy",
+          "service": {
+            "shortName": "BinauthzManagementServiceV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_CreateAttestor_async",
+      "title": "BinauthzManagementServiceV1Beta1 createAttestor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor], and returns a copy of the new [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] already exists.",
+      "canonical": true,
+      "file": "binauthz_management_service_v1_beta1.create_attestor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAttestor",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.CreateAttestor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "attestor_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "attestor",
+            "type": ".google.cloud.binaryauthorization.v1beta1.Attestor"
+          }
+        ],
+        "resultType": ".google.cloud.binaryauthorization.v1beta1.Attestor",
+        "client": {
+          "shortName": "BinauthzManagementServiceV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "CreateAttestor",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.CreateAttestor",
+          "service": {
+            "shortName": "BinauthzManagementServiceV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_GetAttestor_async",
+      "title": "BinauthzManagementServiceV1Beta1 getAttestor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] does not exist.",
+      "canonical": true,
+      "file": "binauthz_management_service_v1_beta1.get_attestor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAttestor",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetAttestor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.binaryauthorization.v1beta1.Attestor",
+        "client": {
+          "shortName": "BinauthzManagementServiceV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "GetAttestor",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.GetAttestor",
+          "service": {
+            "shortName": "BinauthzManagementServiceV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_UpdateAttestor_async",
+      "title": "BinauthzManagementServiceV1Beta1 updateAttestor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] does not exist.",
+      "canonical": true,
+      "file": "binauthz_management_service_v1_beta1.update_attestor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAttestor",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdateAttestor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "attestor",
+            "type": ".google.cloud.binaryauthorization.v1beta1.Attestor"
+          }
+        ],
+        "resultType": ".google.cloud.binaryauthorization.v1beta1.Attestor",
+        "client": {
+          "shortName": "BinauthzManagementServiceV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "UpdateAttestor",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.UpdateAttestor",
+          "service": {
+            "shortName": "BinauthzManagementServiceV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_ListAttestors_async",
+      "title": "BinauthzManagementServiceV1Beta1 listAttestors Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [attestors][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns INVALID_ARGUMENT if the project does not exist.",
+      "canonical": true,
+      "file": "binauthz_management_service_v1_beta1.list_attestors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAttestors",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.ListAttestors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse",
+        "client": {
+          "shortName": "BinauthzManagementServiceV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "ListAttestors",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.ListAttestors",
+          "service": {
+            "shortName": "BinauthzManagementServiceV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_DeleteAttestor_async",
+      "title": "BinauthzManagementServiceV1Beta1 deleteAttestor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an [attestor][google.cloud.binaryauthorization.v1beta1.Attestor]. Returns NOT_FOUND if the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] does not exist.",
+      "canonical": true,
+      "file": "binauthz_management_service_v1_beta1.delete_attestor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAttestor",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.DeleteAttestor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "BinauthzManagementServiceV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "DeleteAttestor",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.DeleteAttestor",
+          "service": {
+            "shortName": "BinauthzManagementServiceV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "binaryauthorization_v1beta1_generated_SystemPolicyV1Beta1_GetSystemPolicy_async",
+      "title": "BinauthzManagementServiceV1Beta1 getSystemPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the current system policy in the specified location.",
+      "canonical": true,
+      "file": "system_policy_v1_beta1.get_system_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSystemPolicy",
+        "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.binaryauthorization.v1beta1.Policy",
+        "client": {
+          "shortName": "SystemPolicyV1Beta1Client",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1Client"
+        },
+        "method": {
+          "shortName": "GetSystemPolicy",
+          "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicy",
+          "service": {
+            "shortName": "SystemPolicyV1Beta1",
+            "fullName": "google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1"
+          }
+        }
+      }
+    }
+  ]
 }

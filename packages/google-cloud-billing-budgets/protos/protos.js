@@ -3970,3910 +3970,6 @@
                         return v1;
                     })();
     
-                    budgets.v1beta1 = (function() {
-    
-                        /**
-                         * Namespace v1beta1.
-                         * @memberof google.cloud.billing.budgets
-                         * @namespace
-                         */
-                        var v1beta1 = {};
-    
-                        v1beta1.Budget = (function() {
-    
-                            /**
-                             * Properties of a Budget.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IBudget
-                             * @property {string|null} [name] Budget name
-                             * @property {string|null} [displayName] Budget displayName
-                             * @property {google.cloud.billing.budgets.v1beta1.IFilter|null} [budgetFilter] Budget budgetFilter
-                             * @property {google.cloud.billing.budgets.v1beta1.IBudgetAmount|null} [amount] Budget amount
-                             * @property {Array.<google.cloud.billing.budgets.v1beta1.IThresholdRule>|null} [thresholdRules] Budget thresholdRules
-                             * @property {google.cloud.billing.budgets.v1beta1.IAllUpdatesRule|null} [allUpdatesRule] Budget allUpdatesRule
-                             * @property {string|null} [etag] Budget etag
-                             */
-    
-                            /**
-                             * Constructs a new Budget.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a Budget.
-                             * @implements IBudget
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudget=} [properties] Properties to set
-                             */
-                            function Budget(properties) {
-                                this.thresholdRules = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Budget name.
-                             * @member {string} name
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             */
-                            Budget.prototype.name = "";
-    
-                            /**
-                             * Budget displayName.
-                             * @member {string} displayName
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             */
-                            Budget.prototype.displayName = "";
-    
-                            /**
-                             * Budget budgetFilter.
-                             * @member {google.cloud.billing.budgets.v1beta1.IFilter|null|undefined} budgetFilter
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             */
-                            Budget.prototype.budgetFilter = null;
-    
-                            /**
-                             * Budget amount.
-                             * @member {google.cloud.billing.budgets.v1beta1.IBudgetAmount|null|undefined} amount
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             */
-                            Budget.prototype.amount = null;
-    
-                            /**
-                             * Budget thresholdRules.
-                             * @member {Array.<google.cloud.billing.budgets.v1beta1.IThresholdRule>} thresholdRules
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             */
-                            Budget.prototype.thresholdRules = $util.emptyArray;
-    
-                            /**
-                             * Budget allUpdatesRule.
-                             * @member {google.cloud.billing.budgets.v1beta1.IAllUpdatesRule|null|undefined} allUpdatesRule
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             */
-                            Budget.prototype.allUpdatesRule = null;
-    
-                            /**
-                             * Budget etag.
-                             * @member {string} etag
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             */
-                            Budget.prototype.etag = "";
-    
-                            /**
-                             * Creates a new Budget instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudget=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.Budget} Budget instance
-                             */
-                            Budget.create = function create(properties) {
-                                return new Budget(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Budget message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.Budget.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudget} message Budget message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Budget.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
-                                if (message.budgetFilter != null && Object.hasOwnProperty.call(message, "budgetFilter"))
-                                    $root.google.cloud.billing.budgets.v1beta1.Filter.encode(message.budgetFilter, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
-                                    $root.google.cloud.billing.budgets.v1beta1.BudgetAmount.encode(message.amount, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                                if (message.thresholdRules != null && message.thresholdRules.length)
-                                    for (var i = 0; i < message.thresholdRules.length; ++i)
-                                        $root.google.cloud.billing.budgets.v1beta1.ThresholdRule.encode(message.thresholdRules[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                                if (message.allUpdatesRule != null && Object.hasOwnProperty.call(message, "allUpdatesRule"))
-                                    $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule.encode(message.allUpdatesRule, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                                if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
-                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.etag);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Budget message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.Budget.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudget} message Budget message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Budget.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Budget message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.Budget} Budget
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Budget.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.Budget();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.displayName = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.budgetFilter = $root.google.cloud.billing.budgets.v1beta1.Filter.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.amount = $root.google.cloud.billing.budgets.v1beta1.BudgetAmount.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 5: {
-                                            if (!(message.thresholdRules && message.thresholdRules.length))
-                                                message.thresholdRules = [];
-                                            message.thresholdRules.push($root.google.cloud.billing.budgets.v1beta1.ThresholdRule.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.allUpdatesRule = $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.etag = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Budget message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.Budget} Budget
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Budget.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Budget message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Budget.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                if (message.budgetFilter != null && message.hasOwnProperty("budgetFilter")) {
-                                    var error = $root.google.cloud.billing.budgets.v1beta1.Filter.verify(message.budgetFilter);
-                                    if (error)
-                                        return "budgetFilter." + error;
-                                }
-                                if (message.amount != null && message.hasOwnProperty("amount")) {
-                                    var error = $root.google.cloud.billing.budgets.v1beta1.BudgetAmount.verify(message.amount);
-                                    if (error)
-                                        return "amount." + error;
-                                }
-                                if (message.thresholdRules != null && message.hasOwnProperty("thresholdRules")) {
-                                    if (!Array.isArray(message.thresholdRules))
-                                        return "thresholdRules: array expected";
-                                    for (var i = 0; i < message.thresholdRules.length; ++i) {
-                                        var error = $root.google.cloud.billing.budgets.v1beta1.ThresholdRule.verify(message.thresholdRules[i]);
-                                        if (error)
-                                            return "thresholdRules." + error;
-                                    }
-                                }
-                                if (message.allUpdatesRule != null && message.hasOwnProperty("allUpdatesRule")) {
-                                    var error = $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule.verify(message.allUpdatesRule);
-                                    if (error)
-                                        return "allUpdatesRule." + error;
-                                }
-                                if (message.etag != null && message.hasOwnProperty("etag"))
-                                    if (!$util.isString(message.etag))
-                                        return "etag: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Budget message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.Budget} Budget
-                             */
-                            Budget.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.Budget)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.Budget();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                if (object.budgetFilter != null) {
-                                    if (typeof object.budgetFilter !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Budget.budgetFilter: object expected");
-                                    message.budgetFilter = $root.google.cloud.billing.budgets.v1beta1.Filter.fromObject(object.budgetFilter);
-                                }
-                                if (object.amount != null) {
-                                    if (typeof object.amount !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Budget.amount: object expected");
-                                    message.amount = $root.google.cloud.billing.budgets.v1beta1.BudgetAmount.fromObject(object.amount);
-                                }
-                                if (object.thresholdRules) {
-                                    if (!Array.isArray(object.thresholdRules))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Budget.thresholdRules: array expected");
-                                    message.thresholdRules = [];
-                                    for (var i = 0; i < object.thresholdRules.length; ++i) {
-                                        if (typeof object.thresholdRules[i] !== "object")
-                                            throw TypeError(".google.cloud.billing.budgets.v1beta1.Budget.thresholdRules: object expected");
-                                        message.thresholdRules[i] = $root.google.cloud.billing.budgets.v1beta1.ThresholdRule.fromObject(object.thresholdRules[i]);
-                                    }
-                                }
-                                if (object.allUpdatesRule != null) {
-                                    if (typeof object.allUpdatesRule !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Budget.allUpdatesRule: object expected");
-                                    message.allUpdatesRule = $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule.fromObject(object.allUpdatesRule);
-                                }
-                                if (object.etag != null)
-                                    message.etag = String(object.etag);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Budget message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.Budget} message Budget
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Budget.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.thresholdRules = [];
-                                if (options.defaults) {
-                                    object.name = "";
-                                    object.displayName = "";
-                                    object.budgetFilter = null;
-                                    object.amount = null;
-                                    object.allUpdatesRule = null;
-                                    object.etag = "";
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                if (message.budgetFilter != null && message.hasOwnProperty("budgetFilter"))
-                                    object.budgetFilter = $root.google.cloud.billing.budgets.v1beta1.Filter.toObject(message.budgetFilter, options);
-                                if (message.amount != null && message.hasOwnProperty("amount"))
-                                    object.amount = $root.google.cloud.billing.budgets.v1beta1.BudgetAmount.toObject(message.amount, options);
-                                if (message.thresholdRules && message.thresholdRules.length) {
-                                    object.thresholdRules = [];
-                                    for (var j = 0; j < message.thresholdRules.length; ++j)
-                                        object.thresholdRules[j] = $root.google.cloud.billing.budgets.v1beta1.ThresholdRule.toObject(message.thresholdRules[j], options);
-                                }
-                                if (message.allUpdatesRule != null && message.hasOwnProperty("allUpdatesRule"))
-                                    object.allUpdatesRule = $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule.toObject(message.allUpdatesRule, options);
-                                if (message.etag != null && message.hasOwnProperty("etag"))
-                                    object.etag = message.etag;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Budget to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Budget.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Budget
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.Budget
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Budget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.Budget";
-                            };
-    
-                            return Budget;
-                        })();
-    
-                        v1beta1.BudgetAmount = (function() {
-    
-                            /**
-                             * Properties of a BudgetAmount.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IBudgetAmount
-                             * @property {google.type.IMoney|null} [specifiedAmount] BudgetAmount specifiedAmount
-                             * @property {google.cloud.billing.budgets.v1beta1.ILastPeriodAmount|null} [lastPeriodAmount] BudgetAmount lastPeriodAmount
-                             */
-    
-                            /**
-                             * Constructs a new BudgetAmount.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a BudgetAmount.
-                             * @implements IBudgetAmount
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudgetAmount=} [properties] Properties to set
-                             */
-                            function BudgetAmount(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * BudgetAmount specifiedAmount.
-                             * @member {google.type.IMoney|null|undefined} specifiedAmount
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @instance
-                             */
-                            BudgetAmount.prototype.specifiedAmount = null;
-    
-                            /**
-                             * BudgetAmount lastPeriodAmount.
-                             * @member {google.cloud.billing.budgets.v1beta1.ILastPeriodAmount|null|undefined} lastPeriodAmount
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @instance
-                             */
-                            BudgetAmount.prototype.lastPeriodAmount = null;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * BudgetAmount budgetAmount.
-                             * @member {"specifiedAmount"|"lastPeriodAmount"|undefined} budgetAmount
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @instance
-                             */
-                            Object.defineProperty(BudgetAmount.prototype, "budgetAmount", {
-                                get: $util.oneOfGetter($oneOfFields = ["specifiedAmount", "lastPeriodAmount"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new BudgetAmount instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudgetAmount=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.BudgetAmount} BudgetAmount instance
-                             */
-                            BudgetAmount.create = function create(properties) {
-                                return new BudgetAmount(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified BudgetAmount message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.BudgetAmount.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudgetAmount} message BudgetAmount message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            BudgetAmount.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.specifiedAmount != null && Object.hasOwnProperty.call(message, "specifiedAmount"))
-                                    $root.google.type.Money.encode(message.specifiedAmount, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.lastPeriodAmount != null && Object.hasOwnProperty.call(message, "lastPeriodAmount"))
-                                    $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount.encode(message.lastPeriodAmount, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified BudgetAmount message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.BudgetAmount.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IBudgetAmount} message BudgetAmount message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            BudgetAmount.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a BudgetAmount message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.BudgetAmount} BudgetAmount
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            BudgetAmount.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.BudgetAmount();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.specifiedAmount = $root.google.type.Money.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.lastPeriodAmount = $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a BudgetAmount message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.BudgetAmount} BudgetAmount
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            BudgetAmount.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a BudgetAmount message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            BudgetAmount.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.specifiedAmount != null && message.hasOwnProperty("specifiedAmount")) {
-                                    properties.budgetAmount = 1;
-                                    {
-                                        var error = $root.google.type.Money.verify(message.specifiedAmount);
-                                        if (error)
-                                            return "specifiedAmount." + error;
-                                    }
-                                }
-                                if (message.lastPeriodAmount != null && message.hasOwnProperty("lastPeriodAmount")) {
-                                    if (properties.budgetAmount === 1)
-                                        return "budgetAmount: multiple values";
-                                    properties.budgetAmount = 1;
-                                    {
-                                        var error = $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount.verify(message.lastPeriodAmount);
-                                        if (error)
-                                            return "lastPeriodAmount." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a BudgetAmount message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.BudgetAmount} BudgetAmount
-                             */
-                            BudgetAmount.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.BudgetAmount)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.BudgetAmount();
-                                if (object.specifiedAmount != null) {
-                                    if (typeof object.specifiedAmount !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.BudgetAmount.specifiedAmount: object expected");
-                                    message.specifiedAmount = $root.google.type.Money.fromObject(object.specifiedAmount);
-                                }
-                                if (object.lastPeriodAmount != null) {
-                                    if (typeof object.lastPeriodAmount !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.BudgetAmount.lastPeriodAmount: object expected");
-                                    message.lastPeriodAmount = $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount.fromObject(object.lastPeriodAmount);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a BudgetAmount message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.BudgetAmount} message BudgetAmount
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            BudgetAmount.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (message.specifiedAmount != null && message.hasOwnProperty("specifiedAmount")) {
-                                    object.specifiedAmount = $root.google.type.Money.toObject(message.specifiedAmount, options);
-                                    if (options.oneofs)
-                                        object.budgetAmount = "specifiedAmount";
-                                }
-                                if (message.lastPeriodAmount != null && message.hasOwnProperty("lastPeriodAmount")) {
-                                    object.lastPeriodAmount = $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount.toObject(message.lastPeriodAmount, options);
-                                    if (options.oneofs)
-                                        object.budgetAmount = "lastPeriodAmount";
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this BudgetAmount to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            BudgetAmount.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for BudgetAmount
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetAmount
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            BudgetAmount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.BudgetAmount";
-                            };
-    
-                            return BudgetAmount;
-                        })();
-    
-                        v1beta1.LastPeriodAmount = (function() {
-    
-                            /**
-                             * Properties of a LastPeriodAmount.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface ILastPeriodAmount
-                             */
-    
-                            /**
-                             * Constructs a new LastPeriodAmount.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a LastPeriodAmount.
-                             * @implements ILastPeriodAmount
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.ILastPeriodAmount=} [properties] Properties to set
-                             */
-                            function LastPeriodAmount(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Creates a new LastPeriodAmount instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ILastPeriodAmount=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.LastPeriodAmount} LastPeriodAmount instance
-                             */
-                            LastPeriodAmount.create = function create(properties) {
-                                return new LastPeriodAmount(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified LastPeriodAmount message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.LastPeriodAmount.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ILastPeriodAmount} message LastPeriodAmount message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            LastPeriodAmount.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified LastPeriodAmount message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.LastPeriodAmount.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ILastPeriodAmount} message LastPeriodAmount message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            LastPeriodAmount.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a LastPeriodAmount message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.LastPeriodAmount} LastPeriodAmount
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            LastPeriodAmount.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a LastPeriodAmount message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.LastPeriodAmount} LastPeriodAmount
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            LastPeriodAmount.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a LastPeriodAmount message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            LastPeriodAmount.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a LastPeriodAmount message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.LastPeriodAmount} LastPeriodAmount
-                             */
-                            LastPeriodAmount.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount)
-                                    return object;
-                                return new $root.google.cloud.billing.budgets.v1beta1.LastPeriodAmount();
-                            };
-    
-                            /**
-                             * Creates a plain object from a LastPeriodAmount message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.LastPeriodAmount} message LastPeriodAmount
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            LastPeriodAmount.toObject = function toObject() {
-                                return {};
-                            };
-    
-                            /**
-                             * Converts this LastPeriodAmount to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            LastPeriodAmount.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for LastPeriodAmount
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.LastPeriodAmount
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            LastPeriodAmount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.LastPeriodAmount";
-                            };
-    
-                            return LastPeriodAmount;
-                        })();
-    
-                        v1beta1.ThresholdRule = (function() {
-    
-                            /**
-                             * Properties of a ThresholdRule.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IThresholdRule
-                             * @property {number|null} [thresholdPercent] ThresholdRule thresholdPercent
-                             * @property {google.cloud.billing.budgets.v1beta1.ThresholdRule.Basis|null} [spendBasis] ThresholdRule spendBasis
-                             */
-    
-                            /**
-                             * Constructs a new ThresholdRule.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a ThresholdRule.
-                             * @implements IThresholdRule
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IThresholdRule=} [properties] Properties to set
-                             */
-                            function ThresholdRule(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ThresholdRule thresholdPercent.
-                             * @member {number} thresholdPercent
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @instance
-                             */
-                            ThresholdRule.prototype.thresholdPercent = 0;
-    
-                            /**
-                             * ThresholdRule spendBasis.
-                             * @member {google.cloud.billing.budgets.v1beta1.ThresholdRule.Basis} spendBasis
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @instance
-                             */
-                            ThresholdRule.prototype.spendBasis = 0;
-    
-                            /**
-                             * Creates a new ThresholdRule instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IThresholdRule=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.ThresholdRule} ThresholdRule instance
-                             */
-                            ThresholdRule.create = function create(properties) {
-                                return new ThresholdRule(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ThresholdRule message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.ThresholdRule.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IThresholdRule} message ThresholdRule message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ThresholdRule.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.thresholdPercent != null && Object.hasOwnProperty.call(message, "thresholdPercent"))
-                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.thresholdPercent);
-                                if (message.spendBasis != null && Object.hasOwnProperty.call(message, "spendBasis"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.spendBasis);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ThresholdRule message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.ThresholdRule.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IThresholdRule} message ThresholdRule message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ThresholdRule.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ThresholdRule message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.ThresholdRule} ThresholdRule
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ThresholdRule.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.ThresholdRule();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.thresholdPercent = reader.double();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.spendBasis = reader.int32();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ThresholdRule message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.ThresholdRule} ThresholdRule
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ThresholdRule.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ThresholdRule message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ThresholdRule.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.thresholdPercent != null && message.hasOwnProperty("thresholdPercent"))
-                                    if (typeof message.thresholdPercent !== "number")
-                                        return "thresholdPercent: number expected";
-                                if (message.spendBasis != null && message.hasOwnProperty("spendBasis"))
-                                    switch (message.spendBasis) {
-                                    default:
-                                        return "spendBasis: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                        break;
-                                    }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ThresholdRule message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.ThresholdRule} ThresholdRule
-                             */
-                            ThresholdRule.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.ThresholdRule)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.ThresholdRule();
-                                if (object.thresholdPercent != null)
-                                    message.thresholdPercent = Number(object.thresholdPercent);
-                                switch (object.spendBasis) {
-                                default:
-                                    if (typeof object.spendBasis === "number") {
-                                        message.spendBasis = object.spendBasis;
-                                        break;
-                                    }
-                                    break;
-                                case "BASIS_UNSPECIFIED":
-                                case 0:
-                                    message.spendBasis = 0;
-                                    break;
-                                case "CURRENT_SPEND":
-                                case 1:
-                                    message.spendBasis = 1;
-                                    break;
-                                case "FORECASTED_SPEND":
-                                case 2:
-                                    message.spendBasis = 2;
-                                    break;
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ThresholdRule message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ThresholdRule} message ThresholdRule
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ThresholdRule.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.thresholdPercent = 0;
-                                    object.spendBasis = options.enums === String ? "BASIS_UNSPECIFIED" : 0;
-                                }
-                                if (message.thresholdPercent != null && message.hasOwnProperty("thresholdPercent"))
-                                    object.thresholdPercent = options.json && !isFinite(message.thresholdPercent) ? String(message.thresholdPercent) : message.thresholdPercent;
-                                if (message.spendBasis != null && message.hasOwnProperty("spendBasis"))
-                                    object.spendBasis = options.enums === String ? $root.google.cloud.billing.budgets.v1beta1.ThresholdRule.Basis[message.spendBasis] === undefined ? message.spendBasis : $root.google.cloud.billing.budgets.v1beta1.ThresholdRule.Basis[message.spendBasis] : message.spendBasis;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ThresholdRule to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ThresholdRule.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ThresholdRule
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.ThresholdRule
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ThresholdRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.ThresholdRule";
-                            };
-    
-                            /**
-                             * Basis enum.
-                             * @name google.cloud.billing.budgets.v1beta1.ThresholdRule.Basis
-                             * @enum {number}
-                             * @property {number} BASIS_UNSPECIFIED=0 BASIS_UNSPECIFIED value
-                             * @property {number} CURRENT_SPEND=1 CURRENT_SPEND value
-                             * @property {number} FORECASTED_SPEND=2 FORECASTED_SPEND value
-                             */
-                            ThresholdRule.Basis = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "BASIS_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "CURRENT_SPEND"] = 1;
-                                values[valuesById[2] = "FORECASTED_SPEND"] = 2;
-                                return values;
-                            })();
-    
-                            return ThresholdRule;
-                        })();
-    
-                        v1beta1.AllUpdatesRule = (function() {
-    
-                            /**
-                             * Properties of an AllUpdatesRule.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IAllUpdatesRule
-                             * @property {string|null} [pubsubTopic] AllUpdatesRule pubsubTopic
-                             * @property {string|null} [schemaVersion] AllUpdatesRule schemaVersion
-                             * @property {Array.<string>|null} [monitoringNotificationChannels] AllUpdatesRule monitoringNotificationChannels
-                             * @property {boolean|null} [disableDefaultIamRecipients] AllUpdatesRule disableDefaultIamRecipients
-                             * @property {boolean|null} [enableProjectLevelRecipients] AllUpdatesRule enableProjectLevelRecipients
-                             */
-    
-                            /**
-                             * Constructs a new AllUpdatesRule.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents an AllUpdatesRule.
-                             * @implements IAllUpdatesRule
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IAllUpdatesRule=} [properties] Properties to set
-                             */
-                            function AllUpdatesRule(properties) {
-                                this.monitoringNotificationChannels = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * AllUpdatesRule pubsubTopic.
-                             * @member {string} pubsubTopic
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @instance
-                             */
-                            AllUpdatesRule.prototype.pubsubTopic = "";
-    
-                            /**
-                             * AllUpdatesRule schemaVersion.
-                             * @member {string} schemaVersion
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @instance
-                             */
-                            AllUpdatesRule.prototype.schemaVersion = "";
-    
-                            /**
-                             * AllUpdatesRule monitoringNotificationChannels.
-                             * @member {Array.<string>} monitoringNotificationChannels
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @instance
-                             */
-                            AllUpdatesRule.prototype.monitoringNotificationChannels = $util.emptyArray;
-    
-                            /**
-                             * AllUpdatesRule disableDefaultIamRecipients.
-                             * @member {boolean} disableDefaultIamRecipients
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @instance
-                             */
-                            AllUpdatesRule.prototype.disableDefaultIamRecipients = false;
-    
-                            /**
-                             * AllUpdatesRule enableProjectLevelRecipients.
-                             * @member {boolean} enableProjectLevelRecipients
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @instance
-                             */
-                            AllUpdatesRule.prototype.enableProjectLevelRecipients = false;
-    
-                            /**
-                             * Creates a new AllUpdatesRule instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IAllUpdatesRule=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.AllUpdatesRule} AllUpdatesRule instance
-                             */
-                            AllUpdatesRule.create = function create(properties) {
-                                return new AllUpdatesRule(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified AllUpdatesRule message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.AllUpdatesRule.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IAllUpdatesRule} message AllUpdatesRule message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AllUpdatesRule.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.pubsubTopic != null && Object.hasOwnProperty.call(message, "pubsubTopic"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubTopic);
-                                if (message.schemaVersion != null && Object.hasOwnProperty.call(message, "schemaVersion"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.schemaVersion);
-                                if (message.monitoringNotificationChannels != null && message.monitoringNotificationChannels.length)
-                                    for (var i = 0; i < message.monitoringNotificationChannels.length; ++i)
-                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.monitoringNotificationChannels[i]);
-                                if (message.disableDefaultIamRecipients != null && Object.hasOwnProperty.call(message, "disableDefaultIamRecipients"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disableDefaultIamRecipients);
-                                if (message.enableProjectLevelRecipients != null && Object.hasOwnProperty.call(message, "enableProjectLevelRecipients"))
-                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableProjectLevelRecipients);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified AllUpdatesRule message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.AllUpdatesRule.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IAllUpdatesRule} message AllUpdatesRule message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AllUpdatesRule.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an AllUpdatesRule message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.AllUpdatesRule} AllUpdatesRule
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AllUpdatesRule.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.pubsubTopic = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.schemaVersion = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            if (!(message.monitoringNotificationChannels && message.monitoringNotificationChannels.length))
-                                                message.monitoringNotificationChannels = [];
-                                            message.monitoringNotificationChannels.push(reader.string());
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.disableDefaultIamRecipients = reader.bool();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.enableProjectLevelRecipients = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an AllUpdatesRule message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.AllUpdatesRule} AllUpdatesRule
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AllUpdatesRule.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an AllUpdatesRule message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            AllUpdatesRule.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic"))
-                                    if (!$util.isString(message.pubsubTopic))
-                                        return "pubsubTopic: string expected";
-                                if (message.schemaVersion != null && message.hasOwnProperty("schemaVersion"))
-                                    if (!$util.isString(message.schemaVersion))
-                                        return "schemaVersion: string expected";
-                                if (message.monitoringNotificationChannels != null && message.hasOwnProperty("monitoringNotificationChannels")) {
-                                    if (!Array.isArray(message.monitoringNotificationChannels))
-                                        return "monitoringNotificationChannels: array expected";
-                                    for (var i = 0; i < message.monitoringNotificationChannels.length; ++i)
-                                        if (!$util.isString(message.monitoringNotificationChannels[i]))
-                                            return "monitoringNotificationChannels: string[] expected";
-                                }
-                                if (message.disableDefaultIamRecipients != null && message.hasOwnProperty("disableDefaultIamRecipients"))
-                                    if (typeof message.disableDefaultIamRecipients !== "boolean")
-                                        return "disableDefaultIamRecipients: boolean expected";
-                                if (message.enableProjectLevelRecipients != null && message.hasOwnProperty("enableProjectLevelRecipients"))
-                                    if (typeof message.enableProjectLevelRecipients !== "boolean")
-                                        return "enableProjectLevelRecipients: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an AllUpdatesRule message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.AllUpdatesRule} AllUpdatesRule
-                             */
-                            AllUpdatesRule.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.AllUpdatesRule();
-                                if (object.pubsubTopic != null)
-                                    message.pubsubTopic = String(object.pubsubTopic);
-                                if (object.schemaVersion != null)
-                                    message.schemaVersion = String(object.schemaVersion);
-                                if (object.monitoringNotificationChannels) {
-                                    if (!Array.isArray(object.monitoringNotificationChannels))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.AllUpdatesRule.monitoringNotificationChannels: array expected");
-                                    message.monitoringNotificationChannels = [];
-                                    for (var i = 0; i < object.monitoringNotificationChannels.length; ++i)
-                                        message.monitoringNotificationChannels[i] = String(object.monitoringNotificationChannels[i]);
-                                }
-                                if (object.disableDefaultIamRecipients != null)
-                                    message.disableDefaultIamRecipients = Boolean(object.disableDefaultIamRecipients);
-                                if (object.enableProjectLevelRecipients != null)
-                                    message.enableProjectLevelRecipients = Boolean(object.enableProjectLevelRecipients);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an AllUpdatesRule message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.AllUpdatesRule} message AllUpdatesRule
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            AllUpdatesRule.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.monitoringNotificationChannels = [];
-                                if (options.defaults) {
-                                    object.pubsubTopic = "";
-                                    object.schemaVersion = "";
-                                    object.disableDefaultIamRecipients = false;
-                                    object.enableProjectLevelRecipients = false;
-                                }
-                                if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic"))
-                                    object.pubsubTopic = message.pubsubTopic;
-                                if (message.schemaVersion != null && message.hasOwnProperty("schemaVersion"))
-                                    object.schemaVersion = message.schemaVersion;
-                                if (message.monitoringNotificationChannels && message.monitoringNotificationChannels.length) {
-                                    object.monitoringNotificationChannels = [];
-                                    for (var j = 0; j < message.monitoringNotificationChannels.length; ++j)
-                                        object.monitoringNotificationChannels[j] = message.monitoringNotificationChannels[j];
-                                }
-                                if (message.disableDefaultIamRecipients != null && message.hasOwnProperty("disableDefaultIamRecipients"))
-                                    object.disableDefaultIamRecipients = message.disableDefaultIamRecipients;
-                                if (message.enableProjectLevelRecipients != null && message.hasOwnProperty("enableProjectLevelRecipients"))
-                                    object.enableProjectLevelRecipients = message.enableProjectLevelRecipients;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this AllUpdatesRule to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            AllUpdatesRule.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for AllUpdatesRule
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            AllUpdatesRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.AllUpdatesRule";
-                            };
-    
-                            return AllUpdatesRule;
-                        })();
-    
-                        v1beta1.Filter = (function() {
-    
-                            /**
-                             * Properties of a Filter.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IFilter
-                             * @property {Array.<string>|null} [projects] Filter projects
-                             * @property {Array.<string>|null} [resourceAncestors] Filter resourceAncestors
-                             * @property {Array.<string>|null} [creditTypes] Filter creditTypes
-                             * @property {google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment|null} [creditTypesTreatment] Filter creditTypesTreatment
-                             * @property {Array.<string>|null} [services] Filter services
-                             * @property {Array.<string>|null} [subaccounts] Filter subaccounts
-                             * @property {Object.<string,google.protobuf.IListValue>|null} [labels] Filter labels
-                             * @property {google.cloud.billing.budgets.v1beta1.CalendarPeriod|null} [calendarPeriod] Filter calendarPeriod
-                             * @property {google.cloud.billing.budgets.v1beta1.ICustomPeriod|null} [customPeriod] Filter customPeriod
-                             */
-    
-                            /**
-                             * Constructs a new Filter.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a Filter.
-                             * @implements IFilter
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IFilter=} [properties] Properties to set
-                             */
-                            function Filter(properties) {
-                                this.projects = [];
-                                this.resourceAncestors = [];
-                                this.creditTypes = [];
-                                this.services = [];
-                                this.subaccounts = [];
-                                this.labels = {};
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Filter projects.
-                             * @member {Array.<string>} projects
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.projects = $util.emptyArray;
-    
-                            /**
-                             * Filter resourceAncestors.
-                             * @member {Array.<string>} resourceAncestors
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.resourceAncestors = $util.emptyArray;
-    
-                            /**
-                             * Filter creditTypes.
-                             * @member {Array.<string>} creditTypes
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.creditTypes = $util.emptyArray;
-    
-                            /**
-                             * Filter creditTypesTreatment.
-                             * @member {google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment} creditTypesTreatment
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.creditTypesTreatment = 0;
-    
-                            /**
-                             * Filter services.
-                             * @member {Array.<string>} services
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.services = $util.emptyArray;
-    
-                            /**
-                             * Filter subaccounts.
-                             * @member {Array.<string>} subaccounts
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.subaccounts = $util.emptyArray;
-    
-                            /**
-                             * Filter labels.
-                             * @member {Object.<string,google.protobuf.IListValue>} labels
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.labels = $util.emptyObject;
-    
-                            /**
-                             * Filter calendarPeriod.
-                             * @member {google.cloud.billing.budgets.v1beta1.CalendarPeriod|null|undefined} calendarPeriod
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.calendarPeriod = null;
-    
-                            /**
-                             * Filter customPeriod.
-                             * @member {google.cloud.billing.budgets.v1beta1.ICustomPeriod|null|undefined} customPeriod
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Filter.prototype.customPeriod = null;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * Filter usagePeriod.
-                             * @member {"calendarPeriod"|"customPeriod"|undefined} usagePeriod
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             */
-                            Object.defineProperty(Filter.prototype, "usagePeriod", {
-                                get: $util.oneOfGetter($oneOfFields = ["calendarPeriod", "customPeriod"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new Filter instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IFilter=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.Filter} Filter instance
-                             */
-                            Filter.create = function create(properties) {
-                                return new Filter(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.Filter.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.projects != null && message.projects.length)
-                                    for (var i = 0; i < message.projects.length; ++i)
-                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.projects[i]);
-                                if (message.resourceAncestors != null && message.resourceAncestors.length)
-                                    for (var i = 0; i < message.resourceAncestors.length; ++i)
-                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceAncestors[i]);
-                                if (message.services != null && message.services.length)
-                                    for (var i = 0; i < message.services.length; ++i)
-                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.services[i]);
-                                if (message.creditTypesTreatment != null && Object.hasOwnProperty.call(message, "creditTypesTreatment"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.creditTypesTreatment);
-                                if (message.subaccounts != null && message.subaccounts.length)
-                                    for (var i = 0; i < message.subaccounts.length; ++i)
-                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.subaccounts[i]);
-                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
-                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i) {
-                                        writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                        $root.google.protobuf.ListValue.encode(message.labels[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                                    }
-                                if (message.creditTypes != null && message.creditTypes.length)
-                                    for (var i = 0; i < message.creditTypes.length; ++i)
-                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.creditTypes[i]);
-                                if (message.calendarPeriod != null && Object.hasOwnProperty.call(message, "calendarPeriod"))
-                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.calendarPeriod);
-                                if (message.customPeriod != null && Object.hasOwnProperty.call(message, "customPeriod"))
-                                    $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.encode(message.customPeriod, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.Filter.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.Filter(), key, value;
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.projects && message.projects.length))
-                                                message.projects = [];
-                                            message.projects.push(reader.string());
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (!(message.resourceAncestors && message.resourceAncestors.length))
-                                                message.resourceAncestors = [];
-                                            message.resourceAncestors.push(reader.string());
-                                            break;
-                                        }
-                                    case 7: {
-                                            if (!(message.creditTypes && message.creditTypes.length))
-                                                message.creditTypes = [];
-                                            message.creditTypes.push(reader.string());
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.creditTypesTreatment = reader.int32();
-                                            break;
-                                        }
-                                    case 3: {
-                                            if (!(message.services && message.services.length))
-                                                message.services = [];
-                                            message.services.push(reader.string());
-                                            break;
-                                        }
-                                    case 5: {
-                                            if (!(message.subaccounts && message.subaccounts.length))
-                                                message.subaccounts = [];
-                                            message.subaccounts.push(reader.string());
-                                            break;
-                                        }
-                                    case 6: {
-                                            if (message.labels === $util.emptyObject)
-                                                message.labels = {};
-                                            var end2 = reader.uint32() + reader.pos;
-                                            key = "";
-                                            value = null;
-                                            while (reader.pos < end2) {
-                                                var tag2 = reader.uint32();
-                                                switch (tag2 >>> 3) {
-                                                case 1:
-                                                    key = reader.string();
-                                                    break;
-                                                case 2:
-                                                    value = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
-                                                    break;
-                                                default:
-                                                    reader.skipType(tag2 & 7);
-                                                    break;
-                                                }
-                                            }
-                                            message.labels[key] = value;
-                                            break;
-                                        }
-                                    case 8: {
-                                            message.calendarPeriod = reader.int32();
-                                            break;
-                                        }
-                                    case 9: {
-                                            message.customPeriod = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Filter message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Filter.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.projects != null && message.hasOwnProperty("projects")) {
-                                    if (!Array.isArray(message.projects))
-                                        return "projects: array expected";
-                                    for (var i = 0; i < message.projects.length; ++i)
-                                        if (!$util.isString(message.projects[i]))
-                                            return "projects: string[] expected";
-                                }
-                                if (message.resourceAncestors != null && message.hasOwnProperty("resourceAncestors")) {
-                                    if (!Array.isArray(message.resourceAncestors))
-                                        return "resourceAncestors: array expected";
-                                    for (var i = 0; i < message.resourceAncestors.length; ++i)
-                                        if (!$util.isString(message.resourceAncestors[i]))
-                                            return "resourceAncestors: string[] expected";
-                                }
-                                if (message.creditTypes != null && message.hasOwnProperty("creditTypes")) {
-                                    if (!Array.isArray(message.creditTypes))
-                                        return "creditTypes: array expected";
-                                    for (var i = 0; i < message.creditTypes.length; ++i)
-                                        if (!$util.isString(message.creditTypes[i]))
-                                            return "creditTypes: string[] expected";
-                                }
-                                if (message.creditTypesTreatment != null && message.hasOwnProperty("creditTypesTreatment"))
-                                    switch (message.creditTypesTreatment) {
-                                    default:
-                                        return "creditTypesTreatment: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        break;
-                                    }
-                                if (message.services != null && message.hasOwnProperty("services")) {
-                                    if (!Array.isArray(message.services))
-                                        return "services: array expected";
-                                    for (var i = 0; i < message.services.length; ++i)
-                                        if (!$util.isString(message.services[i]))
-                                            return "services: string[] expected";
-                                }
-                                if (message.subaccounts != null && message.hasOwnProperty("subaccounts")) {
-                                    if (!Array.isArray(message.subaccounts))
-                                        return "subaccounts: array expected";
-                                    for (var i = 0; i < message.subaccounts.length; ++i)
-                                        if (!$util.isString(message.subaccounts[i]))
-                                            return "subaccounts: string[] expected";
-                                }
-                                if (message.labels != null && message.hasOwnProperty("labels")) {
-                                    if (!$util.isObject(message.labels))
-                                        return "labels: object expected";
-                                    var key = Object.keys(message.labels);
-                                    for (var i = 0; i < key.length; ++i) {
-                                        var error = $root.google.protobuf.ListValue.verify(message.labels[key[i]]);
-                                        if (error)
-                                            return "labels." + error;
-                                    }
-                                }
-                                if (message.calendarPeriod != null && message.hasOwnProperty("calendarPeriod")) {
-                                    properties.usagePeriod = 1;
-                                    switch (message.calendarPeriod) {
-                                    default:
-                                        return "calendarPeriod: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        break;
-                                    }
-                                }
-                                if (message.customPeriod != null && message.hasOwnProperty("customPeriod")) {
-                                    if (properties.usagePeriod === 1)
-                                        return "usagePeriod: multiple values";
-                                    properties.usagePeriod = 1;
-                                    {
-                                        var error = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.verify(message.customPeriod);
-                                        if (error)
-                                            return "customPeriod." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.Filter} Filter
-                             */
-                            Filter.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.Filter)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.Filter();
-                                if (object.projects) {
-                                    if (!Array.isArray(object.projects))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.projects: array expected");
-                                    message.projects = [];
-                                    for (var i = 0; i < object.projects.length; ++i)
-                                        message.projects[i] = String(object.projects[i]);
-                                }
-                                if (object.resourceAncestors) {
-                                    if (!Array.isArray(object.resourceAncestors))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.resourceAncestors: array expected");
-                                    message.resourceAncestors = [];
-                                    for (var i = 0; i < object.resourceAncestors.length; ++i)
-                                        message.resourceAncestors[i] = String(object.resourceAncestors[i]);
-                                }
-                                if (object.creditTypes) {
-                                    if (!Array.isArray(object.creditTypes))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.creditTypes: array expected");
-                                    message.creditTypes = [];
-                                    for (var i = 0; i < object.creditTypes.length; ++i)
-                                        message.creditTypes[i] = String(object.creditTypes[i]);
-                                }
-                                switch (object.creditTypesTreatment) {
-                                default:
-                                    if (typeof object.creditTypesTreatment === "number") {
-                                        message.creditTypesTreatment = object.creditTypesTreatment;
-                                        break;
-                                    }
-                                    break;
-                                case "CREDIT_TYPES_TREATMENT_UNSPECIFIED":
-                                case 0:
-                                    message.creditTypesTreatment = 0;
-                                    break;
-                                case "INCLUDE_ALL_CREDITS":
-                                case 1:
-                                    message.creditTypesTreatment = 1;
-                                    break;
-                                case "EXCLUDE_ALL_CREDITS":
-                                case 2:
-                                    message.creditTypesTreatment = 2;
-                                    break;
-                                case "INCLUDE_SPECIFIED_CREDITS":
-                                case 3:
-                                    message.creditTypesTreatment = 3;
-                                    break;
-                                }
-                                if (object.services) {
-                                    if (!Array.isArray(object.services))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.services: array expected");
-                                    message.services = [];
-                                    for (var i = 0; i < object.services.length; ++i)
-                                        message.services[i] = String(object.services[i]);
-                                }
-                                if (object.subaccounts) {
-                                    if (!Array.isArray(object.subaccounts))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.subaccounts: array expected");
-                                    message.subaccounts = [];
-                                    for (var i = 0; i < object.subaccounts.length; ++i)
-                                        message.subaccounts[i] = String(object.subaccounts[i]);
-                                }
-                                if (object.labels) {
-                                    if (typeof object.labels !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.labels: object expected");
-                                    message.labels = {};
-                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i) {
-                                        if (typeof object.labels[keys[i]] !== "object")
-                                            throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.labels: object expected");
-                                        message.labels[keys[i]] = $root.google.protobuf.ListValue.fromObject(object.labels[keys[i]]);
-                                    }
-                                }
-                                switch (object.calendarPeriod) {
-                                default:
-                                    if (typeof object.calendarPeriod === "number") {
-                                        message.calendarPeriod = object.calendarPeriod;
-                                        break;
-                                    }
-                                    break;
-                                case "CALENDAR_PERIOD_UNSPECIFIED":
-                                case 0:
-                                    message.calendarPeriod = 0;
-                                    break;
-                                case "MONTH":
-                                case 1:
-                                    message.calendarPeriod = 1;
-                                    break;
-                                case "QUARTER":
-                                case 2:
-                                    message.calendarPeriod = 2;
-                                    break;
-                                case "YEAR":
-                                case 3:
-                                    message.calendarPeriod = 3;
-                                    break;
-                                }
-                                if (object.customPeriod != null) {
-                                    if (typeof object.customPeriod !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.customPeriod: object expected");
-                                    message.customPeriod = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.fromObject(object.customPeriod);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.Filter} message Filter
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Filter.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults) {
-                                    object.projects = [];
-                                    object.resourceAncestors = [];
-                                    object.services = [];
-                                    object.subaccounts = [];
-                                    object.creditTypes = [];
-                                }
-                                if (options.objects || options.defaults)
-                                    object.labels = {};
-                                if (options.defaults)
-                                    object.creditTypesTreatment = options.enums === String ? "CREDIT_TYPES_TREATMENT_UNSPECIFIED" : 0;
-                                if (message.projects && message.projects.length) {
-                                    object.projects = [];
-                                    for (var j = 0; j < message.projects.length; ++j)
-                                        object.projects[j] = message.projects[j];
-                                }
-                                if (message.resourceAncestors && message.resourceAncestors.length) {
-                                    object.resourceAncestors = [];
-                                    for (var j = 0; j < message.resourceAncestors.length; ++j)
-                                        object.resourceAncestors[j] = message.resourceAncestors[j];
-                                }
-                                if (message.services && message.services.length) {
-                                    object.services = [];
-                                    for (var j = 0; j < message.services.length; ++j)
-                                        object.services[j] = message.services[j];
-                                }
-                                if (message.creditTypesTreatment != null && message.hasOwnProperty("creditTypesTreatment"))
-                                    object.creditTypesTreatment = options.enums === String ? $root.google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment[message.creditTypesTreatment] === undefined ? message.creditTypesTreatment : $root.google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment[message.creditTypesTreatment] : message.creditTypesTreatment;
-                                if (message.subaccounts && message.subaccounts.length) {
-                                    object.subaccounts = [];
-                                    for (var j = 0; j < message.subaccounts.length; ++j)
-                                        object.subaccounts[j] = message.subaccounts[j];
-                                }
-                                var keys2;
-                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
-                                    object.labels = {};
-                                    for (var j = 0; j < keys2.length; ++j)
-                                        object.labels[keys2[j]] = $root.google.protobuf.ListValue.toObject(message.labels[keys2[j]], options);
-                                }
-                                if (message.creditTypes && message.creditTypes.length) {
-                                    object.creditTypes = [];
-                                    for (var j = 0; j < message.creditTypes.length; ++j)
-                                        object.creditTypes[j] = message.creditTypes[j];
-                                }
-                                if (message.calendarPeriod != null && message.hasOwnProperty("calendarPeriod")) {
-                                    object.calendarPeriod = options.enums === String ? $root.google.cloud.billing.budgets.v1beta1.CalendarPeriod[message.calendarPeriod] === undefined ? message.calendarPeriod : $root.google.cloud.billing.budgets.v1beta1.CalendarPeriod[message.calendarPeriod] : message.calendarPeriod;
-                                    if (options.oneofs)
-                                        object.usagePeriod = "calendarPeriod";
-                                }
-                                if (message.customPeriod != null && message.hasOwnProperty("customPeriod")) {
-                                    object.customPeriod = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.toObject(message.customPeriod, options);
-                                    if (options.oneofs)
-                                        object.usagePeriod = "customPeriod";
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Filter to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Filter.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Filter
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.Filter";
-                            };
-    
-                            /**
-                             * CreditTypesTreatment enum.
-                             * @name google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment
-                             * @enum {number}
-                             * @property {number} CREDIT_TYPES_TREATMENT_UNSPECIFIED=0 CREDIT_TYPES_TREATMENT_UNSPECIFIED value
-                             * @property {number} INCLUDE_ALL_CREDITS=1 INCLUDE_ALL_CREDITS value
-                             * @property {number} EXCLUDE_ALL_CREDITS=2 EXCLUDE_ALL_CREDITS value
-                             * @property {number} INCLUDE_SPECIFIED_CREDITS=3 INCLUDE_SPECIFIED_CREDITS value
-                             */
-                            Filter.CreditTypesTreatment = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "CREDIT_TYPES_TREATMENT_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "INCLUDE_ALL_CREDITS"] = 1;
-                                values[valuesById[2] = "EXCLUDE_ALL_CREDITS"] = 2;
-                                values[valuesById[3] = "INCLUDE_SPECIFIED_CREDITS"] = 3;
-                                return values;
-                            })();
-    
-                            return Filter;
-                        })();
-    
-                        v1beta1.CustomPeriod = (function() {
-    
-                            /**
-                             * Properties of a CustomPeriod.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface ICustomPeriod
-                             * @property {google.type.IDate|null} [startDate] CustomPeriod startDate
-                             * @property {google.type.IDate|null} [endDate] CustomPeriod endDate
-                             */
-    
-                            /**
-                             * Constructs a new CustomPeriod.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a CustomPeriod.
-                             * @implements ICustomPeriod
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod=} [properties] Properties to set
-                             */
-                            function CustomPeriod(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * CustomPeriod startDate.
-                             * @member {google.type.IDate|null|undefined} startDate
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @instance
-                             */
-                            CustomPeriod.prototype.startDate = null;
-    
-                            /**
-                             * CustomPeriod endDate.
-                             * @member {google.type.IDate|null|undefined} endDate
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @instance
-                             */
-                            CustomPeriod.prototype.endDate = null;
-    
-                            /**
-                             * Creates a new CustomPeriod instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod instance
-                             */
-                            CustomPeriod.create = function create(properties) {
-                                return new CustomPeriod(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified CustomPeriod message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CustomPeriod.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod} message CustomPeriod message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CustomPeriod.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
-                                    $root.google.type.Date.encode(message.startDate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
-                                    $root.google.type.Date.encode(message.endDate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified CustomPeriod message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CustomPeriod.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod} message CustomPeriod message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CustomPeriod.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a CustomPeriod message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CustomPeriod.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.CustomPeriod();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.startDate = $root.google.type.Date.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.endDate = $root.google.type.Date.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a CustomPeriod message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CustomPeriod.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a CustomPeriod message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            CustomPeriod.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.startDate != null && message.hasOwnProperty("startDate")) {
-                                    var error = $root.google.type.Date.verify(message.startDate);
-                                    if (error)
-                                        return "startDate." + error;
-                                }
-                                if (message.endDate != null && message.hasOwnProperty("endDate")) {
-                                    var error = $root.google.type.Date.verify(message.endDate);
-                                    if (error)
-                                        return "endDate." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a CustomPeriod message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod
-                             */
-                            CustomPeriod.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.CustomPeriod)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.CustomPeriod();
-                                if (object.startDate != null) {
-                                    if (typeof object.startDate !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.CustomPeriod.startDate: object expected");
-                                    message.startDate = $root.google.type.Date.fromObject(object.startDate);
-                                }
-                                if (object.endDate != null) {
-                                    if (typeof object.endDate !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.CustomPeriod.endDate: object expected");
-                                    message.endDate = $root.google.type.Date.fromObject(object.endDate);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a CustomPeriod message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.CustomPeriod} message CustomPeriod
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            CustomPeriod.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.startDate = null;
-                                    object.endDate = null;
-                                }
-                                if (message.startDate != null && message.hasOwnProperty("startDate"))
-                                    object.startDate = $root.google.type.Date.toObject(message.startDate, options);
-                                if (message.endDate != null && message.hasOwnProperty("endDate"))
-                                    object.endDate = $root.google.type.Date.toObject(message.endDate, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this CustomPeriod to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            CustomPeriod.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for CustomPeriod
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            CustomPeriod.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.CustomPeriod";
-                            };
-    
-                            return CustomPeriod;
-                        })();
-    
-                        /**
-                         * CalendarPeriod enum.
-                         * @name google.cloud.billing.budgets.v1beta1.CalendarPeriod
-                         * @enum {number}
-                         * @property {number} CALENDAR_PERIOD_UNSPECIFIED=0 CALENDAR_PERIOD_UNSPECIFIED value
-                         * @property {number} MONTH=1 MONTH value
-                         * @property {number} QUARTER=2 QUARTER value
-                         * @property {number} YEAR=3 YEAR value
-                         */
-                        v1beta1.CalendarPeriod = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "CALENDAR_PERIOD_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "MONTH"] = 1;
-                            values[valuesById[2] = "QUARTER"] = 2;
-                            values[valuesById[3] = "YEAR"] = 3;
-                            return values;
-                        })();
-    
-                        v1beta1.BudgetService = (function() {
-    
-                            /**
-                             * Constructs a new BudgetService service.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a BudgetService
-                             * @extends $protobuf.rpc.Service
-                             * @constructor
-                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                             */
-                            function BudgetService(rpcImpl, requestDelimited, responseDelimited) {
-                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                            }
-    
-                            (BudgetService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = BudgetService;
-    
-                            /**
-                             * Creates new BudgetService service using the specified rpc implementation.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @static
-                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                             * @returns {BudgetService} RPC service. Useful where requests and/or responses are streamed.
-                             */
-                            BudgetService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                                return new this(rpcImpl, requestDelimited, responseDelimited);
-                            };
-    
-                            /**
-                             * Callback as used by {@link google.cloud.billing.budgets.v1beta1.BudgetService|createBudget}.
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @typedef CreateBudgetCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.cloud.billing.budgets.v1beta1.Budget} [response] Budget
-                             */
-    
-                            /**
-                             * Calls CreateBudget.
-                             * @function createBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest} request CreateBudgetRequest message or plain object
-                             * @param {google.cloud.billing.budgets.v1beta1.BudgetService.CreateBudgetCallback} callback Node-style callback called with the error, if any, and Budget
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(BudgetService.prototype.createBudget = function createBudget(request, callback) {
-                                return this.rpcCall(createBudget, $root.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest, $root.google.cloud.billing.budgets.v1beta1.Budget, request, callback);
-                            }, "name", { value: "CreateBudget" });
-    
-                            /**
-                             * Calls CreateBudget.
-                             * @function createBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest} request CreateBudgetRequest message or plain object
-                             * @returns {Promise<google.cloud.billing.budgets.v1beta1.Budget>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.cloud.billing.budgets.v1beta1.BudgetService|updateBudget}.
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @typedef UpdateBudgetCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.cloud.billing.budgets.v1beta1.Budget} [response] Budget
-                             */
-    
-                            /**
-                             * Calls UpdateBudget.
-                             * @function updateBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest} request UpdateBudgetRequest message or plain object
-                             * @param {google.cloud.billing.budgets.v1beta1.BudgetService.UpdateBudgetCallback} callback Node-style callback called with the error, if any, and Budget
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(BudgetService.prototype.updateBudget = function updateBudget(request, callback) {
-                                return this.rpcCall(updateBudget, $root.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest, $root.google.cloud.billing.budgets.v1beta1.Budget, request, callback);
-                            }, "name", { value: "UpdateBudget" });
-    
-                            /**
-                             * Calls UpdateBudget.
-                             * @function updateBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest} request UpdateBudgetRequest message or plain object
-                             * @returns {Promise<google.cloud.billing.budgets.v1beta1.Budget>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.cloud.billing.budgets.v1beta1.BudgetService|getBudget}.
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @typedef GetBudgetCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.cloud.billing.budgets.v1beta1.Budget} [response] Budget
-                             */
-    
-                            /**
-                             * Calls GetBudget.
-                             * @function getBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IGetBudgetRequest} request GetBudgetRequest message or plain object
-                             * @param {google.cloud.billing.budgets.v1beta1.BudgetService.GetBudgetCallback} callback Node-style callback called with the error, if any, and Budget
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(BudgetService.prototype.getBudget = function getBudget(request, callback) {
-                                return this.rpcCall(getBudget, $root.google.cloud.billing.budgets.v1beta1.GetBudgetRequest, $root.google.cloud.billing.budgets.v1beta1.Budget, request, callback);
-                            }, "name", { value: "GetBudget" });
-    
-                            /**
-                             * Calls GetBudget.
-                             * @function getBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IGetBudgetRequest} request GetBudgetRequest message or plain object
-                             * @returns {Promise<google.cloud.billing.budgets.v1beta1.Budget>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.cloud.billing.budgets.v1beta1.BudgetService|listBudgets}.
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @typedef ListBudgetsCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.cloud.billing.budgets.v1beta1.ListBudgetsResponse} [response] ListBudgetsResponse
-                             */
-    
-                            /**
-                             * Calls ListBudgets.
-                             * @function listBudgets
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsRequest} request ListBudgetsRequest message or plain object
-                             * @param {google.cloud.billing.budgets.v1beta1.BudgetService.ListBudgetsCallback} callback Node-style callback called with the error, if any, and ListBudgetsResponse
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(BudgetService.prototype.listBudgets = function listBudgets(request, callback) {
-                                return this.rpcCall(listBudgets, $root.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest, $root.google.cloud.billing.budgets.v1beta1.ListBudgetsResponse, request, callback);
-                            }, "name", { value: "ListBudgets" });
-    
-                            /**
-                             * Calls ListBudgets.
-                             * @function listBudgets
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsRequest} request ListBudgetsRequest message or plain object
-                             * @returns {Promise<google.cloud.billing.budgets.v1beta1.ListBudgetsResponse>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.cloud.billing.budgets.v1beta1.BudgetService|deleteBudget}.
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @typedef DeleteBudgetCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.protobuf.Empty} [response] Empty
-                             */
-    
-                            /**
-                             * Calls DeleteBudget.
-                             * @function deleteBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest} request DeleteBudgetRequest message or plain object
-                             * @param {google.cloud.billing.budgets.v1beta1.BudgetService.DeleteBudgetCallback} callback Node-style callback called with the error, if any, and Empty
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(BudgetService.prototype.deleteBudget = function deleteBudget(request, callback) {
-                                return this.rpcCall(deleteBudget, $root.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest, $root.google.protobuf.Empty, request, callback);
-                            }, "name", { value: "DeleteBudget" });
-    
-                            /**
-                             * Calls DeleteBudget.
-                             * @function deleteBudget
-                             * @memberof google.cloud.billing.budgets.v1beta1.BudgetService
-                             * @instance
-                             * @param {google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest} request DeleteBudgetRequest message or plain object
-                             * @returns {Promise<google.protobuf.Empty>} Promise
-                             * @variation 2
-                             */
-    
-                            return BudgetService;
-                        })();
-    
-                        v1beta1.CreateBudgetRequest = (function() {
-    
-                            /**
-                             * Properties of a CreateBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface ICreateBudgetRequest
-                             * @property {string|null} [parent] CreateBudgetRequest parent
-                             * @property {google.cloud.billing.budgets.v1beta1.IBudget|null} [budget] CreateBudgetRequest budget
-                             */
-    
-                            /**
-                             * Constructs a new CreateBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a CreateBudgetRequest.
-                             * @implements ICreateBudgetRequest
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest=} [properties] Properties to set
-                             */
-                            function CreateBudgetRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * CreateBudgetRequest parent.
-                             * @member {string} parent
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @instance
-                             */
-                            CreateBudgetRequest.prototype.parent = "";
-    
-                            /**
-                             * CreateBudgetRequest budget.
-                             * @member {google.cloud.billing.budgets.v1beta1.IBudget|null|undefined} budget
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @instance
-                             */
-                            CreateBudgetRequest.prototype.budget = null;
-    
-                            /**
-                             * Creates a new CreateBudgetRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.CreateBudgetRequest} CreateBudgetRequest instance
-                             */
-                            CreateBudgetRequest.create = function create(properties) {
-                                return new CreateBudgetRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified CreateBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CreateBudgetRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest} message CreateBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateBudgetRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                                if (message.budget != null && Object.hasOwnProperty.call(message, "budget"))
-                                    $root.google.cloud.billing.budgets.v1beta1.Budget.encode(message.budget, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified CreateBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CreateBudgetRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest} message CreateBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateBudgetRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a CreateBudgetRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.CreateBudgetRequest} CreateBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateBudgetRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.parent = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.budget = $root.google.cloud.billing.budgets.v1beta1.Budget.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a CreateBudgetRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.CreateBudgetRequest} CreateBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateBudgetRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a CreateBudgetRequest message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            CreateBudgetRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    if (!$util.isString(message.parent))
-                                        return "parent: string expected";
-                                if (message.budget != null && message.hasOwnProperty("budget")) {
-                                    var error = $root.google.cloud.billing.budgets.v1beta1.Budget.verify(message.budget);
-                                    if (error)
-                                        return "budget." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a CreateBudgetRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.CreateBudgetRequest} CreateBudgetRequest
-                             */
-                            CreateBudgetRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest();
-                                if (object.parent != null)
-                                    message.parent = String(object.parent);
-                                if (object.budget != null) {
-                                    if (typeof object.budget !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.CreateBudgetRequest.budget: object expected");
-                                    message.budget = $root.google.cloud.billing.budgets.v1beta1.Budget.fromObject(object.budget);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a CreateBudgetRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.CreateBudgetRequest} message CreateBudgetRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            CreateBudgetRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.parent = "";
-                                    object.budget = null;
-                                }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    object.parent = message.parent;
-                                if (message.budget != null && message.hasOwnProperty("budget"))
-                                    object.budget = $root.google.cloud.billing.budgets.v1beta1.Budget.toObject(message.budget, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this CreateBudgetRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            CreateBudgetRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for CreateBudgetRequest
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.CreateBudgetRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            CreateBudgetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.CreateBudgetRequest";
-                            };
-    
-                            return CreateBudgetRequest;
-                        })();
-    
-                        v1beta1.UpdateBudgetRequest = (function() {
-    
-                            /**
-                             * Properties of an UpdateBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IUpdateBudgetRequest
-                             * @property {google.cloud.billing.budgets.v1beta1.IBudget|null} [budget] UpdateBudgetRequest budget
-                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBudgetRequest updateMask
-                             */
-    
-                            /**
-                             * Constructs a new UpdateBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents an UpdateBudgetRequest.
-                             * @implements IUpdateBudgetRequest
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest=} [properties] Properties to set
-                             */
-                            function UpdateBudgetRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * UpdateBudgetRequest budget.
-                             * @member {google.cloud.billing.budgets.v1beta1.IBudget|null|undefined} budget
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @instance
-                             */
-                            UpdateBudgetRequest.prototype.budget = null;
-    
-                            /**
-                             * UpdateBudgetRequest updateMask.
-                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @instance
-                             */
-                            UpdateBudgetRequest.prototype.updateMask = null;
-    
-                            /**
-                             * Creates a new UpdateBudgetRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest} UpdateBudgetRequest instance
-                             */
-                            UpdateBudgetRequest.create = function create(properties) {
-                                return new UpdateBudgetRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest} message UpdateBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateBudgetRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.budget != null && Object.hasOwnProperty.call(message, "budget"))
-                                    $root.google.cloud.billing.budgets.v1beta1.Budget.encode(message.budget, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest} message UpdateBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateBudgetRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an UpdateBudgetRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest} UpdateBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateBudgetRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.budget = $root.google.cloud.billing.budgets.v1beta1.Budget.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an UpdateBudgetRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest} UpdateBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateBudgetRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an UpdateBudgetRequest message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            UpdateBudgetRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.budget != null && message.hasOwnProperty("budget")) {
-                                    var error = $root.google.cloud.billing.budgets.v1beta1.Budget.verify(message.budget);
-                                    if (error)
-                                        return "budget." + error;
-                                }
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
-                                    if (error)
-                                        return "updateMask." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an UpdateBudgetRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest} UpdateBudgetRequest
-                             */
-                            UpdateBudgetRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest();
-                                if (object.budget != null) {
-                                    if (typeof object.budget !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest.budget: object expected");
-                                    message.budget = $root.google.cloud.billing.budgets.v1beta1.Budget.fromObject(object.budget);
-                                }
-                                if (object.updateMask != null) {
-                                    if (typeof object.updateMask !== "object")
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest.updateMask: object expected");
-                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an UpdateBudgetRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest} message UpdateBudgetRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            UpdateBudgetRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.budget = null;
-                                    object.updateMask = null;
-                                }
-                                if (message.budget != null && message.hasOwnProperty("budget"))
-                                    object.budget = $root.google.cloud.billing.budgets.v1beta1.Budget.toObject(message.budget, options);
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this UpdateBudgetRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            UpdateBudgetRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for UpdateBudgetRequest
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            UpdateBudgetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest";
-                            };
-    
-                            return UpdateBudgetRequest;
-                        })();
-    
-                        v1beta1.GetBudgetRequest = (function() {
-    
-                            /**
-                             * Properties of a GetBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IGetBudgetRequest
-                             * @property {string|null} [name] GetBudgetRequest name
-                             */
-    
-                            /**
-                             * Constructs a new GetBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a GetBudgetRequest.
-                             * @implements IGetBudgetRequest
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IGetBudgetRequest=} [properties] Properties to set
-                             */
-                            function GetBudgetRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * GetBudgetRequest name.
-                             * @member {string} name
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @instance
-                             */
-                            GetBudgetRequest.prototype.name = "";
-    
-                            /**
-                             * Creates a new GetBudgetRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IGetBudgetRequest=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.GetBudgetRequest} GetBudgetRequest instance
-                             */
-                            GetBudgetRequest.create = function create(properties) {
-                                return new GetBudgetRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified GetBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.GetBudgetRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IGetBudgetRequest} message GetBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GetBudgetRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified GetBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.GetBudgetRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IGetBudgetRequest} message GetBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GetBudgetRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a GetBudgetRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.GetBudgetRequest} GetBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GetBudgetRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.GetBudgetRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a GetBudgetRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.GetBudgetRequest} GetBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GetBudgetRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a GetBudgetRequest message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            GetBudgetRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a GetBudgetRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.GetBudgetRequest} GetBudgetRequest
-                             */
-                            GetBudgetRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.GetBudgetRequest)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.GetBudgetRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a GetBudgetRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.GetBudgetRequest} message GetBudgetRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            GetBudgetRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this GetBudgetRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            GetBudgetRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for GetBudgetRequest
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.GetBudgetRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            GetBudgetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.GetBudgetRequest";
-                            };
-    
-                            return GetBudgetRequest;
-                        })();
-    
-                        v1beta1.ListBudgetsRequest = (function() {
-    
-                            /**
-                             * Properties of a ListBudgetsRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IListBudgetsRequest
-                             * @property {string|null} [parent] ListBudgetsRequest parent
-                             * @property {string|null} [scope] ListBudgetsRequest scope
-                             * @property {number|null} [pageSize] ListBudgetsRequest pageSize
-                             * @property {string|null} [pageToken] ListBudgetsRequest pageToken
-                             */
-    
-                            /**
-                             * Constructs a new ListBudgetsRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a ListBudgetsRequest.
-                             * @implements IListBudgetsRequest
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsRequest=} [properties] Properties to set
-                             */
-                            function ListBudgetsRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ListBudgetsRequest parent.
-                             * @member {string} parent
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @instance
-                             */
-                            ListBudgetsRequest.prototype.parent = "";
-    
-                            /**
-                             * ListBudgetsRequest scope.
-                             * @member {string} scope
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @instance
-                             */
-                            ListBudgetsRequest.prototype.scope = "";
-    
-                            /**
-                             * ListBudgetsRequest pageSize.
-                             * @member {number} pageSize
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @instance
-                             */
-                            ListBudgetsRequest.prototype.pageSize = 0;
-    
-                            /**
-                             * ListBudgetsRequest pageToken.
-                             * @member {string} pageToken
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @instance
-                             */
-                            ListBudgetsRequest.prototype.pageToken = "";
-    
-                            /**
-                             * Creates a new ListBudgetsRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsRequest=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsRequest} ListBudgetsRequest instance
-                             */
-                            ListBudgetsRequest.create = function create(properties) {
-                                return new ListBudgetsRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ListBudgetsRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.ListBudgetsRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsRequest} message ListBudgetsRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListBudgetsRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
-                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                                if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
-                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.scope);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ListBudgetsRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.ListBudgetsRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsRequest} message ListBudgetsRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListBudgetsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ListBudgetsRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsRequest} ListBudgetsRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListBudgetsRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.parent = reader.string();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.scope = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.pageSize = reader.int32();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.pageToken = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ListBudgetsRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsRequest} ListBudgetsRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListBudgetsRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ListBudgetsRequest message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ListBudgetsRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    if (!$util.isString(message.parent))
-                                        return "parent: string expected";
-                                if (message.scope != null && message.hasOwnProperty("scope"))
-                                    if (!$util.isString(message.scope))
-                                        return "scope: string expected";
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    if (!$util.isInteger(message.pageSize))
-                                        return "pageSize: integer expected";
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    if (!$util.isString(message.pageToken))
-                                        return "pageToken: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ListBudgetsRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsRequest} ListBudgetsRequest
-                             */
-                            ListBudgetsRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest();
-                                if (object.parent != null)
-                                    message.parent = String(object.parent);
-                                if (object.scope != null)
-                                    message.scope = String(object.scope);
-                                if (object.pageSize != null)
-                                    message.pageSize = object.pageSize | 0;
-                                if (object.pageToken != null)
-                                    message.pageToken = String(object.pageToken);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ListBudgetsRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ListBudgetsRequest} message ListBudgetsRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ListBudgetsRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.parent = "";
-                                    object.pageSize = 0;
-                                    object.pageToken = "";
-                                    object.scope = "";
-                                }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    object.parent = message.parent;
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    object.pageSize = message.pageSize;
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    object.pageToken = message.pageToken;
-                                if (message.scope != null && message.hasOwnProperty("scope"))
-                                    object.scope = message.scope;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ListBudgetsRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ListBudgetsRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ListBudgetsRequest
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ListBudgetsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.ListBudgetsRequest";
-                            };
-    
-                            return ListBudgetsRequest;
-                        })();
-    
-                        v1beta1.ListBudgetsResponse = (function() {
-    
-                            /**
-                             * Properties of a ListBudgetsResponse.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IListBudgetsResponse
-                             * @property {Array.<google.cloud.billing.budgets.v1beta1.IBudget>|null} [budgets] ListBudgetsResponse budgets
-                             * @property {string|null} [nextPageToken] ListBudgetsResponse nextPageToken
-                             */
-    
-                            /**
-                             * Constructs a new ListBudgetsResponse.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a ListBudgetsResponse.
-                             * @implements IListBudgetsResponse
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsResponse=} [properties] Properties to set
-                             */
-                            function ListBudgetsResponse(properties) {
-                                this.budgets = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ListBudgetsResponse budgets.
-                             * @member {Array.<google.cloud.billing.budgets.v1beta1.IBudget>} budgets
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @instance
-                             */
-                            ListBudgetsResponse.prototype.budgets = $util.emptyArray;
-    
-                            /**
-                             * ListBudgetsResponse nextPageToken.
-                             * @member {string} nextPageToken
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @instance
-                             */
-                            ListBudgetsResponse.prototype.nextPageToken = "";
-    
-                            /**
-                             * Creates a new ListBudgetsResponse instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsResponse=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsResponse} ListBudgetsResponse instance
-                             */
-                            ListBudgetsResponse.create = function create(properties) {
-                                return new ListBudgetsResponse(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ListBudgetsResponse message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.ListBudgetsResponse.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsResponse} message ListBudgetsResponse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListBudgetsResponse.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.budgets != null && message.budgets.length)
-                                    for (var i = 0; i < message.budgets.length; ++i)
-                                        $root.google.cloud.billing.budgets.v1beta1.Budget.encode(message.budgets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ListBudgetsResponse message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.ListBudgetsResponse.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IListBudgetsResponse} message ListBudgetsResponse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListBudgetsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ListBudgetsResponse message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsResponse} ListBudgetsResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListBudgetsResponse.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.ListBudgetsResponse();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.budgets && message.budgets.length))
-                                                message.budgets = [];
-                                            message.budgets.push($root.google.cloud.billing.budgets.v1beta1.Budget.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.nextPageToken = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ListBudgetsResponse message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsResponse} ListBudgetsResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListBudgetsResponse.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ListBudgetsResponse message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ListBudgetsResponse.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.budgets != null && message.hasOwnProperty("budgets")) {
-                                    if (!Array.isArray(message.budgets))
-                                        return "budgets: array expected";
-                                    for (var i = 0; i < message.budgets.length; ++i) {
-                                        var error = $root.google.cloud.billing.budgets.v1beta1.Budget.verify(message.budgets[i]);
-                                        if (error)
-                                            return "budgets." + error;
-                                    }
-                                }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                    if (!$util.isString(message.nextPageToken))
-                                        return "nextPageToken: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ListBudgetsResponse message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.ListBudgetsResponse} ListBudgetsResponse
-                             */
-                            ListBudgetsResponse.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.ListBudgetsResponse)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.ListBudgetsResponse();
-                                if (object.budgets) {
-                                    if (!Array.isArray(object.budgets))
-                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.ListBudgetsResponse.budgets: array expected");
-                                    message.budgets = [];
-                                    for (var i = 0; i < object.budgets.length; ++i) {
-                                        if (typeof object.budgets[i] !== "object")
-                                            throw TypeError(".google.cloud.billing.budgets.v1beta1.ListBudgetsResponse.budgets: object expected");
-                                        message.budgets[i] = $root.google.cloud.billing.budgets.v1beta1.Budget.fromObject(object.budgets[i]);
-                                    }
-                                }
-                                if (object.nextPageToken != null)
-                                    message.nextPageToken = String(object.nextPageToken);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ListBudgetsResponse message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.ListBudgetsResponse} message ListBudgetsResponse
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ListBudgetsResponse.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.budgets = [];
-                                if (options.defaults)
-                                    object.nextPageToken = "";
-                                if (message.budgets && message.budgets.length) {
-                                    object.budgets = [];
-                                    for (var j = 0; j < message.budgets.length; ++j)
-                                        object.budgets[j] = $root.google.cloud.billing.budgets.v1beta1.Budget.toObject(message.budgets[j], options);
-                                }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                    object.nextPageToken = message.nextPageToken;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ListBudgetsResponse to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ListBudgetsResponse.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ListBudgetsResponse
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.ListBudgetsResponse
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ListBudgetsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.ListBudgetsResponse";
-                            };
-    
-                            return ListBudgetsResponse;
-                        })();
-    
-                        v1beta1.DeleteBudgetRequest = (function() {
-    
-                            /**
-                             * Properties of a DeleteBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @interface IDeleteBudgetRequest
-                             * @property {string|null} [name] DeleteBudgetRequest name
-                             */
-    
-                            /**
-                             * Constructs a new DeleteBudgetRequest.
-                             * @memberof google.cloud.billing.budgets.v1beta1
-                             * @classdesc Represents a DeleteBudgetRequest.
-                             * @implements IDeleteBudgetRequest
-                             * @constructor
-                             * @param {google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest=} [properties] Properties to set
-                             */
-                            function DeleteBudgetRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * DeleteBudgetRequest name.
-                             * @member {string} name
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @instance
-                             */
-                            DeleteBudgetRequest.prototype.name = "";
-    
-                            /**
-                             * Creates a new DeleteBudgetRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest=} [properties] Properties to set
-                             * @returns {google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest} DeleteBudgetRequest instance
-                             */
-                            DeleteBudgetRequest.create = function create(properties) {
-                                return new DeleteBudgetRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest} message DeleteBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteBudgetRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest} message DeleteBudgetRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteBudgetRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a DeleteBudgetRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest} DeleteBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteBudgetRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a DeleteBudgetRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest} DeleteBudgetRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteBudgetRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a DeleteBudgetRequest message.
-                             * @function verify
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            DeleteBudgetRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a DeleteBudgetRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest} DeleteBudgetRequest
-                             */
-                            DeleteBudgetRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest)
-                                    return object;
-                                var message = new $root.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a DeleteBudgetRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest} message DeleteBudgetRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            DeleteBudgetRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this DeleteBudgetRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            DeleteBudgetRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for DeleteBudgetRequest
-                             * @function getTypeUrl
-                             * @memberof google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            DeleteBudgetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest";
-                            };
-    
-                            return DeleteBudgetRequest;
-                        })();
-    
-                        return v1beta1;
-                    })();
-    
                     return budgets;
                 })();
     
@@ -9585,7 +5681,6 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
-                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -9621,14 +5716,6 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
-                 * CommonLanguageSettings selectiveGapicGeneration.
-                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
-                 * @memberof google.api.CommonLanguageSettings
-                 * @instance
-                 */
-                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
-    
-                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -9660,8 +5747,6 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
-                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -9711,10 +5796,6 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
-                                break;
-                            }
-                        case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -9768,11 +5849,6 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
-                        if (error)
-                            return "selectiveGapicGeneration." + error;
-                    }
                     return null;
                 };
     
@@ -9815,11 +5891,6 @@
                                 break;
                             }
                     }
-                    if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
-                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
-                    }
                     return message;
                 };
     
@@ -9838,10 +5909,8 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.referenceDocsUri = "";
-                        object.selectiveGapicGeneration = null;
-                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -9849,8 +5918,6 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -11673,7 +7740,6 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
-                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -11698,14 +7764,6 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
-    
-                /**
-                 * PythonSettings experimentalFeatures.
-                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
-                 * @memberof google.api.PythonSettings
-                 * @instance
-                 */
-                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -11733,8 +7791,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -11773,10 +7829,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -11819,11 +7871,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
-                        if (error)
-                            return "experimentalFeatures." + error;
-                    }
                     return null;
                 };
     
@@ -11844,11 +7891,6 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
-                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
-                    }
                     return message;
                 };
     
@@ -11865,14 +7907,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.common = null;
-                        object.experimentalFeatures = null;
-                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -11901,258 +7939,6 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
-    
-                PythonSettings.ExperimentalFeatures = (function() {
-    
-                    /**
-                     * Properties of an ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @interface IExperimentalFeatures
-                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
-                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
-                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
-                     */
-    
-                    /**
-                     * Constructs a new ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @classdesc Represents an ExperimentalFeatures.
-                     * @implements IExperimentalFeatures
-                     * @constructor
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     */
-                    function ExperimentalFeatures(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ExperimentalFeatures restAsyncIoEnabled.
-                     * @member {boolean} restAsyncIoEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures protobufPythonicTypesEnabled.
-                     * @member {boolean} protobufPythonicTypesEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures unversionedPackageDisabled.
-                     * @member {boolean} unversionedPackageDisabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
-    
-                    /**
-                     * Creates a new ExperimentalFeatures instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
-                     */
-                    ExperimentalFeatures.create = function create(properties) {
-                        return new ExperimentalFeatures(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
-                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
-                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.restAsyncIoEnabled = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.protobufPythonicTypesEnabled = reader.bool();
-                                    break;
-                                }
-                            case 3: {
-                                    message.unversionedPackageDisabled = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ExperimentalFeatures message.
-                     * @function verify
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ExperimentalFeatures.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            if (typeof message.restAsyncIoEnabled !== "boolean")
-                                return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
-                                return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            if (typeof message.unversionedPackageDisabled !== "boolean")
-                                return "unversionedPackageDisabled: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
-                            return object;
-                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        if (object.restAsyncIoEnabled != null)
-                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
-                        if (object.protobufPythonicTypesEnabled != null)
-                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
-                        if (object.unversionedPackageDisabled != null)
-                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.restAsyncIoEnabled = false;
-                            object.protobufPythonicTypesEnabled = false;
-                            object.unversionedPackageDisabled = false;
-                        }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ExperimentalFeatures to JSON.
-                     * @function toJSON
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ExperimentalFeatures
-                     * @function getTypeUrl
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
-                    };
-    
-                    return ExperimentalFeatures;
-                })();
     
                 return PythonSettings;
             })();
@@ -13030,7 +8816,6 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -13042,7 +8827,6 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
-                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -13056,14 +8840,6 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
-    
-                /**
-                 * GoSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.GoSettings
-                 * @instance
-                 */
-                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -13091,9 +8867,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -13124,7 +8897,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -13132,29 +8905,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -13197,14 +8947,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
                     return null;
                 };
     
@@ -13225,13 +8967,6 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
                     return message;
                 };
     
@@ -13248,18 +8983,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.objects || options.defaults)
-                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
                     return object;
                 };
     
@@ -13898,251 +9625,6 @@
                 return values;
             })();
     
-            api.SelectiveGapicGeneration = (function() {
-    
-                /**
-                 * Properties of a SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @interface ISelectiveGapicGeneration
-                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
-                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
-                 */
-    
-                /**
-                 * Constructs a new SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @classdesc Represents a SelectiveGapicGeneration.
-                 * @implements ISelectiveGapicGeneration
-                 * @constructor
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 */
-                function SelectiveGapicGeneration(properties) {
-                    this.methods = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * SelectiveGapicGeneration methods.
-                 * @member {Array.<string>} methods
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
-    
-                /**
-                 * SelectiveGapicGeneration generateOmittedAsInternal.
-                 * @member {boolean} generateOmittedAsInternal
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
-    
-                /**
-                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
-                 */
-                SelectiveGapicGeneration.create = function create(properties) {
-                    return new SelectiveGapicGeneration(properties);
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.methods != null && message.methods.length)
-                        for (var i = 0; i < message.methods.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
-                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.methods && message.methods.length))
-                                    message.methods = [];
-                                message.methods.push(reader.string());
-                                break;
-                            }
-                        case 2: {
-                                message.generateOmittedAsInternal = reader.bool();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a SelectiveGapicGeneration message.
-                 * @function verify
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                SelectiveGapicGeneration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
-                        if (!Array.isArray(message.methods))
-                            return "methods: array expected";
-                        for (var i = 0; i < message.methods.length; ++i)
-                            if (!$util.isString(message.methods[i]))
-                                return "methods: string[] expected";
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        if (typeof message.generateOmittedAsInternal !== "boolean")
-                            return "generateOmittedAsInternal: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
-                        return object;
-                    var message = new $root.google.api.SelectiveGapicGeneration();
-                    if (object.methods) {
-                        if (!Array.isArray(object.methods))
-                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
-                        message.methods = [];
-                        for (var i = 0; i < object.methods.length; ++i)
-                            message.methods[i] = String(object.methods[i]);
-                    }
-                    if (object.generateOmittedAsInternal != null)
-                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.methods = [];
-                    if (options.defaults)
-                        object.generateOmittedAsInternal = false;
-                    if (message.methods && message.methods.length) {
-                        object.methods = [];
-                        for (var j = 0; j < message.methods.length; ++j)
-                            object.methods[j] = message.methods[j];
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
-                    return object;
-                };
-    
-                /**
-                 * Converts this SelectiveGapicGeneration to JSON.
-                 * @function toJSON
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for SelectiveGapicGeneration
-                 * @function getTypeUrl
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
-                };
-    
-                return SelectiveGapicGeneration;
-            })();
-    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -14412,7 +9894,6 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
-             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -14427,7 +9908,6 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
-                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -14452,7 +9932,6 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
-                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -14475,7 +9954,6 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
-                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -14525,14 +10003,6 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
-    
-                /**
-                 * FileDescriptorProto optionDependency.
-                 * @member {Array.<string>} optionDependency
-                 * @memberof google.protobuf.FileDescriptorProto
-                 * @instance
-                 */
-                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -14655,9 +10125,6 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
-                    if (message.optionDependency != null && message.optionDependency.length)
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -14728,12 +10195,6 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
-                                break;
-                            }
-                        case 15: {
-                                if (!(message.optionDependency && message.optionDependency.length))
-                                    message.optionDependency = [];
-                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -14838,13 +10299,6 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
-                        if (!Array.isArray(message.optionDependency))
-                            return "optionDependency: array expected";
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            if (!$util.isString(message.optionDependency[i]))
-                                return "optionDependency: string[] expected";
-                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -14899,7 +10353,6 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -14951,13 +10404,6 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
-                    }
-                    if (object.optionDependency) {
-                        if (!Array.isArray(object.optionDependency))
-                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
-                        message.optionDependency = [];
-                        for (var i = 0; i < object.optionDependency.length; ++i)
-                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -15021,10 +10467,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -15091,7 +10533,6 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
-                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -15148,11 +10589,6 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                    if (message.optionDependency && message.optionDependency.length) {
-                        object.optionDependency = [];
-                        for (var j = 0; j < message.optionDependency.length; ++j)
-                            object.optionDependency[j] = message.optionDependency[j];
-                    }
                     return object;
                 };
     
@@ -15201,7 +10637,6 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -15308,14 +10743,6 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * DescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.DescriptorProto
-                 * @instance
-                 */
-                DescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -15367,8 +10794,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -15459,10 +10884,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 11: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -15578,15 +10999,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -15686,26 +11098,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -15735,7 +11127,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -15781,8 +11172,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -17827,7 +13216,6 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -17889,14 +13277,6 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * EnumDescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.EnumDescriptorProto
-                 * @instance
-                 */
-                EnumDescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -17933,8 +13313,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -17995,10 +13373,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -18069,15 +13443,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -18127,26 +13492,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -18171,7 +13516,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -18192,8 +13536,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -20512,7 +15854,6 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -20634,14 +15975,6 @@
                 FieldOptions.prototype.features = null;
     
                 /**
-                 * FieldOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.featureSupport = null;
-    
-                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -20715,8 +16048,6 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -20816,10 +16147,6 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -20956,11 +16283,6 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
-                    }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -21150,11 +16472,6 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -21252,7 +16569,6 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
-                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -21285,8 +16601,6 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -21559,7 +16873,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -21600,10 +16913,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -21702,488 +17011,6 @@
                     };
     
                     return EditionDefault;
-                })();
-    
-                FieldOptions.FeatureSupport = (function() {
-    
-                    /**
-                     * Properties of a FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IFeatureSupport
-                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
-                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
-                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
-                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
-                     */
-    
-                    /**
-                     * Constructs a new FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents a FeatureSupport.
-                     * @implements IFeatureSupport
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     */
-                    function FeatureSupport(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * FeatureSupport editionIntroduced.
-                     * @member {google.protobuf.Edition} editionIntroduced
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionIntroduced = 0;
-    
-                    /**
-                     * FeatureSupport editionDeprecated.
-                     * @member {google.protobuf.Edition} editionDeprecated
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionDeprecated = 0;
-    
-                    /**
-                     * FeatureSupport deprecationWarning.
-                     * @member {string} deprecationWarning
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.deprecationWarning = "";
-    
-                    /**
-                     * FeatureSupport editionRemoved.
-                     * @member {google.protobuf.Edition} editionRemoved
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionRemoved = 0;
-    
-                    /**
-                     * Creates a new FeatureSupport instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
-                     */
-                    FeatureSupport.create = function create(properties) {
-                        return new FeatureSupport(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
-                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
-                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
-                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.editionIntroduced = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.editionDeprecated = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.deprecationWarning = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.editionRemoved = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a FeatureSupport message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    FeatureSupport.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            switch (message.editionIntroduced) {
-                            default:
-                                return "editionIntroduced: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            switch (message.editionDeprecated) {
-                            default:
-                                return "editionDeprecated: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            if (!$util.isString(message.deprecationWarning))
-                                return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            switch (message.editionRemoved) {
-                            default:
-                                return "editionRemoved: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     */
-                    FeatureSupport.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        switch (object.editionIntroduced) {
-                        default:
-                            if (typeof object.editionIntroduced === "number") {
-                                message.editionIntroduced = object.editionIntroduced;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionIntroduced = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionIntroduced = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionIntroduced = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionIntroduced = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionIntroduced = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionIntroduced = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionIntroduced = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionIntroduced = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionIntroduced = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionIntroduced = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionIntroduced = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionIntroduced = 2147483647;
-                            break;
-                        }
-                        switch (object.editionDeprecated) {
-                        default:
-                            if (typeof object.editionDeprecated === "number") {
-                                message.editionDeprecated = object.editionDeprecated;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionDeprecated = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionDeprecated = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionDeprecated = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionDeprecated = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionDeprecated = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionDeprecated = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionDeprecated = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionDeprecated = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionDeprecated = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionDeprecated = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionDeprecated = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionDeprecated = 2147483647;
-                            break;
-                        }
-                        if (object.deprecationWarning != null)
-                            message.deprecationWarning = String(object.deprecationWarning);
-                        switch (object.editionRemoved) {
-                        default:
-                            if (typeof object.editionRemoved === "number") {
-                                message.editionRemoved = object.editionRemoved;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionRemoved = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionRemoved = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionRemoved = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionRemoved = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionRemoved = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionRemoved = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionRemoved = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionRemoved = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionRemoved = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionRemoved = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionRemoved = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionRemoved = 2147483647;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    FeatureSupport.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.deprecationWarning = "";
-                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                        }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this FeatureSupport to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    FeatureSupport.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for FeatureSupport
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
-                    };
-    
-                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -22778,7 +17605,6 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -22823,14 +17649,6 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
-                 * EnumValueOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.featureSupport = null;
-    
-                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -22868,8 +17686,6 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -22919,10 +17735,6 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -22977,11 +17789,6 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -23015,11 +17822,6 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -23052,7 +17854,6 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
-                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -23060,8 +17861,6 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24501,8 +19300,6 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
-                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -24569,22 +19366,6 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
-                 * FeatureSet enforceNamingStyle.
-                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enforceNamingStyle = 0;
-    
-                /**
-                 * FeatureSet defaultSymbolVisibility.
-                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.defaultSymbolVisibility = 0;
-    
-                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -24620,10 +19401,6 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
-                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -24682,14 +19459,6 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 7: {
-                                message.enforceNamingStyle = reader.int32();
-                                break;
-                            }
-                        case 8: {
-                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -24780,26 +19549,6 @@
                         case 0:
                         case 1:
                         case 2:
-                            break;
-                        }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        switch (message.enforceNamingStyle) {
-                        default:
-                            return "enforceNamingStyle: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        switch (message.defaultSymbolVisibility) {
-                        default:
-                            return "defaultSymbolVisibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
                             break;
                         }
                     return null;
@@ -24941,54 +19690,6 @@
                         message.jsonFormat = 2;
                         break;
                     }
-                    switch (object.enforceNamingStyle) {
-                    default:
-                        if (typeof object.enforceNamingStyle === "number") {
-                            message.enforceNamingStyle = object.enforceNamingStyle;
-                            break;
-                        }
-                        break;
-                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-                    case 0:
-                        message.enforceNamingStyle = 0;
-                        break;
-                    case "STYLE2024":
-                    case 1:
-                        message.enforceNamingStyle = 1;
-                        break;
-                    case "STYLE_LEGACY":
-                    case 2:
-                        message.enforceNamingStyle = 2;
-                        break;
-                    }
-                    switch (object.defaultSymbolVisibility) {
-                    default:
-                        if (typeof object.defaultSymbolVisibility === "number") {
-                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
-                            break;
-                        }
-                        break;
-                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-                    case 0:
-                        message.defaultSymbolVisibility = 0;
-                        break;
-                    case "EXPORT_ALL":
-                    case 1:
-                        message.defaultSymbolVisibility = 1;
-                        break;
-                    case "EXPORT_TOP_LEVEL":
-                    case 2:
-                        message.defaultSymbolVisibility = 2;
-                        break;
-                    case "LOCAL_ALL":
-                    case 3:
-                        message.defaultSymbolVisibility = 3;
-                        break;
-                    case "STRICT":
-                    case 4:
-                        message.defaultSymbolVisibility = 4;
-                        break;
-                    }
                     return message;
                 };
     
@@ -25012,8 +19713,6 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
-                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -25027,10 +19726,6 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -25156,219 +19851,6 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
-                })();
-    
-                /**
-                 * EnforceNamingStyle enum.
-                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
-                 * @enum {number}
-                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
-                 * @property {number} STYLE2024=1 STYLE2024 value
-                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
-                 */
-                FeatureSet.EnforceNamingStyle = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "STYLE2024"] = 1;
-                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
-                    return values;
-                })();
-    
-                FeatureSet.VisibilityFeature = (function() {
-    
-                    /**
-                     * Properties of a VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @interface IVisibilityFeature
-                     */
-    
-                    /**
-                     * Constructs a new VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @classdesc Represents a VisibilityFeature.
-                     * @implements IVisibilityFeature
-                     * @constructor
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     */
-                    function VisibilityFeature(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Creates a new VisibilityFeature instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
-                     */
-                    VisibilityFeature.create = function create(properties) {
-                        return new VisibilityFeature(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a VisibilityFeature message.
-                     * @function verify
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    VisibilityFeature.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     */
-                    VisibilityFeature.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
-                            return object;
-                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                    };
-    
-                    /**
-                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    VisibilityFeature.toObject = function toObject() {
-                        return {};
-                    };
-    
-                    /**
-                     * Converts this VisibilityFeature to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    VisibilityFeature.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for VisibilityFeature
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
-                    };
-    
-                    /**
-                     * DefaultSymbolVisibility enum.
-                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
-                     * @enum {number}
-                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
-                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
-                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
-                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
-                     * @property {number} STRICT=4 STRICT value
-                     */
-                    VisibilityFeature.DefaultSymbolVisibility = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
-                        values[valuesById[1] = "EXPORT_ALL"] = 1;
-                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
-                        values[valuesById[3] = "LOCAL_ALL"] = 3;
-                        values[valuesById[4] = "STRICT"] = 4;
-                        return values;
-                    })();
-    
-                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -25555,7 +20037,6 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -25573,7 +20054,6 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -25621,10 +20101,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -25677,10 +20153,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -25790,8 +20262,7 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
-                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
                      */
     
                     /**
@@ -25818,20 +20289,12 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault overridableFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
-    
-                    /**
-                     * FeatureSetEditionDefault fixedFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
-                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
-                     * @instance
-                     */
-                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
+                    FeatureSetEditionDefault.prototype.features = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -25857,12 +20320,10 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
-                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -25903,12 +20364,8 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -25951,7 +20408,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -25964,15 +20420,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
                             if (error)
-                                return "overridableFeatures." + error;
-                        }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
-                            if (error)
-                                return "fixedFeatures." + error;
+                                return "features." + error;
                         }
                         return null;
                     };
@@ -25999,10 +20450,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -26045,15 +20492,10 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
-                        }
-                        if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                         }
                         return message;
                     };
@@ -26072,16 +20514,13 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
+                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.overridableFeatures = null;
-                            object.fixedFeatures = null;
                         }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -27294,22 +21733,6 @@
                 })();
     
                 return GeneratedCodeInfo;
-            })();
-    
-            /**
-             * SymbolVisibility enum.
-             * @name google.protobuf.SymbolVisibility
-             * @enum {number}
-             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
-             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
-             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
-             */
-            protobuf.SymbolVisibility = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
-                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
-                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
-                return values;
             })();
     
             protobuf.Struct = (function() {
