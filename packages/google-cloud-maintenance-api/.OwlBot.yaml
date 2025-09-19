@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/maintenance/api/google-cloud-maintenance-api-nodejs
-    dest: /owl-bot-staging/google-cloud-maintenance-api
+    - source: /google/cloud/maintenance/api/google-cloud-maintenance-api-nodejs
+      dest: /owl-bot-staging/google-cloud-maintenance-api
 
-api-name: maintenance
+api-name: api

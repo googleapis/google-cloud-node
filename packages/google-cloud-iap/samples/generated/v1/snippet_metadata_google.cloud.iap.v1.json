@@ -1,835 +1,835 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-iap",
-        "version": "4.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.iap.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_async",
-            "title": "IdentityAwareProxyAdminService setIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the access control policy for an Identity-Aware Proxy protected resource. Replaces any existing policy. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.set_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetIamPolicy",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.SetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "policy",
-                        "type": ".google.iam.v1.Policy"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "SetIamPolicy",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.SetIamPolicy",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_GetIamPolicy_async",
-            "title": "IdentityAwareProxyAdminService getIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the access control policy for an Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.get_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIamPolicy",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "options",
-                        "type": ".google.iam.v1.GetPolicyOptions"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetIamPolicy",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIamPolicy",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_TestIamPermissions_async",
-            "title": "IdentityAwareProxyAdminService testIamPermissions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns permissions that a caller has on the Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.test_iam_permissions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TestIamPermissions",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.TestIamPermissions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permissions",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.iam.v1.TestIamPermissionsResponse",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "TestIamPermissions",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.TestIamPermissions",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_async",
-            "title": "IdentityAwareProxyAdminService getIapSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the IAP settings on a particular IAP protected resource.",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.get_iap_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIapSettings",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIapSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.IapSettings",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetIapSettings",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIapSettings",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_UpdateIapSettings_async",
-            "title": "IdentityAwareProxyAdminService updateIapSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the IAP settings on a particular IAP protected resource. It replaces all fields unless the `update_mask` is set.",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.update_iap_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateIapSettings",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateIapSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "iap_settings",
-                        "type": ".google.cloud.iap.v1.IapSettings"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.IapSettings",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateIapSettings",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateIapSettings",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_ValidateIapAttributeExpression_async",
-            "title": "IdentityAwareProxyAdminService validateIapAttributeExpression Sample",
-            "origin": "API_DEFINITION",
-            "description": " Validates that a given CEL expression conforms to IAP restrictions.",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.validate_iap_attribute_expression.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ValidateIapAttributeExpression",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpression",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "expression",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.ValidateIapAttributeExpressionResponse",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ValidateIapAttributeExpression",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpression",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_async",
-            "title": "IdentityAwareProxyAdminService listTunnelDestGroups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the existing TunnelDestGroups. To group across all locations, use a `-` as the location ID. For example: `/v1/projects/123/iap_tunnel/locations/-/destGroups`",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.list_tunnel_dest_groups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListTunnelDestGroups",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ListTunnelDestGroups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.ListTunnelDestGroupsResponse",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListTunnelDestGroups",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ListTunnelDestGroups",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_CreateTunnelDestGroup_async",
-            "title": "IdentityAwareProxyAdminService createTunnelDestGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new TunnelDestGroup.",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.create_tunnel_dest_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateTunnelDestGroup",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.CreateTunnelDestGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "tunnel_dest_group",
-                        "type": ".google.cloud.iap.v1.TunnelDestGroup"
-                    },
-                    {
-                        "name": "tunnel_dest_group_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateTunnelDestGroup",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.CreateTunnelDestGroup",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_async",
-            "title": "IdentityAwareProxyAdminService getTunnelDestGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves an existing TunnelDestGroup.",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.get_tunnel_dest_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetTunnelDestGroup",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetTunnelDestGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetTunnelDestGroup",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetTunnelDestGroup",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_DeleteTunnelDestGroup_async",
-            "title": "IdentityAwareProxyAdminService deleteTunnelDestGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a TunnelDestGroup.",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.delete_tunnel_dest_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteTunnelDestGroup",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.DeleteTunnelDestGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteTunnelDestGroup",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.DeleteTunnelDestGroup",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_UpdateTunnelDestGroup_async",
-            "title": "IdentityAwareProxyAdminService updateTunnelDestGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a TunnelDestGroup.",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_service.update_tunnel_dest_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateTunnelDestGroup",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateTunnelDestGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "tunnel_dest_group",
-                        "type": ".google.cloud.iap.v1.TunnelDestGroup"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateTunnelDestGroup",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateTunnelDestGroup",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_ListBrands_async",
-            "title": "IdentityAwareProxyAdminService listBrands Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the existing brands for the project.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.list_brands.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBrands",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrands",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.ListBrandsResponse",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "ListBrands",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrands",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_CreateBrand_async",
-            "title": "IdentityAwareProxyAdminService createBrand Sample",
-            "origin": "API_DEFINITION",
-            "description": " Constructs a new OAuth brand for the project if one does not exist. The created brand is \"internal only\", meaning that OAuth clients created under it only accept requests from users who belong to the same Google Workspace organization as the project. The brand is created in an un-reviewed status. NOTE: The \"internal only\" status can be manually changed in the Google Cloud Console. Requires that a brand does not already exist for the project, and that the specified support email is owned by the caller.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.create_brand.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBrand",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrand",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "brand",
-                        "type": ".google.cloud.iap.v1.Brand"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.Brand",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateBrand",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrand",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_GetBrand_async",
-            "title": "IdentityAwareProxyAdminService getBrand Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves the OAuth brand of the project.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.get_brand.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBrand",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrand",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.Brand",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "GetBrand",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrand",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_CreateIdentityAwareProxyClient_async",
-            "title": "IdentityAwareProxyAdminService createIdentityAwareProxyClient Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned by IAP. Requires that the brand for the project exists and that it is set for internal-only use.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateIdentityAwareProxyClient",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClient",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "identity_aware_proxy_client",
-                        "type": ".google.cloud.iap.v1.IdentityAwareProxyClient"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.IdentityAwareProxyClient",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateIdentityAwareProxyClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClient",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_ListIdentityAwareProxyClients_async",
-            "title": "IdentityAwareProxyAdminService listIdentityAwareProxyClients Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the existing clients for the brand.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.list_identity_aware_proxy_clients.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListIdentityAwareProxyClients",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClients",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "ListIdentityAwareProxyClients",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClients",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_GetIdentityAwareProxyClient_async",
-            "title": "IdentityAwareProxyAdminService getIdentityAwareProxyClient Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves an Identity Aware Proxy (IAP) OAuth client. Requires that the client is owned by IAP.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.get_identity_aware_proxy_client.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIdentityAwareProxyClient",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClient",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.IdentityAwareProxyClient",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "GetIdentityAwareProxyClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClient",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_ResetIdentityAwareProxyClientSecret_async",
-            "title": "IdentityAwareProxyAdminService resetIdentityAwareProxyClientSecret Sample",
-            "origin": "API_DEFINITION",
-            "description": " Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful if the secret was compromised. Requires that the client is owned by IAP.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.reset_identity_aware_proxy_client_secret.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResetIdentityAwareProxyClientSecret",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecret",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.iap.v1.IdentityAwareProxyClient",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "ResetIdentityAwareProxyClientSecret",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecret",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_DeleteIdentityAwareProxyClient_async",
-            "title": "IdentityAwareProxyAdminService deleteIdentityAwareProxyClient Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an Identity Aware Proxy (IAP) OAuth client. Useful for removing obsolete clients, managing the number of clients in a given project, and cleaning up after tests. Requires that the client is owned by IAP.",
-            "canonical": true,
-            "file": "identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteIdentityAwareProxyClient",
-                "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClient",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "IdentityAwareProxyOAuthServiceClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteIdentityAwareProxyClient",
-                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClient",
-                    "service": {
-                        "shortName": "IdentityAwareProxyOAuthService",
-                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-iap",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.iap.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_async",
+      "title": "IdentityAwareProxyAdminService setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy for an Identity-Aware Proxy protected resource. Replaces any existing policy. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.SetIamPolicy",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_GetIamPolicy_async",
+      "title": "IdentityAwareProxyAdminService getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for an Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIamPolicy",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_TestIamPermissions_async",
+      "title": "IdentityAwareProxyAdminService testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.TestIamPermissions",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_async",
+      "title": "IdentityAwareProxyAdminService getIapSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the IAP settings on a particular IAP protected resource.",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.get_iap_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIapSettings",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIapSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.IapSettings",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetIapSettings",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetIapSettings",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_UpdateIapSettings_async",
+      "title": "IdentityAwareProxyAdminService updateIapSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the IAP settings on a particular IAP protected resource. It replaces all fields unless the `update_mask` is set.",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.update_iap_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateIapSettings",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateIapSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "iap_settings",
+            "type": ".google.cloud.iap.v1.IapSettings"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.IapSettings",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateIapSettings",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateIapSettings",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_ValidateIapAttributeExpression_async",
+      "title": "IdentityAwareProxyAdminService validateIapAttributeExpression Sample",
+      "origin": "API_DEFINITION",
+      "description": " Validates that a given CEL expression conforms to IAP restrictions.",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.validate_iap_attribute_expression.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ValidateIapAttributeExpression",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpression",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "expression",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.ValidateIapAttributeExpressionResponse",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ValidateIapAttributeExpression",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpression",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_async",
+      "title": "IdentityAwareProxyAdminService listTunnelDestGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the existing TunnelDestGroups. To group across all locations, use a `-` as the location ID. For example: `/v1/projects/123/iap_tunnel/locations/-/destGroups`",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.list_tunnel_dest_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTunnelDestGroups",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ListTunnelDestGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.ListTunnelDestGroupsResponse",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListTunnelDestGroups",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ListTunnelDestGroups",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_CreateTunnelDestGroup_async",
+      "title": "IdentityAwareProxyAdminService createTunnelDestGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new TunnelDestGroup.",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.create_tunnel_dest_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTunnelDestGroup",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.CreateTunnelDestGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tunnel_dest_group",
+            "type": ".google.cloud.iap.v1.TunnelDestGroup"
+          },
+          {
+            "name": "tunnel_dest_group_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateTunnelDestGroup",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.CreateTunnelDestGroup",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_async",
+      "title": "IdentityAwareProxyAdminService getTunnelDestGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves an existing TunnelDestGroup.",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.get_tunnel_dest_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTunnelDestGroup",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetTunnelDestGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetTunnelDestGroup",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.GetTunnelDestGroup",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_DeleteTunnelDestGroup_async",
+      "title": "IdentityAwareProxyAdminService deleteTunnelDestGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a TunnelDestGroup.",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.delete_tunnel_dest_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTunnelDestGroup",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.DeleteTunnelDestGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteTunnelDestGroup",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.DeleteTunnelDestGroup",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_UpdateTunnelDestGroup_async",
+      "title": "IdentityAwareProxyAdminService updateTunnelDestGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a TunnelDestGroup.",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_service.update_tunnel_dest_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTunnelDestGroup",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateTunnelDestGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tunnel_dest_group",
+            "type": ".google.cloud.iap.v1.TunnelDestGroup"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.TunnelDestGroup",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateTunnelDestGroup",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.UpdateTunnelDestGroup",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_ListBrands_async",
+      "title": "IdentityAwareProxyAdminService listBrands Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the existing brands for the project.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.list_brands.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBrands",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrands",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.ListBrandsResponse",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "ListBrands",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrands",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_CreateBrand_async",
+      "title": "IdentityAwareProxyAdminService createBrand Sample",
+      "origin": "API_DEFINITION",
+      "description": " Constructs a new OAuth brand for the project if one does not exist. The created brand is \"internal only\", meaning that OAuth clients created under it only accept requests from users who belong to the same Google Workspace organization as the project. The brand is created in an un-reviewed status. NOTE: The \"internal only\" status can be manually changed in the Google Cloud Console. Requires that a brand does not already exist for the project, and that the specified support email is owned by the caller.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.create_brand.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBrand",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrand",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "brand",
+            "type": ".google.cloud.iap.v1.Brand"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.Brand",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "CreateBrand",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrand",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_GetBrand_async",
+      "title": "IdentityAwareProxyAdminService getBrand Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the OAuth brand of the project.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.get_brand.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBrand",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrand",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.Brand",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "GetBrand",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrand",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_CreateIdentityAwareProxyClient_async",
+      "title": "IdentityAwareProxyAdminService createIdentityAwareProxyClient Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned by IAP. Requires that the brand for the project exists and that it is set for internal-only use.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateIdentityAwareProxyClient",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClient",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "identity_aware_proxy_client",
+            "type": ".google.cloud.iap.v1.IdentityAwareProxyClient"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.IdentityAwareProxyClient",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "CreateIdentityAwareProxyClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClient",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_ListIdentityAwareProxyClients_async",
+      "title": "IdentityAwareProxyAdminService listIdentityAwareProxyClients Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the existing clients for the brand.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.list_identity_aware_proxy_clients.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListIdentityAwareProxyClients",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClients",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "ListIdentityAwareProxyClients",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClients",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_GetIdentityAwareProxyClient_async",
+      "title": "IdentityAwareProxyAdminService getIdentityAwareProxyClient Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves an Identity Aware Proxy (IAP) OAuth client. Requires that the client is owned by IAP.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.get_identity_aware_proxy_client.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIdentityAwareProxyClient",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClient",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.IdentityAwareProxyClient",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "GetIdentityAwareProxyClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClient",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_ResetIdentityAwareProxyClientSecret_async",
+      "title": "IdentityAwareProxyAdminService resetIdentityAwareProxyClientSecret Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful if the secret was compromised. Requires that the client is owned by IAP.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.reset_identity_aware_proxy_client_secret.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResetIdentityAwareProxyClientSecret",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecret",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iap.v1.IdentityAwareProxyClient",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "ResetIdentityAwareProxyClientSecret",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecret",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1_generated_IdentityAwareProxyOAuthService_DeleteIdentityAwareProxyClient_async",
+      "title": "IdentityAwareProxyAdminService deleteIdentityAwareProxyClient Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an Identity Aware Proxy (IAP) OAuth client. Useful for removing obsolete clients, managing the number of clients in a given project, and cleaning up after tests. Requires that the client is owned by IAP.",
+      "canonical": true,
+      "file": "identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteIdentityAwareProxyClient",
+        "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClient",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "IdentityAwareProxyOAuthServiceClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteIdentityAwareProxyClient",
+          "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClient",
+          "service": {
+            "shortName": "IdentityAwareProxyOAuthService",
+            "fullName": "google.cloud.iap.v1.IdentityAwareProxyOAuthService"
+          }
+        }
+      }
+    }
+  ]
 }
