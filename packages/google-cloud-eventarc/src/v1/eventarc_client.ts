@@ -257,9 +257,9 @@ export class EventarcClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/triggers/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/channels/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/channelConnections/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/messageBuses/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/enrollments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/pipelines/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/triggers/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/channels/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/channelConnections/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/messageBuses/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/enrollments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/pipelines/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/triggers/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/channels/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/channelConnections/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/messageBuses/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/enrollments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/pipelines/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:testIamPermissions',body: '*',}],
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/triggers/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/channels/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/channelConnections/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/messageBuses/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/enrollments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/pipelines/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/kafkaSources/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/triggers/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/channels/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/channelConnections/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/messageBuses/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/enrollments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/pipelines/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/kafkaSources/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/triggers/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/channels/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/channelConnections/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/messageBuses/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/enrollments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/pipelines/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/kafkaSources/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:testIamPermissions',body: '*',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
@@ -951,7 +951,9 @@ export class EventarcClient {
       });
   }
 /**
- * Get a GoogleChannelConfig
+ * Get a GoogleChannelConfig.
+ * The name of the GoogleChannelConfig in the response is ALWAYS coded with
+ * projectID.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -2433,7 +2435,7 @@ export class EventarcClient {
  *   Required. The message bus to create.
  * @param {string} request.messageBusId
  *   Required. The user-provided ID to be assigned to the MessageBus. It should
- *   match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$)
+ *   match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {boolean} [request.validateOnly]
  *   Optional. If set, validate the request and preview the review, but do not
  *   post it.
@@ -2781,7 +2783,7 @@ export class EventarcClient {
  *   Required. The enrollment to create.
  * @param {string} request.enrollmentId
  *   Required. The user-provided ID to be assigned to the Enrollment. It should
- *   match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+ *   match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {boolean} [request.validateOnly]
  *   Optional. If set, validate the request and preview the review, but do not
  *   post it.
@@ -3128,7 +3130,8 @@ export class EventarcClient {
  * @param {google.cloud.eventarc.v1.Pipeline} request.pipeline
  *   Required. The pipeline to create.
  * @param {string} request.pipelineId
- *   Required. The user-provided ID to be assigned to the Pipeline.
+ *   Required. The user-provided ID to be assigned to the Pipeline. It should
+ *   match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {boolean} [request.validateOnly]
  *   Optional. If set, validate the request and preview the review, but do not
  *   post it.
@@ -3476,7 +3479,7 @@ export class EventarcClient {
  *   Required. The google api source to create.
  * @param {string} request.googleApiSourceId
  *   Required. The user-provided ID to be assigned to the GoogleApiSource. It
- *   should match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+ *   should match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {boolean} [request.validateOnly]
  *   Optional. If set, validate the request and preview the review, but do not
  *   post it.
@@ -4713,7 +4716,7 @@ export class EventarcClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent collection to list triggers on.
+ *   Required. The parent collection to list message buses on.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of results to return on each page.
  *
@@ -4825,7 +4828,7 @@ export class EventarcClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent collection to list triggers on.
+ *   Required. The parent collection to list message buses on.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of results to return on each page.
  *
@@ -4886,7 +4889,7 @@ export class EventarcClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent collection to list triggers on.
+ *   Required. The parent collection to list message buses on.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of results to return on each page.
  *
