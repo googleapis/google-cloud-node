@@ -20,30 +20,23 @@
 # with a non-zero
 set -eo pipefail
 
-NODE_VERSIONS=(
-    "18"
-)
-
 echo "change directory to the project root"
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 pushd ${PROJECT_ROOT}
 pwd
 
 echo "exporting Cloud Build triggers"
-
-for NODE_VERSION in ${NODE_VERSIONS[@]}; do
-    echo "exporting presubmit build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "system-presubmit-node${NODE_VERSION}" --destination "ci/export/system-presubmit-node${NODE_VERSION}.yaml"
-    echo "exporting continuous build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "system-continuous-node${NODE_VERSION}" --destination "ci/export/system-continuous-node${NODE_VERSION}.yaml"
-    echo "exporting nightly build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "system-nightly-node${NODE_VERSION}" --destination "ci/export/system-nightly-node${NODE_VERSION}.yaml"
-    echo "exporting presubmit build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "samples-presubmit-node${NODE_VERSION}" --destination "ci/export/samples-presubmit-node${NODE_VERSION}.yaml"
-    echo "exporting continuous build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "samples-continuous-node${NODE_VERSION}" --destination "ci/export/samples-continuous-node${NODE_VERSION}.yaml"
-    echo "exporting nightly build for node${NODE_VERSION}"
-    gcloud beta builds triggers export "samples-nightly-node${NODE_VERSION}" --destination "ci/export/samples-nightly-node${NODE_VERSION}.yaml"
-    echo "exporting presubmit build for node${NODE_VERSION} with credentials"
-    gcloud beta builds triggers export "samples-presubmit-node${NODE_VERSION}-with-credentials" --destination "ci/export/samples-presubmit-node${NODE_VERSION}-with-credentials.yaml"
-done
+echo "exporting presubmit build for node"
+gcloud beta builds triggers export "gcnc-system-presubmit-node" --destination "ci/export/gcnc-system-presubmit-node.yaml"
+echo "exporting continuous build for node"
+gcloud beta builds triggers export "gcnc-system-continuous-node" --destination "ci/export/gcnc-system-continuous-node.yaml"
+echo "exporting nightly build for node"
+gcloud beta builds triggers export "gcnc-system-nightly-node" --destination "ci/export/gcnc-system-nightly-node.yaml"
+echo "exporting presubmit build for node"
+gcloud beta builds triggers export "gcnc-samples-presubmit-node" --destination "ci/export/gcnc-samples-presubmit-node.yaml"
+echo "exporting continuous build for node"
+gcloud beta builds triggers export "gcnc-samples-continuous-node" --destination "ci/export/gcnc-samples-continuous-node.yaml"
+echo "exporting nightly build for node"
+gcloud beta builds triggers export "gcnc-samples-nightly-node" --destination "ci/export/gcnc-samples-nightly-node.yaml"
+echo "exporting presubmit build for node with credentials"
+gcloud beta builds triggers export "gcnc-samples-presubmit-node-with-credentials" --destination "ci/export/gcnc-samples-presubmit-node-with-credentials.yaml"

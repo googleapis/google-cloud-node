@@ -1,14 +1,14 @@
-createTime: '2022-08-05T20:10:57.660562803Z'
-description: Continuous build with node 18
-filename: ci/cloudbuild.yaml
+createTime: '2025-09-18T18:59:48.419617959Z'
+description: Continuous build with node
+filename: ci/gcnc-cloudbuild.yaml
 github:
   name: google-cloud-node-core
   owner: googleapis
   push:
     branch: ^main$
-id: 60bcf576-538e-45a8-ba92-b1b488afbf51
-name: samples-continuous-node18
-resourceName: projects/long-door-651/locations/global/triggers/60bcf576-538e-45a8-ba92-b1b488afbf51
+id: 6d4bac54-3cc5-4178-af9e-a0e220dfe95e
+name: gcnc-samples-continuous-node
+resourceName: projects/long-door-651/locations/global/triggers/6d4bac54-3cc5-4178-af9e-a0e220dfe95e
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: continuous

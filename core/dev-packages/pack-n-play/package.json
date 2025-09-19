@@ -1,0 +1,65 @@
+{
+  "name": "pack-n-play",
+  "description": "Ensure your library installs and compiles",
+  "version": "3.0.1",
+  "author": "Google LLC",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "directory": "packages/pack-n-play",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+  },
+  "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
+  "files": [
+    "build/src"
+  ],
+  "contributors": [
+    "Dominic Kramer <DominicDKramer@google.com>",
+    "Kelvin Jin <kelvinjin@google.com>"
+  ],
+  "scripts": {
+    "clean": "gts clean",
+    "compile": "tsc -p tsconfig.json",
+    "docs": "node -e 'fs.mkdirSync(`docs`)'",
+    "fix": "gts fix",
+    "lint": "if [ -d node_modules/gts ]; then GTS_PATH='./node_modules/gts'; else GTS_PATH='./../../node_modules/gts'; fi && echo \"{\\\"extends\\\": \\\"${GTS_PATH}\\\"}\" > .eslintrc.json && gts check && rm .eslintrc.json",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "samples-test": "",
+    "system-test": "",
+    "test": "c8 mocha build/test",
+    "prelint": ""
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.10",
+    "@types/npm-packlist": "^7.0.3",
+    "@types/once": "^1.4.5",
+    "@types/rimraf": "^4.0.5",
+    "@types/tar": "^6.1.13",
+    "@types/tmp": "^0.2.6",
+    "c8": "^10.1.3",
+    "gts": "^6.0.2",
+    "mocha": "^11.1.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@npmcli/arborist": "^8.0.0",
+    "execa": "^5.0.0",
+    "npm-packlist": "^9.0.0",
+    "once": "^1.4.0",
+    "rimraf": "^5.0.1",
+    "tar": "^7.4.3",
+    "tmp": "^0.2.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "c8": {
+    "exclude": [
+      "build/test"
+    ]
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/pack-n-play"
+}

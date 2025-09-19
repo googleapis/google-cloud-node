@@ -40,8 +40,8 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+echo "npm install --ignore-scripts --engine-strict; npm install"
+npm install --ignore-scripts --engine-strict; npm install
 
 
 retval=0
@@ -49,20 +49,20 @@ retval=0
 set +e
 case ${TEST_TYPE} in
 lint)
-    pnpm prelint
-    pnpm lint
+    npm run prelint
+    npm run lint
     retval=$?
     ;;
 samples)
-    pnpm samples-test
+    npm run samples-test
     retval=$?
     ;;
 system)
-    pnpm system-test
+    npm run system-test
     retval=$?
     ;;
 units)
-    pnpm test
+    npm run test
     retval=$?
     ;;
 *)

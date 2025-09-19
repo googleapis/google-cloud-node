@@ -16,6 +16,13 @@
     "url": "https://github.com/googleapis/google-cloud-node-core/issues"
   },
   "scripts": {
-    "test": "echo nothing to test"
-  }
+    "test": "npm test --ws",
+    "samples-test": "npm run samples-test --ws",
+    "system-test": "npm run system-test --ws",
+    "prelint": "npm run prelint --ws",
+    "lint": "npm run lint --ws"
+  },
+  "workspaces": [
+    "dev-packages/pack-n-play"
+  ]
 }
