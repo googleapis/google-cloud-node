@@ -1,75 +1,75 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-videointelligence",
-        "version": "6.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.videointelligence.v1beta2",
-                "version": "v1beta2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async",
-            "title": "videointelligence annotateVideo Sample",
-            "origin": "API_DEFINITION",
-            "description": " Performs asynchronous video annotation. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `AnnotateVideoProgress` (progress). `Operation.response` contains `AnnotateVideoResponse` (results).",
-            "canonical": true,
-            "file": "video_intelligence_service.annotate_video.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 94,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AnnotateVideo",
-                "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceService.AnnotateVideo",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "input_uri",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "input_content",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "features",
-                        "type": "TYPE_ENUM[]"
-                    },
-                    {
-                        "name": "video_context",
-                        "type": ".google.cloud.videointelligence.v1beta2.VideoContext"
-                    },
-                    {
-                        "name": "output_uri",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "VideoIntelligenceServiceClient",
-                    "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceServiceClient"
-                },
-                "method": {
-                    "shortName": "AnnotateVideo",
-                    "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceService.AnnotateVideo",
-                    "service": {
-                        "shortName": "VideoIntelligenceService",
-                        "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-videointelligence",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.videointelligence.v1beta2",
+        "version": "v1beta2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async",
+      "title": "videointelligence annotateVideo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Performs asynchronous video annotation. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `AnnotateVideoProgress` (progress). `Operation.response` contains `AnnotateVideoResponse` (results).",
+      "canonical": true,
+      "file": "video_intelligence_service.annotate_video.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 94,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnnotateVideo",
+        "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceService.AnnotateVideo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "input_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_content",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "features",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "video_context",
+            "type": ".google.cloud.videointelligence.v1beta2.VideoContext"
+          },
+          {
+            "name": "output_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VideoIntelligenceServiceClient",
+          "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceServiceClient"
+        },
+        "method": {
+          "shortName": "AnnotateVideo",
+          "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceService.AnnotateVideo",
+          "service": {
+            "shortName": "VideoIntelligenceService",
+            "fullName": "google.cloud.videointelligence.v1beta2.VideoIntelligenceService"
+          }
+        }
+      }
+    }
+  ]
 }

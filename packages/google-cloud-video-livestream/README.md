@@ -4,9 +4,7 @@
 
 # [Live Stream API: Nodejs Client][homepage]
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
+[//]: # "releaseLevel"
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/livestream.svg)](https://www.npmjs.org/package/@google-cloud/livestream)
 
@@ -55,44 +53,7 @@ npm install @google-cloud/livestream
 
 Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       |
-| --------------------------- | --------------------------------- |
-| create asset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_asset.js) |
-| create channel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_channel.js) |
-| create clip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_clip.js) |
-| create dvr session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_dvr_session.js) |
-| create event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_event.js) |
-| create input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_input.js) |
-| delete asset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_asset.js) |
-| delete channel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_channel.js) |
-| delete clip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_clip.js) |
-| delete dvr session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_dvr_session.js) |
-| delete event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_event.js) |
-| delete input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_input.js) |
-| get asset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_asset.js) |
-| get channel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_channel.js) |
-| get clip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_clip.js) |
-| get dvr session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_dvr_session.js) |
-| get event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_event.js) |
-| get input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_input.js) |
-| get pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_pool.js) |
-| list assets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_assets.js) |
-| list channels | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_channels.js) |
-| list clips | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_clips.js) |
-| list dvr sessions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_dvr_sessions.js) |
-| list events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_events.js) |
-| list inputs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_inputs.js) |
-| preview input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.preview_input.js) |
-| start channel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.start_channel.js) |
-| start distribution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.start_distribution.js) |
-| stop channel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.stop_channel.js) |
-| stop distribution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.stop_distribution.js) |
-| update channel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_channel.js) |
-| update dvr session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_dvr_session.js) |
-| update input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_input.js) |
-| update pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_pool.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/snippet_metadata_google.cloud.video.livestream.v1.json) |
-
+[//]: # "samples"
 
 ## Supported Node.js Versions
 

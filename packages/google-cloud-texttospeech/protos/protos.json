@@ -666,702 +666,6 @@
                       }
                     }
                   }
-                },
-                "v1beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.TextToSpeech.V1Beta1",
-                    "go_package": "cloud.google.com/go/texttospeech/apiv1beta1/texttospeechpb;texttospeechpb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "TextToSpeechLongAudioSynthesisProto",
-                    "java_package": "com.google.cloud.texttospeech.v1beta1",
-                    "objc_class_prefix": "CTTS",
-                    "php_namespace": "Google\\Cloud\\TextToSpeech\\V1beta1",
-                    "ruby_package": "Google::Cloud::TextToSpeech::V1beta1",
-                    "(google.api.resource_definition).type": "automl.googleapis.com/Model",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/models/{model}"
-                  },
-                  "nested": {
-                    "TextToSpeech": {
-                      "options": {
-                        "(google.api.default_host)": "texttospeech.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "ListVoices": {
-                          "requestType": "ListVoicesRequest",
-                          "responseType": "ListVoicesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/voices",
-                            "(google.api.method_signature)": "language_code"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/voices"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "language_code"
-                            }
-                          ]
-                        },
-                        "SynthesizeSpeech": {
-                          "requestType": "SynthesizeSpeechRequest",
-                          "responseType": "SynthesizeSpeechResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/text:synthesize",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "input,voice,audio_config"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/text:synthesize",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "input,voice,audio_config"
-                            }
-                          ]
-                        },
-                        "StreamingSynthesize": {
-                          "requestType": "StreamingSynthesizeRequest",
-                          "requestStream": true,
-                          "responseType": "StreamingSynthesizeResponse",
-                          "responseStream": true
-                        }
-                      }
-                    },
-                    "SsmlVoiceGender": {
-                      "values": {
-                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                        "MALE": 1,
-                        "FEMALE": 2,
-                        "NEUTRAL": 3
-                      }
-                    },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "LINEAR16": 1,
-                        "MP3": 2,
-                        "MP3_64_KBPS": 4,
-                        "OGG_OPUS": 3,
-                        "MULAW": 5,
-                        "ALAW": 6,
-                        "PCM": 7,
-                        "M4A": 8
-                      }
-                    },
-                    "ListVoicesRequest": {
-                      "fields": {
-                        "languageCode": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListVoicesResponse": {
-                      "fields": {
-                        "voices": {
-                          "rule": "repeated",
-                          "type": "Voice",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Voice": {
-                      "fields": {
-                        "languageCodes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "ssmlGender": {
-                          "type": "SsmlVoiceGender",
-                          "id": 3
-                        },
-                        "naturalSampleRateHertz": {
-                          "type": "int32",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "AdvancedVoiceOptions": {
-                      "oneofs": {
-                        "_lowLatencyJourneySynthesis": {
-                          "oneof": [
-                            "lowLatencyJourneySynthesis"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "lowLatencyJourneySynthesis": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      }
-                    },
-                    "SynthesizeSpeechRequest": {
-                      "oneofs": {
-                        "_advancedVoiceOptions": {
-                          "oneof": [
-                            "advancedVoiceOptions"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "input": {
-                          "type": "SynthesisInput",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "voice": {
-                          "type": "VoiceSelectionParams",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "audioConfig": {
-                          "type": "AudioConfig",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "enableTimePointing": {
-                          "rule": "repeated",
-                          "type": "TimepointType",
-                          "id": 4
-                        },
-                        "advancedVoiceOptions": {
-                          "type": "AdvancedVoiceOptions",
-                          "id": 8,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      },
-                      "nested": {
-                        "TimepointType": {
-                          "values": {
-                            "TIMEPOINT_TYPE_UNSPECIFIED": 0,
-                            "SSML_MARK": 1
-                          }
-                        }
-                      }
-                    },
-                    "CustomPronunciationParams": {
-                      "oneofs": {
-                        "_phrase": {
-                          "oneof": [
-                            "phrase"
-                          ]
-                        },
-                        "_phoneticEncoding": {
-                          "oneof": [
-                            "phoneticEncoding"
-                          ]
-                        },
-                        "_pronunciation": {
-                          "oneof": [
-                            "pronunciation"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "phrase": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "phoneticEncoding": {
-                          "type": "PhoneticEncoding",
-                          "id": 2,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "pronunciation": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      },
-                      "nested": {
-                        "PhoneticEncoding": {
-                          "values": {
-                            "PHONETIC_ENCODING_UNSPECIFIED": 0,
-                            "PHONETIC_ENCODING_IPA": 1,
-                            "PHONETIC_ENCODING_X_SAMPA": 2,
-                            "PHONETIC_ENCODING_JAPANESE_YOMIGANA": 3,
-                            "PHONETIC_ENCODING_PINYIN": 4
-                          }
-                        }
-                      }
-                    },
-                    "CustomPronunciations": {
-                      "fields": {
-                        "pronunciations": {
-                          "rule": "repeated",
-                          "type": "CustomPronunciationParams",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "MultiSpeakerMarkup": {
-                      "fields": {
-                        "turns": {
-                          "rule": "repeated",
-                          "type": "Turn",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Turn": {
-                          "fields": {
-                            "speaker": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "text": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "SynthesisInput": {
-                      "oneofs": {
-                        "inputSource": {
-                          "oneof": [
-                            "text",
-                            "markup",
-                            "ssml",
-                            "multiSpeakerMarkup"
-                          ]
-                        },
-                        "_prompt": {
-                          "oneof": [
-                            "prompt"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "text": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "markup": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "ssml": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "multiSpeakerMarkup": {
-                          "type": "MultiSpeakerMarkup",
-                          "id": 4
-                        },
-                        "prompt": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "customPronunciations": {
-                          "type": "CustomPronunciations",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "VoiceSelectionParams": {
-                      "fields": {
-                        "languageCode": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "ssmlGender": {
-                          "type": "SsmlVoiceGender",
-                          "id": 3
-                        },
-                        "customVoice": {
-                          "type": "CustomVoiceParams",
-                          "id": 4
-                        },
-                        "voiceClone": {
-                          "type": "VoiceCloneParams",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "modelName": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "AudioConfig": {
-                      "fields": {
-                        "audioEncoding": {
-                          "type": "AudioEncoding",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "speakingRate": {
-                          "type": "double",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pitch": {
-                          "type": "double",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "volumeGainDb": {
-                          "type": "double",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "sampleRateHertz": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "effectsProfileId": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "CustomVoiceParams": {
-                      "fields": {
-                        "model": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "automl.googleapis.com/Model"
-                          }
-                        },
-                        "reportedUsage": {
-                          "type": "ReportedUsage",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ReportedUsage": {
-                          "values": {
-                            "REPORTED_USAGE_UNSPECIFIED": 0,
-                            "REALTIME": 1,
-                            "OFFLINE": 2
-                          }
-                        }
-                      }
-                    },
-                    "VoiceCloneParams": {
-                      "fields": {
-                        "voiceCloningKey": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "SynthesizeSpeechResponse": {
-                      "fields": {
-                        "audioContent": {
-                          "type": "bytes",
-                          "id": 1
-                        },
-                        "timepoints": {
-                          "rule": "repeated",
-                          "type": "Timepoint",
-                          "id": 2
-                        },
-                        "audioConfig": {
-                          "type": "AudioConfig",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "Timepoint": {
-                      "fields": {
-                        "markName": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "timeSeconds": {
-                          "type": "double",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "StreamingAudioConfig": {
-                      "fields": {
-                        "audioEncoding": {
-                          "type": "AudioEncoding",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "sampleRateHertz": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "speakingRate": {
-                          "type": "double",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "StreamingSynthesizeConfig": {
-                      "fields": {
-                        "voice": {
-                          "type": "VoiceSelectionParams",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "streamingAudioConfig": {
-                          "type": "StreamingAudioConfig",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "customPronunciations": {
-                          "type": "CustomPronunciations",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "StreamingSynthesisInput": {
-                      "oneofs": {
-                        "inputSource": {
-                          "oneof": [
-                            "text",
-                            "markup"
-                          ]
-                        },
-                        "_prompt": {
-                          "oneof": [
-                            "prompt"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "text": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "markup": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "prompt": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      }
-                    },
-                    "StreamingSynthesizeRequest": {
-                      "oneofs": {
-                        "streamingRequest": {
-                          "oneof": [
-                            "streamingConfig",
-                            "input"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "streamingConfig": {
-                          "type": "StreamingSynthesizeConfig",
-                          "id": 1
-                        },
-                        "input": {
-                          "type": "StreamingSynthesisInput",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "StreamingSynthesizeResponse": {
-                      "fields": {
-                        "audioContent": {
-                          "type": "bytes",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextToSpeechLongAudioSynthesize": {
-                      "options": {
-                        "(google.api.default_host)": "texttospeech.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "SynthesizeLongAudio": {
-                          "requestType": "SynthesizeLongAudioRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}:synthesizeLongAudio",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioResponse",
-                            "(google.longrunning.operation_info).metadata_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=projects/*/locations/*}:synthesizeLongAudio",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioResponse",
-                                "metadata_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioMetadata"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "SynthesizeLongAudioRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "input": {
-                          "type": "SynthesisInput",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "audioConfig": {
-                          "type": "AudioConfig",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "outputGcsUri": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "voice": {
-                          "type": "VoiceSelectionParams",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "SynthesizeLongAudioResponse": {
-                      "fields": {}
-                    },
-                    "SynthesizeLongAudioMetadata": {
-                      "fields": {
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "lastUpdateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "progressPercentage": {
-                          "type": "double",
-                          "id": 3
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -1373,7 +677,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -1497,10 +802,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -1641,28 +942,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -1720,11 +999,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -1784,19 +1058,6 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
-              }
-            },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
               }
             },
             "LaunchStage": {
@@ -1931,19 +1192,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -1981,11 +1235,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -2075,10 +1324,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -2304,10 +1549,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -2522,7 +1763,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -2658,8 +1898,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -2686,10 +1925,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -2758,26 +1993,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -2867,10 +2082,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3014,7 +2225,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -3025,7 +2235,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -3036,7 +2245,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -3047,7 +2255,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -3058,8 +2265,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -3069,38 +2275,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -3145,13 +2340,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -3165,33 +2354,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -3220,26 +2382,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -3252,12 +2399,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -3343,14 +2484,6 @@
                 }
               }
             },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -3400,7 +2533,6 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
-            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {
