@@ -1,323 +1,323 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-language",
-        "version": "7.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.language.v1beta2",
-                "version": "v1beta2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeSentiment_async",
-            "title": "LanguageService analyzeSentiment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Analyzes the sentiment of the provided text.",
-            "canonical": true,
-            "file": "language_service.analyze_sentiment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AnalyzeSentiment",
-                "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSentiment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "document",
-                        "type": ".google.cloud.language.v1beta2.Document"
-                    },
-                    {
-                        "name": "encoding_type",
-                        "type": ".google.cloud.language.v1beta2.EncodingType"
-                    }
-                ],
-                "resultType": ".google.cloud.language.v1beta2.AnalyzeSentimentResponse",
-                "client": {
-                    "shortName": "LanguageServiceClient",
-                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
-                },
-                "method": {
-                    "shortName": "AnalyzeSentiment",
-                    "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSentiment",
-                    "service": {
-                        "shortName": "LanguageService",
-                        "fullName": "google.cloud.language.v1beta2.LanguageService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeEntities_async",
-            "title": "LanguageService analyzeEntities Sample",
-            "origin": "API_DEFINITION",
-            "description": " Finds named entities (currently proper names and common nouns) in the text along with entity types, salience, mentions for each entity, and other properties.",
-            "canonical": true,
-            "file": "language_service.analyze_entities.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AnalyzeEntities",
-                "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntities",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "document",
-                        "type": ".google.cloud.language.v1beta2.Document"
-                    },
-                    {
-                        "name": "encoding_type",
-                        "type": ".google.cloud.language.v1beta2.EncodingType"
-                    }
-                ],
-                "resultType": ".google.cloud.language.v1beta2.AnalyzeEntitiesResponse",
-                "client": {
-                    "shortName": "LanguageServiceClient",
-                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
-                },
-                "method": {
-                    "shortName": "AnalyzeEntities",
-                    "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntities",
-                    "service": {
-                        "shortName": "LanguageService",
-                        "fullName": "google.cloud.language.v1beta2.LanguageService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeEntitySentiment_async",
-            "title": "LanguageService analyzeEntitySentiment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1beta2.LanguageService.AnalyzeEntities] in the text and analyzes sentiment associated with each entity and its mentions.",
-            "canonical": true,
-            "file": "language_service.analyze_entity_sentiment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AnalyzeEntitySentiment",
-                "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntitySentiment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "document",
-                        "type": ".google.cloud.language.v1beta2.Document"
-                    },
-                    {
-                        "name": "encoding_type",
-                        "type": ".google.cloud.language.v1beta2.EncodingType"
-                    }
-                ],
-                "resultType": ".google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse",
-                "client": {
-                    "shortName": "LanguageServiceClient",
-                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
-                },
-                "method": {
-                    "shortName": "AnalyzeEntitySentiment",
-                    "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntitySentiment",
-                    "service": {
-                        "shortName": "LanguageService",
-                        "fullName": "google.cloud.language.v1beta2.LanguageService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeSyntax_async",
-            "title": "LanguageService analyzeSyntax Sample",
-            "origin": "API_DEFINITION",
-            "description": " Analyzes the syntax of the text and provides sentence boundaries and tokenization along with part of speech tags, dependency trees, and other properties.",
-            "canonical": true,
-            "file": "language_service.analyze_syntax.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AnalyzeSyntax",
-                "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSyntax",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "document",
-                        "type": ".google.cloud.language.v1beta2.Document"
-                    },
-                    {
-                        "name": "encoding_type",
-                        "type": ".google.cloud.language.v1beta2.EncodingType"
-                    }
-                ],
-                "resultType": ".google.cloud.language.v1beta2.AnalyzeSyntaxResponse",
-                "client": {
-                    "shortName": "LanguageServiceClient",
-                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
-                },
-                "method": {
-                    "shortName": "AnalyzeSyntax",
-                    "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSyntax",
-                    "service": {
-                        "shortName": "LanguageService",
-                        "fullName": "google.cloud.language.v1beta2.LanguageService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "language_v1beta2_generated_LanguageService_ClassifyText_async",
-            "title": "LanguageService classifyText Sample",
-            "origin": "API_DEFINITION",
-            "description": " Classifies a document into categories.",
-            "canonical": true,
-            "file": "language_service.classify_text.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ClassifyText",
-                "fullName": "google.cloud.language.v1beta2.LanguageService.ClassifyText",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "document",
-                        "type": ".google.cloud.language.v1beta2.Document"
-                    },
-                    {
-                        "name": "classification_model_options",
-                        "type": ".google.cloud.language.v1beta2.ClassificationModelOptions"
-                    }
-                ],
-                "resultType": ".google.cloud.language.v1beta2.ClassifyTextResponse",
-                "client": {
-                    "shortName": "LanguageServiceClient",
-                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
-                },
-                "method": {
-                    "shortName": "ClassifyText",
-                    "fullName": "google.cloud.language.v1beta2.LanguageService.ClassifyText",
-                    "service": {
-                        "shortName": "LanguageService",
-                        "fullName": "google.cloud.language.v1beta2.LanguageService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "language_v1beta2_generated_LanguageService_ModerateText_async",
-            "title": "LanguageService moderateText Sample",
-            "origin": "API_DEFINITION",
-            "description": " Moderates a document for harmful and sensitive categories.",
-            "canonical": true,
-            "file": "language_service.moderate_text.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ModerateText",
-                "fullName": "google.cloud.language.v1beta2.LanguageService.ModerateText",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "document",
-                        "type": ".google.cloud.language.v1beta2.Document"
-                    }
-                ],
-                "resultType": ".google.cloud.language.v1beta2.ModerateTextResponse",
-                "client": {
-                    "shortName": "LanguageServiceClient",
-                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
-                },
-                "method": {
-                    "shortName": "ModerateText",
-                    "fullName": "google.cloud.language.v1beta2.LanguageService.ModerateText",
-                    "service": {
-                        "shortName": "LanguageService",
-                        "fullName": "google.cloud.language.v1beta2.LanguageService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "language_v1beta2_generated_LanguageService_AnnotateText_async",
-            "title": "LanguageService annotateText Sample",
-            "origin": "API_DEFINITION",
-            "description": " A convenience method that provides all syntax, sentiment, entity, and classification features in one call.",
-            "canonical": true,
-            "file": "language_service.annotate_text.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AnnotateText",
-                "fullName": "google.cloud.language.v1beta2.LanguageService.AnnotateText",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "document",
-                        "type": ".google.cloud.language.v1beta2.Document"
-                    },
-                    {
-                        "name": "features",
-                        "type": ".google.cloud.language.v1beta2.AnnotateTextRequest.Features"
-                    },
-                    {
-                        "name": "encoding_type",
-                        "type": ".google.cloud.language.v1beta2.EncodingType"
-                    }
-                ],
-                "resultType": ".google.cloud.language.v1beta2.AnnotateTextResponse",
-                "client": {
-                    "shortName": "LanguageServiceClient",
-                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
-                },
-                "method": {
-                    "shortName": "AnnotateText",
-                    "fullName": "google.cloud.language.v1beta2.LanguageService.AnnotateText",
-                    "service": {
-                        "shortName": "LanguageService",
-                        "fullName": "google.cloud.language.v1beta2.LanguageService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-language",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.language.v1beta2",
+        "version": "v1beta2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeSentiment_async",
+      "title": "LanguageService analyzeSentiment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Analyzes the sentiment of the provided text.",
+      "canonical": true,
+      "file": "language_service.analyze_sentiment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnalyzeSentiment",
+        "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSentiment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.language.v1beta2.Document"
+          },
+          {
+            "name": "encoding_type",
+            "type": ".google.cloud.language.v1beta2.EncodingType"
+          }
+        ],
+        "resultType": ".google.cloud.language.v1beta2.AnalyzeSentimentResponse",
+        "client": {
+          "shortName": "LanguageServiceClient",
+          "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+        },
+        "method": {
+          "shortName": "AnalyzeSentiment",
+          "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSentiment",
+          "service": {
+            "shortName": "LanguageService",
+            "fullName": "google.cloud.language.v1beta2.LanguageService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeEntities_async",
+      "title": "LanguageService analyzeEntities Sample",
+      "origin": "API_DEFINITION",
+      "description": " Finds named entities (currently proper names and common nouns) in the text along with entity types, salience, mentions for each entity, and other properties.",
+      "canonical": true,
+      "file": "language_service.analyze_entities.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnalyzeEntities",
+        "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntities",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.language.v1beta2.Document"
+          },
+          {
+            "name": "encoding_type",
+            "type": ".google.cloud.language.v1beta2.EncodingType"
+          }
+        ],
+        "resultType": ".google.cloud.language.v1beta2.AnalyzeEntitiesResponse",
+        "client": {
+          "shortName": "LanguageServiceClient",
+          "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+        },
+        "method": {
+          "shortName": "AnalyzeEntities",
+          "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntities",
+          "service": {
+            "shortName": "LanguageService",
+            "fullName": "google.cloud.language.v1beta2.LanguageService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeEntitySentiment_async",
+      "title": "LanguageService analyzeEntitySentiment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1beta2.LanguageService.AnalyzeEntities] in the text and analyzes sentiment associated with each entity and its mentions.",
+      "canonical": true,
+      "file": "language_service.analyze_entity_sentiment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnalyzeEntitySentiment",
+        "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntitySentiment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.language.v1beta2.Document"
+          },
+          {
+            "name": "encoding_type",
+            "type": ".google.cloud.language.v1beta2.EncodingType"
+          }
+        ],
+        "resultType": ".google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse",
+        "client": {
+          "shortName": "LanguageServiceClient",
+          "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+        },
+        "method": {
+          "shortName": "AnalyzeEntitySentiment",
+          "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeEntitySentiment",
+          "service": {
+            "shortName": "LanguageService",
+            "fullName": "google.cloud.language.v1beta2.LanguageService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeSyntax_async",
+      "title": "LanguageService analyzeSyntax Sample",
+      "origin": "API_DEFINITION",
+      "description": " Analyzes the syntax of the text and provides sentence boundaries and tokenization along with part of speech tags, dependency trees, and other properties.",
+      "canonical": true,
+      "file": "language_service.analyze_syntax.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnalyzeSyntax",
+        "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSyntax",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.language.v1beta2.Document"
+          },
+          {
+            "name": "encoding_type",
+            "type": ".google.cloud.language.v1beta2.EncodingType"
+          }
+        ],
+        "resultType": ".google.cloud.language.v1beta2.AnalyzeSyntaxResponse",
+        "client": {
+          "shortName": "LanguageServiceClient",
+          "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+        },
+        "method": {
+          "shortName": "AnalyzeSyntax",
+          "fullName": "google.cloud.language.v1beta2.LanguageService.AnalyzeSyntax",
+          "service": {
+            "shortName": "LanguageService",
+            "fullName": "google.cloud.language.v1beta2.LanguageService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "language_v1beta2_generated_LanguageService_ClassifyText_async",
+      "title": "LanguageService classifyText Sample",
+      "origin": "API_DEFINITION",
+      "description": " Classifies a document into categories.",
+      "canonical": true,
+      "file": "language_service.classify_text.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ClassifyText",
+        "fullName": "google.cloud.language.v1beta2.LanguageService.ClassifyText",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.language.v1beta2.Document"
+          },
+          {
+            "name": "classification_model_options",
+            "type": ".google.cloud.language.v1beta2.ClassificationModelOptions"
+          }
+        ],
+        "resultType": ".google.cloud.language.v1beta2.ClassifyTextResponse",
+        "client": {
+          "shortName": "LanguageServiceClient",
+          "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+        },
+        "method": {
+          "shortName": "ClassifyText",
+          "fullName": "google.cloud.language.v1beta2.LanguageService.ClassifyText",
+          "service": {
+            "shortName": "LanguageService",
+            "fullName": "google.cloud.language.v1beta2.LanguageService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "language_v1beta2_generated_LanguageService_ModerateText_async",
+      "title": "LanguageService moderateText Sample",
+      "origin": "API_DEFINITION",
+      "description": " Moderates a document for harmful and sensitive categories.",
+      "canonical": true,
+      "file": "language_service.moderate_text.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ModerateText",
+        "fullName": "google.cloud.language.v1beta2.LanguageService.ModerateText",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.language.v1beta2.Document"
+          }
+        ],
+        "resultType": ".google.cloud.language.v1beta2.ModerateTextResponse",
+        "client": {
+          "shortName": "LanguageServiceClient",
+          "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+        },
+        "method": {
+          "shortName": "ModerateText",
+          "fullName": "google.cloud.language.v1beta2.LanguageService.ModerateText",
+          "service": {
+            "shortName": "LanguageService",
+            "fullName": "google.cloud.language.v1beta2.LanguageService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "language_v1beta2_generated_LanguageService_AnnotateText_async",
+      "title": "LanguageService annotateText Sample",
+      "origin": "API_DEFINITION",
+      "description": " A convenience method that provides all syntax, sentiment, entity, and classification features in one call.",
+      "canonical": true,
+      "file": "language_service.annotate_text.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnnotateText",
+        "fullName": "google.cloud.language.v1beta2.LanguageService.AnnotateText",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.language.v1beta2.Document"
+          },
+          {
+            "name": "features",
+            "type": ".google.cloud.language.v1beta2.AnnotateTextRequest.Features"
+          },
+          {
+            "name": "encoding_type",
+            "type": ".google.cloud.language.v1beta2.EncodingType"
+          }
+        ],
+        "resultType": ".google.cloud.language.v1beta2.AnnotateTextResponse",
+        "client": {
+          "shortName": "LanguageServiceClient",
+          "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+        },
+        "method": {
+          "shortName": "AnnotateText",
+          "fullName": "google.cloud.language.v1beta2.LanguageService.AnnotateText",
+          "service": {
+            "shortName": "LanguageService",
+            "fullName": "google.cloud.language.v1beta2.LanguageService"
+          }
+        }
+      }
+    }
+  ]
 }
