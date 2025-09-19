@@ -1,0 +1,82 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.devicestreaming.v1",
+  "libraryPackage": "@google-cloud/devicestreaming",
+  "services": {
+    "DirectAccessService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DirectAccessServiceClient",
+          "rpcs": {
+            "CreateDeviceSession": {
+              "methods": [
+                "createDeviceSession"
+              ]
+            },
+            "GetDeviceSession": {
+              "methods": [
+                "getDeviceSession"
+              ]
+            },
+            "CancelDeviceSession": {
+              "methods": [
+                "cancelDeviceSession"
+              ]
+            },
+            "UpdateDeviceSession": {
+              "methods": [
+                "updateDeviceSession"
+              ]
+            },
+            "AdbConnect": {
+              "methods": [
+                "adbConnect"
+              ]
+            },
+            "ListDeviceSessions": {
+              "methods": [
+                "listDeviceSessions",
+                "listDeviceSessionsStream",
+                "listDeviceSessionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DirectAccessServiceClient",
+          "rpcs": {
+            "CreateDeviceSession": {
+              "methods": [
+                "createDeviceSession"
+              ]
+            },
+            "GetDeviceSession": {
+              "methods": [
+                "getDeviceSession"
+              ]
+            },
+            "CancelDeviceSession": {
+              "methods": [
+                "cancelDeviceSession"
+              ]
+            },
+            "UpdateDeviceSession": {
+              "methods": [
+                "updateDeviceSession"
+              ]
+            },
+            "ListDeviceSessions": {
+              "methods": [
+                "listDeviceSessions",
+                "listDeviceSessionsStream",
+                "listDeviceSessionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
