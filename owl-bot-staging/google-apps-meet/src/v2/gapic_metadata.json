@@ -1,0 +1,221 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.apps.meet.v2",
+  "libraryPackage": "@google-apps/meet",
+  "services": {
+    "ConferenceRecordsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConferenceRecordsServiceClient",
+          "rpcs": {
+            "GetConferenceRecord": {
+              "methods": [
+                "getConferenceRecord"
+              ]
+            },
+            "GetParticipant": {
+              "methods": [
+                "getParticipant"
+              ]
+            },
+            "GetParticipantSession": {
+              "methods": [
+                "getParticipantSession"
+              ]
+            },
+            "GetRecording": {
+              "methods": [
+                "getRecording"
+              ]
+            },
+            "GetTranscript": {
+              "methods": [
+                "getTranscript"
+              ]
+            },
+            "GetTranscriptEntry": {
+              "methods": [
+                "getTranscriptEntry"
+              ]
+            },
+            "ListConferenceRecords": {
+              "methods": [
+                "listConferenceRecords",
+                "listConferenceRecordsStream",
+                "listConferenceRecordsAsync"
+              ]
+            },
+            "ListParticipants": {
+              "methods": [
+                "listParticipants",
+                "listParticipantsStream",
+                "listParticipantsAsync"
+              ]
+            },
+            "ListParticipantSessions": {
+              "methods": [
+                "listParticipantSessions",
+                "listParticipantSessionsStream",
+                "listParticipantSessionsAsync"
+              ]
+            },
+            "ListRecordings": {
+              "methods": [
+                "listRecordings",
+                "listRecordingsStream",
+                "listRecordingsAsync"
+              ]
+            },
+            "ListTranscripts": {
+              "methods": [
+                "listTranscripts",
+                "listTranscriptsStream",
+                "listTranscriptsAsync"
+              ]
+            },
+            "ListTranscriptEntries": {
+              "methods": [
+                "listTranscriptEntries",
+                "listTranscriptEntriesStream",
+                "listTranscriptEntriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConferenceRecordsServiceClient",
+          "rpcs": {
+            "GetConferenceRecord": {
+              "methods": [
+                "getConferenceRecord"
+              ]
+            },
+            "GetParticipant": {
+              "methods": [
+                "getParticipant"
+              ]
+            },
+            "GetParticipantSession": {
+              "methods": [
+                "getParticipantSession"
+              ]
+            },
+            "GetRecording": {
+              "methods": [
+                "getRecording"
+              ]
+            },
+            "GetTranscript": {
+              "methods": [
+                "getTranscript"
+              ]
+            },
+            "GetTranscriptEntry": {
+              "methods": [
+                "getTranscriptEntry"
+              ]
+            },
+            "ListConferenceRecords": {
+              "methods": [
+                "listConferenceRecords",
+                "listConferenceRecordsStream",
+                "listConferenceRecordsAsync"
+              ]
+            },
+            "ListParticipants": {
+              "methods": [
+                "listParticipants",
+                "listParticipantsStream",
+                "listParticipantsAsync"
+              ]
+            },
+            "ListParticipantSessions": {
+              "methods": [
+                "listParticipantSessions",
+                "listParticipantSessionsStream",
+                "listParticipantSessionsAsync"
+              ]
+            },
+            "ListRecordings": {
+              "methods": [
+                "listRecordings",
+                "listRecordingsStream",
+                "listRecordingsAsync"
+              ]
+            },
+            "ListTranscripts": {
+              "methods": [
+                "listTranscripts",
+                "listTranscriptsStream",
+                "listTranscriptsAsync"
+              ]
+            },
+            "ListTranscriptEntries": {
+              "methods": [
+                "listTranscriptEntries",
+                "listTranscriptEntriesStream",
+                "listTranscriptEntriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SpacesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SpacesServiceClient",
+          "rpcs": {
+            "CreateSpace": {
+              "methods": [
+                "createSpace"
+              ]
+            },
+            "GetSpace": {
+              "methods": [
+                "getSpace"
+              ]
+            },
+            "UpdateSpace": {
+              "methods": [
+                "updateSpace"
+              ]
+            },
+            "EndActiveConference": {
+              "methods": [
+                "endActiveConference"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SpacesServiceClient",
+          "rpcs": {
+            "CreateSpace": {
+              "methods": [
+                "createSpace"
+              ]
+            },
+            "GetSpace": {
+              "methods": [
+                "getSpace"
+              ]
+            },
+            "UpdateSpace": {
+              "methods": [
+                "updateSpace"
+              ]
+            },
+            "EndActiveConference": {
+              "methods": [
+                "endActiveConference"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
