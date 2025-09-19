@@ -1133,1493 +1133,6 @@
                       }
                     }
                   }
-                },
-                "v2beta": {
-                  "options": {
-                    "csharp_namespace": "Google.Apps.Meet.V2Beta",
-                    "go_package": "cloud.google.com/go/apps/meet/apiv2beta/meetpb;meetpb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "ServiceProto",
-                    "java_package": "com.google.apps.meet.v2beta",
-                    "php_namespace": "Google\\Apps\\Meet\\V2beta",
-                    "ruby_package": "Google::Apps::Meet::V2beta"
-                  },
-                  "nested": {
-                    "Space": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/Space",
-                        "(google.api.resource).pattern": "spaces/{space}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "meetingUri": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "meetingCode": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "config": {
-                          "type": "SpaceConfig",
-                          "id": 5
-                        },
-                        "activeConference": {
-                          "type": "ActiveConference",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "ActiveConference": {
-                      "fields": {
-                        "conferenceRecord": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/ConferenceRecord"
-                          }
-                        }
-                      }
-                    },
-                    "SpaceConfig": {
-                      "fields": {
-                        "accessType": {
-                          "type": "AccessType",
-                          "id": 1
-                        },
-                        "entryPointAccess": {
-                          "type": "EntryPointAccess",
-                          "id": 2
-                        },
-                        "moderation": {
-                          "type": "Moderation",
-                          "id": 3
-                        },
-                        "moderationRestrictions": {
-                          "type": "ModerationRestrictions",
-                          "id": 4
-                        },
-                        "attendanceReportGenerationType": {
-                          "type": "AttendanceReportGenerationType",
-                          "id": 6
-                        },
-                        "artifactConfig": {
-                          "type": "ArtifactConfig",
-                          "id": 7
-                        }
-                      },
-                      "nested": {
-                        "ModerationRestrictions": {
-                          "fields": {
-                            "chatRestriction": {
-                              "type": "RestrictionType",
-                              "id": 1
-                            },
-                            "reactionRestriction": {
-                              "type": "RestrictionType",
-                              "id": 2
-                            },
-                            "presentRestriction": {
-                              "type": "RestrictionType",
-                              "id": 3
-                            },
-                            "defaultJoinAsViewerType": {
-                              "type": "DefaultJoinAsViewerType",
-                              "id": 4
-                            }
-                          },
-                          "nested": {
-                            "RestrictionType": {
-                              "values": {
-                                "RESTRICTION_TYPE_UNSPECIFIED": 0,
-                                "HOSTS_ONLY": 1,
-                                "NO_RESTRICTION": 2
-                              }
-                            },
-                            "DefaultJoinAsViewerType": {
-                              "values": {
-                                "DEFAULT_JOIN_AS_VIEWER_TYPE_UNSPECIFIED": 0,
-                                "ON": 1,
-                                "OFF": 2
-                              }
-                            }
-                          }
-                        },
-                        "ArtifactConfig": {
-                          "fields": {
-                            "recordingConfig": {
-                              "type": "RecordingConfig",
-                              "id": 1
-                            },
-                            "transcriptionConfig": {
-                              "type": "TranscriptionConfig",
-                              "id": 2
-                            },
-                            "smartNotesConfig": {
-                              "type": "SmartNotesConfig",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "RecordingConfig": {
-                              "fields": {
-                                "autoRecordingGeneration": {
-                                  "type": "AutoGenerationType",
-                                  "id": 2
-                                }
-                              }
-                            },
-                            "TranscriptionConfig": {
-                              "fields": {
-                                "autoTranscriptionGeneration": {
-                                  "type": "AutoGenerationType",
-                                  "id": 2
-                                }
-                              }
-                            },
-                            "SmartNotesConfig": {
-                              "fields": {
-                                "autoSmartNotesGeneration": {
-                                  "type": "AutoGenerationType",
-                                  "id": 2
-                                }
-                              }
-                            },
-                            "AutoGenerationType": {
-                              "values": {
-                                "AUTO_GENERATION_TYPE_UNSPECIFIED": 0,
-                                "ON": 1,
-                                "OFF": 2
-                              }
-                            }
-                          }
-                        },
-                        "AccessType": {
-                          "values": {
-                            "ACCESS_TYPE_UNSPECIFIED": 0,
-                            "OPEN": 1,
-                            "TRUSTED": 2,
-                            "RESTRICTED": 3
-                          }
-                        },
-                        "EntryPointAccess": {
-                          "values": {
-                            "ENTRY_POINT_ACCESS_UNSPECIFIED": 0,
-                            "ALL": 1,
-                            "CREATOR_APP_ONLY": 2
-                          }
-                        },
-                        "Moderation": {
-                          "values": {
-                            "MODERATION_UNSPECIFIED": 0,
-                            "OFF": 1,
-                            "ON": 2
-                          }
-                        },
-                        "AttendanceReportGenerationType": {
-                          "values": {
-                            "ATTENDANCE_REPORT_GENERATION_TYPE_UNSPECIFIED": 0,
-                            "GENERATE_REPORT": 1,
-                            "DO_NOT_GENERATE": 2
-                          }
-                        }
-                      }
-                    },
-                    "Member": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/Member",
-                        "(google.api.resource).pattern": "spaces/{space}/members/{member}",
-                        "(google.api.resource).plural": "members",
-                        "(google.api.resource).singular": "member"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "email": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "role": {
-                          "type": "Role",
-                          "id": 3
-                        },
-                        "user": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      },
-                      "nested": {
-                        "Role": {
-                          "values": {
-                            "ROLE_UNSPECIFIED": 0,
-                            "COHOST": 1
-                          }
-                        }
-                      }
-                    },
-                    "ConferenceRecord": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/ConferenceRecord",
-                        "(google.api.resource).pattern": "conferenceRecords/{conference_record}",
-                        "(google.api.resource).plural": "conferenceRecords",
-                        "(google.api.resource).singular": "conferenceRecord"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "expireTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "space": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Space"
-                          }
-                        }
-                      }
-                    },
-                    "Participant": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/Participant",
-                        "(google.api.resource).pattern": "conferenceRecords/{conference_record}/participants/{participant}",
-                        "(google.api.resource).plural": "participants",
-                        "(google.api.resource).singular": "participant"
-                      },
-                      "oneofs": {
-                        "user": {
-                          "oneof": [
-                            "signedinUser",
-                            "anonymousUser",
-                            "phoneUser"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "signedinUser": {
-                          "type": "SignedinUser",
-                          "id": 4
-                        },
-                        "anonymousUser": {
-                          "type": "AnonymousUser",
-                          "id": 5
-                        },
-                        "phoneUser": {
-                          "type": "PhoneUser",
-                          "id": 6
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "earliestStartTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "latestEndTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "ParticipantSession": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/ParticipantSession",
-                        "(google.api.resource).pattern": "conferenceRecords/{conference_record}/participants/{participant}/participantSessions/{participant_session}",
-                        "(google.api.resource).plural": "participantSessions",
-                        "(google.api.resource).singular": "participantSession"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "SignedinUser": {
-                      "fields": {
-                        "user": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "AnonymousUser": {
-                      "fields": {
-                        "displayName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "PhoneUser": {
-                      "fields": {
-                        "displayName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "Recording": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/Recording",
-                        "(google.api.resource).pattern": "conferenceRecords/{conference_record}/recordings/{recording}",
-                        "(google.api.resource).plural": "recordings",
-                        "(google.api.resource).singular": "recording"
-                      },
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "driveDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "driveDestination": {
-                          "type": "DriveDestination",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "STARTED": 1,
-                            "ENDED": 2,
-                            "FILE_GENERATED": 3
-                          }
-                        }
-                      }
-                    },
-                    "DriveDestination": {
-                      "fields": {
-                        "file": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "exportUri": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "Transcript": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/Transcript",
-                        "(google.api.resource).pattern": "conferenceRecords/{conference_record}/transcripts/{transcript}",
-                        "(google.api.resource).plural": "transcripts",
-                        "(google.api.resource).singular": "transcript"
-                      },
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "docsDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "docsDestination": {
-                          "type": "DocsDestination",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "STARTED": 1,
-                            "ENDED": 2,
-                            "FILE_GENERATED": 3
-                          }
-                        }
-                      }
-                    },
-                    "DocsDestination": {
-                      "fields": {
-                        "document": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "exportUri": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "TranscriptEntry": {
-                      "options": {
-                        "(google.api.resource).type": "meet.googleapis.com/TranscriptEntry",
-                        "(google.api.resource).pattern": "conferenceRecords/{conference_record}/transcripts/{transcript}/entries/{entry}",
-                        "(google.api.resource).plural": "transcriptEntries",
-                        "(google.api.resource).singular": "transcriptEntry"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "participant": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Participant"
-                          }
-                        },
-                        "text": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "SpacesService": {
-                      "options": {
-                        "(google.api.default_host)": "meet.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.conference.media.audio.readonly,https://www.googleapis.com/auth/meetings.conference.media.readonly,https://www.googleapis.com/auth/meetings.conference.media.video.readonly,https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly,https://www.googleapis.com/auth/meetings.space.settings"
-                      },
-                      "methods": {
-                        "CreateSpace": {
-                          "requestType": "CreateSpaceRequest",
-                          "responseType": "Space",
-                          "options": {
-                            "(google.api.http).post": "/v2beta/spaces",
-                            "(google.api.http).body": "space",
-                            "(google.api.method_signature)": "space"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v2beta/spaces",
-                                "body": "space"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "space"
-                            }
-                          ]
-                        },
-                        "GetSpace": {
-                          "requestType": "GetSpaceRequest",
-                          "responseType": "Space",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=spaces/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=spaces/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "UpdateSpace": {
-                          "requestType": "UpdateSpaceRequest",
-                          "responseType": "Space",
-                          "options": {
-                            "(google.api.http).patch": "/v2beta/{space.name=spaces/*}",
-                            "(google.api.http).body": "space",
-                            "(google.api.method_signature)": "space,update_mask"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v2beta/{space.name=spaces/*}",
-                                "body": "space"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "space,update_mask"
-                            }
-                          ]
-                        },
-                        "ConnectActiveConference": {
-                          "requestType": "ConnectActiveConferenceRequest",
-                          "responseType": "ConnectActiveConferenceResponse",
-                          "options": {
-                            "(google.api.http).post": "/v2beta/{name=spaces/*}:connectActiveConference",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v2beta/{name=spaces/*}:connectActiveConference",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "EndActiveConference": {
-                          "requestType": "EndActiveConferenceRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).post": "/v2beta/{name=spaces/*}:endActiveConference",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v2beta/{name=spaces/*}:endActiveConference",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "CreateMember": {
-                          "requestType": "CreateMemberRequest",
-                          "responseType": "Member",
-                          "options": {
-                            "(google.api.http).post": "/v2beta/{parent=spaces/*}/members",
-                            "(google.api.http).body": "member",
-                            "(google.api.method_signature)": "parent,member"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v2beta/{parent=spaces/*}/members",
-                                "body": "member"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,member"
-                            }
-                          ]
-                        },
-                        "GetMember": {
-                          "requestType": "GetMemberRequest",
-                          "responseType": "Member",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=spaces/*/members/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=spaces/*/members/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListMembers": {
-                          "requestType": "ListMembersRequest",
-                          "responseType": "ListMembersResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{parent=spaces/*}/members",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{parent=spaces/*}/members"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "DeleteMember": {
-                          "requestType": "DeleteMemberRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v2beta/{name=spaces/*/members/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v2beta/{name=spaces/*/members/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "ConferenceRecordsService": {
-                      "options": {
-                        "(google.api.default_host)": "meet.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly"
-                      },
-                      "methods": {
-                        "GetConferenceRecord": {
-                          "requestType": "GetConferenceRecordRequest",
-                          "responseType": "ConferenceRecord",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=conferenceRecords/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=conferenceRecords/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListConferenceRecords": {
-                          "requestType": "ListConferenceRecordsRequest",
-                          "responseType": "ListConferenceRecordsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/conferenceRecords"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/conferenceRecords"
-                              }
-                            }
-                          ]
-                        },
-                        "GetParticipant": {
-                          "requestType": "GetParticipantRequest",
-                          "responseType": "Participant",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=conferenceRecords/*/participants/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=conferenceRecords/*/participants/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListParticipants": {
-                          "requestType": "ListParticipantsRequest",
-                          "responseType": "ListParticipantsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{parent=conferenceRecords/*}/participants",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{parent=conferenceRecords/*}/participants"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetParticipantSession": {
-                          "requestType": "GetParticipantSessionRequest",
-                          "responseType": "ParticipantSession",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=conferenceRecords/*/participants/*/participantSessions/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=conferenceRecords/*/participants/*/participantSessions/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListParticipantSessions": {
-                          "requestType": "ListParticipantSessionsRequest",
-                          "responseType": "ListParticipantSessionsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{parent=conferenceRecords/*/participants/*}/participantSessions",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{parent=conferenceRecords/*/participants/*}/participantSessions"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetRecording": {
-                          "requestType": "GetRecordingRequest",
-                          "responseType": "Recording",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=conferenceRecords/*/recordings/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=conferenceRecords/*/recordings/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListRecordings": {
-                          "requestType": "ListRecordingsRequest",
-                          "responseType": "ListRecordingsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{parent=conferenceRecords/*}/recordings",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{parent=conferenceRecords/*}/recordings"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetTranscript": {
-                          "requestType": "GetTranscriptRequest",
-                          "responseType": "Transcript",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=conferenceRecords/*/transcripts/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=conferenceRecords/*/transcripts/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListTranscripts": {
-                          "requestType": "ListTranscriptsRequest",
-                          "responseType": "ListTranscriptsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{parent=conferenceRecords/*}/transcripts",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{parent=conferenceRecords/*}/transcripts"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetTranscriptEntry": {
-                          "requestType": "GetTranscriptEntryRequest",
-                          "responseType": "TranscriptEntry",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{name=conferenceRecords/*/transcripts/*/entries/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{name=conferenceRecords/*/transcripts/*/entries/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListTranscriptEntries": {
-                          "requestType": "ListTranscriptEntriesRequest",
-                          "responseType": "ListTranscriptEntriesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta/{parent=conferenceRecords/*/transcripts/*}/entries",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta/{parent=conferenceRecords/*/transcripts/*}/entries"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "CreateSpaceRequest": {
-                      "fields": {
-                        "space": {
-                          "type": "Space",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GetSpaceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Space"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateSpaceRequest": {
-                      "fields": {
-                        "space": {
-                          "type": "Space",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ConnectActiveConferenceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Space"
-                          }
-                        },
-                        "offer": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ConnectActiveConferenceResponse": {
-                      "fields": {
-                        "answer": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "traceId": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "EndActiveConferenceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Space"
-                          }
-                        }
-                      }
-                    },
-                    "CreateMemberRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "meet.googleapis.com/Member"
-                          }
-                        },
-                        "member": {
-                          "type": "Member",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "GetMemberRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Member"
-                          }
-                        }
-                      }
-                    },
-                    "ListMembersRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "meet.googleapis.com/Member"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListMembersResponse": {
-                      "fields": {
-                        "members": {
-                          "rule": "repeated",
-                          "type": "Member",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteMemberRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Member"
-                          }
-                        }
-                      }
-                    },
-                    "GetConferenceRecordRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/ConferenceRecord"
-                          }
-                        }
-                      }
-                    },
-                    "ListConferenceRecordsRequest": {
-                      "fields": {
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListConferenceRecordsResponse": {
-                      "fields": {
-                        "conferenceRecords": {
-                          "rule": "repeated",
-                          "type": "ConferenceRecord",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetParticipantRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Participant"
-                          }
-                        }
-                      }
-                    },
-                    "ListParticipantsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "meet.googleapis.com/Participant"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListParticipantsResponse": {
-                      "fields": {
-                        "participants": {
-                          "rule": "repeated",
-                          "type": "Participant",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "totalSize": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetParticipantSessionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/ParticipantSession"
-                          }
-                        }
-                      }
-                    },
-                    "ListParticipantSessionsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "meet.googleapis.com/ParticipantSession"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListParticipantSessionsResponse": {
-                      "fields": {
-                        "participantSessions": {
-                          "rule": "repeated",
-                          "type": "ParticipantSession",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetRecordingRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Recording"
-                          }
-                        }
-                      }
-                    },
-                    "ListRecordingsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "meet.googleapis.com/Recording"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListRecordingsResponse": {
-                      "fields": {
-                        "recordings": {
-                          "rule": "repeated",
-                          "type": "Recording",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetTranscriptRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/Transcript"
-                          }
-                        }
-                      }
-                    },
-                    "ListTranscriptsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "meet.googleapis.com/Transcript"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListTranscriptsResponse": {
-                      "fields": {
-                        "transcripts": {
-                          "rule": "repeated",
-                          "type": "Transcript",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetTranscriptEntryRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "meet.googleapis.com/TranscriptEntry"
-                          }
-                        }
-                      }
-                    },
-                    "ListTranscriptEntriesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "meet.googleapis.com/TranscriptEntry"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListTranscriptEntriesResponse": {
-                      "fields": {
-                        "transcriptEntries": {
-                          "rule": "repeated",
-                          "type": "TranscriptEntry",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -2631,7 +1144,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "fieldBehavior": {
@@ -2854,10 +1368,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -2998,28 +1508,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -3077,11 +1565,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -3143,19 +1626,6 @@
                 "PACKAGE_MANAGER": 20
               }
             },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -3189,19 +1659,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -3239,11 +1702,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -3333,10 +1791,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -3562,10 +2016,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -3780,7 +2230,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -3916,8 +2365,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -3944,10 +2392,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4016,26 +2460,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -4125,10 +2549,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4272,7 +2692,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -4283,7 +2702,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -4294,7 +2712,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -4305,7 +2722,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -4316,8 +2732,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -4327,38 +2742,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -4403,13 +2807,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -4423,33 +2821,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -4478,26 +2849,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -4510,12 +2866,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -4599,14 +2949,6 @@
                     }
                   }
                 }
-              }
-            },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
               }
             },
             "Timestamp": {

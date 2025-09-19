@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'CacheService',
-    filename: './cache-service.js',
+    library: 'GenerativeService',
+    filename: './generative-service.js',
   },
   node: {
     child_process: 'empty',

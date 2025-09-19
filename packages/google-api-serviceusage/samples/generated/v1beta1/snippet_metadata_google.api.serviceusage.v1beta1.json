@@ -1,923 +1,923 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-serviceusage",
-        "version": "4.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.api.serviceusage.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_EnableService_async",
-            "title": "ServiceUsage enableService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enables a service so that it can be used with a project. Operation response type: `google.protobuf.Empty`",
-            "canonical": true,
-            "file": "service_usage.enable_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EnableService",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.EnableService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "EnableService",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.EnableService",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_DisableService_async",
-            "title": "ServiceUsage disableService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Disables a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled. Operation response type: `google.protobuf.Empty`",
-            "canonical": true,
-            "file": "service_usage.disable_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DisableService",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DisableService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "DisableService",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DisableService",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GetService_async",
-            "title": "ServiceUsage getService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the service configuration and enabled state for a given service.",
-            "canonical": true,
-            "file": "service_usage.get_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetService",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1beta1.Service",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "GetService",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetService",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListServices_async",
-            "title": "ServiceUsage listServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project.",
-            "canonical": true,
-            "file": "service_usage.list_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServices",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1beta1.ListServicesResponse",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "ListServices",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListServices",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_BatchEnableServices_async",
-            "title": "ServiceUsage batchEnableServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enables multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. Operation response type: `google.protobuf.Empty`",
-            "canonical": true,
-            "file": "service_usage.batch_enable_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchEnableServices",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.BatchEnableServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_ids",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "BatchEnableServices",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.BatchEnableServices",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListConsumerQuotaMetrics_async",
-            "title": "ServiceUsage listConsumerQuotaMetrics Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves a summary of all quota information visible to the service consumer, organized by service metric. Each metric includes information about all of its defined limits. Each limit includes the limit configuration (quota unit, preciseness, default value), the current effective limit value, and all of the overrides applied to the limit.",
-            "canonical": true,
-            "file": "service_usage.list_consumer_quota_metrics.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConsumerQuotaMetrics",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerQuotaMetrics",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.api.serviceusage.v1beta1.QuotaView"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "ListConsumerQuotaMetrics",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerQuotaMetrics",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GetConsumerQuotaMetric_async",
-            "title": "ServiceUsage getConsumerQuotaMetric Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves a summary of quota information for a specific quota metric",
-            "canonical": true,
-            "file": "service_usage.get_consumer_quota_metric.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConsumerQuotaMetric",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaMetric",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.api.serviceusage.v1beta1.QuotaView"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "GetConsumerQuotaMetric",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaMetric",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GetConsumerQuotaLimit_async",
-            "title": "ServiceUsage getConsumerQuotaLimit Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves a summary of quota information for a specific quota limit.",
-            "canonical": true,
-            "file": "service_usage.get_consumer_quota_limit.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConsumerQuotaLimit",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaLimit",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.api.serviceusage.v1beta1.QuotaView"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "GetConsumerQuotaLimit",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaLimit",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_CreateAdminOverride_async",
-            "title": "ServiceUsage createAdminOverride Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an admin override. An admin override is applied by an administrator of a parent folder or parent organization of the consumer receiving the override. An admin override is intended to limit the amount of quota the consumer can use out of the total quota pool allocated to all children of the folder or organization.",
-            "canonical": true,
-            "file": "service_usage.create_admin_override.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAdminOverride",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateAdminOverride",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "override",
-                        "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "CreateAdminOverride",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateAdminOverride",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_UpdateAdminOverride_async",
-            "title": "ServiceUsage updateAdminOverride Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an admin override.",
-            "canonical": true,
-            "file": "service_usage.update_admin_override.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAdminOverride",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateAdminOverride",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "override",
-                        "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "UpdateAdminOverride",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateAdminOverride",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_DeleteAdminOverride_async",
-            "title": "ServiceUsage deleteAdminOverride Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an admin override.",
-            "canonical": true,
-            "file": "service_usage.delete_admin_override.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAdminOverride",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteAdminOverride",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "DeleteAdminOverride",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteAdminOverride",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListAdminOverrides_async",
-            "title": "ServiceUsage listAdminOverrides Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all admin overrides on this limit.",
-            "canonical": true,
-            "file": "service_usage.list_admin_overrides.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAdminOverrides",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListAdminOverrides",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1beta1.ListAdminOverridesResponse",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "ListAdminOverrides",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListAdminOverrides",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ImportAdminOverrides_async",
-            "title": "ServiceUsage importAdminOverrides Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates or updates multiple admin overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.",
-            "canonical": true,
-            "file": "service_usage.import_admin_overrides.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ImportAdminOverrides",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportAdminOverrides",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "inline_source",
-                        "type": ".google.api.serviceusage.v1beta1.OverrideInlineSource"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "ImportAdminOverrides",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportAdminOverrides",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_CreateConsumerOverride_async",
-            "title": "ServiceUsage createConsumerOverride Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a consumer override. A consumer override is applied to the consumer on its own authority to limit its own quota usage. Consumer overrides cannot be used to grant more quota than would be allowed by admin overrides, producer overrides, or the default limit of the service.",
-            "canonical": true,
-            "file": "service_usage.create_consumer_override.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConsumerOverride",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateConsumerOverride",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "override",
-                        "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "CreateConsumerOverride",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateConsumerOverride",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_UpdateConsumerOverride_async",
-            "title": "ServiceUsage updateConsumerOverride Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a consumer override.",
-            "canonical": true,
-            "file": "service_usage.update_consumer_override.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConsumerOverride",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateConsumerOverride",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "override",
-                        "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "UpdateConsumerOverride",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateConsumerOverride",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_DeleteConsumerOverride_async",
-            "title": "ServiceUsage deleteConsumerOverride Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a consumer override.",
-            "canonical": true,
-            "file": "service_usage.delete_consumer_override.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConsumerOverride",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteConsumerOverride",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "DeleteConsumerOverride",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteConsumerOverride",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListConsumerOverrides_async",
-            "title": "ServiceUsage listConsumerOverrides Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all consumer overrides on this limit.",
-            "canonical": true,
-            "file": "service_usage.list_consumer_overrides.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConsumerOverrides",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerOverrides",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1beta1.ListConsumerOverridesResponse",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "ListConsumerOverrides",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerOverrides",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ImportConsumerOverrides_async",
-            "title": "ServiceUsage importConsumerOverrides Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates or updates multiple consumer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.",
-            "canonical": true,
-            "file": "service_usage.import_consumer_overrides.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ImportConsumerOverrides",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportConsumerOverrides",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "inline_source",
-                        "type": ".google.api.serviceusage.v1beta1.OverrideInlineSource"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force_only",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "ImportConsumerOverrides",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportConsumerOverrides",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GenerateServiceIdentity_async",
-            "title": "ServiceUsage generateServiceIdentity Sample",
-            "origin": "API_DEFINITION",
-            "description": " Generates service identity for service.",
-            "canonical": true,
-            "file": "service_usage.generate_service_identity.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GenerateServiceIdentity",
-                "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GenerateServiceIdentity",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "GenerateServiceIdentity",
-                    "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GenerateServiceIdentity",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-serviceusage",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.api.serviceusage.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_EnableService_async",
+      "title": "ServiceUsage enableService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enables a service so that it can be used with a project. Operation response type: `google.protobuf.Empty`",
+      "canonical": true,
+      "file": "service_usage.enable_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EnableService",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.EnableService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "EnableService",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.EnableService",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_DisableService_async",
+      "title": "ServiceUsage disableService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Disables a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled. Operation response type: `google.protobuf.Empty`",
+      "canonical": true,
+      "file": "service_usage.disable_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DisableService",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DisableService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "DisableService",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DisableService",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GetService_async",
+      "title": "ServiceUsage getService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the service configuration and enabled state for a given service.",
+      "canonical": true,
+      "file": "service_usage.get_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetService",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1beta1.Service",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "GetService",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetService",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListServices_async",
+      "title": "ServiceUsage listServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project.",
+      "canonical": true,
+      "file": "service_usage.list_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServices",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1beta1.ListServicesResponse",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "ListServices",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListServices",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_BatchEnableServices_async",
+      "title": "ServiceUsage batchEnableServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enables multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. Operation response type: `google.protobuf.Empty`",
+      "canonical": true,
+      "file": "service_usage.batch_enable_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchEnableServices",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.BatchEnableServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_ids",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "BatchEnableServices",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.BatchEnableServices",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListConsumerQuotaMetrics_async",
+      "title": "ServiceUsage listConsumerQuotaMetrics Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a summary of all quota information visible to the service consumer, organized by service metric. Each metric includes information about all of its defined limits. Each limit includes the limit configuration (quota unit, preciseness, default value), the current effective limit value, and all of the overrides applied to the limit.",
+      "canonical": true,
+      "file": "service_usage.list_consumer_quota_metrics.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConsumerQuotaMetrics",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerQuotaMetrics",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.api.serviceusage.v1beta1.QuotaView"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "ListConsumerQuotaMetrics",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerQuotaMetrics",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GetConsumerQuotaMetric_async",
+      "title": "ServiceUsage getConsumerQuotaMetric Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a summary of quota information for a specific quota metric",
+      "canonical": true,
+      "file": "service_usage.get_consumer_quota_metric.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConsumerQuotaMetric",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaMetric",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.api.serviceusage.v1beta1.QuotaView"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "GetConsumerQuotaMetric",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaMetric",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GetConsumerQuotaLimit_async",
+      "title": "ServiceUsage getConsumerQuotaLimit Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a summary of quota information for a specific quota limit.",
+      "canonical": true,
+      "file": "service_usage.get_consumer_quota_limit.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConsumerQuotaLimit",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaLimit",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.api.serviceusage.v1beta1.QuotaView"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "GetConsumerQuotaLimit",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GetConsumerQuotaLimit",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_CreateAdminOverride_async",
+      "title": "ServiceUsage createAdminOverride Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an admin override. An admin override is applied by an administrator of a parent folder or parent organization of the consumer receiving the override. An admin override is intended to limit the amount of quota the consumer can use out of the total quota pool allocated to all children of the folder or organization.",
+      "canonical": true,
+      "file": "service_usage.create_admin_override.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAdminOverride",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateAdminOverride",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "override",
+            "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "CreateAdminOverride",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateAdminOverride",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_UpdateAdminOverride_async",
+      "title": "ServiceUsage updateAdminOverride Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an admin override.",
+      "canonical": true,
+      "file": "service_usage.update_admin_override.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAdminOverride",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateAdminOverride",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "override",
+            "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "UpdateAdminOverride",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateAdminOverride",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_DeleteAdminOverride_async",
+      "title": "ServiceUsage deleteAdminOverride Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an admin override.",
+      "canonical": true,
+      "file": "service_usage.delete_admin_override.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAdminOverride",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteAdminOverride",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "DeleteAdminOverride",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteAdminOverride",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListAdminOverrides_async",
+      "title": "ServiceUsage listAdminOverrides Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all admin overrides on this limit.",
+      "canonical": true,
+      "file": "service_usage.list_admin_overrides.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAdminOverrides",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListAdminOverrides",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1beta1.ListAdminOverridesResponse",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "ListAdminOverrides",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListAdminOverrides",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ImportAdminOverrides_async",
+      "title": "ServiceUsage importAdminOverrides Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates or updates multiple admin overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.",
+      "canonical": true,
+      "file": "service_usage.import_admin_overrides.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportAdminOverrides",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportAdminOverrides",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "inline_source",
+            "type": ".google.api.serviceusage.v1beta1.OverrideInlineSource"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "ImportAdminOverrides",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportAdminOverrides",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_CreateConsumerOverride_async",
+      "title": "ServiceUsage createConsumerOverride Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a consumer override. A consumer override is applied to the consumer on its own authority to limit its own quota usage. Consumer overrides cannot be used to grant more quota than would be allowed by admin overrides, producer overrides, or the default limit of the service.",
+      "canonical": true,
+      "file": "service_usage.create_consumer_override.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConsumerOverride",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateConsumerOverride",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "override",
+            "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "CreateConsumerOverride",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.CreateConsumerOverride",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_UpdateConsumerOverride_async",
+      "title": "ServiceUsage updateConsumerOverride Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a consumer override.",
+      "canonical": true,
+      "file": "service_usage.update_consumer_override.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConsumerOverride",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateConsumerOverride",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "override",
+            "type": ".google.api.serviceusage.v1beta1.QuotaOverride"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "UpdateConsumerOverride",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.UpdateConsumerOverride",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_DeleteConsumerOverride_async",
+      "title": "ServiceUsage deleteConsumerOverride Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a consumer override.",
+      "canonical": true,
+      "file": "service_usage.delete_consumer_override.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConsumerOverride",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteConsumerOverride",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "DeleteConsumerOverride",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.DeleteConsumerOverride",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ListConsumerOverrides_async",
+      "title": "ServiceUsage listConsumerOverrides Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all consumer overrides on this limit.",
+      "canonical": true,
+      "file": "service_usage.list_consumer_overrides.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConsumerOverrides",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerOverrides",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1beta1.ListConsumerOverridesResponse",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "ListConsumerOverrides",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ListConsumerOverrides",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_ImportConsumerOverrides_async",
+      "title": "ServiceUsage importConsumerOverrides Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates or updates multiple consumer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.",
+      "canonical": true,
+      "file": "service_usage.import_consumer_overrides.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportConsumerOverrides",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportConsumerOverrides",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "inline_source",
+            "type": ".google.api.serviceusage.v1beta1.OverrideInlineSource"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force_only",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "ImportConsumerOverrides",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.ImportConsumerOverrides",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1beta1_generated_ServiceUsage_GenerateServiceIdentity_async",
+      "title": "ServiceUsage generateServiceIdentity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates service identity for service.",
+      "canonical": true,
+      "file": "service_usage.generate_service_identity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateServiceIdentity",
+        "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GenerateServiceIdentity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "GenerateServiceIdentity",
+          "fullName": "google.api.serviceusage.v1beta1.ServiceUsage.GenerateServiceIdentity",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1beta1.ServiceUsage"
+          }
+        }
+      }
+    }
+  ]
 }

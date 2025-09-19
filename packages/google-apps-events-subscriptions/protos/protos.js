@@ -3883,4072 +3883,6 @@
                         return v1;
                     })();
     
-                    subscriptions.v1beta = (function() {
-    
-                        /**
-                         * Namespace v1beta.
-                         * @memberof google.apps.events.subscriptions
-                         * @namespace
-                         */
-                        var v1beta = {};
-    
-                        v1beta.Subscription = (function() {
-    
-                            /**
-                             * Properties of a Subscription.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface ISubscription
-                             * @property {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions|null} [driveOptions] Subscription driveOptions
-                             * @property {google.protobuf.ITimestamp|null} [expireTime] Subscription expireTime
-                             * @property {google.protobuf.IDuration|null} [ttl] Subscription ttl
-                             * @property {string|null} [name] Subscription name
-                             * @property {string|null} [uid] Subscription uid
-                             * @property {string|null} [targetResource] Subscription targetResource
-                             * @property {Array.<string>|null} [eventTypes] Subscription eventTypes
-                             * @property {google.apps.events.subscriptions.v1beta.IPayloadOptions|null} [payloadOptions] Subscription payloadOptions
-                             * @property {google.apps.events.subscriptions.v1beta.INotificationEndpoint|null} [notificationEndpoint] Subscription notificationEndpoint
-                             * @property {google.apps.events.subscriptions.v1beta.Subscription.State|null} [state] Subscription state
-                             * @property {google.apps.events.subscriptions.v1beta.Subscription.ErrorType|null} [suspensionReason] Subscription suspensionReason
-                             * @property {string|null} [authority] Subscription authority
-                             * @property {google.protobuf.ITimestamp|null} [createTime] Subscription createTime
-                             * @property {google.protobuf.ITimestamp|null} [updateTime] Subscription updateTime
-                             * @property {boolean|null} [reconciling] Subscription reconciling
-                             * @property {string|null} [etag] Subscription etag
-                             */
-    
-                            /**
-                             * Constructs a new Subscription.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a Subscription.
-                             * @implements ISubscription
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.ISubscription=} [properties] Properties to set
-                             */
-                            function Subscription(properties) {
-                                this.eventTypes = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Subscription driveOptions.
-                             * @member {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions|null|undefined} driveOptions
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.driveOptions = null;
-    
-                            /**
-                             * Subscription expireTime.
-                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.expireTime = null;
-    
-                            /**
-                             * Subscription ttl.
-                             * @member {google.protobuf.IDuration|null|undefined} ttl
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.ttl = null;
-    
-                            /**
-                             * Subscription name.
-                             * @member {string} name
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.name = "";
-    
-                            /**
-                             * Subscription uid.
-                             * @member {string} uid
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.uid = "";
-    
-                            /**
-                             * Subscription targetResource.
-                             * @member {string} targetResource
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.targetResource = "";
-    
-                            /**
-                             * Subscription eventTypes.
-                             * @member {Array.<string>} eventTypes
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.eventTypes = $util.emptyArray;
-    
-                            /**
-                             * Subscription payloadOptions.
-                             * @member {google.apps.events.subscriptions.v1beta.IPayloadOptions|null|undefined} payloadOptions
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.payloadOptions = null;
-    
-                            /**
-                             * Subscription notificationEndpoint.
-                             * @member {google.apps.events.subscriptions.v1beta.INotificationEndpoint|null|undefined} notificationEndpoint
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.notificationEndpoint = null;
-    
-                            /**
-                             * Subscription state.
-                             * @member {google.apps.events.subscriptions.v1beta.Subscription.State} state
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.state = 0;
-    
-                            /**
-                             * Subscription suspensionReason.
-                             * @member {google.apps.events.subscriptions.v1beta.Subscription.ErrorType} suspensionReason
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.suspensionReason = 0;
-    
-                            /**
-                             * Subscription authority.
-                             * @member {string} authority
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.authority = "";
-    
-                            /**
-                             * Subscription createTime.
-                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.createTime = null;
-    
-                            /**
-                             * Subscription updateTime.
-                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.updateTime = null;
-    
-                            /**
-                             * Subscription reconciling.
-                             * @member {boolean} reconciling
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.reconciling = false;
-    
-                            /**
-                             * Subscription etag.
-                             * @member {string} etag
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Subscription.prototype.etag = "";
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * Subscription subscriptionOptions.
-                             * @member {"driveOptions"|undefined} subscriptionOptions
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Object.defineProperty(Subscription.prototype, "subscriptionOptions", {
-                                get: $util.oneOfGetter($oneOfFields = ["driveOptions"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Subscription expiration.
-                             * @member {"expireTime"|"ttl"|undefined} expiration
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             */
-                            Object.defineProperty(Subscription.prototype, "expiration", {
-                                get: $util.oneOfGetter($oneOfFields = ["expireTime", "ttl"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new Subscription instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ISubscription=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.Subscription} Subscription instance
-                             */
-                            Subscription.create = function create(properties) {
-                                return new Subscription(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Subscription message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ISubscription} message Subscription message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Subscription.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
-                                if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
-                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetResource);
-                                if (message.eventTypes != null && message.eventTypes.length)
-                                    for (var i = 0; i < message.eventTypes.length; ++i)
-                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.eventTypes[i]);
-                                if (message.payloadOptions != null && Object.hasOwnProperty.call(message, "payloadOptions"))
-                                    $root.google.apps.events.subscriptions.v1beta.PayloadOptions.encode(message.payloadOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                                if (message.notificationEndpoint != null && Object.hasOwnProperty.call(message, "notificationEndpoint"))
-                                    $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint.encode(message.notificationEndpoint, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.state);
-                                if (message.authority != null && Object.hasOwnProperty.call(message, "authority"))
-                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.authority);
-                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
-                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-                                if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
-                                    $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
-                                if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
-                                    writer.uint32(/* id 15, wireType 0 =*/120).bool(message.reconciling);
-                                if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
-                                    writer.uint32(/* id 17, wireType 2 =*/138).string(message.etag);
-                                if (message.suspensionReason != null && Object.hasOwnProperty.call(message, "suspensionReason"))
-                                    writer.uint32(/* id 18, wireType 0 =*/144).int32(message.suspensionReason);
-                                if (message.driveOptions != null && Object.hasOwnProperty.call(message, "driveOptions"))
-                                    $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.encode(message.driveOptions, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Subscription message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ISubscription} message Subscription message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Subscription.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Subscription message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.Subscription} Subscription
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Subscription.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.Subscription();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 20: {
-                                            message.driveOptions = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 13: {
-                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 14: {
-                                            message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.uid = reader.string();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.targetResource = reader.string();
-                                            break;
-                                        }
-                                    case 5: {
-                                            if (!(message.eventTypes && message.eventTypes.length))
-                                                message.eventTypes = [];
-                                            message.eventTypes.push(reader.string());
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.payloadOptions = $root.google.apps.events.subscriptions.v1beta.PayloadOptions.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.notificationEndpoint = $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 8: {
-                                            message.state = reader.int32();
-                                            break;
-                                        }
-                                    case 18: {
-                                            message.suspensionReason = reader.int32();
-                                            break;
-                                        }
-                                    case 10: {
-                                            message.authority = reader.string();
-                                            break;
-                                        }
-                                    case 11: {
-                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 12: {
-                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 15: {
-                                            message.reconciling = reader.bool();
-                                            break;
-                                        }
-                                    case 17: {
-                                            message.etag = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Subscription message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.Subscription} Subscription
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Subscription.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Subscription message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Subscription.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.driveOptions != null && message.hasOwnProperty("driveOptions")) {
-                                    properties.subscriptionOptions = 1;
-                                    {
-                                        var error = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify(message.driveOptions);
-                                        if (error)
-                                            return "driveOptions." + error;
-                                    }
-                                }
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                    properties.expiration = 1;
-                                    {
-                                        var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                        if (error)
-                                            return "expireTime." + error;
-                                    }
-                                }
-                                if (message.ttl != null && message.hasOwnProperty("ttl")) {
-                                    if (properties.expiration === 1)
-                                        return "expiration: multiple values";
-                                    properties.expiration = 1;
-                                    {
-                                        var error = $root.google.protobuf.Duration.verify(message.ttl);
-                                        if (error)
-                                            return "ttl." + error;
-                                    }
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                if (message.uid != null && message.hasOwnProperty("uid"))
-                                    if (!$util.isString(message.uid))
-                                        return "uid: string expected";
-                                if (message.targetResource != null && message.hasOwnProperty("targetResource"))
-                                    if (!$util.isString(message.targetResource))
-                                        return "targetResource: string expected";
-                                if (message.eventTypes != null && message.hasOwnProperty("eventTypes")) {
-                                    if (!Array.isArray(message.eventTypes))
-                                        return "eventTypes: array expected";
-                                    for (var i = 0; i < message.eventTypes.length; ++i)
-                                        if (!$util.isString(message.eventTypes[i]))
-                                            return "eventTypes: string[] expected";
-                                }
-                                if (message.payloadOptions != null && message.hasOwnProperty("payloadOptions")) {
-                                    var error = $root.google.apps.events.subscriptions.v1beta.PayloadOptions.verify(message.payloadOptions);
-                                    if (error)
-                                        return "payloadOptions." + error;
-                                }
-                                if (message.notificationEndpoint != null && message.hasOwnProperty("notificationEndpoint")) {
-                                    var error = $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint.verify(message.notificationEndpoint);
-                                    if (error)
-                                        return "notificationEndpoint." + error;
-                                }
-                                if (message.state != null && message.hasOwnProperty("state"))
-                                    switch (message.state) {
-                                    default:
-                                        return "state: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                        break;
-                                    }
-                                if (message.suspensionReason != null && message.hasOwnProperty("suspensionReason"))
-                                    switch (message.suspensionReason) {
-                                    default:
-                                        return "suspensionReason: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                    case 6:
-                                    case 7:
-                                    case 5:
-                                        break;
-                                    }
-                                if (message.authority != null && message.hasOwnProperty("authority"))
-                                    if (!$util.isString(message.authority))
-                                        return "authority: string expected";
-                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                    if (error)
-                                        return "createTime." + error;
-                                }
-                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                                    if (error)
-                                        return "updateTime." + error;
-                                }
-                                if (message.reconciling != null && message.hasOwnProperty("reconciling"))
-                                    if (typeof message.reconciling !== "boolean")
-                                        return "reconciling: boolean expected";
-                                if (message.etag != null && message.hasOwnProperty("etag"))
-                                    if (!$util.isString(message.etag))
-                                        return "etag: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Subscription message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.Subscription} Subscription
-                             */
-                            Subscription.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.Subscription)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.Subscription();
-                                if (object.driveOptions != null) {
-                                    if (typeof object.driveOptions !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.driveOptions: object expected");
-                                    message.driveOptions = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.fromObject(object.driveOptions);
-                                }
-                                if (object.expireTime != null) {
-                                    if (typeof object.expireTime !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.expireTime: object expected");
-                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                                }
-                                if (object.ttl != null) {
-                                    if (typeof object.ttl !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.ttl: object expected");
-                                    message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
-                                }
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                if (object.uid != null)
-                                    message.uid = String(object.uid);
-                                if (object.targetResource != null)
-                                    message.targetResource = String(object.targetResource);
-                                if (object.eventTypes) {
-                                    if (!Array.isArray(object.eventTypes))
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.eventTypes: array expected");
-                                    message.eventTypes = [];
-                                    for (var i = 0; i < object.eventTypes.length; ++i)
-                                        message.eventTypes[i] = String(object.eventTypes[i]);
-                                }
-                                if (object.payloadOptions != null) {
-                                    if (typeof object.payloadOptions !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.payloadOptions: object expected");
-                                    message.payloadOptions = $root.google.apps.events.subscriptions.v1beta.PayloadOptions.fromObject(object.payloadOptions);
-                                }
-                                if (object.notificationEndpoint != null) {
-                                    if (typeof object.notificationEndpoint !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.notificationEndpoint: object expected");
-                                    message.notificationEndpoint = $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint.fromObject(object.notificationEndpoint);
-                                }
-                                switch (object.state) {
-                                default:
-                                    if (typeof object.state === "number") {
-                                        message.state = object.state;
-                                        break;
-                                    }
-                                    break;
-                                case "STATE_UNSPECIFIED":
-                                case 0:
-                                    message.state = 0;
-                                    break;
-                                case "ACTIVE":
-                                case 1:
-                                    message.state = 1;
-                                    break;
-                                case "SUSPENDED":
-                                case 2:
-                                    message.state = 2;
-                                    break;
-                                case "DELETED":
-                                case 3:
-                                    message.state = 3;
-                                    break;
-                                }
-                                switch (object.suspensionReason) {
-                                default:
-                                    if (typeof object.suspensionReason === "number") {
-                                        message.suspensionReason = object.suspensionReason;
-                                        break;
-                                    }
-                                    break;
-                                case "ERROR_TYPE_UNSPECIFIED":
-                                case 0:
-                                    message.suspensionReason = 0;
-                                    break;
-                                case "USER_SCOPE_REVOKED":
-                                case 1:
-                                    message.suspensionReason = 1;
-                                    break;
-                                case "RESOURCE_DELETED":
-                                case 2:
-                                    message.suspensionReason = 2;
-                                    break;
-                                case "USER_AUTHORIZATION_FAILURE":
-                                case 3:
-                                    message.suspensionReason = 3;
-                                    break;
-                                case "ENDPOINT_PERMISSION_DENIED":
-                                case 4:
-                                    message.suspensionReason = 4;
-                                    break;
-                                case "ENDPOINT_NOT_FOUND":
-                                case 6:
-                                    message.suspensionReason = 6;
-                                    break;
-                                case "ENDPOINT_RESOURCE_EXHAUSTED":
-                                case 7:
-                                    message.suspensionReason = 7;
-                                    break;
-                                case "OTHER":
-                                case 5:
-                                    message.suspensionReason = 5;
-                                    break;
-                                }
-                                if (object.authority != null)
-                                    message.authority = String(object.authority);
-                                if (object.createTime != null) {
-                                    if (typeof object.createTime !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.createTime: object expected");
-                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                                }
-                                if (object.updateTime != null) {
-                                    if (typeof object.updateTime !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.updateTime: object expected");
-                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                                }
-                                if (object.reconciling != null)
-                                    message.reconciling = Boolean(object.reconciling);
-                                if (object.etag != null)
-                                    message.etag = String(object.etag);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Subscription message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.Subscription} message Subscription
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Subscription.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.eventTypes = [];
-                                if (options.defaults) {
-                                    object.name = "";
-                                    object.uid = "";
-                                    object.targetResource = "";
-                                    object.payloadOptions = null;
-                                    object.notificationEndpoint = null;
-                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                                    object.authority = "";
-                                    object.createTime = null;
-                                    object.updateTime = null;
-                                    object.reconciling = false;
-                                    object.etag = "";
-                                    object.suspensionReason = options.enums === String ? "ERROR_TYPE_UNSPECIFIED" : 0;
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                if (message.uid != null && message.hasOwnProperty("uid"))
-                                    object.uid = message.uid;
-                                if (message.targetResource != null && message.hasOwnProperty("targetResource"))
-                                    object.targetResource = message.targetResource;
-                                if (message.eventTypes && message.eventTypes.length) {
-                                    object.eventTypes = [];
-                                    for (var j = 0; j < message.eventTypes.length; ++j)
-                                        object.eventTypes[j] = message.eventTypes[j];
-                                }
-                                if (message.payloadOptions != null && message.hasOwnProperty("payloadOptions"))
-                                    object.payloadOptions = $root.google.apps.events.subscriptions.v1beta.PayloadOptions.toObject(message.payloadOptions, options);
-                                if (message.notificationEndpoint != null && message.hasOwnProperty("notificationEndpoint"))
-                                    object.notificationEndpoint = $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint.toObject(message.notificationEndpoint, options);
-                                if (message.state != null && message.hasOwnProperty("state"))
-                                    object.state = options.enums === String ? $root.google.apps.events.subscriptions.v1beta.Subscription.State[message.state] === undefined ? message.state : $root.google.apps.events.subscriptions.v1beta.Subscription.State[message.state] : message.state;
-                                if (message.authority != null && message.hasOwnProperty("authority"))
-                                    object.authority = message.authority;
-                                if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                                    if (options.oneofs)
-                                        object.expiration = "expireTime";
-                                }
-                                if (message.ttl != null && message.hasOwnProperty("ttl")) {
-                                    object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
-                                    if (options.oneofs)
-                                        object.expiration = "ttl";
-                                }
-                                if (message.reconciling != null && message.hasOwnProperty("reconciling"))
-                                    object.reconciling = message.reconciling;
-                                if (message.etag != null && message.hasOwnProperty("etag"))
-                                    object.etag = message.etag;
-                                if (message.suspensionReason != null && message.hasOwnProperty("suspensionReason"))
-                                    object.suspensionReason = options.enums === String ? $root.google.apps.events.subscriptions.v1beta.Subscription.ErrorType[message.suspensionReason] === undefined ? message.suspensionReason : $root.google.apps.events.subscriptions.v1beta.Subscription.ErrorType[message.suspensionReason] : message.suspensionReason;
-                                if (message.driveOptions != null && message.hasOwnProperty("driveOptions")) {
-                                    object.driveOptions = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.toObject(message.driveOptions, options);
-                                    if (options.oneofs)
-                                        object.subscriptionOptions = "driveOptions";
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Subscription to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Subscription.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Subscription
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Subscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.Subscription";
-                            };
-    
-                            Subscription.DriveOptions = (function() {
-    
-                                /**
-                                 * Properties of a DriveOptions.
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                                 * @interface IDriveOptions
-                                 * @property {boolean|null} [includeDescendants] DriveOptions includeDescendants
-                                 */
-    
-                                /**
-                                 * Constructs a new DriveOptions.
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription
-                                 * @classdesc Represents a DriveOptions.
-                                 * @implements IDriveOptions
-                                 * @constructor
-                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions=} [properties] Properties to set
-                                 */
-                                function DriveOptions(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * DriveOptions includeDescendants.
-                                 * @member {boolean} includeDescendants
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @instance
-                                 */
-                                DriveOptions.prototype.includeDescendants = false;
-    
-                                /**
-                                 * Creates a new DriveOptions instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions=} [properties] Properties to set
-                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions instance
-                                 */
-                                DriveOptions.create = function create(properties) {
-                                    return new DriveOptions(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified DriveOptions message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions} message DriveOptions message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                DriveOptions.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.includeDescendants != null && Object.hasOwnProperty.call(message, "includeDescendants"))
-                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.includeDescendants);
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified DriveOptions message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions} message DriveOptions message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                DriveOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes a DriveOptions message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                DriveOptions.decode = function decode(reader, length, error) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
-                                        switch (tag >>> 3) {
-                                        case 1: {
-                                                message.includeDescendants = reader.bool();
-                                                break;
-                                            }
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes a DriveOptions message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                DriveOptions.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies a DriveOptions message.
-                                 * @function verify
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                DriveOptions.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.includeDescendants != null && message.hasOwnProperty("includeDescendants"))
-                                        if (typeof message.includeDescendants !== "boolean")
-                                            return "includeDescendants: boolean expected";
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates a DriveOptions message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions
-                                 */
-                                DriveOptions.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions)
-                                        return object;
-                                    var message = new $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions();
-                                    if (object.includeDescendants != null)
-                                        message.includeDescendants = Boolean(object.includeDescendants);
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from a DriveOptions message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} message DriveOptions
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                DriveOptions.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults)
-                                        object.includeDescendants = false;
-                                    if (message.includeDescendants != null && message.hasOwnProperty("includeDescendants"))
-                                        object.includeDescendants = message.includeDescendants;
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this DriveOptions to JSON.
-                                 * @function toJSON
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                DriveOptions.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                /**
-                                 * Gets the default type url for DriveOptions
-                                 * @function getTypeUrl
-                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
-                                 * @static
-                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                 * @returns {string} The default type url
-                                 */
-                                DriveOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                    if (typeUrlPrefix === undefined) {
-                                        typeUrlPrefix = "type.googleapis.com";
-                                    }
-                                    return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.Subscription.DriveOptions";
-                                };
-    
-                                return DriveOptions;
-                            })();
-    
-                            /**
-                             * State enum.
-                             * @name google.apps.events.subscriptions.v1beta.Subscription.State
-                             * @enum {number}
-                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                             * @property {number} ACTIVE=1 ACTIVE value
-                             * @property {number} SUSPENDED=2 SUSPENDED value
-                             * @property {number} DELETED=3 DELETED value
-                             */
-                            Subscription.State = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "ACTIVE"] = 1;
-                                values[valuesById[2] = "SUSPENDED"] = 2;
-                                values[valuesById[3] = "DELETED"] = 3;
-                                return values;
-                            })();
-    
-                            /**
-                             * ErrorType enum.
-                             * @name google.apps.events.subscriptions.v1beta.Subscription.ErrorType
-                             * @enum {number}
-                             * @property {number} ERROR_TYPE_UNSPECIFIED=0 ERROR_TYPE_UNSPECIFIED value
-                             * @property {number} USER_SCOPE_REVOKED=1 USER_SCOPE_REVOKED value
-                             * @property {number} RESOURCE_DELETED=2 RESOURCE_DELETED value
-                             * @property {number} USER_AUTHORIZATION_FAILURE=3 USER_AUTHORIZATION_FAILURE value
-                             * @property {number} ENDPOINT_PERMISSION_DENIED=4 ENDPOINT_PERMISSION_DENIED value
-                             * @property {number} ENDPOINT_NOT_FOUND=6 ENDPOINT_NOT_FOUND value
-                             * @property {number} ENDPOINT_RESOURCE_EXHAUSTED=7 ENDPOINT_RESOURCE_EXHAUSTED value
-                             * @property {number} OTHER=5 OTHER value
-                             */
-                            Subscription.ErrorType = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "ERROR_TYPE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "USER_SCOPE_REVOKED"] = 1;
-                                values[valuesById[2] = "RESOURCE_DELETED"] = 2;
-                                values[valuesById[3] = "USER_AUTHORIZATION_FAILURE"] = 3;
-                                values[valuesById[4] = "ENDPOINT_PERMISSION_DENIED"] = 4;
-                                values[valuesById[6] = "ENDPOINT_NOT_FOUND"] = 6;
-                                values[valuesById[7] = "ENDPOINT_RESOURCE_EXHAUSTED"] = 7;
-                                values[valuesById[5] = "OTHER"] = 5;
-                                return values;
-                            })();
-    
-                            return Subscription;
-                        })();
-    
-                        v1beta.PayloadOptions = (function() {
-    
-                            /**
-                             * Properties of a PayloadOptions.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IPayloadOptions
-                             * @property {boolean|null} [includeResource] PayloadOptions includeResource
-                             * @property {google.protobuf.IFieldMask|null} [fieldMask] PayloadOptions fieldMask
-                             */
-    
-                            /**
-                             * Constructs a new PayloadOptions.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a PayloadOptions.
-                             * @implements IPayloadOptions
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IPayloadOptions=} [properties] Properties to set
-                             */
-                            function PayloadOptions(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * PayloadOptions includeResource.
-                             * @member {boolean} includeResource
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @instance
-                             */
-                            PayloadOptions.prototype.includeResource = false;
-    
-                            /**
-                             * PayloadOptions fieldMask.
-                             * @member {google.protobuf.IFieldMask|null|undefined} fieldMask
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @instance
-                             */
-                            PayloadOptions.prototype.fieldMask = null;
-    
-                            /**
-                             * Creates a new PayloadOptions instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IPayloadOptions=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.PayloadOptions} PayloadOptions instance
-                             */
-                            PayloadOptions.create = function create(properties) {
-                                return new PayloadOptions(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified PayloadOptions message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.PayloadOptions.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IPayloadOptions} message PayloadOptions message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PayloadOptions.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.includeResource != null && Object.hasOwnProperty.call(message, "includeResource"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.includeResource);
-                                if (message.fieldMask != null && Object.hasOwnProperty.call(message, "fieldMask"))
-                                    $root.google.protobuf.FieldMask.encode(message.fieldMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified PayloadOptions message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.PayloadOptions.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IPayloadOptions} message PayloadOptions message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            PayloadOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a PayloadOptions message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.PayloadOptions} PayloadOptions
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PayloadOptions.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.PayloadOptions();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.includeResource = reader.bool();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.fieldMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a PayloadOptions message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.PayloadOptions} PayloadOptions
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            PayloadOptions.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a PayloadOptions message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            PayloadOptions.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.includeResource != null && message.hasOwnProperty("includeResource"))
-                                    if (typeof message.includeResource !== "boolean")
-                                        return "includeResource: boolean expected";
-                                if (message.fieldMask != null && message.hasOwnProperty("fieldMask")) {
-                                    var error = $root.google.protobuf.FieldMask.verify(message.fieldMask);
-                                    if (error)
-                                        return "fieldMask." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a PayloadOptions message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.PayloadOptions} PayloadOptions
-                             */
-                            PayloadOptions.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.PayloadOptions)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.PayloadOptions();
-                                if (object.includeResource != null)
-                                    message.includeResource = Boolean(object.includeResource);
-                                if (object.fieldMask != null) {
-                                    if (typeof object.fieldMask !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.PayloadOptions.fieldMask: object expected");
-                                    message.fieldMask = $root.google.protobuf.FieldMask.fromObject(object.fieldMask);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a PayloadOptions message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.PayloadOptions} message PayloadOptions
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            PayloadOptions.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.includeResource = false;
-                                    object.fieldMask = null;
-                                }
-                                if (message.includeResource != null && message.hasOwnProperty("includeResource"))
-                                    object.includeResource = message.includeResource;
-                                if (message.fieldMask != null && message.hasOwnProperty("fieldMask"))
-                                    object.fieldMask = $root.google.protobuf.FieldMask.toObject(message.fieldMask, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this PayloadOptions to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            PayloadOptions.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for PayloadOptions
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.PayloadOptions
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            PayloadOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.PayloadOptions";
-                            };
-    
-                            return PayloadOptions;
-                        })();
-    
-                        v1beta.NotificationEndpoint = (function() {
-    
-                            /**
-                             * Properties of a NotificationEndpoint.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface INotificationEndpoint
-                             * @property {string|null} [pubsubTopic] NotificationEndpoint pubsubTopic
-                             */
-    
-                            /**
-                             * Constructs a new NotificationEndpoint.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a NotificationEndpoint.
-                             * @implements INotificationEndpoint
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.INotificationEndpoint=} [properties] Properties to set
-                             */
-                            function NotificationEndpoint(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * NotificationEndpoint pubsubTopic.
-                             * @member {string|null|undefined} pubsubTopic
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @instance
-                             */
-                            NotificationEndpoint.prototype.pubsubTopic = null;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * NotificationEndpoint endpoint.
-                             * @member {"pubsubTopic"|undefined} endpoint
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @instance
-                             */
-                            Object.defineProperty(NotificationEndpoint.prototype, "endpoint", {
-                                get: $util.oneOfGetter($oneOfFields = ["pubsubTopic"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new NotificationEndpoint instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.INotificationEndpoint=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.NotificationEndpoint} NotificationEndpoint instance
-                             */
-                            NotificationEndpoint.create = function create(properties) {
-                                return new NotificationEndpoint(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified NotificationEndpoint message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.NotificationEndpoint.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.INotificationEndpoint} message NotificationEndpoint message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            NotificationEndpoint.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.pubsubTopic != null && Object.hasOwnProperty.call(message, "pubsubTopic"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubTopic);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified NotificationEndpoint message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.NotificationEndpoint.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.INotificationEndpoint} message NotificationEndpoint message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            NotificationEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a NotificationEndpoint message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.NotificationEndpoint} NotificationEndpoint
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            NotificationEndpoint.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.pubsubTopic = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a NotificationEndpoint message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.NotificationEndpoint} NotificationEndpoint
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            NotificationEndpoint.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a NotificationEndpoint message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            NotificationEndpoint.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic")) {
-                                    properties.endpoint = 1;
-                                    if (!$util.isString(message.pubsubTopic))
-                                        return "pubsubTopic: string expected";
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a NotificationEndpoint message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.NotificationEndpoint} NotificationEndpoint
-                             */
-                            NotificationEndpoint.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.NotificationEndpoint();
-                                if (object.pubsubTopic != null)
-                                    message.pubsubTopic = String(object.pubsubTopic);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a NotificationEndpoint message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.NotificationEndpoint} message NotificationEndpoint
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            NotificationEndpoint.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic")) {
-                                    object.pubsubTopic = message.pubsubTopic;
-                                    if (options.oneofs)
-                                        object.endpoint = "pubsubTopic";
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this NotificationEndpoint to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            NotificationEndpoint.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for NotificationEndpoint
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.NotificationEndpoint
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            NotificationEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.NotificationEndpoint";
-                            };
-    
-                            return NotificationEndpoint;
-                        })();
-    
-                        v1beta.SubscriptionsService = (function() {
-    
-                            /**
-                             * Constructs a new SubscriptionsService service.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a SubscriptionsService
-                             * @extends $protobuf.rpc.Service
-                             * @constructor
-                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                             */
-                            function SubscriptionsService(rpcImpl, requestDelimited, responseDelimited) {
-                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                            }
-    
-                            (SubscriptionsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SubscriptionsService;
-    
-                            /**
-                             * Creates new SubscriptionsService service using the specified rpc implementation.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @static
-                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                             * @returns {SubscriptionsService} RPC service. Useful where requests and/or responses are streamed.
-                             */
-                            SubscriptionsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                                return new this(rpcImpl, requestDelimited, responseDelimited);
-                            };
-    
-                            /**
-                             * Callback as used by {@link google.apps.events.subscriptions.v1beta.SubscriptionsService|createSubscription}.
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @typedef CreateSubscriptionCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.longrunning.Operation} [response] Operation
-                             */
-    
-                            /**
-                             * Calls CreateSubscription.
-                             * @function createSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest} request CreateSubscriptionRequest message or plain object
-                             * @param {google.apps.events.subscriptions.v1beta.SubscriptionsService.CreateSubscriptionCallback} callback Node-style callback called with the error, if any, and Operation
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(SubscriptionsService.prototype.createSubscription = function createSubscription(request, callback) {
-                                return this.rpcCall(createSubscription, $root.google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest, $root.google.longrunning.Operation, request, callback);
-                            }, "name", { value: "CreateSubscription" });
-    
-                            /**
-                             * Calls CreateSubscription.
-                             * @function createSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest} request CreateSubscriptionRequest message or plain object
-                             * @returns {Promise<google.longrunning.Operation>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.apps.events.subscriptions.v1beta.SubscriptionsService|deleteSubscription}.
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @typedef DeleteSubscriptionCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.longrunning.Operation} [response] Operation
-                             */
-    
-                            /**
-                             * Calls DeleteSubscription.
-                             * @function deleteSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest} request DeleteSubscriptionRequest message or plain object
-                             * @param {google.apps.events.subscriptions.v1beta.SubscriptionsService.DeleteSubscriptionCallback} callback Node-style callback called with the error, if any, and Operation
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(SubscriptionsService.prototype.deleteSubscription = function deleteSubscription(request, callback) {
-                                return this.rpcCall(deleteSubscription, $root.google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest, $root.google.longrunning.Operation, request, callback);
-                            }, "name", { value: "DeleteSubscription" });
-    
-                            /**
-                             * Calls DeleteSubscription.
-                             * @function deleteSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest} request DeleteSubscriptionRequest message or plain object
-                             * @returns {Promise<google.longrunning.Operation>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.apps.events.subscriptions.v1beta.SubscriptionsService|getSubscription}.
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @typedef GetSubscriptionCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.apps.events.subscriptions.v1beta.Subscription} [response] Subscription
-                             */
-    
-                            /**
-                             * Calls GetSubscription.
-                             * @function getSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest} request GetSubscriptionRequest message or plain object
-                             * @param {google.apps.events.subscriptions.v1beta.SubscriptionsService.GetSubscriptionCallback} callback Node-style callback called with the error, if any, and Subscription
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(SubscriptionsService.prototype.getSubscription = function getSubscription(request, callback) {
-                                return this.rpcCall(getSubscription, $root.google.apps.events.subscriptions.v1beta.GetSubscriptionRequest, $root.google.apps.events.subscriptions.v1beta.Subscription, request, callback);
-                            }, "name", { value: "GetSubscription" });
-    
-                            /**
-                             * Calls GetSubscription.
-                             * @function getSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest} request GetSubscriptionRequest message or plain object
-                             * @returns {Promise<google.apps.events.subscriptions.v1beta.Subscription>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.apps.events.subscriptions.v1beta.SubscriptionsService|listSubscriptions}.
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @typedef ListSubscriptionsCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse} [response] ListSubscriptionsResponse
-                             */
-    
-                            /**
-                             * Calls ListSubscriptions.
-                             * @function listSubscriptions
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest} request ListSubscriptionsRequest message or plain object
-                             * @param {google.apps.events.subscriptions.v1beta.SubscriptionsService.ListSubscriptionsCallback} callback Node-style callback called with the error, if any, and ListSubscriptionsResponse
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(SubscriptionsService.prototype.listSubscriptions = function listSubscriptions(request, callback) {
-                                return this.rpcCall(listSubscriptions, $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest, $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse, request, callback);
-                            }, "name", { value: "ListSubscriptions" });
-    
-                            /**
-                             * Calls ListSubscriptions.
-                             * @function listSubscriptions
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest} request ListSubscriptionsRequest message or plain object
-                             * @returns {Promise<google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.apps.events.subscriptions.v1beta.SubscriptionsService|updateSubscription}.
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @typedef UpdateSubscriptionCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.longrunning.Operation} [response] Operation
-                             */
-    
-                            /**
-                             * Calls UpdateSubscription.
-                             * @function updateSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest} request UpdateSubscriptionRequest message or plain object
-                             * @param {google.apps.events.subscriptions.v1beta.SubscriptionsService.UpdateSubscriptionCallback} callback Node-style callback called with the error, if any, and Operation
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(SubscriptionsService.prototype.updateSubscription = function updateSubscription(request, callback) {
-                                return this.rpcCall(updateSubscription, $root.google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest, $root.google.longrunning.Operation, request, callback);
-                            }, "name", { value: "UpdateSubscription" });
-    
-                            /**
-                             * Calls UpdateSubscription.
-                             * @function updateSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest} request UpdateSubscriptionRequest message or plain object
-                             * @returns {Promise<google.longrunning.Operation>} Promise
-                             * @variation 2
-                             */
-    
-                            /**
-                             * Callback as used by {@link google.apps.events.subscriptions.v1beta.SubscriptionsService|reactivateSubscription}.
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @typedef ReactivateSubscriptionCallback
-                             * @type {function}
-                             * @param {Error|null} error Error, if any
-                             * @param {google.longrunning.Operation} [response] Operation
-                             */
-    
-                            /**
-                             * Calls ReactivateSubscription.
-                             * @function reactivateSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest} request ReactivateSubscriptionRequest message or plain object
-                             * @param {google.apps.events.subscriptions.v1beta.SubscriptionsService.ReactivateSubscriptionCallback} callback Node-style callback called with the error, if any, and Operation
-                             * @returns {undefined}
-                             * @variation 1
-                             */
-                            Object.defineProperty(SubscriptionsService.prototype.reactivateSubscription = function reactivateSubscription(request, callback) {
-                                return this.rpcCall(reactivateSubscription, $root.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest, $root.google.longrunning.Operation, request, callback);
-                            }, "name", { value: "ReactivateSubscription" });
-    
-                            /**
-                             * Calls ReactivateSubscription.
-                             * @function reactivateSubscription
-                             * @memberof google.apps.events.subscriptions.v1beta.SubscriptionsService
-                             * @instance
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest} request ReactivateSubscriptionRequest message or plain object
-                             * @returns {Promise<google.longrunning.Operation>} Promise
-                             * @variation 2
-                             */
-    
-                            return SubscriptionsService;
-                        })();
-    
-                        v1beta.CreateSubscriptionRequest = (function() {
-    
-                            /**
-                             * Properties of a CreateSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface ICreateSubscriptionRequest
-                             * @property {google.apps.events.subscriptions.v1beta.ISubscription|null} [subscription] CreateSubscriptionRequest subscription
-                             * @property {boolean|null} [validateOnly] CreateSubscriptionRequest validateOnly
-                             */
-    
-                            /**
-                             * Constructs a new CreateSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a CreateSubscriptionRequest.
-                             * @implements ICreateSubscriptionRequest
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest=} [properties] Properties to set
-                             */
-                            function CreateSubscriptionRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * CreateSubscriptionRequest subscription.
-                             * @member {google.apps.events.subscriptions.v1beta.ISubscription|null|undefined} subscription
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @instance
-                             */
-                            CreateSubscriptionRequest.prototype.subscription = null;
-    
-                            /**
-                             * CreateSubscriptionRequest validateOnly.
-                             * @member {boolean} validateOnly
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @instance
-                             */
-                            CreateSubscriptionRequest.prototype.validateOnly = false;
-    
-                            /**
-                             * Creates a new CreateSubscriptionRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest} CreateSubscriptionRequest instance
-                             */
-                            CreateSubscriptionRequest.create = function create(properties) {
-                                return new CreateSubscriptionRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified CreateSubscriptionRequest message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest} message CreateSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateSubscriptionRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
-                                    $root.google.apps.events.subscriptions.v1beta.Subscription.encode(message.subscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified CreateSubscriptionRequest message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest} message CreateSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a CreateSubscriptionRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest} CreateSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateSubscriptionRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.subscription = $root.google.apps.events.subscriptions.v1beta.Subscription.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.validateOnly = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a CreateSubscriptionRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest} CreateSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a CreateSubscriptionRequest message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            CreateSubscriptionRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.subscription != null && message.hasOwnProperty("subscription")) {
-                                    var error = $root.google.apps.events.subscriptions.v1beta.Subscription.verify(message.subscription);
-                                    if (error)
-                                        return "subscription." + error;
-                                }
-                                if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
-                                    if (typeof message.validateOnly !== "boolean")
-                                        return "validateOnly: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a CreateSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest} CreateSubscriptionRequest
-                             */
-                            CreateSubscriptionRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest();
-                                if (object.subscription != null) {
-                                    if (typeof object.subscription !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest.subscription: object expected");
-                                    message.subscription = $root.google.apps.events.subscriptions.v1beta.Subscription.fromObject(object.subscription);
-                                }
-                                if (object.validateOnly != null)
-                                    message.validateOnly = Boolean(object.validateOnly);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a CreateSubscriptionRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest} message CreateSubscriptionRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            CreateSubscriptionRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.subscription = null;
-                                    object.validateOnly = false;
-                                }
-                                if (message.subscription != null && message.hasOwnProperty("subscription"))
-                                    object.subscription = $root.google.apps.events.subscriptions.v1beta.Subscription.toObject(message.subscription, options);
-                                if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
-                                    object.validateOnly = message.validateOnly;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this CreateSubscriptionRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            CreateSubscriptionRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for CreateSubscriptionRequest
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            CreateSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.CreateSubscriptionRequest";
-                            };
-    
-                            return CreateSubscriptionRequest;
-                        })();
-    
-                        v1beta.DeleteSubscriptionRequest = (function() {
-    
-                            /**
-                             * Properties of a DeleteSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IDeleteSubscriptionRequest
-                             * @property {string|null} [name] DeleteSubscriptionRequest name
-                             * @property {boolean|null} [validateOnly] DeleteSubscriptionRequest validateOnly
-                             * @property {boolean|null} [allowMissing] DeleteSubscriptionRequest allowMissing
-                             * @property {string|null} [etag] DeleteSubscriptionRequest etag
-                             */
-    
-                            /**
-                             * Constructs a new DeleteSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a DeleteSubscriptionRequest.
-                             * @implements IDeleteSubscriptionRequest
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest=} [properties] Properties to set
-                             */
-                            function DeleteSubscriptionRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * DeleteSubscriptionRequest name.
-                             * @member {string} name
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @instance
-                             */
-                            DeleteSubscriptionRequest.prototype.name = "";
-    
-                            /**
-                             * DeleteSubscriptionRequest validateOnly.
-                             * @member {boolean} validateOnly
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @instance
-                             */
-                            DeleteSubscriptionRequest.prototype.validateOnly = false;
-    
-                            /**
-                             * DeleteSubscriptionRequest allowMissing.
-                             * @member {boolean} allowMissing
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @instance
-                             */
-                            DeleteSubscriptionRequest.prototype.allowMissing = false;
-    
-                            /**
-                             * DeleteSubscriptionRequest etag.
-                             * @member {string} etag
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @instance
-                             */
-                            DeleteSubscriptionRequest.prototype.etag = "";
-    
-                            /**
-                             * Creates a new DeleteSubscriptionRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest} DeleteSubscriptionRequest instance
-                             */
-                            DeleteSubscriptionRequest.create = function create(properties) {
-                                return new DeleteSubscriptionRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteSubscriptionRequest message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest} message DeleteSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteSubscriptionRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
-                                if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
-                                if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
-                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteSubscriptionRequest message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest} message DeleteSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest} DeleteSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteSubscriptionRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.validateOnly = reader.bool();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.allowMissing = reader.bool();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.etag = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest} DeleteSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a DeleteSubscriptionRequest message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            DeleteSubscriptionRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
-                                    if (typeof message.validateOnly !== "boolean")
-                                        return "validateOnly: boolean expected";
-                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
-                                    if (typeof message.allowMissing !== "boolean")
-                                        return "allowMissing: boolean expected";
-                                if (message.etag != null && message.hasOwnProperty("etag"))
-                                    if (!$util.isString(message.etag))
-                                        return "etag: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a DeleteSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest} DeleteSubscriptionRequest
-                             */
-                            DeleteSubscriptionRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                if (object.validateOnly != null)
-                                    message.validateOnly = Boolean(object.validateOnly);
-                                if (object.allowMissing != null)
-                                    message.allowMissing = Boolean(object.allowMissing);
-                                if (object.etag != null)
-                                    message.etag = String(object.etag);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a DeleteSubscriptionRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest} message DeleteSubscriptionRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            DeleteSubscriptionRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.name = "";
-                                    object.validateOnly = false;
-                                    object.allowMissing = false;
-                                    object.etag = "";
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
-                                    object.validateOnly = message.validateOnly;
-                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
-                                    object.allowMissing = message.allowMissing;
-                                if (message.etag != null && message.hasOwnProperty("etag"))
-                                    object.etag = message.etag;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this DeleteSubscriptionRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            DeleteSubscriptionRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for DeleteSubscriptionRequest
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            DeleteSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.DeleteSubscriptionRequest";
-                            };
-    
-                            return DeleteSubscriptionRequest;
-                        })();
-    
-                        v1beta.GetSubscriptionRequest = (function() {
-    
-                            /**
-                             * Properties of a GetSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IGetSubscriptionRequest
-                             * @property {string|null} [name] GetSubscriptionRequest name
-                             */
-    
-                            /**
-                             * Constructs a new GetSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a GetSubscriptionRequest.
-                             * @implements IGetSubscriptionRequest
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest=} [properties] Properties to set
-                             */
-                            function GetSubscriptionRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * GetSubscriptionRequest name.
-                             * @member {string} name
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @instance
-                             */
-                            GetSubscriptionRequest.prototype.name = "";
-    
-                            /**
-                             * Creates a new GetSubscriptionRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.GetSubscriptionRequest} GetSubscriptionRequest instance
-                             */
-                            GetSubscriptionRequest.create = function create(properties) {
-                                return new GetSubscriptionRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified GetSubscriptionRequest message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.GetSubscriptionRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest} message GetSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GetSubscriptionRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified GetSubscriptionRequest message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.GetSubscriptionRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest} message GetSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GetSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a GetSubscriptionRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.GetSubscriptionRequest} GetSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GetSubscriptionRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.GetSubscriptionRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a GetSubscriptionRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.GetSubscriptionRequest} GetSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GetSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a GetSubscriptionRequest message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            GetSubscriptionRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a GetSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.GetSubscriptionRequest} GetSubscriptionRequest
-                             */
-                            GetSubscriptionRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.GetSubscriptionRequest)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.GetSubscriptionRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a GetSubscriptionRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.GetSubscriptionRequest} message GetSubscriptionRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            GetSubscriptionRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this GetSubscriptionRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            GetSubscriptionRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for GetSubscriptionRequest
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.GetSubscriptionRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            GetSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.GetSubscriptionRequest";
-                            };
-    
-                            return GetSubscriptionRequest;
-                        })();
-    
-                        v1beta.UpdateSubscriptionRequest = (function() {
-    
-                            /**
-                             * Properties of an UpdateSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IUpdateSubscriptionRequest
-                             * @property {google.apps.events.subscriptions.v1beta.ISubscription|null} [subscription] UpdateSubscriptionRequest subscription
-                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSubscriptionRequest updateMask
-                             * @property {boolean|null} [validateOnly] UpdateSubscriptionRequest validateOnly
-                             */
-    
-                            /**
-                             * Constructs a new UpdateSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents an UpdateSubscriptionRequest.
-                             * @implements IUpdateSubscriptionRequest
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest=} [properties] Properties to set
-                             */
-                            function UpdateSubscriptionRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * UpdateSubscriptionRequest subscription.
-                             * @member {google.apps.events.subscriptions.v1beta.ISubscription|null|undefined} subscription
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @instance
-                             */
-                            UpdateSubscriptionRequest.prototype.subscription = null;
-    
-                            /**
-                             * UpdateSubscriptionRequest updateMask.
-                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @instance
-                             */
-                            UpdateSubscriptionRequest.prototype.updateMask = null;
-    
-                            /**
-                             * UpdateSubscriptionRequest validateOnly.
-                             * @member {boolean} validateOnly
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @instance
-                             */
-                            UpdateSubscriptionRequest.prototype.validateOnly = false;
-    
-                            /**
-                             * Creates a new UpdateSubscriptionRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest} UpdateSubscriptionRequest instance
-                             */
-                            UpdateSubscriptionRequest.create = function create(properties) {
-                                return new UpdateSubscriptionRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateSubscriptionRequest message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest} message UpdateSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateSubscriptionRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
-                                    $root.google.apps.events.subscriptions.v1beta.Subscription.encode(message.subscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateSubscriptionRequest message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest} message UpdateSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an UpdateSubscriptionRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest} UpdateSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateSubscriptionRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.subscription = $root.google.apps.events.subscriptions.v1beta.Subscription.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.validateOnly = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an UpdateSubscriptionRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest} UpdateSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an UpdateSubscriptionRequest message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            UpdateSubscriptionRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.subscription != null && message.hasOwnProperty("subscription")) {
-                                    var error = $root.google.apps.events.subscriptions.v1beta.Subscription.verify(message.subscription);
-                                    if (error)
-                                        return "subscription." + error;
-                                }
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
-                                    if (error)
-                                        return "updateMask." + error;
-                                }
-                                if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
-                                    if (typeof message.validateOnly !== "boolean")
-                                        return "validateOnly: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an UpdateSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest} UpdateSubscriptionRequest
-                             */
-                            UpdateSubscriptionRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest();
-                                if (object.subscription != null) {
-                                    if (typeof object.subscription !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest.subscription: object expected");
-                                    message.subscription = $root.google.apps.events.subscriptions.v1beta.Subscription.fromObject(object.subscription);
-                                }
-                                if (object.updateMask != null) {
-                                    if (typeof object.updateMask !== "object")
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest.updateMask: object expected");
-                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
-                                }
-                                if (object.validateOnly != null)
-                                    message.validateOnly = Boolean(object.validateOnly);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an UpdateSubscriptionRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest} message UpdateSubscriptionRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            UpdateSubscriptionRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.subscription = null;
-                                    object.updateMask = null;
-                                    object.validateOnly = false;
-                                }
-                                if (message.subscription != null && message.hasOwnProperty("subscription"))
-                                    object.subscription = $root.google.apps.events.subscriptions.v1beta.Subscription.toObject(message.subscription, options);
-                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
-                                if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
-                                    object.validateOnly = message.validateOnly;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this UpdateSubscriptionRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            UpdateSubscriptionRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for UpdateSubscriptionRequest
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            UpdateSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.UpdateSubscriptionRequest";
-                            };
-    
-                            return UpdateSubscriptionRequest;
-                        })();
-    
-                        v1beta.ReactivateSubscriptionRequest = (function() {
-    
-                            /**
-                             * Properties of a ReactivateSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IReactivateSubscriptionRequest
-                             * @property {string|null} [name] ReactivateSubscriptionRequest name
-                             */
-    
-                            /**
-                             * Constructs a new ReactivateSubscriptionRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a ReactivateSubscriptionRequest.
-                             * @implements IReactivateSubscriptionRequest
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest=} [properties] Properties to set
-                             */
-                            function ReactivateSubscriptionRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ReactivateSubscriptionRequest name.
-                             * @member {string} name
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @instance
-                             */
-                            ReactivateSubscriptionRequest.prototype.name = "";
-    
-                            /**
-                             * Creates a new ReactivateSubscriptionRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest} ReactivateSubscriptionRequest instance
-                             */
-                            ReactivateSubscriptionRequest.create = function create(properties) {
-                                return new ReactivateSubscriptionRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ReactivateSubscriptionRequest message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest} message ReactivateSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ReactivateSubscriptionRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ReactivateSubscriptionRequest message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest} message ReactivateSubscriptionRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ReactivateSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ReactivateSubscriptionRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest} ReactivateSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ReactivateSubscriptionRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ReactivateSubscriptionRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest} ReactivateSubscriptionRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ReactivateSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ReactivateSubscriptionRequest message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ReactivateSubscriptionRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ReactivateSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest} ReactivateSubscriptionRequest
-                             */
-                            ReactivateSubscriptionRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ReactivateSubscriptionRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest} message ReactivateSubscriptionRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ReactivateSubscriptionRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.name = "";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ReactivateSubscriptionRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ReactivateSubscriptionRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ReactivateSubscriptionRequest
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ReactivateSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.ReactivateSubscriptionRequest";
-                            };
-    
-                            return ReactivateSubscriptionRequest;
-                        })();
-    
-                        v1beta.ListSubscriptionsRequest = (function() {
-    
-                            /**
-                             * Properties of a ListSubscriptionsRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IListSubscriptionsRequest
-                             * @property {number|null} [pageSize] ListSubscriptionsRequest pageSize
-                             * @property {string|null} [pageToken] ListSubscriptionsRequest pageToken
-                             * @property {string|null} [filter] ListSubscriptionsRequest filter
-                             */
-    
-                            /**
-                             * Constructs a new ListSubscriptionsRequest.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a ListSubscriptionsRequest.
-                             * @implements IListSubscriptionsRequest
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest=} [properties] Properties to set
-                             */
-                            function ListSubscriptionsRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ListSubscriptionsRequest pageSize.
-                             * @member {number} pageSize
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @instance
-                             */
-                            ListSubscriptionsRequest.prototype.pageSize = 0;
-    
-                            /**
-                             * ListSubscriptionsRequest pageToken.
-                             * @member {string} pageToken
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @instance
-                             */
-                            ListSubscriptionsRequest.prototype.pageToken = "";
-    
-                            /**
-                             * ListSubscriptionsRequest filter.
-                             * @member {string} filter
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @instance
-                             */
-                            ListSubscriptionsRequest.prototype.filter = "";
-    
-                            /**
-                             * Creates a new ListSubscriptionsRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest} ListSubscriptionsRequest instance
-                             */
-                            ListSubscriptionsRequest.create = function create(properties) {
-                                return new ListSubscriptionsRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ListSubscriptionsRequest message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest} message ListSubscriptionsRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListSubscriptionsRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pageSize);
-                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
-                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ListSubscriptionsRequest message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest} message ListSubscriptionsRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListSubscriptionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ListSubscriptionsRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest} ListSubscriptionsRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListSubscriptionsRequest.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.pageSize = reader.int32();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.pageToken = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.filter = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ListSubscriptionsRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest} ListSubscriptionsRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListSubscriptionsRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ListSubscriptionsRequest message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ListSubscriptionsRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    if (!$util.isInteger(message.pageSize))
-                                        return "pageSize: integer expected";
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    if (!$util.isString(message.pageToken))
-                                        return "pageToken: string expected";
-                                if (message.filter != null && message.hasOwnProperty("filter"))
-                                    if (!$util.isString(message.filter))
-                                        return "filter: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ListSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest} ListSubscriptionsRequest
-                             */
-                            ListSubscriptionsRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest();
-                                if (object.pageSize != null)
-                                    message.pageSize = object.pageSize | 0;
-                                if (object.pageToken != null)
-                                    message.pageToken = String(object.pageToken);
-                                if (object.filter != null)
-                                    message.filter = String(object.filter);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ListSubscriptionsRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest} message ListSubscriptionsRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ListSubscriptionsRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.pageSize = 0;
-                                    object.pageToken = "";
-                                    object.filter = "";
-                                }
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    object.pageSize = message.pageSize;
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    object.pageToken = message.pageToken;
-                                if (message.filter != null && message.hasOwnProperty("filter"))
-                                    object.filter = message.filter;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ListSubscriptionsRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ListSubscriptionsRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ListSubscriptionsRequest
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ListSubscriptionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.ListSubscriptionsRequest";
-                            };
-    
-                            return ListSubscriptionsRequest;
-                        })();
-    
-                        v1beta.ListSubscriptionsResponse = (function() {
-    
-                            /**
-                             * Properties of a ListSubscriptionsResponse.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IListSubscriptionsResponse
-                             * @property {Array.<google.apps.events.subscriptions.v1beta.ISubscription>|null} [subscriptions] ListSubscriptionsResponse subscriptions
-                             * @property {string|null} [nextPageToken] ListSubscriptionsResponse nextPageToken
-                             */
-    
-                            /**
-                             * Constructs a new ListSubscriptionsResponse.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a ListSubscriptionsResponse.
-                             * @implements IListSubscriptionsResponse
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse=} [properties] Properties to set
-                             */
-                            function ListSubscriptionsResponse(properties) {
-                                this.subscriptions = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ListSubscriptionsResponse subscriptions.
-                             * @member {Array.<google.apps.events.subscriptions.v1beta.ISubscription>} subscriptions
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @instance
-                             */
-                            ListSubscriptionsResponse.prototype.subscriptions = $util.emptyArray;
-    
-                            /**
-                             * ListSubscriptionsResponse nextPageToken.
-                             * @member {string} nextPageToken
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @instance
-                             */
-                            ListSubscriptionsResponse.prototype.nextPageToken = "";
-    
-                            /**
-                             * Creates a new ListSubscriptionsResponse instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse} ListSubscriptionsResponse instance
-                             */
-                            ListSubscriptionsResponse.create = function create(properties) {
-                                return new ListSubscriptionsResponse(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ListSubscriptionsResponse message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse} message ListSubscriptionsResponse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListSubscriptionsResponse.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.subscriptions != null && message.subscriptions.length)
-                                    for (var i = 0; i < message.subscriptions.length; ++i)
-                                        $root.google.apps.events.subscriptions.v1beta.Subscription.encode(message.subscriptions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ListSubscriptionsResponse message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse} message ListSubscriptionsResponse message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListSubscriptionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ListSubscriptionsResponse message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse} ListSubscriptionsResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListSubscriptionsResponse.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.subscriptions && message.subscriptions.length))
-                                                message.subscriptions = [];
-                                            message.subscriptions.push($root.google.apps.events.subscriptions.v1beta.Subscription.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.nextPageToken = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ListSubscriptionsResponse message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse} ListSubscriptionsResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListSubscriptionsResponse.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ListSubscriptionsResponse message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ListSubscriptionsResponse.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.subscriptions != null && message.hasOwnProperty("subscriptions")) {
-                                    if (!Array.isArray(message.subscriptions))
-                                        return "subscriptions: array expected";
-                                    for (var i = 0; i < message.subscriptions.length; ++i) {
-                                        var error = $root.google.apps.events.subscriptions.v1beta.Subscription.verify(message.subscriptions[i]);
-                                        if (error)
-                                            return "subscriptions." + error;
-                                    }
-                                }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                    if (!$util.isString(message.nextPageToken))
-                                        return "nextPageToken: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ListSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse} ListSubscriptionsResponse
-                             */
-                            ListSubscriptionsResponse.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse)
-                                    return object;
-                                var message = new $root.google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse();
-                                if (object.subscriptions) {
-                                    if (!Array.isArray(object.subscriptions))
-                                        throw TypeError(".google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse.subscriptions: array expected");
-                                    message.subscriptions = [];
-                                    for (var i = 0; i < object.subscriptions.length; ++i) {
-                                        if (typeof object.subscriptions[i] !== "object")
-                                            throw TypeError(".google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse.subscriptions: object expected");
-                                        message.subscriptions[i] = $root.google.apps.events.subscriptions.v1beta.Subscription.fromObject(object.subscriptions[i]);
-                                    }
-                                }
-                                if (object.nextPageToken != null)
-                                    message.nextPageToken = String(object.nextPageToken);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ListSubscriptionsResponse message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse} message ListSubscriptionsResponse
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ListSubscriptionsResponse.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.subscriptions = [];
-                                if (options.defaults)
-                                    object.nextPageToken = "";
-                                if (message.subscriptions && message.subscriptions.length) {
-                                    object.subscriptions = [];
-                                    for (var j = 0; j < message.subscriptions.length; ++j)
-                                        object.subscriptions[j] = $root.google.apps.events.subscriptions.v1beta.Subscription.toObject(message.subscriptions[j], options);
-                                }
-                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                    object.nextPageToken = message.nextPageToken;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ListSubscriptionsResponse to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ListSubscriptionsResponse.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ListSubscriptionsResponse
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ListSubscriptionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.ListSubscriptionsResponse";
-                            };
-    
-                            return ListSubscriptionsResponse;
-                        })();
-    
-                        v1beta.UpdateSubscriptionMetadata = (function() {
-    
-                            /**
-                             * Properties of an UpdateSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IUpdateSubscriptionMetadata
-                             */
-    
-                            /**
-                             * Constructs a new UpdateSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents an UpdateSubscriptionMetadata.
-                             * @implements IUpdateSubscriptionMetadata
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata=} [properties] Properties to set
-                             */
-                            function UpdateSubscriptionMetadata(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Creates a new UpdateSubscriptionMetadata instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata} UpdateSubscriptionMetadata instance
-                             */
-                            UpdateSubscriptionMetadata.create = function create(properties) {
-                                return new UpdateSubscriptionMetadata(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateSubscriptionMetadata message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata} message UpdateSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateSubscriptionMetadata.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified UpdateSubscriptionMetadata message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata} message UpdateSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            UpdateSubscriptionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an UpdateSubscriptionMetadata message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata} UpdateSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateSubscriptionMetadata.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an UpdateSubscriptionMetadata message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata} UpdateSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            UpdateSubscriptionMetadata.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an UpdateSubscriptionMetadata message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            UpdateSubscriptionMetadata.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an UpdateSubscriptionMetadata message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata} UpdateSubscriptionMetadata
-                             */
-                            UpdateSubscriptionMetadata.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata)
-                                    return object;
-                                return new $root.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata();
-                            };
-    
-                            /**
-                             * Creates a plain object from an UpdateSubscriptionMetadata message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata} message UpdateSubscriptionMetadata
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            UpdateSubscriptionMetadata.toObject = function toObject() {
-                                return {};
-                            };
-    
-                            /**
-                             * Converts this UpdateSubscriptionMetadata to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            UpdateSubscriptionMetadata.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for UpdateSubscriptionMetadata
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            UpdateSubscriptionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata";
-                            };
-    
-                            return UpdateSubscriptionMetadata;
-                        })();
-    
-                        v1beta.CreateSubscriptionMetadata = (function() {
-    
-                            /**
-                             * Properties of a CreateSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface ICreateSubscriptionMetadata
-                             */
-    
-                            /**
-                             * Constructs a new CreateSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a CreateSubscriptionMetadata.
-                             * @implements ICreateSubscriptionMetadata
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata=} [properties] Properties to set
-                             */
-                            function CreateSubscriptionMetadata(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Creates a new CreateSubscriptionMetadata instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata} CreateSubscriptionMetadata instance
-                             */
-                            CreateSubscriptionMetadata.create = function create(properties) {
-                                return new CreateSubscriptionMetadata(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified CreateSubscriptionMetadata message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata} message CreateSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateSubscriptionMetadata.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified CreateSubscriptionMetadata message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata} message CreateSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CreateSubscriptionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a CreateSubscriptionMetadata message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata} CreateSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateSubscriptionMetadata.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a CreateSubscriptionMetadata message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata} CreateSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CreateSubscriptionMetadata.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a CreateSubscriptionMetadata message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            CreateSubscriptionMetadata.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a CreateSubscriptionMetadata message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata} CreateSubscriptionMetadata
-                             */
-                            CreateSubscriptionMetadata.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata)
-                                    return object;
-                                return new $root.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata();
-                            };
-    
-                            /**
-                             * Creates a plain object from a CreateSubscriptionMetadata message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata} message CreateSubscriptionMetadata
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            CreateSubscriptionMetadata.toObject = function toObject() {
-                                return {};
-                            };
-    
-                            /**
-                             * Converts this CreateSubscriptionMetadata to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            CreateSubscriptionMetadata.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for CreateSubscriptionMetadata
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            CreateSubscriptionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata";
-                            };
-    
-                            return CreateSubscriptionMetadata;
-                        })();
-    
-                        v1beta.DeleteSubscriptionMetadata = (function() {
-    
-                            /**
-                             * Properties of a DeleteSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IDeleteSubscriptionMetadata
-                             */
-    
-                            /**
-                             * Constructs a new DeleteSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a DeleteSubscriptionMetadata.
-                             * @implements IDeleteSubscriptionMetadata
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata=} [properties] Properties to set
-                             */
-                            function DeleteSubscriptionMetadata(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Creates a new DeleteSubscriptionMetadata instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata} DeleteSubscriptionMetadata instance
-                             */
-                            DeleteSubscriptionMetadata.create = function create(properties) {
-                                return new DeleteSubscriptionMetadata(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteSubscriptionMetadata message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata} message DeleteSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteSubscriptionMetadata.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified DeleteSubscriptionMetadata message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata} message DeleteSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            DeleteSubscriptionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a DeleteSubscriptionMetadata message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata} DeleteSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteSubscriptionMetadata.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a DeleteSubscriptionMetadata message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata} DeleteSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            DeleteSubscriptionMetadata.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a DeleteSubscriptionMetadata message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            DeleteSubscriptionMetadata.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a DeleteSubscriptionMetadata message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata} DeleteSubscriptionMetadata
-                             */
-                            DeleteSubscriptionMetadata.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata)
-                                    return object;
-                                return new $root.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata();
-                            };
-    
-                            /**
-                             * Creates a plain object from a DeleteSubscriptionMetadata message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata} message DeleteSubscriptionMetadata
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            DeleteSubscriptionMetadata.toObject = function toObject() {
-                                return {};
-                            };
-    
-                            /**
-                             * Converts this DeleteSubscriptionMetadata to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            DeleteSubscriptionMetadata.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for DeleteSubscriptionMetadata
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            DeleteSubscriptionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata";
-                            };
-    
-                            return DeleteSubscriptionMetadata;
-                        })();
-    
-                        v1beta.ReactivateSubscriptionMetadata = (function() {
-    
-                            /**
-                             * Properties of a ReactivateSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @interface IReactivateSubscriptionMetadata
-                             */
-    
-                            /**
-                             * Constructs a new ReactivateSubscriptionMetadata.
-                             * @memberof google.apps.events.subscriptions.v1beta
-                             * @classdesc Represents a ReactivateSubscriptionMetadata.
-                             * @implements IReactivateSubscriptionMetadata
-                             * @constructor
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata=} [properties] Properties to set
-                             */
-                            function ReactivateSubscriptionMetadata(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Creates a new ReactivateSubscriptionMetadata instance using the specified properties.
-                             * @function create
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata=} [properties] Properties to set
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata} ReactivateSubscriptionMetadata instance
-                             */
-                            ReactivateSubscriptionMetadata.create = function create(properties) {
-                                return new ReactivateSubscriptionMetadata(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ReactivateSubscriptionMetadata message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata} message ReactivateSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ReactivateSubscriptionMetadata.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ReactivateSubscriptionMetadata message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata} message ReactivateSubscriptionMetadata message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ReactivateSubscriptionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ReactivateSubscriptionMetadata message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata} ReactivateSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ReactivateSubscriptionMetadata.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ReactivateSubscriptionMetadata message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata} ReactivateSubscriptionMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ReactivateSubscriptionMetadata.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ReactivateSubscriptionMetadata message.
-                             * @function verify
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ReactivateSubscriptionMetadata.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ReactivateSubscriptionMetadata message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata} ReactivateSubscriptionMetadata
-                             */
-                            ReactivateSubscriptionMetadata.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata)
-                                    return object;
-                                return new $root.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata();
-                            };
-    
-                            /**
-                             * Creates a plain object from a ReactivateSubscriptionMetadata message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata} message ReactivateSubscriptionMetadata
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ReactivateSubscriptionMetadata.toObject = function toObject() {
-                                return {};
-                            };
-    
-                            /**
-                             * Converts this ReactivateSubscriptionMetadata to JSON.
-                             * @function toJSON
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ReactivateSubscriptionMetadata.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ReactivateSubscriptionMetadata
-                             * @function getTypeUrl
-                             * @memberof google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ReactivateSubscriptionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata";
-                            };
-    
-                            return ReactivateSubscriptionMetadata;
-                        })();
-    
-                        return v1beta;
-                    })();
-    
                     return subscriptions;
                 })();
     
@@ -9660,7 +5594,6 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
-                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -9696,14 +5629,6 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
-                 * CommonLanguageSettings selectiveGapicGeneration.
-                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
-                 * @memberof google.api.CommonLanguageSettings
-                 * @instance
-                 */
-                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
-    
-                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -9735,8 +5660,6 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
-                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -9786,10 +5709,6 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
-                                break;
-                            }
-                        case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -9843,11 +5762,6 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
-                        if (error)
-                            return "selectiveGapicGeneration." + error;
-                    }
                     return null;
                 };
     
@@ -9890,11 +5804,6 @@
                                 break;
                             }
                     }
-                    if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
-                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
-                    }
                     return message;
                 };
     
@@ -9913,10 +5822,8 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.referenceDocsUri = "";
-                        object.selectiveGapicGeneration = null;
-                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -9924,8 +5831,6 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -11748,7 +7653,6 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
-                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -11773,14 +7677,6 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
-    
-                /**
-                 * PythonSettings experimentalFeatures.
-                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
-                 * @memberof google.api.PythonSettings
-                 * @instance
-                 */
-                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -11808,8 +7704,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -11848,10 +7742,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -11894,11 +7784,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
-                        if (error)
-                            return "experimentalFeatures." + error;
-                    }
                     return null;
                 };
     
@@ -11919,11 +7804,6 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
-                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
-                    }
                     return message;
                 };
     
@@ -11940,14 +7820,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.common = null;
-                        object.experimentalFeatures = null;
-                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -11976,258 +7852,6 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
-    
-                PythonSettings.ExperimentalFeatures = (function() {
-    
-                    /**
-                     * Properties of an ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @interface IExperimentalFeatures
-                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
-                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
-                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
-                     */
-    
-                    /**
-                     * Constructs a new ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @classdesc Represents an ExperimentalFeatures.
-                     * @implements IExperimentalFeatures
-                     * @constructor
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     */
-                    function ExperimentalFeatures(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ExperimentalFeatures restAsyncIoEnabled.
-                     * @member {boolean} restAsyncIoEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures protobufPythonicTypesEnabled.
-                     * @member {boolean} protobufPythonicTypesEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures unversionedPackageDisabled.
-                     * @member {boolean} unversionedPackageDisabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
-    
-                    /**
-                     * Creates a new ExperimentalFeatures instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
-                     */
-                    ExperimentalFeatures.create = function create(properties) {
-                        return new ExperimentalFeatures(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
-                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
-                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.restAsyncIoEnabled = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.protobufPythonicTypesEnabled = reader.bool();
-                                    break;
-                                }
-                            case 3: {
-                                    message.unversionedPackageDisabled = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ExperimentalFeatures message.
-                     * @function verify
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ExperimentalFeatures.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            if (typeof message.restAsyncIoEnabled !== "boolean")
-                                return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
-                                return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            if (typeof message.unversionedPackageDisabled !== "boolean")
-                                return "unversionedPackageDisabled: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
-                            return object;
-                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        if (object.restAsyncIoEnabled != null)
-                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
-                        if (object.protobufPythonicTypesEnabled != null)
-                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
-                        if (object.unversionedPackageDisabled != null)
-                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.restAsyncIoEnabled = false;
-                            object.protobufPythonicTypesEnabled = false;
-                            object.unversionedPackageDisabled = false;
-                        }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ExperimentalFeatures to JSON.
-                     * @function toJSON
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ExperimentalFeatures
-                     * @function getTypeUrl
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
-                    };
-    
-                    return ExperimentalFeatures;
-                })();
     
                 return PythonSettings;
             })();
@@ -13105,7 +8729,6 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -13117,7 +8740,6 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
-                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -13131,14 +8753,6 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
-    
-                /**
-                 * GoSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.GoSettings
-                 * @instance
-                 */
-                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -13166,9 +8780,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -13199,7 +8810,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -13207,29 +8818,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -13272,14 +8860,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
                     return null;
                 };
     
@@ -13300,13 +8880,6 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
                     return message;
                 };
     
@@ -13323,18 +8896,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.objects || options.defaults)
-                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
                     return object;
                 };
     
@@ -13973,251 +9538,6 @@
                 return values;
             })();
     
-            api.SelectiveGapicGeneration = (function() {
-    
-                /**
-                 * Properties of a SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @interface ISelectiveGapicGeneration
-                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
-                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
-                 */
-    
-                /**
-                 * Constructs a new SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @classdesc Represents a SelectiveGapicGeneration.
-                 * @implements ISelectiveGapicGeneration
-                 * @constructor
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 */
-                function SelectiveGapicGeneration(properties) {
-                    this.methods = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * SelectiveGapicGeneration methods.
-                 * @member {Array.<string>} methods
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
-    
-                /**
-                 * SelectiveGapicGeneration generateOmittedAsInternal.
-                 * @member {boolean} generateOmittedAsInternal
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
-    
-                /**
-                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
-                 */
-                SelectiveGapicGeneration.create = function create(properties) {
-                    return new SelectiveGapicGeneration(properties);
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.methods != null && message.methods.length)
-                        for (var i = 0; i < message.methods.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
-                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.methods && message.methods.length))
-                                    message.methods = [];
-                                message.methods.push(reader.string());
-                                break;
-                            }
-                        case 2: {
-                                message.generateOmittedAsInternal = reader.bool();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a SelectiveGapicGeneration message.
-                 * @function verify
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                SelectiveGapicGeneration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
-                        if (!Array.isArray(message.methods))
-                            return "methods: array expected";
-                        for (var i = 0; i < message.methods.length; ++i)
-                            if (!$util.isString(message.methods[i]))
-                                return "methods: string[] expected";
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        if (typeof message.generateOmittedAsInternal !== "boolean")
-                            return "generateOmittedAsInternal: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
-                        return object;
-                    var message = new $root.google.api.SelectiveGapicGeneration();
-                    if (object.methods) {
-                        if (!Array.isArray(object.methods))
-                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
-                        message.methods = [];
-                        for (var i = 0; i < object.methods.length; ++i)
-                            message.methods[i] = String(object.methods[i]);
-                    }
-                    if (object.generateOmittedAsInternal != null)
-                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.methods = [];
-                    if (options.defaults)
-                        object.generateOmittedAsInternal = false;
-                    if (message.methods && message.methods.length) {
-                        object.methods = [];
-                        for (var j = 0; j < message.methods.length; ++j)
-                            object.methods[j] = message.methods[j];
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
-                    return object;
-                };
-    
-                /**
-                 * Converts this SelectiveGapicGeneration to JSON.
-                 * @function toJSON
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for SelectiveGapicGeneration
-                 * @function getTypeUrl
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
-                };
-    
-                return SelectiveGapicGeneration;
-            })();
-    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -14242,515 +9562,6 @@
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
                 return values;
-            })();
-    
-            api.FieldInfo = (function() {
-    
-                /**
-                 * Properties of a FieldInfo.
-                 * @memberof google.api
-                 * @interface IFieldInfo
-                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
-                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
-                 */
-    
-                /**
-                 * Constructs a new FieldInfo.
-                 * @memberof google.api
-                 * @classdesc Represents a FieldInfo.
-                 * @implements IFieldInfo
-                 * @constructor
-                 * @param {google.api.IFieldInfo=} [properties] Properties to set
-                 */
-                function FieldInfo(properties) {
-                    this.referencedTypes = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldInfo format.
-                 * @member {google.api.FieldInfo.Format} format
-                 * @memberof google.api.FieldInfo
-                 * @instance
-                 */
-                FieldInfo.prototype.format = 0;
-    
-                /**
-                 * FieldInfo referencedTypes.
-                 * @member {Array.<google.api.ITypeReference>} referencedTypes
-                 * @memberof google.api.FieldInfo
-                 * @instance
-                 */
-                FieldInfo.prototype.referencedTypes = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldInfo instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.IFieldInfo=} [properties] Properties to set
-                 * @returns {google.api.FieldInfo} FieldInfo instance
-                 */
-                FieldInfo.create = function create(properties) {
-                    return new FieldInfo(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldInfo.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
-                    if (message.referencedTypes != null && message.referencedTypes.length)
-                        for (var i = 0; i < message.referencedTypes.length; ++i)
-                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldInfo message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.FieldInfo} FieldInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldInfo.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.format = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.referencedTypes && message.referencedTypes.length))
-                                    message.referencedTypes = [];
-                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.FieldInfo} FieldInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldInfo message.
-                 * @function verify
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldInfo.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.format != null && message.hasOwnProperty("format"))
-                        switch (message.format) {
-                        default:
-                            return "format: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                            break;
-                        }
-                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
-                        if (!Array.isArray(message.referencedTypes))
-                            return "referencedTypes: array expected";
-                        for (var i = 0; i < message.referencedTypes.length; ++i) {
-                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
-                            if (error)
-                                return "referencedTypes." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.FieldInfo} FieldInfo
-                 */
-                FieldInfo.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.FieldInfo)
-                        return object;
-                    var message = new $root.google.api.FieldInfo();
-                    switch (object.format) {
-                    default:
-                        if (typeof object.format === "number") {
-                            message.format = object.format;
-                            break;
-                        }
-                        break;
-                    case "FORMAT_UNSPECIFIED":
-                    case 0:
-                        message.format = 0;
-                        break;
-                    case "UUID4":
-                    case 1:
-                        message.format = 1;
-                        break;
-                    case "IPV4":
-                    case 2:
-                        message.format = 2;
-                        break;
-                    case "IPV6":
-                    case 3:
-                        message.format = 3;
-                        break;
-                    case "IPV4_OR_IPV6":
-                    case 4:
-                        message.format = 4;
-                        break;
-                    }
-                    if (object.referencedTypes) {
-                        if (!Array.isArray(object.referencedTypes))
-                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
-                        message.referencedTypes = [];
-                        for (var i = 0; i < object.referencedTypes.length; ++i) {
-                            if (typeof object.referencedTypes[i] !== "object")
-                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
-                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.FieldInfo} message FieldInfo
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldInfo.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.referencedTypes = [];
-                    if (options.defaults)
-                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
-                    if (message.format != null && message.hasOwnProperty("format"))
-                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
-                    if (message.referencedTypes && message.referencedTypes.length) {
-                        object.referencedTypes = [];
-                        for (var j = 0; j < message.referencedTypes.length; ++j)
-                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldInfo to JSON.
-                 * @function toJSON
-                 * @memberof google.api.FieldInfo
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldInfo.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldInfo
-                 * @function getTypeUrl
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.FieldInfo";
-                };
-    
-                /**
-                 * Format enum.
-                 * @name google.api.FieldInfo.Format
-                 * @enum {number}
-                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
-                 * @property {number} UUID4=1 UUID4 value
-                 * @property {number} IPV4=2 IPV4 value
-                 * @property {number} IPV6=3 IPV6 value
-                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
-                 */
-                FieldInfo.Format = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "UUID4"] = 1;
-                    values[valuesById[2] = "IPV4"] = 2;
-                    values[valuesById[3] = "IPV6"] = 3;
-                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
-                    return values;
-                })();
-    
-                return FieldInfo;
-            })();
-    
-            api.TypeReference = (function() {
-    
-                /**
-                 * Properties of a TypeReference.
-                 * @memberof google.api
-                 * @interface ITypeReference
-                 * @property {string|null} [typeName] TypeReference typeName
-                 */
-    
-                /**
-                 * Constructs a new TypeReference.
-                 * @memberof google.api
-                 * @classdesc Represents a TypeReference.
-                 * @implements ITypeReference
-                 * @constructor
-                 * @param {google.api.ITypeReference=} [properties] Properties to set
-                 */
-                function TypeReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * TypeReference typeName.
-                 * @member {string} typeName
-                 * @memberof google.api.TypeReference
-                 * @instance
-                 */
-                TypeReference.prototype.typeName = "";
-    
-                /**
-                 * Creates a new TypeReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {google.api.ITypeReference=} [properties] Properties to set
-                 * @returns {google.api.TypeReference} TypeReference instance
-                 */
-                TypeReference.create = function create(properties) {
-                    return new TypeReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                TypeReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a TypeReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.TypeReference} TypeReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                TypeReference.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.typeName = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.TypeReference} TypeReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                TypeReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a TypeReference message.
-                 * @function verify
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                TypeReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
-                        if (!$util.isString(message.typeName))
-                            return "typeName: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.TypeReference} TypeReference
-                 */
-                TypeReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.TypeReference)
-                        return object;
-                    var message = new $root.google.api.TypeReference();
-                    if (object.typeName != null)
-                        message.typeName = String(object.typeName);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {google.api.TypeReference} message TypeReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                TypeReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults)
-                        object.typeName = "";
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
-                        object.typeName = message.typeName;
-                    return object;
-                };
-    
-                /**
-                 * Converts this TypeReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.TypeReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                TypeReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for TypeReference
-                 * @function getTypeUrl
-                 * @memberof google.api.TypeReference
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.TypeReference";
-                };
-    
-                return TypeReference;
             })();
     
             return api;
@@ -14996,7 +9807,6 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
-             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -15011,7 +9821,6 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
-                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -15036,7 +9845,6 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
-                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -15059,7 +9867,6 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
-                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -15109,14 +9916,6 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
-    
-                /**
-                 * FileDescriptorProto optionDependency.
-                 * @member {Array.<string>} optionDependency
-                 * @memberof google.protobuf.FileDescriptorProto
-                 * @instance
-                 */
-                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -15239,9 +10038,6 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
-                    if (message.optionDependency != null && message.optionDependency.length)
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -15312,12 +10108,6 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
-                                break;
-                            }
-                        case 15: {
-                                if (!(message.optionDependency && message.optionDependency.length))
-                                    message.optionDependency = [];
-                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -15422,13 +10212,6 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
-                        if (!Array.isArray(message.optionDependency))
-                            return "optionDependency: array expected";
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            if (!$util.isString(message.optionDependency[i]))
-                                return "optionDependency: string[] expected";
-                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -15483,7 +10266,6 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -15535,13 +10317,6 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
-                    }
-                    if (object.optionDependency) {
-                        if (!Array.isArray(object.optionDependency))
-                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
-                        message.optionDependency = [];
-                        for (var i = 0; i < object.optionDependency.length; ++i)
-                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -15605,10 +10380,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -15675,7 +10446,6 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
-                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -15732,11 +10502,6 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                    if (message.optionDependency && message.optionDependency.length) {
-                        object.optionDependency = [];
-                        for (var j = 0; j < message.optionDependency.length; ++j)
-                            object.optionDependency[j] = message.optionDependency[j];
-                    }
                     return object;
                 };
     
@@ -15785,7 +10550,6 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -15892,14 +10656,6 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * DescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.DescriptorProto
-                 * @instance
-                 */
-                DescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -15951,8 +10707,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -16043,10 +10797,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 11: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -16162,15 +10912,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -16270,26 +11011,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -16319,7 +11040,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -16365,8 +11085,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -18411,7 +13129,6 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -18473,14 +13190,6 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * EnumDescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.EnumDescriptorProto
-                 * @instance
-                 */
-                EnumDescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -18517,8 +13226,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -18579,10 +13286,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -18653,15 +13356,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -18711,26 +13405,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -18755,7 +13429,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -18776,8 +13449,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -21096,11 +15767,9 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
-                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
                 /**
@@ -21219,14 +15888,6 @@
                 FieldOptions.prototype.features = null;
     
                 /**
-                 * FieldOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.featureSupport = null;
-    
-                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -21249,14 +15910,6 @@
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
-                 * FieldOptions .google.api.fieldInfo.
-                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.fieldInfo"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -21308,8 +15961,6 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -21318,8 +15969,6 @@
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
-                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
-                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -21413,10 +16062,6 @@
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
-                        case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
-                                break;
-                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -21436,10 +16081,6 @@
                             }
                         case 1055: {
                                 message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 291403980: {
-                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -21556,11 +16197,6 @@
                         if (error)
                             return "features." + error;
                     }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -21593,11 +16229,6 @@
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
                         if (error)
                             return ".google.api.resourceReference." + error;
-                    }
-                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
-                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
-                        if (error)
-                            return ".google.api.fieldInfo." + error;
                     }
                     return null;
                 };
@@ -21754,11 +16385,6 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -21823,11 +16449,6 @@
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
-                    if (object[".google.api.fieldInfo"] != null) {
-                        if (typeof object[".google.api.fieldInfo"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
-                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
-                    }
                     return message;
                 };
     
@@ -21861,9 +16482,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
-                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
-                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -21895,8 +16514,6 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -21909,8 +16526,6 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
-                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
-                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     
@@ -22171,7 +16786,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -22212,10 +16826,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -22314,488 +16924,6 @@
                     };
     
                     return EditionDefault;
-                })();
-    
-                FieldOptions.FeatureSupport = (function() {
-    
-                    /**
-                     * Properties of a FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IFeatureSupport
-                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
-                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
-                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
-                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
-                     */
-    
-                    /**
-                     * Constructs a new FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents a FeatureSupport.
-                     * @implements IFeatureSupport
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     */
-                    function FeatureSupport(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * FeatureSupport editionIntroduced.
-                     * @member {google.protobuf.Edition} editionIntroduced
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionIntroduced = 0;
-    
-                    /**
-                     * FeatureSupport editionDeprecated.
-                     * @member {google.protobuf.Edition} editionDeprecated
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionDeprecated = 0;
-    
-                    /**
-                     * FeatureSupport deprecationWarning.
-                     * @member {string} deprecationWarning
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.deprecationWarning = "";
-    
-                    /**
-                     * FeatureSupport editionRemoved.
-                     * @member {google.protobuf.Edition} editionRemoved
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionRemoved = 0;
-    
-                    /**
-                     * Creates a new FeatureSupport instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
-                     */
-                    FeatureSupport.create = function create(properties) {
-                        return new FeatureSupport(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
-                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
-                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
-                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.editionIntroduced = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.editionDeprecated = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.deprecationWarning = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.editionRemoved = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a FeatureSupport message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    FeatureSupport.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            switch (message.editionIntroduced) {
-                            default:
-                                return "editionIntroduced: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            switch (message.editionDeprecated) {
-                            default:
-                                return "editionDeprecated: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            if (!$util.isString(message.deprecationWarning))
-                                return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            switch (message.editionRemoved) {
-                            default:
-                                return "editionRemoved: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     */
-                    FeatureSupport.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        switch (object.editionIntroduced) {
-                        default:
-                            if (typeof object.editionIntroduced === "number") {
-                                message.editionIntroduced = object.editionIntroduced;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionIntroduced = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionIntroduced = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionIntroduced = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionIntroduced = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionIntroduced = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionIntroduced = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionIntroduced = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionIntroduced = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionIntroduced = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionIntroduced = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionIntroduced = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionIntroduced = 2147483647;
-                            break;
-                        }
-                        switch (object.editionDeprecated) {
-                        default:
-                            if (typeof object.editionDeprecated === "number") {
-                                message.editionDeprecated = object.editionDeprecated;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionDeprecated = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionDeprecated = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionDeprecated = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionDeprecated = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionDeprecated = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionDeprecated = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionDeprecated = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionDeprecated = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionDeprecated = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionDeprecated = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionDeprecated = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionDeprecated = 2147483647;
-                            break;
-                        }
-                        if (object.deprecationWarning != null)
-                            message.deprecationWarning = String(object.deprecationWarning);
-                        switch (object.editionRemoved) {
-                        default:
-                            if (typeof object.editionRemoved === "number") {
-                                message.editionRemoved = object.editionRemoved;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionRemoved = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionRemoved = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionRemoved = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionRemoved = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionRemoved = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionRemoved = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionRemoved = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionRemoved = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionRemoved = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionRemoved = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionRemoved = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionRemoved = 2147483647;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    FeatureSupport.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.deprecationWarning = "";
-                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                        }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this FeatureSupport to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    FeatureSupport.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for FeatureSupport
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
-                    };
-    
-                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -23390,7 +17518,6 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -23435,14 +17562,6 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
-                 * EnumValueOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.featureSupport = null;
-    
-                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -23480,8 +17599,6 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -23531,10 +17648,6 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -23589,11 +17702,6 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -23627,11 +17735,6 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -23664,7 +17767,6 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
-                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -23672,8 +17774,6 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -25141,8 +19241,6 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
-                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -25209,22 +19307,6 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
-                 * FeatureSet enforceNamingStyle.
-                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enforceNamingStyle = 0;
-    
-                /**
-                 * FeatureSet defaultSymbolVisibility.
-                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.defaultSymbolVisibility = 0;
-    
-                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -25260,10 +19342,6 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
-                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -25322,14 +19400,6 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 7: {
-                                message.enforceNamingStyle = reader.int32();
-                                break;
-                            }
-                        case 8: {
-                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -25420,26 +19490,6 @@
                         case 0:
                         case 1:
                         case 2:
-                            break;
-                        }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        switch (message.enforceNamingStyle) {
-                        default:
-                            return "enforceNamingStyle: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        switch (message.defaultSymbolVisibility) {
-                        default:
-                            return "defaultSymbolVisibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
                             break;
                         }
                     return null;
@@ -25581,54 +19631,6 @@
                         message.jsonFormat = 2;
                         break;
                     }
-                    switch (object.enforceNamingStyle) {
-                    default:
-                        if (typeof object.enforceNamingStyle === "number") {
-                            message.enforceNamingStyle = object.enforceNamingStyle;
-                            break;
-                        }
-                        break;
-                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-                    case 0:
-                        message.enforceNamingStyle = 0;
-                        break;
-                    case "STYLE2024":
-                    case 1:
-                        message.enforceNamingStyle = 1;
-                        break;
-                    case "STYLE_LEGACY":
-                    case 2:
-                        message.enforceNamingStyle = 2;
-                        break;
-                    }
-                    switch (object.defaultSymbolVisibility) {
-                    default:
-                        if (typeof object.defaultSymbolVisibility === "number") {
-                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
-                            break;
-                        }
-                        break;
-                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-                    case 0:
-                        message.defaultSymbolVisibility = 0;
-                        break;
-                    case "EXPORT_ALL":
-                    case 1:
-                        message.defaultSymbolVisibility = 1;
-                        break;
-                    case "EXPORT_TOP_LEVEL":
-                    case 2:
-                        message.defaultSymbolVisibility = 2;
-                        break;
-                    case "LOCAL_ALL":
-                    case 3:
-                        message.defaultSymbolVisibility = 3;
-                        break;
-                    case "STRICT":
-                    case 4:
-                        message.defaultSymbolVisibility = 4;
-                        break;
-                    }
                     return message;
                 };
     
@@ -25652,8 +19654,6 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
-                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -25667,10 +19667,6 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -25796,219 +19792,6 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
-                })();
-    
-                /**
-                 * EnforceNamingStyle enum.
-                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
-                 * @enum {number}
-                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
-                 * @property {number} STYLE2024=1 STYLE2024 value
-                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
-                 */
-                FeatureSet.EnforceNamingStyle = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "STYLE2024"] = 1;
-                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
-                    return values;
-                })();
-    
-                FeatureSet.VisibilityFeature = (function() {
-    
-                    /**
-                     * Properties of a VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @interface IVisibilityFeature
-                     */
-    
-                    /**
-                     * Constructs a new VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @classdesc Represents a VisibilityFeature.
-                     * @implements IVisibilityFeature
-                     * @constructor
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     */
-                    function VisibilityFeature(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Creates a new VisibilityFeature instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
-                     */
-                    VisibilityFeature.create = function create(properties) {
-                        return new VisibilityFeature(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a VisibilityFeature message.
-                     * @function verify
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    VisibilityFeature.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     */
-                    VisibilityFeature.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
-                            return object;
-                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                    };
-    
-                    /**
-                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    VisibilityFeature.toObject = function toObject() {
-                        return {};
-                    };
-    
-                    /**
-                     * Converts this VisibilityFeature to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    VisibilityFeature.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for VisibilityFeature
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
-                    };
-    
-                    /**
-                     * DefaultSymbolVisibility enum.
-                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
-                     * @enum {number}
-                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
-                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
-                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
-                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
-                     * @property {number} STRICT=4 STRICT value
-                     */
-                    VisibilityFeature.DefaultSymbolVisibility = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
-                        values[valuesById[1] = "EXPORT_ALL"] = 1;
-                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
-                        values[valuesById[3] = "LOCAL_ALL"] = 3;
-                        values[valuesById[4] = "STRICT"] = 4;
-                        return values;
-                    })();
-    
-                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -26195,7 +19978,6 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -26213,7 +19995,6 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -26261,10 +20042,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -26317,10 +20094,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -26430,8 +20203,7 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
-                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
                      */
     
                     /**
@@ -26458,20 +20230,12 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault overridableFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
-    
-                    /**
-                     * FeatureSetEditionDefault fixedFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
-                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
-                     * @instance
-                     */
-                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
+                    FeatureSetEditionDefault.prototype.features = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -26497,12 +20261,10 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
-                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -26543,12 +20305,8 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -26591,7 +20349,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -26604,15 +20361,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
                             if (error)
-                                return "overridableFeatures." + error;
-                        }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
-                            if (error)
-                                return "fixedFeatures." + error;
+                                return "features." + error;
                         }
                         return null;
                     };
@@ -26639,10 +20391,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -26685,15 +20433,10 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
-                        }
-                        if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                         }
                         return message;
                     };
@@ -26712,16 +20455,13 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
+                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.overridableFeatures = null;
-                            object.fixedFeatures = null;
                         }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -27934,22 +21674,6 @@
                 })();
     
                 return GeneratedCodeInfo;
-            })();
-    
-            /**
-             * SymbolVisibility enum.
-             * @name google.protobuf.SymbolVisibility
-             * @enum {number}
-             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
-             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
-             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
-             */
-            protobuf.SymbolVisibility = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
-                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
-                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
-                return values;
             })();
     
             protobuf.Duration = (function() {

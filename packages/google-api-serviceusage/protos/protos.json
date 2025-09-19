@@ -85,19 +85,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -135,11 +128,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -229,10 +217,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -458,10 +442,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -676,7 +656,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -812,8 +791,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -840,10 +818,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -912,26 +886,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -1021,10 +975,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -1168,7 +1118,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -1179,7 +1128,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -1190,7 +1138,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -1201,7 +1148,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -1212,8 +1158,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -1223,38 +1168,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -1299,13 +1233,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -1319,33 +1247,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -1374,26 +1275,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -1406,12 +1292,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -1495,14 +1375,6 @@
                     }
                   }
                 }
-              }
-            },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
               }
             },
             "Api": {
@@ -1798,15 +1670,6 @@
             },
             "Empty": {
               "fields": {}
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
             }
           }
         },
@@ -1814,9 +1677,10 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "serviceusage": {
@@ -2195,1190 +2059,6 @@
                       }
                     }
                   }
-                },
-                "v1beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Api.ServiceUsage.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/api/serviceusage/v1beta1;serviceusage",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "ServiceUsageProto",
-                    "java_package": "com.google.api.serviceusage.v1beta1",
-                    "php_namespace": "Google\\Api\\ServiceUsage\\V1beta1",
-                    "ruby_package": "Google::Api::ServiceUsage::V1beta1"
-                  },
-                  "nested": {
-                    "Service": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "config": {
-                          "type": "ServiceConfig",
-                          "id": 2
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "State": {
-                      "values": {
-                        "STATE_UNSPECIFIED": 0,
-                        "DISABLED": 1,
-                        "ENABLED": 2
-                      }
-                    },
-                    "ServiceConfig": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "title": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "apis": {
-                          "rule": "repeated",
-                          "type": "google.protobuf.Api",
-                          "id": 3
-                        },
-                        "documentation": {
-                          "type": "google.api.Documentation",
-                          "id": 6
-                        },
-                        "quota": {
-                          "type": "google.api.Quota",
-                          "id": 10
-                        },
-                        "authentication": {
-                          "type": "google.api.Authentication",
-                          "id": 11
-                        },
-                        "usage": {
-                          "type": "google.api.Usage",
-                          "id": 15
-                        },
-                        "endpoints": {
-                          "rule": "repeated",
-                          "type": "google.api.Endpoint",
-                          "id": 18
-                        },
-                        "monitoredResources": {
-                          "rule": "repeated",
-                          "type": "google.api.MonitoredResourceDescriptor",
-                          "id": 25
-                        },
-                        "monitoring": {
-                          "type": "google.api.Monitoring",
-                          "id": 28
-                        }
-                      }
-                    },
-                    "OperationMetadata": {
-                      "fields": {
-                        "resourceNames": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ConsumerQuotaMetric": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "metric": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "consumerQuotaLimits": {
-                          "rule": "repeated",
-                          "type": "ConsumerQuotaLimit",
-                          "id": 3
-                        },
-                        "descendantConsumerQuotaLimits": {
-                          "rule": "repeated",
-                          "type": "ConsumerQuotaLimit",
-                          "id": 6
-                        },
-                        "unit": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ConsumerQuotaLimit": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "metric": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "unit": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "isPrecise": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "allowsAdminOverrides": {
-                          "type": "bool",
-                          "id": 7
-                        },
-                        "quotaBuckets": {
-                          "rule": "repeated",
-                          "type": "QuotaBucket",
-                          "id": 9
-                        },
-                        "supportedLocations": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 11
-                        }
-                      }
-                    },
-                    "QuotaView": {
-                      "values": {
-                        "QUOTA_VIEW_UNSPECIFIED": 0,
-                        "BASIC": 1,
-                        "FULL": 2
-                      }
-                    },
-                    "QuotaBucket": {
-                      "fields": {
-                        "effectiveLimit": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "defaultLimit": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "producerOverride": {
-                          "type": "QuotaOverride",
-                          "id": 3
-                        },
-                        "consumerOverride": {
-                          "type": "QuotaOverride",
-                          "id": 4
-                        },
-                        "adminOverride": {
-                          "type": "QuotaOverride",
-                          "id": 5
-                        },
-                        "producerQuotaPolicy": {
-                          "type": "ProducerQuotaPolicy",
-                          "id": 7
-                        },
-                        "dimensions": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "QuotaOverride": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "overrideValue": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "dimensions": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "metric": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "unit": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "adminOverrideAncestor": {
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "OverrideInlineSource": {
-                      "fields": {
-                        "overrides": {
-                          "rule": "repeated",
-                          "type": "QuotaOverride",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "QuotaSafetyCheck": {
-                      "values": {
-                        "QUOTA_SAFETY_CHECK_UNSPECIFIED": 0,
-                        "LIMIT_DECREASE_BELOW_USAGE": 1,
-                        "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH": 2
-                      }
-                    },
-                    "ProducerQuotaPolicy": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "policyValue": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "dimensions": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "metric": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "unit": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "container": {
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "AdminQuotaPolicy": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "policyValue": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "dimensions": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "metric": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "unit": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "container": {
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "ServiceIdentity": {
-                      "fields": {
-                        "email": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "uniqueId": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ServiceUsage": {
-                      "options": {
-                        "(google.api.default_host)": "serviceusage.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/service.management"
-                      },
-                      "methods": {
-                        "EnableService": {
-                          "requestType": "EnableServiceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).post": "/v1beta1/{name=*/*/services/*}:enable",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{name=*/*/services/*}:enable",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DisableService": {
-                          "requestType": "DisableServiceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).post": "/v1beta1/{name=*/*/services/*}:disable",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{name=*/*/services/*}:disable",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "GetService": {
-                          "requestType": "GetServiceRequest",
-                          "responseType": "Service",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).get": "/v1beta1/{name=*/*/services/*}"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=*/*/services/*}"
-                              }
-                            }
-                          ]
-                        },
-                        "ListServices": {
-                          "requestType": "ListServicesRequest",
-                          "responseType": "ListServicesResponse",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).get": "/v1beta1/{parent=*/*}/services"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=*/*}/services"
-                              }
-                            }
-                          ]
-                        },
-                        "BatchEnableServices": {
-                          "requestType": "BatchEnableServicesRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).post": "/v1beta1/{parent=*/*}/services:batchEnable",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=*/*}/services:batchEnable",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ListConsumerQuotaMetrics": {
-                          "requestType": "ListConsumerQuotaMetricsRequest",
-                          "responseType": "ListConsumerQuotaMetricsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics"
-                              }
-                            }
-                          ]
-                        },
-                        "GetConsumerQuotaMetric": {
-                          "requestType": "GetConsumerQuotaMetricRequest",
-                          "responseType": "ConsumerQuotaMetric",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*}"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*}"
-                              }
-                            }
-                          ]
-                        },
-                        "GetConsumerQuotaLimit": {
-                          "requestType": "GetConsumerQuotaLimitRequest",
-                          "responseType": "ConsumerQuotaLimit",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*}"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*}"
-                              }
-                            }
-                          ]
-                        },
-                        "CreateAdminOverride": {
-                          "requestType": "CreateAdminOverrideRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides",
-                            "(google.api.http).body": "override",
-                            "(google.longrunning.operation_info).response_type": "QuotaOverride",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides",
-                                "body": "override"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "QuotaOverride",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateAdminOverride": {
-                          "requestType": "UpdateAdminOverrideRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}",
-                            "(google.api.http).body": "override",
-                            "(google.longrunning.operation_info).response_type": "QuotaOverride",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}",
-                                "body": "override"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "QuotaOverride",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteAdminOverride": {
-                          "requestType": "DeleteAdminOverrideRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/adminOverrides/*}"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ListAdminOverrides": {
-                          "requestType": "ListAdminOverridesRequest",
-                          "responseType": "ListAdminOverridesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/adminOverrides"
-                              }
-                            }
-                          ]
-                        },
-                        "ImportAdminOverrides": {
-                          "requestType": "ImportAdminOverridesRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importAdminOverrides",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "ImportAdminOverridesResponse",
-                            "(google.longrunning.operation_info).metadata_type": "ImportAdminOverridesMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importAdminOverrides",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "ImportAdminOverridesResponse",
-                                "metadata_type": "ImportAdminOverridesMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "CreateConsumerOverride": {
-                          "requestType": "CreateConsumerOverrideRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides",
-                            "(google.api.http).body": "override",
-                            "(google.longrunning.operation_info).response_type": "QuotaOverride",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides",
-                                "body": "override"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "QuotaOverride",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateConsumerOverride": {
-                          "requestType": "UpdateConsumerOverrideRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}",
-                            "(google.api.http).body": "override",
-                            "(google.longrunning.operation_info).response_type": "QuotaOverride",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}",
-                                "body": "override"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "QuotaOverride",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteConsumerOverride": {
-                          "requestType": "DeleteConsumerOverrideRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=*/*/services/*/consumerQuotaMetrics/*/limits/*/consumerOverrides/*}"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ListConsumerOverrides": {
-                          "requestType": "ListConsumerOverridesRequest",
-                          "responseType": "ListConsumerOverridesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=*/*/services/*/consumerQuotaMetrics/*/limits/*}/consumerOverrides"
-                              }
-                            }
-                          ]
-                        },
-                        "ImportConsumerOverrides": {
-                          "requestType": "ImportConsumerOverridesRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importConsumerOverrides",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "ImportConsumerOverridesResponse",
-                            "(google.longrunning.operation_info).metadata_type": "ImportConsumerOverridesMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=*/*/services/*}/consumerQuotaMetrics:importConsumerOverrides",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "ImportConsumerOverridesResponse",
-                                "metadata_type": "ImportConsumerOverridesMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "GenerateServiceIdentity": {
-                          "requestType": "GenerateServiceIdentityRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=*/*/services/*}:generateServiceIdentity",
-                            "(google.longrunning.operation_info).response_type": "ServiceIdentity",
-                            "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=*/*/services/*}:generateServiceIdentity"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "ServiceIdentity",
-                                "metadata_type": "google.protobuf.Empty"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "EnableServiceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "DisableServiceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GetServiceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListServicesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ListServicesResponse": {
-                      "fields": {
-                        "services": {
-                          "rule": "repeated",
-                          "type": "Service",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchEnableServicesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "serviceIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ListConsumerQuotaMetricsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "view": {
-                          "type": "QuotaView",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ListConsumerQuotaMetricsResponse": {
-                      "fields": {
-                        "metrics": {
-                          "rule": "repeated",
-                          "type": "ConsumerQuotaMetric",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetConsumerQuotaMetricRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "view": {
-                          "type": "QuotaView",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetConsumerQuotaLimitRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "view": {
-                          "type": "QuotaView",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "CreateAdminOverrideRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "override": {
-                          "type": "QuotaOverride",
-                          "id": 2
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "UpdateAdminOverrideRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "override": {
-                          "type": "QuotaOverride",
-                          "id": 2
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 4
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "DeleteAdminOverrideRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListAdminOverridesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListAdminOverridesResponse": {
-                      "fields": {
-                        "overrides": {
-                          "rule": "repeated",
-                          "type": "QuotaOverride",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchCreateAdminOverridesResponse": {
-                      "fields": {
-                        "overrides": {
-                          "rule": "repeated",
-                          "type": "QuotaOverride",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImportAdminOverridesRequest": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "inlineSource"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "inlineSource": {
-                          "type": "OverrideInlineSource",
-                          "id": 2
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ImportAdminOverridesResponse": {
-                      "fields": {
-                        "overrides": {
-                          "rule": "repeated",
-                          "type": "QuotaOverride",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImportAdminOverridesMetadata": {
-                      "fields": {}
-                    },
-                    "CreateConsumerOverrideRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "override": {
-                          "type": "QuotaOverride",
-                          "id": 2
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "UpdateConsumerOverrideRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "override": {
-                          "type": "QuotaOverride",
-                          "id": 2
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 4
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "DeleteConsumerOverrideRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListConsumerOverridesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListConsumerOverridesResponse": {
-                      "fields": {
-                        "overrides": {
-                          "rule": "repeated",
-                          "type": "QuotaOverride",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchCreateConsumerOverridesResponse": {
-                      "fields": {
-                        "overrides": {
-                          "rule": "repeated",
-                          "type": "QuotaOverride",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImportConsumerOverridesRequest": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "inlineSource"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "inlineSource": {
-                          "type": "OverrideInlineSource",
-                          "id": 2
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "forceOnly": {
-                          "rule": "repeated",
-                          "type": "QuotaSafetyCheck",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ImportConsumerOverridesResponse": {
-                      "fields": {
-                        "overrides": {
-                          "rule": "repeated",
-                          "type": "QuotaOverride",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImportConsumerOverridesMetadata": {
-                      "fields": {}
-                    },
-                    "ImportAdminQuotaPoliciesResponse": {
-                      "fields": {
-                        "policies": {
-                          "rule": "repeated",
-                          "type": "AdminQuotaPolicy",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImportAdminQuotaPoliciesMetadata": {
-                      "fields": {}
-                    },
-                    "CreateAdminQuotaPolicyMetadata": {
-                      "fields": {}
-                    },
-                    "UpdateAdminQuotaPolicyMetadata": {
-                      "fields": {}
-                    },
-                    "DeleteAdminQuotaPolicyMetadata": {
-                      "fields": {}
-                    },
-                    "GenerateServiceIdentityRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GetServiceIdentityResponse": {
-                      "fields": {
-                        "identity": {
-                          "type": "ServiceIdentity",
-                          "id": 1
-                        },
-                        "state": {
-                          "type": "IdentityState",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "IdentityState": {
-                          "values": {
-                            "IDENTITY_STATE_UNSPECIFIED": 0,
-                            "ACTIVE": 1
-                          }
-                        }
-                      }
-                    },
-                    "GetServiceIdentityMetadata": {
-                      "fields": {}
-                    }
-                  }
                 }
               }
             },
@@ -3567,7 +2247,10 @@
                 "aliases": {
                   "rule": "repeated",
                   "type": "string",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "deprecated": true
+                  }
                 },
                 "target": {
                   "type": "string",
@@ -4004,10 +2687,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -4148,28 +2827,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -4227,11 +2884,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -4292,41 +2944,6 @@
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
               }
-            },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions",
-              "options": {
-                "packed": false
-              }
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
-              }
             }
           }
         },
@@ -4338,7 +2955,6 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
-            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {

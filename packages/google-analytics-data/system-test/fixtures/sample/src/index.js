@@ -18,10 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const data = require('@google-analytics/data');
+const data = require('@google-cloud/data');
 
 function main() {
-  const betaAnalyticsDataClient = new data.BetaAnalyticsDataClient();
+  const alphaAnalyticsDataClient = new data.AlphaAnalyticsDataClient();
 }
 
 main();

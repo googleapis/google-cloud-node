@@ -1,363 +1,363 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-apikeys",
-        "version": "2.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.api.apikeys.v2",
-                "version": "v2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_CreateKey_async",
-            "title": "ApiKeys createKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new API key. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
-            "canonical": true,
-            "file": "api_keys.create_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateKey",
-                "fullName": "google.api.apikeys.v2.ApiKeys.CreateKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "key",
-                        "type": ".google.api.apikeys.v2.Key"
-                    },
-                    {
-                        "name": "key_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "CreateKey",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.CreateKey",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_ListKeys_async",
-            "title": "ApiKeys listKeys Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the API keys owned by a project. The key string of the API key isn't included in the response. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
-            "canonical": true,
-            "file": "api_keys.list_keys.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListKeys",
-                "fullName": "google.api.apikeys.v2.ApiKeys.ListKeys",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "show_deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.apikeys.v2.ListKeysResponse",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "ListKeys",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.ListKeys",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_GetKey_async",
-            "title": "ApiKeys getKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the metadata for an API key. The key string of the API key isn't included in the response. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
-            "canonical": true,
-            "file": "api_keys.get_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetKey",
-                "fullName": "google.api.apikeys.v2.ApiKeys.GetKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.apikeys.v2.Key",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "GetKey",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.GetKey",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_GetKeyString_async",
-            "title": "ApiKeys getKeyString Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the key string for an API key. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
-            "canonical": true,
-            "file": "api_keys.get_key_string.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetKeyString",
-                "fullName": "google.api.apikeys.v2.ApiKeys.GetKeyString",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.apikeys.v2.GetKeyStringResponse",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "GetKeyString",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.GetKeyString",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_UpdateKey_async",
-            "title": "ApiKeys updateKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Patches the modifiable fields of an API key. The key string of the API key isn't included in the response. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
-            "canonical": true,
-            "file": "api_keys.update_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateKey",
-                "fullName": "google.api.apikeys.v2.ApiKeys.UpdateKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "key",
-                        "type": ".google.api.apikeys.v2.Key"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "UpdateKey",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.UpdateKey",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_DeleteKey_async",
-            "title": "ApiKeys deleteKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an API key. Deleted key can be retrieved within 30 days of deletion. Afterward, key will be purged from the project. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
-            "canonical": true,
-            "file": "api_keys.delete_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteKey",
-                "fullName": "google.api.apikeys.v2.ApiKeys.DeleteKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "DeleteKey",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.DeleteKey",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_UndeleteKey_async",
-            "title": "ApiKeys undeleteKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Undeletes an API key which was deleted within 30 days. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
-            "canonical": true,
-            "file": "api_keys.undelete_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UndeleteKey",
-                "fullName": "google.api.apikeys.v2.ApiKeys.UndeleteKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "UndeleteKey",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.UndeleteKey",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apikeys_v2_generated_ApiKeys_LookupKey_async",
-            "title": "ApiKeys lookupKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Find the parent project and resource name of the API key that matches the key string in the request. If the API key has been purged, resource name will not be set. The service account must have the `apikeys.keys.lookup` permission on the parent project.",
-            "canonical": true,
-            "file": "api_keys.lookup_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LookupKey",
-                "fullName": "google.api.apikeys.v2.ApiKeys.LookupKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "key_string",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.apikeys.v2.LookupKeyResponse",
-                "client": {
-                    "shortName": "ApiKeysClient",
-                    "fullName": "google.api.apikeys.v2.ApiKeysClient"
-                },
-                "method": {
-                    "shortName": "LookupKey",
-                    "fullName": "google.api.apikeys.v2.ApiKeys.LookupKey",
-                    "service": {
-                        "shortName": "ApiKeys",
-                        "fullName": "google.api.apikeys.v2.ApiKeys"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-apikeys",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.api.apikeys.v2",
+        "version": "v2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_CreateKey_async",
+      "title": "ApiKeys createKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new API key. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
+      "canonical": true,
+      "file": "api_keys.create_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateKey",
+        "fullName": "google.api.apikeys.v2.ApiKeys.CreateKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key",
+            "type": ".google.api.apikeys.v2.Key"
+          },
+          {
+            "name": "key_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "CreateKey",
+          "fullName": "google.api.apikeys.v2.ApiKeys.CreateKey",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_ListKeys_async",
+      "title": "ApiKeys listKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the API keys owned by a project. The key string of the API key isn't included in the response. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
+      "canonical": true,
+      "file": "api_keys.list_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListKeys",
+        "fullName": "google.api.apikeys.v2.ApiKeys.ListKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "show_deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.apikeys.v2.ListKeysResponse",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "ListKeys",
+          "fullName": "google.api.apikeys.v2.ApiKeys.ListKeys",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_GetKey_async",
+      "title": "ApiKeys getKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the metadata for an API key. The key string of the API key isn't included in the response. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
+      "canonical": true,
+      "file": "api_keys.get_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKey",
+        "fullName": "google.api.apikeys.v2.ApiKeys.GetKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.apikeys.v2.Key",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "GetKey",
+          "fullName": "google.api.apikeys.v2.ApiKeys.GetKey",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_GetKeyString_async",
+      "title": "ApiKeys getKeyString Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the key string for an API key. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
+      "canonical": true,
+      "file": "api_keys.get_key_string.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKeyString",
+        "fullName": "google.api.apikeys.v2.ApiKeys.GetKeyString",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.apikeys.v2.GetKeyStringResponse",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "GetKeyString",
+          "fullName": "google.api.apikeys.v2.ApiKeys.GetKeyString",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_UpdateKey_async",
+      "title": "ApiKeys updateKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Patches the modifiable fields of an API key. The key string of the API key isn't included in the response. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
+      "canonical": true,
+      "file": "api_keys.update_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKey",
+        "fullName": "google.api.apikeys.v2.ApiKeys.UpdateKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "key",
+            "type": ".google.api.apikeys.v2.Key"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "UpdateKey",
+          "fullName": "google.api.apikeys.v2.ApiKeys.UpdateKey",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_DeleteKey_async",
+      "title": "ApiKeys deleteKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an API key. Deleted key can be retrieved within 30 days of deletion. Afterward, key will be purged from the project. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
+      "canonical": true,
+      "file": "api_keys.delete_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteKey",
+        "fullName": "google.api.apikeys.v2.ApiKeys.DeleteKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "DeleteKey",
+          "fullName": "google.api.apikeys.v2.ApiKeys.DeleteKey",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_UndeleteKey_async",
+      "title": "ApiKeys undeleteKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Undeletes an API key which was deleted within 30 days. NOTE: Key is a global resource; hence the only supported value for location is `global`.",
+      "canonical": true,
+      "file": "api_keys.undelete_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UndeleteKey",
+        "fullName": "google.api.apikeys.v2.ApiKeys.UndeleteKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "UndeleteKey",
+          "fullName": "google.api.apikeys.v2.ApiKeys.UndeleteKey",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apikeys_v2_generated_ApiKeys_LookupKey_async",
+      "title": "ApiKeys lookupKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Find the parent project and resource name of the API key that matches the key string in the request. If the API key has been purged, resource name will not be set. The service account must have the `apikeys.keys.lookup` permission on the parent project.",
+      "canonical": true,
+      "file": "api_keys.lookup_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupKey",
+        "fullName": "google.api.apikeys.v2.ApiKeys.LookupKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "key_string",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.apikeys.v2.LookupKeyResponse",
+        "client": {
+          "shortName": "ApiKeysClient",
+          "fullName": "google.api.apikeys.v2.ApiKeysClient"
+        },
+        "method": {
+          "shortName": "LookupKey",
+          "fullName": "google.api.apikeys.v2.ApiKeys.LookupKey",
+          "service": {
+            "shortName": "ApiKeys",
+            "fullName": "google.api.apikeys.v2.ApiKeys"
+          }
+        }
+      }
+    }
+  ]
 }
