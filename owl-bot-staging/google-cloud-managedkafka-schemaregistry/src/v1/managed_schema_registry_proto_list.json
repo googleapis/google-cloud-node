@@ -1,0 +1,4 @@
+[
+  "../../protos/google/cloud/managedkafka/schemaregistry/v1/schema_registry.proto",
+  "../../protos/google/cloud/managedkafka/schemaregistry/v1/schema_registry_resources.proto"
+]
