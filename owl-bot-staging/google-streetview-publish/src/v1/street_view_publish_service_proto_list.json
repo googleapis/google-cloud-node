@@ -1,0 +1,5 @@
+[
+  "../../protos/google/streetview/publish/v1/resources.proto",
+  "../../protos/google/streetview/publish/v1/rpcmessages.proto",
+  "../../protos/google/streetview/publish/v1/streetview_publish.proto"
+]
