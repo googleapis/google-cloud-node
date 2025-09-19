@@ -23,12 +23,13 @@
     "compile": "tsc -p tsconfig.json",
     "docs": "node -e 'fs.mkdirSync(`docs`)'",
     "fix": "gts fix",
-    "lint": "gts check",
+    "lint": "if [ -d node_modules/gts ]; then GTS_PATH='./node_modules/gts'; else GTS_PATH='./../../node_modules/gts'; fi && echo \"{\\\"extends\\\": \\\"${GTS_PATH}\\\"}\" > .eslintrc.json && gts check && rm .eslintrc.json",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "samples-test": "",
     "system-test": "",
-    "test": "c8 mocha build/test"
+    "test": "c8 mocha build/test",
+    "prelint": ""
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

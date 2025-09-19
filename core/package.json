@@ -18,9 +18,9 @@
   "scripts": {
     "test": "npm test --ws",
     "samples-test": "npm samples-test --ws",
-    "system-test": "npm system-test --ws",
-    "npm prelint": "npm prelint --ws",
-    "npm lint": "npm lint --ws"
+    "system-test": "npm run system-test --ws",
+    "prelint": "npm run prelint --ws",
+    "lint": "npm run lint --ws"
   },
   "workspaces": [
     "dev-packages/pack-n-play"
