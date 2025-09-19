@@ -1253,1040 +1253,6 @@
                           }
                         }
                       }
-                    },
-                    "v2alpha": {
-                      "options": {
-                        "csharp_namespace": "Google.Cloud.BigQuery.Migration.V2Alpha",
-                        "go_package": "cloud.google.com/go/bigquery/migration/apiv2alpha/migrationpb;migrationpb",
-                        "java_multiple_files": true,
-                        "java_outer_classname": "TranslationServiceProto",
-                        "java_package": "com.google.cloud.bigquery.migration.v2alpha",
-                        "php_namespace": "Google\\Cloud\\BigQuery\\Migration\\V2alpha"
-                      },
-                      "nested": {
-                        "AssessmentTaskDetails": {
-                          "fields": {
-                            "inputPath": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "outputDataset": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "querylogsPath": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "dataSource": {
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "AssessmentOrchestrationResultDetails": {
-                          "fields": {
-                            "outputTablesSchemaVersion": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "MigrationWorkflow": {
-                          "options": {
-                            "(google.api.resource).type": "bigquerymigration.googleapis.com/MigrationWorkflow",
-                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/workflows/{workflow}"
-                          },
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 6
-                            },
-                            "tasks": {
-                              "keyType": "string",
-                              "type": "MigrationTask",
-                              "id": 2
-                            },
-                            "state": {
-                              "type": "State",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "createTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 4
-                            },
-                            "lastUpdateTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 5
-                            }
-                          },
-                          "nested": {
-                            "State": {
-                              "values": {
-                                "STATE_UNSPECIFIED": 0,
-                                "DRAFT": 1,
-                                "RUNNING": 2,
-                                "PAUSED": 3,
-                                "COMPLETED": 4
-                              }
-                            }
-                          }
-                        },
-                        "MigrationTask": {
-                          "oneofs": {
-                            "taskDetails": {
-                              "oneof": [
-                                "assessmentTaskDetails",
-                                "translationTaskDetails"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "assessmentTaskDetails": {
-                              "type": "AssessmentTaskDetails",
-                              "id": 12
-                            },
-                            "translationTaskDetails": {
-                              "type": "TranslationTaskDetails",
-                              "id": 13
-                            },
-                            "id": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "type": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "details": {
-                              "type": "google.protobuf.Any",
-                              "id": 3
-                            },
-                            "state": {
-                              "type": "State",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "processingError": {
-                              "type": "google.rpc.ErrorInfo",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "createTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 6
-                            },
-                            "lastUpdateTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 7
-                            },
-                            "orchestrationResult": {
-                              "type": "MigrationTaskOrchestrationResult",
-                              "id": 10,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "State": {
-                              "values": {
-                                "STATE_UNSPECIFIED": 0,
-                                "PENDING": 1,
-                                "ORCHESTRATING": 2,
-                                "RUNNING": 3,
-                                "PAUSED": 4,
-                                "SUCCEEDED": 5,
-                                "FAILED": 6
-                              }
-                            }
-                          }
-                        },
-                        "MigrationSubtask": {
-                          "options": {
-                            "(google.api.resource).type": "bigquerymigration.googleapis.com/MigrationSubtask",
-                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/workflows/{workflow}/subtasks/{subtask}"
-                          },
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "taskId": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "type": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "state": {
-                              "type": "State",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "processingError": {
-                              "type": "google.rpc.ErrorInfo",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "resourceErrorDetails": {
-                              "rule": "repeated",
-                              "type": "ResourceErrorDetail",
-                              "id": 12,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "resourceErrorCount": {
-                              "type": "int32",
-                              "id": 13
-                            },
-                            "createTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 7
-                            },
-                            "lastUpdateTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 8
-                            },
-                            "metrics": {
-                              "rule": "repeated",
-                              "type": "TimeSeries",
-                              "id": 11
-                            }
-                          },
-                          "nested": {
-                            "State": {
-                              "values": {
-                                "STATE_UNSPECIFIED": 0,
-                                "ACTIVE": 1,
-                                "RUNNING": 2,
-                                "SUCCEEDED": 3,
-                                "FAILED": 4,
-                                "PAUSED": 5
-                              }
-                            }
-                          }
-                        },
-                        "MigrationTaskOrchestrationResult": {
-                          "oneofs": {
-                            "details": {
-                              "oneof": [
-                                "assessmentDetails"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "assessmentDetails": {
-                              "type": "AssessmentOrchestrationResultDetails",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "ResourceErrorDetail": {
-                          "fields": {
-                            "resourceInfo": {
-                              "type": "google.rpc.ResourceInfo",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "errorDetails": {
-                              "rule": "repeated",
-                              "type": "ErrorDetail",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "errorCount": {
-                              "type": "int32",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "ErrorDetail": {
-                          "fields": {
-                            "location": {
-                              "type": "ErrorLocation",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "errorInfo": {
-                              "type": "google.rpc.ErrorInfo",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "ErrorLocation": {
-                          "fields": {
-                            "line": {
-                              "type": "int32",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "column": {
-                              "type": "int32",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "TimeSeries": {
-                          "fields": {
-                            "metric": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "valueType": {
-                              "type": "google.api.MetricDescriptor.ValueType",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "metricKind": {
-                              "type": "google.api.MetricDescriptor.MetricKind",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "points": {
-                              "rule": "repeated",
-                              "type": "Point",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "Point": {
-                          "fields": {
-                            "interval": {
-                              "type": "TimeInterval",
-                              "id": 1
-                            },
-                            "value": {
-                              "type": "TypedValue",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "TimeInterval": {
-                          "fields": {
-                            "startTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "endTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "TypedValue": {
-                          "oneofs": {
-                            "value": {
-                              "oneof": [
-                                "boolValue",
-                                "int64Value",
-                                "doubleValue",
-                                "stringValue",
-                                "distributionValue"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "boolValue": {
-                              "type": "bool",
-                              "id": 1
-                            },
-                            "int64Value": {
-                              "type": "int64",
-                              "id": 2
-                            },
-                            "doubleValue": {
-                              "type": "double",
-                              "id": 3
-                            },
-                            "stringValue": {
-                              "type": "string",
-                              "id": 4
-                            },
-                            "distributionValue": {
-                              "type": "google.api.Distribution",
-                              "id": 5
-                            }
-                          }
-                        },
-                        "TranslationFileMapping": {
-                          "fields": {
-                            "inputPath": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "outputPath": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "TranslationTaskDetails": {
-                          "oneofs": {
-                            "languageOptions": {
-                              "oneof": [
-                                "teradataOptions",
-                                "bteqOptions"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "teradataOptions": {
-                              "type": "TeradataOptions",
-                              "id": 10
-                            },
-                            "bteqOptions": {
-                              "type": "BteqOptions",
-                              "id": 11
-                            },
-                            "inputPath": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "outputPath": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "filePaths": {
-                              "rule": "repeated",
-                              "type": "TranslationFileMapping",
-                              "id": 12
-                            },
-                            "schemaPath": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "fileEncoding": {
-                              "type": "FileEncoding",
-                              "id": 4
-                            },
-                            "identifierSettings": {
-                              "type": "IdentifierSettings",
-                              "id": 5
-                            },
-                            "specialTokenMap": {
-                              "keyType": "string",
-                              "type": "TokenType",
-                              "id": 6
-                            },
-                            "filter": {
-                              "type": "Filter",
-                              "id": 7
-                            },
-                            "translationExceptionTable": {
-                              "type": "string",
-                              "id": 13
-                            }
-                          },
-                          "nested": {
-                            "FileEncoding": {
-                              "values": {
-                                "FILE_ENCODING_UNSPECIFIED": 0,
-                                "UTF_8": 1,
-                                "ISO_8859_1": 2,
-                                "US_ASCII": 3,
-                                "UTF_16": 4,
-                                "UTF_16LE": 5,
-                                "UTF_16BE": 6
-                              }
-                            },
-                            "TokenType": {
-                              "values": {
-                                "TOKEN_TYPE_UNSPECIFIED": 0,
-                                "STRING": 1,
-                                "INT64": 2,
-                                "NUMERIC": 3,
-                                "BOOL": 4,
-                                "FLOAT64": 5,
-                                "DATE": 6,
-                                "TIMESTAMP": 7
-                              }
-                            }
-                          }
-                        },
-                        "Filter": {
-                          "fields": {
-                            "inputFileExclusionPrefixes": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "IdentifierSettings": {
-                          "fields": {
-                            "outputIdentifierCase": {
-                              "type": "IdentifierCase",
-                              "id": 1
-                            },
-                            "identifierRewriteMode": {
-                              "type": "IdentifierRewriteMode",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "IdentifierCase": {
-                              "values": {
-                                "IDENTIFIER_CASE_UNSPECIFIED": 0,
-                                "ORIGINAL": 1,
-                                "UPPER": 2,
-                                "LOWER": 3
-                              }
-                            },
-                            "IdentifierRewriteMode": {
-                              "values": {
-                                "IDENTIFIER_REWRITE_MODE_UNSPECIFIED": 0,
-                                "NONE": 1,
-                                "REWRITE_ALL": 2
-                              }
-                            }
-                          }
-                        },
-                        "TeradataOptions": {
-                          "fields": {}
-                        },
-                        "BteqOptions": {
-                          "fields": {
-                            "projectDataset": {
-                              "type": "DatasetReference",
-                              "id": 1
-                            },
-                            "defaultPathUri": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "fileReplacementMap": {
-                              "keyType": "string",
-                              "type": "string",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "DatasetReference": {
-                          "fields": {
-                            "datasetId": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "projectId": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "MigrationService": {
-                          "options": {
-                            "(google.api.default_host)": "bigquerymigration.googleapis.com",
-                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                          },
-                          "methods": {
-                            "CreateMigrationWorkflow": {
-                              "requestType": "CreateMigrationWorkflowRequest",
-                              "responseType": "MigrationWorkflow",
-                              "options": {
-                                "(google.api.http).post": "/v2alpha/{parent=projects/*/locations/*}/workflows",
-                                "(google.api.http).body": "migration_workflow",
-                                "(google.api.method_signature)": "parent,migration_workflow"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "post": "/v2alpha/{parent=projects/*/locations/*}/workflows",
-                                    "body": "migration_workflow"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent,migration_workflow"
-                                }
-                              ]
-                            },
-                            "GetMigrationWorkflow": {
-                              "requestType": "GetMigrationWorkflowRequest",
-                              "responseType": "MigrationWorkflow",
-                              "options": {
-                                "(google.api.http).get": "/v2alpha/{name=projects/*/locations/*/workflows/*}",
-                                "(google.api.method_signature)": "name"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v2alpha/{name=projects/*/locations/*/workflows/*}"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "name"
-                                }
-                              ]
-                            },
-                            "ListMigrationWorkflows": {
-                              "requestType": "ListMigrationWorkflowsRequest",
-                              "responseType": "ListMigrationWorkflowsResponse",
-                              "options": {
-                                "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*}/workflows",
-                                "(google.api.method_signature)": "parent"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v2alpha/{parent=projects/*/locations/*}/workflows"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent"
-                                }
-                              ]
-                            },
-                            "DeleteMigrationWorkflow": {
-                              "requestType": "DeleteMigrationWorkflowRequest",
-                              "responseType": "google.protobuf.Empty",
-                              "options": {
-                                "(google.api.http).delete": "/v2alpha/{name=projects/*/locations/*/workflows/*}",
-                                "(google.api.method_signature)": "name"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "delete": "/v2alpha/{name=projects/*/locations/*/workflows/*}"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "name"
-                                }
-                              ]
-                            },
-                            "StartMigrationWorkflow": {
-                              "requestType": "StartMigrationWorkflowRequest",
-                              "responseType": "google.protobuf.Empty",
-                              "options": {
-                                "(google.api.http).post": "/v2alpha/{name=projects/*/locations/*/workflows/*}:start",
-                                "(google.api.http).body": "*",
-                                "(google.api.method_signature)": "name"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "post": "/v2alpha/{name=projects/*/locations/*/workflows/*}:start",
-                                    "body": "*"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "name"
-                                }
-                              ]
-                            },
-                            "GetMigrationSubtask": {
-                              "requestType": "GetMigrationSubtaskRequest",
-                              "responseType": "MigrationSubtask",
-                              "options": {
-                                "(google.api.http).get": "/v2alpha/{name=projects/*/locations/*/workflows/*/subtasks/*}",
-                                "(google.api.method_signature)": "name"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v2alpha/{name=projects/*/locations/*/workflows/*/subtasks/*}"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "name"
-                                }
-                              ]
-                            },
-                            "ListMigrationSubtasks": {
-                              "requestType": "ListMigrationSubtasksRequest",
-                              "responseType": "ListMigrationSubtasksResponse",
-                              "options": {
-                                "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/workflows/*}/subtasks",
-                                "(google.api.method_signature)": "parent"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v2alpha/{parent=projects/*/locations/*/workflows/*}/subtasks"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent"
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        "CreateMigrationWorkflowRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                              }
-                            },
-                            "migrationWorkflow": {
-                              "type": "MigrationWorkflow",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "GetMigrationWorkflowRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerymigration.googleapis.com/MigrationWorkflow"
-                              }
-                            },
-                            "readMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "ListMigrationWorkflowsRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                              }
-                            },
-                            "readMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2
-                            },
-                            "pageSize": {
-                              "type": "int32",
-                              "id": 3
-                            },
-                            "pageToken": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "ListMigrationWorkflowsResponse": {
-                          "fields": {
-                            "migrationWorkflows": {
-                              "rule": "repeated",
-                              "type": "MigrationWorkflow",
-                              "id": 1
-                            },
-                            "nextPageToken": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "DeleteMigrationWorkflowRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerymigration.googleapis.com/MigrationWorkflow"
-                              }
-                            }
-                          }
-                        },
-                        "StartMigrationWorkflowRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerymigration.googleapis.com/MigrationWorkflow"
-                              }
-                            }
-                          }
-                        },
-                        "GetMigrationSubtaskRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerymigration.googleapis.com/MigrationSubtask"
-                              }
-                            },
-                            "readMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "ListMigrationSubtasksRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerymigration.googleapis.com/MigrationWorkflow"
-                              }
-                            },
-                            "readMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "pageSize": {
-                              "type": "int32",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "pageToken": {
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "filter": {
-                              "type": "string",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "ListMigrationSubtasksResponse": {
-                          "fields": {
-                            "migrationSubtasks": {
-                              "rule": "repeated",
-                              "type": "MigrationSubtask",
-                              "id": 1
-                            },
-                            "nextPageToken": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "SqlTranslationService": {
-                          "options": {
-                            "(google.api.default_host)": "bigquerymigration.googleapis.com",
-                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                          },
-                          "methods": {
-                            "TranslateQuery": {
-                              "requestType": "TranslateQueryRequest",
-                              "responseType": "TranslateQueryResponse",
-                              "options": {
-                                "(google.api.http).post": "/v2alpha/{parent=projects/*/locations/*}:translateQuery",
-                                "(google.api.http).body": "*",
-                                "(google.api.method_signature)": "parent,source_dialect,query"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "post": "/v2alpha/{parent=projects/*/locations/*}:translateQuery",
-                                    "body": "*"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent,source_dialect,query"
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        "TranslateQueryRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                              }
-                            },
-                            "sourceDialect": {
-                              "type": "SqlTranslationSourceDialect",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "query": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "SqlTranslationSourceDialect": {
-                              "values": {
-                                "SQL_TRANSLATION_SOURCE_DIALECT_UNSPECIFIED": 0,
-                                "TERADATA": 1
-                              }
-                            }
-                          }
-                        },
-                        "TranslateQueryResponse": {
-                          "fields": {
-                            "translationJob": {
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "translatedQuery": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "errors": {
-                              "rule": "repeated",
-                              "type": "SqlTranslationError",
-                              "id": 2
-                            },
-                            "warnings": {
-                              "rule": "repeated",
-                              "type": "SqlTranslationWarning",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "SqlTranslationErrorDetail": {
-                          "fields": {
-                            "row": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "column": {
-                              "type": "int64",
-                              "id": 2
-                            },
-                            "message": {
-                              "type": "string",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "SqlTranslationError": {
-                          "fields": {
-                            "errorType": {
-                              "type": "SqlTranslationErrorType",
-                              "id": 1
-                            },
-                            "errorDetail": {
-                              "type": "SqlTranslationErrorDetail",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "SqlTranslationErrorType": {
-                              "values": {
-                                "SQL_TRANSLATION_ERROR_TYPE_UNSPECIFIED": 0,
-                                "SQL_PARSE_ERROR": 1,
-                                "UNSUPPORTED_SQL_FUNCTION": 2
-                              }
-                            }
-                          }
-                        },
-                        "SqlTranslationWarning": {
-                          "fields": {
-                            "warningDetail": {
-                              "type": "SqlTranslationErrorDetail",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
                     }
                   }
                 }
@@ -2300,7 +1266,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "fieldBehavior": {
@@ -2620,21 +1587,6 @@
                     "ingestDelay": {
                       "type": "google.protobuf.Duration",
                       "id": 3
-                    },
-                    "timeSeriesResourceHierarchyLevel": {
-                      "rule": "repeated",
-                      "type": "TimeSeriesResourceHierarchyLevel",
-                      "id": 4
-                    }
-                  },
-                  "nested": {
-                    "TimeSeriesResourceHierarchyLevel": {
-                      "values": {
-                        "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED": 0,
-                        "PROJECT": 1,
-                        "ORGANIZATION": 2,
-                        "FOLDER": 3
-                      }
                     }
                   }
                 }
@@ -2811,10 +1763,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -2955,28 +1903,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -3034,11 +1960,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -3099,19 +2020,6 @@
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
               }
-            },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
             }
           }
         },
@@ -3134,19 +2042,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -3184,11 +2085,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -3278,10 +2174,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -3507,10 +2399,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -3725,7 +2613,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -3861,8 +2748,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -3889,10 +2775,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3961,26 +2843,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -4070,10 +2932,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4217,7 +3075,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -4228,7 +3085,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -4239,7 +3095,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -4250,7 +3105,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -4261,8 +3115,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -4272,38 +3125,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -4348,13 +3190,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -4368,33 +3204,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -4423,26 +3232,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -4455,12 +3249,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -4544,14 +3332,6 @@
                     }
                   }
                 }
-              }
-            },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {
@@ -4661,13 +3441,6 @@
               },
               "nested": {
                 "Violation": {
-                  "oneofs": {
-                    "_futureQuotaValue": {
-                      "oneof": [
-                        "futureQuotaValue"
-                      ]
-                    }
-                  },
                   "fields": {
                     "subject": {
                       "type": "string",
@@ -4676,34 +3449,6 @@
                     "description": {
                       "type": "string",
                       "id": 2
-                    },
-                    "apiService": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "quotaMetric": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "quotaId": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "quotaDimensions": {
-                      "keyType": "string",
-                      "type": "string",
-                      "id": 6
-                    },
-                    "quotaValue": {
-                      "type": "int64",
-                      "id": 7
-                    },
-                    "futureQuotaValue": {
-                      "type": "int64",
-                      "id": 8,
-                      "options": {
-                        "proto3_optional": true
-                      }
                     }
                   }
                 }
@@ -4754,14 +3499,6 @@
                     "description": {
                       "type": "string",
                       "id": 2
-                    },
-                    "reason": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "localizedMessage": {
-                      "type": "LocalizedMessage",
-                      "id": 4
                     }
                   }
                 }

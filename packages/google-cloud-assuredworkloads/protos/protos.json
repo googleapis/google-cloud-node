@@ -927,704 +927,6 @@
                       }
                     }
                   }
-                },
-                "v1beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.AssuredWorkloads.V1Beta1",
-                    "go_package": "cloud.google.com/go/assuredworkloads/apiv1beta1/assuredworkloadspb;assuredworkloadspb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "AssuredworkloadsServiceProto",
-                    "java_package": "com.google.cloud.assuredworkloads.v1beta1",
-                    "php_namespace": "Google\\Cloud\\AssuredWorkloads\\V1beta1",
-                    "ruby_package": "Google::Cloud::AssuredWorkloads::V1beta1",
-                    "(google.api.resource_definition).type": "assuredworkloads.googleapis.com/Location",
-                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
-                  },
-                  "nested": {
-                    "CreateWorkloadRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "assuredworkloads.googleapis.com/Workload"
-                          }
-                        },
-                        "workload": {
-                          "type": "Workload",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "externalId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateWorkloadRequest": {
-                      "fields": {
-                        "workload": {
-                          "type": "Workload",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "RestrictAllowedResourcesRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "restrictionType": {
-                          "type": "RestrictionType",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "RestrictionType": {
-                          "values": {
-                            "RESTRICTION_TYPE_UNSPECIFIED": 0,
-                            "ALLOW_ALL_GCP_RESOURCES": 1,
-                            "ALLOW_COMPLIANT_RESOURCES": 2
-                          }
-                        }
-                      }
-                    },
-                    "RestrictAllowedResourcesResponse": {
-                      "fields": {}
-                    },
-                    "DeleteWorkloadRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "assuredworkloads.googleapis.com/Workload"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "GetWorkloadRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "assuredworkloads.googleapis.com/Workload"
-                          }
-                        }
-                      }
-                    },
-                    "AnalyzeWorkloadMoveRequest": {
-                      "oneofs": {
-                        "projectOrWorkloadResource": {
-                          "oneof": [
-                            "source",
-                            "project"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "source": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "project": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "target": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "AnalyzeWorkloadMoveResponse": {
-                      "fields": {
-                        "blockers": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListWorkloadsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "assuredworkloads.googleapis.com/Workload"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ListWorkloadsResponse": {
-                      "fields": {
-                        "workloads": {
-                          "rule": "repeated",
-                          "type": "Workload",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Workload": {
-                      "options": {
-                        "(google.api.resource).type": "assuredworkloads.googleapis.com/Workload",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/workloads/{workload}"
-                      },
-                      "oneofs": {
-                        "complianceRegimeSettings": {
-                          "oneof": [
-                            "il4Settings",
-                            "cjisSettings",
-                            "fedrampHighSettings",
-                            "fedrampModerateSettings"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "resources": {
-                          "rule": "repeated",
-                          "type": "ResourceInfo",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "complianceRegime": {
-                          "type": "ComplianceRegime",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "billingAccount": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "il4Settings": {
-                          "type": "IL4Settings",
-                          "id": 7,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "cjisSettings": {
-                          "type": "CJISSettings",
-                          "id": 8,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "fedrampHighSettings": {
-                          "type": "FedrampHighSettings",
-                          "id": 11,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "fedrampModerateSettings": {
-                          "type": "FedrampModerateSettings",
-                          "id": 12,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "provisionedResourcesParent": {
-                          "type": "string",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
-                          }
-                        },
-                        "kmsSettings": {
-                          "type": "KMSSettings",
-                          "id": 14,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "INPUT_ONLY"
-                          }
-                        },
-                        "resourceSettings": {
-                          "rule": "repeated",
-                          "type": "ResourceSettings",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
-                          }
-                        },
-                        "kajEnrollmentState": {
-                          "type": "KajEnrollmentState",
-                          "id": 17,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "enableSovereignControls": {
-                          "type": "bool",
-                          "id": 18,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "saaEnrollmentResponse": {
-                          "type": "SaaEnrollmentResponse",
-                          "id": 20,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "compliantButDisallowedServices": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 24,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ResourceInfo": {
-                          "fields": {
-                            "resourceId": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "resourceType": {
-                              "type": "ResourceType",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "ResourceType": {
-                              "valuesOptions": {
-                                "CONSUMER_PROJECT": {
-                                  "deprecated": true
-                                }
-                              },
-                              "values": {
-                                "RESOURCE_TYPE_UNSPECIFIED": 0,
-                                "CONSUMER_PROJECT": 1,
-                                "CONSUMER_FOLDER": 4,
-                                "ENCRYPTION_KEYS_PROJECT": 2,
-                                "KEYRING": 3
-                              }
-                            }
-                          }
-                        },
-                        "ComplianceRegime": {
-                          "values": {
-                            "COMPLIANCE_REGIME_UNSPECIFIED": 0,
-                            "IL4": 1,
-                            "CJIS": 2,
-                            "FEDRAMP_HIGH": 3,
-                            "FEDRAMP_MODERATE": 4,
-                            "US_REGIONAL_ACCESS": 5,
-                            "HIPAA": 6,
-                            "HITRUST": 7,
-                            "EU_REGIONS_AND_SUPPORT": 8,
-                            "CA_REGIONS_AND_SUPPORT": 9,
-                            "ITAR": 10,
-                            "AU_REGIONS_AND_US_SUPPORT": 11
-                          }
-                        },
-                        "KMSSettings": {
-                          "options": {
-                            "deprecated": true
-                          },
-                          "fields": {
-                            "nextRotationTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            },
-                            "rotationPeriod": {
-                              "type": "google.protobuf.Duration",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            }
-                          }
-                        },
-                        "IL4Settings": {
-                          "options": {
-                            "deprecated": true
-                          },
-                          "fields": {
-                            "kmsSettings": {
-                              "type": "KMSSettings",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            }
-                          }
-                        },
-                        "CJISSettings": {
-                          "options": {
-                            "deprecated": true
-                          },
-                          "fields": {
-                            "kmsSettings": {
-                              "type": "KMSSettings",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            }
-                          }
-                        },
-                        "FedrampHighSettings": {
-                          "options": {
-                            "deprecated": true
-                          },
-                          "fields": {
-                            "kmsSettings": {
-                              "type": "KMSSettings",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            }
-                          }
-                        },
-                        "FedrampModerateSettings": {
-                          "options": {
-                            "deprecated": true
-                          },
-                          "fields": {
-                            "kmsSettings": {
-                              "type": "KMSSettings",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            }
-                          }
-                        },
-                        "ResourceSettings": {
-                          "fields": {
-                            "resourceId": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "resourceType": {
-                              "type": "ResourceInfo.ResourceType",
-                              "id": 2
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "KajEnrollmentState": {
-                          "values": {
-                            "KAJ_ENROLLMENT_STATE_UNSPECIFIED": 0,
-                            "KAJ_ENROLLMENT_STATE_PENDING": 1,
-                            "KAJ_ENROLLMENT_STATE_COMPLETE": 2
-                          }
-                        },
-                        "SaaEnrollmentResponse": {
-                          "oneofs": {
-                            "_setupStatus": {
-                              "oneof": [
-                                "setupStatus"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "setupStatus": {
-                              "type": "SetupState",
-                              "id": 1,
-                              "options": {
-                                "proto3_optional": true
-                              }
-                            },
-                            "setupErrors": {
-                              "rule": "repeated",
-                              "type": "SetupError",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "SetupState": {
-                              "values": {
-                                "SETUP_STATE_UNSPECIFIED": 0,
-                                "STATUS_PENDING": 1,
-                                "STATUS_COMPLETE": 2
-                              }
-                            },
-                            "SetupError": {
-                              "values": {
-                                "SETUP_ERROR_UNSPECIFIED": 0,
-                                "ERROR_INVALID_BASE_SETUP": 1,
-                                "ERROR_MISSING_EXTERNAL_SIGNING_KEY": 2,
-                                "ERROR_NOT_ALL_SERVICES_ENROLLED": 3,
-                                "ERROR_SETUP_CHECK_FAILED": 4
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "CreateWorkloadOperationMetadata": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "complianceRegime": {
-                          "type": "Workload.ComplianceRegime",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "resourceSettings": {
-                          "rule": "repeated",
-                          "type": "Workload.ResourceSettings",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "AssuredWorkloadsService": {
-                      "options": {
-                        "(google.api.default_host)": "assuredworkloads.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "CreateWorkload": {
-                          "requestType": "CreateWorkloadRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
-                            "(google.api.http).body": "workload",
-                            "(google.api.method_signature)": "parent,workload",
-                            "(google.longrunning.operation_info).response_type": "Workload",
-                            "(google.longrunning.operation_info).metadata_type": "CreateWorkloadOperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
-                                "body": "workload"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,workload"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Workload",
-                                "metadata_type": "CreateWorkloadOperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateWorkload": {
-                          "requestType": "UpdateWorkloadRequest",
-                          "responseType": "Workload",
-                          "options": {
-                            "(google.api.method_signature)": "workload,update_mask"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.method_signature)": "workload,update_mask"
-                            }
-                          ]
-                        },
-                        "RestrictAllowedResources": {
-                          "requestType": "RestrictAllowedResourcesRequest",
-                          "responseType": "RestrictAllowedResourcesResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{name=organizations/*/locations/*/workloads/*}:restrictAllowedResources",
-                            "(google.api.http).body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{name=organizations/*/locations/*/workloads/*}:restrictAllowedResources",
-                                "body": "*"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteWorkload": {
-                          "requestType": "DeleteWorkloadRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "GetWorkload": {
-                          "requestType": "GetWorkloadRequest",
-                          "responseType": "Workload",
-                          "options": {
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "AnalyzeWorkloadMove": {
-                          "requestType": "AnalyzeWorkloadMoveRequest",
-                          "responseType": "AnalyzeWorkloadMoveResponse",
-                          "options": {
-                            "(google.api.method_signature)": "project,target"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.method_signature)": "project,target"
-                            }
-                          ]
-                        },
-                        "ListWorkloads": {
-                          "requestType": "ListWorkloadsRequest",
-                          "responseType": "ListWorkloadsResponse",
-                          "options": {
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -1636,7 +938,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -1760,10 +1063,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -1904,28 +1203,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -1983,11 +1260,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -2047,19 +1319,6 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
-              }
-            },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
               }
             },
             "LaunchStage": {
@@ -2194,19 +1453,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -2244,11 +1496,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -2338,10 +1585,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -2567,10 +1810,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -2785,7 +2024,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -2921,8 +2159,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -2949,10 +2186,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3021,26 +2254,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -3130,10 +2343,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3277,7 +2486,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -3288,7 +2496,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -3299,7 +2506,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -3310,7 +2516,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -3321,8 +2526,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -3332,38 +2536,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -3408,13 +2601,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -3428,33 +2615,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -3483,26 +2643,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -3515,12 +2660,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -3606,14 +2745,6 @@
                 }
               }
             },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -3672,7 +2803,6 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
-            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {
