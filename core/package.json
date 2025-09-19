@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "npm test --ws",
-    "samples-test": "npm samples-test --ws",
+    "samples-test": "npm run samples-test --ws",
     "system-test": "npm run system-test --ws",
     "prelint": "npm run prelint --ws",
     "lint": "npm run lint --ws"
