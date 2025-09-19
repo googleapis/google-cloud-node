@@ -1,6 +1,6 @@
 createTime: '2025-09-18T18:59:48.419617959Z'
 description: Continuous build with node
-filename: ci/gcnc-cloudbuild.yaml
+filename: ci/cloudbuild.yaml
 github:
   name: google-cloud-node-core
   owner: googleapis
