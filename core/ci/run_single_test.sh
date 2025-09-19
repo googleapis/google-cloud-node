@@ -40,8 +40,8 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-echo "npm install --ignore-scripts --engine-strict --prod; npm install"
-npm install --ignore-scripts --engine-strict --prod; npm install
+echo "npm install --ignore-scripts --engine-strict; npm install"
+npm install --ignore-scripts --engine-strict; npm install
 
 
 retval=0
