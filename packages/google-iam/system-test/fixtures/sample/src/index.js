@@ -18,10 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const iam = require('@google-cloud/iam');
+const iam = require('iam');
 
 function main() {
-  const policiesClient = new iam.PoliciesClient();
+  const workloadIdentityPoolsClient = new iam.WorkloadIdentityPoolsClient();
 }
 
 main();

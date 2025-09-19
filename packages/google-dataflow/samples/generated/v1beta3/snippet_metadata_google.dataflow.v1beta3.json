@@ -1,1019 +1,1019 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-dataflow",
-        "version": "4.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.dataflow.v1beta3",
-                "version": "v1beta3"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "dataflow_v1beta3_generated_FlexTemplatesService_LaunchFlexTemplate_async",
-            "title": "FlexTemplatesService launchFlexTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Launch a job with a FlexTemplate.",
-            "canonical": true,
-            "file": "flex_templates_service.launch_flex_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LaunchFlexTemplate",
-                "fullName": "google.dataflow.v1beta3.FlexTemplatesService.LaunchFlexTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "launch_parameter",
-                        "type": ".google.dataflow.v1beta3.LaunchFlexTemplateParameter"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.LaunchFlexTemplateResponse",
-                "client": {
-                    "shortName": "FlexTemplatesServiceClient",
-                    "fullName": "google.dataflow.v1beta3.FlexTemplatesServiceClient"
-                },
-                "method": {
-                    "shortName": "LaunchFlexTemplate",
-                    "fullName": "google.dataflow.v1beta3.FlexTemplatesService.LaunchFlexTemplate",
-                    "service": {
-                        "shortName": "FlexTemplatesService",
-                        "fullName": "google.dataflow.v1beta3.FlexTemplatesService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_CreateJob_async",
-            "title": "FlexTemplatesService createJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Cloud Dataflow job. To create a job, we recommend using `projects.locations.jobs.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.create` is not recommended, as your job will always start in `us-central1`. Do not enter confidential information when you supply string values using the API.",
-            "canonical": true,
-            "file": "jobs_v1_beta3.create_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateJob",
-                "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CreateJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job",
-                        "type": ".google.dataflow.v1beta3.Job"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.dataflow.v1beta3.JobView"
-                    },
-                    {
-                        "name": "replace_job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.Job",
-                "client": {
-                    "shortName": "JobsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "CreateJob",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CreateJob",
-                    "service": {
-                        "shortName": "JobsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_GetJob_async",
-            "title": "FlexTemplatesService getJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the state of the specified Cloud Dataflow job. To get the state of a job, we recommend using `projects.locations.jobs.get` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.get` is not recommended, as you can only get the state of jobs that are running in `us-central1`.",
-            "canonical": true,
-            "file": "jobs_v1_beta3.get_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetJob",
-                "fullName": "google.dataflow.v1beta3.JobsV1Beta3.GetJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.dataflow.v1beta3.JobView"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.Job",
-                "client": {
-                    "shortName": "JobsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "GetJob",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3.GetJob",
-                    "service": {
-                        "shortName": "JobsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_UpdateJob_async",
-            "title": "FlexTemplatesService updateJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the state of an existing Cloud Dataflow job. To update the state of an existing job, we recommend using `projects.locations.jobs.update` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.update` is not recommended, as you can only update the state of jobs that are running in `us-central1`.",
-            "canonical": true,
-            "file": "jobs_v1_beta3.update_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateJob",
-                "fullName": "google.dataflow.v1beta3.JobsV1Beta3.UpdateJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job",
-                        "type": ".google.dataflow.v1beta3.Job"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.Job",
-                "client": {
-                    "shortName": "JobsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "UpdateJob",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3.UpdateJob",
-                    "service": {
-                        "shortName": "JobsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_ListJobs_async",
-            "title": "FlexTemplatesService listJobs Sample",
-            "origin": "API_DEFINITION",
-            "description": " List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, because you can only get the list of jobs that are running in `us-central1`. `projects.locations.jobs.list` and `projects.jobs.list` support filtering the list of jobs by name. Filtering by name isn't supported by `projects.jobs.aggregated`.",
-            "canonical": true,
-            "file": "jobs_v1_beta3.list_jobs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListJobs",
-                "fullName": "google.dataflow.v1beta3.JobsV1Beta3.ListJobs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "filter",
-                        "type": ".google.dataflow.v1beta3.ListJobsRequest.Filter"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.dataflow.v1beta3.JobView"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.ListJobsResponse",
-                "client": {
-                    "shortName": "JobsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "ListJobs",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3.ListJobs",
-                    "service": {
-                        "shortName": "JobsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_AggregatedListJobs_async",
-            "title": "FlexTemplatesService aggregatedListJobs Sample",
-            "origin": "API_DEFINITION",
-            "description": " List the jobs of a project across all regions. **Note:** This method doesn't support filtering the list of jobs by name.",
-            "canonical": true,
-            "file": "jobs_v1_beta3.aggregated_list_jobs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AggregatedListJobs",
-                "fullName": "google.dataflow.v1beta3.JobsV1Beta3.AggregatedListJobs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "filter",
-                        "type": ".google.dataflow.v1beta3.ListJobsRequest.Filter"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.dataflow.v1beta3.JobView"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.ListJobsResponse",
-                "client": {
-                    "shortName": "JobsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "AggregatedListJobs",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3.AggregatedListJobs",
-                    "service": {
-                        "shortName": "JobsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_CheckActiveJobs_async",
-            "title": "FlexTemplatesService checkActiveJobs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Check for existence of active jobs in the given project across all regions.",
-            "canonical": true,
-            "file": "jobs_v1_beta3.check_active_jobs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 52,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CheckActiveJobs",
-                "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CheckActiveJobs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.CheckActiveJobsResponse",
-                "client": {
-                    "shortName": "JobsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "CheckActiveJobs",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CheckActiveJobs",
-                    "service": {
-                        "shortName": "JobsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_SnapshotJob_async",
-            "title": "FlexTemplatesService snapshotJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Snapshot the state of a streaming job.",
-            "canonical": true,
-            "file": "jobs_v1_beta3.snapshot_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SnapshotJob",
-                "fullName": "google.dataflow.v1beta3.JobsV1Beta3.SnapshotJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ttl",
-                        "type": ".google.protobuf.Duration"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "snapshot_sources",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "description",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.Snapshot",
-                "client": {
-                    "shortName": "JobsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "SnapshotJob",
-                    "fullName": "google.dataflow.v1beta3.JobsV1Beta3.SnapshotJob",
-                    "service": {
-                        "shortName": "JobsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_MessagesV1Beta3_ListJobMessages_async",
-            "title": "FlexTemplatesService listJobMessages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.messages.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.messages.list` is not recommended, as you can only request the status of jobs that are running in `us-central1`.",
-            "canonical": true,
-            "file": "messages_v1_beta3.list_job_messages.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 90,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListJobMessages",
-                "fullName": "google.dataflow.v1beta3.MessagesV1Beta3.ListJobMessages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "minimum_importance",
-                        "type": ".google.dataflow.v1beta3.JobMessageImportance"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "start_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "end_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.ListJobMessagesResponse",
-                "client": {
-                    "shortName": "MessagesV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.MessagesV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "ListJobMessages",
-                    "fullName": "google.dataflow.v1beta3.MessagesV1Beta3.ListJobMessages",
-                    "service": {
-                        "shortName": "MessagesV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.MessagesV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_MetricsV1Beta3_GetJobMetrics_async",
-            "title": "FlexTemplatesService getJobMetrics Sample",
-            "origin": "API_DEFINITION",
-            "description": " Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.getMetrics` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.getMetrics` is not recommended, as you can only request the status of jobs that are running in `us-central1`.",
-            "canonical": true,
-            "file": "metrics_v1_beta3.get_job_metrics.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetJobMetrics",
-                "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobMetrics",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "start_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.JobMetrics",
-                "client": {
-                    "shortName": "MetricsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.MetricsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "GetJobMetrics",
-                    "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobMetrics",
-                    "service": {
-                        "shortName": "MetricsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.MetricsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_MetricsV1Beta3_GetJobExecutionDetails_async",
-            "title": "FlexTemplatesService getJobExecutionDetails Sample",
-            "origin": "API_DEFINITION",
-            "description": " Request detailed information about the execution status of the job. EXPERIMENTAL.  This API is subject to change or removal without notice.",
-            "canonical": true,
-            "file": "metrics_v1_beta3.get_job_execution_details.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetJobExecutionDetails",
-                "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobExecutionDetails",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.JobExecutionDetails",
-                "client": {
-                    "shortName": "MetricsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.MetricsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "GetJobExecutionDetails",
-                    "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobExecutionDetails",
-                    "service": {
-                        "shortName": "MetricsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.MetricsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_MetricsV1Beta3_GetStageExecutionDetails_async",
-            "title": "FlexTemplatesService getStageExecutionDetails Sample",
-            "origin": "API_DEFINITION",
-            "description": " Request detailed information about the execution status of a stage of the job. EXPERIMENTAL.  This API is subject to change or removal without notice.",
-            "canonical": true,
-            "file": "metrics_v1_beta3.get_stage_execution_details.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 88,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetStageExecutionDetails",
-                "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetStageExecutionDetails",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "stage_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "start_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "end_time",
-                        "type": ".google.protobuf.Timestamp"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.StageExecutionDetails",
-                "client": {
-                    "shortName": "MetricsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.MetricsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "GetStageExecutionDetails",
-                    "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetStageExecutionDetails",
-                    "service": {
-                        "shortName": "MetricsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.MetricsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_SnapshotsV1Beta3_GetSnapshot_async",
-            "title": "FlexTemplatesService getSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets information about a snapshot.",
-            "canonical": true,
-            "file": "snapshots_v1_beta3.get_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSnapshot",
-                "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.GetSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "snapshot_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.Snapshot",
-                "client": {
-                    "shortName": "SnapshotsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "GetSnapshot",
-                    "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.GetSnapshot",
-                    "service": {
-                        "shortName": "SnapshotsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_SnapshotsV1Beta3_DeleteSnapshot_async",
-            "title": "FlexTemplatesService deleteSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a snapshot.",
-            "canonical": true,
-            "file": "snapshots_v1_beta3.delete_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSnapshot",
-                "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.DeleteSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "snapshot_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.DeleteSnapshotResponse",
-                "client": {
-                    "shortName": "SnapshotsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "DeleteSnapshot",
-                    "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.DeleteSnapshot",
-                    "service": {
-                        "shortName": "SnapshotsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_SnapshotsV1Beta3_ListSnapshots_async",
-            "title": "FlexTemplatesService listSnapshots Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists snapshots.",
-            "canonical": true,
-            "file": "snapshots_v1_beta3.list_snapshots.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSnapshots",
-                "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.ListSnapshots",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.ListSnapshotsResponse",
-                "client": {
-                    "shortName": "SnapshotsV1Beta3Client",
-                    "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3Client"
-                },
-                "method": {
-                    "shortName": "ListSnapshots",
-                    "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.ListSnapshots",
-                    "service": {
-                        "shortName": "SnapshotsV1Beta3",
-                        "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_TemplatesService_CreateJobFromTemplate_async",
-            "title": "FlexTemplatesService createJobFromTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API. To create a job, we recommend using `projects.locations.templates.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.templates.create` is not recommended, because your job will always start in `us-central1`.",
-            "canonical": true,
-            "file": "templates_service.create_job_from_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateJobFromTemplate",
-                "fullName": "google.dataflow.v1beta3.TemplatesService.CreateJobFromTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "gcs_path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "parameters",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "environment",
-                        "type": ".google.dataflow.v1beta3.RuntimeEnvironment"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.Job",
-                "client": {
-                    "shortName": "TemplatesServiceClient",
-                    "fullName": "google.dataflow.v1beta3.TemplatesServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateJobFromTemplate",
-                    "fullName": "google.dataflow.v1beta3.TemplatesService.CreateJobFromTemplate",
-                    "service": {
-                        "shortName": "TemplatesService",
-                        "fullName": "google.dataflow.v1beta3.TemplatesService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_TemplatesService_LaunchTemplate_async",
-            "title": "FlexTemplatesService launchTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Launches a template. To launch a template, we recommend using `projects.locations.templates.launch` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.templates.launch` is not recommended, because jobs launched from the template will always start in `us-central1`.",
-            "canonical": true,
-            "file": "templates_service.launch_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LaunchTemplate",
-                "fullName": "google.dataflow.v1beta3.TemplatesService.LaunchTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "gcs_path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dynamic_template",
-                        "type": ".google.dataflow.v1beta3.DynamicTemplateLaunchParams"
-                    },
-                    {
-                        "name": "launch_parameters",
-                        "type": ".google.dataflow.v1beta3.LaunchTemplateParameters"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.LaunchTemplateResponse",
-                "client": {
-                    "shortName": "TemplatesServiceClient",
-                    "fullName": "google.dataflow.v1beta3.TemplatesServiceClient"
-                },
-                "method": {
-                    "shortName": "LaunchTemplate",
-                    "fullName": "google.dataflow.v1beta3.TemplatesService.LaunchTemplate",
-                    "service": {
-                        "shortName": "TemplatesService",
-                        "fullName": "google.dataflow.v1beta3.TemplatesService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataflow_v1beta3_generated_TemplatesService_GetTemplate_async",
-            "title": "FlexTemplatesService getTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the template associated with a template. To get the template, we recommend using `projects.locations.templates.get` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.templates.get` is not recommended, because only templates that are running in `us-central1` are retrieved.",
-            "canonical": true,
-            "file": "templates_service.get_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetTemplate",
-                "fullName": "google.dataflow.v1beta3.TemplatesService.GetTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "gcs_path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.dataflow.v1beta3.GetTemplateRequest.TemplateView"
-                    },
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.dataflow.v1beta3.GetTemplateResponse",
-                "client": {
-                    "shortName": "TemplatesServiceClient",
-                    "fullName": "google.dataflow.v1beta3.TemplatesServiceClient"
-                },
-                "method": {
-                    "shortName": "GetTemplate",
-                    "fullName": "google.dataflow.v1beta3.TemplatesService.GetTemplate",
-                    "service": {
-                        "shortName": "TemplatesService",
-                        "fullName": "google.dataflow.v1beta3.TemplatesService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-dataflow",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.dataflow.v1beta3",
+        "version": "v1beta3"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "dataflow_v1beta3_generated_FlexTemplatesService_LaunchFlexTemplate_async",
+      "title": "FlexTemplatesService launchFlexTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Launch a job with a FlexTemplate.",
+      "canonical": true,
+      "file": "flex_templates_service.launch_flex_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LaunchFlexTemplate",
+        "fullName": "google.dataflow.v1beta3.FlexTemplatesService.LaunchFlexTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "launch_parameter",
+            "type": ".google.dataflow.v1beta3.LaunchFlexTemplateParameter"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.LaunchFlexTemplateResponse",
+        "client": {
+          "shortName": "FlexTemplatesServiceClient",
+          "fullName": "google.dataflow.v1beta3.FlexTemplatesServiceClient"
+        },
+        "method": {
+          "shortName": "LaunchFlexTemplate",
+          "fullName": "google.dataflow.v1beta3.FlexTemplatesService.LaunchFlexTemplate",
+          "service": {
+            "shortName": "FlexTemplatesService",
+            "fullName": "google.dataflow.v1beta3.FlexTemplatesService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_CreateJob_async",
+      "title": "FlexTemplatesService createJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Cloud Dataflow job. To create a job, we recommend using `projects.locations.jobs.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.create` is not recommended, as your job will always start in `us-central1`. Do not enter confidential information when you supply string values using the API.",
+      "canonical": true,
+      "file": "jobs_v1_beta3.create_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateJob",
+        "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CreateJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job",
+            "type": ".google.dataflow.v1beta3.Job"
+          },
+          {
+            "name": "view",
+            "type": ".google.dataflow.v1beta3.JobView"
+          },
+          {
+            "name": "replace_job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.Job",
+        "client": {
+          "shortName": "JobsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "CreateJob",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CreateJob",
+          "service": {
+            "shortName": "JobsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_GetJob_async",
+      "title": "FlexTemplatesService getJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the state of the specified Cloud Dataflow job. To get the state of a job, we recommend using `projects.locations.jobs.get` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.get` is not recommended, as you can only get the state of jobs that are running in `us-central1`.",
+      "canonical": true,
+      "file": "jobs_v1_beta3.get_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetJob",
+        "fullName": "google.dataflow.v1beta3.JobsV1Beta3.GetJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.dataflow.v1beta3.JobView"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.Job",
+        "client": {
+          "shortName": "JobsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "GetJob",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3.GetJob",
+          "service": {
+            "shortName": "JobsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_UpdateJob_async",
+      "title": "FlexTemplatesService updateJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the state of an existing Cloud Dataflow job. To update the state of an existing job, we recommend using `projects.locations.jobs.update` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.update` is not recommended, as you can only update the state of jobs that are running in `us-central1`.",
+      "canonical": true,
+      "file": "jobs_v1_beta3.update_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateJob",
+        "fullName": "google.dataflow.v1beta3.JobsV1Beta3.UpdateJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job",
+            "type": ".google.dataflow.v1beta3.Job"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.Job",
+        "client": {
+          "shortName": "JobsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "UpdateJob",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3.UpdateJob",
+          "service": {
+            "shortName": "JobsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_ListJobs_async",
+      "title": "FlexTemplatesService listJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, because you can only get the list of jobs that are running in `us-central1`. `projects.locations.jobs.list` and `projects.jobs.list` support filtering the list of jobs by name. Filtering by name isn't supported by `projects.jobs.aggregated`.",
+      "canonical": true,
+      "file": "jobs_v1_beta3.list_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListJobs",
+        "fullName": "google.dataflow.v1beta3.JobsV1Beta3.ListJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": ".google.dataflow.v1beta3.ListJobsRequest.Filter"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.dataflow.v1beta3.JobView"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.ListJobsResponse",
+        "client": {
+          "shortName": "JobsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "ListJobs",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3.ListJobs",
+          "service": {
+            "shortName": "JobsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_AggregatedListJobs_async",
+      "title": "FlexTemplatesService aggregatedListJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " List the jobs of a project across all regions. **Note:** This method doesn't support filtering the list of jobs by name.",
+      "canonical": true,
+      "file": "jobs_v1_beta3.aggregated_list_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregatedListJobs",
+        "fullName": "google.dataflow.v1beta3.JobsV1Beta3.AggregatedListJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": ".google.dataflow.v1beta3.ListJobsRequest.Filter"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.dataflow.v1beta3.JobView"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.ListJobsResponse",
+        "client": {
+          "shortName": "JobsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "AggregatedListJobs",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3.AggregatedListJobs",
+          "service": {
+            "shortName": "JobsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_CheckActiveJobs_async",
+      "title": "FlexTemplatesService checkActiveJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Check for existence of active jobs in the given project across all regions.",
+      "canonical": true,
+      "file": "jobs_v1_beta3.check_active_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CheckActiveJobs",
+        "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CheckActiveJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.CheckActiveJobsResponse",
+        "client": {
+          "shortName": "JobsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "CheckActiveJobs",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3.CheckActiveJobs",
+          "service": {
+            "shortName": "JobsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_JobsV1Beta3_SnapshotJob_async",
+      "title": "FlexTemplatesService snapshotJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Snapshot the state of a streaming job.",
+      "canonical": true,
+      "file": "jobs_v1_beta3.snapshot_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SnapshotJob",
+        "fullName": "google.dataflow.v1beta3.JobsV1Beta3.SnapshotJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ttl",
+            "type": ".google.protobuf.Duration"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_sources",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "description",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.Snapshot",
+        "client": {
+          "shortName": "JobsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "SnapshotJob",
+          "fullName": "google.dataflow.v1beta3.JobsV1Beta3.SnapshotJob",
+          "service": {
+            "shortName": "JobsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_MessagesV1Beta3_ListJobMessages_async",
+      "title": "FlexTemplatesService listJobMessages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.messages.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.messages.list` is not recommended, as you can only request the status of jobs that are running in `us-central1`.",
+      "canonical": true,
+      "file": "messages_v1_beta3.list_job_messages.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListJobMessages",
+        "fullName": "google.dataflow.v1beta3.MessagesV1Beta3.ListJobMessages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "minimum_importance",
+            "type": ".google.dataflow.v1beta3.JobMessageImportance"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "end_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.ListJobMessagesResponse",
+        "client": {
+          "shortName": "MessagesV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.MessagesV1Beta3Client"
+        },
+        "method": {
+          "shortName": "ListJobMessages",
+          "fullName": "google.dataflow.v1beta3.MessagesV1Beta3.ListJobMessages",
+          "service": {
+            "shortName": "MessagesV1Beta3",
+            "fullName": "google.dataflow.v1beta3.MessagesV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_MetricsV1Beta3_GetJobMetrics_async",
+      "title": "FlexTemplatesService getJobMetrics Sample",
+      "origin": "API_DEFINITION",
+      "description": " Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.getMetrics` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.getMetrics` is not recommended, as you can only request the status of jobs that are running in `us-central1`.",
+      "canonical": true,
+      "file": "metrics_v1_beta3.get_job_metrics.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetJobMetrics",
+        "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobMetrics",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.JobMetrics",
+        "client": {
+          "shortName": "MetricsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.MetricsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "GetJobMetrics",
+          "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobMetrics",
+          "service": {
+            "shortName": "MetricsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.MetricsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_MetricsV1Beta3_GetJobExecutionDetails_async",
+      "title": "FlexTemplatesService getJobExecutionDetails Sample",
+      "origin": "API_DEFINITION",
+      "description": " Request detailed information about the execution status of the job. EXPERIMENTAL.  This API is subject to change or removal without notice.",
+      "canonical": true,
+      "file": "metrics_v1_beta3.get_job_execution_details.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetJobExecutionDetails",
+        "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobExecutionDetails",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.JobExecutionDetails",
+        "client": {
+          "shortName": "MetricsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.MetricsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "GetJobExecutionDetails",
+          "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobExecutionDetails",
+          "service": {
+            "shortName": "MetricsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.MetricsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_MetricsV1Beta3_GetStageExecutionDetails_async",
+      "title": "FlexTemplatesService getStageExecutionDetails Sample",
+      "origin": "API_DEFINITION",
+      "description": " Request detailed information about the execution status of a stage of the job. EXPERIMENTAL.  This API is subject to change or removal without notice.",
+      "canonical": true,
+      "file": "metrics_v1_beta3.get_stage_execution_details.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetStageExecutionDetails",
+        "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetStageExecutionDetails",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "stage_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "end_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.StageExecutionDetails",
+        "client": {
+          "shortName": "MetricsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.MetricsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "GetStageExecutionDetails",
+          "fullName": "google.dataflow.v1beta3.MetricsV1Beta3.GetStageExecutionDetails",
+          "service": {
+            "shortName": "MetricsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.MetricsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_SnapshotsV1Beta3_GetSnapshot_async",
+      "title": "FlexTemplatesService getSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information about a snapshot.",
+      "canonical": true,
+      "file": "snapshots_v1_beta3.get_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSnapshot",
+        "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.GetSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.Snapshot",
+        "client": {
+          "shortName": "SnapshotsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "GetSnapshot",
+          "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.GetSnapshot",
+          "service": {
+            "shortName": "SnapshotsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_SnapshotsV1Beta3_DeleteSnapshot_async",
+      "title": "FlexTemplatesService deleteSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a snapshot.",
+      "canonical": true,
+      "file": "snapshots_v1_beta3.delete_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSnapshot",
+        "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.DeleteSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.DeleteSnapshotResponse",
+        "client": {
+          "shortName": "SnapshotsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "DeleteSnapshot",
+          "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.DeleteSnapshot",
+          "service": {
+            "shortName": "SnapshotsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_SnapshotsV1Beta3_ListSnapshots_async",
+      "title": "FlexTemplatesService listSnapshots Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists snapshots.",
+      "canonical": true,
+      "file": "snapshots_v1_beta3.list_snapshots.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSnapshots",
+        "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.ListSnapshots",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.ListSnapshotsResponse",
+        "client": {
+          "shortName": "SnapshotsV1Beta3Client",
+          "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3Client"
+        },
+        "method": {
+          "shortName": "ListSnapshots",
+          "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3.ListSnapshots",
+          "service": {
+            "shortName": "SnapshotsV1Beta3",
+            "fullName": "google.dataflow.v1beta3.SnapshotsV1Beta3"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_TemplatesService_CreateJobFromTemplate_async",
+      "title": "FlexTemplatesService createJobFromTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API. To create a job, we recommend using `projects.locations.templates.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.templates.create` is not recommended, because your job will always start in `us-central1`.",
+      "canonical": true,
+      "file": "templates_service.create_job_from_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateJobFromTemplate",
+        "fullName": "google.dataflow.v1beta3.TemplatesService.CreateJobFromTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gcs_path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parameters",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "environment",
+            "type": ".google.dataflow.v1beta3.RuntimeEnvironment"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.Job",
+        "client": {
+          "shortName": "TemplatesServiceClient",
+          "fullName": "google.dataflow.v1beta3.TemplatesServiceClient"
+        },
+        "method": {
+          "shortName": "CreateJobFromTemplate",
+          "fullName": "google.dataflow.v1beta3.TemplatesService.CreateJobFromTemplate",
+          "service": {
+            "shortName": "TemplatesService",
+            "fullName": "google.dataflow.v1beta3.TemplatesService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_TemplatesService_LaunchTemplate_async",
+      "title": "FlexTemplatesService launchTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Launches a template. To launch a template, we recommend using `projects.locations.templates.launch` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.templates.launch` is not recommended, because jobs launched from the template will always start in `us-central1`.",
+      "canonical": true,
+      "file": "templates_service.launch_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LaunchTemplate",
+        "fullName": "google.dataflow.v1beta3.TemplatesService.LaunchTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "gcs_path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dynamic_template",
+            "type": ".google.dataflow.v1beta3.DynamicTemplateLaunchParams"
+          },
+          {
+            "name": "launch_parameters",
+            "type": ".google.dataflow.v1beta3.LaunchTemplateParameters"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.LaunchTemplateResponse",
+        "client": {
+          "shortName": "TemplatesServiceClient",
+          "fullName": "google.dataflow.v1beta3.TemplatesServiceClient"
+        },
+        "method": {
+          "shortName": "LaunchTemplate",
+          "fullName": "google.dataflow.v1beta3.TemplatesService.LaunchTemplate",
+          "service": {
+            "shortName": "TemplatesService",
+            "fullName": "google.dataflow.v1beta3.TemplatesService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataflow_v1beta3_generated_TemplatesService_GetTemplate_async",
+      "title": "FlexTemplatesService getTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the template associated with a template. To get the template, we recommend using `projects.locations.templates.get` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.templates.get` is not recommended, because only templates that are running in `us-central1` are retrieved.",
+      "canonical": true,
+      "file": "templates_service.get_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTemplate",
+        "fullName": "google.dataflow.v1beta3.TemplatesService.GetTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gcs_path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.dataflow.v1beta3.GetTemplateRequest.TemplateView"
+          },
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.dataflow.v1beta3.GetTemplateResponse",
+        "client": {
+          "shortName": "TemplatesServiceClient",
+          "fullName": "google.dataflow.v1beta3.TemplatesServiceClient"
+        },
+        "method": {
+          "shortName": "GetTemplate",
+          "fullName": "google.dataflow.v1beta3.TemplatesService.GetTemplate",
+          "service": {
+            "shortName": "TemplatesService",
+            "fullName": "google.dataflow.v1beta3.TemplatesService"
+          }
+        }
+      }
+    }
+  ]
 }
