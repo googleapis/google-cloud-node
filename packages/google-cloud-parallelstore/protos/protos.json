@@ -952,1015 +952,6 @@
                       }
                     }
                   }
-                },
-                "v1beta": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.Parallelstore.V1Beta",
-                    "go_package": "cloud.google.com/go/parallelstore/apiv1beta/parallelstorepb;parallelstorepb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "ParallelstoreProto",
-                    "java_package": "com.google.cloud.parallelstore.v1beta",
-                    "php_namespace": "Google\\Cloud\\Parallelstore\\V1beta",
-                    "ruby_package": "Google::Cloud::Parallelstore::V1beta",
-                    "(google.api.resource_definition).type": "iam.googleapis.com/ServiceAccount",
-                    "(google.api.resource_definition).pattern": "projects/{project}/serviceAccounts/{service_account}"
-                  },
-                  "nested": {
-                    "Parallelstore": {
-                      "options": {
-                        "(google.api.default_host)": "parallelstore.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "ListInstances": {
-                          "requestType": "ListInstancesRequest",
-                          "responseType": "ListInstancesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/instances",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta/{parent=projects/*/locations/*}/instances"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetInstance": {
-                          "requestType": "GetInstanceRequest",
-                          "responseType": "Instance",
-                          "options": {
-                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/instances/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/locations/*/instances/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "CreateInstance": {
-                          "requestType": "CreateInstanceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/instances",
-                            "(google.api.http).body": "instance",
-                            "(google.api.method_signature)": "parent,instance,instance_id",
-                            "(google.longrunning.operation_info).response_type": "Instance",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*}/instances",
-                                "body": "instance"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,instance,instance_id"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Instance",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateInstance": {
-                          "requestType": "UpdateInstanceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta/{instance.name=projects/*/locations/*/instances/*}",
-                            "(google.api.http).body": "instance",
-                            "(google.api.method_signature)": "instance,update_mask",
-                            "(google.longrunning.operation_info).response_type": "Instance",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta/{instance.name=projects/*/locations/*/instances/*}",
-                                "body": "instance"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "instance,update_mask"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Instance",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteInstance": {
-                          "requestType": "DeleteInstanceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/instances/*}",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta/{name=projects/*/locations/*/instances/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ImportData": {
-                          "requestType": "ImportDataRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/instances/*}:importData",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "ImportDataResponse",
-                            "(google.longrunning.operation_info).metadata_type": "ImportDataMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta/{name=projects/*/locations/*/instances/*}:importData",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "ImportDataResponse",
-                                "metadata_type": "ImportDataMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ExportData": {
-                          "requestType": "ExportDataRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/instances/*}:exportData",
-                            "(google.api.http).body": "*",
-                            "(google.longrunning.operation_info).response_type": "ExportDataResponse",
-                            "(google.longrunning.operation_info).metadata_type": "ExportDataMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta/{name=projects/*/locations/*/instances/*}:exportData",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "ExportDataResponse",
-                                "metadata_type": "ExportDataMetadata"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "TransferType": {
-                      "values": {
-                        "TRANSFER_TYPE_UNSPECIFIED": 0,
-                        "IMPORT": 1,
-                        "EXPORT": 2
-                      }
-                    },
-                    "FileStripeLevel": {
-                      "values": {
-                        "FILE_STRIPE_LEVEL_UNSPECIFIED": 0,
-                        "FILE_STRIPE_LEVEL_MIN": 1,
-                        "FILE_STRIPE_LEVEL_BALANCED": 2,
-                        "FILE_STRIPE_LEVEL_MAX": 3
-                      }
-                    },
-                    "DirectoryStripeLevel": {
-                      "values": {
-                        "DIRECTORY_STRIPE_LEVEL_UNSPECIFIED": 0,
-                        "DIRECTORY_STRIPE_LEVEL_MIN": 1,
-                        "DIRECTORY_STRIPE_LEVEL_BALANCED": 2,
-                        "DIRECTORY_STRIPE_LEVEL_MAX": 3
-                      }
-                    },
-                    "DeploymentType": {
-                      "values": {
-                        "DEPLOYMENT_TYPE_UNSPECIFIED": 0,
-                        "SCRATCH": 1,
-                        "PERSISTENT": 2
-                      }
-                    },
-                    "Instance": {
-                      "options": {
-                        "(google.api.resource).type": "parallelstore.googleapis.com/Instance",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}",
-                        "(google.api.resource).plural": "instances",
-                        "(google.api.resource).singular": "instance"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "capacityGib": {
-                          "type": "int64",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "daosVersion": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "accessPoints": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
-                        },
-                        "reservedIpRange": {
-                          "type": "string",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Address"
-                          }
-                        },
-                        "effectiveReservedIpRange": {
-                          "type": "string",
-                          "id": 14,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Address"
-                          }
-                        },
-                        "fileStripeLevel": {
-                          "type": "FileStripeLevel",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "directoryStripeLevel": {
-                          "type": "DirectoryStripeLevel",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "deploymentType": {
-                          "type": "DeploymentType",
-                          "id": 17,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "CREATING": 1,
-                            "ACTIVE": 2,
-                            "DELETING": 3,
-                            "FAILED": 4,
-                            "UPGRADING": 5,
-                            "REPAIRING": 6
-                          }
-                        }
-                      }
-                    },
-                    "TransferMetadataOptions": {
-                      "fields": {
-                        "uid": {
-                          "type": "Uid",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "gid": {
-                          "type": "Gid",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "mode": {
-                          "type": "Mode",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Uid": {
-                          "values": {
-                            "UID_UNSPECIFIED": 0,
-                            "UID_SKIP": 1,
-                            "UID_NUMBER_PRESERVE": 2
-                          }
-                        },
-                        "Gid": {
-                          "values": {
-                            "GID_UNSPECIFIED": 0,
-                            "GID_SKIP": 1,
-                            "GID_NUMBER_PRESERVE": 2
-                          }
-                        },
-                        "Mode": {
-                          "values": {
-                            "MODE_UNSPECIFIED": 0,
-                            "MODE_SKIP": 1,
-                            "MODE_PRESERVE": 2
-                          }
-                        }
-                      }
-                    },
-                    "ListInstancesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "parallelstore.googleapis.com/Instance"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListInstancesResponse": {
-                      "fields": {
-                        "instances": {
-                          "rule": "repeated",
-                          "type": "Instance",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetInstanceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
-                          }
-                        }
-                      }
-                    },
-                    "CreateInstanceRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "parallelstore.googleapis.com/Instance"
-                          }
-                        },
-                        "instanceId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "instance": {
-                          "type": "Instance",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateInstanceRequest": {
-                      "fields": {
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "instance": {
-                          "type": "Instance",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteInstanceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "OperationMetadata": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "target": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "verb": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "statusMessage": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "requestedCancellation": {
-                          "type": "bool",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "apiVersion": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "SourceGcsBucket": {
-                      "fields": {
-                        "uri": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DestinationGcsBucket": {
-                      "fields": {
-                        "uri": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "SourceParallelstore": {
-                      "fields": {
-                        "path": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DestinationParallelstore": {
-                      "fields": {
-                        "path": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ImportDataRequest": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "sourceGcsBucket"
-                          ]
-                        },
-                        "destination": {
-                          "oneof": [
-                            "destinationParallelstore"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "sourceGcsBucket": {
-                          "type": "SourceGcsBucket",
-                          "id": 2
-                        },
-                        "destinationParallelstore": {
-                          "type": "DestinationParallelstore",
-                          "id": 3
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceAccount": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
-                          }
-                        },
-                        "metadataOptions": {
-                          "type": "TransferMetadataOptions",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ExportDataRequest": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "sourceParallelstore"
-                          ]
-                        },
-                        "destination": {
-                          "oneof": [
-                            "destinationGcsBucket"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "sourceParallelstore": {
-                          "type": "SourceParallelstore",
-                          "id": 2
-                        },
-                        "destinationGcsBucket": {
-                          "type": "DestinationGcsBucket",
-                          "id": 3
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceAccount": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
-                          }
-                        },
-                        "metadataOptions": {
-                          "type": "TransferMetadataOptions",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ImportDataResponse": {
-                      "fields": {}
-                    },
-                    "TransferErrorLogEntry": {
-                      "fields": {
-                        "uri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "errorDetails": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "TransferErrorSummary": {
-                      "fields": {
-                        "errorCode": {
-                          "type": "google.rpc.Code",
-                          "id": 1
-                        },
-                        "errorCount": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "errorLogEntries": {
-                          "rule": "repeated",
-                          "type": "TransferErrorLogEntry",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ImportDataMetadata": {
-                      "fields": {
-                        "operationMetadata": {
-                          "type": "TransferOperationMetadata",
-                          "id": 1
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "target": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "verb": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "statusMessage": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "requestedCancellation": {
-                          "type": "bool",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "apiVersion": {
-                          "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "ExportDataResponse": {
-                      "fields": {}
-                    },
-                    "ExportDataMetadata": {
-                      "fields": {
-                        "operationMetadata": {
-                          "type": "TransferOperationMetadata",
-                          "id": 1
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "target": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "verb": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "statusMessage": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "requestedCancellation": {
-                          "type": "bool",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "apiVersion": {
-                          "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "TransferOperationMetadata": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "sourceParallelstore",
-                            "sourceGcsBucket"
-                          ]
-                        },
-                        "destination": {
-                          "oneof": [
-                            "destinationGcsBucket",
-                            "destinationParallelstore"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "sourceParallelstore": {
-                          "type": "SourceParallelstore",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "sourceGcsBucket": {
-                          "type": "SourceGcsBucket",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "destinationGcsBucket": {
-                          "type": "DestinationGcsBucket",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "destinationParallelstore": {
-                          "type": "DestinationParallelstore",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "counters": {
-                          "type": "TransferCounters",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "transferType": {
-                          "type": "TransferType",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "errorSummary": {
-                          "rule": "repeated",
-                          "type": "TransferErrorSummary",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "TransferCounters": {
-                      "fields": {
-                        "objectsFound": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "bytesFound": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "objectsSkipped": {
-                          "type": "int64",
-                          "id": 3
-                        },
-                        "bytesSkipped": {
-                          "type": "int64",
-                          "id": 4
-                        },
-                        "objectsCopied": {
-                          "type": "int64",
-                          "id": 5
-                        },
-                        "bytesCopied": {
-                          "type": "int64",
-                          "id": 6
-                        },
-                        "objectsFailed": {
-                          "type": "int64",
-                          "id": 7
-                        },
-                        "bytesFailed": {
-                          "type": "int64",
-                          "id": 8
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -1972,7 +963,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -2096,10 +1088,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -2240,28 +1228,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -2319,11 +1285,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -2385,19 +1346,6 @@
                 "PACKAGE_MANAGER": 20
               }
             },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -2442,11 +1390,6 @@
                 "format": {
                   "type": "Format",
                   "id": 1
-                },
-                "referencedTypes": {
-                  "rule": "repeated",
-                  "type": "TypeReference",
-                  "id": 2
                 }
               },
               "nested": {
@@ -2458,14 +1401,6 @@
                     "IPV6": 3,
                     "IPV4_OR_IPV6": 4
                   }
-                }
-              }
-            },
-            "TypeReference": {
-              "fields": {
-                "typeName": {
-                  "type": "string",
-                  "id": 1
                 }
               }
             },
@@ -2567,19 +1502,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -2617,11 +1545,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -2711,10 +1634,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -2940,10 +1859,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -3158,7 +2073,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -3294,8 +2208,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -3322,10 +2235,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3394,26 +2303,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -3503,10 +2392,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3650,7 +2535,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -3661,7 +2545,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -3672,7 +2555,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -3683,7 +2565,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -3694,8 +2575,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -3705,38 +2585,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -3781,13 +2650,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -3801,33 +2664,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -3856,26 +2692,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -3888,12 +2709,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -3979,14 +2794,6 @@
                 }
               }
             },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -4045,7 +2852,6 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
-            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {

@@ -2049,1051 +2049,6 @@
                       }
                     }
                   }
-                },
-                "v1beta": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.Memorystore.V1Beta",
-                    "go_package": "cloud.google.com/go/memorystore/apiv1beta/memorystorepb;memorystorepb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "V1mainProto",
-                    "java_package": "com.google.cloud.memorystore.v1beta",
-                    "php_namespace": "Google\\Cloud\\Memorystore\\V1beta",
-                    "ruby_package": "Google::Cloud::Memorystore::V1beta",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/ServiceAttachment",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/serviceAttachments/{service_attachment}"
-                  },
-                  "nested": {
-                    "Memorystore": {
-                      "options": {
-                        "(google.api.default_host)": "memorystore.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "ListInstances": {
-                          "requestType": "ListInstancesRequest",
-                          "responseType": "ListInstancesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/instances",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta/{parent=projects/*/locations/*}/instances"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetInstance": {
-                          "requestType": "GetInstanceRequest",
-                          "responseType": "Instance",
-                          "options": {
-                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/instances/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/locations/*/instances/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "CreateInstance": {
-                          "requestType": "CreateInstanceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/instances",
-                            "(google.api.http).body": "instance",
-                            "(google.api.method_signature)": "parent,instance,instance_id",
-                            "(google.longrunning.operation_info).response_type": "Instance",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*/locations/*}/instances",
-                                "body": "instance"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,instance,instance_id"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Instance",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateInstance": {
-                          "requestType": "UpdateInstanceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta/{instance.name=projects/*/locations/*/instances/*}",
-                            "(google.api.http).body": "instance",
-                            "(google.api.method_signature)": "instance,update_mask",
-                            "(google.longrunning.operation_info).response_type": "Instance",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta/{instance.name=projects/*/locations/*/instances/*}",
-                                "body": "instance"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "instance,update_mask"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Instance",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteInstance": {
-                          "requestType": "DeleteInstanceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/instances/*}",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta/{name=projects/*/locations/*/instances/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "GetCertificateAuthority": {
-                          "requestType": "GetCertificateAuthorityRequest",
-                          "responseType": "CertificateAuthority",
-                          "options": {
-                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/instances/*}/certificateAuthority",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/locations/*/instances/*}/certificateAuthority"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "PscConnectionStatus": {
-                      "values": {
-                        "PSC_CONNECTION_STATUS_UNSPECIFIED": 0,
-                        "ACTIVE": 1,
-                        "NOT_FOUND": 2
-                      }
-                    },
-                    "ConnectionType": {
-                      "values": {
-                        "CONNECTION_TYPE_UNSPECIFIED": 0,
-                        "CONNECTION_TYPE_DISCOVERY": 1,
-                        "CONNECTION_TYPE_PRIMARY": 2,
-                        "CONNECTION_TYPE_READER": 3
-                      }
-                    },
-                    "Instance": {
-                      "options": {
-                        "(google.api.resource).type": "memorystore.googleapis.com/Instance",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}",
-                        "(google.api.resource).plural": "instances",
-                        "(google.api.resource).singular": "instance"
-                      },
-                      "oneofs": {
-                        "_replicaCount": {
-                          "oneof": [
-                            "replicaCount"
-                          ]
-                        },
-                        "_deletionProtectionEnabled": {
-                          "oneof": [
-                            "deletionProtectionEnabled"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "stateInfo": {
-                          "type": "StateInfo",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "uid": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "replicaCount": {
-                          "type": "int32",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "proto3_optional": true
-                          }
-                        },
-                        "authorizationMode": {
-                          "type": "AuthorizationMode",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "transitEncryptionMode": {
-                          "type": "TransitEncryptionMode",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "shardCount": {
-                          "type": "int32",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "discoveryEndpoints": {
-                          "rule": "repeated",
-                          "type": "DiscoveryEndpoint",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "nodeType": {
-                          "type": "NodeType",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "persistenceConfig": {
-                          "type": "PersistenceConfig",
-                          "id": 14,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "engineVersion": {
-                          "type": "string",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "engineConfigs": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "nodeConfig": {
-                          "type": "NodeConfig",
-                          "id": 17,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "zoneDistributionConfig": {
-                          "type": "ZoneDistributionConfig",
-                          "id": 18,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "deletionProtectionEnabled": {
-                          "type": "bool",
-                          "id": 19,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "proto3_optional": true
-                          }
-                        },
-                        "pscAutoConnections": {
-                          "rule": "repeated",
-                          "type": "PscAutoConnection",
-                          "id": 20,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "endpoints": {
-                          "rule": "repeated",
-                          "type": "InstanceEndpoint",
-                          "id": 25,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "mode": {
-                          "type": "Mode",
-                          "id": 26,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "StateInfo": {
-                          "oneofs": {
-                            "info": {
-                              "oneof": [
-                                "updateInfo"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "updateInfo": {
-                              "type": "UpdateInfo",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "UpdateInfo": {
-                              "oneofs": {
-                                "_targetShardCount": {
-                                  "oneof": [
-                                    "targetShardCount"
-                                  ]
-                                },
-                                "_targetReplicaCount": {
-                                  "oneof": [
-                                    "targetReplicaCount"
-                                  ]
-                                }
-                              },
-                              "fields": {
-                                "targetShardCount": {
-                                  "type": "int32",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
-                                    "proto3_optional": true
-                                  }
-                                },
-                                "targetReplicaCount": {
-                                  "type": "int32",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
-                                    "proto3_optional": true
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "InstanceEndpoint": {
-                          "fields": {
-                            "connections": {
-                              "rule": "repeated",
-                              "type": "ConnectionDetail",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "ConnectionDetail": {
-                          "oneofs": {
-                            "connection": {
-                              "oneof": [
-                                "pscAutoConnection",
-                                "pscConnection"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "pscAutoConnection": {
-                              "type": "PscAutoConnection",
-                              "id": 1
-                            },
-                            "pscConnection": {
-                              "type": "PscConnection",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "CREATING": 1,
-                            "ACTIVE": 2,
-                            "UPDATING": 3,
-                            "DELETING": 4
-                          }
-                        },
-                        "AuthorizationMode": {
-                          "values": {
-                            "AUTHORIZATION_MODE_UNSPECIFIED": 0,
-                            "AUTH_DISABLED": 1,
-                            "IAM_AUTH": 2
-                          }
-                        },
-                        "TransitEncryptionMode": {
-                          "values": {
-                            "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED": 0,
-                            "TRANSIT_ENCRYPTION_DISABLED": 1,
-                            "SERVER_AUTHENTICATION": 2
-                          }
-                        },
-                        "NodeType": {
-                          "values": {
-                            "NODE_TYPE_UNSPECIFIED": 0,
-                            "SHARED_CORE_NANO": 1,
-                            "HIGHMEM_MEDIUM": 2,
-                            "HIGHMEM_XLARGE": 3,
-                            "STANDARD_SMALL": 4
-                          }
-                        },
-                        "Mode": {
-                          "valuesOptions": {
-                            "STANDALONE": {
-                              "deprecated": true
-                            }
-                          },
-                          "values": {
-                            "MODE_UNSPECIFIED": 0,
-                            "STANDALONE": 1,
-                            "CLUSTER": 2,
-                            "CLUSTER_DISABLED": 4
-                          }
-                        }
-                      }
-                    },
-                    "PscAutoConnection": {
-                      "oneofs": {
-                        "ports": {
-                          "oneof": [
-                            "port"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "port": {
-                          "type": "int32",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pscConnectionId": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "ipAddress": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_info).format": "IPV4",
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "forwardingRule": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/ForwardingRule"
-                          }
-                        },
-                        "projectId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
-                        },
-                        "serviceAttachment": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/ServiceAttachment"
-                          }
-                        },
-                        "pscConnectionStatus": {
-                          "type": "PscConnectionStatus",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "connectionType": {
-                          "type": "ConnectionType",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "PscConnection": {
-                      "fields": {
-                        "pscConnectionId": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "ipAddress": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_info).format": "IPV4",
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "forwardingRule": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/ForwardingRule"
-                          }
-                        },
-                        "projectId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
-                        },
-                        "serviceAttachment": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/ServiceAttachment"
-                          }
-                        },
-                        "pscConnectionStatus": {
-                          "type": "PscConnectionStatus",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "connectionType": {
-                          "type": "ConnectionType",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "DiscoveryEndpoint": {
-                      "fields": {
-                        "address": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "port": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
-                        }
-                      }
-                    },
-                    "PersistenceConfig": {
-                      "fields": {
-                        "mode": {
-                          "type": "PersistenceMode",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "rdbConfig": {
-                          "type": "RDBConfig",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "aofConfig": {
-                          "type": "AOFConfig",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "RDBConfig": {
-                          "fields": {
-                            "rdbSnapshotPeriod": {
-                              "type": "SnapshotPeriod",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "rdbSnapshotStartTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "SnapshotPeriod": {
-                              "values": {
-                                "SNAPSHOT_PERIOD_UNSPECIFIED": 0,
-                                "ONE_HOUR": 1,
-                                "SIX_HOURS": 2,
-                                "TWELVE_HOURS": 3,
-                                "TWENTY_FOUR_HOURS": 4
-                              }
-                            }
-                          }
-                        },
-                        "AOFConfig": {
-                          "fields": {
-                            "appendFsync": {
-                              "type": "AppendFsync",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "AppendFsync": {
-                              "values": {
-                                "APPEND_FSYNC_UNSPECIFIED": 0,
-                                "NEVER": 1,
-                                "EVERY_SEC": 2,
-                                "ALWAYS": 3
-                              }
-                            }
-                          }
-                        },
-                        "PersistenceMode": {
-                          "values": {
-                            "PERSISTENCE_MODE_UNSPECIFIED": 0,
-                            "DISABLED": 1,
-                            "RDB": 2,
-                            "AOF": 3
-                          }
-                        }
-                      }
-                    },
-                    "NodeConfig": {
-                      "fields": {
-                        "sizeGb": {
-                          "type": "double",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "ZoneDistributionConfig": {
-                      "fields": {
-                        "zone": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "mode": {
-                          "type": "ZoneDistributionMode",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ZoneDistributionMode": {
-                          "values": {
-                            "ZONE_DISTRIBUTION_MODE_UNSPECIFIED": 0,
-                            "MULTI_ZONE": 1,
-                            "SINGLE_ZONE": 2
-                          }
-                        }
-                      }
-                    },
-                    "ListInstancesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "memorystore.googleapis.com/Instance"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListInstancesResponse": {
-                      "fields": {
-                        "instances": {
-                          "rule": "repeated",
-                          "type": "Instance",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetInstanceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "memorystore.googleapis.com/Instance"
-                          }
-                        }
-                      }
-                    },
-                    "CreateInstanceRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "memorystore.googleapis.com/Instance"
-                          }
-                        },
-                        "instanceId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "instance": {
-                          "type": "Instance",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateInstanceRequest": {
-                      "fields": {
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "instance": {
-                          "type": "Instance",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteInstanceRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "memorystore.googleapis.com/Instance"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "GetCertificateAuthorityRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "memorystore.googleapis.com/Instance"
-                          }
-                        }
-                      }
-                    },
-                    "CertificateAuthority": {
-                      "options": {
-                        "(google.api.resource).type": "memorystore.googleapis.com/CertificateAuthority",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/certificateAuthority",
-                        "(google.api.resource).plural": "certificateAuthorities",
-                        "(google.api.resource).singular": "certificateAuthority"
-                      },
-                      "oneofs": {
-                        "serverCa": {
-                          "oneof": [
-                            "managedServerCa"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "managedServerCa": {
-                          "type": "ManagedCertificateAuthority",
-                          "id": 2
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ManagedCertificateAuthority": {
-                          "fields": {
-                            "caCerts": {
-                              "rule": "repeated",
-                              "type": "CertChain",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "CertChain": {
-                              "fields": {
-                                "certificates": {
-                                  "rule": "repeated",
-                                  "type": "string",
-                                  "id": 1
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "OperationMetadata": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "target": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "verb": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "statusMessage": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "requestedCancellation": {
-                          "type": "bool",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "apiVersion": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -3105,7 +2060,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -3229,10 +2185,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -3373,28 +2325,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -3452,11 +2382,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -3518,19 +2443,6 @@
                 "PACKAGE_MANAGER": 20
               }
             },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -3575,11 +2487,6 @@
                 "format": {
                   "type": "Format",
                   "id": 1
-                },
-                "referencedTypes": {
-                  "rule": "repeated",
-                  "type": "TypeReference",
-                  "id": 2
                 }
               },
               "nested": {
@@ -3591,14 +2498,6 @@
                     "IPV6": 3,
                     "IPV4_OR_IPV6": 4
                   }
-                }
-              }
-            },
-            "TypeReference": {
-              "fields": {
-                "typeName": {
-                  "type": "string",
-                  "id": 1
                 }
               }
             },
@@ -3700,19 +2599,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -3750,11 +2642,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -3844,10 +2731,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -4073,10 +2956,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -4291,7 +3170,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -4427,8 +3305,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -4455,10 +3332,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4527,26 +3400,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -4636,10 +3489,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4783,7 +3632,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -4794,7 +3642,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -4805,7 +3652,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -4816,7 +3662,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -4827,8 +3672,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -4838,38 +3682,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -4914,13 +3747,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -4934,33 +3761,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -4989,26 +3789,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -5021,12 +3806,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -5112,14 +3891,6 @@
                 }
               }
             },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -5178,7 +3949,6 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
-            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {
