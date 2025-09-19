@@ -3350,3871 +3350,6 @@
                     return v1;
                 })();
     
-                oslogin.v1beta = (function() {
-    
-                    /**
-                     * Namespace v1beta.
-                     * @memberof google.cloud.oslogin
-                     * @namespace
-                     */
-                    var v1beta = {};
-    
-                    v1beta.OsLoginService = (function() {
-    
-                        /**
-                         * Constructs a new OsLoginService service.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents an OsLoginService
-                         * @extends $protobuf.rpc.Service
-                         * @constructor
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        function OsLoginService(rpcImpl, requestDelimited, responseDelimited) {
-                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                        }
-    
-                        (OsLoginService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = OsLoginService;
-    
-                        /**
-                         * Creates new OsLoginService service using the specified rpc implementation.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @static
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         * @returns {OsLoginService} RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        OsLoginService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                            return new this(rpcImpl, requestDelimited, responseDelimited);
-                        };
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|createSshPublicKey}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef CreateSshPublicKeyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.oslogin.common.SshPublicKey} [response] SshPublicKey
-                         */
-    
-                        /**
-                         * Calls CreateSshPublicKey.
-                         * @function createSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} request CreateSshPublicKeyRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.CreateSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SshPublicKey
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.createSshPublicKey = function createSshPublicKey(request, callback) {
-                            return this.rpcCall(createSshPublicKey, $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest, $root.google.cloud.oslogin.common.SshPublicKey, request, callback);
-                        }, "name", { value: "CreateSshPublicKey" });
-    
-                        /**
-                         * Calls CreateSshPublicKey.
-                         * @function createSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} request CreateSshPublicKeyRequest message or plain object
-                         * @returns {Promise<google.cloud.oslogin.common.SshPublicKey>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|deletePosixAccount}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef DeletePosixAccountCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.protobuf.Empty} [response] Empty
-                         */
-    
-                        /**
-                         * Calls DeletePosixAccount.
-                         * @function deletePosixAccount
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IDeletePosixAccountRequest} request DeletePosixAccountRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.DeletePosixAccountCallback} callback Node-style callback called with the error, if any, and Empty
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.deletePosixAccount = function deletePosixAccount(request, callback) {
-                            return this.rpcCall(deletePosixAccount, $root.google.cloud.oslogin.v1beta.DeletePosixAccountRequest, $root.google.protobuf.Empty, request, callback);
-                        }, "name", { value: "DeletePosixAccount" });
-    
-                        /**
-                         * Calls DeletePosixAccount.
-                         * @function deletePosixAccount
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IDeletePosixAccountRequest} request DeletePosixAccountRequest message or plain object
-                         * @returns {Promise<google.protobuf.Empty>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|deleteSshPublicKey}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef DeleteSshPublicKeyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.protobuf.Empty} [response] Empty
-                         */
-    
-                        /**
-                         * Calls DeleteSshPublicKey.
-                         * @function deleteSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest} request DeleteSshPublicKeyRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.DeleteSshPublicKeyCallback} callback Node-style callback called with the error, if any, and Empty
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.deleteSshPublicKey = function deleteSshPublicKey(request, callback) {
-                            return this.rpcCall(deleteSshPublicKey, $root.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest, $root.google.protobuf.Empty, request, callback);
-                        }, "name", { value: "DeleteSshPublicKey" });
-    
-                        /**
-                         * Calls DeleteSshPublicKey.
-                         * @function deleteSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest} request DeleteSshPublicKeyRequest message or plain object
-                         * @returns {Promise<google.protobuf.Empty>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|getLoginProfile}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef GetLoginProfileCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.oslogin.v1beta.LoginProfile} [response] LoginProfile
-                         */
-    
-                        /**
-                         * Calls GetLoginProfile.
-                         * @function getLoginProfile
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IGetLoginProfileRequest} request GetLoginProfileRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.GetLoginProfileCallback} callback Node-style callback called with the error, if any, and LoginProfile
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.getLoginProfile = function getLoginProfile(request, callback) {
-                            return this.rpcCall(getLoginProfile, $root.google.cloud.oslogin.v1beta.GetLoginProfileRequest, $root.google.cloud.oslogin.v1beta.LoginProfile, request, callback);
-                        }, "name", { value: "GetLoginProfile" });
-    
-                        /**
-                         * Calls GetLoginProfile.
-                         * @function getLoginProfile
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IGetLoginProfileRequest} request GetLoginProfileRequest message or plain object
-                         * @returns {Promise<google.cloud.oslogin.v1beta.LoginProfile>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|getSshPublicKey}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef GetSshPublicKeyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.oslogin.common.SshPublicKey} [response] SshPublicKey
-                         */
-    
-                        /**
-                         * Calls GetSshPublicKey.
-                         * @function getSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest} request GetSshPublicKeyRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.GetSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SshPublicKey
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.getSshPublicKey = function getSshPublicKey(request, callback) {
-                            return this.rpcCall(getSshPublicKey, $root.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest, $root.google.cloud.oslogin.common.SshPublicKey, request, callback);
-                        }, "name", { value: "GetSshPublicKey" });
-    
-                        /**
-                         * Calls GetSshPublicKey.
-                         * @function getSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest} request GetSshPublicKeyRequest message or plain object
-                         * @returns {Promise<google.cloud.oslogin.common.SshPublicKey>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|importSshPublicKey}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef ImportSshPublicKeyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse} [response] ImportSshPublicKeyResponse
-                         */
-    
-                        /**
-                         * Calls ImportSshPublicKey.
-                         * @function importSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest} request ImportSshPublicKeyRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.ImportSshPublicKeyCallback} callback Node-style callback called with the error, if any, and ImportSshPublicKeyResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.importSshPublicKey = function importSshPublicKey(request, callback) {
-                            return this.rpcCall(importSshPublicKey, $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest, $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse, request, callback);
-                        }, "name", { value: "ImportSshPublicKey" });
-    
-                        /**
-                         * Calls ImportSshPublicKey.
-                         * @function importSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest} request ImportSshPublicKeyRequest message or plain object
-                         * @returns {Promise<google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|updateSshPublicKey}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef UpdateSshPublicKeyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.oslogin.common.SshPublicKey} [response] SshPublicKey
-                         */
-    
-                        /**
-                         * Calls UpdateSshPublicKey.
-                         * @function updateSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest} request UpdateSshPublicKeyRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.UpdateSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SshPublicKey
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.updateSshPublicKey = function updateSshPublicKey(request, callback) {
-                            return this.rpcCall(updateSshPublicKey, $root.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest, $root.google.cloud.oslogin.common.SshPublicKey, request, callback);
-                        }, "name", { value: "UpdateSshPublicKey" });
-    
-                        /**
-                         * Calls UpdateSshPublicKey.
-                         * @function updateSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest} request UpdateSshPublicKeyRequest message or plain object
-                         * @returns {Promise<google.cloud.oslogin.common.SshPublicKey>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|signSshPublicKey}.
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @typedef SignSshPublicKeyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} [response] SignSshPublicKeyResponse
-                         */
-    
-                        /**
-                         * Calls SignSshPublicKey.
-                         * @function signSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} request SignSshPublicKeyRequest message or plain object
-                         * @param {google.cloud.oslogin.v1beta.OsLoginService.SignSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SignSshPublicKeyResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(OsLoginService.prototype.signSshPublicKey = function signSshPublicKey(request, callback) {
-                            return this.rpcCall(signSshPublicKey, $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest, $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse, request, callback);
-                        }, "name", { value: "SignSshPublicKey" });
-    
-                        /**
-                         * Calls SignSshPublicKey.
-                         * @function signSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
-                         * @instance
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} request SignSshPublicKeyRequest message or plain object
-                         * @returns {Promise<google.cloud.oslogin.v1beta.SignSshPublicKeyResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        return OsLoginService;
-                    })();
-    
-                    v1beta.LoginProfile = (function() {
-    
-                        /**
-                         * Properties of a LoginProfile.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface ILoginProfile
-                         * @property {string|null} [name] LoginProfile name
-                         * @property {Array.<google.cloud.oslogin.common.IPosixAccount>|null} [posixAccounts] LoginProfile posixAccounts
-                         * @property {Object.<string,google.cloud.oslogin.common.ISshPublicKey>|null} [sshPublicKeys] LoginProfile sshPublicKeys
-                         * @property {Array.<google.cloud.oslogin.v1beta.ISecurityKey>|null} [securityKeys] LoginProfile securityKeys
-                         */
-    
-                        /**
-                         * Constructs a new LoginProfile.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a LoginProfile.
-                         * @implements ILoginProfile
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.ILoginProfile=} [properties] Properties to set
-                         */
-                        function LoginProfile(properties) {
-                            this.posixAccounts = [];
-                            this.sshPublicKeys = {};
-                            this.securityKeys = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * LoginProfile name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @instance
-                         */
-                        LoginProfile.prototype.name = "";
-    
-                        /**
-                         * LoginProfile posixAccounts.
-                         * @member {Array.<google.cloud.oslogin.common.IPosixAccount>} posixAccounts
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @instance
-                         */
-                        LoginProfile.prototype.posixAccounts = $util.emptyArray;
-    
-                        /**
-                         * LoginProfile sshPublicKeys.
-                         * @member {Object.<string,google.cloud.oslogin.common.ISshPublicKey>} sshPublicKeys
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @instance
-                         */
-                        LoginProfile.prototype.sshPublicKeys = $util.emptyObject;
-    
-                        /**
-                         * LoginProfile securityKeys.
-                         * @member {Array.<google.cloud.oslogin.v1beta.ISecurityKey>} securityKeys
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @instance
-                         */
-                        LoginProfile.prototype.securityKeys = $util.emptyArray;
-    
-                        /**
-                         * Creates a new LoginProfile instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ILoginProfile=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.LoginProfile} LoginProfile instance
-                         */
-                        LoginProfile.create = function create(properties) {
-                            return new LoginProfile(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified LoginProfile message. Does not implicitly {@link google.cloud.oslogin.v1beta.LoginProfile.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ILoginProfile} message LoginProfile message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LoginProfile.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.posixAccounts != null && message.posixAccounts.length)
-                                for (var i = 0; i < message.posixAccounts.length; ++i)
-                                    $root.google.cloud.oslogin.common.PosixAccount.encode(message.posixAccounts[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.sshPublicKeys != null && Object.hasOwnProperty.call(message, "sshPublicKeys"))
-                                for (var keys = Object.keys(message.sshPublicKeys), i = 0; i < keys.length; ++i) {
-                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                    $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKeys[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                                }
-                            if (message.securityKeys != null && message.securityKeys.length)
-                                for (var i = 0; i < message.securityKeys.length; ++i)
-                                    $root.google.cloud.oslogin.v1beta.SecurityKey.encode(message.securityKeys[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified LoginProfile message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.LoginProfile.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ILoginProfile} message LoginProfile message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LoginProfile.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a LoginProfile message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.LoginProfile} LoginProfile
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LoginProfile.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.LoginProfile(), key, value;
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.posixAccounts && message.posixAccounts.length))
-                                            message.posixAccounts = [];
-                                        message.posixAccounts.push($root.google.cloud.oslogin.common.PosixAccount.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 3: {
-                                        if (message.sshPublicKeys === $util.emptyObject)
-                                            message.sshPublicKeys = {};
-                                        var end2 = reader.uint32() + reader.pos;
-                                        key = "";
-                                        value = null;
-                                        while (reader.pos < end2) {
-                                            var tag2 = reader.uint32();
-                                            switch (tag2 >>> 3) {
-                                            case 1:
-                                                key = reader.string();
-                                                break;
-                                            case 2:
-                                                value = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
-                                                break;
-                                            default:
-                                                reader.skipType(tag2 & 7);
-                                                break;
-                                            }
-                                        }
-                                        message.sshPublicKeys[key] = value;
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.securityKeys && message.securityKeys.length))
-                                            message.securityKeys = [];
-                                        message.securityKeys.push($root.google.cloud.oslogin.v1beta.SecurityKey.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a LoginProfile message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.LoginProfile} LoginProfile
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LoginProfile.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a LoginProfile message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        LoginProfile.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.posixAccounts != null && message.hasOwnProperty("posixAccounts")) {
-                                if (!Array.isArray(message.posixAccounts))
-                                    return "posixAccounts: array expected";
-                                for (var i = 0; i < message.posixAccounts.length; ++i) {
-                                    var error = $root.google.cloud.oslogin.common.PosixAccount.verify(message.posixAccounts[i]);
-                                    if (error)
-                                        return "posixAccounts." + error;
-                                }
-                            }
-                            if (message.sshPublicKeys != null && message.hasOwnProperty("sshPublicKeys")) {
-                                if (!$util.isObject(message.sshPublicKeys))
-                                    return "sshPublicKeys: object expected";
-                                var key = Object.keys(message.sshPublicKeys);
-                                for (var i = 0; i < key.length; ++i) {
-                                    var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKeys[key[i]]);
-                                    if (error)
-                                        return "sshPublicKeys." + error;
-                                }
-                            }
-                            if (message.securityKeys != null && message.hasOwnProperty("securityKeys")) {
-                                if (!Array.isArray(message.securityKeys))
-                                    return "securityKeys: array expected";
-                                for (var i = 0; i < message.securityKeys.length; ++i) {
-                                    var error = $root.google.cloud.oslogin.v1beta.SecurityKey.verify(message.securityKeys[i]);
-                                    if (error)
-                                        return "securityKeys." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a LoginProfile message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.LoginProfile} LoginProfile
-                         */
-                        LoginProfile.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.LoginProfile)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.LoginProfile();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.posixAccounts) {
-                                if (!Array.isArray(object.posixAccounts))
-                                    throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.posixAccounts: array expected");
-                                message.posixAccounts = [];
-                                for (var i = 0; i < object.posixAccounts.length; ++i) {
-                                    if (typeof object.posixAccounts[i] !== "object")
-                                        throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.posixAccounts: object expected");
-                                    message.posixAccounts[i] = $root.google.cloud.oslogin.common.PosixAccount.fromObject(object.posixAccounts[i]);
-                                }
-                            }
-                            if (object.sshPublicKeys) {
-                                if (typeof object.sshPublicKeys !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.sshPublicKeys: object expected");
-                                message.sshPublicKeys = {};
-                                for (var keys = Object.keys(object.sshPublicKeys), i = 0; i < keys.length; ++i) {
-                                    if (typeof object.sshPublicKeys[keys[i]] !== "object")
-                                        throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.sshPublicKeys: object expected");
-                                    message.sshPublicKeys[keys[i]] = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKeys[keys[i]]);
-                                }
-                            }
-                            if (object.securityKeys) {
-                                if (!Array.isArray(object.securityKeys))
-                                    throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.securityKeys: array expected");
-                                message.securityKeys = [];
-                                for (var i = 0; i < object.securityKeys.length; ++i) {
-                                    if (typeof object.securityKeys[i] !== "object")
-                                        throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.securityKeys: object expected");
-                                    message.securityKeys[i] = $root.google.cloud.oslogin.v1beta.SecurityKey.fromObject(object.securityKeys[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a LoginProfile message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.LoginProfile} message LoginProfile
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        LoginProfile.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.posixAccounts = [];
-                                object.securityKeys = [];
-                            }
-                            if (options.objects || options.defaults)
-                                object.sshPublicKeys = {};
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.posixAccounts && message.posixAccounts.length) {
-                                object.posixAccounts = [];
-                                for (var j = 0; j < message.posixAccounts.length; ++j)
-                                    object.posixAccounts[j] = $root.google.cloud.oslogin.common.PosixAccount.toObject(message.posixAccounts[j], options);
-                            }
-                            var keys2;
-                            if (message.sshPublicKeys && (keys2 = Object.keys(message.sshPublicKeys)).length) {
-                                object.sshPublicKeys = {};
-                                for (var j = 0; j < keys2.length; ++j)
-                                    object.sshPublicKeys[keys2[j]] = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKeys[keys2[j]], options);
-                            }
-                            if (message.securityKeys && message.securityKeys.length) {
-                                object.securityKeys = [];
-                                for (var j = 0; j < message.securityKeys.length; ++j)
-                                    object.securityKeys[j] = $root.google.cloud.oslogin.v1beta.SecurityKey.toObject(message.securityKeys[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this LoginProfile to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        LoginProfile.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for LoginProfile
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        LoginProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.LoginProfile";
-                        };
-    
-                        return LoginProfile;
-                    })();
-    
-                    v1beta.CreateSshPublicKeyRequest = (function() {
-    
-                        /**
-                         * Properties of a CreateSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface ICreateSshPublicKeyRequest
-                         * @property {string|null} [parent] CreateSshPublicKeyRequest parent
-                         * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] CreateSshPublicKeyRequest sshPublicKey
-                         */
-    
-                        /**
-                         * Constructs a new CreateSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a CreateSshPublicKeyRequest.
-                         * @implements ICreateSshPublicKeyRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest=} [properties] Properties to set
-                         */
-                        function CreateSshPublicKeyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * CreateSshPublicKeyRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @instance
-                         */
-                        CreateSshPublicKeyRequest.prototype.parent = "";
-    
-                        /**
-                         * CreateSshPublicKeyRequest sshPublicKey.
-                         * @member {google.cloud.oslogin.common.ISshPublicKey|null|undefined} sshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @instance
-                         */
-                        CreateSshPublicKeyRequest.prototype.sshPublicKey = null;
-    
-                        /**
-                         * Creates a new CreateSshPublicKeyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest instance
-                         */
-                        CreateSshPublicKeyRequest.create = function create(properties) {
-                            return new CreateSshPublicKeyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CreateSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} message CreateSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateSshPublicKeyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.sshPublicKey != null && Object.hasOwnProperty.call(message, "sshPublicKey"))
-                                $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CreateSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} message CreateSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateSshPublicKeyRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CreateSshPublicKeyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CreateSshPublicKeyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey")) {
-                                var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKey);
-                                if (error)
-                                    return "sshPublicKey." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CreateSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
-                         */
-                        CreateSshPublicKeyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.sshPublicKey != null) {
-                                if (typeof object.sshPublicKey !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.sshPublicKey: object expected");
-                                message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKey);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a CreateSshPublicKeyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} message CreateSshPublicKeyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CreateSshPublicKeyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.sshPublicKey = null;
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
-                                object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this CreateSshPublicKeyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CreateSshPublicKeyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CreateSshPublicKeyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CreateSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest";
-                        };
-    
-                        return CreateSshPublicKeyRequest;
-                    })();
-    
-                    v1beta.DeletePosixAccountRequest = (function() {
-    
-                        /**
-                         * Properties of a DeletePosixAccountRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IDeletePosixAccountRequest
-                         * @property {string|null} [name] DeletePosixAccountRequest name
-                         */
-    
-                        /**
-                         * Constructs a new DeletePosixAccountRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a DeletePosixAccountRequest.
-                         * @implements IDeletePosixAccountRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IDeletePosixAccountRequest=} [properties] Properties to set
-                         */
-                        function DeletePosixAccountRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeletePosixAccountRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @instance
-                         */
-                        DeletePosixAccountRequest.prototype.name = "";
-    
-                        /**
-                         * Creates a new DeletePosixAccountRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IDeletePosixAccountRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.DeletePosixAccountRequest} DeletePosixAccountRequest instance
-                         */
-                        DeletePosixAccountRequest.create = function create(properties) {
-                            return new DeletePosixAccountRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeletePosixAccountRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.DeletePosixAccountRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IDeletePosixAccountRequest} message DeletePosixAccountRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeletePosixAccountRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeletePosixAccountRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.DeletePosixAccountRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IDeletePosixAccountRequest} message DeletePosixAccountRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeletePosixAccountRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeletePosixAccountRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.DeletePosixAccountRequest} DeletePosixAccountRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeletePosixAccountRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.DeletePosixAccountRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeletePosixAccountRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.DeletePosixAccountRequest} DeletePosixAccountRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeletePosixAccountRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeletePosixAccountRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeletePosixAccountRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeletePosixAccountRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.DeletePosixAccountRequest} DeletePosixAccountRequest
-                         */
-                        DeletePosixAccountRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.DeletePosixAccountRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.DeletePosixAccountRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeletePosixAccountRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.DeletePosixAccountRequest} message DeletePosixAccountRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeletePosixAccountRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeletePosixAccountRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeletePosixAccountRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for DeletePosixAccountRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.DeletePosixAccountRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        DeletePosixAccountRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.DeletePosixAccountRequest";
-                        };
-    
-                        return DeletePosixAccountRequest;
-                    })();
-    
-                    v1beta.DeleteSshPublicKeyRequest = (function() {
-    
-                        /**
-                         * Properties of a DeleteSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IDeleteSshPublicKeyRequest
-                         * @property {string|null} [name] DeleteSshPublicKeyRequest name
-                         */
-    
-                        /**
-                         * Constructs a new DeleteSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a DeleteSshPublicKeyRequest.
-                         * @implements IDeleteSshPublicKeyRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest=} [properties] Properties to set
-                         */
-                        function DeleteSshPublicKeyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeleteSshPublicKeyRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @instance
-                         */
-                        DeleteSshPublicKeyRequest.prototype.name = "";
-    
-                        /**
-                         * Creates a new DeleteSshPublicKeyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest instance
-                         */
-                        DeleteSshPublicKeyRequest.create = function create(properties) {
-                            return new DeleteSshPublicKeyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest} message DeleteSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteSshPublicKeyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest} message DeleteSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeleteSshPublicKeyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteSshPublicKeyRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeleteSshPublicKeyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeleteSshPublicKeyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeleteSshPublicKeyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeleteSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest} DeleteSshPublicKeyRequest
-                         */
-                        DeleteSshPublicKeyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeleteSshPublicKeyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest} message DeleteSshPublicKeyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeleteSshPublicKeyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeleteSshPublicKeyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeleteSshPublicKeyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for DeleteSshPublicKeyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        DeleteSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest";
-                        };
-    
-                        return DeleteSshPublicKeyRequest;
-                    })();
-    
-                    v1beta.GetLoginProfileRequest = (function() {
-    
-                        /**
-                         * Properties of a GetLoginProfileRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IGetLoginProfileRequest
-                         * @property {string|null} [name] GetLoginProfileRequest name
-                         * @property {string|null} [projectId] GetLoginProfileRequest projectId
-                         * @property {string|null} [systemId] GetLoginProfileRequest systemId
-                         * @property {google.cloud.oslogin.v1beta.LoginProfileView|null} [view] GetLoginProfileRequest view
-                         */
-    
-                        /**
-                         * Constructs a new GetLoginProfileRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a GetLoginProfileRequest.
-                         * @implements IGetLoginProfileRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IGetLoginProfileRequest=} [properties] Properties to set
-                         */
-                        function GetLoginProfileRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * GetLoginProfileRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @instance
-                         */
-                        GetLoginProfileRequest.prototype.name = "";
-    
-                        /**
-                         * GetLoginProfileRequest projectId.
-                         * @member {string} projectId
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @instance
-                         */
-                        GetLoginProfileRequest.prototype.projectId = "";
-    
-                        /**
-                         * GetLoginProfileRequest systemId.
-                         * @member {string} systemId
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @instance
-                         */
-                        GetLoginProfileRequest.prototype.systemId = "";
-    
-                        /**
-                         * GetLoginProfileRequest view.
-                         * @member {google.cloud.oslogin.v1beta.LoginProfileView} view
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @instance
-                         */
-                        GetLoginProfileRequest.prototype.view = 0;
-    
-                        /**
-                         * Creates a new GetLoginProfileRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IGetLoginProfileRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.GetLoginProfileRequest} GetLoginProfileRequest instance
-                         */
-                        GetLoginProfileRequest.create = function create(properties) {
-                            return new GetLoginProfileRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GetLoginProfileRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.GetLoginProfileRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IGetLoginProfileRequest} message GetLoginProfileRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetLoginProfileRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
-                            if (message.systemId != null && Object.hasOwnProperty.call(message, "systemId"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.systemId);
-                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.view);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GetLoginProfileRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.GetLoginProfileRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IGetLoginProfileRequest} message GetLoginProfileRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetLoginProfileRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GetLoginProfileRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.GetLoginProfileRequest} GetLoginProfileRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetLoginProfileRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.GetLoginProfileRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.projectId = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.systemId = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.view = reader.int32();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GetLoginProfileRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.GetLoginProfileRequest} GetLoginProfileRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetLoginProfileRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GetLoginProfileRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GetLoginProfileRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.projectId != null && message.hasOwnProperty("projectId"))
-                                if (!$util.isString(message.projectId))
-                                    return "projectId: string expected";
-                            if (message.systemId != null && message.hasOwnProperty("systemId"))
-                                if (!$util.isString(message.systemId))
-                                    return "systemId: string expected";
-                            if (message.view != null && message.hasOwnProperty("view"))
-                                switch (message.view) {
-                                default:
-                                    return "view: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GetLoginProfileRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.GetLoginProfileRequest} GetLoginProfileRequest
-                         */
-                        GetLoginProfileRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.GetLoginProfileRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.GetLoginProfileRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.projectId != null)
-                                message.projectId = String(object.projectId);
-                            if (object.systemId != null)
-                                message.systemId = String(object.systemId);
-                            switch (object.view) {
-                            default:
-                                if (typeof object.view === "number") {
-                                    message.view = object.view;
-                                    break;
-                                }
-                                break;
-                            case "LOGIN_PROFILE_VIEW_UNSPECIFIED":
-                            case 0:
-                                message.view = 0;
-                                break;
-                            case "BASIC":
-                            case 1:
-                                message.view = 1;
-                                break;
-                            case "SECURITY_KEY":
-                            case 2:
-                                message.view = 2;
-                                break;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GetLoginProfileRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.GetLoginProfileRequest} message GetLoginProfileRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GetLoginProfileRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.projectId = "";
-                                object.systemId = "";
-                                object.view = options.enums === String ? "LOGIN_PROFILE_VIEW_UNSPECIFIED" : 0;
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.projectId != null && message.hasOwnProperty("projectId"))
-                                object.projectId = message.projectId;
-                            if (message.systemId != null && message.hasOwnProperty("systemId"))
-                                object.systemId = message.systemId;
-                            if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] === undefined ? message.view : $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] : message.view;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GetLoginProfileRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GetLoginProfileRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for GetLoginProfileRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        GetLoginProfileRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.GetLoginProfileRequest";
-                        };
-    
-                        return GetLoginProfileRequest;
-                    })();
-    
-                    v1beta.GetSshPublicKeyRequest = (function() {
-    
-                        /**
-                         * Properties of a GetSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IGetSshPublicKeyRequest
-                         * @property {string|null} [name] GetSshPublicKeyRequest name
-                         */
-    
-                        /**
-                         * Constructs a new GetSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a GetSshPublicKeyRequest.
-                         * @implements IGetSshPublicKeyRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest=} [properties] Properties to set
-                         */
-                        function GetSshPublicKeyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * GetSshPublicKeyRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @instance
-                         */
-                        GetSshPublicKeyRequest.prototype.name = "";
-    
-                        /**
-                         * Creates a new GetSshPublicKeyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.GetSshPublicKeyRequest} GetSshPublicKeyRequest instance
-                         */
-                        GetSshPublicKeyRequest.create = function create(properties) {
-                            return new GetSshPublicKeyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GetSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.GetSshPublicKeyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest} message GetSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetSshPublicKeyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GetSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.GetSshPublicKeyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest} message GetSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GetSshPublicKeyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.GetSshPublicKeyRequest} GetSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetSshPublicKeyRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GetSshPublicKeyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.GetSshPublicKeyRequest} GetSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GetSshPublicKeyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GetSshPublicKeyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GetSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.GetSshPublicKeyRequest} GetSshPublicKeyRequest
-                         */
-                        GetSshPublicKeyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GetSshPublicKeyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.GetSshPublicKeyRequest} message GetSshPublicKeyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GetSshPublicKeyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GetSshPublicKeyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GetSshPublicKeyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for GetSshPublicKeyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.GetSshPublicKeyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        GetSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.GetSshPublicKeyRequest";
-                        };
-    
-                        return GetSshPublicKeyRequest;
-                    })();
-    
-                    v1beta.ImportSshPublicKeyRequest = (function() {
-    
-                        /**
-                         * Properties of an ImportSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IImportSshPublicKeyRequest
-                         * @property {string|null} [parent] ImportSshPublicKeyRequest parent
-                         * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] ImportSshPublicKeyRequest sshPublicKey
-                         * @property {string|null} [projectId] ImportSshPublicKeyRequest projectId
-                         * @property {google.cloud.oslogin.v1beta.LoginProfileView|null} [view] ImportSshPublicKeyRequest view
-                         * @property {Array.<string>|null} [regions] ImportSshPublicKeyRequest regions
-                         */
-    
-                        /**
-                         * Constructs a new ImportSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents an ImportSshPublicKeyRequest.
-                         * @implements IImportSshPublicKeyRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest=} [properties] Properties to set
-                         */
-                        function ImportSshPublicKeyRequest(properties) {
-                            this.regions = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ImportSshPublicKeyRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @instance
-                         */
-                        ImportSshPublicKeyRequest.prototype.parent = "";
-    
-                        /**
-                         * ImportSshPublicKeyRequest sshPublicKey.
-                         * @member {google.cloud.oslogin.common.ISshPublicKey|null|undefined} sshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @instance
-                         */
-                        ImportSshPublicKeyRequest.prototype.sshPublicKey = null;
-    
-                        /**
-                         * ImportSshPublicKeyRequest projectId.
-                         * @member {string} projectId
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @instance
-                         */
-                        ImportSshPublicKeyRequest.prototype.projectId = "";
-    
-                        /**
-                         * ImportSshPublicKeyRequest view.
-                         * @member {google.cloud.oslogin.v1beta.LoginProfileView} view
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @instance
-                         */
-                        ImportSshPublicKeyRequest.prototype.view = 0;
-    
-                        /**
-                         * ImportSshPublicKeyRequest regions.
-                         * @member {Array.<string>} regions
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @instance
-                         */
-                        ImportSshPublicKeyRequest.prototype.regions = $util.emptyArray;
-    
-                        /**
-                         * Creates a new ImportSshPublicKeyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest instance
-                         */
-                        ImportSshPublicKeyRequest.create = function create(properties) {
-                            return new ImportSshPublicKeyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ImportSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest} message ImportSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ImportSshPublicKeyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.sshPublicKey != null && Object.hasOwnProperty.call(message, "sshPublicKey"))
-                                $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
-                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.view);
-                            if (message.regions != null && message.regions.length)
-                                for (var i = 0; i < message.regions.length; ++i)
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.regions[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ImportSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest} message ImportSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ImportSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an ImportSshPublicKeyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ImportSshPublicKeyRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.projectId = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.view = reader.int32();
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.regions && message.regions.length))
-                                            message.regions = [];
-                                        message.regions.push(reader.string());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an ImportSshPublicKeyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ImportSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an ImportSshPublicKeyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ImportSshPublicKeyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey")) {
-                                var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKey);
-                                if (error)
-                                    return "sshPublicKey." + error;
-                            }
-                            if (message.projectId != null && message.hasOwnProperty("projectId"))
-                                if (!$util.isString(message.projectId))
-                                    return "projectId: string expected";
-                            if (message.view != null && message.hasOwnProperty("view"))
-                                switch (message.view) {
-                                default:
-                                    return "view: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            if (message.regions != null && message.hasOwnProperty("regions")) {
-                                if (!Array.isArray(message.regions))
-                                    return "regions: array expected";
-                                for (var i = 0; i < message.regions.length; ++i)
-                                    if (!$util.isString(message.regions[i]))
-                                        return "regions: string[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an ImportSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest} ImportSshPublicKeyRequest
-                         */
-                        ImportSshPublicKeyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.sshPublicKey != null) {
-                                if (typeof object.sshPublicKey !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest.sshPublicKey: object expected");
-                                message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKey);
-                            }
-                            if (object.projectId != null)
-                                message.projectId = String(object.projectId);
-                            switch (object.view) {
-                            default:
-                                if (typeof object.view === "number") {
-                                    message.view = object.view;
-                                    break;
-                                }
-                                break;
-                            case "LOGIN_PROFILE_VIEW_UNSPECIFIED":
-                            case 0:
-                                message.view = 0;
-                                break;
-                            case "BASIC":
-                            case 1:
-                                message.view = 1;
-                                break;
-                            case "SECURITY_KEY":
-                            case 2:
-                                message.view = 2;
-                                break;
-                            }
-                            if (object.regions) {
-                                if (!Array.isArray(object.regions))
-                                    throw TypeError(".google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest.regions: array expected");
-                                message.regions = [];
-                                for (var i = 0; i < object.regions.length; ++i)
-                                    message.regions[i] = String(object.regions[i]);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an ImportSshPublicKeyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest} message ImportSshPublicKeyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ImportSshPublicKeyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.regions = [];
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.sshPublicKey = null;
-                                object.projectId = "";
-                                object.view = options.enums === String ? "LOGIN_PROFILE_VIEW_UNSPECIFIED" : 0;
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
-                                object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
-                            if (message.projectId != null && message.hasOwnProperty("projectId"))
-                                object.projectId = message.projectId;
-                            if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] === undefined ? message.view : $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] : message.view;
-                            if (message.regions && message.regions.length) {
-                                object.regions = [];
-                                for (var j = 0; j < message.regions.length; ++j)
-                                    object.regions[j] = message.regions[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ImportSshPublicKeyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ImportSshPublicKeyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ImportSshPublicKeyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ImportSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest";
-                        };
-    
-                        return ImportSshPublicKeyRequest;
-                    })();
-    
-                    v1beta.ImportSshPublicKeyResponse = (function() {
-    
-                        /**
-                         * Properties of an ImportSshPublicKeyResponse.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IImportSshPublicKeyResponse
-                         * @property {google.cloud.oslogin.v1beta.ILoginProfile|null} [loginProfile] ImportSshPublicKeyResponse loginProfile
-                         * @property {string|null} [details] ImportSshPublicKeyResponse details
-                         */
-    
-                        /**
-                         * Constructs a new ImportSshPublicKeyResponse.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents an ImportSshPublicKeyResponse.
-                         * @implements IImportSshPublicKeyResponse
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyResponse=} [properties] Properties to set
-                         */
-                        function ImportSshPublicKeyResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ImportSshPublicKeyResponse loginProfile.
-                         * @member {google.cloud.oslogin.v1beta.ILoginProfile|null|undefined} loginProfile
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @instance
-                         */
-                        ImportSshPublicKeyResponse.prototype.loginProfile = null;
-    
-                        /**
-                         * ImportSshPublicKeyResponse details.
-                         * @member {string} details
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @instance
-                         */
-                        ImportSshPublicKeyResponse.prototype.details = "";
-    
-                        /**
-                         * Creates a new ImportSshPublicKeyResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyResponse=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse instance
-                         */
-                        ImportSshPublicKeyResponse.create = function create(properties) {
-                            return new ImportSshPublicKeyResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ImportSshPublicKeyResponse message. Does not implicitly {@link google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyResponse} message ImportSshPublicKeyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ImportSshPublicKeyResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.loginProfile != null && Object.hasOwnProperty.call(message, "loginProfile"))
-                                $root.google.cloud.oslogin.v1beta.LoginProfile.encode(message.loginProfile, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.details);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ImportSshPublicKeyResponse message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IImportSshPublicKeyResponse} message ImportSshPublicKeyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ImportSshPublicKeyResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an ImportSshPublicKeyResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ImportSshPublicKeyResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.loginProfile = $root.google.cloud.oslogin.v1beta.LoginProfile.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.details = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an ImportSshPublicKeyResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ImportSshPublicKeyResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an ImportSshPublicKeyResponse message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ImportSshPublicKeyResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.loginProfile != null && message.hasOwnProperty("loginProfile")) {
-                                var error = $root.google.cloud.oslogin.v1beta.LoginProfile.verify(message.loginProfile);
-                                if (error)
-                                    return "loginProfile." + error;
-                            }
-                            if (message.details != null && message.hasOwnProperty("details"))
-                                if (!$util.isString(message.details))
-                                    return "details: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an ImportSshPublicKeyResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse} ImportSshPublicKeyResponse
-                         */
-                        ImportSshPublicKeyResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse();
-                            if (object.loginProfile != null) {
-                                if (typeof object.loginProfile !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse.loginProfile: object expected");
-                                message.loginProfile = $root.google.cloud.oslogin.v1beta.LoginProfile.fromObject(object.loginProfile);
-                            }
-                            if (object.details != null)
-                                message.details = String(object.details);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an ImportSshPublicKeyResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse} message ImportSshPublicKeyResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ImportSshPublicKeyResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.loginProfile = null;
-                                object.details = "";
-                            }
-                            if (message.loginProfile != null && message.hasOwnProperty("loginProfile"))
-                                object.loginProfile = $root.google.cloud.oslogin.v1beta.LoginProfile.toObject(message.loginProfile, options);
-                            if (message.details != null && message.hasOwnProperty("details"))
-                                object.details = message.details;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ImportSshPublicKeyResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ImportSshPublicKeyResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ImportSshPublicKeyResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ImportSshPublicKeyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse";
-                        };
-    
-                        return ImportSshPublicKeyResponse;
-                    })();
-    
-                    v1beta.UpdateSshPublicKeyRequest = (function() {
-    
-                        /**
-                         * Properties of an UpdateSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IUpdateSshPublicKeyRequest
-                         * @property {string|null} [name] UpdateSshPublicKeyRequest name
-                         * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] UpdateSshPublicKeyRequest sshPublicKey
-                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSshPublicKeyRequest updateMask
-                         */
-    
-                        /**
-                         * Constructs a new UpdateSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents an UpdateSshPublicKeyRequest.
-                         * @implements IUpdateSshPublicKeyRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest=} [properties] Properties to set
-                         */
-                        function UpdateSshPublicKeyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UpdateSshPublicKeyRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @instance
-                         */
-                        UpdateSshPublicKeyRequest.prototype.name = "";
-    
-                        /**
-                         * UpdateSshPublicKeyRequest sshPublicKey.
-                         * @member {google.cloud.oslogin.common.ISshPublicKey|null|undefined} sshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @instance
-                         */
-                        UpdateSshPublicKeyRequest.prototype.sshPublicKey = null;
-    
-                        /**
-                         * UpdateSshPublicKeyRequest updateMask.
-                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @instance
-                         */
-                        UpdateSshPublicKeyRequest.prototype.updateMask = null;
-    
-                        /**
-                         * Creates a new UpdateSshPublicKeyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest instance
-                         */
-                        UpdateSshPublicKeyRequest.create = function create(properties) {
-                            return new UpdateSshPublicKeyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest} message UpdateSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateSshPublicKeyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.sshPublicKey != null && Object.hasOwnProperty.call(message, "sshPublicKey"))
-                                $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest} message UpdateSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an UpdateSshPublicKeyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateSshPublicKeyRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an UpdateSshPublicKeyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an UpdateSshPublicKeyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UpdateSshPublicKeyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey")) {
-                                var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKey);
-                                if (error)
-                                    return "sshPublicKey." + error;
-                            }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
-                                if (error)
-                                    return "updateMask." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an UpdateSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest} UpdateSshPublicKeyRequest
-                         */
-                        UpdateSshPublicKeyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.sshPublicKey != null) {
-                                if (typeof object.sshPublicKey !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest.sshPublicKey: object expected");
-                                message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKey);
-                            }
-                            if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest.updateMask: object expected");
-                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an UpdateSshPublicKeyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest} message UpdateSshPublicKeyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UpdateSshPublicKeyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.sshPublicKey = null;
-                                object.updateMask = null;
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
-                                object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UpdateSshPublicKeyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UpdateSshPublicKeyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for UpdateSshPublicKeyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        UpdateSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest";
-                        };
-    
-                        return UpdateSshPublicKeyRequest;
-                    })();
-    
-                    v1beta.SecurityKey = (function() {
-    
-                        /**
-                         * Properties of a SecurityKey.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface ISecurityKey
-                         * @property {string|null} [publicKey] SecurityKey publicKey
-                         * @property {string|null} [privateKey] SecurityKey privateKey
-                         * @property {google.cloud.oslogin.v1beta.IUniversalTwoFactor|null} [universalTwoFactor] SecurityKey universalTwoFactor
-                         * @property {google.cloud.oslogin.v1beta.IWebAuthn|null} [webAuthn] SecurityKey webAuthn
-                         * @property {string|null} [deviceNickname] SecurityKey deviceNickname
-                         */
-    
-                        /**
-                         * Constructs a new SecurityKey.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a SecurityKey.
-                         * @implements ISecurityKey
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.ISecurityKey=} [properties] Properties to set
-                         */
-                        function SecurityKey(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SecurityKey publicKey.
-                         * @member {string} publicKey
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @instance
-                         */
-                        SecurityKey.prototype.publicKey = "";
-    
-                        /**
-                         * SecurityKey privateKey.
-                         * @member {string} privateKey
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @instance
-                         */
-                        SecurityKey.prototype.privateKey = "";
-    
-                        /**
-                         * SecurityKey universalTwoFactor.
-                         * @member {google.cloud.oslogin.v1beta.IUniversalTwoFactor|null|undefined} universalTwoFactor
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @instance
-                         */
-                        SecurityKey.prototype.universalTwoFactor = null;
-    
-                        /**
-                         * SecurityKey webAuthn.
-                         * @member {google.cloud.oslogin.v1beta.IWebAuthn|null|undefined} webAuthn
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @instance
-                         */
-                        SecurityKey.prototype.webAuthn = null;
-    
-                        /**
-                         * SecurityKey deviceNickname.
-                         * @member {string|null|undefined} deviceNickname
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @instance
-                         */
-                        SecurityKey.prototype.deviceNickname = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * SecurityKey protocolType.
-                         * @member {"universalTwoFactor"|"webAuthn"|undefined} protocolType
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @instance
-                         */
-                        Object.defineProperty(SecurityKey.prototype, "protocolType", {
-                            get: $util.oneOfGetter($oneOfFields = ["universalTwoFactor", "webAuthn"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(SecurityKey.prototype, "_deviceNickname", {
-                            get: $util.oneOfGetter($oneOfFields = ["deviceNickname"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new SecurityKey instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISecurityKey=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey instance
-                         */
-                        SecurityKey.create = function create(properties) {
-                            return new SecurityKey(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SecurityKey message. Does not implicitly {@link google.cloud.oslogin.v1beta.SecurityKey.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISecurityKey} message SecurityKey message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SecurityKey.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.publicKey != null && Object.hasOwnProperty.call(message, "publicKey"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.publicKey);
-                            if (message.privateKey != null && Object.hasOwnProperty.call(message, "privateKey"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.privateKey);
-                            if (message.universalTwoFactor != null && Object.hasOwnProperty.call(message, "universalTwoFactor"))
-                                $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.encode(message.universalTwoFactor, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.webAuthn != null && Object.hasOwnProperty.call(message, "webAuthn"))
-                                $root.google.cloud.oslogin.v1beta.WebAuthn.encode(message.webAuthn, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.deviceNickname != null && Object.hasOwnProperty.call(message, "deviceNickname"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.deviceNickname);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SecurityKey message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SecurityKey.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISecurityKey} message SecurityKey message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SecurityKey.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SecurityKey message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SecurityKey.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.SecurityKey();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.publicKey = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.privateKey = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.universalTwoFactor = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 5: {
-                                        message.deviceNickname = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SecurityKey message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SecurityKey.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SecurityKey message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SecurityKey.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
-                                if (!$util.isString(message.publicKey))
-                                    return "publicKey: string expected";
-                            if (message.privateKey != null && message.hasOwnProperty("privateKey"))
-                                if (!$util.isString(message.privateKey))
-                                    return "privateKey: string expected";
-                            if (message.universalTwoFactor != null && message.hasOwnProperty("universalTwoFactor")) {
-                                properties.protocolType = 1;
-                                {
-                                    var error = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.verify(message.universalTwoFactor);
-                                    if (error)
-                                        return "universalTwoFactor." + error;
-                                }
-                            }
-                            if (message.webAuthn != null && message.hasOwnProperty("webAuthn")) {
-                                if (properties.protocolType === 1)
-                                    return "protocolType: multiple values";
-                                properties.protocolType = 1;
-                                {
-                                    var error = $root.google.cloud.oslogin.v1beta.WebAuthn.verify(message.webAuthn);
-                                    if (error)
-                                        return "webAuthn." + error;
-                                }
-                            }
-                            if (message.deviceNickname != null && message.hasOwnProperty("deviceNickname")) {
-                                properties._deviceNickname = 1;
-                                if (!$util.isString(message.deviceNickname))
-                                    return "deviceNickname: string expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SecurityKey message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey
-                         */
-                        SecurityKey.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.SecurityKey)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.SecurityKey();
-                            if (object.publicKey != null)
-                                message.publicKey = String(object.publicKey);
-                            if (object.privateKey != null)
-                                message.privateKey = String(object.privateKey);
-                            if (object.universalTwoFactor != null) {
-                                if (typeof object.universalTwoFactor !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.SecurityKey.universalTwoFactor: object expected");
-                                message.universalTwoFactor = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.fromObject(object.universalTwoFactor);
-                            }
-                            if (object.webAuthn != null) {
-                                if (typeof object.webAuthn !== "object")
-                                    throw TypeError(".google.cloud.oslogin.v1beta.SecurityKey.webAuthn: object expected");
-                                message.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.fromObject(object.webAuthn);
-                            }
-                            if (object.deviceNickname != null)
-                                message.deviceNickname = String(object.deviceNickname);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SecurityKey message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.SecurityKey} message SecurityKey
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SecurityKey.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.publicKey = "";
-                                object.privateKey = "";
-                            }
-                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
-                                object.publicKey = message.publicKey;
-                            if (message.privateKey != null && message.hasOwnProperty("privateKey"))
-                                object.privateKey = message.privateKey;
-                            if (message.universalTwoFactor != null && message.hasOwnProperty("universalTwoFactor")) {
-                                object.universalTwoFactor = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.toObject(message.universalTwoFactor, options);
-                                if (options.oneofs)
-                                    object.protocolType = "universalTwoFactor";
-                            }
-                            if (message.webAuthn != null && message.hasOwnProperty("webAuthn")) {
-                                object.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.toObject(message.webAuthn, options);
-                                if (options.oneofs)
-                                    object.protocolType = "webAuthn";
-                            }
-                            if (message.deviceNickname != null && message.hasOwnProperty("deviceNickname")) {
-                                object.deviceNickname = message.deviceNickname;
-                                if (options.oneofs)
-                                    object._deviceNickname = "deviceNickname";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SecurityKey to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SecurityKey.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SecurityKey
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SecurityKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.SecurityKey";
-                        };
-    
-                        return SecurityKey;
-                    })();
-    
-                    v1beta.UniversalTwoFactor = (function() {
-    
-                        /**
-                         * Properties of an UniversalTwoFactor.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IUniversalTwoFactor
-                         * @property {string|null} [appId] UniversalTwoFactor appId
-                         */
-    
-                        /**
-                         * Constructs a new UniversalTwoFactor.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents an UniversalTwoFactor.
-                         * @implements IUniversalTwoFactor
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor=} [properties] Properties to set
-                         */
-                        function UniversalTwoFactor(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UniversalTwoFactor appId.
-                         * @member {string} appId
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @instance
-                         */
-                        UniversalTwoFactor.prototype.appId = "";
-    
-                        /**
-                         * Creates a new UniversalTwoFactor instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor instance
-                         */
-                        UniversalTwoFactor.create = function create(properties) {
-                            return new UniversalTwoFactor(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UniversalTwoFactor message. Does not implicitly {@link google.cloud.oslogin.v1beta.UniversalTwoFactor.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor} message UniversalTwoFactor message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UniversalTwoFactor.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.appId != null && Object.hasOwnProperty.call(message, "appId"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.appId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UniversalTwoFactor message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.UniversalTwoFactor.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor} message UniversalTwoFactor message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UniversalTwoFactor.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an UniversalTwoFactor message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UniversalTwoFactor.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.UniversalTwoFactor();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.appId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an UniversalTwoFactor message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UniversalTwoFactor.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an UniversalTwoFactor message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UniversalTwoFactor.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.appId != null && message.hasOwnProperty("appId"))
-                                if (!$util.isString(message.appId))
-                                    return "appId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an UniversalTwoFactor message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor
-                         */
-                        UniversalTwoFactor.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.UniversalTwoFactor)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.UniversalTwoFactor();
-                            if (object.appId != null)
-                                message.appId = String(object.appId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an UniversalTwoFactor message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.UniversalTwoFactor} message UniversalTwoFactor
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UniversalTwoFactor.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.appId = "";
-                            if (message.appId != null && message.hasOwnProperty("appId"))
-                                object.appId = message.appId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UniversalTwoFactor to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UniversalTwoFactor.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for UniversalTwoFactor
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        UniversalTwoFactor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.UniversalTwoFactor";
-                        };
-    
-                        return UniversalTwoFactor;
-                    })();
-    
-                    v1beta.WebAuthn = (function() {
-    
-                        /**
-                         * Properties of a WebAuthn.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface IWebAuthn
-                         * @property {string|null} [rpId] WebAuthn rpId
-                         */
-    
-                        /**
-                         * Constructs a new WebAuthn.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a WebAuthn.
-                         * @implements IWebAuthn
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.IWebAuthn=} [properties] Properties to set
-                         */
-                        function WebAuthn(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * WebAuthn rpId.
-                         * @member {string} rpId
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @instance
-                         */
-                        WebAuthn.prototype.rpId = "";
-    
-                        /**
-                         * Creates a new WebAuthn instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IWebAuthn=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn instance
-                         */
-                        WebAuthn.create = function create(properties) {
-                            return new WebAuthn(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified WebAuthn message. Does not implicitly {@link google.cloud.oslogin.v1beta.WebAuthn.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IWebAuthn} message WebAuthn message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        WebAuthn.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.rpId != null && Object.hasOwnProperty.call(message, "rpId"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.rpId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified WebAuthn message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.WebAuthn.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.IWebAuthn} message WebAuthn message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        WebAuthn.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a WebAuthn message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        WebAuthn.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.WebAuthn();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.rpId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a WebAuthn message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        WebAuthn.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a WebAuthn message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        WebAuthn.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.rpId != null && message.hasOwnProperty("rpId"))
-                                if (!$util.isString(message.rpId))
-                                    return "rpId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a WebAuthn message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn
-                         */
-                        WebAuthn.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.WebAuthn)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.WebAuthn();
-                            if (object.rpId != null)
-                                message.rpId = String(object.rpId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a WebAuthn message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.WebAuthn} message WebAuthn
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        WebAuthn.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.rpId = "";
-                            if (message.rpId != null && message.hasOwnProperty("rpId"))
-                                object.rpId = message.rpId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this WebAuthn to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        WebAuthn.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for WebAuthn
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        WebAuthn.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.WebAuthn";
-                        };
-    
-                        return WebAuthn;
-                    })();
-    
-                    v1beta.SignSshPublicKeyRequest = (function() {
-    
-                        /**
-                         * Properties of a SignSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface ISignSshPublicKeyRequest
-                         * @property {string|null} [sshPublicKey] SignSshPublicKeyRequest sshPublicKey
-                         * @property {string|null} [parent] SignSshPublicKeyRequest parent
-                         */
-    
-                        /**
-                         * Constructs a new SignSshPublicKeyRequest.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a SignSshPublicKeyRequest.
-                         * @implements ISignSshPublicKeyRequest
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest=} [properties] Properties to set
-                         */
-                        function SignSshPublicKeyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SignSshPublicKeyRequest sshPublicKey.
-                         * @member {string} sshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @instance
-                         */
-                        SignSshPublicKeyRequest.prototype.sshPublicKey = "";
-    
-                        /**
-                         * SignSshPublicKeyRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @instance
-                         */
-                        SignSshPublicKeyRequest.prototype.parent = "";
-    
-                        /**
-                         * Creates a new SignSshPublicKeyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest instance
-                         */
-                        SignSshPublicKeyRequest.create = function create(properties) {
-                            return new SignSshPublicKeyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SignSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} message SignSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SignSshPublicKeyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.sshPublicKey != null && Object.hasOwnProperty.call(message, "sshPublicKey"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sshPublicKey);
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parent);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SignSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} message SignSshPublicKeyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SignSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SignSshPublicKeyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SignSshPublicKeyRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.sshPublicKey = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SignSshPublicKeyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SignSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SignSshPublicKeyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SignSshPublicKeyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
-                                if (!$util.isString(message.sshPublicKey))
-                                    return "sshPublicKey: string expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SignSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest
-                         */
-                        SignSshPublicKeyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest();
-                            if (object.sshPublicKey != null)
-                                message.sshPublicKey = String(object.sshPublicKey);
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SignSshPublicKeyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} message SignSshPublicKeyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SignSshPublicKeyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.sshPublicKey = "";
-                                object.parent = "";
-                            }
-                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
-                                object.sshPublicKey = message.sshPublicKey;
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SignSshPublicKeyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SignSshPublicKeyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SignSshPublicKeyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SignSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.SignSshPublicKeyRequest";
-                        };
-    
-                        return SignSshPublicKeyRequest;
-                    })();
-    
-                    v1beta.SignSshPublicKeyResponse = (function() {
-    
-                        /**
-                         * Properties of a SignSshPublicKeyResponse.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @interface ISignSshPublicKeyResponse
-                         * @property {string|null} [signedSshPublicKey] SignSshPublicKeyResponse signedSshPublicKey
-                         */
-    
-                        /**
-                         * Constructs a new SignSshPublicKeyResponse.
-                         * @memberof google.cloud.oslogin.v1beta
-                         * @classdesc Represents a SignSshPublicKeyResponse.
-                         * @implements ISignSshPublicKeyResponse
-                         * @constructor
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse=} [properties] Properties to set
-                         */
-                        function SignSshPublicKeyResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SignSshPublicKeyResponse signedSshPublicKey.
-                         * @member {string} signedSshPublicKey
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @instance
-                         */
-                        SignSshPublicKeyResponse.prototype.signedSshPublicKey = "";
-    
-                        /**
-                         * Creates a new SignSshPublicKeyResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse instance
-                         */
-                        SignSshPublicKeyResponse.create = function create(properties) {
-                            return new SignSshPublicKeyResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SignSshPublicKeyResponse message. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse} message SignSshPublicKeyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SignSshPublicKeyResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.signedSshPublicKey != null && Object.hasOwnProperty.call(message, "signedSshPublicKey"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.signedSshPublicKey);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SignSshPublicKeyResponse message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse} message SignSshPublicKeyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SignSshPublicKeyResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SignSshPublicKeyResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SignSshPublicKeyResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.signedSshPublicKey = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SignSshPublicKeyResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SignSshPublicKeyResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SignSshPublicKeyResponse message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SignSshPublicKeyResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.signedSshPublicKey != null && message.hasOwnProperty("signedSshPublicKey"))
-                                if (!$util.isString(message.signedSshPublicKey))
-                                    return "signedSshPublicKey: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SignSshPublicKeyResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse
-                         */
-                        SignSshPublicKeyResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse();
-                            if (object.signedSshPublicKey != null)
-                                message.signedSshPublicKey = String(object.signedSshPublicKey);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SignSshPublicKeyResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} message SignSshPublicKeyResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SignSshPublicKeyResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.signedSshPublicKey = "";
-                            if (message.signedSshPublicKey != null && message.hasOwnProperty("signedSshPublicKey"))
-                                object.signedSshPublicKey = message.signedSshPublicKey;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SignSshPublicKeyResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SignSshPublicKeyResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SignSshPublicKeyResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SignSshPublicKeyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.SignSshPublicKeyResponse";
-                        };
-    
-                        return SignSshPublicKeyResponse;
-                    })();
-    
-                    /**
-                     * LoginProfileView enum.
-                     * @name google.cloud.oslogin.v1beta.LoginProfileView
-                     * @enum {number}
-                     * @property {number} LOGIN_PROFILE_VIEW_UNSPECIFIED=0 LOGIN_PROFILE_VIEW_UNSPECIFIED value
-                     * @property {number} BASIC=1 BASIC value
-                     * @property {number} SECURITY_KEY=2 SECURITY_KEY value
-                     */
-                    v1beta.LoginProfileView = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "LOGIN_PROFILE_VIEW_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "BASIC"] = 1;
-                        values[valuesById[2] = "SECURITY_KEY"] = 2;
-                        return values;
-                    })();
-    
-                    return v1beta;
-                })();
-    
                 return oslogin;
             })();
     
@@ -8923,7 +5058,6 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
-                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -8959,14 +5093,6 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
-                 * CommonLanguageSettings selectiveGapicGeneration.
-                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
-                 * @memberof google.api.CommonLanguageSettings
-                 * @instance
-                 */
-                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
-    
-                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -8998,8 +5124,6 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
-                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -9049,10 +5173,6 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
-                                break;
-                            }
-                        case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -9106,11 +5226,6 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
-                        if (error)
-                            return "selectiveGapicGeneration." + error;
-                    }
                     return null;
                 };
     
@@ -9153,11 +5268,6 @@
                                 break;
                             }
                     }
-                    if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
-                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
-                    }
                     return message;
                 };
     
@@ -9176,10 +5286,8 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.referenceDocsUri = "";
-                        object.selectiveGapicGeneration = null;
-                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -9187,8 +5295,6 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -11011,7 +7117,6 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
-                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -11036,14 +7141,6 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
-    
-                /**
-                 * PythonSettings experimentalFeatures.
-                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
-                 * @memberof google.api.PythonSettings
-                 * @instance
-                 */
-                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -11071,8 +7168,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -11111,10 +7206,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -11157,11 +7248,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
-                        if (error)
-                            return "experimentalFeatures." + error;
-                    }
                     return null;
                 };
     
@@ -11182,11 +7268,6 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
-                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
-                    }
                     return message;
                 };
     
@@ -11203,14 +7284,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.common = null;
-                        object.experimentalFeatures = null;
-                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -11239,258 +7316,6 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
-    
-                PythonSettings.ExperimentalFeatures = (function() {
-    
-                    /**
-                     * Properties of an ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @interface IExperimentalFeatures
-                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
-                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
-                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
-                     */
-    
-                    /**
-                     * Constructs a new ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @classdesc Represents an ExperimentalFeatures.
-                     * @implements IExperimentalFeatures
-                     * @constructor
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     */
-                    function ExperimentalFeatures(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ExperimentalFeatures restAsyncIoEnabled.
-                     * @member {boolean} restAsyncIoEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures protobufPythonicTypesEnabled.
-                     * @member {boolean} protobufPythonicTypesEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures unversionedPackageDisabled.
-                     * @member {boolean} unversionedPackageDisabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
-    
-                    /**
-                     * Creates a new ExperimentalFeatures instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
-                     */
-                    ExperimentalFeatures.create = function create(properties) {
-                        return new ExperimentalFeatures(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
-                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
-                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.restAsyncIoEnabled = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.protobufPythonicTypesEnabled = reader.bool();
-                                    break;
-                                }
-                            case 3: {
-                                    message.unversionedPackageDisabled = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ExperimentalFeatures message.
-                     * @function verify
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ExperimentalFeatures.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            if (typeof message.restAsyncIoEnabled !== "boolean")
-                                return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
-                                return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            if (typeof message.unversionedPackageDisabled !== "boolean")
-                                return "unversionedPackageDisabled: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
-                            return object;
-                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        if (object.restAsyncIoEnabled != null)
-                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
-                        if (object.protobufPythonicTypesEnabled != null)
-                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
-                        if (object.unversionedPackageDisabled != null)
-                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.restAsyncIoEnabled = false;
-                            object.protobufPythonicTypesEnabled = false;
-                            object.unversionedPackageDisabled = false;
-                        }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ExperimentalFeatures to JSON.
-                     * @function toJSON
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ExperimentalFeatures
-                     * @function getTypeUrl
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
-                    };
-    
-                    return ExperimentalFeatures;
-                })();
     
                 return PythonSettings;
             })();
@@ -12368,7 +8193,6 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -12380,7 +8204,6 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
-                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -12394,14 +8217,6 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
-    
-                /**
-                 * GoSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.GoSettings
-                 * @instance
-                 */
-                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -12429,9 +8244,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -12462,7 +8274,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -12470,29 +8282,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -12535,14 +8324,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
                     return null;
                 };
     
@@ -12563,13 +8344,6 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
                     return message;
                 };
     
@@ -12586,18 +8360,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.objects || options.defaults)
-                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
                     return object;
                 };
     
@@ -13236,251 +9002,6 @@
                 return values;
             })();
     
-            api.SelectiveGapicGeneration = (function() {
-    
-                /**
-                 * Properties of a SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @interface ISelectiveGapicGeneration
-                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
-                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
-                 */
-    
-                /**
-                 * Constructs a new SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @classdesc Represents a SelectiveGapicGeneration.
-                 * @implements ISelectiveGapicGeneration
-                 * @constructor
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 */
-                function SelectiveGapicGeneration(properties) {
-                    this.methods = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * SelectiveGapicGeneration methods.
-                 * @member {Array.<string>} methods
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
-    
-                /**
-                 * SelectiveGapicGeneration generateOmittedAsInternal.
-                 * @member {boolean} generateOmittedAsInternal
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
-    
-                /**
-                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
-                 */
-                SelectiveGapicGeneration.create = function create(properties) {
-                    return new SelectiveGapicGeneration(properties);
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.methods != null && message.methods.length)
-                        for (var i = 0; i < message.methods.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
-                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.methods && message.methods.length))
-                                    message.methods = [];
-                                message.methods.push(reader.string());
-                                break;
-                            }
-                        case 2: {
-                                message.generateOmittedAsInternal = reader.bool();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a SelectiveGapicGeneration message.
-                 * @function verify
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                SelectiveGapicGeneration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
-                        if (!Array.isArray(message.methods))
-                            return "methods: array expected";
-                        for (var i = 0; i < message.methods.length; ++i)
-                            if (!$util.isString(message.methods[i]))
-                                return "methods: string[] expected";
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        if (typeof message.generateOmittedAsInternal !== "boolean")
-                            return "generateOmittedAsInternal: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
-                        return object;
-                    var message = new $root.google.api.SelectiveGapicGeneration();
-                    if (object.methods) {
-                        if (!Array.isArray(object.methods))
-                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
-                        message.methods = [];
-                        for (var i = 0; i < object.methods.length; ++i)
-                            message.methods[i] = String(object.methods[i]);
-                    }
-                    if (object.generateOmittedAsInternal != null)
-                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.methods = [];
-                    if (options.defaults)
-                        object.generateOmittedAsInternal = false;
-                    if (message.methods && message.methods.length) {
-                        object.methods = [];
-                        for (var j = 0; j < message.methods.length; ++j)
-                            object.methods[j] = message.methods[j];
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
-                    return object;
-                };
-    
-                /**
-                 * Converts this SelectiveGapicGeneration to JSON.
-                 * @function toJSON
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for SelectiveGapicGeneration
-                 * @function getTypeUrl
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
-                };
-    
-                return SelectiveGapicGeneration;
-            })();
-    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -13750,7 +9271,6 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
-             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -13765,7 +9285,6 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
-                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -13790,7 +9309,6 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
-                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -13813,7 +9331,6 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
-                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -13863,14 +9380,6 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
-    
-                /**
-                 * FileDescriptorProto optionDependency.
-                 * @member {Array.<string>} optionDependency
-                 * @memberof google.protobuf.FileDescriptorProto
-                 * @instance
-                 */
-                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -13993,9 +9502,6 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
-                    if (message.optionDependency != null && message.optionDependency.length)
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -14066,12 +9572,6 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
-                                break;
-                            }
-                        case 15: {
-                                if (!(message.optionDependency && message.optionDependency.length))
-                                    message.optionDependency = [];
-                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -14176,13 +9676,6 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
-                        if (!Array.isArray(message.optionDependency))
-                            return "optionDependency: array expected";
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            if (!$util.isString(message.optionDependency[i]))
-                                return "optionDependency: string[] expected";
-                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -14237,7 +9730,6 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -14289,13 +9781,6 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
-                    }
-                    if (object.optionDependency) {
-                        if (!Array.isArray(object.optionDependency))
-                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
-                        message.optionDependency = [];
-                        for (var i = 0; i < object.optionDependency.length; ++i)
-                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -14359,10 +9844,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -14429,7 +9910,6 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
-                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -14486,11 +9966,6 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                    if (message.optionDependency && message.optionDependency.length) {
-                        object.optionDependency = [];
-                        for (var j = 0; j < message.optionDependency.length; ++j)
-                            object.optionDependency[j] = message.optionDependency[j];
-                    }
                     return object;
                 };
     
@@ -14539,7 +10014,6 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -14646,14 +10120,6 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * DescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.DescriptorProto
-                 * @instance
-                 */
-                DescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -14705,8 +10171,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -14797,10 +10261,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 11: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -14916,15 +10376,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -15024,26 +10475,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -15073,7 +10504,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -15119,8 +10549,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -17165,7 +12593,6 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -17227,14 +12654,6 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * EnumDescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.EnumDescriptorProto
-                 * @instance
-                 */
-                EnumDescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -17271,8 +12690,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -17333,10 +12750,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -17407,15 +12820,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -17465,26 +12869,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -17509,7 +12893,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -17530,8 +12913,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -19850,7 +15231,6 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -19972,14 +15352,6 @@
                 FieldOptions.prototype.features = null;
     
                 /**
-                 * FieldOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.featureSupport = null;
-    
-                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -20053,8 +15425,6 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -20154,10 +15524,6 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -20294,11 +15660,6 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
-                    }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -20488,11 +15849,6 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -20590,7 +15946,6 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
-                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -20623,8 +15978,6 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -20897,7 +16250,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -20938,10 +16290,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -21040,488 +16388,6 @@
                     };
     
                     return EditionDefault;
-                })();
-    
-                FieldOptions.FeatureSupport = (function() {
-    
-                    /**
-                     * Properties of a FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IFeatureSupport
-                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
-                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
-                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
-                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
-                     */
-    
-                    /**
-                     * Constructs a new FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents a FeatureSupport.
-                     * @implements IFeatureSupport
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     */
-                    function FeatureSupport(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * FeatureSupport editionIntroduced.
-                     * @member {google.protobuf.Edition} editionIntroduced
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionIntroduced = 0;
-    
-                    /**
-                     * FeatureSupport editionDeprecated.
-                     * @member {google.protobuf.Edition} editionDeprecated
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionDeprecated = 0;
-    
-                    /**
-                     * FeatureSupport deprecationWarning.
-                     * @member {string} deprecationWarning
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.deprecationWarning = "";
-    
-                    /**
-                     * FeatureSupport editionRemoved.
-                     * @member {google.protobuf.Edition} editionRemoved
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionRemoved = 0;
-    
-                    /**
-                     * Creates a new FeatureSupport instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
-                     */
-                    FeatureSupport.create = function create(properties) {
-                        return new FeatureSupport(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
-                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
-                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
-                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.editionIntroduced = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.editionDeprecated = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.deprecationWarning = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.editionRemoved = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a FeatureSupport message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    FeatureSupport.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            switch (message.editionIntroduced) {
-                            default:
-                                return "editionIntroduced: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            switch (message.editionDeprecated) {
-                            default:
-                                return "editionDeprecated: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            if (!$util.isString(message.deprecationWarning))
-                                return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            switch (message.editionRemoved) {
-                            default:
-                                return "editionRemoved: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     */
-                    FeatureSupport.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        switch (object.editionIntroduced) {
-                        default:
-                            if (typeof object.editionIntroduced === "number") {
-                                message.editionIntroduced = object.editionIntroduced;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionIntroduced = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionIntroduced = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionIntroduced = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionIntroduced = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionIntroduced = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionIntroduced = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionIntroduced = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionIntroduced = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionIntroduced = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionIntroduced = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionIntroduced = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionIntroduced = 2147483647;
-                            break;
-                        }
-                        switch (object.editionDeprecated) {
-                        default:
-                            if (typeof object.editionDeprecated === "number") {
-                                message.editionDeprecated = object.editionDeprecated;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionDeprecated = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionDeprecated = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionDeprecated = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionDeprecated = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionDeprecated = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionDeprecated = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionDeprecated = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionDeprecated = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionDeprecated = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionDeprecated = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionDeprecated = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionDeprecated = 2147483647;
-                            break;
-                        }
-                        if (object.deprecationWarning != null)
-                            message.deprecationWarning = String(object.deprecationWarning);
-                        switch (object.editionRemoved) {
-                        default:
-                            if (typeof object.editionRemoved === "number") {
-                                message.editionRemoved = object.editionRemoved;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionRemoved = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionRemoved = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionRemoved = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionRemoved = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionRemoved = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionRemoved = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionRemoved = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionRemoved = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionRemoved = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionRemoved = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionRemoved = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionRemoved = 2147483647;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    FeatureSupport.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.deprecationWarning = "";
-                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                        }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this FeatureSupport to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    FeatureSupport.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for FeatureSupport
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
-                    };
-    
-                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -22116,7 +16982,6 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -22161,14 +17026,6 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
-                 * EnumValueOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.featureSupport = null;
-    
-                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -22206,8 +17063,6 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -22257,10 +17112,6 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -22315,11 +17166,6 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -22353,11 +17199,6 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -22390,7 +17231,6 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
-                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -22398,8 +17238,6 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -23839,8 +18677,6 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
-                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -23907,22 +18743,6 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
-                 * FeatureSet enforceNamingStyle.
-                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enforceNamingStyle = 0;
-    
-                /**
-                 * FeatureSet defaultSymbolVisibility.
-                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.defaultSymbolVisibility = 0;
-    
-                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -23958,10 +18778,6 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
-                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -24020,14 +18836,6 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 7: {
-                                message.enforceNamingStyle = reader.int32();
-                                break;
-                            }
-                        case 8: {
-                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -24118,26 +18926,6 @@
                         case 0:
                         case 1:
                         case 2:
-                            break;
-                        }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        switch (message.enforceNamingStyle) {
-                        default:
-                            return "enforceNamingStyle: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        switch (message.defaultSymbolVisibility) {
-                        default:
-                            return "defaultSymbolVisibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
                             break;
                         }
                     return null;
@@ -24279,54 +19067,6 @@
                         message.jsonFormat = 2;
                         break;
                     }
-                    switch (object.enforceNamingStyle) {
-                    default:
-                        if (typeof object.enforceNamingStyle === "number") {
-                            message.enforceNamingStyle = object.enforceNamingStyle;
-                            break;
-                        }
-                        break;
-                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-                    case 0:
-                        message.enforceNamingStyle = 0;
-                        break;
-                    case "STYLE2024":
-                    case 1:
-                        message.enforceNamingStyle = 1;
-                        break;
-                    case "STYLE_LEGACY":
-                    case 2:
-                        message.enforceNamingStyle = 2;
-                        break;
-                    }
-                    switch (object.defaultSymbolVisibility) {
-                    default:
-                        if (typeof object.defaultSymbolVisibility === "number") {
-                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
-                            break;
-                        }
-                        break;
-                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-                    case 0:
-                        message.defaultSymbolVisibility = 0;
-                        break;
-                    case "EXPORT_ALL":
-                    case 1:
-                        message.defaultSymbolVisibility = 1;
-                        break;
-                    case "EXPORT_TOP_LEVEL":
-                    case 2:
-                        message.defaultSymbolVisibility = 2;
-                        break;
-                    case "LOCAL_ALL":
-                    case 3:
-                        message.defaultSymbolVisibility = 3;
-                        break;
-                    case "STRICT":
-                    case 4:
-                        message.defaultSymbolVisibility = 4;
-                        break;
-                    }
                     return message;
                 };
     
@@ -24350,8 +19090,6 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
-                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -24365,10 +19103,6 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -24494,219 +19228,6 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
-                })();
-    
-                /**
-                 * EnforceNamingStyle enum.
-                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
-                 * @enum {number}
-                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
-                 * @property {number} STYLE2024=1 STYLE2024 value
-                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
-                 */
-                FeatureSet.EnforceNamingStyle = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "STYLE2024"] = 1;
-                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
-                    return values;
-                })();
-    
-                FeatureSet.VisibilityFeature = (function() {
-    
-                    /**
-                     * Properties of a VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @interface IVisibilityFeature
-                     */
-    
-                    /**
-                     * Constructs a new VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @classdesc Represents a VisibilityFeature.
-                     * @implements IVisibilityFeature
-                     * @constructor
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     */
-                    function VisibilityFeature(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Creates a new VisibilityFeature instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
-                     */
-                    VisibilityFeature.create = function create(properties) {
-                        return new VisibilityFeature(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a VisibilityFeature message.
-                     * @function verify
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    VisibilityFeature.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     */
-                    VisibilityFeature.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
-                            return object;
-                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                    };
-    
-                    /**
-                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    VisibilityFeature.toObject = function toObject() {
-                        return {};
-                    };
-    
-                    /**
-                     * Converts this VisibilityFeature to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    VisibilityFeature.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for VisibilityFeature
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
-                    };
-    
-                    /**
-                     * DefaultSymbolVisibility enum.
-                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
-                     * @enum {number}
-                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
-                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
-                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
-                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
-                     * @property {number} STRICT=4 STRICT value
-                     */
-                    VisibilityFeature.DefaultSymbolVisibility = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
-                        values[valuesById[1] = "EXPORT_ALL"] = 1;
-                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
-                        values[valuesById[3] = "LOCAL_ALL"] = 3;
-                        values[valuesById[4] = "STRICT"] = 4;
-                        return values;
-                    })();
-    
-                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -24893,7 +19414,6 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -24911,7 +19431,6 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -24959,10 +19478,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -25015,10 +19530,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -25128,8 +19639,7 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
-                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
                      */
     
                     /**
@@ -25156,20 +19666,12 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault overridableFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
-    
-                    /**
-                     * FeatureSetEditionDefault fixedFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
-                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
-                     * @instance
-                     */
-                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
+                    FeatureSetEditionDefault.prototype.features = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -25195,12 +19697,10 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
-                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -25241,12 +19741,8 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -25289,7 +19785,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -25302,15 +19797,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
                             if (error)
-                                return "overridableFeatures." + error;
-                        }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
-                            if (error)
-                                return "fixedFeatures." + error;
+                                return "features." + error;
                         }
                         return null;
                     };
@@ -25337,10 +19827,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -25383,15 +19869,10 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
-                        }
-                        if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                         }
                         return message;
                     };
@@ -25410,16 +19891,13 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
+                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.overridableFeatures = null;
-                            object.fixedFeatures = null;
                         }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -26632,22 +21110,6 @@
                 })();
     
                 return GeneratedCodeInfo;
-            })();
-    
-            /**
-             * SymbolVisibility enum.
-             * @name google.protobuf.SymbolVisibility
-             * @enum {number}
-             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
-             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
-             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
-             */
-            protobuf.SymbolVisibility = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
-                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
-                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
-                return values;
             })();
     
             protobuf.Duration = (function() {

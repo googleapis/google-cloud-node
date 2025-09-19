@@ -1,1195 +1,1195 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-oracledatabase",
-        "version": "0.6.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.oracledatabase.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListCloudExadataInfrastructures_async",
-            "title": "OracleDatabase listCloudExadataInfrastructures Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Exadata Infrastructures in a given project and location.",
-            "canonical": true,
-            "file": "oracle_database.list_cloud_exadata_infrastructures.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCloudExadataInfrastructures",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudExadataInfrastructures",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListCloudExadataInfrastructures",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudExadataInfrastructures",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_GetCloudExadataInfrastructure_async",
-            "title": "OracleDatabase getCloudExadataInfrastructure Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Exadata Infrastructure.",
-            "canonical": true,
-            "file": "oracle_database.get_cloud_exadata_infrastructure.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCloudExadataInfrastructure",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudExadataInfrastructure",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.CloudExadataInfrastructure",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "GetCloudExadataInfrastructure",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudExadataInfrastructure",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_CreateCloudExadataInfrastructure_async",
-            "title": "OracleDatabase createCloudExadataInfrastructure Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Exadata Infrastructure in a given project and location.",
-            "canonical": true,
-            "file": "oracle_database.create_cloud_exadata_infrastructure.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCloudExadataInfrastructure",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudExadataInfrastructure",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cloud_exadata_infrastructure_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cloud_exadata_infrastructure",
-                        "type": ".google.cloud.oracledatabase.v1.CloudExadataInfrastructure"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "CreateCloudExadataInfrastructure",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudExadataInfrastructure",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_DeleteCloudExadataInfrastructure_async",
-            "title": "OracleDatabase deleteCloudExadataInfrastructure Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Exadata Infrastructure.",
-            "canonical": true,
-            "file": "oracle_database.delete_cloud_exadata_infrastructure.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteCloudExadataInfrastructure",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudExadataInfrastructure",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "DeleteCloudExadataInfrastructure",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudExadataInfrastructure",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListCloudVmClusters_async",
-            "title": "OracleDatabase listCloudVmClusters Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the VM Clusters in a given project and location.",
-            "canonical": true,
-            "file": "oracle_database.list_cloud_vm_clusters.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCloudVmClusters",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudVmClusters",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListCloudVmClustersResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListCloudVmClusters",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudVmClusters",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_GetCloudVmCluster_async",
-            "title": "OracleDatabase getCloudVmCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single VM Cluster.",
-            "canonical": true,
-            "file": "oracle_database.get_cloud_vm_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCloudVmCluster",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudVmCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.CloudVmCluster",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "GetCloudVmCluster",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudVmCluster",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_CreateCloudVmCluster_async",
-            "title": "OracleDatabase createCloudVmCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new VM Cluster in a given project and location.",
-            "canonical": true,
-            "file": "oracle_database.create_cloud_vm_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCloudVmCluster",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudVmCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cloud_vm_cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cloud_vm_cluster",
-                        "type": ".google.cloud.oracledatabase.v1.CloudVmCluster"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "CreateCloudVmCluster",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudVmCluster",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_DeleteCloudVmCluster_async",
-            "title": "OracleDatabase deleteCloudVmCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single VM Cluster.",
-            "canonical": true,
-            "file": "oracle_database.delete_cloud_vm_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteCloudVmCluster",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudVmCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "DeleteCloudVmCluster",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudVmCluster",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListEntitlements_async",
-            "title": "OracleDatabase listEntitlements Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the entitlements in a given project.",
-            "canonical": true,
-            "file": "oracle_database.list_entitlements.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListEntitlements",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListEntitlements",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListEntitlementsResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListEntitlements",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListEntitlements",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListDbServers_async",
-            "title": "OracleDatabase listDbServers Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the database servers of an Exadata Infrastructure instance.",
-            "canonical": true,
-            "file": "oracle_database.list_db_servers.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDbServers",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbServers",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListDbServersResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListDbServers",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbServers",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListDbNodes_async",
-            "title": "OracleDatabase listDbNodes Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the database nodes of a VM Cluster.",
-            "canonical": true,
-            "file": "oracle_database.list_db_nodes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDbNodes",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbNodes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListDbNodesResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListDbNodes",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbNodes",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListGiVersions_async",
-            "title": "OracleDatabase listGiVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all the valid Oracle Grid Infrastructure (GI) versions for the given project and location.",
-            "canonical": true,
-            "file": "oracle_database.list_gi_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListGiVersions",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListGiVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListGiVersionsResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListGiVersions",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListGiVersions",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListDbSystemShapes_async",
-            "title": "OracleDatabase listDbSystemShapes Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the database system shapes available for the project and location.",
-            "canonical": true,
-            "file": "oracle_database.list_db_system_shapes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDbSystemShapes",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbSystemShapes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListDbSystemShapesResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListDbSystemShapes",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbSystemShapes",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabases_async",
-            "title": "OracleDatabase listAutonomousDatabases Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the Autonomous Databases in a given project and location.",
-            "canonical": true,
-            "file": "oracle_database.list_autonomous_databases.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAutonomousDatabases",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabases",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDatabasesResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListAutonomousDatabases",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabases",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabase_async",
-            "title": "OracleDatabase getAutonomousDatabase Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a single Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.get_autonomous_database.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAutonomousDatabase",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetAutonomousDatabase",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.AutonomousDatabase",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "GetAutonomousDatabase",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetAutonomousDatabase",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_CreateAutonomousDatabase_async",
-            "title": "OracleDatabase createAutonomousDatabase Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Autonomous Database in a given project and location.",
-            "canonical": true,
-            "file": "oracle_database.create_autonomous_database.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAutonomousDatabase",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateAutonomousDatabase",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "autonomous_database_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "autonomous_database",
-                        "type": ".google.cloud.oracledatabase.v1.AutonomousDatabase"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "CreateAutonomousDatabase",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateAutonomousDatabase",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_DeleteAutonomousDatabase_async",
-            "title": "OracleDatabase deleteAutonomousDatabase Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.delete_autonomous_database.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAutonomousDatabase",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteAutonomousDatabase",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "DeleteAutonomousDatabase",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteAutonomousDatabase",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_RestoreAutonomousDatabase_async",
-            "title": "OracleDatabase restoreAutonomousDatabase Sample",
-            "origin": "API_DEFINITION",
-            "description": " Restores a single Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.restore_autonomous_database.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RestoreAutonomousDatabase",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestoreAutonomousDatabase",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "restore_time",
-                        "type": ".google.protobuf.Timestamp"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "RestoreAutonomousDatabase",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestoreAutonomousDatabase",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_GenerateAutonomousDatabaseWallet_async",
-            "title": "OracleDatabase generateAutonomousDatabaseWallet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Generates a wallet for an Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.generate_autonomous_database_wallet.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GenerateAutonomousDatabaseWallet",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GenerateAutonomousDatabaseWallet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "type",
-                        "type": ".google.cloud.oracledatabase.v1.GenerateType"
-                    },
-                    {
-                        "name": "is_regional",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "password",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "GenerateAutonomousDatabaseWallet",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GenerateAutonomousDatabaseWallet",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDbVersions_async",
-            "title": "OracleDatabase listAutonomousDbVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all the available Autonomous Database versions for a project and location.",
-            "canonical": true,
-            "file": "oracle_database.list_autonomous_db_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAutonomousDbVersions",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDbVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDbVersionsResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListAutonomousDbVersions",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDbVersions",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseCharacterSets_async",
-            "title": "OracleDatabase listAutonomousDatabaseCharacterSets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Autonomous Database Character Sets in a given project and location.",
-            "canonical": true,
-            "file": "oracle_database.list_autonomous_database_character_sets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAutonomousDatabaseCharacterSets",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseCharacterSets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListAutonomousDatabaseCharacterSets",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseCharacterSets",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseBackups_async",
-            "title": "OracleDatabase listAutonomousDatabaseBackups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the long-term and automatic backups of an Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.list_autonomous_database_backups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAutonomousDatabaseBackups",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseBackups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsResponse",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "ListAutonomousDatabaseBackups",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseBackups",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async",
-            "title": "OracleDatabase stopAutonomousDatabase Sample",
-            "origin": "API_DEFINITION",
-            "description": " Stops an Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.stop_autonomous_database.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StopAutonomousDatabase",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StopAutonomousDatabase",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "StopAutonomousDatabase",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StopAutonomousDatabase",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async",
-            "title": "OracleDatabase startAutonomousDatabase Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts an Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.start_autonomous_database.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StartAutonomousDatabase",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StartAutonomousDatabase",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "StartAutonomousDatabase",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StartAutonomousDatabase",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async",
-            "title": "OracleDatabase restartAutonomousDatabase Sample",
-            "origin": "API_DEFINITION",
-            "description": " Restarts an Autonomous Database.",
-            "canonical": true,
-            "file": "oracle_database.restart_autonomous_database.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RestartAutonomousDatabase",
-                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestartAutonomousDatabase",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OracleDatabaseClient",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
-                },
-                "method": {
-                    "shortName": "RestartAutonomousDatabase",
-                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestartAutonomousDatabase",
-                    "service": {
-                        "shortName": "OracleDatabase",
-                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-oracledatabase",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.oracledatabase.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListCloudExadataInfrastructures_async",
+      "title": "OracleDatabase listCloudExadataInfrastructures Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Exadata Infrastructures in a given project and location.",
+      "canonical": true,
+      "file": "oracle_database.list_cloud_exadata_infrastructures.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCloudExadataInfrastructures",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudExadataInfrastructures",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListCloudExadataInfrastructures",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudExadataInfrastructures",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_GetCloudExadataInfrastructure_async",
+      "title": "OracleDatabase getCloudExadataInfrastructure Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Exadata Infrastructure.",
+      "canonical": true,
+      "file": "oracle_database.get_cloud_exadata_infrastructure.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCloudExadataInfrastructure",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudExadataInfrastructure",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.CloudExadataInfrastructure",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "GetCloudExadataInfrastructure",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudExadataInfrastructure",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_CreateCloudExadataInfrastructure_async",
+      "title": "OracleDatabase createCloudExadataInfrastructure Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Exadata Infrastructure in a given project and location.",
+      "canonical": true,
+      "file": "oracle_database.create_cloud_exadata_infrastructure.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCloudExadataInfrastructure",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudExadataInfrastructure",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_exadata_infrastructure_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_exadata_infrastructure",
+            "type": ".google.cloud.oracledatabase.v1.CloudExadataInfrastructure"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "CreateCloudExadataInfrastructure",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudExadataInfrastructure",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_DeleteCloudExadataInfrastructure_async",
+      "title": "OracleDatabase deleteCloudExadataInfrastructure Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Exadata Infrastructure.",
+      "canonical": true,
+      "file": "oracle_database.delete_cloud_exadata_infrastructure.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCloudExadataInfrastructure",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudExadataInfrastructure",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "DeleteCloudExadataInfrastructure",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudExadataInfrastructure",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListCloudVmClusters_async",
+      "title": "OracleDatabase listCloudVmClusters Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the VM Clusters in a given project and location.",
+      "canonical": true,
+      "file": "oracle_database.list_cloud_vm_clusters.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCloudVmClusters",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudVmClusters",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListCloudVmClustersResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListCloudVmClusters",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListCloudVmClusters",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_GetCloudVmCluster_async",
+      "title": "OracleDatabase getCloudVmCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single VM Cluster.",
+      "canonical": true,
+      "file": "oracle_database.get_cloud_vm_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCloudVmCluster",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudVmCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.CloudVmCluster",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "GetCloudVmCluster",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetCloudVmCluster",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_CreateCloudVmCluster_async",
+      "title": "OracleDatabase createCloudVmCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new VM Cluster in a given project and location.",
+      "canonical": true,
+      "file": "oracle_database.create_cloud_vm_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCloudVmCluster",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudVmCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_vm_cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_vm_cluster",
+            "type": ".google.cloud.oracledatabase.v1.CloudVmCluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "CreateCloudVmCluster",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateCloudVmCluster",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_DeleteCloudVmCluster_async",
+      "title": "OracleDatabase deleteCloudVmCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single VM Cluster.",
+      "canonical": true,
+      "file": "oracle_database.delete_cloud_vm_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCloudVmCluster",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudVmCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "DeleteCloudVmCluster",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteCloudVmCluster",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListEntitlements_async",
+      "title": "OracleDatabase listEntitlements Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the entitlements in a given project.",
+      "canonical": true,
+      "file": "oracle_database.list_entitlements.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEntitlements",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListEntitlements",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListEntitlementsResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListEntitlements",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListEntitlements",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListDbServers_async",
+      "title": "OracleDatabase listDbServers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the database servers of an Exadata Infrastructure instance.",
+      "canonical": true,
+      "file": "oracle_database.list_db_servers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDbServers",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbServers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListDbServersResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListDbServers",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbServers",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListDbNodes_async",
+      "title": "OracleDatabase listDbNodes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the database nodes of a VM Cluster.",
+      "canonical": true,
+      "file": "oracle_database.list_db_nodes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDbNodes",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbNodes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListDbNodesResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListDbNodes",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbNodes",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListGiVersions_async",
+      "title": "OracleDatabase listGiVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the valid Oracle Grid Infrastructure (GI) versions for the given project and location.",
+      "canonical": true,
+      "file": "oracle_database.list_gi_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGiVersions",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListGiVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListGiVersionsResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListGiVersions",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListGiVersions",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListDbSystemShapes_async",
+      "title": "OracleDatabase listDbSystemShapes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the database system shapes available for the project and location.",
+      "canonical": true,
+      "file": "oracle_database.list_db_system_shapes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDbSystemShapes",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbSystemShapes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListDbSystemShapesResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListDbSystemShapes",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListDbSystemShapes",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabases_async",
+      "title": "OracleDatabase listAutonomousDatabases Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Autonomous Databases in a given project and location.",
+      "canonical": true,
+      "file": "oracle_database.list_autonomous_databases.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAutonomousDatabases",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabases",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDatabasesResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListAutonomousDatabases",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabases",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabase_async",
+      "title": "OracleDatabase getAutonomousDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a single Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.get_autonomous_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAutonomousDatabase",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetAutonomousDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.AutonomousDatabase",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "GetAutonomousDatabase",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GetAutonomousDatabase",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_CreateAutonomousDatabase_async",
+      "title": "OracleDatabase createAutonomousDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Autonomous Database in a given project and location.",
+      "canonical": true,
+      "file": "oracle_database.create_autonomous_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAutonomousDatabase",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateAutonomousDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "autonomous_database_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "autonomous_database",
+            "type": ".google.cloud.oracledatabase.v1.AutonomousDatabase"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "CreateAutonomousDatabase",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.CreateAutonomousDatabase",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_DeleteAutonomousDatabase_async",
+      "title": "OracleDatabase deleteAutonomousDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.delete_autonomous_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAutonomousDatabase",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteAutonomousDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "DeleteAutonomousDatabase",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.DeleteAutonomousDatabase",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_RestoreAutonomousDatabase_async",
+      "title": "OracleDatabase restoreAutonomousDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restores a single Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.restore_autonomous_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreAutonomousDatabase",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestoreAutonomousDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "restore_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "RestoreAutonomousDatabase",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestoreAutonomousDatabase",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_GenerateAutonomousDatabaseWallet_async",
+      "title": "OracleDatabase generateAutonomousDatabaseWallet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates a wallet for an Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.generate_autonomous_database_wallet.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateAutonomousDatabaseWallet",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GenerateAutonomousDatabaseWallet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "type",
+            "type": ".google.cloud.oracledatabase.v1.GenerateType"
+          },
+          {
+            "name": "is_regional",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "password",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "GenerateAutonomousDatabaseWallet",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.GenerateAutonomousDatabaseWallet",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDbVersions_async",
+      "title": "OracleDatabase listAutonomousDbVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the available Autonomous Database versions for a project and location.",
+      "canonical": true,
+      "file": "oracle_database.list_autonomous_db_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAutonomousDbVersions",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDbVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDbVersionsResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListAutonomousDbVersions",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDbVersions",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseCharacterSets_async",
+      "title": "OracleDatabase listAutonomousDatabaseCharacterSets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Autonomous Database Character Sets in a given project and location.",
+      "canonical": true,
+      "file": "oracle_database.list_autonomous_database_character_sets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAutonomousDatabaseCharacterSets",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseCharacterSets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListAutonomousDatabaseCharacterSets",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseCharacterSets",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseBackups_async",
+      "title": "OracleDatabase listAutonomousDatabaseBackups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the long-term and automatic backups of an Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.list_autonomous_database_backups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAutonomousDatabaseBackups",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseBackups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsResponse",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "ListAutonomousDatabaseBackups",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.ListAutonomousDatabaseBackups",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async",
+      "title": "OracleDatabase stopAutonomousDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stops an Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.stop_autonomous_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StopAutonomousDatabase",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StopAutonomousDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "StopAutonomousDatabase",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StopAutonomousDatabase",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async",
+      "title": "OracleDatabase startAutonomousDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts an Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.start_autonomous_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartAutonomousDatabase",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StartAutonomousDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "StartAutonomousDatabase",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StartAutonomousDatabase",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async",
+      "title": "OracleDatabase restartAutonomousDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restarts an Autonomous Database.",
+      "canonical": true,
+      "file": "oracle_database.restart_autonomous_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestartAutonomousDatabase",
+        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestartAutonomousDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OracleDatabaseClient",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+        },
+        "method": {
+          "shortName": "RestartAutonomousDatabase",
+          "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestartAutonomousDatabase",
+          "service": {
+            "shortName": "OracleDatabase",
+            "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      }
+    }
+  ]
 }

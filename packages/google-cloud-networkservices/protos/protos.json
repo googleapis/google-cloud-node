@@ -6183,1262 +6183,6 @@
                       }
                     }
                   }
-                },
-                "v1beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.NetworkServices.V1Beta1",
-                    "go_package": "cloud.google.com/go/networkservices/apiv1beta1/networkservicespb;networkservicespb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "EndpointPolicyProto",
-                    "java_package": "com.google.cloud.networkservices.v1beta1",
-                    "php_namespace": "Google\\Cloud\\NetworkServices\\V1beta1",
-                    "ruby_package": "Google::Cloud::NetworkServices::V1beta1",
-                    "(google.api.resource_definition).type": "networksecurity.googleapis.com/ClientTlsPolicy",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}"
-                  },
-                  "nested": {
-                    "OperationMetadata": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "target": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "verb": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "statusMessage": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "requestedCancellation": {
-                          "type": "bool",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "apiVersion": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "TrafficPortSelector": {
-                      "fields": {
-                        "ports": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "EndpointMatcher": {
-                      "oneofs": {
-                        "matcherType": {
-                          "oneof": [
-                            "metadataLabelMatcher"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "metadataLabelMatcher": {
-                          "type": "MetadataLabelMatcher",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "MetadataLabelMatcher": {
-                          "fields": {
-                            "metadataLabelMatchCriteria": {
-                              "type": "MetadataLabelMatchCriteria",
-                              "id": 1
-                            },
-                            "metadataLabels": {
-                              "rule": "repeated",
-                              "type": "MetadataLabels",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "MetadataLabels": {
-                              "fields": {
-                                "labelName": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "labelValue": {
-                                  "type": "string",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                }
-                              }
-                            },
-                            "MetadataLabelMatchCriteria": {
-                              "values": {
-                                "METADATA_LABEL_MATCH_CRITERIA_UNSPECIFIED": 0,
-                                "MATCH_ANY": 1,
-                                "MATCH_ALL": 2
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "DepService": {
-                      "options": {
-                        "(google.api.default_host)": "networkservices.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "ListLbTrafficExtensions": {
-                          "requestType": "ListLbTrafficExtensionsRequest",
-                          "responseType": "ListLbTrafficExtensionsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/lbTrafficExtensions",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*/locations/*}/lbTrafficExtensions"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetLbTrafficExtension": {
-                          "requestType": "GetLbTrafficExtensionRequest",
-                          "responseType": "LbTrafficExtension",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/lbTrafficExtensions/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/locations/*/lbTrafficExtensions/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "CreateLbTrafficExtension": {
-                          "requestType": "CreateLbTrafficExtensionRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/lbTrafficExtensions",
-                            "(google.api.http).body": "lb_traffic_extension",
-                            "(google.api.method_signature)": "parent,lb_traffic_extension,lb_traffic_extension_id",
-                            "(google.longrunning.operation_info).response_type": "LbTrafficExtension",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=projects/*/locations/*}/lbTrafficExtensions",
-                                "body": "lb_traffic_extension"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,lb_traffic_extension,lb_traffic_extension_id"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "LbTrafficExtension",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateLbTrafficExtension": {
-                          "requestType": "UpdateLbTrafficExtensionRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{lb_traffic_extension.name=projects/*/locations/*/lbTrafficExtensions/*}",
-                            "(google.api.http).body": "lb_traffic_extension",
-                            "(google.api.method_signature)": "lb_traffic_extension,update_mask",
-                            "(google.longrunning.operation_info).response_type": "LbTrafficExtension",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{lb_traffic_extension.name=projects/*/locations/*/lbTrafficExtensions/*}",
-                                "body": "lb_traffic_extension"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "lb_traffic_extension,update_mask"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "LbTrafficExtension",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteLbTrafficExtension": {
-                          "requestType": "DeleteLbTrafficExtensionRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/lbTrafficExtensions/*}",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=projects/*/locations/*/lbTrafficExtensions/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ListLbRouteExtensions": {
-                          "requestType": "ListLbRouteExtensionsRequest",
-                          "responseType": "ListLbRouteExtensionsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/lbRouteExtensions",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*/locations/*}/lbRouteExtensions"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetLbRouteExtension": {
-                          "requestType": "GetLbRouteExtensionRequest",
-                          "responseType": "LbRouteExtension",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/lbRouteExtensions/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/locations/*/lbRouteExtensions/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "CreateLbRouteExtension": {
-                          "requestType": "CreateLbRouteExtensionRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/lbRouteExtensions",
-                            "(google.api.http).body": "lb_route_extension",
-                            "(google.api.method_signature)": "parent,lb_route_extension,lb_route_extension_id",
-                            "(google.longrunning.operation_info).response_type": "LbRouteExtension",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=projects/*/locations/*}/lbRouteExtensions",
-                                "body": "lb_route_extension"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,lb_route_extension,lb_route_extension_id"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "LbRouteExtension",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateLbRouteExtension": {
-                          "requestType": "UpdateLbRouteExtensionRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{lb_route_extension.name=projects/*/locations/*/lbRouteExtensions/*}",
-                            "(google.api.http).body": "lb_route_extension",
-                            "(google.api.method_signature)": "lb_route_extension,update_mask",
-                            "(google.longrunning.operation_info).response_type": "LbRouteExtension",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{lb_route_extension.name=projects/*/locations/*/lbRouteExtensions/*}",
-                                "body": "lb_route_extension"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "lb_route_extension,update_mask"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "LbRouteExtension",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteLbRouteExtension": {
-                          "requestType": "DeleteLbRouteExtensionRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/lbRouteExtensions/*}",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=projects/*/locations/*/lbRouteExtensions/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "EventType": {
-                      "values": {
-                        "EVENT_TYPE_UNSPECIFIED": 0,
-                        "REQUEST_HEADERS": 1,
-                        "REQUEST_BODY": 2,
-                        "RESPONSE_HEADERS": 3,
-                        "RESPONSE_BODY": 4,
-                        "REQUEST_TRAILERS": 5,
-                        "RESPONSE_TRAILERS": 6
-                      }
-                    },
-                    "LoadBalancingScheme": {
-                      "values": {
-                        "LOAD_BALANCING_SCHEME_UNSPECIFIED": 0,
-                        "INTERNAL_MANAGED": 1,
-                        "EXTERNAL_MANAGED": 2
-                      }
-                    },
-                    "ExtensionChain": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "matchCondition": {
-                          "type": "MatchCondition",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "extensions": {
-                          "rule": "repeated",
-                          "type": "Extension",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "MatchCondition": {
-                          "fields": {
-                            "celExpression": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "Extension": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "authority": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "service": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "supportedEvents": {
-                              "rule": "repeated",
-                              "type": "EventType",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "timeout": {
-                              "type": "google.protobuf.Duration",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "failOpen": {
-                              "type": "bool",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "forwardHeaders": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "LbTrafficExtension": {
-                      "options": {
-                        "(google.api.resource).type": "networkservices.googleapis.com/LbTrafficExtension",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}",
-                        "(google.api.resource).plural": "lbTrafficExtensions",
-                        "(google.api.resource).singular": "lbTrafficExtension"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "forwardingRules": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "extensionChains": {
-                          "rule": "repeated",
-                          "type": "ExtensionChain",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "loadBalancingScheme": {
-                          "type": "LoadBalancingScheme",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ListLbTrafficExtensionsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/LbTrafficExtension"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListLbTrafficExtensionsResponse": {
-                      "fields": {
-                        "lbTrafficExtensions": {
-                          "rule": "repeated",
-                          "type": "LbTrafficExtension",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetLbTrafficExtensionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkservices.googleapis.com/LbTrafficExtension"
-                          }
-                        }
-                      }
-                    },
-                    "CreateLbTrafficExtensionRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/LbTrafficExtension"
-                          }
-                        },
-                        "lbTrafficExtensionId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "lbTrafficExtension": {
-                          "type": "LbTrafficExtension",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateLbTrafficExtensionRequest": {
-                      "fields": {
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "lbTrafficExtension": {
-                          "type": "LbTrafficExtension",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteLbTrafficExtensionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkservices.googleapis.com/LbTrafficExtension"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "LbRouteExtension": {
-                      "options": {
-                        "(google.api.resource).type": "networkservices.googleapis.com/LbRouteExtension",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}",
-                        "(google.api.resource).plural": "lbRouteExtensions",
-                        "(google.api.resource).singular": "lbRouteExtension"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "forwardingRules": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "extensionChains": {
-                          "rule": "repeated",
-                          "type": "ExtensionChain",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "loadBalancingScheme": {
-                          "type": "LoadBalancingScheme",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ListLbRouteExtensionsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/LbRouteExtension"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListLbRouteExtensionsResponse": {
-                      "fields": {
-                        "lbRouteExtensions": {
-                          "rule": "repeated",
-                          "type": "LbRouteExtension",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetLbRouteExtensionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkservices.googleapis.com/LbRouteExtension"
-                          }
-                        }
-                      }
-                    },
-                    "CreateLbRouteExtensionRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/LbRouteExtension"
-                          }
-                        },
-                        "lbRouteExtensionId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "lbRouteExtension": {
-                          "type": "LbRouteExtension",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateLbRouteExtensionRequest": {
-                      "fields": {
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "lbRouteExtension": {
-                          "type": "LbRouteExtension",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteLbRouteExtensionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkservices.googleapis.com/LbRouteExtension"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_info).format": "UUID4",
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "EndpointPolicy": {
-                      "options": {
-                        "(google.api.resource).type": "networkservices.googleapis.com/EndpointPolicy",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/endpointPolicies/{endpoint_policy}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "type": {
-                          "type": "EndpointPolicyType",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "authorizationPolicy": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/AuthorizationPolicy"
-                          }
-                        },
-                        "endpointMatcher": {
-                          "type": "EndpointMatcher",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "trafficPortSelector": {
-                          "type": "TrafficPortSelector",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serverTlsPolicy": {
-                          "type": "string",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/ServerTlsPolicy"
-                          }
-                        },
-                        "clientTlsPolicy": {
-                          "type": "string",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/ClientTlsPolicy"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "EndpointPolicyType": {
-                          "values": {
-                            "ENDPOINT_POLICY_TYPE_UNSPECIFIED": 0,
-                            "SIDECAR_PROXY": 1,
-                            "GRPC_SERVER": 2
-                          }
-                        }
-                      }
-                    },
-                    "ListEndpointPoliciesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/EndpointPolicy"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListEndpointPoliciesResponse": {
-                      "fields": {
-                        "endpointPolicies": {
-                          "rule": "repeated",
-                          "type": "EndpointPolicy",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetEndpointPolicyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkservices.googleapis.com/EndpointPolicy"
-                          }
-                        }
-                      }
-                    },
-                    "CreateEndpointPolicyRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/EndpointPolicy"
-                          }
-                        },
-                        "endpointPolicyId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "endpointPolicy": {
-                          "type": "EndpointPolicy",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateEndpointPolicyRequest": {
-                      "fields": {
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "endpointPolicy": {
-                          "type": "EndpointPolicy",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteEndpointPolicyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkservices.googleapis.com/EndpointPolicy"
-                          }
-                        }
-                      }
-                    },
-                    "NetworkServices": {
-                      "options": {
-                        "(google.api.default_host)": "networkservices.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "ListEndpointPolicies": {
-                          "requestType": "ListEndpointPoliciesRequest",
-                          "responseType": "ListEndpointPoliciesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/endpointPolicies",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*/locations/*}/endpointPolicies"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetEndpointPolicy": {
-                          "requestType": "GetEndpointPolicyRequest",
-                          "responseType": "EndpointPolicy",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/endpointPolicies/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/locations/*/endpointPolicies/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "CreateEndpointPolicy": {
-                          "requestType": "CreateEndpointPolicyRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/endpointPolicies",
-                            "(google.api.http).body": "endpoint_policy",
-                            "(google.api.method_signature)": "parent,endpoint_policy,endpoint_policy_id",
-                            "(google.longrunning.operation_info).response_type": "EndpointPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1beta1.OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=projects/*/locations/*}/endpointPolicies",
-                                "body": "endpoint_policy"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,endpoint_policy,endpoint_policy_id"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "EndpointPolicy",
-                                "metadata_type": "google.cloud.networkservices.v1beta1.OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateEndpointPolicy": {
-                          "requestType": "UpdateEndpointPolicyRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{endpoint_policy.name=projects/*/locations/*/endpointPolicies/*}",
-                            "(google.api.http).body": "endpoint_policy",
-                            "(google.api.method_signature)": "endpoint_policy,update_mask",
-                            "(google.longrunning.operation_info).response_type": "EndpointPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1beta1.OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{endpoint_policy.name=projects/*/locations/*/endpointPolicies/*}",
-                                "body": "endpoint_policy"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "endpoint_policy,update_mask"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "EndpointPolicy",
-                                "metadata_type": "google.cloud.networkservices.v1beta1.OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteEndpointPolicy": {
-                          "requestType": "DeleteEndpointPolicyRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/endpointPolicies/*}",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1beta1.OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=projects/*/locations/*/endpointPolicies/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.protobuf.Empty",
-                                "metadata_type": "google.cloud.networkservices.v1beta1.OperationMetadata"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -7450,7 +6194,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "fieldBehavior": {
@@ -7596,10 +6341,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -7740,28 +6481,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -7819,11 +6538,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -7885,19 +6599,6 @@
                 "PACKAGE_MANAGER": 20
               }
             },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -7920,11 +6621,6 @@
                 "format": {
                   "type": "Format",
                   "id": 1
-                },
-                "referencedTypes": {
-                  "rule": "repeated",
-                  "type": "TypeReference",
-                  "id": 2
                 }
               },
               "nested": {
@@ -7936,14 +6632,6 @@
                     "IPV6": 3,
                     "IPV4_OR_IPV6": 4
                   }
-                }
-              }
-            },
-            "TypeReference": {
-              "fields": {
-                "typeName": {
-                  "type": "string",
-                  "id": 1
                 }
               }
             },
@@ -8045,19 +6733,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -8095,11 +6776,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -8189,10 +6865,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -8418,10 +7090,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -8636,7 +7304,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -8772,8 +7439,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -8800,10 +7466,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -8872,26 +7534,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -8981,10 +7623,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -9128,7 +7766,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -9139,7 +7776,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -9150,7 +7786,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -9161,7 +7796,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -9172,8 +7806,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -9183,38 +7816,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -9259,13 +7881,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -9279,33 +7895,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -9334,26 +7923,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -9366,12 +7940,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -9455,14 +8023,6 @@
                     }
                   }
                 }
-              }
-            },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
               }
             },
             "Timestamp": {
@@ -9586,7 +8146,6 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
-            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {

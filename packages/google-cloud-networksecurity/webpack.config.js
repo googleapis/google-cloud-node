@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'NetworkSecurity',
-    filename: './network-security.js',
+    library: 'AddressGroupService',
+    filename: './address-group-service.js',
   },
   node: {
     child_process: 'empty',
