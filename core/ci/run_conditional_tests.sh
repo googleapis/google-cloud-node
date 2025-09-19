@@ -77,6 +77,9 @@ subdirs=(
 
 RETVAL=0
 
+echo "npm install --ignore-scripts --engine-strict --prod --ws; npm install --ws"
+npm install --ignore-scripts --engine-strict --prod --ws; npm install --ws
+
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
         should_test=false
