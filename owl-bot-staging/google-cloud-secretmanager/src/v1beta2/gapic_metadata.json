@@ -1,0 +1,181 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.secretmanager.v1beta2",
+  "libraryPackage": "@google-cloud/secretmanager",
+  "services": {
+    "SecretManagerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SecretManagerServiceClient",
+          "rpcs": {
+            "CreateSecret": {
+              "methods": [
+                "createSecret"
+              ]
+            },
+            "AddSecretVersion": {
+              "methods": [
+                "addSecretVersion"
+              ]
+            },
+            "GetSecret": {
+              "methods": [
+                "getSecret"
+              ]
+            },
+            "UpdateSecret": {
+              "methods": [
+                "updateSecret"
+              ]
+            },
+            "DeleteSecret": {
+              "methods": [
+                "deleteSecret"
+              ]
+            },
+            "GetSecretVersion": {
+              "methods": [
+                "getSecretVersion"
+              ]
+            },
+            "AccessSecretVersion": {
+              "methods": [
+                "accessSecretVersion"
+              ]
+            },
+            "DisableSecretVersion": {
+              "methods": [
+                "disableSecretVersion"
+              ]
+            },
+            "EnableSecretVersion": {
+              "methods": [
+                "enableSecretVersion"
+              ]
+            },
+            "DestroySecretVersion": {
+              "methods": [
+                "destroySecretVersion"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListSecrets": {
+              "methods": [
+                "listSecrets",
+                "listSecretsStream",
+                "listSecretsAsync"
+              ]
+            },
+            "ListSecretVersions": {
+              "methods": [
+                "listSecretVersions",
+                "listSecretVersionsStream",
+                "listSecretVersionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SecretManagerServiceClient",
+          "rpcs": {
+            "CreateSecret": {
+              "methods": [
+                "createSecret"
+              ]
+            },
+            "AddSecretVersion": {
+              "methods": [
+                "addSecretVersion"
+              ]
+            },
+            "GetSecret": {
+              "methods": [
+                "getSecret"
+              ]
+            },
+            "UpdateSecret": {
+              "methods": [
+                "updateSecret"
+              ]
+            },
+            "DeleteSecret": {
+              "methods": [
+                "deleteSecret"
+              ]
+            },
+            "GetSecretVersion": {
+              "methods": [
+                "getSecretVersion"
+              ]
+            },
+            "AccessSecretVersion": {
+              "methods": [
+                "accessSecretVersion"
+              ]
+            },
+            "DisableSecretVersion": {
+              "methods": [
+                "disableSecretVersion"
+              ]
+            },
+            "EnableSecretVersion": {
+              "methods": [
+                "enableSecretVersion"
+              ]
+            },
+            "DestroySecretVersion": {
+              "methods": [
+                "destroySecretVersion"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListSecrets": {
+              "methods": [
+                "listSecrets",
+                "listSecretsStream",
+                "listSecretsAsync"
+              ]
+            },
+            "ListSecretVersions": {
+              "methods": [
+                "listSecretVersions",
+                "listSecretVersionsStream",
+                "listSecretVersionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
