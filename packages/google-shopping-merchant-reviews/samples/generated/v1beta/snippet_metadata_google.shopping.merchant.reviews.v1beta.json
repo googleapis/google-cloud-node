@@ -1,367 +1,367 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-reviews",
-        "version": "0.5.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.shopping.merchant.reviews.v1beta",
-                "version": "v1beta"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_GetMerchantReview_async",
-            "title": "MerchantReviewsService getMerchantReview Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a merchant review.",
-            "canonical": true,
-            "file": "merchant_reviews_service.get_merchant_review.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetMerchantReview",
-                "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.GetMerchantReview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.reviews.v1beta.MerchantReview",
-                "client": {
-                    "shortName": "MerchantReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetMerchantReview",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.GetMerchantReview",
-                    "service": {
-                        "shortName": "MerchantReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_ListMerchantReviews_async",
-            "title": "MerchantReviewsService listMerchantReviews Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists merchant reviews.",
-            "canonical": true,
-            "file": "merchant_reviews_service.list_merchant_reviews.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListMerchantReviews",
-                "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.ListMerchantReviews",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.reviews.v1beta.ListMerchantReviewsResponse",
-                "client": {
-                    "shortName": "MerchantReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListMerchantReviews",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.ListMerchantReviews",
-                    "service": {
-                        "shortName": "MerchantReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_InsertMerchantReview_async",
-            "title": "MerchantReviewsService insertMerchantReview Sample",
-            "origin": "API_DEFINITION",
-            "description": " Inserts a review for your Merchant Center account. If the review already exists, then the review is replaced with the new instance.",
-            "canonical": true,
-            "file": "merchant_reviews_service.insert_merchant_review.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "InsertMerchantReview",
-                "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.InsertMerchantReview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "merchant_review",
-                        "type": ".google.shopping.merchant.reviews.v1beta.MerchantReview"
-                    },
-                    {
-                        "name": "data_source",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.reviews.v1beta.MerchantReview",
-                "client": {
-                    "shortName": "MerchantReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "InsertMerchantReview",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.InsertMerchantReview",
-                    "service": {
-                        "shortName": "MerchantReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_DeleteMerchantReview_async",
-            "title": "MerchantReviewsService deleteMerchantReview Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes merchant review.",
-            "canonical": true,
-            "file": "merchant_reviews_service.delete_merchant_review.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteMerchantReview",
-                "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.DeleteMerchantReview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "MerchantReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteMerchantReview",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.DeleteMerchantReview",
-                    "service": {
-                        "shortName": "MerchantReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_GetProductReview_async",
-            "title": "MerchantReviewsService getProductReview Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a product review.",
-            "canonical": true,
-            "file": "product_reviews_service.get_product_review.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProductReview",
-                "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.GetProductReview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.reviews.v1beta.ProductReview",
-                "client": {
-                    "shortName": "ProductReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetProductReview",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.GetProductReview",
-                    "service": {
-                        "shortName": "ProductReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_ListProductReviews_async",
-            "title": "MerchantReviewsService listProductReviews Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists product reviews.",
-            "canonical": true,
-            "file": "product_reviews_service.list_product_reviews.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProductReviews",
-                "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.ListProductReviews",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.reviews.v1beta.ListProductReviewsResponse",
-                "client": {
-                    "shortName": "ProductReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListProductReviews",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.ListProductReviews",
-                    "service": {
-                        "shortName": "ProductReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_InsertProductReview_async",
-            "title": "MerchantReviewsService insertProductReview Sample",
-            "origin": "API_DEFINITION",
-            "description": " Inserts a product review.",
-            "canonical": true,
-            "file": "product_reviews_service.insert_product_review.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "InsertProductReview",
-                "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.InsertProductReview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "product_review",
-                        "type": ".google.shopping.merchant.reviews.v1beta.ProductReview"
-                    },
-                    {
-                        "name": "data_source",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.reviews.v1beta.ProductReview",
-                "client": {
-                    "shortName": "ProductReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "InsertProductReview",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.InsertProductReview",
-                    "service": {
-                        "shortName": "ProductReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_DeleteProductReview_async",
-            "title": "MerchantReviewsService deleteProductReview Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a product review.",
-            "canonical": true,
-            "file": "product_reviews_service.delete_product_review.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteProductReview",
-                "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.DeleteProductReview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ProductReviewsServiceClient",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteProductReview",
-                    "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.DeleteProductReview",
-                    "service": {
-                        "shortName": "ProductReviewsService",
-                        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-reviews",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.reviews.v1beta",
+        "version": "v1beta"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_GetMerchantReview_async",
+      "title": "MerchantReviewsService getMerchantReview Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a merchant review.",
+      "canonical": true,
+      "file": "merchant_reviews_service.get_merchant_review.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMerchantReview",
+        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.GetMerchantReview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.reviews.v1beta.MerchantReview",
+        "client": {
+          "shortName": "MerchantReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "GetMerchantReview",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.GetMerchantReview",
+          "service": {
+            "shortName": "MerchantReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_ListMerchantReviews_async",
+      "title": "MerchantReviewsService listMerchantReviews Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists merchant reviews.",
+      "canonical": true,
+      "file": "merchant_reviews_service.list_merchant_reviews.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMerchantReviews",
+        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.ListMerchantReviews",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.reviews.v1beta.ListMerchantReviewsResponse",
+        "client": {
+          "shortName": "MerchantReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "ListMerchantReviews",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.ListMerchantReviews",
+          "service": {
+            "shortName": "MerchantReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_InsertMerchantReview_async",
+      "title": "MerchantReviewsService insertMerchantReview Sample",
+      "origin": "API_DEFINITION",
+      "description": " Inserts a review for your Merchant Center account. If the review already exists, then the review is replaced with the new instance.",
+      "canonical": true,
+      "file": "merchant_reviews_service.insert_merchant_review.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertMerchantReview",
+        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.InsertMerchantReview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "merchant_review",
+            "type": ".google.shopping.merchant.reviews.v1beta.MerchantReview"
+          },
+          {
+            "name": "data_source",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.reviews.v1beta.MerchantReview",
+        "client": {
+          "shortName": "MerchantReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "InsertMerchantReview",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.InsertMerchantReview",
+          "service": {
+            "shortName": "MerchantReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1beta_generated_MerchantReviewsService_DeleteMerchantReview_async",
+      "title": "MerchantReviewsService deleteMerchantReview Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes merchant review.",
+      "canonical": true,
+      "file": "merchant_reviews_service.delete_merchant_review.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMerchantReview",
+        "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.DeleteMerchantReview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "MerchantReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteMerchantReview",
+          "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService.DeleteMerchantReview",
+          "service": {
+            "shortName": "MerchantReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.MerchantReviewsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_GetProductReview_async",
+      "title": "MerchantReviewsService getProductReview Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a product review.",
+      "canonical": true,
+      "file": "product_reviews_service.get_product_review.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProductReview",
+        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.GetProductReview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.reviews.v1beta.ProductReview",
+        "client": {
+          "shortName": "ProductReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "GetProductReview",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.GetProductReview",
+          "service": {
+            "shortName": "ProductReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_ListProductReviews_async",
+      "title": "MerchantReviewsService listProductReviews Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists product reviews.",
+      "canonical": true,
+      "file": "product_reviews_service.list_product_reviews.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProductReviews",
+        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.ListProductReviews",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.reviews.v1beta.ListProductReviewsResponse",
+        "client": {
+          "shortName": "ProductReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "ListProductReviews",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.ListProductReviews",
+          "service": {
+            "shortName": "ProductReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_InsertProductReview_async",
+      "title": "MerchantReviewsService insertProductReview Sample",
+      "origin": "API_DEFINITION",
+      "description": " Inserts a product review.",
+      "canonical": true,
+      "file": "product_reviews_service.insert_product_review.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertProductReview",
+        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.InsertProductReview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "product_review",
+            "type": ".google.shopping.merchant.reviews.v1beta.ProductReview"
+          },
+          {
+            "name": "data_source",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.reviews.v1beta.ProductReview",
+        "client": {
+          "shortName": "ProductReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "InsertProductReview",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.InsertProductReview",
+          "service": {
+            "shortName": "ProductReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1beta_generated_ProductReviewsService_DeleteProductReview_async",
+      "title": "MerchantReviewsService deleteProductReview Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a product review.",
+      "canonical": true,
+      "file": "product_reviews_service.delete_product_review.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteProductReview",
+        "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.DeleteProductReview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProductReviewsServiceClient",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteProductReview",
+          "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService.DeleteProductReview",
+          "service": {
+            "shortName": "ProductReviewsService",
+            "fullName": "google.shopping.merchant.reviews.v1beta.ProductReviewsService"
+          }
+        }
+      }
+    }
+  ]
 }
