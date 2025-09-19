@@ -2659,684 +2659,6 @@
                       }
                     }
                   }
-                },
-                "v1beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.RecaptchaEnterprise.V1Beta1",
-                    "go_package": "cloud.google.com/go/recaptchaenterprise/v2/apiv1beta1/recaptchaenterprisepb;recaptchaenterprisepb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "RecaptchaEnterpriseProto",
-                    "java_package": "com.google.recaptchaenterprise.v1beta1",
-                    "objc_class_prefix": "GCRE",
-                    "php_namespace": "Google\\Cloud\\RecaptchaEnterprise\\V1beta1",
-                    "ruby_package": "Google::Cloud::RecaptchaEnterprise::V1beta1"
-                  },
-                  "nested": {
-                    "RecaptchaEnterpriseServiceV1Beta1": {
-                      "options": {
-                        "(google.api.default_host)": "recaptchaenterprise.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "CreateAssessment": {
-                          "requestType": "CreateAssessmentRequest",
-                          "responseType": "Assessment",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*}/assessments",
-                            "(google.api.http).body": "assessment",
-                            "(google.api.method_signature)": "parent,assessment"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=projects/*}/assessments",
-                                "body": "assessment"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,assessment"
-                            }
-                          ]
-                        },
-                        "AnnotateAssessment": {
-                          "requestType": "AnnotateAssessmentRequest",
-                          "responseType": "AnnotateAssessmentResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{name=projects/*/assessments/*}:annotate",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name,annotation"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{name=projects/*/assessments/*}:annotate",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name,annotation"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "CreateAssessmentRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "assessment": {
-                          "type": "Assessment",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "TransactionEvent": {
-                      "fields": {
-                        "eventType": {
-                          "type": "TransactionEventType",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "reason": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "value": {
-                          "type": "double",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "eventTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "TransactionEventType": {
-                          "values": {
-                            "TRANSACTION_EVENT_TYPE_UNSPECIFIED": 0,
-                            "MERCHANT_APPROVE": 1,
-                            "MERCHANT_DENY": 2,
-                            "MANUAL_REVIEW": 3,
-                            "AUTHORIZATION": 4,
-                            "AUTHORIZATION_DECLINE": 5,
-                            "PAYMENT_CAPTURE": 6,
-                            "PAYMENT_CAPTURE_DECLINE": 7,
-                            "CANCEL": 8,
-                            "CHARGEBACK_INQUIRY": 9,
-                            "CHARGEBACK_ALERT": 10,
-                            "FRAUD_NOTIFICATION": 11,
-                            "CHARGEBACK": 12,
-                            "CHARGEBACK_REPRESENTMENT": 13,
-                            "CHARGEBACK_REVERSE": 14,
-                            "REFUND_REQUEST": 15,
-                            "REFUND_DECLINE": 16,
-                            "REFUND": 17,
-                            "REFUND_REVERSE": 18
-                          }
-                        }
-                      }
-                    },
-                    "AnnotateAssessmentRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Assessment"
-                          }
-                        },
-                        "annotation": {
-                          "type": "Annotation",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "reasons": {
-                          "rule": "repeated",
-                          "type": "Reason",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "hashedAccountId": {
-                          "type": "bytes",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "transactionEvent": {
-                          "type": "TransactionEvent",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Annotation": {
-                          "valuesOptions": {
-                            "PASSWORD_CORRECT": {
-                              "deprecated": true
-                            },
-                            "PASSWORD_INCORRECT": {
-                              "deprecated": true
-                            }
-                          },
-                          "values": {
-                            "ANNOTATION_UNSPECIFIED": 0,
-                            "LEGITIMATE": 1,
-                            "FRAUDULENT": 2,
-                            "PASSWORD_CORRECT": 3,
-                            "PASSWORD_INCORRECT": 4
-                          }
-                        },
-                        "Reason": {
-                          "values": {
-                            "REASON_UNSPECIFIED": 0,
-                            "CHARGEBACK": 1,
-                            "CHARGEBACK_FRAUD": 8,
-                            "CHARGEBACK_DISPUTE": 9,
-                            "REFUND": 10,
-                            "REFUND_FRAUD": 11,
-                            "TRANSACTION_ACCEPTED": 12,
-                            "TRANSACTION_DECLINED": 13,
-                            "PAYMENT_HEURISTICS": 2,
-                            "INITIATED_TWO_FACTOR": 7,
-                            "PASSED_TWO_FACTOR": 3,
-                            "FAILED_TWO_FACTOR": 4,
-                            "CORRECT_PASSWORD": 5,
-                            "INCORRECT_PASSWORD": 6,
-                            "SOCIAL_SPAM": 14
-                          }
-                        }
-                      }
-                    },
-                    "AnnotateAssessmentResponse": {
-                      "fields": {}
-                    },
-                    "PasswordLeakVerification": {
-                      "fields": {
-                        "hashedUserCredentials": {
-                          "type": "bytes",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "credentialsLeaked": {
-                          "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "canonicalizedUsername": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "Assessment": {
-                      "options": {
-                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Assessment",
-                        "(google.api.resource).pattern": "projects/{project}/assessments/{assessment}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "event": {
-                          "type": "Event",
-                          "id": 2
-                        },
-                        "score": {
-                          "type": "float",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "tokenProperties": {
-                          "type": "TokenProperties",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "reasons": {
-                          "rule": "repeated",
-                          "type": "ClassificationReason",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "passwordLeakVerification": {
-                          "type": "PasswordLeakVerification",
-                          "id": 7
-                        },
-                        "accountDefenderAssessment": {
-                          "type": "AccountDefenderAssessment",
-                          "id": 8
-                        },
-                        "fraudPreventionAssessment": {
-                          "type": "FraudPreventionAssessment",
-                          "id": 11
-                        }
-                      },
-                      "nested": {
-                        "ClassificationReason": {
-                          "values": {
-                            "CLASSIFICATION_REASON_UNSPECIFIED": 0,
-                            "AUTOMATION": 1,
-                            "UNEXPECTED_ENVIRONMENT": 2,
-                            "TOO_MUCH_TRAFFIC": 3,
-                            "UNEXPECTED_USAGE_PATTERNS": 4,
-                            "LOW_CONFIDENCE_SCORE": 5,
-                            "SUSPECTED_CARDING": 6,
-                            "SUSPECTED_CHARGEBACK": 7
-                          }
-                        }
-                      }
-                    },
-                    "Event": {
-                      "fields": {
-                        "token": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "siteKey": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "userAgent": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "userIpAddress": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "expectedAction": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "hashedAccountId": {
-                          "type": "bytes",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "transactionData": {
-                          "type": "TransactionData",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "fraudPrevention": {
-                          "type": "FraudPrevention",
-                          "id": 17,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "FraudPrevention": {
-                          "values": {
-                            "FRAUD_PREVENTION_UNSPECIFIED": 0,
-                            "ENABLED": 1,
-                            "DISABLED": 2
-                          }
-                        }
-                      }
-                    },
-                    "TransactionData": {
-                      "oneofs": {
-                        "_transactionId": {
-                          "oneof": [
-                            "transactionId"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "transactionId": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "paymentMethod": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "cardBin": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "cardLastFour": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "currencyCode": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "value": {
-                          "type": "double",
-                          "id": 5
-                        },
-                        "shippingValue": {
-                          "type": "double",
-                          "id": 12
-                        },
-                        "shippingAddress": {
-                          "type": "Address",
-                          "id": 6
-                        },
-                        "billingAddress": {
-                          "type": "Address",
-                          "id": 7
-                        },
-                        "user": {
-                          "type": "User",
-                          "id": 8
-                        },
-                        "merchants": {
-                          "rule": "repeated",
-                          "type": "User",
-                          "id": 13
-                        },
-                        "items": {
-                          "rule": "repeated",
-                          "type": "Item",
-                          "id": 14
-                        },
-                        "gatewayInfo": {
-                          "type": "GatewayInfo",
-                          "id": 10
-                        }
-                      },
-                      "nested": {
-                        "Address": {
-                          "fields": {
-                            "recipient": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "address": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "locality": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "administrativeArea": {
-                              "type": "string",
-                              "id": 4
-                            },
-                            "regionCode": {
-                              "type": "string",
-                              "id": 5
-                            },
-                            "postalCode": {
-                              "type": "string",
-                              "id": 6
-                            }
-                          }
-                        },
-                        "User": {
-                          "fields": {
-                            "accountId": {
-                              "type": "string",
-                              "id": 6
-                            },
-                            "creationMs": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "email": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "emailVerified": {
-                              "type": "bool",
-                              "id": 3
-                            },
-                            "phoneNumber": {
-                              "type": "string",
-                              "id": 4
-                            },
-                            "phoneVerified": {
-                              "type": "bool",
-                              "id": 5
-                            }
-                          }
-                        },
-                        "Item": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "value": {
-                              "type": "double",
-                              "id": 2
-                            },
-                            "quantity": {
-                              "type": "int64",
-                              "id": 3
-                            },
-                            "merchantAccountId": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "GatewayInfo": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "gatewayResponseCode": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "avsResponseCode": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "cvvResponseCode": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TokenProperties": {
-                      "fields": {
-                        "valid": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "invalidReason": {
-                          "type": "InvalidReason",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "hostname": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "action": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "InvalidReason": {
-                          "valuesOptions": {
-                            "SITE_MISMATCH": {
-                              "deprecated": true
-                            }
-                          },
-                          "values": {
-                            "INVALID_REASON_UNSPECIFIED": 0,
-                            "UNKNOWN_INVALID_REASON": 1,
-                            "MALFORMED": 2,
-                            "EXPIRED": 3,
-                            "DUPE": 4,
-                            "SITE_MISMATCH": 5,
-                            "MISSING": 6,
-                            "BROWSER_ERROR": 7
-                          }
-                        }
-                      }
-                    },
-                    "FraudPreventionAssessment": {
-                      "fields": {
-                        "transactionRisk": {
-                          "type": "float",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "stolenInstrumentVerdict": {
-                          "type": "StolenInstrumentVerdict",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "cardTestingVerdict": {
-                          "type": "CardTestingVerdict",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "behavioralTrustVerdict": {
-                          "type": "BehavioralTrustVerdict",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "StolenInstrumentVerdict": {
-                          "fields": {
-                            "risk": {
-                              "type": "float",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        },
-                        "CardTestingVerdict": {
-                          "fields": {
-                            "risk": {
-                              "type": "float",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        },
-                        "BehavioralTrustVerdict": {
-                          "fields": {
-                            "trust": {
-                              "type": "float",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "AccountDefenderAssessment": {
-                      "fields": {
-                        "labels": {
-                          "rule": "repeated",
-                          "type": "AccountDefenderLabel",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "AccountDefenderLabel": {
-                          "values": {
-                            "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED": 0,
-                            "PROFILE_MATCH": 1,
-                            "SUSPICIOUS_LOGIN_ACTIVITY": 2,
-                            "SUSPICIOUS_ACCOUNT_CREATION": 3,
-                            "RELATED_ACCOUNTS_NUMBER_HIGH": 4
-                          }
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -3348,7 +2670,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -3472,10 +2795,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -3616,28 +2935,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -3695,11 +2992,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -3761,19 +3053,6 @@
                 "PACKAGE_MANAGER": 20
               }
             },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -3818,11 +3097,6 @@
                 "format": {
                   "type": "Format",
                   "id": 1
-                },
-                "referencedTypes": {
-                  "rule": "repeated",
-                  "type": "TypeReference",
-                  "id": 2
                 }
               },
               "nested": {
@@ -3834,14 +3108,6 @@
                     "IPV6": 3,
                     "IPV4_OR_IPV6": 4
                   }
-                }
-              }
-            },
-            "TypeReference": {
-              "fields": {
-                "typeName": {
-                  "type": "string",
-                  "id": 1
                 }
               }
             },
@@ -3943,19 +3209,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -3993,11 +3252,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -4087,10 +3341,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -4316,10 +3566,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -4534,7 +3780,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -4670,8 +3915,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -4698,10 +3942,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4770,26 +4010,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -4879,10 +4099,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -5026,7 +4242,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -5037,7 +4252,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -5048,7 +4262,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -5059,7 +4272,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -5070,8 +4282,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -5081,38 +4292,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -5157,13 +4357,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -5177,33 +4371,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -5232,26 +4399,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -5264,12 +4416,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -5353,14 +4499,6 @@
                     }
                   }
                 }
-              }
-            },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {
