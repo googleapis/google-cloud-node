@@ -1,7 +1,7 @@
 {
   "initial-version": "0.1.0",
   "packages": {
-    "dev-packages/pack-n-play": {},
+    "dev-packages/pack-n-play": {}
   },
   "plugins": [
     {
