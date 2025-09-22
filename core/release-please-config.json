@@ -1,0 +1,13 @@
+{
+  "initial-version": "0.1.0",
+  "packages": {
+    "dev-packages/pack-n-play": {}
+  },
+  "plugins": [
+    {
+      "type": "sentence-case"
+    }
+  ],
+  "bump-minor-pre-major": true,
+  "release-type": "node"
+}
