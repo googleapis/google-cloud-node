@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.3](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.0.2...pack-n-play-v4.0.3) (2025-09-23)
+
+
+### Bug Fixes
+
+* Repository directory in pack-n-play ([#40](https://github.com/googleapis/google-cloud-node-core/issues/40)) ([f3da693](https://github.com/googleapis/google-cloud-node-core/commit/f3da693f14d4b921445990b94bf096e24846a12b))
+
 ## [4.0.2](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.0.1...pack-n-play-v4.0.2) (2025-09-23)
 
 
