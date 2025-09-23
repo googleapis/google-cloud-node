@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.0.0...pack-n-play-v4.0.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* Copyright year ([6980e55](https://github.com/googleapis/google-cloud-node-core/commit/6980e55cdf0283d5ae482f34c2b23bc7f20fc031))
+* Lint command in pack-n-play ([91b9629](https://github.com/googleapis/google-cloud-node-core/commit/91b9629761d275542631231452c1e7fc7770c15e))
+* Pack-n-play lint command and coypright year ([de18035](https://github.com/googleapis/google-cloud-node-core/commit/de180354f9013c4eb7eec5a538272e8e7ec559fe))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v3.0.1...pack-n-play-v4.0.0) (2025-09-22)
 
 
