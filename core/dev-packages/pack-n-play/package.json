@@ -61,5 +61,5 @@
       "build/test"
     ]
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/pack-n-play"
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/pack-n-play"
 }

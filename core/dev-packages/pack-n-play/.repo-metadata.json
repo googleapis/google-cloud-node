@@ -5,6 +5,6 @@
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node-core",
   "distribution_name": "pack-n-play",
-  "client_documentation": "https://github.com/googleapis/pack-n-play",
+  "client_documentation": "https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/pack-n-play",
   "library_type": "OTHER"
 }

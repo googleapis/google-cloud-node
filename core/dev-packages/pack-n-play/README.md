@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Pack-N-Play: Node.js Client](https://github.com/googleapis/pack-n-play)
+# [Pack-N-Play: Node.js Client](https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/pack-n-play)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/pack-n-play.svg)](https://www.npmjs.org/package/pack-n-play)
@@ -14,11 +14,11 @@ Ensure your library installs and compiles
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/pack-n-play/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node-core/blob/main/dev-packages/pack-n-play/CHANGELOG.md).
 
 * [Pack-N-Play Node.js Client API Reference][client-docs]
 
-* [github.com/googleapis/pack-n-play](https://github.com/googleapis/pack-n-play)
+* [github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/pack-n-play](https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/pack-n-play)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -95,7 +95,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/pack-n-play/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node-core/blob/main/dev-packages/pack-n-play/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -107,9 +107,9 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/pack-n-play/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node-core/blob/main/dev-packages/pack-n-play/LICENSE)
 
-[client-docs]: https://github.com/googleapis/pack-n-play
+[client-docs]: https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/pack-n-play
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
