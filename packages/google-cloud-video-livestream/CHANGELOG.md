@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v2.1.0...livestream-v2.2.0) (2025-09-23)
+
+
+### Features
+
+* [video] Added H.265 (HEVC) codec support ([#6726](https://github.com/googleapis/google-cloud-node/issues/6726)) ([d9809c5](https://github.com/googleapis/google-cloud-node/commit/d9809c5ca92239b1200037feda24ff29f140ceae))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v2.0.1...livestream-v2.1.0) (2025-07-09)
 
 

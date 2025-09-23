@@ -5,6 +5,40 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "d9809c5ca92239b1200037feda24ff29f140ceae",
+          "message": "[video] Added H.265 (HEVC) codec support",
+          "issues": [
+            "6726"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "3e1a2c1a-bb78-499b-920d-9ecc063d2df4",
+      "createTime": "2025-09-23T02:43:15.085Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "98566c9ae36312a08485ecc3dee1faf3f2745467",
+          "message": "[dataproc] Added support for JUPYTER_KERNEL_GATEWAY component",
+          "issues": [
+            "6758"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "0fedb90d-8184-4721-b198-fc3aab4efebb",
+      "createTime": "2025-09-23T02:43:15.051Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "6bc75f673e44831fb2f73ba3ae29e8da23a8b50a",
           "message": "[apihub] Introduce new services for data collection (ApiHubCollect) and curation (ApiHubCurate)",
           "issues": [
@@ -62460,5 +62494,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-09-16T18:29:23.401Z"
+  "updateTime": "2025-09-23T02:43:15.085Z"
 }
