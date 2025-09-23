@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "directory": "packages/pack-n-play",
+    "directory": "dev-packages/pack-n-play",
     "url": "https://github.com/googleapis/google-cloud-node-core.git"
   },
   "main": "./build/src/index.js",
