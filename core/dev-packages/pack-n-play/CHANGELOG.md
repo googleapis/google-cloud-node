@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.0.3...pack-n-play-v4.1.0) (2025-09-24)
+
+
+### Features
+
+* Add retry in linkinator config ([#42](https://github.com/googleapis/google-cloud-node-core/issues/42)) ([6d9e29d](https://github.com/googleapis/google-cloud-node-core/commit/6d9e29d6e83a82e7e1a6109f1331e809e6922493))
+
 ## [4.0.3](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.0.2...pack-n-play-v4.0.3) (2025-09-23)
 
 
