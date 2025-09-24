@@ -6,5 +6,8 @@
     "img.shields.io"
   ],
   "silent": true,
-  "concurrency": 10
+  "concurrency": 10,
+  "retry": true,
+  "retryErrors": true,
+  "retryErrorsCount": 3
 }
