@@ -1202,7 +1202,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 78,
+          "end": 83,
           "type": "FULL"
         }
       ],
@@ -1230,6 +1230,10 @@
           {
             "name": "sql_statement",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.cloud.alloydb.v1alpha.ExecuteSqlResponse",
@@ -1964,6 +1968,54 @@
         "method": {
           "shortName": "ListDatabases",
           "fullName": "google.cloud.alloydb.v1alpha.AlloyDBAdmin.ListDatabases",
+          "service": {
+            "shortName": "AlloyDBAdmin",
+            "fullName": "google.cloud.alloydb.v1alpha.AlloyDBAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "alloydb_v1alpha_generated_AlloyDBAdmin_CreateDatabase_async",
+      "title": "AlloyDBAdmin createDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Database in a given project, location, and cluster.",
+      "canonical": true,
+      "file": "alloy_d_b_admin.create_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDatabase",
+        "fullName": "google.cloud.alloydb.v1alpha.AlloyDBAdmin.CreateDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "database_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "database",
+            "type": ".google.cloud.alloydb.v1alpha.Database"
+          }
+        ],
+        "resultType": ".google.cloud.alloydb.v1alpha.Database",
+        "client": {
+          "shortName": "AlloyDBAdminClient",
+          "fullName": "google.cloud.alloydb.v1alpha.AlloyDBAdminClient"
+        },
+        "method": {
+          "shortName": "CreateDatabase",
+          "fullName": "google.cloud.alloydb.v1alpha.AlloyDBAdmin.CreateDatabase",
           "service": {
             "shortName": "AlloyDBAdmin",
             "fullName": "google.cloud.alloydb.v1alpha.AlloyDBAdmin"
