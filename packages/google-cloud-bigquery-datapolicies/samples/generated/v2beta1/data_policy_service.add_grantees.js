@@ -47,7 +47,7 @@ function main(dataPolicy, grantees) {
   // const grantees = ['abc','def']
 
   // Imports the Datapolicies library
-  const {DataPolicyServiceClient} = require('@google-cloud/datapolicies').v2beta1;
+  const {DataPolicyServiceClient} = require('@google-cloud/bigquery-datapolicies').v2beta1;
 
   // Instantiates a client
   const datapoliciesClient = new DataPolicyServiceClient();

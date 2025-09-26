@@ -56,7 +56,7 @@ function main(parent) {
   // const filter = 'abc123'
 
   // Imports the Datapolicies library
-  const {DataPolicyServiceClient} = require('@google-cloud/datapolicies').v2;
+  const {DataPolicyServiceClient} = require('@google-cloud/bigquery-datapolicies').v2;
 
   // Instantiates a client
   const datapoliciesClient = new DataPolicyServiceClient();
