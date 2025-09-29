@@ -1,13 +1,14 @@
 {
+  "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
   "packages": {
-    "dev-packages/pack-n-play": {}
+    "dev-packages/pack-n-play": {},
+    "dev-packages/jsdoc-fresh": {}
   },
   "plugins": [
     {
       "type": "sentence-case"
     }
   ],
-  "bump-minor-pre-major": true,
   "release-type": "node"
 }

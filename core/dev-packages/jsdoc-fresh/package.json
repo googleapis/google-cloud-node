@@ -1,0 +1,36 @@
+{
+  "name": "jsdoc-fresh",
+  "version": "4.0.0",
+  "description": "Fresh JSDoc 3 Template",
+  "scripts": {
+    "lint": "gts check",
+    "test": "echo no tests",
+    "fix": "gts fix",
+    "docs": "mkdir docs && touch docs/noop.html",
+    "system-test": "echo no system test",
+    "samples-test": "echo no samples test",
+    "docs-test": "echo no docs tests",
+    "compile": "echo no compile script"
+  },
+  "repository": {
+    "type": "git",
+    "directory": "packages/jsdoc-fresh",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+  },
+  "author": "Google LLC",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/googleapis/jsdoc-fresh"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/jsdoc-fresh",
+  "devDependencies": {
+    "gts": "^5.0.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@jsdoc/salty": "^0.2.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
