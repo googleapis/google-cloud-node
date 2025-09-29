@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.1.0...dataproc-v6.2.0) (2025-09-23)
+
+
+### Features
+
+* [dataproc] Added support for JUPYTER_KERNEL_GATEWAY component ([#6758](https://github.com/googleapis/google-cloud-node/issues/6758)) ([98566c9](https://github.com/googleapis/google-cloud-node/commit/98566c9ae36312a08485ecc3dee1faf3f2745467))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.0.1...dataproc-v6.1.0) (2025-07-09)
 
 
