@@ -124,7 +124,8 @@ export async function generateIndexTs(
   console.log(`All versions in ${currentLibrary}: ${versions}`);
 
   // Get all the clients in each specific version
-  const clientsAndVersions = await extractClients(currentLibrary);
+  const pathToSrc = isEsm ? currentLibrary : `${currentLibrary}/esm`;
+  const clientsAndVersions = await extractClients(pathToSrc);
   console.log(
     `All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`,
   );
