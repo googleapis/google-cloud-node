@@ -4313,7 +4313,25 @@
                         }
                       },
                       "nested": {
+                        "PhishBlockThreshold": {
+                          "values": {
+                            "PHISH_BLOCK_THRESHOLD_UNSPECIFIED": 0,
+                            "BLOCK_LOW_AND_ABOVE": 30,
+                            "BLOCK_MEDIUM_AND_ABOVE": 40,
+                            "BLOCK_HIGH_AND_ABOVE": 50,
+                            "BLOCK_HIGHER_AND_ABOVE": 55,
+                            "BLOCK_VERY_HIGH_AND_ABOVE": 60,
+                            "BLOCK_ONLY_EXTREMELY_HIGH": 100
+                          }
+                        },
                         "GoogleSearch": {
+                          "oneofs": {
+                            "_blockingConfidence": {
+                              "oneof": [
+                                "blockingConfidence"
+                              ]
+                            }
+                          },
                           "fields": {
                             "excludeDomains": {
                               "rule": "repeated",
@@ -4321,6 +4339,14 @@
                               "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "blockingConfidence": {
+                              "type": "PhishBlockThreshold",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -4661,6 +4687,13 @@
                       }
                     },
                     "EnterpriseWebSearch": {
+                      "oneofs": {
+                        "_blockingConfidence": {
+                          "oneof": [
+                            "blockingConfidence"
+                          ]
+                        }
+                      },
                       "fields": {
                         "excludeDomains": {
                           "rule": "repeated",
@@ -4668,6 +4701,14 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "blockingConfidence": {
+                          "type": "Tool.PhishBlockThreshold",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }

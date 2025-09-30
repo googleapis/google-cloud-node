@@ -15477,11 +15477,25 @@ export namespace google {
 
                 namespace Tool {
 
+                    /** PhishBlockThreshold enum. */
+                    enum PhishBlockThreshold {
+                        PHISH_BLOCK_THRESHOLD_UNSPECIFIED = 0,
+                        BLOCK_LOW_AND_ABOVE = 30,
+                        BLOCK_MEDIUM_AND_ABOVE = 40,
+                        BLOCK_HIGH_AND_ABOVE = 50,
+                        BLOCK_HIGHER_AND_ABOVE = 55,
+                        BLOCK_VERY_HIGH_AND_ABOVE = 60,
+                        BLOCK_ONLY_EXTREMELY_HIGH = 100
+                    }
+
                     /** Properties of a GoogleSearch. */
                     interface IGoogleSearch {
 
                         /** GoogleSearch excludeDomains */
                         excludeDomains?: (string[]|null);
+
+                        /** GoogleSearch blockingConfidence */
+                        blockingConfidence?: (google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|keyof typeof google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|null);
                     }
 
                     /** Represents a GoogleSearch. */
@@ -15495,6 +15509,9 @@ export namespace google {
 
                         /** GoogleSearch excludeDomains. */
                         public excludeDomains: string[];
+
+                        /** GoogleSearch blockingConfidence. */
+                        public blockingConfidence?: (google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|keyof typeof google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|null);
 
                         /**
                          * Creates a new GoogleSearch instance using the specified properties.
@@ -17181,6 +17198,9 @@ export namespace google {
 
                     /** EnterpriseWebSearch excludeDomains */
                     excludeDomains?: (string[]|null);
+
+                    /** EnterpriseWebSearch blockingConfidence */
+                    blockingConfidence?: (google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|keyof typeof google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|null);
                 }
 
                 /** Represents an EnterpriseWebSearch. */
@@ -17194,6 +17214,9 @@ export namespace google {
 
                     /** EnterpriseWebSearch excludeDomains. */
                     public excludeDomains: string[];
+
+                    /** EnterpriseWebSearch blockingConfidence. */
+                    public blockingConfidence?: (google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|keyof typeof google.cloud.aiplatform.v1.Tool.PhishBlockThreshold|null);
 
                     /**
                      * Creates a new EnterpriseWebSearch instance using the specified properties.
