@@ -19,7 +19,8 @@
     "docs": "echo 'no docs to publish'"
   },
   "files": [
-    "build/src"
+    "build/src",
+    "templates"
   ],
   "author": "Google LLC",
   "license": "Apache-2.0",
