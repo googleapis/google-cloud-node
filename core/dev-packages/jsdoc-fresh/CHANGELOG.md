@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-fresh-v4.0.0...jsdoc-fresh-v5.0.0) (2025-09-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* monorepo migration
+
+### Bug Fixes
+
+* Monorepo migration ([86a7376](https://github.com/googleapis/google-cloud-node-core/commit/86a7376da60852dae8eacf9ca97a6d302b6b7eb4))
+
 ## [4.0.0](https://github.com/googleapis/jsdoc-fresh/compare/v3.0.0...v4.0.0) (2025-05-28)
 
 
