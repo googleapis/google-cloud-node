@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-fresh-v5.0.0...jsdoc-fresh-v5.0.1) (2025-09-30)
+
+
+### Bug Fixes
+
+* Broken links in jsdoc-fresh package.json ([#50](https://github.com/googleapis/google-cloud-node-core/issues/50)) ([83580e6](https://github.com/googleapis/google-cloud-node-core/commit/83580e6eb7d2d295339cfbe24ed220bc22a101ea))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-fresh-v4.0.0...jsdoc-fresh-v5.0.0) (2025-09-29)
 
 
