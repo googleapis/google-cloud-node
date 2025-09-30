@@ -19671,12 +19671,27 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "deploymentTier": {
+                          "type": "DeploymentTier",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "pscAutomationConfigs": {
                           "rule": "repeated",
                           "type": "PSCAutomationConfig",
                           "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DeploymentTier": {
+                          "values": {
+                            "DEPLOYMENT_TIER_UNSPECIFIED": 0,
+                            "STORAGE": 2
                           }
                         }
                       }

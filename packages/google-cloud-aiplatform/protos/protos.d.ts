@@ -71883,6 +71883,9 @@ export namespace google {
                     /** DeployedIndex deploymentGroup */
                     deploymentGroup?: (string|null);
 
+                    /** DeployedIndex deploymentTier */
+                    deploymentTier?: (google.cloud.aiplatform.v1.DeployedIndex.DeploymentTier|keyof typeof google.cloud.aiplatform.v1.DeployedIndex.DeploymentTier|null);
+
                     /** DeployedIndex pscAutomationConfigs */
                     pscAutomationConfigs?: (google.cloud.aiplatform.v1.IPSCAutomationConfig[]|null);
                 }
@@ -71934,6 +71937,9 @@ export namespace google {
 
                     /** DeployedIndex deploymentGroup. */
                     public deploymentGroup: string;
+
+                    /** DeployedIndex deploymentTier. */
+                    public deploymentTier: (google.cloud.aiplatform.v1.DeployedIndex.DeploymentTier|keyof typeof google.cloud.aiplatform.v1.DeployedIndex.DeploymentTier);
 
                     /** DeployedIndex pscAutomationConfigs. */
                     public pscAutomationConfigs: google.cloud.aiplatform.v1.IPSCAutomationConfig[];
@@ -72014,6 +72020,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeployedIndex {
+
+                    /** DeploymentTier enum. */
+                    enum DeploymentTier {
+                        DEPLOYMENT_TIER_UNSPECIFIED = 0,
+                        STORAGE = 2
+                    }
                 }
 
                 /** Properties of a DeployedIndexAuthConfig. */
