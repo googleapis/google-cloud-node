@@ -20,9 +20,9 @@
   "author": "Google LLC",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/googleapis/jsdoc-fresh"
+    "url": "https://github.com/googleapis/google-cloud-node-core/issues"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/jsdoc-fresh",
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/jsdoc-fresh",
   "devDependencies": {
     "gts": "^5.0.0",
     "typescript": "^5.1.6"
