@@ -2,8 +2,9 @@
   "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
   "packages": {
+    "dev-packages/jsdoc-fresh": {},
     "dev-packages/pack-n-play": {},
-    "dev-packages/jsdoc-fresh": {}
+    "dev-packages/jsdoc-region-tag": {}
   },
   "plugins": [
     {
