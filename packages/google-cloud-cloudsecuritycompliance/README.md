@@ -4,7 +4,9 @@
 
 # [Cloud Security Compliance API: Nodejs Client][homepage]
 
-[//]: # "releaseLevel"
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/cloudsecuritycompliance.svg)](https://www.npmjs.org/package/@google-cloud/cloudsecuritycompliance)
 
@@ -53,7 +55,26 @@ npm install @google-cloud/cloudsecuritycompliance
 
 Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-[//]: # "samples"
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_cloud_control.js) |
+| create framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_framework.js) |
+| delete cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_cloud_control.js) |
+| delete framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_framework.js) |
+| get cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_cloud_control.js) |
+| get framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.get_framework.js) |
+| list cloud controls | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_cloud_controls.js) |
+| list frameworks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.list_frameworks.js) |
+| update cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_cloud_control.js) |
+| update framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.update_framework.js) |
+| create framework deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.create_framework_deployment.js) |
+| delete framework deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.delete_framework_deployment.js) |
+| get cloud control deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_cloud_control_deployment.js) |
+| get framework deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.get_framework_deployment.js) |
+| list cloud control deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_cloud_control_deployments.js) |
+| list framework deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/deployment.list_framework_deployments.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/snippet_metadata_google.cloud.cloudsecuritycompliance.v1.json) |
+
 
 ## Supported Node.js Versions
 
