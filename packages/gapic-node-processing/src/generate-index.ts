@@ -51,10 +51,10 @@ const CLIENT_EXTRACTION_REGEX = /export\s*{\s*(\w+Client)\s*}/g;
  * @returns {Promise<string[]>} A promise that resolves to an array of version directory names (e.g., ['v1', 'v2beta1']).
  * @throws {Error} Throws an error if the `src` directory does not exist or has an unexpected format.
  */
-export async function extractVersions(currentPath: string) {
+export async function extractVersions(currentPath: string, srcPath = SRC_PATH) {
   let allItemsInSrc: Dirent[] = [];
   try {
-    allItemsInSrc = await fs.readdir(path.join(currentPath, SRC_PATH), {
+    allItemsInSrc = await fs.readdir(path.join(currentPath, srcPath), {
       withFileTypes: true,
     });
   } catch (err) {
@@ -82,11 +82,11 @@ export async function extractVersions(currentPath: string) {
  * @param {string} currentPath - The path to the library's root directory.
  * @returns {Promise<{version: string; clients: string[]}[]>} A promise that resolves to an array of objects, each containing a version string and an array of client names.
  */
-export async function extractClients(currentPath: string) {
-  const directories = await extractVersions(currentPath);
+export async function extractClients(currentPath: string, srcPath = SRC_PATH) {
+  const directories = await extractVersions(currentPath, srcPath);
   const clientsAndVersions: VersionsAndClients[] = [];
   for (const directory of directories) {
-    const indexFile = path.join(currentPath, SRC_PATH, directory, INDEX_PATH);
+    const indexFile = path.join(currentPath, srcPath, directory, INDEX_PATH);
     if (await fs.stat(indexFile)) {
       const clientsRegexMatch = [
         ...(await fs.readFile(indexFile, 'utf8')).matchAll(
@@ -119,15 +119,15 @@ export async function generateIndexTs(
   defaultVersion?: string,
   isEsm?: boolean,
 ) {
-  const pathToSrc = isEsm ? `${currentLibrary}/esm` : currentLibrary;
+  const srcPath = isEsm ? `esm/${SRC_PATH}` : SRC_PATH;
   // Get all the versions
-  const versions = await extractVersions(pathToSrc);
-  console.log(`All versions in ${pathToSrc}: ${versions}`);
+  const versions = await extractVersions(currentLibrary, srcPath);
+  console.log(`All versions in ${currentLibrary}: ${versions}`);
 
   // Get all the clients in each specific version
-  const clientsAndVersions = await extractClients(pathToSrc);
+  const clientsAndVersions = await extractClients(currentLibrary, srcPath);
   console.log(
-    `All clients and their versions in ${pathToSrc}: ${JSON.stringify(clientsAndVersions, null, 2)}`,
+    `All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`,
   );
   defaultVersion = defaultVersion || getHighestVersionWithPrecedence(versions);
   // Get the default versions' clients
@@ -150,7 +150,7 @@ export async function generateIndexTs(
 
   const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables);
 
-  const outputPath = path.join(pathToSrc, SRC_PATH, INDEX_PATH);
+  const outputPath = path.join(currentLibrary, srcPath, INDEX_PATH);
   console.log(
     `Generating index.ts in ${outputPath} with the following values: ${JSON.stringify(variables)}`,
   );

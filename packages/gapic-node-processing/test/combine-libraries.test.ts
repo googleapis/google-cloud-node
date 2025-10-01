@@ -25,7 +25,10 @@ import * as assert from 'assert';
 export const TEST_FIXTURES_PATH = path.resolve(
   'test/fixtures/combined-library',
 );
+
+export const LIB_PRE_COMBINATION_ESM = 'google-cloud-tasks-nodejs';
 export const LIB_PRE_COMBINATION = 'google-cloud-speech-nodejs';
+export const LIB_POST_COMBINATION_ESM = 'google-cloud-tasks';
 export const LIB_POST_COMBINATION = 'google-cloud-speech';
 
 describe('combine libraries', () => {
@@ -79,27 +82,27 @@ describe('combine libraries', () => {
       path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
     );
 
-    assert.ok(fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION)));
+    assert.ok(await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION)));
     // We won't assert very specific library structure, but we will assert
     // the top-level folders
     assert.ok(
-      fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'protos')),
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'protos')),
     );
     assert.ok(
-      fs.stat(
+      await fs.stat(
         path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'samples'),
       ),
     );
     assert.ok(
-      fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src')),
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src')),
     );
     assert.ok(
-      fs.stat(
+      await fs.stat(
         path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'system-test'),
       ),
     );
     assert.ok(
-      fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'test')),
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'test')),
     );
     try {
       await fs.rm(path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION), {
@@ -107,6 +110,52 @@ describe('combine libraries', () => {
       });
     } catch (err) {
       console.log(`Could not delete ${LIB_POST_COMBINATION} directory`);
+    }
+  });
+
+    it('should create a combined ESM library', async () => {
+    // Even though the library combination should delete the current library,
+    // this allows us to ensure that our output is expected.
+    try {
+      await fs.rm(path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM), {
+        recursive: true,
+      });
+    } catch (err) {
+      console.log(`Could not delete ${LIB_POST_COMBINATION_ESM} directory`);
+    }
+    await combineLibraries(
+      path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
+      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
+    );
+
+    assert.ok(await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM)));
+    // We won't assert very specific library structure, but we will assert
+    // the top-level folders
+    assert.ok(
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'protos')),
+    );
+    assert.ok(
+      await fs.stat(
+        path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'samples'),
+      ),
+    );
+    assert.ok(
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'src')),
+    );
+    assert.ok(
+      await fs.stat(
+        path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'system-test'),
+      ),
+    );
+    assert.ok(
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'test')),
+    );
+    try {
+      await fs.rm(path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM), {
+        recursive: true,
+      });
+    } catch (err) {
+      console.log(`Could not delete ${LIB_POST_COMBINATION_ESM} directory`);
     }
   });
 
@@ -120,7 +169,7 @@ describe('combine libraries', () => {
       path.resolve(TEST_FIXTURES_PATH, 'testDir'),
       filePathAndContent,
     );
-    assert.ok(fs.stat(path.resolve(TEST_FIXTURES_PATH, 'testDir')));
+    assert.ok(await fs.stat(path.resolve(TEST_FIXTURES_PATH, 'testDir')));
 
     assert.deepEqual(
       await fs.readFile(

@@ -25,7 +25,9 @@ import {
 } from '../src/generate-index';
 import {
   LIB_POST_COMBINATION,
+  LIB_POST_COMBINATION_ESM,
   LIB_PRE_COMBINATION,
+  LIB_PRE_COMBINATION_ESM,
 } from './combine-libraries.test';
 import {combineLibraries} from '../src/combine-libraries';
 const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
@@ -123,25 +125,29 @@ describe('generate index.ts', () => {
     // this allows us to ensure that our output is expected.
     try {
       await fs.rm(
-        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src', 'index.ts'),
+        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
       );
     } catch (err) {
-      console.log(`Could not delete ${LIB_POST_COMBINATION}/src/index.ts file`);
+      console.log(`Could not delete ${LIB_POST_COMBINATION_ESM} directory`);
     }
+    await combineLibraries(
+      path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
+      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
+    );
     await generateIndexTs(
-      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
-      'v1',
+      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
+      'v2',
       true,
     );
 
     // Confirm index.ts was generated
     assert.ok(
       await fs.stat(
-        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src', 'index.ts'),
+        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'src', 'index.ts'),
       ),
     );
     const contents = await fs.readFile(
-      path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src', 'index.ts'),
+      path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'src', 'index.ts'),
       'utf8',
     );
     // Confirm all versions were generated
