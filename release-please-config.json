@@ -214,7 +214,10 @@
     "packages/google-cloud-saasplatform-saasservicemgmt": {},
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-capacityplanner": {},
-    "packages/google-cloud-locationfinder": {}
+    "packages/google-cloud-locationfinder": {},
+    "packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-tasks": {},
+    "packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-tasks-nodejs/tasks-v2-nodejs": {},
+    "packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-tasks-nodejs/tasks-v2beta2-nodejs": {}
   },
   "plugins": [
     {
