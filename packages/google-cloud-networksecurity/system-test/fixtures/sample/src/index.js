@@ -18,10 +18,12 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const networksecurity = require('@google-cloud/network-security');
+const networksecurity = require('@google-cloud/networksecurity');
 
 function main() {
+  const addressGroupServiceClient = new networksecurity.AddressGroupServiceClient();
   const networkSecurityClient = new networksecurity.NetworkSecurityClient();
+  const organizationAddressGroupServiceClient = new networksecurity.OrganizationAddressGroupServiceClient();
 }
 
 main();
