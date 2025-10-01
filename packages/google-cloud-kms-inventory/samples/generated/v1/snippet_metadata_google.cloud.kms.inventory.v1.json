@@ -1,159 +1,159 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-inventory",
-        "version": "2.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.kms.inventory.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "kmsinventory_v1_generated_KeyDashboardService_ListCryptoKeys_async",
-            "title": "KeyDashboardService listCryptoKeys Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns cryptographic keys managed by Cloud KMS in a given Cloud project. Note that this data is sourced from snapshots, meaning it may not completely reflect the actual state of key metadata at call time.",
-            "canonical": true,
-            "file": "key_dashboard_service.list_crypto_keys.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCryptoKeys",
-                "fullName": "google.cloud.kms.inventory.v1.KeyDashboardService.ListCryptoKeys",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.inventory.v1.ListCryptoKeysResponse",
-                "client": {
-                    "shortName": "KeyDashboardServiceClient",
-                    "fullName": "google.cloud.kms.inventory.v1.KeyDashboardServiceClient"
-                },
-                "method": {
-                    "shortName": "ListCryptoKeys",
-                    "fullName": "google.cloud.kms.inventory.v1.KeyDashboardService.ListCryptoKeys",
-                    "service": {
-                        "shortName": "KeyDashboardService",
-                        "fullName": "google.cloud.kms.inventory.v1.KeyDashboardService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async",
-            "title": "KeyDashboardService getProtectedResourcesSummary Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns aggregate information about the resources protected by the given Cloud KMS [CryptoKey][google.cloud.kms.v1.CryptoKey]. Only resources within the same Cloud organization as the key will be returned. The project that holds the key must be part of an organization in order for this call to succeed.",
-            "canonical": true,
-            "file": "key_tracking_service.get_protected_resources_summary.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProtectedResourcesSummary",
-                "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.GetProtectedResourcesSummary",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.inventory.v1.ProtectedResourcesSummary",
-                "client": {
-                    "shortName": "KeyTrackingServiceClient",
-                    "fullName": "google.cloud.kms.inventory.v1.KeyTrackingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetProtectedResourcesSummary",
-                    "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.GetProtectedResourcesSummary",
-                    "service": {
-                        "shortName": "KeyTrackingService",
-                        "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_async",
-            "title": "KeyDashboardService searchProtectedResources Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns metadata about the resources protected by the given Cloud KMS [CryptoKey][google.cloud.kms.v1.CryptoKey] in the given Cloud organization.",
-            "canonical": true,
-            "file": "key_tracking_service.search_protected_resources.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 92,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SearchProtectedResources",
-                "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "scope",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "crypto_key",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "resource_types",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.inventory.v1.SearchProtectedResourcesResponse",
-                "client": {
-                    "shortName": "KeyTrackingServiceClient",
-                    "fullName": "google.cloud.kms.inventory.v1.KeyTrackingServiceClient"
-                },
-                "method": {
-                    "shortName": "SearchProtectedResources",
-                    "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources",
-                    "service": {
-                        "shortName": "KeyTrackingService",
-                        "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-inventory",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.kms.inventory.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "kmsinventory_v1_generated_KeyDashboardService_ListCryptoKeys_async",
+      "title": "KeyDashboardService listCryptoKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns cryptographic keys managed by Cloud KMS in a given Cloud project. Note that this data is sourced from snapshots, meaning it may not completely reflect the actual state of key metadata at call time.",
+      "canonical": true,
+      "file": "key_dashboard_service.list_crypto_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCryptoKeys",
+        "fullName": "google.cloud.kms.inventory.v1.KeyDashboardService.ListCryptoKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.inventory.v1.ListCryptoKeysResponse",
+        "client": {
+          "shortName": "KeyDashboardServiceClient",
+          "fullName": "google.cloud.kms.inventory.v1.KeyDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "ListCryptoKeys",
+          "fullName": "google.cloud.kms.inventory.v1.KeyDashboardService.ListCryptoKeys",
+          "service": {
+            "shortName": "KeyDashboardService",
+            "fullName": "google.cloud.kms.inventory.v1.KeyDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async",
+      "title": "KeyDashboardService getProtectedResourcesSummary Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns aggregate information about the resources protected by the given Cloud KMS [CryptoKey][google.cloud.kms.v1.CryptoKey]. Only resources within the same Cloud organization as the key will be returned. The project that holds the key must be part of an organization in order for this call to succeed.",
+      "canonical": true,
+      "file": "key_tracking_service.get_protected_resources_summary.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProtectedResourcesSummary",
+        "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.GetProtectedResourcesSummary",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.inventory.v1.ProtectedResourcesSummary",
+        "client": {
+          "shortName": "KeyTrackingServiceClient",
+          "fullName": "google.cloud.kms.inventory.v1.KeyTrackingServiceClient"
+        },
+        "method": {
+          "shortName": "GetProtectedResourcesSummary",
+          "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.GetProtectedResourcesSummary",
+          "service": {
+            "shortName": "KeyTrackingService",
+            "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_async",
+      "title": "KeyDashboardService searchProtectedResources Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata about the resources protected by the given Cloud KMS [CryptoKey][google.cloud.kms.v1.CryptoKey] in the given Cloud organization.",
+      "canonical": true,
+      "file": "key_tracking_service.search_protected_resources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 92,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchProtectedResources",
+        "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "scope",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "crypto_key",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource_types",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.kms.inventory.v1.SearchProtectedResourcesResponse",
+        "client": {
+          "shortName": "KeyTrackingServiceClient",
+          "fullName": "google.cloud.kms.inventory.v1.KeyTrackingServiceClient"
+        },
+        "method": {
+          "shortName": "SearchProtectedResources",
+          "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources",
+          "service": {
+            "shortName": "KeyTrackingService",
+            "fullName": "google.cloud.kms.inventory.v1.KeyTrackingService"
+          }
+        }
+      }
+    }
+  ]
 }

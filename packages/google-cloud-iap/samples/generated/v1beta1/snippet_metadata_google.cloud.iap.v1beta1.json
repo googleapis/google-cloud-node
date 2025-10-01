@@ -1,151 +1,151 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-iap",
-        "version": "4.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.iap.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_SetIamPolicy_async",
-            "title": "IdentityAwareProxyAdminV1Beta1 setIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the access control policy for an Identity-Aware Proxy protected resource. Replaces any existing policy. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_v1_beta1.set_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetIamPolicy",
-                "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.SetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "policy",
-                        "type": ".google.iam.v1.Policy"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminV1Beta1Client",
-                    "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "SetIamPolicy",
-                    "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.SetIamPolicy",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminV1Beta1",
-                        "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_GetIamPolicy_async",
-            "title": "IdentityAwareProxyAdminV1Beta1 getIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the access control policy for an Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_v1_beta1.get_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIamPolicy",
-                "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.GetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "options",
-                        "type": ".google.iam.v1.GetPolicyOptions"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminV1Beta1Client",
-                    "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "GetIamPolicy",
-                    "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.GetIamPolicy",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminV1Beta1",
-                        "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_TestIamPermissions_async",
-            "title": "IdentityAwareProxyAdminV1Beta1 testIamPermissions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns permissions that a caller has on the Identity-Aware Proxy protected resource. If the resource does not exist or the caller does not have Identity-Aware Proxy permissions a [google.rpc.Code.PERMISSION_DENIED] will be returned. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-            "canonical": true,
-            "file": "identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TestIamPermissions",
-                "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.TestIamPermissions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permissions",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.iam.v1.TestIamPermissionsResponse",
-                "client": {
-                    "shortName": "IdentityAwareProxyAdminV1Beta1Client",
-                    "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "TestIamPermissions",
-                    "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.TestIamPermissions",
-                    "service": {
-                        "shortName": "IdentityAwareProxyAdminV1Beta1",
-                        "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-iap",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.iap.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_SetIamPolicy_async",
+      "title": "IdentityAwareProxyAdminV1Beta1 setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy for an Identity-Aware Proxy protected resource. Replaces any existing policy. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_v1_beta1.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminV1Beta1Client",
+          "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1Client"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.SetIamPolicy",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminV1Beta1",
+            "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_GetIamPolicy_async",
+      "title": "IdentityAwareProxyAdminV1Beta1 getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for an Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_v1_beta1.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminV1Beta1Client",
+          "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1Client"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.GetIamPolicy",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminV1Beta1",
+            "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_TestIamPermissions_async",
+      "title": "IdentityAwareProxyAdminV1Beta1 testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the Identity-Aware Proxy protected resource. If the resource does not exist or the caller does not have Identity-Aware Proxy permissions a [google.rpc.Code.PERMISSION_DENIED] will be returned. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "canonical": true,
+      "file": "identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "IdentityAwareProxyAdminV1Beta1Client",
+          "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1Client"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.TestIamPermissions",
+          "service": {
+            "shortName": "IdentityAwareProxyAdminV1Beta1",
+            "fullName": "google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1"
+          }
+        }
+      }
+    }
+  ]
 }
