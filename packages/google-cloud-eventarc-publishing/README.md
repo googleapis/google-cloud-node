@@ -4,7 +4,10 @@
 
 # [Eventarc Publishing API: Nodejs Client][homepage]
 
-[//]: # "releaseLevel"
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/eventarc-publishing.svg)](https://www.npmjs.org/package/@google-cloud/eventarc-publishing)
 
@@ -53,7 +56,13 @@ npm install @google-cloud/eventarc-publishing
 
 Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-[//]: # "samples"
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| publish | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish.js) |
+| publish channel connection events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js) |
+| publish events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/snippet_metadata_google.cloud.eventarc.publishing.v1.json) |
+
 
 ## Supported Node.js Versions
 
