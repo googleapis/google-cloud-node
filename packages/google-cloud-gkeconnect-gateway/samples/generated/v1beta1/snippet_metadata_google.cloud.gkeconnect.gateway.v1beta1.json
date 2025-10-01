@@ -1,71 +1,71 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-gateway",
-        "version": "5.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.gkeconnect.gateway.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "connectgateway_v1beta1_generated_GatewayControl_GenerateCredentials_async",
-            "title": "GatewayControl generateCredentials Sample",
-            "origin": "API_DEFINITION",
-            "description": " GenerateCredentials provides connection information that allows a user to access the specified membership using Connect Gateway.",
-            "canonical": true,
-            "file": "gateway_control.generate_credentials.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GenerateCredentials",
-                "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.GenerateCredentials",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force_use_agent",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "version",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "kubernetes_namespace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "operating_system",
-                        "type": ".google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem"
-                    }
-                ],
-                "resultType": ".google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse",
-                "client": {
-                    "shortName": "GatewayControlClient",
-                    "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControlClient"
-                },
-                "method": {
-                    "shortName": "GenerateCredentials",
-                    "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.GenerateCredentials",
-                    "service": {
-                        "shortName": "GatewayControl",
-                        "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-gateway",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.gkeconnect.gateway.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "connectgateway_v1beta1_generated_GatewayControl_GenerateCredentials_async",
+      "title": "GatewayControl generateCredentials Sample",
+      "origin": "API_DEFINITION",
+      "description": " GenerateCredentials provides connection information that allows a user to access the specified membership using Connect Gateway.",
+      "canonical": true,
+      "file": "gateway_control.generate_credentials.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateCredentials",
+        "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.GenerateCredentials",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force_use_agent",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "kubernetes_namespace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "operating_system",
+            "type": ".google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem"
+          }
+        ],
+        "resultType": ".google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse",
+        "client": {
+          "shortName": "GatewayControlClient",
+          "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControlClient"
+        },
+        "method": {
+          "shortName": "GenerateCredentials",
+          "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.GenerateCredentials",
+          "service": {
+            "shortName": "GatewayControl",
+            "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl"
+          }
+        }
+      }
+    }
+  ]
 }

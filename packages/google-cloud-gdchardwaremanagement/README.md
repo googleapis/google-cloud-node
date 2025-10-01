@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [GDC Hardware Management API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gdchardwaremanagement)
+# [GDC Hardware Management API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/gdchardwaremanagement.svg)](https://www.npmjs.org/package/@google-cloud/gdchardwaremanagement)
-
-
-
 
 GDC Hardware Management API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gdchardwaremanagement/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [GDC Hardware Management API Node.js Client API Reference][client-docs]
-* [GDC Hardware Management API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-gdchardwaremanagement](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gdchardwaremanagement)
+* [GDC Hardware Management API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/gdchardwaremanagement/latest)
+* [GDC Hardware Management API Documentation](https://cloud.google.com/distributed-cloud/edge/latest/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +27,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,121 +43,59 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the GDC Hardware Management API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/gdchardwaremanagement
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The project and location to list SKUs in.
- *  Format: `projects/{project}/locations/{location}`
- */
-// const parent = 'abc123'
-/**
- *  Optional. Requested page size. Server may return fewer items than
- *  requested. If unspecified, server will pick an appropriate default.
- */
-// const pageSize = 1234
-/**
- *  Optional. A token identifying a page of results the server should return.
- */
-// const pageToken = 'abc123'
-/**
- *  Optional. Filtering condition. See AIP-160 (https://google.aip.dev/160).
- */
-// const filter = 'abc123'
-/**
- *  Optional. Hint for how to order the results.
- */
-// const orderBy = 'abc123'
-
-// Imports the Gdchardwaremanagement library
-const {GDCHardwareManagementClient} =
-  require('@google-cloud/gdchardwaremanagement').v1alpha;
-
-// Instantiates a client
-const gdchardwaremanagementClient = new GDCHardwareManagementClient();
-
-async function callListSkus() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = gdchardwaremanagementClient.listSkusAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListSkus();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gdchardwaremanagement/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| G_d_c_hardware_management.cancel_order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.cancel_order.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.cancel_order.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.create_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_comment.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.create_hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_hardware.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_hardware.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.create_hardware_group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_hardware_group.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_hardware_group.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.create_order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_order.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_order.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.create_site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_site.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_site.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.create_zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_zone.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_zone.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.delete_hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.delete_hardware_group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware_group.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware_group.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.delete_order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.delete_site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.delete_zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_zone.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_zone.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_change_log_entry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_change_log_entry.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_change_log_entry.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_comment.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_hardware.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_hardware.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_hardware_group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_hardware_group.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_hardware_group.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_order.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_order.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_site.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_site.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_sku | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_sku.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_sku.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.get_zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_zone.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_zone.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_change_log_entries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_change_log_entries.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_change_log_entries.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_comments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_comments.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_hardware.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_hardware.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_hardware_groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_hardware_groups.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_hardware_groups.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_orders | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_orders.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_orders.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_sites | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_sites.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_sites.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_skus.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_skus.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.list_zones | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_zones.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_zones.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.record_action_on_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.request_order_date_change | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.request_order_date_change.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.request_order_date_change.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.signal_zone_state | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.signal_zone_state.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.signal_zone_state.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.submit_order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.submit_order.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.submit_order.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.update_hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_hardware.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_hardware.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.update_hardware_group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_hardware_group.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_hardware_group.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.update_order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_order.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_order.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.update_site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_site.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_site.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| G_d_c_hardware_management.update_zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_zone.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_zone.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gdchardwaremanagement/samples/quickstart.js,packages/google-cloud-gdchardwaremanagement/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| cancel order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.cancel_order.js) |
+| create comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_comment.js) |
+| create hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_hardware.js) |
+| create hardware group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_hardware_group.js) |
+| create order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_order.js) |
+| create site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_site.js) |
+| create zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.create_zone.js) |
+| delete hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware.js) |
+| delete hardware group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware_group.js) |
+| delete order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js) |
+| delete site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js) |
+| delete zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.delete_zone.js) |
+| get change log entry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_change_log_entry.js) |
+| get comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_comment.js) |
+| get hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_hardware.js) |
+| get hardware group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_hardware_group.js) |
+| get order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_order.js) |
+| get site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_site.js) |
+| get sku | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_sku.js) |
+| get zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.get_zone.js) |
+| list change log entries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_change_log_entries.js) |
+| list comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_comments.js) |
+| list hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_hardware.js) |
+| list hardware groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_hardware_groups.js) |
+| list orders | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_orders.js) |
+| list sites | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_sites.js) |
+| list skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_skus.js) |
+| list zones | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.list_zones.js) |
+| record action on comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js) |
+| request order date change | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.request_order_date_change.js) |
+| signal zone state | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.signal_zone_state.js) |
+| submit order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.submit_order.js) |
+| update hardware | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_hardware.js) |
+| update hardware group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_hardware_group.js) |
+| update order | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_order.js) |
+| update site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_site.js) |
+| update zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/g_d_c_hardware_management.update_zone.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples/generated/v1alpha/snippet_metadata_google.cloud.gdchardwaremanagement.v1alpha.json) |
 
-
-
-The [GDC Hardware Management API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -187,44 +122,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/gdchardwaremanagement/latest
-[product-docs]: https://cloud.google.com/distributed-cloud/edge/latest/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=gdchardwaremanagement.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gdchardwaremanagement

@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const gateway = require('@google-cloud/gke-connect-gateway');
+const gateway = require('@google-cloud/gateway');
 
 function main() {
   const gatewayControlClient = new gateway.GatewayControlClient();
