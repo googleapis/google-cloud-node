@@ -1,119 +1,119 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-servicecontrol",
-        "version": "4.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.api.servicecontrol.v2",
-                "version": "v2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "servicecontrol_v2_generated_ServiceController_Check_async",
-            "title": "ServiceController check Sample",
-            "origin": "API_DEFINITION",
-            "description": " This method provides admission control for services that are integrated with [Service Infrastructure](https://cloud.google.com/service-infrastructure). It checks whether an operation should be allowed based on the service configuration and relevant policies. It must be called before the operation is executed. For more information, see [Admission Control](https://cloud.google.com/service-infrastructure/docs/admission-control). NOTE: The admission control has an expected policy propagation delay of 60s. The caller **must** not depend on the most recent policy changes. NOTE: The admission control has a hard limit of 1 referenced resources per call. If an operation refers to more than 1 resources, the caller must call the Check method multiple times. This method requires the `servicemanagement.services.check` permission on the specified service. For more information, see [Service Control API Access Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
-            "canonical": true,
-            "file": "service_controller.check.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Check",
-                "fullName": "google.api.servicecontrol.v2.ServiceController.Check",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_config_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "attributes",
-                        "type": ".google.rpc.context.AttributeContext"
-                    },
-                    {
-                        "name": "resources",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "flags",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicecontrol.v2.CheckResponse",
-                "client": {
-                    "shortName": "ServiceControllerClient",
-                    "fullName": "google.api.servicecontrol.v2.ServiceControllerClient"
-                },
-                "method": {
-                    "shortName": "Check",
-                    "fullName": "google.api.servicecontrol.v2.ServiceController.Check",
-                    "service": {
-                        "shortName": "ServiceController",
-                        "fullName": "google.api.servicecontrol.v2.ServiceController"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicecontrol_v2_generated_ServiceController_Report_async",
-            "title": "ServiceController report Sample",
-            "origin": "API_DEFINITION",
-            "description": " This method provides telemetry reporting for services that are integrated with [Service Infrastructure](https://cloud.google.com/service-infrastructure). It reports a list of operations that have occurred on a service. It must be called after the operations have been executed. For more information, see [Telemetry Reporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting). NOTE: The telemetry reporting has a hard limit of 100 operations and 1MB per Report call. This method requires the `servicemanagement.services.report` permission on the specified service. For more information, see [Service Control API Access Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
-            "canonical": true,
-            "file": "service_controller.report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Report",
-                "fullName": "google.api.servicecontrol.v2.ServiceController.Report",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_config_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "operations",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.api.servicecontrol.v2.ReportResponse",
-                "client": {
-                    "shortName": "ServiceControllerClient",
-                    "fullName": "google.api.servicecontrol.v2.ServiceControllerClient"
-                },
-                "method": {
-                    "shortName": "Report",
-                    "fullName": "google.api.servicecontrol.v2.ServiceController.Report",
-                    "service": {
-                        "shortName": "ServiceController",
-                        "fullName": "google.api.servicecontrol.v2.ServiceController"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-servicecontrol",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.api.servicecontrol.v2",
+        "version": "v2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "servicecontrol_v2_generated_ServiceController_Check_async",
+      "title": "ServiceController check Sample",
+      "origin": "API_DEFINITION",
+      "description": " This method provides admission control for services that are integrated with [Service Infrastructure](https://cloud.google.com/service-infrastructure). It checks whether an operation should be allowed based on the service configuration and relevant policies. It must be called before the operation is executed. For more information, see [Admission Control](https://cloud.google.com/service-infrastructure/docs/admission-control). NOTE: The admission control has an expected policy propagation delay of 60s. The caller **must** not depend on the most recent policy changes. NOTE: The admission control has a hard limit of 1 referenced resources per call. If an operation refers to more than 1 resources, the caller must call the Check method multiple times. This method requires the `servicemanagement.services.check` permission on the specified service. For more information, see [Service Control API Access Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
+      "canonical": true,
+      "file": "service_controller.check.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Check",
+        "fullName": "google.api.servicecontrol.v2.ServiceController.Check",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "attributes",
+            "type": ".google.rpc.context.AttributeContext"
+          },
+          {
+            "name": "resources",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "flags",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicecontrol.v2.CheckResponse",
+        "client": {
+          "shortName": "ServiceControllerClient",
+          "fullName": "google.api.servicecontrol.v2.ServiceControllerClient"
+        },
+        "method": {
+          "shortName": "Check",
+          "fullName": "google.api.servicecontrol.v2.ServiceController.Check",
+          "service": {
+            "shortName": "ServiceController",
+            "fullName": "google.api.servicecontrol.v2.ServiceController"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicecontrol_v2_generated_ServiceController_Report_async",
+      "title": "ServiceController report Sample",
+      "origin": "API_DEFINITION",
+      "description": " This method provides telemetry reporting for services that are integrated with [Service Infrastructure](https://cloud.google.com/service-infrastructure). It reports a list of operations that have occurred on a service. It must be called after the operations have been executed. For more information, see [Telemetry Reporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting). NOTE: The telemetry reporting has a hard limit of 100 operations and 1MB per Report call. This method requires the `servicemanagement.services.report` permission on the specified service. For more information, see [Service Control API Access Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
+      "canonical": true,
+      "file": "service_controller.report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Report",
+        "fullName": "google.api.servicecontrol.v2.ServiceController.Report",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "operations",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.api.servicecontrol.v2.ReportResponse",
+        "client": {
+          "shortName": "ServiceControllerClient",
+          "fullName": "google.api.servicecontrol.v2.ServiceControllerClient"
+        },
+        "method": {
+          "shortName": "Report",
+          "fullName": "google.api.servicecontrol.v2.ServiceController.Report",
+          "service": {
+            "shortName": "ServiceController",
+            "fullName": "google.api.servicecontrol.v2.ServiceController"
+          }
+        }
+      }
+    }
+  ]
 }

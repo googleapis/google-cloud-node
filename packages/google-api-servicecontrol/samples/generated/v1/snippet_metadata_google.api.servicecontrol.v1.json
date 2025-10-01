@@ -1,159 +1,159 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-servicecontrol",
-        "version": "4.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.api.servicecontrol.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "servicecontrol_v1_generated_QuotaController_AllocateQuota_async",
-            "title": "QuotaController allocateQuota Sample",
-            "origin": "API_DEFINITION",
-            "description": " Attempts to allocate quota for the specified consumer. It should be called before the operation is executed. This method requires the `servicemanagement.services.quota` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam). **NOTE:** The client **must** fail-open on server errors `INTERNAL`, `UNKNOWN`, `DEADLINE_EXCEEDED`, and `UNAVAILABLE`. To ensure system reliability, the server may inject these errors to prohibit any hard dependency on the quota functionality.",
-            "canonical": true,
-            "file": "quota_controller.allocate_quota.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AllocateQuota",
-                "fullName": "google.api.servicecontrol.v1.QuotaController.AllocateQuota",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allocate_operation",
-                        "type": ".google.api.servicecontrol.v1.QuotaOperation"
-                    },
-                    {
-                        "name": "service_config_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicecontrol.v1.AllocateQuotaResponse",
-                "client": {
-                    "shortName": "QuotaControllerClient",
-                    "fullName": "google.api.servicecontrol.v1.QuotaControllerClient"
-                },
-                "method": {
-                    "shortName": "AllocateQuota",
-                    "fullName": "google.api.servicecontrol.v1.QuotaController.AllocateQuota",
-                    "service": {
-                        "shortName": "QuotaController",
-                        "fullName": "google.api.servicecontrol.v1.QuotaController"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicecontrol_v1_generated_ServiceController_Check_async",
-            "title": "QuotaController check Sample",
-            "origin": "API_DEFINITION",
-            "description": " Checks whether an operation on a service should be allowed to proceed based on the configuration of the service and related policies. It must be called before the operation is executed. If feasible, the client should cache the check results and reuse them for 60 seconds. In case of any server errors, the client should rely on the cached results for much longer time to avoid outage. WARNING: There is general 60s delay for the configuration and policy propagation, therefore callers MUST NOT depend on the `Check` method having the latest policy information. NOTE: the [CheckRequest][google.api.servicecontrol.v1.CheckRequest] has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.check` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam).",
-            "canonical": true,
-            "file": "service_controller.check.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Check",
-                "fullName": "google.api.servicecontrol.v1.ServiceController.Check",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "operation",
-                        "type": ".google.api.servicecontrol.v1.Operation"
-                    },
-                    {
-                        "name": "service_config_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicecontrol.v1.CheckResponse",
-                "client": {
-                    "shortName": "ServiceControllerClient",
-                    "fullName": "google.api.servicecontrol.v1.ServiceControllerClient"
-                },
-                "method": {
-                    "shortName": "Check",
-                    "fullName": "google.api.servicecontrol.v1.ServiceController.Check",
-                    "service": {
-                        "shortName": "ServiceController",
-                        "fullName": "google.api.servicecontrol.v1.ServiceController"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicecontrol_v1_generated_ServiceController_Report_async",
-            "title": "QuotaController report Sample",
-            "origin": "API_DEFINITION",
-            "description": " Reports operation results to Google Service Control, such as logs and metrics. It should be called after an operation is completed. If feasible, the client should aggregate reporting data for up to 5 seconds to reduce API traffic. Limiting aggregation to 5 seconds is to reduce data loss during client crashes. Clients should carefully choose the aggregation time window to avoid data loss risk more than 0.01% for business and compliance reasons. NOTE: the [ReportRequest][google.api.servicecontrol.v1.ReportRequest] has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.report` permission on the specified service. For more information, see [Google Cloud IAM](https://cloud.google.com/iam).",
-            "canonical": true,
-            "file": "service_controller.report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Report",
-                "fullName": "google.api.servicecontrol.v1.ServiceController.Report",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "operations",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "service_config_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicecontrol.v1.ReportResponse",
-                "client": {
-                    "shortName": "ServiceControllerClient",
-                    "fullName": "google.api.servicecontrol.v1.ServiceControllerClient"
-                },
-                "method": {
-                    "shortName": "Report",
-                    "fullName": "google.api.servicecontrol.v1.ServiceController.Report",
-                    "service": {
-                        "shortName": "ServiceController",
-                        "fullName": "google.api.servicecontrol.v1.ServiceController"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-servicecontrol",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.api.servicecontrol.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "servicecontrol_v1_generated_QuotaController_AllocateQuota_async",
+      "title": "QuotaController allocateQuota Sample",
+      "origin": "API_DEFINITION",
+      "description": " Attempts to allocate quota for the specified consumer. It should be called before the operation is executed. This method requires the `servicemanagement.services.quota` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam). **NOTE:** The client **must** fail-open on server errors `INTERNAL`, `UNKNOWN`, `DEADLINE_EXCEEDED`, and `UNAVAILABLE`. To ensure system reliability, the server may inject these errors to prohibit any hard dependency on the quota functionality.",
+      "canonical": true,
+      "file": "quota_controller.allocate_quota.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AllocateQuota",
+        "fullName": "google.api.servicecontrol.v1.QuotaController.AllocateQuota",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allocate_operation",
+            "type": ".google.api.servicecontrol.v1.QuotaOperation"
+          },
+          {
+            "name": "service_config_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicecontrol.v1.AllocateQuotaResponse",
+        "client": {
+          "shortName": "QuotaControllerClient",
+          "fullName": "google.api.servicecontrol.v1.QuotaControllerClient"
+        },
+        "method": {
+          "shortName": "AllocateQuota",
+          "fullName": "google.api.servicecontrol.v1.QuotaController.AllocateQuota",
+          "service": {
+            "shortName": "QuotaController",
+            "fullName": "google.api.servicecontrol.v1.QuotaController"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicecontrol_v1_generated_ServiceController_Check_async",
+      "title": "QuotaController check Sample",
+      "origin": "API_DEFINITION",
+      "description": " Checks whether an operation on a service should be allowed to proceed based on the configuration of the service and related policies. It must be called before the operation is executed. If feasible, the client should cache the check results and reuse them for 60 seconds. In case of any server errors, the client should rely on the cached results for much longer time to avoid outage. WARNING: There is general 60s delay for the configuration and policy propagation, therefore callers MUST NOT depend on the `Check` method having the latest policy information. NOTE: the [CheckRequest][google.api.servicecontrol.v1.CheckRequest] has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.check` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam).",
+      "canonical": true,
+      "file": "service_controller.check.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Check",
+        "fullName": "google.api.servicecontrol.v1.ServiceController.Check",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "operation",
+            "type": ".google.api.servicecontrol.v1.Operation"
+          },
+          {
+            "name": "service_config_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicecontrol.v1.CheckResponse",
+        "client": {
+          "shortName": "ServiceControllerClient",
+          "fullName": "google.api.servicecontrol.v1.ServiceControllerClient"
+        },
+        "method": {
+          "shortName": "Check",
+          "fullName": "google.api.servicecontrol.v1.ServiceController.Check",
+          "service": {
+            "shortName": "ServiceController",
+            "fullName": "google.api.servicecontrol.v1.ServiceController"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicecontrol_v1_generated_ServiceController_Report_async",
+      "title": "QuotaController report Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reports operation results to Google Service Control, such as logs and metrics. It should be called after an operation is completed. If feasible, the client should aggregate reporting data for up to 5 seconds to reduce API traffic. Limiting aggregation to 5 seconds is to reduce data loss during client crashes. Clients should carefully choose the aggregation time window to avoid data loss risk more than 0.01% for business and compliance reasons. NOTE: the [ReportRequest][google.api.servicecontrol.v1.ReportRequest] has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.report` permission on the specified service. For more information, see [Google Cloud IAM](https://cloud.google.com/iam).",
+      "canonical": true,
+      "file": "service_controller.report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Report",
+        "fullName": "google.api.servicecontrol.v1.ServiceController.Report",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "operations",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "service_config_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicecontrol.v1.ReportResponse",
+        "client": {
+          "shortName": "ServiceControllerClient",
+          "fullName": "google.api.servicecontrol.v1.ServiceControllerClient"
+        },
+        "method": {
+          "shortName": "Report",
+          "fullName": "google.api.servicecontrol.v1.ServiceController.Report",
+          "service": {
+            "shortName": "ServiceController",
+            "fullName": "google.api.servicecontrol.v1.ServiceController"
+          }
+        }
+      }
+    }
+  ]
 }
