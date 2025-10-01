@@ -1,36 +1,18 @@
 {
+  "extends": "gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": false,
-    "skipLibCheck": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "composite": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": ["ES2023"],
-    "module": "commonjs",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "pretty": true,
-    "sourceMap": true,
-    "stripInternal": true,
-    "strict": true,
-    "target": "ES2022"
+    "skipLibCheck": true
   },
   "include": [
     "src/*.ts",
     "src/**/*.ts",
     "test/*.ts",
-    "test/**/*.ts",
-    ".eslintrc.json"
+    "test/**/*.ts"
   ],
   "exclude": [
-    "test/fixtures",
-    "test/fixtures/**/*.*",
-    "template/**/*.*",
-    "node_modules"
+    "test/fixtures"
   ]
 }
