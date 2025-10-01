@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Billing Budgets: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-billing-budgets)
+# [Cloud Billing Budget API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/billing-budgets.svg)](https://www.npmjs.org/package/@google-cloud/billing-budgets)
 
+Cloud Billing Budget API client for Node.js
 
-
-
-Budgets client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-billing-budgets/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Billing Budgets Node.js Client API Reference][client-docs]
-* [Billing Budgets Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-billing-budgets](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-billing-budgets)
+* [Cloud Billing Budget API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/budgets/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,81 +28,49 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Billing Budgets API][enable_api].
+1.  [Enable the Cloud Billing Budget API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/billing-budgets
 ```
 
-
-### Using the client library
-
-```javascript
-
-// const billingAccount = 'billingAccounts/000000-000000-000000'
-
-// Imports the Google Cloud client library
-const {BudgetServiceClient} = require('@google-cloud/billing-budgets');
-
-// Creates a client
-const budget = new BudgetServiceClient();
-
-async function quickstart() {
-  // List budgets for a billing account
-  const [result] = await budget.listBudgets({
-    parent: billingAccount,
-  });
-  console.info(result);
-}
-
-quickstart();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-billing-budgets/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Budget_service.create_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.create_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.create_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.delete_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.delete_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.delete_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.get_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.get_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.get_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.list_budgets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.list_budgets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.list_budgets.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.update_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.update_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.update_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.create_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.create_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.create_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.delete_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.delete_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.delete_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.get_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.get_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.get_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.list_budgets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.list_budgets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.list_budgets.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Budget_service.update_budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.update_budget.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.update_budget.js,packages/google-cloud-billing-budgets/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/quickstart.js,packages/google-cloud-billing-budgets/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.create_budget.js) |
+| delete budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.delete_budget.js) |
+| get budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.get_budget.js) |
+| list budgets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.list_budgets.js) |
+| update budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.update_budget.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/snippet_metadata_google.cloud.billing.budgets.v1.json) |
+| create budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.create_budget.js) |
+| delete budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.delete_budget.js) |
+| get budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.get_budget.js) |
+| list budgets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.list_budgets.js) |
+| update budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.update_budget.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/snippet_metadata_google.cloud.billing.budgets.v1beta1.json) |
 
-
-
-The [Billing Budgets Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -128,45 +97,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/billing-budgets/latest
-[product-docs]: https://cloud.google.com/billing/docs/how-to/budget-api-overview 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=billingbudgets.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets
