@@ -30,7 +30,6 @@ function main() {
   const modelServiceClient = new retail.ModelServiceClient();
   const predictionServiceClient = new retail.PredictionServiceClient();
   const productServiceClient = new retail.ProductServiceClient();
-  const projectServiceClient = new retail.ProjectServiceClient();
   const searchServiceClient = new retail.SearchServiceClient();
   const servingConfigServiceClient = new retail.ServingConfigServiceClient();
   const userEventServiceClient = new retail.UserEventServiceClient();

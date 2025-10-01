@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Secure Source Manager API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-securesourcemanager)
+# [Secure Source Manager API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/securesourcemanager.svg)](https://www.npmjs.org/package/@google-cloud/securesourcemanager)
-
-
-
 
 Secure Source Manager API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-securesourcemanager/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Secure Source Manager API Node.js Client API Reference][client-docs]
-* [Secure Source Manager API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-securesourcemanager](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-securesourcemanager)
+* [Secure Source Manager API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/securesourcemanager/latest)
+* [Secure Source Manager API Documentation](https://cloud.google.com/secure-source-manager/docs/overview)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,135 +44,74 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Secure Source Manager API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/securesourcemanager
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. Parent value for ListInstancesRequest.
- */
-// const parent = 'abc123'
-/**
- *  Requested page size. Server may return fewer items than requested.
- *  If unspecified, server will pick an appropriate default.
- */
-// const pageSize = 1234
-/**
- *  A token identifying a page of results the server should return.
- */
-// const pageToken = 'abc123'
-/**
- *  Filter for filtering results.
- */
-// const filter = 'abc123'
-/**
- *  Hint for how to order the results.
- */
-// const orderBy = 'abc123'
-
-// Imports the Securesourcemanager library
-const {SecureSourceManagerClient} =
-  require('@google-cloud/securesourcemanager').v1;
-
-// Instantiates a client
-const securesourcemanagerClient = new SecureSourceManagerClient();
-
-async function callListInstances() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = securesourcemanagerClient.listInstancesAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListInstances();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-securesourcemanager/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Secure_source_manager.batch_create_pull_request_comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.batch_create_pull_request_comments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.batch_create_pull_request_comments.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.close_issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.close_issue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.close_issue.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.close_pull_request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.close_pull_request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.close_pull_request.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_branch_rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_branch_rule.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_branch_rule.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_hook.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_hook.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_instance.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_issue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_issue.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_issue_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_issue_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_issue_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_pull_request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_pull_request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_pull_request.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_pull_request_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_pull_request_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_pull_request_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.create_repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_repository.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_repository.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.delete_branch_rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_branch_rule.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_branch_rule.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.delete_hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_hook.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_hook.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.delete_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_instance.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.delete_issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_issue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_issue.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.delete_issue_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_issue_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_issue_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.delete_pull_request_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_pull_request_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_pull_request_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.delete_repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_repository.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_repository.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.fetch_blob | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.fetch_blob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.fetch_blob.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.fetch_tree | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.fetch_tree.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.fetch_tree.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_branch_rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_branch_rule.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_branch_rule.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_hook.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_hook.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_iam_policy_repo | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_iam_policy_repo.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_iam_policy_repo.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_instance.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_issue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_issue.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_issue_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_issue_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_issue_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_pull_request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_pull_request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_pull_request.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_pull_request_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_pull_request_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_pull_request_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.get_repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_repository.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_repository.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_branch_rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_branch_rules.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_branch_rules.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_hooks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_hooks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_hooks.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_instances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_instances.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_issue_comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_issue_comments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_issue_comments.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_issues.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_issues.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_pull_request_comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_request_comments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_request_comments.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_pull_request_file_diffs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_request_file_diffs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_request_file_diffs.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_pull_requests | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_requests.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_requests.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.list_repositories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_repositories.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_repositories.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.merge_pull_request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.merge_pull_request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.merge_pull_request.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.open_issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.open_issue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.open_issue.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.open_pull_request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.open_pull_request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.open_pull_request.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.resolve_pull_request_comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.resolve_pull_request_comments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.resolve_pull_request_comments.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.set_iam_policy_repo | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.set_iam_policy_repo.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.set_iam_policy_repo.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.test_iam_permissions_repo | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.unresolve_pull_request_comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.unresolve_pull_request_comments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.unresolve_pull_request_comments.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.update_branch_rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_branch_rule.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_branch_rule.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.update_hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_hook.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_hook.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.update_issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_issue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_issue.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.update_issue_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_issue_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_issue_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.update_pull_request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.update_pull_request_comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request_comment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request_comment.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Secure_source_manager.update_repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_repository.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_repository.js,packages/google-cloud-securesourcemanager/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securesourcemanager/samples/quickstart.js,packages/google-cloud-securesourcemanager/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| batch create pull request comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.batch_create_pull_request_comments.js) |
+| close issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.close_issue.js) |
+| close pull request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.close_pull_request.js) |
+| create branch rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_branch_rule.js) |
+| create hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_hook.js) |
+| create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_instance.js) |
+| create issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_issue.js) |
+| create issue comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_issue_comment.js) |
+| create pull request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_pull_request.js) |
+| create pull request comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_pull_request_comment.js) |
+| create repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.create_repository.js) |
+| delete branch rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_branch_rule.js) |
+| delete hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_hook.js) |
+| delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_instance.js) |
+| delete issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_issue.js) |
+| delete issue comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_issue_comment.js) |
+| delete pull request comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_pull_request_comment.js) |
+| delete repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.delete_repository.js) |
+| fetch blob | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.fetch_blob.js) |
+| fetch tree | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.fetch_tree.js) |
+| get branch rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_branch_rule.js) |
+| get hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_hook.js) |
+| get iam policy repo | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_iam_policy_repo.js) |
+| get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_instance.js) |
+| get issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_issue.js) |
+| get issue comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_issue_comment.js) |
+| get pull request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_pull_request.js) |
+| get pull request comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_pull_request_comment.js) |
+| get repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.get_repository.js) |
+| list branch rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_branch_rules.js) |
+| list hooks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_hooks.js) |
+| list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_instances.js) |
+| list issue comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_issue_comments.js) |
+| list issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_issues.js) |
+| list pull request comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_request_comments.js) |
+| list pull request file diffs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_request_file_diffs.js) |
+| list pull requests | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_pull_requests.js) |
+| list repositories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.list_repositories.js) |
+| merge pull request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.merge_pull_request.js) |
+| open issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.open_issue.js) |
+| open pull request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.open_pull_request.js) |
+| resolve pull request comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.resolve_pull_request_comments.js) |
+| set iam policy repo | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.set_iam_policy_repo.js) |
+| test iam permissions repo | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js) |
+| unresolve pull request comments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.unresolve_pull_request_comments.js) |
+| update branch rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_branch_rule.js) |
+| update hook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_hook.js) |
+| update issue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_issue.js) |
+| update issue comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_issue_comment.js) |
+| update pull request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request.js) |
+| update pull request comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request_comment.js) |
+| update repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_repository.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/snippet_metadata_google.cloud.securesourcemanager.v1.json) |
 
-
-
-The [Secure Source Manager API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -201,45 +138,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/securesourcemanager/latest
-[product-docs]: https://cloud.google.com/secure-source-manager/docs/overview
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=securesourcemanager.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager

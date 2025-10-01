@@ -1,1823 +1,1823 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-securitycenter",
-        "version": "9.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.securitycenter.v2",
-                "version": "v2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_BatchCreateResourceValueConfigs_async",
-            "title": "SecurityCenter batchCreateResourceValueConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a ResourceValueConfig for an organization. Maps user's tags to difference resource values for use by the attack path simulation.",
-            "canonical": true,
-            "file": "security_center.batch_create_resource_value_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchCreateResourceValueConfigs",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BatchCreateResourceValueConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "BatchCreateResourceValueConfigs",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BatchCreateResourceValueConfigs",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_BulkMuteFindings_async",
-            "title": "SecurityCenter bulkMuteFindings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Kicks off an LRO to bulk mute findings for a parent based on a filter. If no location is specified, findings are muted in global. The parent can be either an organization, folder, or project. The findings matched by the filter will be muted after the LRO is done.",
-            "canonical": true,
-            "file": "security_center.bulk_mute_findings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 86,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BulkMuteFindings",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BulkMuteFindings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "mute_state",
-                        "type": ".google.cloud.securitycenter.v2.BulkMuteFindingsRequest.MuteState"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "BulkMuteFindings",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BulkMuteFindings",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateBigQueryExport_async",
-            "title": "SecurityCenter createBigQueryExport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a BigQuery export.",
-            "canonical": true,
-            "file": "security_center.create_big_query_export.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBigQueryExport",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateBigQueryExport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "big_query_export",
-                        "type": ".google.cloud.securitycenter.v2.BigQueryExport"
-                    },
-                    {
-                        "name": "big_query_export_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.BigQueryExport",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateBigQueryExport",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateBigQueryExport",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateFinding_async",
-            "title": "SecurityCenter createFinding Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a finding in a location. The corresponding source must exist for finding creation to succeed.",
-            "canonical": true,
-            "file": "security_center.create_finding.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateFinding",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateFinding",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "finding_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "finding",
-                        "type": ".google.cloud.securitycenter.v2.Finding"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Finding",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateFinding",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateFinding",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateMuteConfig_async",
-            "title": "SecurityCenter createMuteConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a mute config.",
-            "canonical": true,
-            "file": "security_center.create_mute_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateMuteConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateMuteConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "mute_config",
-                        "type": ".google.cloud.securitycenter.v2.MuteConfig"
-                    },
-                    {
-                        "name": "mute_config_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.MuteConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateMuteConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateMuteConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateNotificationConfig_async",
-            "title": "SecurityCenter createNotificationConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a notification config.",
-            "canonical": true,
-            "file": "security_center.create_notification_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateNotificationConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateNotificationConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "config_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "notification_config",
-                        "type": ".google.cloud.securitycenter.v2.NotificationConfig"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.NotificationConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateNotificationConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateNotificationConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateSource_async",
-            "title": "SecurityCenter createSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a source.",
-            "canonical": true,
-            "file": "security_center.create_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSource",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "source",
-                        "type": ".google.cloud.securitycenter.v2.Source"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Source",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateSource",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateSource",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteBigQueryExport_async",
-            "title": "SecurityCenter deleteBigQueryExport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an existing BigQuery export.",
-            "canonical": true,
-            "file": "security_center.delete_big_query_export.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBigQueryExport",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteBigQueryExport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteBigQueryExport",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteBigQueryExport",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteMuteConfig_async",
-            "title": "SecurityCenter deleteMuteConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an existing mute config. If no location is specified, default is global.",
-            "canonical": true,
-            "file": "security_center.delete_mute_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteMuteConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteMuteConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteMuteConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteMuteConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteNotificationConfig_async",
-            "title": "SecurityCenter deleteNotificationConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a notification config.",
-            "canonical": true,
-            "file": "security_center.delete_notification_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteNotificationConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteNotificationConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteNotificationConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteNotificationConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteResourceValueConfig_async",
-            "title": "SecurityCenter deleteResourceValueConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a ResourceValueConfig.",
-            "canonical": true,
-            "file": "security_center.delete_resource_value_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteResourceValueConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteResourceValueConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteResourceValueConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteResourceValueConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetBigQueryExport_async",
-            "title": "SecurityCenter getBigQueryExport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a BigQuery export.",
-            "canonical": true,
-            "file": "security_center.get_big_query_export.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBigQueryExport",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetBigQueryExport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.BigQueryExport",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetBigQueryExport",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetBigQueryExport",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetSimulation_async",
-            "title": "SecurityCenter getSimulation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the simulation by name or the latest simulation for the given organization.",
-            "canonical": true,
-            "file": "security_center.get_simulation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSimulation",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSimulation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Simulation",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetSimulation",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSimulation",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetValuedResource_async",
-            "title": "SecurityCenter getValuedResource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the valued resource by name",
-            "canonical": true,
-            "file": "security_center.get_valued_resource.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetValuedResource",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetValuedResource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ValuedResource",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetValuedResource",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetValuedResource",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetIamPolicy_async",
-            "title": "SecurityCenter getIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the access control policy on the specified Source.",
-            "canonical": true,
-            "file": "security_center.get_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIamPolicy",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "options",
-                        "type": ".google.iam.v1.GetPolicyOptions"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetIamPolicy",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetIamPolicy",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetMuteConfig_async",
-            "title": "SecurityCenter getMuteConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a mute config. If no location is specified, default is global.",
-            "canonical": true,
-            "file": "security_center.get_mute_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetMuteConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetMuteConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.MuteConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetMuteConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetMuteConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetNotificationConfig_async",
-            "title": "SecurityCenter getNotificationConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a notification config.",
-            "canonical": true,
-            "file": "security_center.get_notification_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetNotificationConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetNotificationConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.NotificationConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetNotificationConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetNotificationConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetResourceValueConfig_async",
-            "title": "SecurityCenter getResourceValueConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a ResourceValueConfig.",
-            "canonical": true,
-            "file": "security_center.get_resource_value_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetResourceValueConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetResourceValueConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ResourceValueConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetResourceValueConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetResourceValueConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GetSource_async",
-            "title": "SecurityCenter getSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a source.",
-            "canonical": true,
-            "file": "security_center.get_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSource",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Source",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GetSource",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSource",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_GroupFindings_async",
-            "title": "SecurityCenter groupFindings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Filters an organization or source's findings and groups them by their specified properties in a location. If no location is specified, findings are assumed to be in global To group across all sources provide a `-` as the source id. The following list shows some examples: + `/v2/organizations/{organization_id}/sources/-/findings` + `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings` + `/v2/folders/{folder_id}/sources/-/findings` + `/v2/folders/{folder_id}/sources/-/locations/{location_id}/findings` + `/v2/projects/{project_id}/sources/-/findings` + `/v2/projects/{project_id}/sources/-/locations/{location_id}/findings`",
-            "canonical": true,
-            "file": "security_center.group_findings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 130,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GroupFindings",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GroupFindings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "group_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.GroupFindingsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "GroupFindings",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GroupFindings",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListAttackPaths_async",
-            "title": "SecurityCenter listAttackPaths Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the attack paths for a set of simulation results or valued resources and filter.",
-            "canonical": true,
-            "file": "security_center.list_attack_paths.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAttackPaths",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListAttackPaths",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListAttackPathsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListAttackPaths",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListAttackPaths",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListBigQueryExports_async",
-            "title": "SecurityCenter listBigQueryExports Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists BigQuery exports. Note that when requesting BigQuery exports at a given level all exports under that level are also returned e.g. if requesting BigQuery exports under a folder, then all BigQuery exports immediately under the folder plus the ones created under the projects within the folder are returned.",
-            "canonical": true,
-            "file": "security_center.list_big_query_exports.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBigQueryExports",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListBigQueryExports",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListBigQueryExportsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListBigQueryExports",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListBigQueryExports",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListFindings_async",
-            "title": "SecurityCenter listFindings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists an organization or source's findings. To list across all sources for a given location provide a `-` as the source id. If no location is specified, finding are assumed to be in global. The following list shows some examples: + `/v2/organizations/{organization_id}/sources/-/findings` + `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings`",
-            "canonical": true,
-            "file": "security_center.list_findings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 148,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListFindings",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListFindings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "field_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListFindingsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListFindings",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListFindings",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListMuteConfigs_async",
-            "title": "SecurityCenter listMuteConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists mute configs. If no location is specified, default is global.",
-            "canonical": true,
-            "file": "security_center.list_mute_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListMuteConfigs",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListMuteConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListMuteConfigsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListMuteConfigs",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListMuteConfigs",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListNotificationConfigs_async",
-            "title": "SecurityCenter listNotificationConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists notification configs.",
-            "canonical": true,
-            "file": "security_center.list_notification_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListNotificationConfigs",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListNotificationConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListNotificationConfigsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListNotificationConfigs",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListNotificationConfigs",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListResourceValueConfigs_async",
-            "title": "SecurityCenter listResourceValueConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all ResourceValueConfigs.",
-            "canonical": true,
-            "file": "security_center.list_resource_value_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListResourceValueConfigs",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListResourceValueConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListResourceValueConfigsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListResourceValueConfigs",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListResourceValueConfigs",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListSources_async",
-            "title": "SecurityCenter listSources Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all sources belonging to an organization.",
-            "canonical": true,
-            "file": "security_center.list_sources.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSources",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListSources",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListSourcesResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListSources",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListSources",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_ListValuedResources_async",
-            "title": "SecurityCenter listValuedResources Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the valued resources for a set of simulation results and filter.",
-            "canonical": true,
-            "file": "security_center.list_valued_resources.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 90,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListValuedResources",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListValuedResources",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ListValuedResourcesResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "ListValuedResources",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListValuedResources",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_SetFindingState_async",
-            "title": "SecurityCenter setFindingState Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the state of a finding. If no location is specified, finding is assumed to be in global",
-            "canonical": true,
-            "file": "security_center.set_finding_state.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetFindingState",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetFindingState",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "state",
-                        "type": ".google.cloud.securitycenter.v2.Finding.State"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Finding",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "SetFindingState",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetFindingState",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_SetIamPolicy_async",
-            "title": "SecurityCenter setIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the access control policy on the specified Source.",
-            "canonical": true,
-            "file": "security_center.set_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetIamPolicy",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "policy",
-                        "type": ".google.iam.v1.Policy"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "SetIamPolicy",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetIamPolicy",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_SetMute_async",
-            "title": "SecurityCenter setMute Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the mute state of a finding. If no location is specified, finding is assumed to be in global",
-            "canonical": true,
-            "file": "security_center.set_mute.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetMute",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetMute",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "mute",
-                        "type": ".google.cloud.securitycenter.v2.Finding.Mute"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Finding",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "SetMute",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetMute",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_TestIamPermissions_async",
-            "title": "SecurityCenter testIamPermissions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the permissions that a caller has on the specified source.",
-            "canonical": true,
-            "file": "security_center.test_iam_permissions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TestIamPermissions",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.TestIamPermissions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permissions",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.iam.v1.TestIamPermissionsResponse",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "TestIamPermissions",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.TestIamPermissions",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateBigQueryExport_async",
-            "title": "SecurityCenter updateBigQueryExport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a BigQuery export.",
-            "canonical": true,
-            "file": "security_center.update_big_query_export.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBigQueryExport",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateBigQueryExport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "big_query_export",
-                        "type": ".google.cloud.securitycenter.v2.BigQueryExport"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.BigQueryExport",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateBigQueryExport",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateBigQueryExport",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateExternalSystem_async",
-            "title": "SecurityCenter updateExternalSystem Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates external system. This is for a given finding. If no location is specified, finding is assumed to be in global",
-            "canonical": true,
-            "file": "security_center.update_external_system.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateExternalSystem",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateExternalSystem",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "external_system",
-                        "type": ".google.cloud.securitycenter.v2.ExternalSystem"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ExternalSystem",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateExternalSystem",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateExternalSystem",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateFinding_async",
-            "title": "SecurityCenter updateFinding Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates or updates a finding. If no location is specified, finding is assumed to be in global. The corresponding source must exist for a finding creation to succeed.",
-            "canonical": true,
-            "file": "security_center.update_finding.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateFinding",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateFinding",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "finding",
-                        "type": ".google.cloud.securitycenter.v2.Finding"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Finding",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateFinding",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateFinding",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateMuteConfig_async",
-            "title": "SecurityCenter updateMuteConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a mute config. If no location is specified, default is global.",
-            "canonical": true,
-            "file": "security_center.update_mute_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateMuteConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateMuteConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "mute_config",
-                        "type": ".google.cloud.securitycenter.v2.MuteConfig"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.MuteConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateMuteConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateMuteConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateNotificationConfig_async",
-            "title": "SecurityCenter updateNotificationConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a notification config. The following update fields are allowed: description, pubsub_topic, streaming_config.filter",
-            "canonical": true,
-            "file": "security_center.update_notification_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateNotificationConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateNotificationConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "notification_config",
-                        "type": ".google.cloud.securitycenter.v2.NotificationConfig"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.NotificationConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateNotificationConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateNotificationConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateResourceValueConfig_async",
-            "title": "SecurityCenter updateResourceValueConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an existing ResourceValueConfigs with new rules.",
-            "canonical": true,
-            "file": "security_center.update_resource_value_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateResourceValueConfig",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateResourceValueConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource_value_config",
-                        "type": ".google.cloud.securitycenter.v2.ResourceValueConfig"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.ResourceValueConfig",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateResourceValueConfig",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateResourceValueConfig",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateSecurityMarks_async",
-            "title": "SecurityCenter updateSecurityMarks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates security marks. For Finding Security marks, if no location is specified, finding is assumed to be in global. Assets Security Marks can only be accessed through global endpoint.",
-            "canonical": true,
-            "file": "security_center.update_security_marks.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSecurityMarks",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSecurityMarks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "security_marks",
-                        "type": ".google.cloud.securitycenter.v2.SecurityMarks"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.SecurityMarks",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateSecurityMarks",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSecurityMarks",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateSource_async",
-            "title": "SecurityCenter updateSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a source.",
-            "canonical": true,
-            "file": "security_center.update_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSource",
-                "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "source",
-                        "type": ".google.cloud.securitycenter.v2.Source"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.securitycenter.v2.Source",
-                "client": {
-                    "shortName": "SecurityCenterClient",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateSource",
-                    "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSource",
-                    "service": {
-                        "shortName": "SecurityCenter",
-                        "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-securitycenter",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.securitycenter.v2",
+        "version": "v2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_BatchCreateResourceValueConfigs_async",
+      "title": "SecurityCenter batchCreateResourceValueConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a ResourceValueConfig for an organization. Maps user's tags to difference resource values for use by the attack path simulation.",
+      "canonical": true,
+      "file": "security_center.batch_create_resource_value_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateResourceValueConfigs",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BatchCreateResourceValueConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "BatchCreateResourceValueConfigs",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BatchCreateResourceValueConfigs",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_BulkMuteFindings_async",
+      "title": "SecurityCenter bulkMuteFindings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Kicks off an LRO to bulk mute findings for a parent based on a filter. If no location is specified, findings are muted in global. The parent can be either an organization, folder, or project. The findings matched by the filter will be muted after the LRO is done.",
+      "canonical": true,
+      "file": "security_center.bulk_mute_findings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 86,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BulkMuteFindings",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BulkMuteFindings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mute_state",
+            "type": ".google.cloud.securitycenter.v2.BulkMuteFindingsRequest.MuteState"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "BulkMuteFindings",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.BulkMuteFindings",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateBigQueryExport_async",
+      "title": "SecurityCenter createBigQueryExport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a BigQuery export.",
+      "canonical": true,
+      "file": "security_center.create_big_query_export.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBigQueryExport",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateBigQueryExport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "big_query_export",
+            "type": ".google.cloud.securitycenter.v2.BigQueryExport"
+          },
+          {
+            "name": "big_query_export_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.BigQueryExport",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "CreateBigQueryExport",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateBigQueryExport",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateFinding_async",
+      "title": "SecurityCenter createFinding Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a finding in a location. The corresponding source must exist for finding creation to succeed.",
+      "canonical": true,
+      "file": "security_center.create_finding.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFinding",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateFinding",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "finding_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "finding",
+            "type": ".google.cloud.securitycenter.v2.Finding"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Finding",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "CreateFinding",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateFinding",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateMuteConfig_async",
+      "title": "SecurityCenter createMuteConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a mute config.",
+      "canonical": true,
+      "file": "security_center.create_mute_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMuteConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateMuteConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mute_config",
+            "type": ".google.cloud.securitycenter.v2.MuteConfig"
+          },
+          {
+            "name": "mute_config_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.MuteConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "CreateMuteConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateMuteConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateNotificationConfig_async",
+      "title": "SecurityCenter createNotificationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a notification config.",
+      "canonical": true,
+      "file": "security_center.create_notification_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateNotificationConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateNotificationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "notification_config",
+            "type": ".google.cloud.securitycenter.v2.NotificationConfig"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.NotificationConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "CreateNotificationConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateNotificationConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_CreateSource_async",
+      "title": "SecurityCenter createSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a source.",
+      "canonical": true,
+      "file": "security_center.create_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSource",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source",
+            "type": ".google.cloud.securitycenter.v2.Source"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Source",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "CreateSource",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.CreateSource",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteBigQueryExport_async",
+      "title": "SecurityCenter deleteBigQueryExport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an existing BigQuery export.",
+      "canonical": true,
+      "file": "security_center.delete_big_query_export.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBigQueryExport",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteBigQueryExport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteBigQueryExport",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteBigQueryExport",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteMuteConfig_async",
+      "title": "SecurityCenter deleteMuteConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an existing mute config. If no location is specified, default is global.",
+      "canonical": true,
+      "file": "security_center.delete_mute_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMuteConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteMuteConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteMuteConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteMuteConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteNotificationConfig_async",
+      "title": "SecurityCenter deleteNotificationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a notification config.",
+      "canonical": true,
+      "file": "security_center.delete_notification_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteNotificationConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteNotificationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteNotificationConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteNotificationConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_DeleteResourceValueConfig_async",
+      "title": "SecurityCenter deleteResourceValueConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a ResourceValueConfig.",
+      "canonical": true,
+      "file": "security_center.delete_resource_value_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteResourceValueConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteResourceValueConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteResourceValueConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.DeleteResourceValueConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetBigQueryExport_async",
+      "title": "SecurityCenter getBigQueryExport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a BigQuery export.",
+      "canonical": true,
+      "file": "security_center.get_big_query_export.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBigQueryExport",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetBigQueryExport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.BigQueryExport",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetBigQueryExport",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetBigQueryExport",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetSimulation_async",
+      "title": "SecurityCenter getSimulation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the simulation by name or the latest simulation for the given organization.",
+      "canonical": true,
+      "file": "security_center.get_simulation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSimulation",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSimulation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Simulation",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetSimulation",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSimulation",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetValuedResource_async",
+      "title": "SecurityCenter getValuedResource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the valued resource by name",
+      "canonical": true,
+      "file": "security_center.get_valued_resource.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetValuedResource",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetValuedResource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ValuedResource",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetValuedResource",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetValuedResource",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetIamPolicy_async",
+      "title": "SecurityCenter getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy on the specified Source.",
+      "canonical": true,
+      "file": "security_center.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetIamPolicy",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetMuteConfig_async",
+      "title": "SecurityCenter getMuteConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a mute config. If no location is specified, default is global.",
+      "canonical": true,
+      "file": "security_center.get_mute_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMuteConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetMuteConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.MuteConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetMuteConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetMuteConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetNotificationConfig_async",
+      "title": "SecurityCenter getNotificationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a notification config.",
+      "canonical": true,
+      "file": "security_center.get_notification_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetNotificationConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetNotificationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.NotificationConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetNotificationConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetNotificationConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetResourceValueConfig_async",
+      "title": "SecurityCenter getResourceValueConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a ResourceValueConfig.",
+      "canonical": true,
+      "file": "security_center.get_resource_value_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetResourceValueConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetResourceValueConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ResourceValueConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetResourceValueConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetResourceValueConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GetSource_async",
+      "title": "SecurityCenter getSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a source.",
+      "canonical": true,
+      "file": "security_center.get_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSource",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Source",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GetSource",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GetSource",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_GroupFindings_async",
+      "title": "SecurityCenter groupFindings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Filters an organization or source's findings and groups them by their specified properties in a location. If no location is specified, findings are assumed to be in global To group across all sources provide a `-` as the source id. The following list shows some examples: + `/v2/organizations/{organization_id}/sources/-/findings` + `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings` + `/v2/folders/{folder_id}/sources/-/findings` + `/v2/folders/{folder_id}/sources/-/locations/{location_id}/findings` + `/v2/projects/{project_id}/sources/-/findings` + `/v2/projects/{project_id}/sources/-/locations/{location_id}/findings`",
+      "canonical": true,
+      "file": "security_center.group_findings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 130,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GroupFindings",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GroupFindings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "group_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.GroupFindingsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "GroupFindings",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.GroupFindings",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListAttackPaths_async",
+      "title": "SecurityCenter listAttackPaths Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the attack paths for a set of simulation results or valued resources and filter.",
+      "canonical": true,
+      "file": "security_center.list_attack_paths.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAttackPaths",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListAttackPaths",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListAttackPathsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListAttackPaths",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListAttackPaths",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListBigQueryExports_async",
+      "title": "SecurityCenter listBigQueryExports Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists BigQuery exports. Note that when requesting BigQuery exports at a given level all exports under that level are also returned e.g. if requesting BigQuery exports under a folder, then all BigQuery exports immediately under the folder plus the ones created under the projects within the folder are returned.",
+      "canonical": true,
+      "file": "security_center.list_big_query_exports.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBigQueryExports",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListBigQueryExports",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListBigQueryExportsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListBigQueryExports",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListBigQueryExports",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListFindings_async",
+      "title": "SecurityCenter listFindings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists an organization or source's findings. To list across all sources for a given location provide a `-` as the source id. If no location is specified, finding are assumed to be in global. The following list shows some examples: + `/v2/organizations/{organization_id}/sources/-/findings` + `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings`",
+      "canonical": true,
+      "file": "security_center.list_findings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 148,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFindings",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListFindings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListFindingsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListFindings",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListFindings",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListMuteConfigs_async",
+      "title": "SecurityCenter listMuteConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists mute configs. If no location is specified, default is global.",
+      "canonical": true,
+      "file": "security_center.list_mute_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMuteConfigs",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListMuteConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListMuteConfigsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListMuteConfigs",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListMuteConfigs",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListNotificationConfigs_async",
+      "title": "SecurityCenter listNotificationConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists notification configs.",
+      "canonical": true,
+      "file": "security_center.list_notification_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNotificationConfigs",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListNotificationConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListNotificationConfigsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListNotificationConfigs",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListNotificationConfigs",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListResourceValueConfigs_async",
+      "title": "SecurityCenter listResourceValueConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all ResourceValueConfigs.",
+      "canonical": true,
+      "file": "security_center.list_resource_value_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListResourceValueConfigs",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListResourceValueConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListResourceValueConfigsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListResourceValueConfigs",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListResourceValueConfigs",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListSources_async",
+      "title": "SecurityCenter listSources Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all sources belonging to an organization.",
+      "canonical": true,
+      "file": "security_center.list_sources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSources",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListSources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListSourcesResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListSources",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListSources",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_ListValuedResources_async",
+      "title": "SecurityCenter listValuedResources Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the valued resources for a set of simulation results and filter.",
+      "canonical": true,
+      "file": "security_center.list_valued_resources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListValuedResources",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListValuedResources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ListValuedResourcesResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "ListValuedResources",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.ListValuedResources",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_SetFindingState_async",
+      "title": "SecurityCenter setFindingState Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the state of a finding. If no location is specified, finding is assumed to be in global",
+      "canonical": true,
+      "file": "security_center.set_finding_state.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetFindingState",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetFindingState",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "state",
+            "type": ".google.cloud.securitycenter.v2.Finding.State"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Finding",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "SetFindingState",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetFindingState",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_SetIamPolicy_async",
+      "title": "SecurityCenter setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified Source.",
+      "canonical": true,
+      "file": "security_center.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetIamPolicy",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_SetMute_async",
+      "title": "SecurityCenter setMute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the mute state of a finding. If no location is specified, finding is assumed to be in global",
+      "canonical": true,
+      "file": "security_center.set_mute.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetMute",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetMute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mute",
+            "type": ".google.cloud.securitycenter.v2.Finding.Mute"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Finding",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "SetMute",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.SetMute",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_TestIamPermissions_async",
+      "title": "SecurityCenter testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the permissions that a caller has on the specified source.",
+      "canonical": true,
+      "file": "security_center.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.TestIamPermissions",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateBigQueryExport_async",
+      "title": "SecurityCenter updateBigQueryExport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a BigQuery export.",
+      "canonical": true,
+      "file": "security_center.update_big_query_export.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBigQueryExport",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateBigQueryExport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "big_query_export",
+            "type": ".google.cloud.securitycenter.v2.BigQueryExport"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.BigQueryExport",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateBigQueryExport",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateBigQueryExport",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateExternalSystem_async",
+      "title": "SecurityCenter updateExternalSystem Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates external system. This is for a given finding. If no location is specified, finding is assumed to be in global",
+      "canonical": true,
+      "file": "security_center.update_external_system.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateExternalSystem",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateExternalSystem",
+        "async": true,
+        "parameters": [
+          {
+            "name": "external_system",
+            "type": ".google.cloud.securitycenter.v2.ExternalSystem"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ExternalSystem",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateExternalSystem",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateExternalSystem",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateFinding_async",
+      "title": "SecurityCenter updateFinding Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates or updates a finding. If no location is specified, finding is assumed to be in global. The corresponding source must exist for a finding creation to succeed.",
+      "canonical": true,
+      "file": "security_center.update_finding.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFinding",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateFinding",
+        "async": true,
+        "parameters": [
+          {
+            "name": "finding",
+            "type": ".google.cloud.securitycenter.v2.Finding"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Finding",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateFinding",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateFinding",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateMuteConfig_async",
+      "title": "SecurityCenter updateMuteConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a mute config. If no location is specified, default is global.",
+      "canonical": true,
+      "file": "security_center.update_mute_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMuteConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateMuteConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "mute_config",
+            "type": ".google.cloud.securitycenter.v2.MuteConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.MuteConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateMuteConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateMuteConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateNotificationConfig_async",
+      "title": "SecurityCenter updateNotificationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a notification config. The following update fields are allowed: description, pubsub_topic, streaming_config.filter",
+      "canonical": true,
+      "file": "security_center.update_notification_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateNotificationConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateNotificationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "notification_config",
+            "type": ".google.cloud.securitycenter.v2.NotificationConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.NotificationConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateNotificationConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateNotificationConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateResourceValueConfig_async",
+      "title": "SecurityCenter updateResourceValueConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing ResourceValueConfigs with new rules.",
+      "canonical": true,
+      "file": "security_center.update_resource_value_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateResourceValueConfig",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateResourceValueConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource_value_config",
+            "type": ".google.cloud.securitycenter.v2.ResourceValueConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.ResourceValueConfig",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateResourceValueConfig",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateResourceValueConfig",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateSecurityMarks_async",
+      "title": "SecurityCenter updateSecurityMarks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates security marks. For Finding Security marks, if no location is specified, finding is assumed to be in global. Assets Security Marks can only be accessed through global endpoint.",
+      "canonical": true,
+      "file": "security_center.update_security_marks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSecurityMarks",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSecurityMarks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "security_marks",
+            "type": ".google.cloud.securitycenter.v2.SecurityMarks"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.SecurityMarks",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateSecurityMarks",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSecurityMarks",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securitycenter_v2_generated_SecurityCenter_UpdateSource_async",
+      "title": "SecurityCenter updateSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a source.",
+      "canonical": true,
+      "file": "security_center.update_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSource",
+        "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "source",
+            "type": ".google.cloud.securitycenter.v2.Source"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.securitycenter.v2.Source",
+        "client": {
+          "shortName": "SecurityCenterClient",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateSource",
+          "fullName": "google.cloud.securitycenter.v2.SecurityCenter.UpdateSource",
+          "service": {
+            "shortName": "SecurityCenter",
+            "fullName": "google.cloud.securitycenter.v2.SecurityCenter"
+          }
+        }
+      }
+    }
+  ]
 }
