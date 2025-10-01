@@ -4,7 +4,10 @@
 
 # [Cloud Text-to-Speech API: Nodejs Client][homepage]
 
-[//]: # "releaseLevel"
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/text-to-speech.svg)](https://www.npmjs.org/package/@google-cloud/text-to-speech)
 
@@ -53,7 +56,19 @@ npm install @google-cloud/text-to-speech
 
 Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-[//]: # "samples"
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/snippet_metadata_google.cloud.texttospeech.v1.json) |
+| list voices | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.list_voices.js) |
+| streaming synthesize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.streaming_synthesize.js) |
+| synthesize speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.synthesize_speech.js) |
+| synthesize long audio | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/snippet_metadata_google.cloud.texttospeech.v1beta1.json) |
+| list voices | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.list_voices.js) |
+| streaming synthesize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.streaming_synthesize.js) |
+| synthesize speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.synthesize_speech.js) |
+| synthesize long audio | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js) |
+
 
 ## Supported Node.js Versions
 

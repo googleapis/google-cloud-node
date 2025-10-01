@@ -708,6 +708,744 @@
                       }
                     }
                   }
+                },
+                "v1beta1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.TextToSpeech.V1Beta1",
+                    "go_package": "cloud.google.com/go/texttospeech/apiv1beta1/texttospeechpb;texttospeechpb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "TextToSpeechLongAudioSynthesisProto",
+                    "java_package": "com.google.cloud.texttospeech.v1beta1",
+                    "objc_class_prefix": "CTTS",
+                    "php_namespace": "Google\\Cloud\\TextToSpeech\\V1beta1",
+                    "ruby_package": "Google::Cloud::TextToSpeech::V1beta1",
+                    "(google.api.resource_definition).type": "automl.googleapis.com/Model",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/models/{model}"
+                  },
+                  "nested": {
+                    "TextToSpeech": {
+                      "options": {
+                        "(google.api.default_host)": "texttospeech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListVoices": {
+                          "requestType": "ListVoicesRequest",
+                          "responseType": "ListVoicesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/voices",
+                            "(google.api.method_signature)": "language_code"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/voices"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "language_code"
+                            }
+                          ]
+                        },
+                        "SynthesizeSpeech": {
+                          "requestType": "SynthesizeSpeechRequest",
+                          "responseType": "SynthesizeSpeechResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/text:synthesize",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input,voice,audio_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/text:synthesize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input,voice,audio_config"
+                            }
+                          ]
+                        },
+                        "StreamingSynthesize": {
+                          "requestType": "StreamingSynthesizeRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingSynthesizeResponse",
+                          "responseStream": true
+                        }
+                      }
+                    },
+                    "SsmlVoiceGender": {
+                      "values": {
+                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                        "MALE": 1,
+                        "FEMALE": 2,
+                        "NEUTRAL": 3
+                      }
+                    },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "LINEAR16": 1,
+                        "MP3": 2,
+                        "MP3_64_KBPS": 4,
+                        "OGG_OPUS": 3,
+                        "MULAW": 5,
+                        "ALAW": 6,
+                        "PCM": 7,
+                        "M4A": 8
+                      }
+                    },
+                    "ListVoicesRequest": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListVoicesResponse": {
+                      "fields": {
+                        "voices": {
+                          "rule": "repeated",
+                          "type": "Voice",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Voice": {
+                      "fields": {
+                        "languageCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ssmlGender": {
+                          "type": "SsmlVoiceGender",
+                          "id": 3
+                        },
+                        "naturalSampleRateHertz": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AdvancedVoiceOptions": {
+                      "oneofs": {
+                        "_lowLatencyJourneySynthesis": {
+                          "oneof": [
+                            "lowLatencyJourneySynthesis"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "lowLatencyJourneySynthesis": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SynthesizeSpeechRequest": {
+                      "oneofs": {
+                        "_advancedVoiceOptions": {
+                          "oneof": [
+                            "advancedVoiceOptions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "input": {
+                          "type": "SynthesisInput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "voice": {
+                          "type": "VoiceSelectionParams",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audioConfig": {
+                          "type": "AudioConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "enableTimePointing": {
+                          "rule": "repeated",
+                          "type": "TimepointType",
+                          "id": 4
+                        },
+                        "advancedVoiceOptions": {
+                          "type": "AdvancedVoiceOptions",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TimepointType": {
+                          "values": {
+                            "TIMEPOINT_TYPE_UNSPECIFIED": 0,
+                            "SSML_MARK": 1
+                          }
+                        }
+                      }
+                    },
+                    "CustomPronunciationParams": {
+                      "oneofs": {
+                        "_phrase": {
+                          "oneof": [
+                            "phrase"
+                          ]
+                        },
+                        "_phoneticEncoding": {
+                          "oneof": [
+                            "phoneticEncoding"
+                          ]
+                        },
+                        "_pronunciation": {
+                          "oneof": [
+                            "pronunciation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "phrase": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "phoneticEncoding": {
+                          "type": "PhoneticEncoding",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pronunciation": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PhoneticEncoding": {
+                          "values": {
+                            "PHONETIC_ENCODING_UNSPECIFIED": 0,
+                            "PHONETIC_ENCODING_IPA": 1,
+                            "PHONETIC_ENCODING_X_SAMPA": 2,
+                            "PHONETIC_ENCODING_JAPANESE_YOMIGANA": 3,
+                            "PHONETIC_ENCODING_PINYIN": 4
+                          }
+                        }
+                      }
+                    },
+                    "CustomPronunciations": {
+                      "fields": {
+                        "pronunciations": {
+                          "rule": "repeated",
+                          "type": "CustomPronunciationParams",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MultiSpeakerMarkup": {
+                      "fields": {
+                        "turns": {
+                          "rule": "repeated",
+                          "type": "Turn",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Turn": {
+                          "fields": {
+                            "speaker": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MultispeakerPrebuiltVoice": {
+                      "fields": {
+                        "speakerAlias": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "speakerId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MultiSpeakerVoiceConfig": {
+                      "fields": {
+                        "speakerVoiceConfigs": {
+                          "rule": "repeated",
+                          "type": "MultispeakerPrebuiltVoice",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SynthesisInput": {
+                      "oneofs": {
+                        "inputSource": {
+                          "oneof": [
+                            "text",
+                            "markup",
+                            "ssml",
+                            "multiSpeakerMarkup"
+                          ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "markup": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "ssml": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "multiSpeakerMarkup": {
+                          "type": "MultiSpeakerMarkup",
+                          "id": 4
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "customPronunciations": {
+                          "type": "CustomPronunciations",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VoiceSelectionParams": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ssmlGender": {
+                          "type": "SsmlVoiceGender",
+                          "id": 3
+                        },
+                        "customVoice": {
+                          "type": "CustomVoiceParams",
+                          "id": 4
+                        },
+                        "voiceClone": {
+                          "type": "VoiceCloneParams",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "modelName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiSpeakerVoiceConfig": {
+                          "type": "MultiSpeakerVoiceConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AudioConfig": {
+                      "fields": {
+                        "audioEncoding": {
+                          "type": "AudioEncoding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "speakingRate": {
+                          "type": "double",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pitch": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "volumeGainDb": {
+                          "type": "double",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sampleRateHertz": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "effectsProfileId": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CustomVoiceParams": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "automl.googleapis.com/Model"
+                          }
+                        },
+                        "reportedUsage": {
+                          "type": "ReportedUsage",
+                          "id": 3,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReportedUsage": {
+                          "values": {
+                            "REPORTED_USAGE_UNSPECIFIED": 0,
+                            "REALTIME": 1,
+                            "OFFLINE": 2
+                          }
+                        }
+                      }
+                    },
+                    "VoiceCloneParams": {
+                      "fields": {
+                        "voiceCloningKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SynthesizeSpeechResponse": {
+                      "fields": {
+                        "audioContent": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "timepoints": {
+                          "rule": "repeated",
+                          "type": "Timepoint",
+                          "id": 2
+                        },
+                        "audioConfig": {
+                          "type": "AudioConfig",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Timepoint": {
+                      "fields": {
+                        "markName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "timeSeconds": {
+                          "type": "double",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingAudioConfig": {
+                      "fields": {
+                        "audioEncoding": {
+                          "type": "AudioEncoding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sampleRateHertz": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "speakingRate": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamingSynthesizeConfig": {
+                      "fields": {
+                        "voice": {
+                          "type": "VoiceSelectionParams",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "streamingAudioConfig": {
+                          "type": "StreamingAudioConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customPronunciations": {
+                          "type": "CustomPronunciations",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamingSynthesisInput": {
+                      "oneofs": {
+                        "inputSource": {
+                          "oneof": [
+                            "text",
+                            "markup",
+                            "multiSpeakerMarkup"
+                          ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "markup": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "multiSpeakerMarkup": {
+                          "type": "MultiSpeakerMarkup",
+                          "id": 7
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "StreamingSynthesizeRequest": {
+                      "oneofs": {
+                        "streamingRequest": {
+                          "oneof": [
+                            "streamingConfig",
+                            "input"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "streamingConfig": {
+                          "type": "StreamingSynthesizeConfig",
+                          "id": 1
+                        },
+                        "input": {
+                          "type": "StreamingSynthesisInput",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingSynthesizeResponse": {
+                      "fields": {
+                        "audioContent": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextToSpeechLongAudioSynthesize": {
+                      "options": {
+                        "(google.api.default_host)": "texttospeech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "SynthesizeLongAudio": {
+                          "requestType": "SynthesizeLongAudioRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}:synthesizeLongAudio",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}:synthesizeLongAudio",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioResponse",
+                                "metadata_type": "google.cloud.texttospeech.v1beta1.SynthesizeLongAudioMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "SynthesizeLongAudioRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "input": {
+                          "type": "SynthesisInput",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audioConfig": {
+                          "type": "AudioConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputGcsUri": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "voice": {
+                          "type": "VoiceSelectionParams",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SynthesizeLongAudioResponse": {
+                      "fields": {}
+                    },
+                    "SynthesizeLongAudioMetadata": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "lastUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "progressPercentage": {
+                          "type": "double",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
