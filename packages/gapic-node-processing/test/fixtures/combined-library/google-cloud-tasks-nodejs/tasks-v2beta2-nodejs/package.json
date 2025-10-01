@@ -5,6 +5,7 @@
   "repository": "googleapis/nodejs-tasks",
   "license": "Apache-2.0",
   "author": "Google LLC",
+  "private": true,
   "main": "./build/cjs/src/index.cjs",
   "types": "./build/cjs/src/index.d.ts",
   "type": "module",
