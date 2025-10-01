@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "88c89f456af4d6347e46d2919cbb757733bd7e19",
+          "message": "Add 'esm' to src path for esm-specific structure",
+          "issues": [
+            "6768"
+          ]
+        }
+      ],
+      "version": "0.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "a6e6bd06-c346-4c53-bbff-f8f64fb51949",
+      "createTime": "2025-10-01T12:43:36.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "4742ae83ff00974e2677935fd7fe6ae13b9f7715",
           "message": "Reexport templates",
           "issues": [
@@ -62511,5 +62528,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-09-30T18:02:54.375Z"
+  "updateTime": "2025-10-01T12:43:36.214Z"
 }
