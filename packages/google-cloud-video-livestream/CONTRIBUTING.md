@@ -72,5 +72,5 @@ accept your pull requests.
 [setup]: https://cloud.google.com/nodejs/docs/setup
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=livestream.googleapis.com
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=livestream.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
