@@ -119,7 +119,7 @@ export async function generateIndexTs(
   defaultVersion?: string,
   isEsm?: boolean,
 ) {
-  const pathToSrc = isEsm ? currentLibrary : `${currentLibrary}/esm`;
+  const pathToSrc = isEsm ? `${currentLibrary}/esm` : currentLibrary;
   // Get all the versions
   const versions = await extractVersions(pathToSrc);
   console.log(`All versions in ${pathToSrc}: ${versions}`);
