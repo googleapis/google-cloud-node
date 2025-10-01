@@ -23,7 +23,7 @@
     "compile": "tsc -p tsconfig.json",
     "docs": "node -e 'fs.mkdirSync(`docs`)'",
     "fix": "gts fix",
-    "lint": "if [ -d node_modules/gts ]; then GTS_PATH='./node_modules/gts'; else GTS_PATH='./../../node_modules/gts'; fi && echo \"{\\\"extends\\\": \\\"${GTS_PATH}\\\"}\" > .eslintrc.json && gts check && git checkout .eslintrc.json",
+    "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "samples-test": "",
