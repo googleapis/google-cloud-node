@@ -119,15 +119,15 @@ export async function generateIndexTs(
   defaultVersion?: string,
   isEsm?: boolean,
 ) {
+  const pathToSrc = isEsm ? currentLibrary : `${currentLibrary}/esm`;
   // Get all the versions
-  const versions = await extractVersions(currentLibrary);
-  console.log(`All versions in ${currentLibrary}: ${versions}`);
+  const versions = await extractVersions(pathToSrc);
+  console.log(`All versions in ${pathToSrc}: ${versions}`);
 
   // Get all the clients in each specific version
-  const pathToSrc = isEsm ? currentLibrary : `${currentLibrary}/esm`;
   const clientsAndVersions = await extractClients(pathToSrc);
   console.log(
-    `All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`,
+    `All clients and their versions in ${pathToSrc}: ${JSON.stringify(clientsAndVersions, null, 2)}`,
   );
   defaultVersion = defaultVersion || getHighestVersionWithPrecedence(versions);
   // Get the default versions' clients
@@ -150,7 +150,7 @@ export async function generateIndexTs(
 
   const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables);
 
-  const outputPath = path.join(currentLibrary, SRC_PATH, INDEX_PATH);
+  const outputPath = path.join(pathToSrc, SRC_PATH, INDEX_PATH);
   console.log(
     `Generating index.ts in ${outputPath} with the following values: ${JSON.stringify(variables)}`,
   );
