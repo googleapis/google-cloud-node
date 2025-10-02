@@ -446,6 +446,8 @@ export class ServiceAttachmentsClient {
  *   Name of the region of this request.
  * @param {string} request.serviceAttachment
  *   Name of the ServiceAttachment resource to return.
+ * @param {boolean} request.showNatIps
+ *   Indicates whether NAT IPs should be included in the response.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

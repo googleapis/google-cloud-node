@@ -87,6 +87,11 @@
                 "setLabels"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -129,6 +134,11 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "AggregatedList": {
@@ -1315,6 +1325,11 @@
                 "setLabels"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -1350,6 +1365,11 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "List": {
@@ -2352,6 +2372,11 @@
                 "setNamedPorts"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -2408,6 +2433,11 @@
                 "setNamedPorts"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -2443,6 +2473,11 @@
                 "addAccessConfig"
               ]
             },
+            "AddNetworkInterface": {
+              "methods": [
+                "addNetworkInterface"
+              ]
+            },
             "AddResourcePolicies": {
               "methods": [
                 "addResourcePolicies"
@@ -2466,6 +2501,11 @@
             "DeleteAccessConfig": {
               "methods": [
                 "deleteAccessConfig"
+              ]
+            },
+            "DeleteNetworkInterface": {
+              "methods": [
+                "deleteNetworkInterface"
               ]
             },
             "DetachDisk": {
@@ -2699,6 +2739,11 @@
                 "addAccessConfig"
               ]
             },
+            "AddNetworkInterface": {
+              "methods": [
+                "addNetworkInterface"
+              ]
+            },
             "AddResourcePolicies": {
               "methods": [
                 "addResourcePolicies"
@@ -2722,6 +2767,11 @@
             "DeleteAccessConfig": {
               "methods": [
                 "deleteAccessConfig"
+              ]
+            },
+            "DeleteNetworkInterface": {
+              "methods": [
+                "deleteNetworkInterface"
               ]
             },
             "DetachDisk": {
@@ -6392,6 +6442,11 @@
                 "setNamedPorts"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -6419,6 +6474,11 @@
             "SetNamedPorts": {
               "methods": [
                 "setNamedPorts"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "List": {
@@ -9430,6 +9490,11 @@
                 "setSecurityPolicy"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -9467,6 +9532,11 @@
             "SetSecurityPolicy": {
               "methods": [
                 "setSecurityPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "AggregatedList": {
@@ -9542,6 +9612,11 @@
                 "setSecurityPolicy"
               ]
             },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -9609,6 +9684,11 @@
             "SetSecurityPolicy": {
               "methods": [
                 "setSecurityPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "AggregatedList": {
