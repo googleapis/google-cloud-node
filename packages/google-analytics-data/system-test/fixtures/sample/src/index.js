@@ -21,7 +21,7 @@
 const data = require('@google-analytics/data');
 
 function main() {
-  const alphaAnalyticsDataClient = new data.AlphaAnalyticsDataClient();
+  const betaAnalyticsDataClient = new data.BetaAnalyticsDataClient();
 }
 
 main();
