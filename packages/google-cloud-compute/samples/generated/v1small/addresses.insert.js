@@ -48,7 +48,7 @@ function main(addressResource, project, region) {
   // const requestId = 'abc123'
 
   // Imports the Compute library
-  const {AddressesClient} = require('@google-cloud/compute-small').v1small;
+  const {AddressesClient} = require('@google-cloud/compute').v1small;
 
   // Instantiates a client
   const computeClient = new AddressesClient();

@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const compute = require('@google-cloud/compute-small');
+const compute = require('@google-cloud/compute');
 
 function main() {
   const addressesClient = new compute.AddressesClient();

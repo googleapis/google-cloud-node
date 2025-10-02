@@ -42,7 +42,7 @@ function main(operation, project, region) {
   // const region = 'us-central1'
 
   // Imports the Compute library
-  const {RegionOperationsClient} = require('@google-cloud/compute-small').v1small;
+  const {RegionOperationsClient} = require('@google-cloud/compute').v1small;
 
   // Instantiates a client
   const computeClient = new RegionOperationsClient();
