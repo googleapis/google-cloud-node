@@ -1088,7 +1088,7 @@ export class AccountsServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'provider': request.provider ?? '',
+      'provider': request.provider?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
@@ -1152,7 +1152,7 @@ export class AccountsServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'provider': request.provider ?? '',
+      'provider': request.provider?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1207,7 +1207,7 @@ export class AccountsServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'provider': request.provider ?? '',
+      'provider': request.provider?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);

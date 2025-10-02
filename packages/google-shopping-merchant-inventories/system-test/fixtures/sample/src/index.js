@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const inventories = require('@google-shopping/inventories');
+const inventories = require('@google-cloud/inventories');
 
 function main() {
   const localInventoryServiceClient = new inventories.LocalInventoryServiceClient();

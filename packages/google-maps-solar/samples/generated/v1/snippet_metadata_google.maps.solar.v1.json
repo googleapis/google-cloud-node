@@ -1,171 +1,171 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-solar",
-        "version": "0.5.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.maps.solar.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "solar_v1_generated_Solar_FindClosestBuildingInsights_async",
-            "title": "Solar findClosestBuildingInsights Sample",
-            "origin": "API_DEFINITION",
-            "description": " Locates the building whose centroid is closest to a query point. Returns an error with code `NOT_FOUND` if there are no buildings within approximately 50m of the query point.",
-            "canonical": true,
-            "file": "solar.find_closest_building_insights.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FindClosestBuildingInsights",
-                "fullName": "google.maps.solar.v1.Solar.FindClosestBuildingInsights",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "location",
-                        "type": ".google.type.LatLng"
-                    },
-                    {
-                        "name": "required_quality",
-                        "type": ".google.maps.solar.v1.ImageryQuality"
-                    },
-                    {
-                        "name": "exact_quality_required",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "experiments",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.maps.solar.v1.BuildingInsights",
-                "client": {
-                    "shortName": "SolarClient",
-                    "fullName": "google.maps.solar.v1.SolarClient"
-                },
-                "method": {
-                    "shortName": "FindClosestBuildingInsights",
-                    "fullName": "google.maps.solar.v1.Solar.FindClosestBuildingInsights",
-                    "service": {
-                        "shortName": "Solar",
-                        "fullName": "google.maps.solar.v1.Solar"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "solar_v1_generated_Solar_GetDataLayers_async",
-            "title": "Solar getDataLayers Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets solar information for a region surrounding a location. Returns an error with code `NOT_FOUND` if the location is outside the coverage area.",
-            "canonical": true,
-            "file": "solar.get_data_layers.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 99,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataLayers",
-                "fullName": "google.maps.solar.v1.Solar.GetDataLayers",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "location",
-                        "type": ".google.type.LatLng"
-                    },
-                    {
-                        "name": "radius_meters",
-                        "type": "TYPE_FLOAT"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.maps.solar.v1.DataLayerView"
-                    },
-                    {
-                        "name": "required_quality",
-                        "type": ".google.maps.solar.v1.ImageryQuality"
-                    },
-                    {
-                        "name": "pixel_size_meters",
-                        "type": "TYPE_FLOAT"
-                    },
-                    {
-                        "name": "exact_quality_required",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "experiments",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.maps.solar.v1.DataLayers",
-                "client": {
-                    "shortName": "SolarClient",
-                    "fullName": "google.maps.solar.v1.SolarClient"
-                },
-                "method": {
-                    "shortName": "GetDataLayers",
-                    "fullName": "google.maps.solar.v1.Solar.GetDataLayers",
-                    "service": {
-                        "shortName": "Solar",
-                        "fullName": "google.maps.solar.v1.Solar"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "solar_v1_generated_Solar_GetGeoTiff_async",
-            "title": "Solar getGeoTiff Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns an image by its ID.",
-            "canonical": true,
-            "file": "solar.get_geo_tiff.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetGeoTiff",
-                "fullName": "google.maps.solar.v1.Solar.GetGeoTiff",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "SolarClient",
-                    "fullName": "google.maps.solar.v1.SolarClient"
-                },
-                "method": {
-                    "shortName": "GetGeoTiff",
-                    "fullName": "google.maps.solar.v1.Solar.GetGeoTiff",
-                    "service": {
-                        "shortName": "Solar",
-                        "fullName": "google.maps.solar.v1.Solar"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-solar",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.maps.solar.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "solar_v1_generated_Solar_FindClosestBuildingInsights_async",
+      "title": "Solar findClosestBuildingInsights Sample",
+      "origin": "API_DEFINITION",
+      "description": " Locates the building whose centroid is closest to a query point. Returns an error with code `NOT_FOUND` if there are no buildings within approximately 50m of the query point.",
+      "canonical": true,
+      "file": "solar.find_closest_building_insights.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FindClosestBuildingInsights",
+        "fullName": "google.maps.solar.v1.Solar.FindClosestBuildingInsights",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location",
+            "type": ".google.type.LatLng"
+          },
+          {
+            "name": "required_quality",
+            "type": ".google.maps.solar.v1.ImageryQuality"
+          },
+          {
+            "name": "exact_quality_required",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "experiments",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.maps.solar.v1.BuildingInsights",
+        "client": {
+          "shortName": "SolarClient",
+          "fullName": "google.maps.solar.v1.SolarClient"
+        },
+        "method": {
+          "shortName": "FindClosestBuildingInsights",
+          "fullName": "google.maps.solar.v1.Solar.FindClosestBuildingInsights",
+          "service": {
+            "shortName": "Solar",
+            "fullName": "google.maps.solar.v1.Solar"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "solar_v1_generated_Solar_GetDataLayers_async",
+      "title": "Solar getDataLayers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets solar information for a region surrounding a location. Returns an error with code `NOT_FOUND` if the location is outside the coverage area.",
+      "canonical": true,
+      "file": "solar.get_data_layers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 99,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataLayers",
+        "fullName": "google.maps.solar.v1.Solar.GetDataLayers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location",
+            "type": ".google.type.LatLng"
+          },
+          {
+            "name": "radius_meters",
+            "type": "TYPE_FLOAT"
+          },
+          {
+            "name": "view",
+            "type": ".google.maps.solar.v1.DataLayerView"
+          },
+          {
+            "name": "required_quality",
+            "type": ".google.maps.solar.v1.ImageryQuality"
+          },
+          {
+            "name": "pixel_size_meters",
+            "type": "TYPE_FLOAT"
+          },
+          {
+            "name": "exact_quality_required",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "experiments",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.maps.solar.v1.DataLayers",
+        "client": {
+          "shortName": "SolarClient",
+          "fullName": "google.maps.solar.v1.SolarClient"
+        },
+        "method": {
+          "shortName": "GetDataLayers",
+          "fullName": "google.maps.solar.v1.Solar.GetDataLayers",
+          "service": {
+            "shortName": "Solar",
+            "fullName": "google.maps.solar.v1.Solar"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "solar_v1_generated_Solar_GetGeoTiff_async",
+      "title": "Solar getGeoTiff Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns an image by its ID.",
+      "canonical": true,
+      "file": "solar.get_geo_tiff.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGeoTiff",
+        "fullName": "google.maps.solar.v1.Solar.GetGeoTiff",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "SolarClient",
+          "fullName": "google.maps.solar.v1.SolarClient"
+        },
+        "method": {
+          "shortName": "GetGeoTiff",
+          "fullName": "google.maps.solar.v1.Solar.GetGeoTiff",
+          "service": {
+            "shortName": "Solar",
+            "fullName": "google.maps.solar.v1.Solar"
+          }
+        }
+      }
+    }
+  ]
 }

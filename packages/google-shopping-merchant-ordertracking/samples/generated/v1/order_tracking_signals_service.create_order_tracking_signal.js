@@ -43,7 +43,7 @@ function main(parent, orderTrackingSignalId, orderTrackingSignal) {
   // const orderTrackingSignal = {}
 
   // Imports the Ordertracking library
-  const {OrderTrackingSignalsServiceClient} = require('@google-cloud/ordertracking').v1;
+  const {OrderTrackingSignalsServiceClient} = require('@google-shopping/ordertracking').v1;
 
   // Instantiates a client
   const ordertrackingClient = new OrderTrackingSignalsServiceClient();

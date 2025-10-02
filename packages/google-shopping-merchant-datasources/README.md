@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Merchant API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-datasources)
+# [Merchant API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-shopping/datasources.svg)](https://www.npmjs.org/package/@google-shopping/datasources)
-
-
-
 
 Merchant API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-datasources/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Merchant API Node.js Client API Reference][client-docs]
-* [Merchant API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-shopping-merchant-datasources](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-datasources)
+* [Merchant API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/datasources/latest)
+* [Merchant API Documentation](https://developers.google.com/merchant/api)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,95 +44,37 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Merchant API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-shopping/datasources
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The account to list data sources for.
- *  Format: `accounts/{account}`
- */
-// const parent = 'abc123'
-/**
- *  Optional. The maximum number of data sources to return. The service may
- *  return fewer than this value. The maximum value is 1000; values above 1000
- *  will be coerced to 1000. If unspecified, the maximum number of data sources
- *  will be returned.
- */
-// const pageSize = 1234
-/**
- *  Optional. A page token, received from a previous `ListDataSources` call.
- *  Provide this to retrieve the subsequent page.
- *  When paginating, all other parameters provided to `ListDataSources`
- *  must match the call that provided the page token.
- */
-// const pageToken = 'abc123'
-
-// Imports the Datasources library
-const {DataSourcesServiceClient} =
-  require('@google-shopping/datasources').v1beta;
-
-// Instantiates a client
-const datasourcesClient = new DataSourcesServiceClient();
-
-async function callListDataSources() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = datasourcesClient.listDataSourcesAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListDataSources();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-datasources/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Data_sources_service.create_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.create_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.create_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.delete_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.delete_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.delete_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.fetch_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.fetch_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.fetch_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.get_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.get_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.get_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.list_data_sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.list_data_sources.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.list_data_sources.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.update_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.update_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.update_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| File_uploads_service.get_file_upload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/file_uploads_service.get_file_upload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1/file_uploads_service.get_file_upload.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.create_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.create_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.create_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.delete_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.delete_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.delete_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.fetch_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.fetch_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.fetch_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.get_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.get_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.get_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.list_data_sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.list_data_sources.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.list_data_sources.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Data_sources_service.update_data_source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| File_uploads_service.get_file_upload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js,packages/google-shopping-merchant-datasources/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/quickstart.js,packages/google-shopping-merchant-datasources/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.create_data_source.js) |
+| delete data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.delete_data_source.js) |
+| fetch data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.fetch_data_source.js) |
+| get data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.get_data_source.js) |
+| list data sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.list_data_sources.js) |
+| update data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.update_data_source.js) |
+| get file upload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/file_uploads_service.get_file_upload.js) |
+| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/snippet_metadata_google.shopping.merchant.datasources.v1.json) |
+| create data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.create_data_source.js) |
+| delete data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.delete_data_source.js) |
+| fetch data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.fetch_data_source.js) |
+| get data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.get_data_source.js) |
+| list data sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.list_data_sources.js) |
+| update data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js) |
+| get file upload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js) |
+| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.datasources.v1beta.json) |
 
-
-
-The [Merchant API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -161,45 +101,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
-[product-docs]: https://developers.google.com/merchant/api
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=merchantapi.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources

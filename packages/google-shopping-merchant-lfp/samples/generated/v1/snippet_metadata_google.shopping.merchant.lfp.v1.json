@@ -1,319 +1,319 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-lfp",
-        "version": "0.9.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.shopping.merchant.lfp.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "merchantapi_v1_generated_LfpInventoryService_InsertLfpInventory_async",
-            "title": "LfpInventoryService insertLfpInventory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Inserts a `LfpInventory` resource for the given target merchant account. If the resource already exists, it will be replaced. The inventory automatically expires after 30 days.",
-            "canonical": true,
-            "file": "lfp_inventory_service.insert_lfp_inventory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "InsertLfpInventory",
-                "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryService.InsertLfpInventory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "lfp_inventory",
-                        "type": ".google.shopping.merchant.lfp.v1.LfpInventory"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.lfp.v1.LfpInventory",
-                "client": {
-                    "shortName": "LfpInventoryServiceClient",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryServiceClient"
-                },
-                "method": {
-                    "shortName": "InsertLfpInventory",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryService.InsertLfpInventory",
-                    "service": {
-                        "shortName": "LfpInventoryService",
-                        "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1_generated_LfpMerchantStateService_GetLfpMerchantState_async",
-            "title": "LfpInventoryService getLfpMerchantState Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the LFP state of a merchant",
-            "canonical": true,
-            "file": "lfp_merchant_state_service.get_lfp_merchant_state.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetLfpMerchantState",
-                "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateService.GetLfpMerchantState",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.lfp.v1.LfpMerchantState",
-                "client": {
-                    "shortName": "LfpMerchantStateServiceClient",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateServiceClient"
-                },
-                "method": {
-                    "shortName": "GetLfpMerchantState",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateService.GetLfpMerchantState",
-                    "service": {
-                        "shortName": "LfpMerchantStateService",
-                        "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1_generated_LfpSaleService_InsertLfpSale_async",
-            "title": "LfpInventoryService insertLfpSale Sample",
-            "origin": "API_DEFINITION",
-            "description": " Inserts a `LfpSale` for the given merchant.",
-            "canonical": true,
-            "file": "lfp_sale_service.insert_lfp_sale.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "InsertLfpSale",
-                "fullName": "google.shopping.merchant.lfp.v1.LfpSaleService.InsertLfpSale",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "lfp_sale",
-                        "type": ".google.shopping.merchant.lfp.v1.LfpSale"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.lfp.v1.LfpSale",
-                "client": {
-                    "shortName": "LfpSaleServiceClient",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpSaleServiceClient"
-                },
-                "method": {
-                    "shortName": "InsertLfpSale",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpSaleService.InsertLfpSale",
-                    "service": {
-                        "shortName": "LfpSaleService",
-                        "fullName": "google.shopping.merchant.lfp.v1.LfpSaleService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1_generated_LfpStoreService_GetLfpStore_async",
-            "title": "LfpInventoryService getLfpStore Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves information about a store.",
-            "canonical": true,
-            "file": "lfp_store_service.get_lfp_store.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetLfpStore",
-                "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.GetLfpStore",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.lfp.v1.LfpStore",
-                "client": {
-                    "shortName": "LfpStoreServiceClient",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
-                },
-                "method": {
-                    "shortName": "GetLfpStore",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.GetLfpStore",
-                    "service": {
-                        "shortName": "LfpStoreService",
-                        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1_generated_LfpStoreService_InsertLfpStore_async",
-            "title": "LfpInventoryService insertLfpStore Sample",
-            "origin": "API_DEFINITION",
-            "description": " Inserts a store for the target merchant. If the store with the same store code already exists, it will be replaced.",
-            "canonical": true,
-            "file": "lfp_store_service.insert_lfp_store.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "InsertLfpStore",
-                "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.InsertLfpStore",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "lfp_store",
-                        "type": ".google.shopping.merchant.lfp.v1.LfpStore"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.lfp.v1.LfpStore",
-                "client": {
-                    "shortName": "LfpStoreServiceClient",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
-                },
-                "method": {
-                    "shortName": "InsertLfpStore",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.InsertLfpStore",
-                    "service": {
-                        "shortName": "LfpStoreService",
-                        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1_generated_LfpStoreService_DeleteLfpStore_async",
-            "title": "LfpInventoryService deleteLfpStore Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a store for a target merchant.",
-            "canonical": true,
-            "file": "lfp_store_service.delete_lfp_store.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteLfpStore",
-                "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.DeleteLfpStore",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "LfpStoreServiceClient",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteLfpStore",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.DeleteLfpStore",
-                    "service": {
-                        "shortName": "LfpStoreService",
-                        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "merchantapi_v1_generated_LfpStoreService_ListLfpStores_async",
-            "title": "LfpInventoryService listLfpStores Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the stores of the target merchant, specified by the filter in `ListLfpStoresRequest`.",
-            "canonical": true,
-            "file": "lfp_store_service.list_lfp_stores.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListLfpStores",
-                "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.ListLfpStores",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "target_account",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.merchant.lfp.v1.ListLfpStoresResponse",
-                "client": {
-                    "shortName": "LfpStoreServiceClient",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
-                },
-                "method": {
-                    "shortName": "ListLfpStores",
-                    "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.ListLfpStores",
-                    "service": {
-                        "shortName": "LfpStoreService",
-                        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-lfp",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.lfp.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "merchantapi_v1_generated_LfpInventoryService_InsertLfpInventory_async",
+      "title": "LfpInventoryService insertLfpInventory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Inserts a `LfpInventory` resource for the given target merchant account. If the resource already exists, it will be replaced. The inventory automatically expires after 30 days.",
+      "canonical": true,
+      "file": "lfp_inventory_service.insert_lfp_inventory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertLfpInventory",
+        "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryService.InsertLfpInventory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "lfp_inventory",
+            "type": ".google.shopping.merchant.lfp.v1.LfpInventory"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.lfp.v1.LfpInventory",
+        "client": {
+          "shortName": "LfpInventoryServiceClient",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryServiceClient"
+        },
+        "method": {
+          "shortName": "InsertLfpInventory",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryService.InsertLfpInventory",
+          "service": {
+            "shortName": "LfpInventoryService",
+            "fullName": "google.shopping.merchant.lfp.v1.LfpInventoryService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_LfpMerchantStateService_GetLfpMerchantState_async",
+      "title": "LfpInventoryService getLfpMerchantState Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the LFP state of a merchant",
+      "canonical": true,
+      "file": "lfp_merchant_state_service.get_lfp_merchant_state.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetLfpMerchantState",
+        "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateService.GetLfpMerchantState",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.lfp.v1.LfpMerchantState",
+        "client": {
+          "shortName": "LfpMerchantStateServiceClient",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateServiceClient"
+        },
+        "method": {
+          "shortName": "GetLfpMerchantState",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateService.GetLfpMerchantState",
+          "service": {
+            "shortName": "LfpMerchantStateService",
+            "fullName": "google.shopping.merchant.lfp.v1.LfpMerchantStateService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_LfpSaleService_InsertLfpSale_async",
+      "title": "LfpInventoryService insertLfpSale Sample",
+      "origin": "API_DEFINITION",
+      "description": " Inserts a `LfpSale` for the given merchant.",
+      "canonical": true,
+      "file": "lfp_sale_service.insert_lfp_sale.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertLfpSale",
+        "fullName": "google.shopping.merchant.lfp.v1.LfpSaleService.InsertLfpSale",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "lfp_sale",
+            "type": ".google.shopping.merchant.lfp.v1.LfpSale"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.lfp.v1.LfpSale",
+        "client": {
+          "shortName": "LfpSaleServiceClient",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpSaleServiceClient"
+        },
+        "method": {
+          "shortName": "InsertLfpSale",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpSaleService.InsertLfpSale",
+          "service": {
+            "shortName": "LfpSaleService",
+            "fullName": "google.shopping.merchant.lfp.v1.LfpSaleService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_LfpStoreService_GetLfpStore_async",
+      "title": "LfpInventoryService getLfpStore Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves information about a store.",
+      "canonical": true,
+      "file": "lfp_store_service.get_lfp_store.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetLfpStore",
+        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.GetLfpStore",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.lfp.v1.LfpStore",
+        "client": {
+          "shortName": "LfpStoreServiceClient",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
+        },
+        "method": {
+          "shortName": "GetLfpStore",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.GetLfpStore",
+          "service": {
+            "shortName": "LfpStoreService",
+            "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_LfpStoreService_InsertLfpStore_async",
+      "title": "LfpInventoryService insertLfpStore Sample",
+      "origin": "API_DEFINITION",
+      "description": " Inserts a store for the target merchant. If the store with the same store code already exists, it will be replaced.",
+      "canonical": true,
+      "file": "lfp_store_service.insert_lfp_store.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertLfpStore",
+        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.InsertLfpStore",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "lfp_store",
+            "type": ".google.shopping.merchant.lfp.v1.LfpStore"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.lfp.v1.LfpStore",
+        "client": {
+          "shortName": "LfpStoreServiceClient",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
+        },
+        "method": {
+          "shortName": "InsertLfpStore",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.InsertLfpStore",
+          "service": {
+            "shortName": "LfpStoreService",
+            "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_LfpStoreService_DeleteLfpStore_async",
+      "title": "LfpInventoryService deleteLfpStore Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a store for a target merchant.",
+      "canonical": true,
+      "file": "lfp_store_service.delete_lfp_store.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteLfpStore",
+        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.DeleteLfpStore",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "LfpStoreServiceClient",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteLfpStore",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.DeleteLfpStore",
+          "service": {
+            "shortName": "LfpStoreService",
+            "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_LfpStoreService_ListLfpStores_async",
+      "title": "LfpInventoryService listLfpStores Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the stores of the target merchant, specified by the filter in `ListLfpStoresRequest`.",
+      "canonical": true,
+      "file": "lfp_store_service.list_lfp_stores.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLfpStores",
+        "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.ListLfpStores",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target_account",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.lfp.v1.ListLfpStoresResponse",
+        "client": {
+          "shortName": "LfpStoreServiceClient",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreServiceClient"
+        },
+        "method": {
+          "shortName": "ListLfpStores",
+          "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService.ListLfpStores",
+          "service": {
+            "shortName": "LfpStoreService",
+            "fullName": "google.shopping.merchant.lfp.v1.LfpStoreService"
+          }
+        }
+      }
+    }
+  ]
 }
