@@ -9,7 +9,7 @@ unless absolutely necessary (e.g. because of critical security issues) or with
 an extensive deprecation period. Issues and requests against **stable** libraries
 are addressed with the highest priority
 
-[![npm version](https://img.shields.io/npm/v/@google-cloud/networksecurity.svg)](https://www.npmjs.org/package/@google-cloud/networksecurity)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/network-security.svg)](https://www.npmjs.org/package/@google-cloud/network-security)
 
 Network Security API client for Node.js
 
@@ -47,7 +47,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/networksecurity
+npm install @google-cloud/network-security
 ```
 
 [//]: # "partials.body"
@@ -134,7 +134,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/networksecurity@legacy-8` installs client libraries
+For example, `npm install @google-cloud/network-security@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

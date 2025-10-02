@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AddressGroupServiceClient, NetworkSecurityClient, OrganizationAddressGroupServiceClient} from '@google-cloud/networksecurity';
+import {AddressGroupServiceClient, NetworkSecurityClient, OrganizationAddressGroupServiceClient} from '@google-cloud/network-security';
 
 // check that the client class type name can be used
 function doStuffWithAddressGroupServiceClient(client: AddressGroupServiceClient) {
