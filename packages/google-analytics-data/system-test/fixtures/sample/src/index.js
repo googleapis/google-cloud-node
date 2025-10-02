@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const data = require('@google-cloud/data');
+const data = require('@google-analytics/data');
 
 function main() {
   const alphaAnalyticsDataClient = new data.AlphaAnalyticsDataClient();
