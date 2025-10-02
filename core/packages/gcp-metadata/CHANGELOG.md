@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node-core/compare/gcp-metadata-v7.0.1...gcp-metadata-v8.0.0) (2025-10-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* typescript@3.7.x has breaking changes; compiler now targets es2015
+* monorepo migration
+
+### Bug Fixes
+
+* Monorepo migration ([86a7376](https://github.com/googleapis/google-cloud-node-core/commit/86a7376da60852dae8eacf9ca97a6d302b6b7eb4))
+
+
+### Miscellaneous Chores
+
+* Migrate code from googleapis/gcp-metadata ([#53](https://github.com/googleapis/google-cloud-node-core/issues/53)) ([46bb52b](https://github.com/googleapis/google-cloud-node-core/commit/46bb52b5fdcf3dbed50b5a34ad3f86a63e1d2a20))
+
 ## [7.0.1](https://github.com/googleapis/gcp-metadata/compare/v7.0.0...v7.0.1) (2025-06-25)
 
 
